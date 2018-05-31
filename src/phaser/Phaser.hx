@@ -1,0 +1,46 @@
+package phaser;
+
+class Phaser{
+    static public var VERSION:String;
+    static public var AUTO:Int;
+    static public var CANVAS:Int;
+    static public var WEBGL:Int;
+    static public var HEADLESS:Int;
+    static public var FOREVER:Int;
+    static public var NONE:Int;
+    static public var UP:Int;
+    static public var DOWN:Int;
+    static public var LEFT:Int;
+    static public var RIGHT:Int;
+    static public var Game:Dynamic;
+    static public var Animation:Dynamic;
+    static public var Cache:Dynamic;
+    static public var Cameras:Dynamic;
+    static public var Class:Dynamic;
+    static public var Data:Dynamic;
+    static public var Display:Dynamic;
+    static public var Events:Dynamic;
+    static public var GameObjects:Dynamic;
+    static public var Input:Dynamic;
+    static public var Loader:Dynamic;
+    static public var Math:Dynamic;
+    static public var Plugins:Dynamic;
+    static public var Scene:Dynamic;
+    static public var Scenes:Dynamic;
+    static public var Sound:Dynamic;
+    static public var Structs:Dynamic;
+    static public var Textures:Dynamic;
+    static public var Time:Dynamic;
+    static public var Tweens:Dynamic;
+    static public var Actions:Dynamic;
+    static public var Create:Dynamic;
+    static public var Curves:Dynamic;
+    static public var DOM:Dynamic;
+    static public var Geom:Dynamic;
+    static public var Physics:Dynamic;
+    static public var Renderer:Dynamic;
+    static public var Tilemaps:Dynamic;
+    static public var Utils:Dynamic;
+    static public var BlendModes:Int;
+    static public var ScaleModes:Int;
+}

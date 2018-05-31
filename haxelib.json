@@ -1,0 +1,12 @@
+{
+    "name": "haxe-phaser3",
+    "url": "https://github.com/sebbernery/haxe-phaser3",
+    "license": "MIT",
+    "tags": ["js", "game"],
+    "description": "Haxe bindings for Phaser 3. Highly experimental.",
+    "contributors": ["Sebbernery"],
+    "version": "3.9.0",
+    "releasenote": "",
+    "dependencies": {}
+}
+

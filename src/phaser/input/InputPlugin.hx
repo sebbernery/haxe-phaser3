@@ -1,0 +1,51 @@
+package phaser.input;
+
+@:native("Phaser.Input.InputPlugin")
+extern class InputPlugin extends phaser.events.EventEmitter {
+    public function new(scene:phaser.Scene);
+    public var scene:phaser.Scene;
+    public var systems:phaser.scenes.Systems;
+    public var settings:phaser.scenes.settings.Object;
+    public var manager:phaser.input.InputManager;
+    public var enabled:Bool;
+    public var displayList:phaser.gameobjects.DisplayList;
+    public var cameras:Dynamic;
+    public var keyboard:phaser.input.keyboard.KeyboardManager;
+    public var mouse:phaser.input.mouse.MouseManager;
+    public var gamepad:phaser.input.gamepad.GamepadManager;
+    public var topOnly:Bool;
+    public var pollRate:Int;
+    public var dragDistanceThreshold:Float;
+    public var dragTimeThreshold:Float;
+    public var activePointer:phaser.input.Pointer;
+    public var x:Float;
+    public var y:Float;
+    public function preUpdate():Void;
+    public function clear(gameObject:phaser.gameobjects.GameObject):phaser.gameobjects.GameObject;
+    public function disable(gameObject:phaser.gameobjects.GameObject):Void;
+    public function enable(gameObject:phaser.gameobjects.GameObject, shape:Dynamic, callback:HitAreaCallback, ?dropZone:Bool):phaser.input.InputPlugin;
+    public function hitTestPointer(pointer:phaser.input.Pointer):Array<Dynamic>;
+    public function processDownEvents(pointer:phaser.input.Pointer):Int;
+    public function processDragEvents(pointer:Float, time:Float):Int;
+    public function processMoveEvents(pointer:phaser.input.Pointer):Int;
+    public function processOverOutEvents(pointer:phaser.input.Pointer):Int;
+    public function processUpEvents(pointer:phaser.input.Pointer):Void;
+    public function queueForInsertion(child:phaser.gameobjects.GameObject):phaser.input.InputPlugin;
+    public function queueForRemoval(child:phaser.gameobjects.GameObject):phaser.input.InputPlugin;
+    public function setDraggable(gameObjects:Dynamic, ?value:Bool):phaser.input.InputPlugin;
+    public function setHitArea(gameObjects:Dynamic, ?shape:Dynamic, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaCircle(gameObjects:Dynamic, x:Float, y:Float, radius:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaEllipse(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaFromTexture(gameObjects:Dynamic, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaRectangle(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaTriangle(gameObjects:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setPollAlways():phaser.input.InputPlugin;
+    public function setPollOnMove():phaser.input.InputPlugin;
+    public function setPollRate(value:Float):phaser.input.InputPlugin;
+    public function setGlobalTopOnly(value:Bool):phaser.input.InputPlugin;
+    public function setTopOnly(value:Bool):phaser.input.InputPlugin;
+    public function sortGameObjects(gameObjects:Array<phaser.gameobjects.GameObject>):Array<phaser.gameobjects.GameObject>;
+    public function sortHandlerGO(childA:phaser.gameobjects.GameObject, childB:phaser.gameobjects.GameObject):Int;
+    public function stopPropagation():phaser.input.InputPlugin;
+    public function update(time:Float, delta:Float):Void;
+}

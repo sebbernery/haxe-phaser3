@@ -1,0 +1,53 @@
+package phaser.tweens;
+
+@:native("Phaser.Tweens.Tween")
+extern class Tween {
+    public function new(parent:Dynamic, data:Array<phaser.tweens.TweenDataConfig>, targets:Array<Dynamic>);
+    public var parent:Dynamic;
+    public var parentIsTimeline:Bool;
+    public var data:Array<phaser.tweens.TweenDataConfig>;
+    public var totalData:Int;
+    public var targets:Array<Dynamic>;
+    public var totalTargets:Int;
+    public var useFrames:Bool;
+    public var timeScale:Float;
+    public var loop:Float;
+    public var loopDelay:Float;
+    public var loopCounter:Float;
+    public var completeDelay:Float;
+    public var countdown:Float;
+    public var offset:Float;
+    public var calculatedOffset:Float;
+    public var state:Int;
+    public var paused:Bool;
+    public var elapsed:Float;
+    public var totalElapsed:Float;
+    public var duration:Float;
+    public var progress:Float;
+    public var totalDuration:Float;
+    public var totalProgress:Float;
+    public var callbacks:Dynamic;
+    public function getValue():Float;
+    public function setTimeScale(value:Float):phaser.tweens.Tween;
+    public function getTimeScale():Float;
+    public function isPlaying():Bool;
+    public function isPaused():Bool;
+    public function hasTarget(target:Dynamic):Bool;
+    public function updateTo(key:String, value:Dynamic, startToCurrent:Bool):phaser.tweens.Tween;
+    public function restart():Void;
+    public function calcDuration():Void;
+    public function init():Bool;
+    public function nextState():Void;
+    public function pause():phaser.tweens.Tween;
+    public function play(resetFromTimeline:Bool):Void;
+    public function resetTweenData(resetFromLoop:Bool):Void;
+    public function resume():phaser.tweens.Tween;
+    public function seek(toPosition:Float):Void;
+    public function setCallback(type:String, callback:Dynamic, ?params:Array<Dynamic>, ?scope:Dynamic):phaser.tweens.Tween;
+    public function complete(?delay:Float):Void;
+    public function stop(?resetTo:Float):Void;
+    public function update(timestamp:Float, delta:Float):Bool;
+    public function setStateFromEnd(tween:phaser.tweens.Tween, tweenData:phaser.tweens.TweenDataConfig, diff:Float):Int;
+    public function setStateFromStart(tween:phaser.tweens.Tween, tweenData:phaser.tweens.TweenDataConfig, diff:Float):Int;
+    public function updateTweenData(tween:phaser.tweens.Tween, tweenData:phaser.tweens.TweenDataConfig, delta:Float):Bool;
+}
