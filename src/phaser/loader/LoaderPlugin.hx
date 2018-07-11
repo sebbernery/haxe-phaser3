@@ -32,6 +32,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
     public function isReady():Bool;
     public function start():Void;
     public function updateProgress():Void;
+    public function update():Void;
     public function nextFile(file:phaser.loader.File, success:Bool):Void;
     public function fileProcessComplete(file:phaser.loader.File):Void;
     public function loadComplete():Void;

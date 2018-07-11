@@ -1,6 +1,8 @@
 package phaser;
 
 typedef ArcadeWorldConfig = {
+    @:optional var fps:Float;
+    @:optional var timeScale:Float;
     @:optional var gravity:Dynamic;
     @:optional var x:Float;
     @:optional var y:Float;
@@ -19,4 +21,5 @@ typedef ArcadeWorldConfig = {
     @:optional var debugStaticBodyColor:Float;
     @:optional var debugVelocityColor:Float;
     @:optional var maxEntries:Float;
+    @:optional var useTree:Bool;
 };

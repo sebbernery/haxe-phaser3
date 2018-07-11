@@ -14,6 +14,7 @@ extern class ScenePlugin {
     public function transition(config:phaser.scenes.sceneplugin.SceneTransitionConfig):Bool;
     public function add(key:String, sceneConfig:Dynamic, autoStart:Bool):phaser.scenes.ScenePlugin;
     public function launch(key:String, ?data:Dynamic):phaser.scenes.ScenePlugin;
+    public function run(key:String, ?data:Dynamic):phaser.scenes.ScenePlugin;
     public function pause(key:String):phaser.scenes.ScenePlugin;
     public function resume(key:String):phaser.scenes.ScenePlugin;
     public function sleep(key:String):phaser.scenes.ScenePlugin;

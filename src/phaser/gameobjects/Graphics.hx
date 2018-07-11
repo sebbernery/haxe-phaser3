@@ -2,7 +2,7 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.Graphics")
 extern class Graphics extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, options:Dynamic);
+    public function new(scene:phaser.Scene, options:GraphicsOptions);
     public var displayOriginX:Float;
     public var displayOriginY:Float;
     public var commandBuffer:Array<Dynamic>;
@@ -12,7 +12,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public var defaultStrokeColor:Float;
     public var defaultStrokeAlpha:Float;
     public var TargetCamera:phaser.cameras.scene2d.Camera;
-    public function setDefaultStyles(options:Dynamic):phaser.gameobjects.Graphics;
+    public function setDefaultStyles(options:GraphicsStyles):phaser.gameobjects.Graphics;
     public function lineStyle(lineWidth:Float, color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
     public function fillStyle(color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
     public function beginPath():phaser.gameobjects.Graphics;
@@ -45,7 +45,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function strokeEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
     public function fillEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):phaser.gameobjects.Graphics;
     public function fillEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
-    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Bool):phaser.gameobjects.Graphics;
+    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):phaser.gameobjects.Graphics;
     public function slice(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):phaser.gameobjects.Graphics;
     public function save():phaser.gameobjects.Graphics;
     public function restore():phaser.gameobjects.Graphics;

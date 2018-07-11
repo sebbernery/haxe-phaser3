@@ -6,4 +6,5 @@ extern class Drag {
     public function setDrag(x:Float, ?y:Float):Dynamic;
     public function setDragX(value:Float):Dynamic;
     public function setDragY(value:Float):Dynamic;
+    public function setDamping(value:Bool):Dynamic;
 }

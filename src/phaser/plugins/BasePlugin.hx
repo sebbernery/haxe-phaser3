@@ -2,7 +2,7 @@ package phaser.plugins;
 
 @:native("Phaser.Plugins.BasePlugin")
 extern class BasePlugin {
-    public function new(game:phaser.Game);
+    public function new(pluginManager:phaser.plugins.PluginManager);
     public var pluginManager:phaser.plugins.PluginManager;
     public var game:phaser.Game;
     public var scene:phaser.Scene;

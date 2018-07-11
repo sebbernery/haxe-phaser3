@@ -13,7 +13,7 @@ extern class GameObjectFactory {
     public function bitmapText(x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float):phaser.gameobjects.BitmapText;
     public function blitter(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.gameobjects.Blitter;
     public function container(x:Float, y:Float, ?children:Dynamic):phaser.gameobjects.Container;
-    public function graphics(?config:Dynamic):phaser.gameobjects.Graphics;
+    public function graphics(?config:GraphicsOptions):phaser.gameobjects.Graphics;
     public function group(?children:Dynamic, ?config:GroupConfig):phaser.gameobjects.Group;
     public function image(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Image;
     public function mesh(x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:String, ?frame:Dynamic):phaser.gameobjects.Mesh;

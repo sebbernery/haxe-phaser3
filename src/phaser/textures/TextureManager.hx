@@ -31,6 +31,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
     public function getFrame(key:String, frame:Dynamic):phaser.textures.Frame;
     public function getTextureKeys():Array<String>;
     public function getPixel(x:Int, y:Int, key:String, frame:Dynamic):phaser.display.Color;
+    public function getPixelAlpha(x:Int, y:Int, key:String, frame:Dynamic):Int;
     public function setTexture(gameObject:phaser.gameobjects.GameObject, key:String, frame:Dynamic):phaser.gameobjects.GameObject;
     public function each(callback:EachTextureCallback, scope:Dynamic, ?args:Dynamic):Void;
     public function canvas():Void;

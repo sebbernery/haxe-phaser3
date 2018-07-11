@@ -18,8 +18,8 @@ extern class GameObject extends phaser.events.EventEmitter {
     public function setActive(value:Bool):phaser.gameobjects.GameObject;
     public function setName(value:String):phaser.gameobjects.GameObject;
     public function setDataEnabled():phaser.gameobjects.GameObject;
-    public function setData(key:String, value:Dynamic):phaser.gameobjects.GameObject;
-    public function getData(key:String):Dynamic;
+    public function setData(key:Dynamic, data:Dynamic):Dynamic;
+    public function getData(key:Dynamic):Dynamic;
     public function setInteractive(?shape:Dynamic, ?callback:HitAreaCallback, ?dropZone:Bool):phaser.gameobjects.GameObject;
     public function disableInteractive():phaser.gameobjects.GameObject;
     public function removeInteractive():phaser.gameobjects.GameObject;

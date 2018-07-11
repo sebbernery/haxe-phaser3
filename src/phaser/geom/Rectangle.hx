@@ -45,6 +45,7 @@ extern class Rectangle {
     public function Perimeter(rect:phaser.geom.Rectangle):Float;
     public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;
     public function Random(rect:phaser.geom.Rectangle, out:phaser.geom.Point):phaser.geom.Point;
+    public function RandomOutside(outer:phaser.geom.Rectangle, inner:phaser.geom.Rectangle, ?out:phaser.geom.Point):phaser.geom.Point;
     public function contains(x:Float, y:Float):Bool;
     public function getPoint(position:Float, ?output:Dynamic):phaser.geom.Point;
     public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;

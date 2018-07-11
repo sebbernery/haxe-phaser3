@@ -4,7 +4,7 @@ package phaser.gameobjects;
 extern class BitmapText extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float);
     public var font:String;
-    public var fontData:Dynamic;
+    public var fontData:BitmapFontData;
     public var text:String;
     public var fontSize:Float;
     public var letterSpacing:Float;
@@ -13,7 +13,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public function setFontSize(size:Float):phaser.gameobjects.BitmapText;
     public function setLetterSpacing(?spacing:Float):phaser.gameobjects.BitmapText;
     public function setText(value:Dynamic):phaser.gameobjects.BitmapText;
-    public function getTextBounds(round:Bool):TextBounds;
+    public function getTextBounds(?round:Bool):BitmapTextSize;
     public var alpha:Float;
     public var alphaTopLeft:Float;
     public var alphaTopRight:Float;

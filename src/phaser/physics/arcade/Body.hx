@@ -40,6 +40,7 @@ extern class Body {
     public var onOverlap:Bool;
     public var maxVelocity:phaser.math.Vector2;
     public var friction:phaser.math.Vector2;
+    public var useDamping:Bool;
     public var angularVelocity:Float;
     public var angularAcceleration:Float;
     public var angularDrag:Float;
@@ -61,7 +62,6 @@ extern class Body {
     public var touching:ArcadeBodyCollision;
     public var wasTouching:ArcadeBodyCollision;
     public var blocked:ArcadeBodyCollision;
-    public var dirty:Bool;
     public var syncBounds:Bool;
     public var isMoving:Bool;
     public var stopVelocityOnCollide:Bool;
@@ -75,7 +75,7 @@ extern class Body {
     public function updateBounds():Void;
     public function updateCenter():Void;
     public function update(delta:Float):Void;
-    public function postUpdate():Void;
+    public function postUpdate(resetDelta:Bool):Void;
     public function checkWorldBounds():Bool;
     public function setOffset(x:Float, ?y:Float):phaser.physics.arcade.Body;
     public function setSize(width:Float, height:Float, ?center:Bool):phaser.physics.arcade.Body;
@@ -96,9 +96,10 @@ extern class Body {
     public function drawDebug(graphic:phaser.gameobjects.Graphics):Void;
     public function willDrawDebug():Bool;
     public function setCollideWorldBounds(?value:Bool):phaser.physics.arcade.Body;
-    public function setVelocity(x:Float, y:Float):phaser.physics.arcade.Body;
+    public function setVelocity(x:Float, ?y:Float):phaser.physics.arcade.Body;
     public function setVelocityX(value:Float):phaser.physics.arcade.Body;
     public function setVelocityY(value:Float):phaser.physics.arcade.Body;
+    public function setMaxVelocity(x:Float, ?y:Float):phaser.physics.arcade.Body;
     public function setBounce(x:Float, y:Float):phaser.physics.arcade.Body;
     public function setBounceX(value:Float):phaser.physics.arcade.Body;
     public function setBounceY(value:Float):phaser.physics.arcade.Body;

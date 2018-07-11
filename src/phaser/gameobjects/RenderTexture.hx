@@ -6,8 +6,12 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public var renderer:Dynamic;
     public var globalTint:Float;
     public var globalAlpha:Float;
-    public function setGlobalTint(tint:Int):phaser.gameobjects.RenderTexture;
-    public function setGlobalAlpha(alpha:Float):phaser.gameobjects.RenderTexture;
+    public var canvas:js.html.CanvasElement;
+    public var context:js.html.CanvasRenderingContext2D;
+    public var framebuffer:js.html.webgl.Framebuffer;
+    public function resize(width:Float, ?height:Float):Dynamic;
+    public function setGlobalTint(tint:Int):Dynamic;
+    public function setGlobalAlpha(alpha:Float):Dynamic;
     public function preDestroy():Void;
     public var alpha:Float;
     public var alphaTopLeft:Float;

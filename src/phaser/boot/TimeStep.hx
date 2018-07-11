@@ -21,7 +21,7 @@ extern class TimeStep {
     public var inFocus:Bool;
     public var delta:Int;
     public var deltaIndex:Int;
-    public var deltaHistory:Array<Dynamic>;
+    public var deltaHistory:Array<Int>;
     public var deltaSmoothingMax:Int;
     public var panicMax:Int;
     public var rawDelta:Float;
@@ -31,7 +31,7 @@ extern class TimeStep {
     public function resume():Void;
     public function resetDelta():Void;
     public function start(callback:TimeStepCallback):Void;
-    public function step(time:Int):Void;
+    public function step(time:Float):Void;
     public function tick():Void;
     public function sleep():Void;
     public function wake(?seamless:Bool):Void;

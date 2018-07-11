@@ -26,7 +26,7 @@ extern class Color {
     public function GetColor(red:Int, green:Int, blue:Int):Float;
     public function GetColor32(red:Int, green:Int, blue:Int, alpha:Int):Float;
     public function HSLToColor(h:Float, s:Float, l:Float):phaser.display.Color;
-    public function HSVColorWheel(?s:Float, ?v:Float):Array<Dynamic>;
+    public function HSVColorWheel(?s:Float, ?v:Float):Array<ColorObject>;
     public function HSVToRGB(h:Float, s:Float, v:Float):ColorObject;
     public function HexStringToColor(hex:String):phaser.display.Color;
     public function HueToComponent(p:Float, q:Float, t:Float):Float;

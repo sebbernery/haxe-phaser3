@@ -10,6 +10,7 @@ extern class Camera extends phaser.events.EventEmitter {
     public var width:Float;
     public var height:Float;
     public var roundPixels:Bool;
+    public var visible:Bool;
     public var useBounds:Bool;
     public var inputEnabled:Bool;
     public var scrollX:Float;
@@ -26,6 +27,8 @@ extern class Camera extends phaser.events.EventEmitter {
     public var culledObjects:Array<phaser.gameobjects.GameObject>;
     public var lerp:phaser.math.Vector2;
     public var followOffset:phaser.math.Vector2;
+    public var centerX:Float;
+    public var centerY:Float;
     public function centerToBounds():phaser.cameras.scene2d.Camera;
     public function centerToSize():phaser.cameras.scene2d.Camera;
     public function cull(renderableObjects:Array<phaser.gameobjects.GameObject>):Array<phaser.gameobjects.GameObject>;
@@ -53,6 +56,7 @@ extern class Camera extends phaser.events.EventEmitter {
     public function setSize(width:Int, ?height:Int):phaser.cameras.scene2d.Camera;
     public function setViewport(x:Float, y:Float, width:Int, ?height:Int):phaser.cameras.scene2d.Camera;
     public function setZoom(?value:Float):phaser.cameras.scene2d.Camera;
+    public function setVisible(value:Bool):Dynamic;
     public function startFollow(target:Dynamic, ?roundPixels:Bool, ?lerpX:Float, ?lerpY:Float, ?offsetX:Float, ?offsetY:Float):Dynamic;
     public function stopFollow():phaser.cameras.scene2d.Camera;
     public function toJSON():JSONCamera;

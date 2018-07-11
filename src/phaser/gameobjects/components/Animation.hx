@@ -28,7 +28,7 @@ extern class Animation {
     public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
     public function getProgress():Float;
     public function setProgress(?value:Float):phaser.gameobjects.GameObject;
-    public function remove(?event:phaser.animations.Animation):Void;
+    public function remove(?key:String, ?animation:phaser.animations.Animation):Void;
     public function getRepeat():Int;
     public function setRepeat(value:Int):phaser.gameobjects.GameObject;
     public function getRepeatDelay():Float;
@@ -41,7 +41,7 @@ extern class Animation {
     public function setTimeScale(?value:Float):phaser.gameobjects.GameObject;
     public function getTimeScale():Float;
     public function getTotalFrames():Int;
-    public function update(timestamp:Float, delta:Float):Void;
+    public function update(time:Float, delta:Float):Void;
     public function setCurrentFrame(animationFrame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     public function setYoyo(?value:Bool):phaser.gameobjects.GameObject;
     public function getYoyo():Bool;

@@ -93,8 +93,8 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
     public function onParticleEmit(callback:ParticleEmitterCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     public function onParticleDeath(callback:ParticleDeathCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     public function killAll():phaser.gameobjects.particles.ParticleEmitter;
-    public function forEachAlive(callback:ParticleEmitterCallback, thisArg:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
-    public function forEachDead(callback:ParticleEmitterCallback, thisArg:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function forEachAlive(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function forEachDead(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     public function start():phaser.gameobjects.particles.ParticleEmitter;
     public function pause():phaser.gameobjects.particles.ParticleEmitter;
     public function resume():phaser.gameobjects.particles.ParticleEmitter;

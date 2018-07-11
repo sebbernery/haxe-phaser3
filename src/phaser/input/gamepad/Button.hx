@@ -9,5 +9,5 @@ extern class Button {
     public var value:Float;
     public var threshold:Float;
     public var pressed:Bool;
-    public function update(data:js.html.GamepadButton):Void;
+    public function destroy():Void;
 }

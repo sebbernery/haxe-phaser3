@@ -21,6 +21,7 @@ extern class Image extends phaser.gameobjects.Image {
     public function setDrag(x:Float, ?y:Float):Dynamic;
     public function setDragX(value:Float):Dynamic;
     public function setDragY(value:Float):Dynamic;
+    public function setDamping(value:Bool):Dynamic;
     public function enableBody(reset:Bool, x:Float, y:Float, enableGameObject:Bool, showGameObject:Bool):Dynamic;
     public function disableBody(?disableGameObject:Bool, ?hideGameObject:Bool):Dynamic;
     public function refreshBody():Dynamic;

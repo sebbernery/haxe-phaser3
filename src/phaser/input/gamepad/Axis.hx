@@ -8,6 +8,6 @@ extern class Axis {
     public var index:Int;
     public var value:Float;
     public var threshold:Float;
-    public function update(value:Float):Void;
     public function getValue():Float;
+    public function destroy():Void;
 }

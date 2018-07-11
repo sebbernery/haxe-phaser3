@@ -14,7 +14,7 @@ extern class CameraManager {
     public function addExisting(camera:phaser.cameras.scene2d.Camera):phaser.cameras.scene2d.Camera;
     public function fromJSON(config:Dynamic):phaser.cameras.scene2d.CameraManager;
     public function getCamera(name:String):phaser.cameras.scene2d.Camera;
-    public function getCameraBelowPointer(pointer:phaser.input.Pointer):phaser.cameras.scene2d.Camera;
+    public function getCamerasBelowPointer(pointer:phaser.input.Pointer):Array<phaser.cameras.scene2d.Camera>;
     public function remove(camera:phaser.cameras.scene2d.Camera):Void;
     public function render(renderer:Dynamic, children:Array<phaser.gameobjects.GameObject>, interpolation:Float):Void;
     public function resetAll():phaser.cameras.scene2d.Camera;

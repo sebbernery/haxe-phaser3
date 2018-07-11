@@ -39,7 +39,7 @@ extern class List {
     public function replace(oldChild:Dynamic, newChild:Dynamic):Dynamic;
     public function exists(child:Dynamic):Bool;
     public function setAll(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):Void;
-    public function each(callback:EachListCallback, ?thisArg:Dynamic, ?args:Dynamic):Void;
+    public function each(callback:EachListCallback, ?context:Dynamic, ?args:Dynamic):Void;
     public function shutdown():Void;
     public function destroy():Void;
 }

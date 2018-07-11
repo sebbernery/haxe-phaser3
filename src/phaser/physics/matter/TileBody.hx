@@ -17,6 +17,7 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
     public function setFrictionAir(value:Float):phaser.gameobjects.GameObject;
     public function setFrictionStatic(value:Float):phaser.gameobjects.GameObject;
     public function setIgnoreGravity(value:Bool):phaser.gameobjects.GameObject;
+    public var centerOfMass:Dynamic;
     public function setMass(value:Float):phaser.gameobjects.GameObject;
     public function setDensity(value:Float):phaser.gameobjects.GameObject;
     public function setSensor(value:Bool):phaser.gameobjects.GameObject;

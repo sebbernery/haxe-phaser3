@@ -5,6 +5,7 @@ var gameObject:phaser.gameobjects.GameObject;
 var enabled:Bool;
 var draggable:Bool;
 var dropZone:Bool;
+var cursor:Dynamic;
 var target:phaser.gameobjects.GameObject;
 var camera:phaser.cameras.scene2d.Camera;
 var hitArea:Dynamic;

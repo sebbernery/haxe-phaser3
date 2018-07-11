@@ -21,6 +21,7 @@ extern class Game {
     public var loop:phaser.boot.TimeStep;
     public var plugins:phaser.plugins.PluginManager;
     public var hasFocus:Bool;
+    public var isOver:Bool;
     public function boot():Void;
     public function start():Void;
     public function step(time:Int, delta:Float):Void;

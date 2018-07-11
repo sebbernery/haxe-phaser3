@@ -22,6 +22,7 @@ extern class SceneManager {
     public function resume(key:String):phaser.scenes.SceneManager;
     public function sleep(key:String):phaser.scenes.SceneManager;
     public function wake(key:String):phaser.scenes.SceneManager;
+    public function run(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     public function start(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     public function stop(key:String):phaser.scenes.SceneManager;
     @:native('switch') public function switch_(from:String, to:String):phaser.scenes.SceneManager;

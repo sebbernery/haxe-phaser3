@@ -4,7 +4,7 @@ package phaser.gameobjects;
 extern class DynamicBitmapText extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float);
     public var font:String;
-    public var fontData:Dynamic;
+    public var fontData:BitmapFontData;
     public var text:String;
     public var fontSize:Float;
     public var letterSpacing:Float;
@@ -21,7 +21,7 @@ extern class DynamicBitmapText extends phaser.gameobjects.GameObject {
     public function setText(value:Dynamic):phaser.gameobjects.DynamicBitmapText;
     public function setScrollX(value:Float):phaser.gameobjects.DynamicBitmapText;
     public function setScrollY(value:Float):phaser.gameobjects.DynamicBitmapText;
-    public function getTextBounds(round:Bool):TextBounds;
+    public function getTextBounds(?round:Bool):BitmapTextSize;
     public var alpha:Float;
     public var alphaTopLeft:Float;
     public var alphaTopRight:Float;
