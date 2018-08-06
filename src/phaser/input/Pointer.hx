@@ -9,6 +9,7 @@ extern class Pointer {
     public var camera:phaser.cameras.scene2d.Camera;
     public var buttons:Int;
     public var position:phaser.math.Vector2;
+    public var prevPosition:phaser.math.Vector2;
     public var worldX:Float;
     public var worldY:Float;
     public var downX:Float;
@@ -39,5 +40,6 @@ extern class Pointer {
     public function middleButtonDown():Bool;
     public function backButtonDown():Bool;
     public function forwardButtonDown():Bool;
+    public function getInterpolatedPosition(?steps:Int, ?out:Array<Dynamic>):Array<Dynamic>;
     public function destroy():Void;
 }

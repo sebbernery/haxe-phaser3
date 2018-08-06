@@ -31,7 +31,7 @@ extern class Blitter extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;

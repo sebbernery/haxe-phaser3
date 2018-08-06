@@ -10,7 +10,7 @@ extern class GameObjectFactory {
     public function path(x:Float, y:Float):phaser.curves.Path;
     public function existing(child:phaser.gameobjects.GameObject):phaser.gameobjects.GameObject;
     public function dynamicBitmapText(x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float):phaser.gameobjects.DynamicBitmapText;
-    public function bitmapText(x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float):phaser.gameobjects.BitmapText;
+    public function bitmapText(x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float, ?align:Int):phaser.gameobjects.BitmapText;
     public function blitter(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.gameobjects.Blitter;
     public function container(x:Float, y:Float, ?children:Dynamic):phaser.gameobjects.Container;
     public function graphics(?config:GraphicsOptions):phaser.gameobjects.Graphics;

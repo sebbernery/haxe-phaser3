@@ -3,6 +3,7 @@ package phaser.display.masks;
 @:native("Phaser.Display.Masks.BitmapMask")
 extern class BitmapMask {
     public function new(scene:phaser.Scene, renderable:phaser.gameobjects.GameObject);
+    public var renderer:Dynamic;
     public var bitmapMask:phaser.gameobjects.GameObject;
     public var maskTexture:js.html.webgl.Texture;
     public var mainTexture:js.html.webgl.Texture;

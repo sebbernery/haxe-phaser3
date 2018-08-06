@@ -28,7 +28,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
     public function exists(key:String):Bool;
     public function get(key:String):phaser.textures.Texture;
     public function cloneFrame(key:String, frame:Dynamic):phaser.textures.Frame;
-    public function getFrame(key:String, frame:Dynamic):phaser.textures.Frame;
+    public function getFrame(key:String, ?frame:Dynamic):phaser.textures.Frame;
     public function getTextureKeys():Array<String>;
     public function getPixel(x:Int, y:Int, key:String, frame:Dynamic):phaser.display.Color;
     public function getPixelAlpha(x:Int, y:Int, key:String, frame:Dynamic):Int;

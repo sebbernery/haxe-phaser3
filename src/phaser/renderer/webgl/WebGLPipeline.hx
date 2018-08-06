@@ -23,6 +23,7 @@ extern class WebGLPipeline {
     public var vertexComponentCount:Int;
     public var flushLocked:Bool;
     public var active:Bool;
+    public function boot():Void;
     public function addAttribute(name:String, size:Int, type:Int, normalized:Bool, offset:Int):phaser.renderer.webgl.WebGLPipeline;
     public function shouldFlush():Bool;
     public function resize(width:Float, height:Float, resolution:Float):phaser.renderer.webgl.WebGLPipeline;

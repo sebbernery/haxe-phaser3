@@ -69,7 +69,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;
@@ -77,13 +77,16 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public var scrollFactorX:Float;
     public var scrollFactorY:Float;
     public function setScrollFactor(x:Float, ?y:Float):Dynamic;
+    public var tintFill:Bool;
     public var tintTopLeft:Int;
     public var tintTopRight:Int;
     public var tintBottomLeft:Int;
     public var tintBottomRight:Int;
     public var tint:Int;
+    public var isTinted:Bool;
     public function clearTint():Dynamic;
     public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
     public var x:Float;
     public var y:Float;
     public var z:Float;

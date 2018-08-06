@@ -35,6 +35,7 @@ extern class Rectangle {
     public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     public function GetSize(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
     public function Inflate(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    public function Intersection(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     public function MarchingAnts(rect:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     public function MergePoints(target:phaser.geom.Rectangle, points:Array<phaser.geom.Point>):phaser.geom.Rectangle;
     public function MergeRect(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;

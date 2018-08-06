@@ -1,6 +1,6 @@
 package phaser;
 
 typedef GraphicsFillStyle = {
-var color:Float;
-var alpha:Float;
+    @:optional var color:Float;
+    @:optional var alpha:Float;
 };

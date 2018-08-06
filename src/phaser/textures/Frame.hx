@@ -7,6 +7,7 @@ extern class Frame {
     public var name:String;
     public var source:phaser.textures.TextureSource;
     public var sourceIndex:Int;
+    public var glTexture:js.html.webgl.Texture;
     public var cutX:Int;
     public var cutY:Int;
     public var cutWidth:Int;
@@ -25,14 +26,19 @@ extern class Frame {
     public var rotated:Bool;
     public var autoRound:Int;
     public var customData:Dynamic;
+    public var u0:Float;
+    public var v0:Float;
+    public var u1:Float;
+    public var v1:Float;
     public var realWidth:Float;
     public var realHeight:Float;
-    public var uvs:Dynamic;
     public var radius:Float;
     public var trimmed:Bool;
     public var canvasData:Dynamic;
     public function setSize(width:Int, height:Int, ?x:Int, ?y:Int):phaser.textures.Frame;
     public function setTrim(actualWidth:Float, actualHeight:Float, destX:Float, destY:Float, destWidth:Float, destHeight:Float):phaser.textures.Frame;
+    public function setCropUVs(crop:Dynamic, x:Float, y:Float, width:Float, height:Float, flipX:Bool, flipY:Bool):Dynamic;
+    public function updateCropUVs(crop:Dynamic, flipX:Bool, flipY:Bool):Dynamic;
     public function updateUVs():phaser.textures.Frame;
     public function updateUVsInverted():phaser.textures.Frame;
     public function clone():phaser.textures.Frame;

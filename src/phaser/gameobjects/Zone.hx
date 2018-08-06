@@ -25,6 +25,7 @@ extern class Zone extends phaser.gameobjects.GameObject {
     public var originY:Float;
     public var displayOriginX:Float;
     public var displayOriginY:Float;
+    public function setAlpha(?value:Float):Dynamic;
     public function setOrigin(?x:Float, ?y:Float):Dynamic;
     public function setOriginFromFrame():Dynamic;
     public function setDisplayOrigin(?x:Float, ?y:Float):Dynamic;

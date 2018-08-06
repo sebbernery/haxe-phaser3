@@ -2,7 +2,7 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.Graphics")
 extern class Graphics extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, options:GraphicsOptions);
+    public function new(scene:phaser.Scene, ?options:GraphicsOptions);
     public var displayOriginX:Float;
     public var displayOriginY:Float;
     public var commandBuffer:Array<Dynamic>;
@@ -27,6 +27,8 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function strokeRectShape(rect:phaser.geom.Rectangle):phaser.gameobjects.Graphics;
     public function fillRect(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Graphics;
     public function strokeRect(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Graphics;
+    public function fillRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Float):phaser.gameobjects.Graphics;
+    public function strokeRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Float):phaser.gameobjects.Graphics;
     public function fillPointShape(point:Dynamic, ?size:Float):phaser.gameobjects.Graphics;
     public function fillPoint(x:Float, y:Float, ?size:Float):phaser.gameobjects.Graphics;
     public function fillTriangleShape(triangle:phaser.geom.Triangle):phaser.gameobjects.Graphics;
@@ -45,8 +47,8 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function strokeEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
     public function fillEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):phaser.gameobjects.Graphics;
     public function fillEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
-    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):phaser.gameobjects.Graphics;
-    public function slice(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):phaser.gameobjects.Graphics;
+    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):phaser.gameobjects.Graphics;
+    public function slice(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):phaser.gameobjects.Graphics;
     public function save():phaser.gameobjects.Graphics;
     public function restore():phaser.gameobjects.Graphics;
     public function translate(x:Float, y:Float):phaser.gameobjects.Graphics;
@@ -74,7 +76,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var x:Float;

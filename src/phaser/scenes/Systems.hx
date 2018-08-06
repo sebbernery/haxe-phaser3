@@ -27,10 +27,10 @@ extern class Systems {
     public function render(renderer:Dynamic):Void;
     public function queueDepthSort():Void;
     public function depthSort():Void;
-    public function pause():phaser.scenes.Systems;
-    public function resume():phaser.scenes.Systems;
-    public function sleep():phaser.scenes.Systems;
-    public function wake():phaser.scenes.Systems;
+    public function pause(?data:Dynamic):phaser.scenes.Systems;
+    public function resume(?data:Dynamic):phaser.scenes.Systems;
+    public function sleep(?data:Dynamic):phaser.scenes.Systems;
+    public function wake(?data:Dynamic):phaser.scenes.Systems;
     public function isSleeping():Bool;
     public function isActive():Bool;
     public function isTransitioning():Bool;
@@ -38,8 +38,8 @@ extern class Systems {
     public function isTransitionIn():Bool;
     public function isVisible():Bool;
     public function setVisible(value:Bool):phaser.scenes.Systems;
-    public function setActive(value:Bool):phaser.scenes.Systems;
+    public function setActive(value:Bool, ?data:Dynamic):phaser.scenes.Systems;
     public function start(data:Dynamic):Void;
     public function resize(width:Float, height:Float):Void;
-    public function shutdown():Void;
+    public function shutdown(?data:Dynamic):Void;
 }

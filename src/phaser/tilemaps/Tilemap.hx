@@ -24,7 +24,7 @@ extern class Tilemap {
     public function addTilesetImage(tilesetName:String, ?key:String, ?tileWidth:Int, ?tileHeight:Int, ?tileMargin:Int, ?tileSpacing:Int, ?gid:Int):phaser.tilemaps.Tileset;
     public function convertLayerToStatic(?layer:Dynamic):phaser.tilemaps.StaticTilemapLayer;
     public function copy():phaser.tilemaps.Tilemap;
-    public function createBlankDynamicLayer(name:String, tileset:phaser.tilemaps.Tileset, width:Int, height:Int, tileWidth:Int, tileHeight:Int):phaser.tilemaps.DynamicTilemapLayer;
+    public function createBlankDynamicLayer(name:String, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float, ?width:Int, ?height:Int, ?tileWidth:Int, ?tileHeight:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function createDynamicLayer(layerID:Dynamic, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float):phaser.tilemaps.DynamicTilemapLayer;
     public function createFromObjects(name:String, id:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene):Array<phaser.gameobjects.Sprite>;
     public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera, ?layer:phaser.tilemaps.LayerData):Array<phaser.gameobjects.Sprite>;
@@ -58,8 +58,8 @@ extern class Tilemap {
     public function calculateFacesAt(tileX:Int, tileY:Int, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;
     public function removeAllLayers():phaser.tilemaps.Tilemap;
-    public function removeTileAt(tile:Dynamic, tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tile;
-    public function removeTileAtWorldXY(tile:Dynamic, worldX:Float, worldY:Float, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tile;
+    public function removeTileAt(tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tile;
+    public function removeTileAtWorldXY(worldX:Float, worldY:Float, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tile;
     public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:Dynamic, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;
     public function replaceByIndex(findIndex:Int, newIndex:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;
     public function setCollision(indexes:Dynamic, ?collides:Bool, ?recalculateFaces:Bool, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;

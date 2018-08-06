@@ -1,6 +1,6 @@
 # Haxe Phaser 3 bindings
 
-This contains bindings for Phaser 3 (3.10.1).
+This contains bindings for Phaser 3 (3.11).
 
 !!! BE CAREFULL, those bindings are not perfect !!!
 

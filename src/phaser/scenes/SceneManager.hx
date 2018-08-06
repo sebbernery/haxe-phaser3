@@ -18,10 +18,10 @@ extern class SceneManager {
     public function isActive(key:String):Bool;
     public function isVisible(key:String):Bool;
     public function isSleeping(key:String):Bool;
-    public function pause(key:String):phaser.scenes.SceneManager;
-    public function resume(key:String):phaser.scenes.SceneManager;
-    public function sleep(key:String):phaser.scenes.SceneManager;
-    public function wake(key:String):phaser.scenes.SceneManager;
+    public function pause(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function resume(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function sleep(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function wake(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     public function run(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     public function start(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     public function stop(key:String):phaser.scenes.SceneManager;

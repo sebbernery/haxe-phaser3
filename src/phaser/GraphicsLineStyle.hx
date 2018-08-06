@@ -1,7 +1,7 @@
 package phaser;
 
 typedef GraphicsLineStyle = {
-var width:Float;
-var color:Float;
-var alpha:Float;
+    @:optional var width:Float;
+    @:optional var color:Float;
+    @:optional var alpha:Float;
 };

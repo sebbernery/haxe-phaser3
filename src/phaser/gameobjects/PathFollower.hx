@@ -12,7 +12,7 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
     public var pathTween:phaser.tweens.Tween;
     public var pathConfig:PathConfig;
     public function setPath(path:phaser.curves.Path, ?config:PathConfig):phaser.gameobjects.PathFollower;
-    public function setRotateToPath(value:Float, ?offset:Float, ?verticalAdjust:Bool):phaser.gameobjects.PathFollower;
+    public function setRotateToPath(value:Bool, ?offset:Float, ?verticalAdjust:Bool):phaser.gameobjects.PathFollower;
     public function isFollowing():Bool;
     public function startFollow(?config:Dynamic, ?startAt:Float):phaser.gameobjects.PathFollower;
     public function pauseFollow():phaser.gameobjects.PathFollower;

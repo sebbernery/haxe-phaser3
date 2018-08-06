@@ -2,7 +2,7 @@ package phaser;
 
 typedef RendererConfig = {
 var clearBeforeRender:Bool;
-var pixelArt:Bool;
+var antialias:Bool;
 var backgroundColor:phaser.display.Color;
 var resolution:Float;
 var autoResize:Bool;

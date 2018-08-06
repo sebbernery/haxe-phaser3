@@ -13,7 +13,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public var padding:Dynamic;
     public var canvasTexture:js.html.CanvasElement;
     public var dirty:Bool;
-    public function GetTextSize(text:phaser.gameobjects.Text, size:Float, lines:Array<Dynamic>):Dynamic;
+    public function GetTextSize(text:phaser.gameobjects.Text, size:TextMetrics, lines:Array<Dynamic>):Dynamic;
     public function MeasureText(textStyle:phaser.gameobjects.text.TextStyle):Dynamic;
     public function initRTL():Void;
     public function runWordWrap(text:String):String;
@@ -31,7 +31,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function setFill(color:String):phaser.gameobjects.Text;
     public function setColor(color:String):phaser.gameobjects.Text;
     public function setStroke(color:String, thickness:Float):phaser.gameobjects.Text;
-    public function setShadow(x:Float, y:Float, color:String, blur:Float, shadowStroke:Bool, shadowFill:Bool):phaser.gameobjects.Text;
+    public function setShadow(?x:Float, ?y:Float, ?color:String, ?blur:Float, ?shadowStroke:Bool, ?shadowFill:Bool):phaser.gameobjects.Text;
     public function setShadowOffset(x:Float, y:Float):phaser.gameobjects.Text;
     public function setShadowColor(color:String):phaser.gameobjects.Text;
     public function setShadowBlur(blur:Float):phaser.gameobjects.Text;
@@ -92,7 +92,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;
@@ -100,13 +100,16 @@ extern class Text extends phaser.gameobjects.GameObject {
     public var scrollFactorX:Float;
     public var scrollFactorY:Float;
     public function setScrollFactor(x:Float, ?y:Float):Dynamic;
+    public var tintFill:Bool;
     public var tintTopLeft:Int;
     public var tintTopRight:Int;
     public var tintBottomLeft:Int;
     public var tintBottomRight:Int;
     public var tint:Int;
+    public var isTinted:Bool;
     public function clearTint():Dynamic;
     public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
     public var x:Float;
     public var y:Float;
     public var z:Float;

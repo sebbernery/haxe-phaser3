@@ -25,7 +25,7 @@ extern class TextStyle {
     public var testString:String;
     public var baselineX:Float;
     public var baselineY:Float;
-    public function setStyle(style:js.html.CSSStyleRule, ?updateText:Bool):phaser.gameobjects.Text;
+    public function setStyle(style:Dynamic, ?updateText:Bool):phaser.gameobjects.Text;
     public function syncFont(canvas:js.html.CanvasElement, context:js.html.CanvasRenderingContext2D):Void;
     public function syncStyle(canvas:js.html.CanvasElement, context:js.html.CanvasRenderingContext2D):Void;
     public function syncShadow(context:js.html.CanvasRenderingContext2D, enabled:Bool):Void;
@@ -50,7 +50,7 @@ extern class TextStyle {
     public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
     public function setAlign(align:String):phaser.gameobjects.Text;
     public function setMaxLines(?max:Int):phaser.gameobjects.Text;
-    public function getTextMetrics():Dynamic;
+    public function getTextMetrics():TextMetrics;
     public function toJSON():Dynamic;
     public function destroy():Void;
 }

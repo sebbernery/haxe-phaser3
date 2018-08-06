@@ -1,6 +1,6 @@
 package phaser;
 
 typedef GraphicsStyles = {
-var lineStyle:GraphicsLineStyle;
-var fillStyle:GraphicsFillStyle;
+    @:optional var lineStyle:GraphicsLineStyle;
+    @:optional var fillStyle:GraphicsFillStyle;
 };

@@ -2,18 +2,26 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.BitmapText")
 extern class BitmapText extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float);
+    public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float, ?align:Int);
     public var font:String;
     public var fontData:BitmapFontData;
+    public var align:Int;
     public var text:String;
     public var fontSize:Float;
     public var letterSpacing:Float;
     public var width:Float;
     public var height:Float;
-    public function setFontSize(size:Float):phaser.gameobjects.BitmapText;
-    public function setLetterSpacing(?spacing:Float):phaser.gameobjects.BitmapText;
-    public function setText(value:Dynamic):phaser.gameobjects.BitmapText;
+    public var ALIGN_LEFT:Int;
+    public var ALIGN_CENTER:Int;
+    public var ALIGN_RIGHT:Int;
+    public function setLeftAlign():Dynamic;
+    public function setCenterAlign():Dynamic;
+    public function setRightAlign():Dynamic;
+    public function setFontSize(size:Float):Dynamic;
+    public function setLetterSpacing(?spacing:Float):Dynamic;
+    public function setText(value:Dynamic):Dynamic;
     public function getTextBounds(?round:Bool):BitmapTextSize;
+    public function setFont(font:String, ?size:Float, ?align:Int):Dynamic;
     public var alpha:Float;
     public var alphaTopLeft:Float;
     public var alphaTopRight:Float;
@@ -41,7 +49,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;
@@ -53,13 +61,16 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public var frame:phaser.textures.Frame;
     public function setTexture(key:String, ?frame:Dynamic):Dynamic;
     public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
+    public var tintFill:Bool;
     public var tintTopLeft:Int;
     public var tintTopRight:Int;
     public var tintBottomLeft:Int;
     public var tintBottomRight:Int;
     public var tint:Int;
+    public var isTinted:Bool;
     public function clearTint():Dynamic;
     public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
     public var x:Float;
     public var y:Float;
     public var z:Float;

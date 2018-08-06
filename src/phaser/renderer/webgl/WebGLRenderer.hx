@@ -33,6 +33,7 @@ extern class WebGLRenderer {
     public var extensions:Dynamic;
     public var glFormats:Array<Dynamic>;
     public var compression:Array<Dynamic>;
+    public var drawingBufferHeight:Float;
     public function init(config:Dynamic):phaser.renderer.webgl.WebGLRenderer;
     public function resize(width:Float, height:Float):phaser.renderer.webgl.WebGLRenderer;
     public function onContextRestored(callback:WebGLContextCallback, target:Dynamic):phaser.renderer.webgl.WebGLRenderer;
@@ -47,7 +48,7 @@ extern class WebGLRenderer {
     public function setScissor(x:Int, y:Int, w:Int, h:Int):phaser.renderer.webgl.WebGLRenderer;
     public function pushScissor(x:Int, y:Int, w:Int, h:Int):phaser.renderer.webgl.WebGLRenderer;
     public function popScissor():phaser.renderer.webgl.WebGLRenderer;
-    public function setPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline):phaser.renderer.webgl.WebGLPipeline;
+    public function setPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline, ?gameObject:phaser.gameobjects.GameObject):phaser.renderer.webgl.WebGLPipeline;
     public function setBlendMode(blendModeId:Int):phaser.renderer.webgl.WebGLRenderer;
     public function addBlendMode(func:Dynamic, equation:Dynamic):Int;
     public function updateBlendMode(index:Int, func:Dynamic, equation:Dynamic):phaser.renderer.webgl.WebGLRenderer;

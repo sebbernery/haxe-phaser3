@@ -9,6 +9,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var layer:phaser.tilemaps.LayerData;
     public var tileset:phaser.tilemaps.Tileset;
     public var culledTiles:Array<Dynamic>;
+    public var skipCull:Bool;
+    public var tilesDrawn:Float;
+    public var tilesTotal:Float;
+    public var cullPaddingX:Float;
+    public var cullPaddingY:Float;
+    public var cullCallback:Dynamic;
     public function calculateFacesAt(tileX:Int, tileY:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;
@@ -34,6 +40,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function removeTileAtWorldXY(tile:Dynamic, worldX:Float, worldY:Float, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
     public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     public function replaceByIndex(findIndex:Int, newIndex:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
+    public function setSkipCull(?value:Bool):Dynamic;
+    public function setCullPadding(?paddingX:Float, ?paddingY:Float):Dynamic;
     public function setCollision(indexes:Dynamic, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setCollisionBetween(start:Int, stop:Int, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setCollisionByProperty(properties:Dynamic, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
@@ -92,7 +100,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;

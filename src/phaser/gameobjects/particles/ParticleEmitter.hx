@@ -61,7 +61,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
     public var frameQuantity:Int;
     public function fromJSON(config:ParticleEmitterConfig):phaser.gameobjects.particles.ParticleEmitter;
     public function toJSON(?output:Dynamic):Dynamic;
-    public function startFollow(target:phaser.gameobjects.particles.Particle, ?offsetX:Float, ?offsetY:Float, ?trackVisible:Bool):phaser.gameobjects.particles.ParticleEmitter;
+    public function startFollow(target:phaser.gameobjects.GameObject, ?offsetX:Float, ?offsetY:Float, ?trackVisible:Bool):phaser.gameobjects.particles.ParticleEmitter;
     public function stopFollow():phaser.gameobjects.particles.ParticleEmitter;
     public function getFrame():phaser.textures.Frame;
     public function setFrame(frames:Dynamic, ?pickRandom:Bool, ?quantity:Int):phaser.gameobjects.particles.ParticleEmitter;
@@ -96,6 +96,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
     public function forEachAlive(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     public function forEachDead(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     public function start():phaser.gameobjects.particles.ParticleEmitter;
+    public function stop():phaser.gameobjects.particles.ParticleEmitter;
     public function pause():phaser.gameobjects.particles.ParticleEmitter;
     public function resume():phaser.gameobjects.particles.ParticleEmitter;
     public function depthSort():phaser.gameobjects.particles.ParticleEmitter;

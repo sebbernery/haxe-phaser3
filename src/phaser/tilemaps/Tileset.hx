@@ -12,6 +12,7 @@ extern class Tileset {
     public var tileProperties:Dynamic;
     public var tileData:Dynamic;
     public var image:phaser.textures.Texture;
+    public var glTexture:js.html.webgl.Texture;
     public var rows:Int;
     public var columns:Int;
     public var total:Int;

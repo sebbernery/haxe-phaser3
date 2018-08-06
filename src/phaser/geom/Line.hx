@@ -20,7 +20,7 @@ extern class Line {
     public function GetMidPoint(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
     public function GetNormal(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
     public function GetPoint(line:phaser.geom.Line, position:Float, ?out:Dynamic):phaser.geom.Point;
-    public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Int, ?out:Dynamic):Array<Dynamic>;
+    public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     public function Height(line:phaser.geom.Line):Float;
     public function Length(line:phaser.geom.Line):Float;
     public function getPoint(position:Float, ?output:Dynamic):phaser.geom.Point;

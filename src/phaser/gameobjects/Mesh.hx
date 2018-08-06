@@ -7,6 +7,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
     public var uv:js.html.Float32Array;
     public var colors:js.html.Uint32Array;
     public var alphas:js.html.Float32Array;
+    public var tintFill:Bool;
     public var alpha:Float;
     public var alphaTopLeft:Float;
     public var alphaTopRight:Float;
@@ -48,7 +49,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     public function initPipeline(pipelineName:String):Bool;
-    public function setPipeline(pipelineName:String):Bool;
+    public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;
     public var scaleMode:Dynamic;
