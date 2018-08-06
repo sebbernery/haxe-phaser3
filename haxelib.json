@@ -5,7 +5,7 @@
     "tags": ["js", "game"],
     "description": "Haxe bindings for Phaser 3. Highly experimental.",
     "contributors": ["Sebbernery"],
-    "version": "3.11",
+    "version": "3.11.0",
     "releasenote": "Updated to support Phaser 3.11",
     "classPath": "src",
     "dependencies": {}
