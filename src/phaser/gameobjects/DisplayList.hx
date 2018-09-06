@@ -11,4 +11,5 @@ extern class DisplayList {
     public function sortByDepth(childA:phaser.gameobjects.GameObject, childB:phaser.gameobjects.GameObject):Int;
     public function sortGameObjects(gameObjects:Array<phaser.gameobjects.GameObject>):Array<Dynamic>;
     public function getTopGameObject(gameObjects:Array<phaser.gameobjects.GameObject>):phaser.gameobjects.GameObject;
+    public function getChildren():Array<phaser.gameobjects.GameObject>;
 }

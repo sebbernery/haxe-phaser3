@@ -48,13 +48,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
     public function binary(key:Dynamic, ?url:String, ?dataType:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function bitmapFont(key:Dynamic, ?textureURL:Dynamic, ?fontDataURL:String, ?textureXhrSettings:XHRSettingsObject, ?fontDataXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function glsl(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
-    public function html(key:Dynamic, ?url:String, ?width:Int, ?height:Int, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function html(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function htmlTexture(key:Dynamic, ?url:String, ?width:Int, ?height:Int, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function image(key:Dynamic, ?url:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function json(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function multiatlas(key:Dynamic, ?atlasURL:String, ?path:String, ?baseURL:String, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function pack(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function plugin(key:Dynamic, ?url:Dynamic, ?start:Bool, ?mapping:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
-    public function svg(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function svg(key:Dynamic, ?url:String, ?svgConfig:phaser.loader.filetypes.SVGSizeConfig, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function scenePlugin(key:Dynamic, ?url:Dynamic, ?systemKey:String, ?sceneKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function script(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function spritesheet(key:Dynamic, ?url:String, ?frameConfig:phaser.loader.filetypes.ImageFrameConfig, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;

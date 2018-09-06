@@ -1,0 +1,55 @@
+package phaser.gameobjects;
+
+@:native("Phaser.GameObjects.DOMElement")
+extern class DOMElement extends phaser.gameobjects.GameObject {
+    public function new(scene:phaser.Scene, x:Float, y:Float, ?element:Dynamic);
+    public var alpha:Float;
+    public var alphaTopLeft:Float;
+    public var alphaTopRight:Float;
+    public var alphaBottomLeft:Float;
+    public var alphaBottomRight:Float;
+    public function clearAlpha():Dynamic;
+    public function setAlpha(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
+    public var blendMode:Dynamic;
+    public function setBlendMode(value:Dynamic):Dynamic;
+    public var width:Float;
+    public var height:Float;
+    public var displayWidth:Float;
+    public var displayHeight:Float;
+    public function setSize(width:Float, height:Float):Dynamic;
+    public function setDisplaySize(width:Float, height:Float):Dynamic;
+    public var depth:Float;
+    public function setDepth(value:Int):Dynamic;
+    public var originX:Float;
+    public var originY:Float;
+    public var displayOriginX:Float;
+    public var displayOriginY:Float;
+    public function setOrigin(?x:Float, ?y:Float):Dynamic;
+    public function setOriginFromFrame():Dynamic;
+    public function setDisplayOrigin(?x:Float, ?y:Float):Dynamic;
+    public function updateDisplayOrigin():Dynamic;
+    public var scrollFactorX:Float;
+    public var scrollFactorY:Float;
+    public function setScrollFactor(x:Float, ?y:Float):Dynamic;
+    public var x:Float;
+    public var y:Float;
+    public var z:Float;
+    public var w:Float;
+    public var scaleX:Float;
+    public var scaleY:Float;
+    public var angle:Int;
+    public var rotation:Float;
+    public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    public function setRandomPosition(?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic;
+    public function setRotation(?radians:Float):Dynamic;
+    public function setAngle(?degrees:Float):Dynamic;
+    public function setScale(x:Float, ?y:Float):Dynamic;
+    public function setX(?value:Float):Dynamic;
+    public function setY(?value:Float):Dynamic;
+    public function setZ(?value:Float):Dynamic;
+    public function setW(?value:Float):Dynamic;
+    public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public var visible:Bool;
+    public function setVisible(value:Bool):Dynamic;
+}

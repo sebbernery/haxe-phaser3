@@ -19,10 +19,13 @@ typedef GameConfig = {
     @:optional var input:Dynamic;
     @:optional var disableContextMenu:Bool;
     @:optional var banner:Dynamic;
+    @:optional var dom:DOMContainerConfig;
     @:optional var fps:FPSConfig;
+    @:optional var render:RenderConfig;
     @:optional var backgroundColor:Dynamic;
-    @:optional var callbacks:Dynamic;
+    @:optional var callbacks:CallbacksConfig;
     @:optional var loader:LoaderConfig;
-    @:optional var images:Dynamic;
+    @:optional var images:ImagesConfig;
     @:optional var physics:Dynamic;
+    @:optional var plugins:Dynamic;
 };

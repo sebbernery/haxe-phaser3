@@ -2,21 +2,24 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.TileSprite")
 extern class TileSprite extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, width:Float, height:Float, texture:String, ?frame:Dynamic);
+    public function new(scene:phaser.Scene, x:Float, y:Float, width:Float, height:Float, textureKey:String, ?frameKey:Dynamic);
+    public var dirty:Bool;
+    public var renderer:Dynamic;
+    public var canvas:js.html.CanvasElement;
+    public var context:js.html.CanvasRenderingContext2D;
+    public var potWidth:Int;
+    public var potHeight:Int;
+    public var fillCanvas:js.html.CanvasElement;
+    public var fillContext:js.html.CanvasRenderingContext2D;
+    public var fillPattern:Dynamic;
     public var tilePositionX:Float;
     public var tilePositionY:Float;
     public var tileScaleX:Float;
     public var tileScaleY:Float;
-    public var dirty:Bool;
-    public var tileTexture:Dynamic;
-    public var renderer:Dynamic;
-    public var potWidth:Int;
-    public var potHeight:Int;
-    public var canvasPattern:js.html.CanvasPattern;
-    public var canvasBuffer:js.html.CanvasElement;
-    public var canvasBufferCtx:js.html.CanvasRenderingContext2D;
-    public function setTilePosition(?x:Float, ?y:Float):phaser.gameobjects.TileSprite;
-    public function updateTileTexture():Void;
+    public function setTexture(key:String, ?frame:Dynamic):Dynamic;
+    public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
+    public function setTilePosition(?x:Float, ?y:Float):Dynamic;
+    public function setTileScale(?x:Float, ?y:Float):Dynamic;
     public function preDestroy():Void;
     public var alpha:Float;
     public var alphaTopLeft:Float;
@@ -33,6 +36,10 @@ extern class TileSprite extends phaser.gameobjects.GameObject {
     public var displayHeight:Float;
     public function setSize(width:Float, height:Float):Dynamic;
     public function setDisplaySize(width:Float, height:Float):Dynamic;
+    public var texture:Dynamic;
+    public var frame:phaser.textures.Frame;
+    public var isCropped:Bool;
+    public function setCrop(?x:Dynamic, ?y:Float, ?width:Float, ?height:Float):Dynamic;
     public var depth:Float;
     public function setDepth(value:Int):Dynamic;
     public var flipX:Bool;
@@ -73,10 +80,6 @@ extern class TileSprite extends phaser.gameobjects.GameObject {
     public var scrollFactorX:Float;
     public var scrollFactorY:Float;
     public function setScrollFactor(x:Float, ?y:Float):Dynamic;
-    public var texture:Dynamic;
-    public var frame:phaser.textures.Frame;
-    public function setTexture(key:String, ?frame:Dynamic):Dynamic;
-    public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
     public var tintFill:Bool;
     public var tintTopLeft:Int;
     public var tintTopRight:Int;
@@ -105,7 +108,7 @@ extern class TileSprite extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
 }

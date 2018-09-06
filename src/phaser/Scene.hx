@@ -12,7 +12,7 @@ extern class Scene {
     public var textures:phaser.textures.TextureManager;
     public var events:phaser.events.EventEmitter;
     public var cameras:phaser.cameras.scene2d.CameraManager;
-    public var cameras3d:phaser.cameras.sprite3d.CameraManager;
+    public var cameras3d:Dynamic;
     public var add:phaser.gameobjects.GameObjectFactory;
     public var make:phaser.gameobjects.GameObjectCreator;
     public var scene:phaser.scenes.ScenePlugin;

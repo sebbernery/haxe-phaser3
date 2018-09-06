@@ -47,13 +47,14 @@ extern class StaticBody {
     public function setGameObject(gameObject:phaser.gameobjects.GameObject, ?update:Bool):phaser.physics.arcade.StaticBody;
     public function updateFromGameObject():phaser.physics.arcade.StaticBody;
     public function setOffset(x:Float, y:Float):phaser.physics.arcade.StaticBody;
-    public function setSize(width:Float, height:Float, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.StaticBody;
+    public function setSize(?width:Int, ?height:Int, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.StaticBody;
     public function setCircle(radius:Float, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.StaticBody;
     public function updateCenter():Void;
     public function reset(x:Float, y:Float):Void;
     public function stop():phaser.physics.arcade.StaticBody;
     public function getBounds(obj:ArcadeBodyBounds):ArcadeBodyBounds;
     public function hitTest(x:Float, y:Float):Bool;
+    public function postUpdate():Void;
     public function deltaAbsX():Float;
     public function deltaAbsY():Float;
     public function deltaX():Float;

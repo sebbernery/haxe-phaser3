@@ -2,7 +2,7 @@ package phaser.math;
 
 @:native("Phaser.Math.RandomDataGenerator")
 extern class RandomDataGenerator {
-    public function new(?seeds:Array<String>);
+    public function new(?seeds:Dynamic);
     public var signs:Array<Float>;
     public function init(seeds:Dynamic):Void;
     public function sow(seeds:Array<String>):Void;

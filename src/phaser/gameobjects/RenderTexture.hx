@@ -2,16 +2,25 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.RenderTexture")
 extern class RenderTexture extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, ?width:Int, ?height:Int);
+    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?width:Int, ?height:Int);
     public var renderer:Dynamic;
+    public var textureManager:phaser.textures.TextureManager;
     public var globalTint:Float;
     public var globalAlpha:Float;
     public var canvas:js.html.CanvasElement;
     public var context:js.html.CanvasRenderingContext2D;
     public var framebuffer:js.html.webgl.Framebuffer;
+    public var camera:phaser.cameras.scene2d.BaseCamera;
+    public var dirty:Bool;
+    public var gl:js.html.webgl.RenderingContext;
     public function resize(width:Float, ?height:Float):Dynamic;
     public function setGlobalTint(tint:Int):Dynamic;
     public function setGlobalAlpha(alpha:Float):Dynamic;
+    public function saveTexture(key:String):phaser.textures.Texture;
+    public function fill(rgb:Float, ?alpha:Float):Dynamic;
+    public function clear():Dynamic;
+    public function draw(entries:Dynamic, ?x:Float, ?y:Float, ?alpha:Float, ?tint:Float):Dynamic;
+    public function drawFrame(key:String, ?frame:Dynamic, ?x:Float, ?y:Float, ?alpha:Float, ?tint:Float):Dynamic;
     public function preDestroy():Void;
     public var alpha:Float;
     public var alphaTopLeft:Float;
@@ -49,15 +58,6 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public function clearMask(?destroyMask:Bool):Dynamic;
     public function createBitmapMask(?renderable:phaser.gameobjects.GameObject):phaser.display.masks.BitmapMask;
     public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
-    public function initMatrixStack():Dynamic;
-    public function save():Dynamic;
-    public function restore():Dynamic;
-    public function loadIdentity():Dynamic;
-    public function transform(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Dynamic;
-    public function setTransform(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Dynamic;
-    public function translate(x:Float, y:Float):Dynamic;
-    public function scale(x:Float, y:Float):Dynamic;
-    public function rotate(t:Float):Dynamic;
     public var originX:Float;
     public var originY:Float;
     public var displayOriginX:Float;
@@ -105,7 +105,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
 }

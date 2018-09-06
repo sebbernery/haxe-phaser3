@@ -92,7 +92,7 @@ extern class Container extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
 }

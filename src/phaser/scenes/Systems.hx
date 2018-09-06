@@ -5,6 +5,7 @@ extern class Systems {
     public function new(scene:phaser.Scene, config:Dynamic);
     public var scene:phaser.Scene;
     public var game:phaser.Game;
+    public var facebook:Dynamic;
     public var config:Dynamic;
     public var settings:phaser.scenes.settings.Object;
     public var canvas:js.html.CanvasElement;

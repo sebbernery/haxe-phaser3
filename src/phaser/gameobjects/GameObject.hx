@@ -23,8 +23,8 @@ extern class GameObject extends phaser.events.EventEmitter {
     public function setInteractive(?shape:Dynamic, ?callback:HitAreaCallback, ?dropZone:Bool):Dynamic;
     public function disableInteractive():Dynamic;
     public function removeInteractive():Dynamic;
-    public function update():Void;
+    public function update(?args:Dynamic):Void;
     public function toJSON():JSONGameObject;
-    public function willRender():Bool;
+    public function willRender(camera:phaser.cameras.scene2d.Camera):Bool;
     public function getIndexList():Array<Int>;
 }

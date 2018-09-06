@@ -15,6 +15,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function setDefaultStyles(options:GraphicsStyles):phaser.gameobjects.Graphics;
     public function lineStyle(lineWidth:Float, color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
     public function fillStyle(color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function fillGradientStyle(topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function lineGradientStyle(lineWidth:Float, topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function setTexture(?key:String, ?frame:Dynamic, ?mode:Float):Dynamic;
     public function beginPath():phaser.gameobjects.Graphics;
     public function closePath():phaser.gameobjects.Graphics;
     public function fillPath():phaser.gameobjects.Graphics;
@@ -97,7 +100,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
     public var scrollFactorX:Float;

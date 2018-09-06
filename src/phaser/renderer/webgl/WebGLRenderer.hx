@@ -26,7 +26,6 @@ extern class WebGLRenderer {
     public var currentBlendMode:Int;
     public var currentScissorEnabled:Bool;
     public var currentScissor:js.html.Uint32Array;
-    public var currentScissorIdx:Float;
     public var scissorStack:js.html.Uint32Array;
     public var gl:js.html.webgl.RenderingContext;
     public var supportedExtensions:Dynamic;
@@ -34,6 +33,7 @@ extern class WebGLRenderer {
     public var glFormats:Array<Dynamic>;
     public var compression:Array<Dynamic>;
     public var drawingBufferHeight:Float;
+    public var blankTexture:js.html.webgl.Texture;
     public function init(config:Dynamic):phaser.renderer.webgl.WebGLRenderer;
     public function resize(width:Float, height:Float):phaser.renderer.webgl.WebGLRenderer;
     public function onContextRestored(callback:WebGLContextCallback, target:Dynamic):phaser.renderer.webgl.WebGLRenderer;
@@ -45,11 +45,11 @@ extern class WebGLRenderer {
     public function getPipeline(pipelineName:String):phaser.renderer.webgl.WebGLPipeline;
     public function removePipeline(pipelineName:String):phaser.renderer.webgl.WebGLRenderer;
     public function addPipeline(pipelineName:String, pipelineInstance:phaser.renderer.webgl.WebGLPipeline):phaser.renderer.webgl.WebGLPipeline;
-    public function setScissor(x:Int, y:Int, w:Int, h:Int):phaser.renderer.webgl.WebGLRenderer;
     public function pushScissor(x:Int, y:Int, w:Int, h:Int):phaser.renderer.webgl.WebGLRenderer;
-    public function popScissor():phaser.renderer.webgl.WebGLRenderer;
+    public function setScissor():Void;
+    public function popScissor():Void;
     public function setPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline, ?gameObject:phaser.gameobjects.GameObject):phaser.renderer.webgl.WebGLPipeline;
-    public function setBlendMode(blendModeId:Int):phaser.renderer.webgl.WebGLRenderer;
+    public function setBlendMode(blendModeId:Int):Bool;
     public function addBlendMode(func:Dynamic, equation:Dynamic):Int;
     public function updateBlendMode(index:Int, func:Dynamic, equation:Dynamic):phaser.renderer.webgl.WebGLRenderer;
     public function removeBlendMode(index:Int):phaser.renderer.webgl.WebGLRenderer;

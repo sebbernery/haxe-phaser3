@@ -78,7 +78,7 @@ extern class Body {
     public function postUpdate(resetDelta:Bool):Void;
     public function checkWorldBounds():Bool;
     public function setOffset(x:Float, ?y:Float):phaser.physics.arcade.Body;
-    public function setSize(width:Float, height:Float, ?center:Bool):phaser.physics.arcade.Body;
+    public function setSize(?width:Int, ?height:Int, ?center:Bool):phaser.physics.arcade.Body;
     public function setCircle(radius:Float, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.Body;
     public function reset(x:Float, y:Float):Void;
     public function stop():phaser.physics.arcade.Body;

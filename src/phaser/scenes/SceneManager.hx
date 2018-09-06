@@ -8,6 +8,7 @@ extern class SceneManager {
     public var scenes:Array<Dynamic>;
     public var isProcessing:Bool;
     public var isBooted:Bool;
+    public var customViewports:Float;
     public function processQueue():Void;
     public function add(key:String, sceneConfig:Dynamic, ?autoStart:Bool, ?data:Dynamic):phaser.Scene;
     public function remove(scene:Dynamic):phaser.scenes.SceneManager;

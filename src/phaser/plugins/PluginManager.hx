@@ -10,7 +10,7 @@ extern class PluginManager {
     public function addToScene(sys:phaser.scenes.Systems, globalPlugins:Array<Dynamic>, scenePlugins:Array<Dynamic>):Void;
     public function getDefaultScenePlugins():Array<String>;
     public function installScenePlugin(key:String, plugin:Dynamic, ?mapping:String, ?addToScene:phaser.Scene):Void;
-    public function install(key:String, plugin:Dynamic, ?start:Bool, ?mapping:String):Void;
+    public function install(key:String, plugin:Dynamic, ?start:Bool, ?mapping:String, ?data:Dynamic):Void;
     public function getIndex(key:String):Int;
     public function getEntry(key:String):GlobalPlugin;
     public function isActive(key:String):Bool;

@@ -10,14 +10,15 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var tileset:phaser.tilemaps.Tileset;
     public var culledTiles:Array<Dynamic>;
     public var skipCull:Bool;
-    public var tilesDrawn:Float;
-    public var tilesTotal:Float;
-    public var cullPaddingX:Float;
-    public var cullPaddingY:Float;
+    public var tilesDrawn:Int;
+    public var tilesTotal:Int;
+    public var cullPaddingX:Int;
+    public var cullPaddingY:Int;
     public var cullCallback:Dynamic;
+    public function setRenderOrder(renderOrder:Dynamic):Dynamic;
     public function calculateFacesAt(tileX:Int, tileY:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
-    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;
+    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;
     public function cull(?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     public function copy(srcTileX:Int, srcTileY:Int, width:Int, height:Int, destTileX:Int, destTileY:Int, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function fill(index:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
@@ -36,12 +37,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function putTileAtWorldXY(tile:Dynamic, worldX:Int, worldY:Int, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
     public function putTilesAt(tile:Dynamic, tileX:Int, tileY:Int, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function randomize(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?indexes:Array<Int>):phaser.tilemaps.DynamicTilemapLayer;
-    public function removeTileAt(tile:Dynamic, tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool):phaser.tilemaps.Tile;
-    public function removeTileAtWorldXY(tile:Dynamic, worldX:Float, worldY:Float, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
+    public function removeTileAt(tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool):phaser.tilemaps.Tile;
+    public function removeTileAtWorldXY(worldX:Float, worldY:Float, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
     public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     public function replaceByIndex(findIndex:Int, newIndex:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function setSkipCull(?value:Bool):Dynamic;
-    public function setCullPadding(?paddingX:Float, ?paddingY:Float):Dynamic;
+    public function setCullPadding(?paddingX:Int, ?paddingY:Int):Dynamic;
     public function setCollision(indexes:Dynamic, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setCollisionBetween(start:Int, stop:Int, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setCollisionByProperty(properties:Dynamic, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
@@ -126,7 +127,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
 }

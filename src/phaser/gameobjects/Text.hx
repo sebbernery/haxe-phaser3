@@ -3,17 +3,16 @@ package phaser.gameobjects;
 @:native("Phaser.GameObjects.Text")
 extern class Text extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, x:Float, y:Float, text:Dynamic, style:Dynamic);
+    public var renderer:Dynamic;
     public var canvas:js.html.CanvasElement;
     public var context:js.html.CanvasRenderingContext2D;
     public var style:phaser.gameobjects.text.TextStyle;
     public var autoRound:Bool;
     public var splitRegExp:Dynamic;
-    public var text:String;
-    public var resolution:Float;
     public var padding:Dynamic;
-    public var canvasTexture:js.html.CanvasElement;
     public var dirty:Bool;
-    public function GetTextSize(text:phaser.gameobjects.Text, size:TextMetrics, lines:Array<Dynamic>):Dynamic;
+    public var text:String;
+    public function GetTextSize(text:phaser.gameobjects.Text, size:BitmapTextMetrics, lines:Array<Dynamic>):Dynamic;
     public function MeasureText(textStyle:phaser.gameobjects.text.TextStyle):Dynamic;
     public function initRTL():Void;
     public function runWordWrap(text:String):String;
@@ -40,6 +39,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function setWordWrapWidth(width:Float, ?useAdvancedWrap:Bool):phaser.gameobjects.Text;
     public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
     public function setAlign(align:String):phaser.gameobjects.Text;
+    public function setResolution(value:Float):phaser.gameobjects.Text;
     public function setPadding(left:Dynamic, top:Float, right:Float, bottom:Float):phaser.gameobjects.Text;
     public function setMaxLines(?max:Int):phaser.gameobjects.Text;
     public function updateText():phaser.gameobjects.Text;
@@ -60,6 +60,10 @@ extern class Text extends phaser.gameobjects.GameObject {
     public var displayHeight:Float;
     public function setSize(width:Float, height:Float):Dynamic;
     public function setDisplaySize(width:Float, height:Float):Dynamic;
+    public var texture:Dynamic;
+    public var frame:phaser.textures.Frame;
+    public var isCropped:Bool;
+    public function setCrop(?x:Dynamic, ?y:Float, ?width:Float, ?height:Float):Dynamic;
     public var depth:Float;
     public function setDepth(value:Int):Dynamic;
     public var flipX:Bool;
@@ -128,7 +132,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
 }

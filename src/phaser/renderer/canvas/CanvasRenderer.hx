@@ -13,11 +13,7 @@ extern class CanvasRenderer {
     public var gameCanvas:js.html.CanvasElement;
     public var gameContext:js.html.CanvasRenderingContext2D;
     public var currentContext:js.html.CanvasRenderingContext2D;
-    public var drawImage:Dynamic;
-    public var blitImage:Dynamic;
     public var blendModes:Array<Dynamic>;
-    public var currentAlpha:Float;
-    public var currentBlendMode:Float;
     public var currentScaleMode:Float;
     public var snapshotCallback:SnapshotCallback;
     public var snapshotType:String;
@@ -27,11 +23,13 @@ extern class CanvasRenderer {
     public function onContextLost(callback:Dynamic):Void;
     public function onContextRestored(callback:Dynamic):Void;
     public function resetTransform():Void;
-    public function setBlendMode(blendMode:Float):Float;
-    public function setAlpha(alpha:Float):Float;
+    public function setBlendMode(blendMode:Float):Dynamic;
+    public function setContext(?ctx:js.html.CanvasRenderingContext2D):Dynamic;
+    public function setAlpha(alpha:Float):Dynamic;
     public function preRender():Void;
     public function render(scene:phaser.Scene, children:phaser.gameobjects.DisplayList, interpolationPercentage:Float, camera:phaser.cameras.scene2d.Camera):Void;
     public function postRender():Void;
     public function snapshot(callback:SnapshotCallback, type:String, encoderOptions:Float):Void;
+    public function batchSprite(sprite:phaser.gameobjects.GameObject, frame:phaser.textures.Frame, camera:phaser.cameras.scene2d.Camera, ?parentTransformMatrix:phaser.gameobjects.components.TransformMatrix):Void;
     public function destroy():Void;
 }

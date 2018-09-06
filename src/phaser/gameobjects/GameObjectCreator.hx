@@ -18,8 +18,7 @@ extern class GameObjectCreator {
     public function particles(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.particles.ParticleEmitterManager;
     public function quad(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Quad;
     public function renderTexture(config:RenderTextureConfig, ?addToScene:Bool):phaser.gameobjects.RenderTexture;
-    public function sprite(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Sprite;
-    public function sprite3D(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Sprite3D;
+    public function sprite(config:SpriteConfig, ?addToScene:Bool):phaser.gameobjects.Sprite;
     public function text(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Text;
     public function tileSprite(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.TileSprite;
     public function zone(config:Dynamic):phaser.gameobjects.Zone;

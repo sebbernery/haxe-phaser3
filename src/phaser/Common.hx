@@ -25,9 +25,12 @@ extern class Common {
     public function info():Void;
     public function warn():Void;
     public function nextId():Void;
+    public function indexOf():Void;
     public function map():Void;
     public function topologicalSort():Void;
+    public function _topologicalSort():Void;
     public function chain():Void;
     public function chainPathBefore():Void;
     public function chainPathAfter():Void;
+    public function _requireGlobal():Void;
 }

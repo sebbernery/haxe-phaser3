@@ -32,7 +32,7 @@ extern class InputManager {
     public function hitTest(pointer:phaser.input.Pointer, gameObjects:Array<Dynamic>, camera:phaser.cameras.scene2d.Camera, ?output:Array<Dynamic>):Array<Dynamic>;
     public function pointWithinHitArea(gameObject:phaser.gameobjects.GameObject, x:Float, y:Float):Bool;
     public function pointWithinInteractiveObject(object:phaser.input.InteractiveObject, x:Float, y:Float):Bool;
-    public function transformPointer(pointer:phaser.input.Pointer):Float;
+    public function transformPointer(pointer:phaser.input.Pointer, pageX:Float, pageY:Float):Void;
     public function transformX(pageX:Float):Float;
     public function transformY(pageY:Float):Float;
     public function getOffsetX():Float;

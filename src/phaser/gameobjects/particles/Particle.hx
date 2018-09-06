@@ -21,7 +21,6 @@ extern class Particle {
     public var angle:Float;
     public var rotation:Float;
     public var tint:Int;
-    public var color:Int;
     public var life:Float;
     public var lifeCurrent:Float;
     public var delayCurrent:Float;

@@ -5,6 +5,7 @@ typedef FixedKeyControlConfig = {
     @:optional var left:phaser.input.keyboard.Key;
     @:optional var right:phaser.input.keyboard.Key;
     @:optional var up:phaser.input.keyboard.Key;
+    @:optional var down:phaser.input.keyboard.Key;
     @:optional var zoomIn:phaser.input.keyboard.Key;
     @:optional var zoomOut:phaser.input.keyboard.Key;
     @:optional var zoomSpeed:Float;

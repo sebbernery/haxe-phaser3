@@ -13,6 +13,7 @@ extern class GameObjectFactory {
     public function bitmapText(x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float, ?align:Int):phaser.gameobjects.BitmapText;
     public function blitter(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.gameobjects.Blitter;
     public function container(x:Float, y:Float, ?children:Dynamic):phaser.gameobjects.Container;
+    public function dom(x:Float, y:Float, element:String):phaser.gameobjects.DOMElement;
     public function graphics(?config:GraphicsOptions):phaser.gameobjects.Graphics;
     public function group(?children:Dynamic, ?config:GroupConfig):phaser.gameobjects.Group;
     public function image(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Image;
@@ -22,7 +23,6 @@ extern class GameObjectFactory {
     public function quad(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Quad;
     public function renderTexture(x:Float, y:Float, ?width:Int, ?height:Int):phaser.gameobjects.RenderTexture;
     public function sprite(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Sprite;
-    public function sprite3D(x:Float, y:Float, z:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Sprite3D;
     public function text(x:Float, y:Float, text:Dynamic, ?style:Dynamic):phaser.gameobjects.Text;
     public function tileSprite(x:Float, y:Float, width:Float, height:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
     public function zone(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Zone;

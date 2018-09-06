@@ -7,7 +7,7 @@ extern class BasePlugin {
     public var game:phaser.Game;
     public var scene:phaser.Scene;
     public var systems:phaser.scenes.Systems;
-    public function init():Void;
+    public function init(?data:Dynamic):Void;
     public function start():Void;
     public function stop():Void;
     public function boot():Void;

@@ -12,7 +12,6 @@ extern class Animation {
     public var duration:Float;
     public var msPerFrame:Float;
     public var skipMissedFrames:Bool;
-    public var forward:Bool;
     public var accumulator:Float;
     public var nextTick:Float;
     public var repeatCounter:Float;
@@ -26,6 +25,9 @@ extern class Animation {
     public function pause(?atFrame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     public function resume(?fromFrame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
+    public function playReverse(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
+    public function _startAnimation(key:String, ?startFrame:Int):phaser.gameobjects.GameObject;
+    public function reverse(key:String):phaser.gameobjects.GameObject;
     public function getProgress():Float;
     public function setProgress(?value:Float):phaser.gameobjects.GameObject;
     public function remove(?key:String, ?animation:phaser.animations.Animation):Void;
@@ -46,4 +48,5 @@ extern class Animation {
     public function setYoyo(?value:Bool):phaser.gameobjects.GameObject;
     public function getYoyo():Bool;
     public function destroy():Void;
+    public function forward():Void;
 }

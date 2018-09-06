@@ -22,4 +22,5 @@ extern class Body {
     public function scale():Void;
     public function update():Void;
     public function applyForce():Void;
+    public function _totalProperties():Void;
 }

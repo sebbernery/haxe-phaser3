@@ -8,15 +8,15 @@ extern class TextureManager extends phaser.events.EventEmitter {
     public var game:phaser.Game;
     public var name:String;
     public var list:Dynamic;
-    public function boot():Void;
-    public function updatePending():Void;
     public function checkKey(key:String):Bool;
     public function remove(key:Dynamic):phaser.textures.TextureManager;
-    public function addBase64(key:String, data:Dynamic):Void;
+    public function addBase64(key:String, data:Dynamic):Dynamic;
+    public function getBase64(key:String, ?frame:Dynamic, ?type:String, ?encoderOptions:Float):String;
     public function addImage(key:String, source:js.html.ImageElement, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addRenderTexture(key:String, renderTexture:phaser.gameobjects.RenderTexture):phaser.textures.Texture;
     public function generate(key:String, config:Dynamic):phaser.textures.Texture;
     public function createCanvas(key:String, ?width:Int, ?height:Int):phaser.textures.CanvasTexture;
-    public function addCanvas(key:String, source:js.html.CanvasElement):phaser.textures.CanvasTexture;
+    public function addCanvas(key:String, source:js.html.CanvasElement, ?skipCache:Bool):phaser.textures.CanvasTexture;
     public function addAtlas(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
     public function addAtlasJSONArray(key:String, source:Dynamic, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
     public function addAtlasJSONHash(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
@@ -33,6 +33,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
     public function getPixel(x:Int, y:Int, key:String, frame:Dynamic):phaser.display.Color;
     public function getPixelAlpha(x:Int, y:Int, key:String, frame:Dynamic):Int;
     public function setTexture(gameObject:phaser.gameobjects.GameObject, key:String, frame:Dynamic):phaser.gameobjects.GameObject;
+    public function renameTexture(currentKey:String, newKey:String):Bool;
     public function each(callback:EachTextureCallback, scope:Dynamic, ?args:Dynamic):Void;
     public function canvas():Void;
 }

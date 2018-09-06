@@ -12,6 +12,7 @@ class Phaser{
     static public var DOWN:Int;
     static public var LEFT:Int;
     static public var RIGHT:Int;
+    static public var CSSBlendModes:String;
     static public var Game:Dynamic;
     static public var Animation:Dynamic;
     static public var Cache:Dynamic;

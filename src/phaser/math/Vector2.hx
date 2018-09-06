@@ -2,7 +2,7 @@ package phaser.math;
 
 @:native("Phaser.Math.Vector2")
 extern class Vector2 {
-    public function new(?x:Float, ?y:Float);
+    public function new(?x:Dynamic, ?y:Float);
     public var x:Float;
     public var y:Float;
     public function clone():phaser.math.Vector2;
@@ -31,5 +31,4 @@ extern class Vector2 {
     public function transformMat3(mat:phaser.math.Matrix3):phaser.math.Vector2;
     public function transformMat4(mat:phaser.math.Matrix4):phaser.math.Vector2;
     public function reset():phaser.math.Vector2;
-    public function ZERO():Void;
 }

@@ -6,4 +6,5 @@ var width:Float;
 var height:Float;
 var chars:String;
 var charsPerRow:Float;
+var lineSpacing:Float;
 };

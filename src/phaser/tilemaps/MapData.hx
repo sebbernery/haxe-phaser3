@@ -12,6 +12,7 @@ extern class MapData {
     public var heightInPixels:Float;
     public var format:Int;
     public var orientation:String;
+    public var renderOrder:String;
     public var version:String;
     public var properties:Dynamic;
     public var layers:Array<Dynamic>;

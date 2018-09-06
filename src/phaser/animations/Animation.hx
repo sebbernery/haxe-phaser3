@@ -28,7 +28,10 @@ extern class Animation {
     public function getNextTick(component:phaser.gameobjects.components.Animation):Void;
     public function getFrameByProgress(value:Float):phaser.animations.AnimationFrame;
     public function nextFrame(component:phaser.gameobjects.components.Animation):Void;
+    public function _handleYoyoFrame(component:phaser.gameobjects.components.Animation, isReverse:Bool):Void;
+    public function getLastFrame():phaser.animations.AnimationFrame;
     public function previousFrame(component:phaser.gameobjects.components.Animation):Void;
+    public function _updateAndGetNextTick(frame:phaser.animations.AnimationFrame):Void;
     public function removeFrame(frame:phaser.animations.AnimationFrame):phaser.animations.Animation;
     public function removeFrameAt(index:Int):phaser.animations.Animation;
     public function repeatAnimation(component:phaser.gameobjects.components.Animation):Void;

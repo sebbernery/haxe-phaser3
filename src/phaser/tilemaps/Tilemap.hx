@@ -9,6 +9,7 @@ extern class Tilemap {
     public var width:Float;
     public var height:Float;
     public var orientation:String;
+    public var renderOrder:String;
     public var format:Float;
     public var version:Float;
     public var properties:Dynamic;
@@ -21,13 +22,14 @@ extern class Tilemap {
     public var objects:Array<phaser.tilemaps.ObjectLayer>;
     public var currentLayerIndex:Int;
     public var layer:phaser.tilemaps.LayerData;
+    public function setRenderOrder(renderOrder:Dynamic):Dynamic;
     public function addTilesetImage(tilesetName:String, ?key:String, ?tileWidth:Int, ?tileHeight:Int, ?tileMargin:Int, ?tileSpacing:Int, ?gid:Int):phaser.tilemaps.Tileset;
     public function convertLayerToStatic(?layer:Dynamic):phaser.tilemaps.StaticTilemapLayer;
     public function copy():phaser.tilemaps.Tilemap;
     public function createBlankDynamicLayer(name:String, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float, ?width:Int, ?height:Int, ?tileWidth:Int, ?tileHeight:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function createDynamicLayer(layerID:Dynamic, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float):phaser.tilemaps.DynamicTilemapLayer;
-    public function createFromObjects(name:String, id:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene):Array<phaser.gameobjects.Sprite>;
-    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:Dynamic, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera, ?layer:phaser.tilemaps.LayerData):Array<phaser.gameobjects.Sprite>;
+    public function createFromObjects(name:String, id:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene):Array<phaser.gameobjects.Sprite>;
+    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera, ?layer:phaser.tilemaps.LayerData):Array<phaser.gameobjects.Sprite>;
     public function createStaticLayer(layerID:Dynamic, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float):phaser.tilemaps.StaticTilemapLayer;
     public function destroy():Void;
     public function fill(index:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?recalculateFaces:Bool, ?layer:phaser.tilemaps.LayerData):phaser.tilemaps.Tilemap;

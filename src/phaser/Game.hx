@@ -5,6 +5,7 @@ extern class Game {
     public function new(?GameConfig:GameConfig);
     public var config:phaser.boot.Config;
     public var renderer:Dynamic;
+    public var domContainer:js.html.DivElement;
     public var canvas:js.html.CanvasElement;
     public var context:Dynamic;
     public var isBooted:Bool;
@@ -17,9 +18,11 @@ extern class Game {
     public var input:phaser.input.InputManager;
     public var scene:phaser.scenes.SceneManager;
     public var device:phaser.DeviceConf;
+    public var scaleManager:phaser.boot.ScaleManager;
     public var sound:phaser.sound.BaseSoundManager;
     public var loop:phaser.boot.TimeStep;
     public var plugins:phaser.plugins.PluginManager;
+    public var facebook:Dynamic;
     public var hasFocus:Bool;
     public var isOver:Bool;
     public function boot():Void;
@@ -31,5 +34,5 @@ extern class Game {
     public function onBlur():Void;
     public function onFocus():Void;
     public function resize(width:Float, height:Float):Void;
-    public function destroy(removeCanvas:Bool):Void;
+    public function destroy(removeCanvas:Bool, ?noReturn:Bool):Void;
 }

@@ -7,4 +7,7 @@ extern class Engine {
     public function update():Void;
     public function merge():Void;
     public function clear():Void;
+    public function _bodiesClearForces():Void;
+    public function _bodiesApplyGravity():Void;
+    public function _bodiesUpdate():Void;
 }

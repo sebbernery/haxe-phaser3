@@ -15,7 +15,7 @@ extern class LightsManager {
     public function setAmbientColor(rgb:Float):phaser.gameobjects.LightsManager;
     public function getMaxVisibleLights():Int;
     public function getLightCount():Int;
-    public function addLight(x:Float, y:Float, radius:Float, rgb:Float, intensity:Float):phaser.gameobjects.Light;
+    public function addLight(?x:Float, ?y:Float, ?radius:Float, ?rgb:Float, ?intensity:Float):phaser.gameobjects.Light;
     public function removeLight(light:phaser.gameobjects.Light):phaser.gameobjects.LightsManager;
     public function shutdown():Void;
     public function destroy():Void;

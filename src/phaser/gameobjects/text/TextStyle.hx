@@ -21,6 +21,7 @@ extern class TextStyle {
     public var maxLines:Int;
     public var fixedWidth:Float;
     public var fixedHeight:Float;
+    public var resolution:Float;
     public var rtl:Bool;
     public var testString:String;
     public var baselineX:Float;
@@ -39,6 +40,7 @@ extern class TextStyle {
     public function setBackgroundColor(color:String):phaser.gameobjects.Text;
     public function setFill(color:String):phaser.gameobjects.Text;
     public function setColor(color:String):phaser.gameobjects.Text;
+    public function setResolution(value:Float):phaser.gameobjects.Text;
     public function setStroke(color:String, thickness:Float):phaser.gameobjects.Text;
     public function setShadow(?x:Float, ?y:Float, ?color:String, ?blur:Float, ?shadowStroke:Bool, ?shadowFill:Bool):phaser.gameobjects.Text;
     public function setShadowOffset(?x:Float, ?y:Float):phaser.gameobjects.Text;
@@ -50,7 +52,7 @@ extern class TextStyle {
     public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
     public function setAlign(align:String):phaser.gameobjects.Text;
     public function setMaxLines(?max:Int):phaser.gameobjects.Text;
-    public function getTextMetrics():TextMetrics;
+    public function getTextMetrics():BitmapTextMetrics;
     public function toJSON():Dynamic;
     public function destroy():Void;
 }

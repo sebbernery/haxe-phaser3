@@ -25,7 +25,6 @@ extern class Zone extends phaser.gameobjects.GameObject {
     public var originY:Float;
     public var displayOriginX:Float;
     public var displayOriginY:Float;
-    public function setAlpha(?value:Float):Dynamic;
     public function setOrigin(?x:Float, ?y:Float):Dynamic;
     public function setOriginFromFrame():Dynamic;
     public function setDisplayOrigin(?x:Float, ?y:Float):Dynamic;
@@ -50,7 +49,7 @@ extern class Zone extends phaser.gameobjects.GameObject {
     public function setZ(?value:Float):Dynamic;
     public function setW(?value:Float):Dynamic;
     public function getLocalTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
-    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var scrollFactorX:Float;
     public var scrollFactorY:Float;
     public function setScrollFactor(x:Float, ?y:Float):Dynamic;
