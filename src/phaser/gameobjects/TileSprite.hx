@@ -2,7 +2,7 @@ package phaser.gameobjects;
 
 @:native("Phaser.GameObjects.TileSprite")
 extern class TileSprite extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, width:Float, height:Float, textureKey:String, ?frameKey:Dynamic);
+    public function new(scene:phaser.Scene, x:Float, y:Float, width:Int, height:Int, textureKey:String, ?frameKey:Dynamic);
     public var dirty:Bool;
     public var renderer:Dynamic;
     public var canvas:js.html.CanvasElement;
@@ -17,7 +17,7 @@ extern class TileSprite extends phaser.gameobjects.GameObject {
     public var tileScaleX:Float;
     public var tileScaleY:Float;
     public function setTexture(key:String, ?frame:Dynamic):Dynamic;
-    public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
+    public function setFrame(frame:Dynamic):Dynamic;
     public function setTilePosition(?x:Float, ?y:Float):Dynamic;
     public function setTileScale(?x:Float, ?y:Float):Dynamic;
     public function preDestroy():Void;

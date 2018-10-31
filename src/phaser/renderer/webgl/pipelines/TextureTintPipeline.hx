@@ -6,7 +6,9 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
     public var vertexViewF32:js.html.Float32Array;
     public var vertexViewU32:js.html.Uint32Array;
     public var maxQuads:Int;
+    public var batches:Array<Dynamic>;
     public function setTexture2D(texture:js.html.webgl.Texture, textureUnit:Int):phaser.renderer.webgl.pipelines.TextureTintPipeline;
+    public function pushBatch():Void;
     public function batchSprite(sprite:Dynamic, camera:phaser.cameras.scene2d.Camera, ?parentTransformMatrix:phaser.gameobjects.components.TransformMatrix):Void;
     public function batchQuad(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintBR:Float, tintEffect:Dynamic):Bool;
     public function batchTri(x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintEffect:Dynamic):Bool;

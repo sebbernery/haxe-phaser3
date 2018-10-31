@@ -12,4 +12,5 @@ typedef RenderConfig = {
     @:optional var failIfMajorPerformanceCaveat:Bool;
     @:optional var powerPreference:String;
     @:optional var batchSize:Int;
+    @:optional var maxLights:Int;
 };

@@ -8,6 +8,7 @@ extern class LightsManager {
     public var culledLights:Array<phaser.gameobjects.Light>;
     public var ambientColor:Dynamic;
     public var active:Bool;
+    public var maxLights:Int;
     public function enable():phaser.gameobjects.LightsManager;
     public function disable():phaser.gameobjects.LightsManager;
     public function cull(camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Light>;

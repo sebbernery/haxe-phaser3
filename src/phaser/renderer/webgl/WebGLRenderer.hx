@@ -6,8 +6,8 @@ extern class WebGLRenderer {
     public var config:RendererConfig;
     public var game:phaser.Game;
     public var type:Int;
-    public var width:Float;
-    public var height:Float;
+    public var width:Int;
+    public var height:Int;
     public var canvas:js.html.CanvasElement;
     public var lostContextCallbacks:Array<WebGLContextCallback>;
     public var restoredContextCallbacks:Array<WebGLContextCallback>;
@@ -74,7 +74,7 @@ extern class WebGLRenderer {
     public function render(scene:phaser.Scene, children:phaser.gameobjects.GameObject, interpolationPercentage:Float, camera:phaser.cameras.scene2d.Camera):Void;
     public function postRender():Void;
     public function snapshot(callback:SnapshotCallback, type:String, encoderOptions:Float):phaser.renderer.webgl.WebGLRenderer;
-    public function canvasToTexture(srcCanvas:js.html.CanvasElement, ?dstTexture:js.html.webgl.Texture):js.html.webgl.Texture;
+    public function canvasToTexture(srcCanvas:js.html.CanvasElement, ?dstTexture:js.html.webgl.Texture, ?noRepeat:Bool):js.html.webgl.Texture;
     public function setTextureFilter(texture:Int, filter:Int):Dynamic;
     public function setFloat1(program:js.html.webgl.Program, name:String, x:Float):Dynamic;
     public function setFloat2(program:js.html.webgl.Program, name:String, x:Float, y:Float):Dynamic;

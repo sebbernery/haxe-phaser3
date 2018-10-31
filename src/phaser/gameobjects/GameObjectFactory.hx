@@ -36,7 +36,7 @@ extern class GameObjectFactory {
     public function triangle(?x:Float, ?y:Float, ?x1:Float, ?y1:Float, ?x2:Float, ?y2:Float, ?x3:Float, ?y3:Float, ?fillColor:Float, ?fillAlpha:Float):phaser.gameobjects.Triangle;
     public function sprite(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Sprite;
     public function text(x:Float, y:Float, text:Dynamic, ?style:Dynamic):phaser.gameobjects.Text;
-    public function tileSprite(x:Float, y:Float, width:Float, height:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
+    public function tileSprite(x:Float, y:Float, width:Int, height:Int, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
     public function zone(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Zone;
     public function tilemap(?key:String, ?tileWidth:Int, ?tileHeight:Int, ?width:Int, ?height:Int, ?data:Array<Array<Int>>, ?insertNull:Bool):phaser.tilemaps.Tilemap;
     public function tween(config:Dynamic):phaser.tweens.Tween;

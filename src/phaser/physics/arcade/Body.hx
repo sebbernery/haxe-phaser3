@@ -123,4 +123,5 @@ extern class Body {
     public function setAngularDrag(value:Float):phaser.physics.arcade.Body;
     public function setMass(value:Float):phaser.physics.arcade.Body;
     public function setImmovable(?value:Bool):phaser.physics.arcade.Body;
+    public function setEnable(?value:Bool):phaser.physics.arcade.Body;
 }

@@ -11,6 +11,7 @@ var setBounceX:Float;
 var setBounceY:Float;
 var setDragX:Float;
 var setDragY:Float;
+var setEnable:Bool;
 var setGravityX:Float;
 var setGravityY:Float;
 var setFrictionX:Float;

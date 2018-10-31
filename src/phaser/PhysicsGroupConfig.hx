@@ -11,6 +11,7 @@ typedef PhysicsGroupConfig = {
     @:optional var bounceY:Float;
     @:optional var dragX:Float;
     @:optional var dragY:Float;
+    @:optional var enable:Bool;
     @:optional var gravityX:Float;
     @:optional var gravityY:Float;
     @:optional var frictionX:Float;

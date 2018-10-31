@@ -26,6 +26,7 @@ extern class Pointer {
     public var justUp:Bool;
     public var justMoved:Bool;
     public var wasTouch:Bool;
+    public var wasCanceled:Bool;
     public var movementX:Float;
     public var movementY:Float;
     public var identifier:Float;

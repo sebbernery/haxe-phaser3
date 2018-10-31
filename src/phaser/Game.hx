@@ -18,7 +18,6 @@ extern class Game {
     public var input:phaser.input.InputManager;
     public var scene:phaser.scenes.SceneManager;
     public var device:phaser.DeviceConf;
-    public var scaleManager:phaser.boot.ScaleManager;
     public var sound:phaser.sound.BaseSoundManager;
     public var loop:phaser.boot.TimeStep;
     public var plugins:phaser.plugins.PluginManager;

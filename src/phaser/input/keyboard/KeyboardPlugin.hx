@@ -17,4 +17,5 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
     public function removeKey(key:Dynamic):Void;
     public function createCombo(keys:Dynamic, ?config:KeyComboConfig):phaser.input.keyboard.KeyCombo;
     public function checkDown(key:phaser.input.keyboard.Key, ?duration:Float):Bool;
+    public function resetKeys():Void;
 }

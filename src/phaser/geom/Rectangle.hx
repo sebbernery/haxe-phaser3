@@ -60,6 +60,7 @@ extern class Rectangle {
     public function getLineB(?line:phaser.geom.Line):phaser.geom.Line;
     public function getLineC(?line:phaser.geom.Line):phaser.geom.Line;
     public function getLineD(?line:phaser.geom.Line):phaser.geom.Line;
+    public function SameDimensions(rect:phaser.geom.Rectangle, toCompare:phaser.geom.Rectangle):Bool;
     public function Scale(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     public function Union(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
 }

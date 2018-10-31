@@ -7,9 +7,10 @@ extern class TouchManager {
     public var capture:Bool;
     public var enabled:Bool;
     public var target:Dynamic;
-    public function onTouchStart(event:js.html.TouchEvent):Void;
-    public function onTouchMove(event:js.html.TouchEvent):Void;
-    public function onTouchEnd(event:js.html.TouchEvent):Void;
+    public var onTouchStart:Dynamic;
+    public var onTouchMove:Dynamic;
+    public var onTouchEnd:Dynamic;
+    public var onTouchCancel:Dynamic;
     public function startListeners():Void;
     public function stopListeners():Void;
     public function destroy():Void;
