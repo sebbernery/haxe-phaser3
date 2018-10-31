@@ -34,6 +34,5 @@ extern class World extends phaser.events.EventEmitter {
     public function step(?delta:Float, ?correction:Float):Void;
     public function update60Hz():Float;
     public function update30Hz():Float;
-    public function postUpdate():Void;
     public function fromPath(path:String, points:Array<Dynamic>):Array<Dynamic>;
 }

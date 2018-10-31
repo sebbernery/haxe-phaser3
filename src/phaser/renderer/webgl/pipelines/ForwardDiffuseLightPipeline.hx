@@ -4,6 +4,6 @@ package phaser.renderer.webgl.pipelines;
 extern class ForwardDiffuseLightPipeline extends phaser.renderer.webgl.pipelines.TextureTintPipeline {
     public function new(config:Dynamic);
     public function boot():Void;
-    public function onBind(?gameObject:phaser.gameobjects.GameObject):phaser.renderer.webgl.pipelines.ForwardDiffuseLightPipeline;
+    public function onBind(?gameObject:phaser.gameobjects.GameObject):Dynamic;
     public function setNormalMap(gameObject:phaser.gameobjects.GameObject):Void;
 }

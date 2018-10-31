@@ -2,12 +2,12 @@ package phaser.tilemaps;
 
 @:native("Phaser.Tilemaps.DynamicTilemapLayer")
 extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, tilemap:phaser.tilemaps.Tilemap, layerIndex:Int, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float);
+    public function new(scene:phaser.Scene, tilemap:phaser.tilemaps.Tilemap, layerIndex:Int, tileset:Dynamic, ?x:Float, ?y:Float);
     public var isTilemap:Bool;
     public var tilemap:phaser.tilemaps.Tilemap;
     public var layerIndex:Int;
     public var layer:phaser.tilemaps.LayerData;
-    public var tileset:phaser.tilemaps.Tileset;
+    public var tileset:Array<phaser.tilemaps.Tileset>;
     public var culledTiles:Array<Dynamic>;
     public var skipCull:Bool;
     public var tilesDrawn:Int;
@@ -15,6 +15,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var cullPaddingX:Int;
     public var cullPaddingY:Int;
     public var cullCallback:Dynamic;
+    public var gidMap:Array<phaser.tilemaps.Tileset>;
     public function setRenderOrder(renderOrder:Dynamic):Dynamic;
     public function calculateFacesAt(tileX:Int, tileY:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
@@ -24,8 +25,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function fill(index:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
     public function findByIndex(index:Int, ?skip:Int, ?reverse:Bool):phaser.tilemaps.Tile;
-    public function findTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.Tile;
-    public function forEachTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.Tile;
+    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     public function getTileAt(tileX:Int, tileY:Int, ?nonNull:Bool):phaser.tilemaps.Tile;
     public function getTileAtWorldXY(worldX:Float, worldY:Float, ?nonNull:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
     public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
@@ -34,7 +35,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function hasTileAt(tileX:Int, tileY:Int):Bool;
     public function hasTileAtWorldXY(worldX:Float, worldY:Float, ?camera:phaser.cameras.scene2d.Camera):Bool;
     public function putTileAt(tile:Dynamic, tileX:Int, tileY:Int, ?recalculateFaces:Bool):phaser.tilemaps.Tile;
-    public function putTileAtWorldXY(tile:Dynamic, worldX:Int, worldY:Int, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
+    public function putTileAtWorldXY(tile:Dynamic, worldX:Float, worldY:Float, ?recalculateFaces:Bool, ?camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.Tile;
     public function putTilesAt(tile:Dynamic, tileX:Int, tileY:Int, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function randomize(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?indexes:Array<Int>):phaser.tilemaps.DynamicTilemapLayer;
     public function removeTileAt(tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool):phaser.tilemaps.Tile;
@@ -49,7 +50,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function setCollisionByExclusion(indexes:Array<Int>, ?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setCollisionFromCollisionGroup(?collides:Bool, ?recalculateFaces:Bool):phaser.tilemaps.DynamicTilemapLayer;
     public function setTileIndexCallback(indexes:Dynamic, callback:Dynamic, callbackContext:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
-    public function setTileLocationCallback(tileX:Int, tileY:Int, width:Int, height:Int, callback:Dynamic, ?callbackContext:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function setTileLocationCallback(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, callback:Dynamic, ?callbackContext:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     public function shuffle(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function swapByIndex(tileA:Int, tileB:Int, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.DynamicTilemapLayer;
     public function tileToWorldX(tileX:Int, ?camera:phaser.cameras.scene2d.Camera):Float;

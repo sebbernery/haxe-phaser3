@@ -8,6 +8,7 @@ extern class MatterPhysics {
     public var config:Dynamic;
     public var world:phaser.physics.matter.World;
     public var add:phaser.physics.matter.Factory;
+    public var verts:matterjs.Vertices;
     public function getConfig():Dynamic;
     public function enableAttractorPlugin():phaser.physics.matter.MatterPhysics;
     public function enableWrapPlugin():phaser.physics.matter.MatterPhysics;

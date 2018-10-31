@@ -15,7 +15,7 @@ extern class Texture {
     public function has(name:String):Bool;
     public function get(?name:Dynamic):phaser.textures.Frame;
     public function getTextureSourceIndex(source:phaser.textures.TextureSource):Int;
-    public function getFramesFromTextureSource(sourceIndex:Int):Array<phaser.textures.Frame>;
+    public function getFramesFromTextureSource(sourceIndex:Int, ?includeBase:Bool):Array<phaser.textures.Frame>;
     public function getFrameNames(?includeBase:Bool):Array<String>;
     public function getSourceImage(?name:Dynamic):js.html.ImageElement;
     public function getDataSourceImage(?name:Dynamic):js.html.ImageElement;

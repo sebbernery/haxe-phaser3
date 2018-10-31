@@ -13,7 +13,7 @@ extern class Factory {
     public function image(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.physics.arcade.Image;
     public function staticSprite(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.physics.arcade.Sprite;
     public function sprite(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.physics.arcade.Sprite;
-    public function staticGroup(?children:Dynamic, ?config:GroupConfig):phaser.physics.arcade.StaticGroup;
-    public function group(?children:Dynamic, ?config:PhysicsGroupConfig):phaser.physics.arcade.Group;
+    public function staticGroup(?children:Dynamic, ?config:Dynamic):phaser.physics.arcade.StaticGroup;
+    public function group(?children:Dynamic, ?config:Dynamic):phaser.physics.arcade.Group;
     public function destroy():Void;
 }

@@ -18,9 +18,9 @@ extern class AnimationManager extends phaser.events.EventEmitter {
     public function get(key:String):phaser.animations.Animation;
     public function load(child:phaser.gameobjects.GameObject, key:String, ?startFrame:Dynamic):phaser.gameobjects.GameObject;
     public function pauseAll():phaser.animations.AnimationManager;
-    public function play(key:String, child:phaser.gameobjects.GameObject):phaser.animations.AnimationManager;
+    public function play(key:String, child:Dynamic):phaser.animations.AnimationManager;
     public function remove(key:String):phaser.animations.Animation;
     public function resumeAll():phaser.animations.AnimationManager;
-    public function staggerPlay(key:String, children:Array<phaser.gameobjects.GameObject>, ?stagger:Float):phaser.animations.AnimationManager;
+    public function staggerPlay(key:String, children:Dynamic, ?stagger:Float):phaser.animations.AnimationManager;
     public function toJSON(key:String):JSONAnimationManager;
 }

@@ -11,6 +11,7 @@ extern class Ellipse extends phaser.curves.Curve {
     public var startAngle:Float;
     public var endAngle:Float;
     public var clockwise:Bool;
+    public var angle:Float;
     public var rotation:Float;
     public function getResolution(divisions:Float):Float;
     public function getPoint(t:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;

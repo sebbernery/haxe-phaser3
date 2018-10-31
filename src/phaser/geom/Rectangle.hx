@@ -41,7 +41,7 @@ extern class Rectangle {
     public function MergeRect(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     public function MergeXY(target:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     public function Offset(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
-    public function OffsetPoint(rect:phaser.geom.Rectangle, point:phaser.geom.Point):phaser.geom.Rectangle;
+    public function OffsetPoint(rect:phaser.geom.Rectangle, point:Dynamic):phaser.geom.Rectangle;
     public function Overlaps(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle):Bool;
     public function Perimeter(rect:phaser.geom.Rectangle):Float;
     public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;

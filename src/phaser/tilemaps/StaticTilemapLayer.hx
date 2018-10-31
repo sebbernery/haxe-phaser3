@@ -2,12 +2,12 @@ package phaser.tilemaps;
 
 @:native("Phaser.Tilemaps.StaticTilemapLayer")
 extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, tilemap:phaser.tilemaps.Tilemap, layerIndex:Int, tileset:phaser.tilemaps.Tileset, ?x:Float, ?y:Float);
+    public function new(scene:phaser.Scene, tilemap:phaser.tilemaps.Tilemap, layerIndex:Int, tileset:Dynamic, ?x:Float, ?y:Float);
     public var isTilemap:Bool;
     public var tilemap:phaser.tilemaps.Tilemap;
     public var layerIndex:Int;
     public var layer:phaser.tilemaps.LayerData;
-    public var tileset:phaser.tilemaps.Tileset;
+    public var tileset:Array<phaser.tilemaps.Tileset>;
     public var culledTiles:Array<Dynamic>;
     public var skipCull:Bool;
     public var tilesDrawn:Int;
@@ -15,8 +15,9 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
     public var cullPaddingX:Int;
     public var cullPaddingY:Int;
     public var cullCallback:Dynamic;
+    public var gidMap:Array<phaser.tilemaps.Tileset>;
+    public function upload(camera:phaser.cameras.scene2d.Camera, tilesetIndex:Int):phaser.tilemaps.StaticTilemapLayer;
     public function setRenderOrder(renderOrder:Dynamic):Dynamic;
-    public function upload(camera:phaser.cameras.scene2d.Camera):phaser.tilemaps.StaticTilemapLayer;
     public function calculateFacesAt(tileX:Int, tileY:Int):phaser.tilemaps.StaticTilemapLayer;
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int):phaser.tilemaps.StaticTilemapLayer;
     public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;

@@ -30,7 +30,7 @@ extern class Body {
     public var deltaMax:phaser.math.Vector2;
     public var acceleration:phaser.math.Vector2;
     public var allowDrag:Bool;
-    public var drag:phaser.math.Vector2;
+    public var drag:Dynamic;
     public var allowGravity:Bool;
     public var gravity:phaser.math.Vector2;
     public var bounce:phaser.math.Vector2;

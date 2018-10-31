@@ -3,6 +3,8 @@ package phaser.textures;
 @:native("Phaser.Textures.CanvasTexture")
 extern class CanvasTexture extends phaser.textures.Texture {
     public function new(manager:phaser.textures.CanvasTexture, key:String, source:js.html.CanvasElement, width:Int, height:Int);
+    public var canvas:js.html.CanvasElement;
+    public var context:js.html.CanvasRenderingContext2D;
     public var width:Int;
     public var height:Int;
     public var imageData:js.html.ImageData;
@@ -17,5 +19,4 @@ extern class CanvasTexture extends phaser.textures.Texture {
     public function getContext():js.html.CanvasRenderingContext2D;
     public function clear():phaser.textures.CanvasTexture;
     public function setSize(width:Int, ?height:Int):phaser.textures.CanvasTexture;
-    public function canvas():Void;
 }

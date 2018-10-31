@@ -35,7 +35,7 @@ extern class Sprite extends phaser.gameobjects.Sprite {
     public function setSleepEndEvent(value:Bool):phaser.gameobjects.GameObject;
     public function setStatic(value:Bool):phaser.gameobjects.GameObject;
     public function isStatic():Bool;
-    public function setFixedRotation():phaser.gameobjects.GameObject;
+    public function setFixedRotation():Dynamic;
     public function setAngularVelocity(value:Float):phaser.gameobjects.GameObject;
     public function setVelocityX(x:Float):phaser.gameobjects.GameObject;
     public function setVelocityY(y:Float):phaser.gameobjects.GameObject;

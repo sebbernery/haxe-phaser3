@@ -27,7 +27,7 @@ extern class Sprite extends phaser.gameobjects.Sprite {
     public function refreshBody():Dynamic;
     public function setFriction(x:Float, ?y:Float):Dynamic;
     public function setFrictionX(x:Float):Dynamic;
-    public function setFrictionY(y:Float):Dynamic;
+    public function setFrictionY(x:Float):Dynamic;
     public function setGravity(x:Float, ?y:Float):Dynamic;
     public function setGravityX(x:Float):Dynamic;
     public function setGravityY(y:Float):Dynamic;

@@ -9,8 +9,8 @@ extern class ArcadePhysics {
     public var world:phaser.physics.arcade.World;
     public var add:phaser.physics.arcade.Factory;
     public function getConfig():Dynamic;
-    public function overlap(object1:Dynamic, object2:Dynamic, ?overlapCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
-    public function collide(object1:Dynamic, object2:Dynamic, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function overlap(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function collide(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     public function pause():phaser.physics.arcade.World;
     public function resume():phaser.physics.arcade.World;
     public function accelerateTo(gameObject:phaser.gameobjects.GameObject, x:Float, y:Float, ?speed:Float, ?xSpeedMax:Float, ?ySpeedMax:Float):Float;

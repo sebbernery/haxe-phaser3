@@ -18,7 +18,7 @@ extern class List {
     public function addAt(child:Dynamic, ?index:Int, ?skipCallback:Bool):Dynamic;
     public function getAt(index:Int):Dynamic;
     public function getIndex(child:Dynamic):Int;
-    public function sort(property:String):Array<Dynamic>;
+    public function sort(property:String):phaser.structs.List;
     public function getByName(name:String):Dynamic;
     public function getRandom(?startIndex:Int, ?length:Int):Dynamic;
     public function getFirst(property:String, value:Dynamic, ?startIndex:Float, ?endIndex:Float):Dynamic;
