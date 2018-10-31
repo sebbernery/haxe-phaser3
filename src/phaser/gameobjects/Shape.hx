@@ -1,13 +1,22 @@
 package phaser.gameobjects;
 
-@:native("Phaser.GameObjects.Mesh")
-extern class Mesh extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:String, ?frame:Dynamic);
-    public var vertices:js.html.Float32Array;
-    public var uv:js.html.Float32Array;
-    public var colors:js.html.Uint32Array;
-    public var alphas:js.html.Float32Array;
-    public var tintFill:Bool;
+@:native("Phaser.GameObjects.Shape")
+extern class Shape extends phaser.gameobjects.GameObject {
+    public function new(scene:phaser.Scene, ?type:String, ?data:Dynamic);
+    public var pathData:Array<Float>;
+    public var pathIndexes:Array<Int>;
+    public var fillColor:Float;
+    public var fillAlpha:Float;
+    public var strokeColor:Float;
+    public var strokeAlpha:Float;
+    public var lineWidth:Float;
+    public var isFilled:Bool;
+    public var isStroked:Bool;
+    public var closePath:Bool;
+    public function setFillStyle(?color:Float, ?alpha:Float):Dynamic;
+    public function setStrokeStyle(?color:Float, ?alpha:Float):Dynamic;
+    public function setClosePath(value:Bool):Dynamic;
+    public function preDestroy():Void;
     public var alpha:Float;
     public var alphaTopLeft:Float;
     public var alphaTopRight:Float;
@@ -17,16 +26,14 @@ extern class Mesh extends phaser.gameobjects.GameObject {
     public function setAlpha(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     public var blendMode:Dynamic;
     public function setBlendMode(value:Dynamic):Dynamic;
+    public var width:Float;
+    public var height:Float;
+    public var displayWidth:Float;
+    public var displayHeight:Float;
+    public function setSize(width:Float, height:Float):Dynamic;
+    public function setDisplaySize(width:Float, height:Float):Dynamic;
     public var depth:Float;
     public function setDepth(value:Int):Dynamic;
-    public var flipX:Bool;
-    public var flipY:Bool;
-    public function toggleFlipX():Dynamic;
-    public function toggleFlipY():Dynamic;
-    public function setFlipX(value:Bool):Dynamic;
-    public function setFlipY(value:Bool):Dynamic;
-    public function setFlip(x:Bool, y:Bool):Dynamic;
-    public function resetFlip():Dynamic;
     public function getCenter(?output:Dynamic):phaser.math.Vector2;
     public function getTopLeft(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     public function getTopRight(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
@@ -54,17 +61,9 @@ extern class Mesh extends phaser.gameobjects.GameObject {
     public function getPipelineName():String;
     public var scaleMode:Dynamic;
     public function setScaleMode(value:Dynamic):Dynamic;
-    public var width:Float;
-    public var height:Float;
-    public var displayWidth:Float;
-    public var displayHeight:Float;
-    public function setSizeToFrame(frame:phaser.textures.Frame):Dynamic;
-    public function setSize(width:Float, height:Float):Dynamic;
-    public function setDisplaySize(width:Float, height:Float):Dynamic;
-    public var texture:Dynamic;
-    public var frame:phaser.textures.Frame;
-    public function setTexture(key:String, ?frame:Dynamic):Dynamic;
-    public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
+    public var scrollFactorX:Float;
+    public var scrollFactorY:Float;
+    public function setScrollFactor(x:Float, ?y:Float):Dynamic;
     public var x:Float;
     public var y:Float;
     public var z:Float;
@@ -86,7 +85,4 @@ extern class Mesh extends phaser.gameobjects.GameObject {
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
     public var visible:Bool;
     public function setVisible(value:Bool):Dynamic;
-    public var scrollFactorX:Float;
-    public var scrollFactorY:Float;
-    public function setScrollFactor(x:Float, ?y:Float):Dynamic;
 }

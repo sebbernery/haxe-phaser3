@@ -10,6 +10,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public var autoRound:Bool;
     public var splitRegExp:Dynamic;
     public var padding:Dynamic;
+    public var lineSpacing:Float;
     public var dirty:Bool;
     public var text:String;
     public function GetTextSize(text:phaser.gameobjects.Text, size:BitmapTextMetrics, lines:Array<Dynamic>):Dynamic;
@@ -40,6 +41,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
     public function setAlign(align:String):phaser.gameobjects.Text;
     public function setResolution(value:Float):phaser.gameobjects.Text;
+    public function setLineSpacing(value:Float):phaser.gameobjects.Text;
     public function setPadding(left:Dynamic, top:Float, right:Float, bottom:Float):phaser.gameobjects.Text;
     public function setMaxLines(?max:Int):phaser.gameobjects.Text;
     public function updateText():phaser.gameobjects.Text;
@@ -95,7 +97,7 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function updateDisplayOrigin():Dynamic;
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
-    public function initPipeline(pipelineName:String):Bool;
+    public function initPipeline(?pipelineName:String):Bool;
     public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;

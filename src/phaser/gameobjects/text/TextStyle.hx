@@ -26,7 +26,7 @@ extern class TextStyle {
     public var testString:String;
     public var baselineX:Float;
     public var baselineY:Float;
-    public function setStyle(style:Dynamic, ?updateText:Bool):phaser.gameobjects.Text;
+    public function setStyle(style:Dynamic, ?updateText:Bool, ?setDefaults:Bool):phaser.gameobjects.Text;
     public function syncFont(canvas:js.html.CanvasElement, context:js.html.CanvasRenderingContext2D):Void;
     public function syncStyle(canvas:js.html.CanvasElement, context:js.html.CanvasRenderingContext2D):Void;
     public function syncShadow(context:js.html.CanvasRenderingContext2D, enabled:Bool):Void;

@@ -44,7 +44,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
     public function atlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function atlasXML(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function audio(key:Dynamic, ?urls:Dynamic, ?config:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
-    public function audioSprite(key:Dynamic, jsonURL:String, ?audioURL:String, ?audioConfig:Dynamic, ?audioXhrSettings:XHRSettingsObject, ?jsonXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function audioSprite(key:Dynamic, jsonURL:String, ?audioURL:Dynamic, ?audioConfig:Dynamic, ?audioXhrSettings:XHRSettingsObject, ?jsonXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function binary(key:Dynamic, ?url:String, ?dataType:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function bitmapFont(key:Dynamic, ?textureURL:Dynamic, ?fontDataURL:String, ?textureXhrSettings:XHRSettingsObject, ?fontDataXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     public function glsl(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;

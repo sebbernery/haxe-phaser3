@@ -10,6 +10,8 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public var canvas:js.html.CanvasElement;
     public var context:js.html.CanvasRenderingContext2D;
     public var framebuffer:js.html.webgl.Framebuffer;
+    public var texture:phaser.textures.Texture;
+    public var frame:phaser.textures.Frame;
     public var camera:phaser.cameras.scene2d.BaseCamera;
     public var dirty:Bool;
     public var gl:js.html.webgl.RenderingContext;
@@ -68,7 +70,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     public function updateDisplayOrigin():Dynamic;
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
-    public function initPipeline(pipelineName:String):Bool;
+    public function initPipeline(?pipelineName:String):Bool;
     public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;

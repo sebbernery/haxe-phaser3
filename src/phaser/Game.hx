@@ -22,13 +22,13 @@ extern class Game {
     public var sound:phaser.sound.BaseSoundManager;
     public var loop:phaser.boot.TimeStep;
     public var plugins:phaser.plugins.PluginManager;
-    public var facebook:Dynamic;
+    public var facebook:phaser.FacebookInstantGamesPlugin;
     public var hasFocus:Bool;
     public var isOver:Bool;
     public function boot():Void;
     public function start():Void;
-    public function step(time:Int, delta:Float):Void;
-    public function headlessStep(time:Int, delta:Float):Void;
+    public function step(time:Float, delta:Float):Void;
+    public function headlessStep(time:Float, delta:Float):Void;
     public function onHidden():Void;
     public function onVisible():Void;
     public function onBlur():Void;

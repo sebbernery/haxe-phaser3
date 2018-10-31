@@ -78,7 +78,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
     public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
-    public function initPipeline(pipelineName:String):Bool;
+    public function initPipeline(?pipelineName:String):Bool;
     public function setPipeline(pipelineName:String):Dynamic;
     public function resetPipeline():Bool;
     public function getPipelineName():String;

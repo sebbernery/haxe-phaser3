@@ -40,6 +40,7 @@ extern class Pointer {
     public function middleButtonDown():Bool;
     public function backButtonDown():Bool;
     public function forwardButtonDown():Bool;
+    public function getDistance():Float;
     public function getInterpolatedPosition(?steps:Int, ?out:Array<Dynamic>):Array<Dynamic>;
     public function destroy():Void;
 }

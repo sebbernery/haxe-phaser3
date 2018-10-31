@@ -12,7 +12,13 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public var lerp:phaser.math.Vector2;
     public var followOffset:phaser.math.Vector2;
     public var deadzone:phaser.geom.Rectangle;
+    public var renderToTexture:Bool;
+    public var canvas:js.html.CanvasElement;
+    public var context:js.html.CanvasRenderingContext2D;
+    public var pipeline:Dynamic;
     public function setRenderToTexture(?pipeline:Dynamic):phaser.cameras.scene2d.Camera;
+    public function setPipeline(?pipeline:Dynamic):phaser.cameras.scene2d.Camera;
+    public function clearRenderToTexture():phaser.cameras.scene2d.Camera;
     public function setDeadzone(?width:Float, ?height:Float):phaser.cameras.scene2d.Camera;
     public function fadeIn(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     public function fadeOut(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
@@ -45,4 +51,5 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public function clearTint():Dynamic;
     public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
     public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function framebuffer():Void;
 }

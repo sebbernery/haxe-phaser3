@@ -17,4 +17,5 @@ extern class Polygon {
     public function calculateArea():Float;
     public function getPoints(quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
     public function Reverse(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
+    public function Smooth(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
 }

@@ -3,8 +3,6 @@ package phaser.textures;
 @:native("Phaser.Textures.TextureManager")
 extern class TextureManager extends phaser.events.EventEmitter {
     public function new(game:phaser.Game);
-    public var width:Int;
-    public var height:Int;
     public var game:phaser.Game;
     public var name:String;
     public var list:Dynamic;
@@ -35,5 +33,4 @@ extern class TextureManager extends phaser.events.EventEmitter {
     public function setTexture(gameObject:phaser.gameobjects.GameObject, key:String, frame:Dynamic):phaser.gameobjects.GameObject;
     public function renameTexture(currentKey:String, newKey:String):Bool;
     public function each(callback:EachTextureCallback, scope:Dynamic, ?args:Dynamic):Void;
-    public function canvas():Void;
 }

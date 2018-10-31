@@ -34,6 +34,7 @@ extern class Systems {
     public function wake(?data:Dynamic):phaser.scenes.Systems;
     public function isSleeping():Bool;
     public function isActive():Bool;
+    public function isPaused():Bool;
     public function isTransitioning():Bool;
     public function isTransitionOut():Bool;
     public function isTransitionIn():Bool;
