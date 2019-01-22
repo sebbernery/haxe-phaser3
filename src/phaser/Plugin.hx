@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Plugin` module contains functions for registering and installing plugins on modules.
+ *
+ * @class Plugin
+ */
 @:native("Plugin")
 extern class Plugin {
     public function new();

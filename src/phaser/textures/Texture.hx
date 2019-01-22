@@ -1,25 +1,242 @@
 package phaser.textures;
 
+/**
+ * @classdesc
+ * A Texture consists of a source, usually an Image from the Cache, and a collection of Frames.
+ * The Frames represent the different areas of the Texture. For example a texture atlas
+ * may have many Frames, one for each element within the atlas. Where-as a single image would have
+ * just one frame, that encompasses the whole image.
+ *
+ * Textures are managed by the global TextureManager. This is a singleton class that is
+ * responsible for creating and delivering Textures and their corresponding Frames to Game Objects.
+ *
+ * Sprites and other Game Objects get the texture data they need from the TextureManager.
+ *
+ * @class Texture
+ * @memberof Phaser.Textures
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {Phaser.Textures.TextureManager} manager - A reference to the Texture Manager this Texture belongs to.
+ * @param {string} key - The unique string-based key of this Texture.
+ * @param {(HTMLImageElement[]|HTMLCanvasElement[])} source - An array of sources that are used to create the texture. Usually Images, but can also be a Canvas.
+ * @param {number} [width] - The width of the Texture. This is optional and automatically derived from the source images.
+ * @param {number} [height] - The height of the Texture. This is optional and automatically derived from the source images.
+ */
 @:native("Phaser.Textures.Texture")
 extern class Texture {
     public function new(manager:phaser.textures.TextureManager, key:String, source:Dynamic, ?width:Float, ?height:Float);
+    /**
+     * A reference to the Texture Manager this Texture belongs to.
+     *
+     * @name Phaser.Textures.Texture#manager
+     * @type {Phaser.Textures.TextureManager}
+     * @since 3.0.0
+     */
     public var manager:phaser.textures.TextureManager;
+    /**
+     * The unique string-based key of this Texture.
+     *
+     * @name Phaser.Textures.Texture#key
+     * @type {string}
+     * @since 3.0.0
+     */
     public var key:String;
+    /**
+     * An array of TextureSource instances.
+     * These are unique to this Texture and contain the actual Image (or Canvas) data.
+     *
+     * @name Phaser.Textures.Texture#source
+     * @type {Phaser.Textures.TextureSource[]}
+     * @since 3.0.0
+     */
     public var source:Array<phaser.textures.TextureSource>;
+    /**
+     * An array of TextureSource data instances.
+     * Used to store additional data images, such as normal maps or specular maps.
+     *
+     * @name Phaser.Textures.Texture#dataSource
+     * @type {array}
+     * @since 3.0.0
+     */
     public var dataSource:Array<Dynamic>;
+    /**
+     * A key-value object pair associating the unique Frame keys with the Frames objects.
+     *
+     * @name Phaser.Textures.Texture#frames
+     * @type {object}
+     * @since 3.0.0
+     */
     public var frames:Dynamic;
+    /**
+     * Any additional data that was set in the source JSON (if any),
+     * or any extra data you'd like to store relating to this texture
+     *
+     * @name Phaser.Textures.Texture#customData
+     * @type {object}
+     * @since 3.0.0
+     */
     public var customData:Dynamic;
+    /**
+     * The name of the first frame of the Texture.
+     *
+     * @name Phaser.Textures.Texture#firstFrame
+     * @type {string}
+     * @since 3.0.0
+     */
     public var firstFrame:String;
+    /**
+     * The total number of Frames in this Texture.
+     *
+     * @name Phaser.Textures.Texture#frameTotal
+     * @type {integer}
+     * @default 0
+     * @since 3.0.0
+     */
     public var frameTotal:Int;
+    /**
+     * Adds a new Frame to this Texture.
+     *
+     * A Frame is a rectangular region of a TextureSource with a unique index or string-based key.
+     *
+     * @method Phaser.Textures.Texture#add
+     * @since 3.0.0
+     *
+     * @param {(integer|string)} name - The name of this Frame. The name is unique within the Texture.
+     * @param {integer} sourceIndex - The index of the TextureSource that this Frame is a part of.
+     * @param {number} x - The x coordinate of the top-left of this Frame.
+     * @param {number} y - The y coordinate of the top-left of this Frame.
+     * @param {number} width - The width of this Frame.
+     * @param {number} height - The height of this Frame.
+     *
+     * @return {Phaser.Textures.Frame} The Frame that was added to this Texture.
+     */
     public function add(name:Dynamic, sourceIndex:Int, x:Float, y:Float, width:Float, height:Float):phaser.textures.Frame;
+    /**
+     * Checks to see if a Frame matching the given key exists within this Texture.
+     *
+     * @method Phaser.Textures.Texture#has
+     * @since 3.0.0
+     *
+     * @param {string} name - The key of the Frame to check for.
+     *
+     * @return {boolean} True if a Frame with the matching key exists in this Texture.
+     */
     public function has(name:String):Bool;
+    /**
+     * Gets a Frame from this Texture based on either the key or the index of the Frame.
+     *
+     * In a Texture Atlas Frames are typically referenced by a key.
+     * In a Sprite Sheet Frames are referenced by an index.
+     * Passing no value for the name returns the base texture.
+     *
+     * @method Phaser.Textures.Texture#get
+     * @since 3.0.0
+     *
+     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     *
+     * @return {Phaser.Textures.Frame} The Texture Frame.
+     */
     public function get(?name:Dynamic):phaser.textures.Frame;
+    /**
+     * Takes the given TextureSource and returns the index of it within this Texture.
+     * If it's not in this Texture, it returns -1.
+     * Unless this Texture has multiple TextureSources, such as with a multi-atlas, this
+     * method will always return zero or -1.
+     *
+     * @method Phaser.Textures.Texture#getTextureSourceIndex
+     * @since 3.0.0
+     *
+     * @param {Phaser.Textures.TextureSource} source - The TextureSource to check.
+     *
+     * @return {integer} The index of the TextureSource within this Texture, or -1 if not in this Texture.
+     */
     public function getTextureSourceIndex(source:phaser.textures.TextureSource):Int;
+    /**
+     * Returns an array of all the Frames in the given TextureSource.
+     *
+     * @method Phaser.Textures.Texture#getFramesFromTextureSource
+     * @since 3.0.0
+     *
+     * @param {integer} sourceIndex - The index of the TextureSource to get the Frames from.
+     * @param {boolean} [includeBase=false] - Include the `__BASE` Frame in the output array?
+     *
+     * @return {Phaser.Textures.Frame[]} An array of Texture Frames.
+     */
     public function getFramesFromTextureSource(sourceIndex:Int, ?includeBase:Bool):Array<phaser.textures.Frame>;
+    /**
+     * Returns an array with all of the names of the Frames in this Texture.
+     *
+     * Useful if you want to randomly assign a Frame to a Game Object, as you can
+     * pick a random element from the returned array.
+     *
+     * @method Phaser.Textures.Texture#getFrameNames
+     * @since 3.0.0
+     *
+     * @param {boolean} [includeBase=false] - Include the `__BASE` Frame in the output array?
+     *
+     * @return {string[]} An array of all Frame names in this Texture.
+     */
     public function getFrameNames(?includeBase:Bool):Array<String>;
+    /**
+     * Given a Frame name, return the source image it uses to render with.
+     *
+     * This will return the actual DOM Image or Canvas element.
+     *
+     * @method Phaser.Textures.Texture#getSourceImage
+     * @since 3.0.0
+     *
+     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     *
+     * @return {(HTMLImageElement|HTMLCanvasElement|Phaser.GameObjects.RenderTexture)} The DOM Image, Canvas Element or Render Texture.
+     */
     public function getSourceImage(?name:Dynamic):js.html.ImageElement;
+    /**
+     * Given a Frame name, return the data source image it uses to render with.
+     * You can use this to get the normal map for an image for example.
+     *
+     * This will return the actual DOM Image.
+     *
+     * @method Phaser.Textures.Texture#getDataSourceImage
+     * @since 3.7.0
+     *
+     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     *
+     * @return {(HTMLImageElement|HTMLCanvasElement)} The DOM Image or Canvas Element.
+     */
     public function getDataSourceImage(?name:Dynamic):js.html.ImageElement;
+    /**
+     * Adds a data source image to this Texture.
+     *
+     * An example of a data source image would be a normal map, where all of the Frames for this Texture
+     * equally apply to the normal map.
+     *
+     * @method Phaser.Textures.Texture#setDataSource
+     * @since 3.0.0
+     *
+     * @param {(HTMLImageElement|HTMLCanvasElement)} data - The source image.
+     */
     public function setDataSource(data:Dynamic):Void;
+    /**
+     * Sets the Filter Mode for this Texture.
+     *
+     * The mode can be either Linear, the default, or Nearest.
+     *
+     * For pixel-art you should use Nearest.
+     *
+     * The mode applies to the entire Texture, not just a specific Frame of it.
+     *
+     * @method Phaser.Textures.Texture#setFilter
+     * @since 3.0.0
+     *
+     * @param {Phaser.Textures.FilterMode} filterMode - The Filter Mode.
+     */
     public function setFilter(filterMode:Dynamic):Void;
+    /**
+     * Destroys this Texture and releases references to its sources and frames.
+     *
+     * @method Phaser.Textures.Texture#destroy
+     * @since 3.0.0
+     */
     public function destroy():Void;
 }

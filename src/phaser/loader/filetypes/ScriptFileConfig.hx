@@ -1,5 +1,13 @@
 package phaser.loader.filetypes;
 
+/**
+ * @typedef {object} Phaser.Loader.FileTypes.ScriptFileConfig
+ *
+ * @property {string} key - The key of the file. Must be unique within the Loader.
+ * @property {string} [url] - The absolute or relative URL to load the file from.
+ * @property {string} [extension='js'] - The default file extension to use if no url is provided.
+ * @property {XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
+ */
 typedef ScriptFileConfig = {
 var key:String;
     @:optional var url:String;

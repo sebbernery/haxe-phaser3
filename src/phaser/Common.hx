@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Common` module contains utility functions that are common to all modules.
+ *
+ * @class Common
+ */
 @:native("Common")
 extern class Common {
     public function new();

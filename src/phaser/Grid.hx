@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Grid` module contains methods for creating and manipulating collision broadphase grid structures.
+ *
+ * @class Grid
+ */
 @:native("Grid")
 extern class Grid {
     public function new();

@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.SAT` module contains methods for detecting collisions using the Separating Axis Theorem.
+ *
+ * @class SAT
+ */
 @:native("SAT")
 extern class SAT {
     public function new();

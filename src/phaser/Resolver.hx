@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Resolver` module contains methods for resolving collision pairs.
+ *
+ * @class Resolver
+ */
 @:native("Resolver")
 extern class Resolver {
     public function new();

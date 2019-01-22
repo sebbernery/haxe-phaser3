@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Pairs` module contains methods for creating and manipulating collision pair sets.
+ *
+ * @class Pairs
+ */
 @:native("Pairs")
 extern class Pairs {
     public function new();

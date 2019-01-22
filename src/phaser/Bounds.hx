@@ -1,5 +1,10 @@
 package phaser;
 
+/**
+ * The `Matter.Bounds` module contains methods for creating and manipulating axis-aligned bounding boxes (AABB).
+ *
+ * @class Bounds
+ */
 @:native("Bounds")
 extern class Bounds {
     public function new();
