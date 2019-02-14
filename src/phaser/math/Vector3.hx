@@ -292,7 +292,7 @@ extern class Vector3 {
      */
     public function transformMat4(mat:phaser.math.Matrix4):phaser.math.Vector3;
     /**
-     * [description]
+     * Transforms the coordinates of this Vector3 with the given Matrix4.
      *
      * @method Phaser.Math.Vector3#transformCoordinates
      * @since 3.0.0

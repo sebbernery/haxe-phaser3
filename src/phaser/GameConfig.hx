@@ -8,7 +8,7 @@ package phaser;
  * @property {number} [zoom=1] - Simple scale applied to the game canvas. 2 is double size, 0.5 is half size, etc.
  * @property {number} [resolution=1] - The size of each game pixel, in canvas pixels. Values larger than 1 are "high" resolution.
  * @property {number} [type=CONST.AUTO] - Which renderer to use. Phaser.AUTO, Phaser.CANVAS, Phaser.HEADLESS, or Phaser.WEBGL. AUTO picks WEBGL if available, otherwise CANVAS.
- * @property {(HTMLElement|string)} [parent=null] - The DOM element that will contain the game canvas, or its `id`. If null (the default) or if the named element doesn't exist, the game canvas is inserted directly into the document body.
+ * @property {(HTMLElement|string)} [parent=null] - The DOM element that will contain the game canvas, or its `id`. If undefined or if the named element doesn't exist, the game canvas is inserted directly into the document body. If `null` no parent will be used and you are responsible for adding the canvas to your environment.
  * @property {HTMLCanvasElement} [canvas=null] - Provide your own Canvas element for Phaser to use instead of creating one.
  * @property {string} [canvasStyle=null] - CSS styles to apply to the game canvas instead of Phaser's default styles.
  * @property {CanvasRenderingContext2D} [context] - Provide your own Canvas Context for Phaser to use, instead of creating one.
@@ -30,6 +30,7 @@ package phaser;
  * @property {ImagesConfig} [images] - Images configuration.
  * @property {object} [physics] - Physics configuration.
  * @property {PluginObject|PluginObjectItem[]} [plugins] - Plugins to install.
+ * @property {ScaleConfig} [scale] - The Scale Manager configuration.
  */
 typedef GameConfig = {
     @:optional var width:Dynamic;
@@ -59,4 +60,5 @@ typedef GameConfig = {
     @:optional var images:ImagesConfig;
     @:optional var physics:Dynamic;
     @:optional var plugins:Dynamic;
+    @:optional var scale:ScaleConfig;
 };

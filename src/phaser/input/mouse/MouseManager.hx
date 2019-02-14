@@ -64,6 +64,66 @@ extern class MouseManager {
      */
     public var locked:Bool;
     /**
+     * The Mouse Move Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseMove
+     * @type {function}
+     * @since 3.10.0
+     */
+    public var onMouseMove:Dynamic;
+    /**
+     * The Mouse Down Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseDown
+     * @type {function}
+     * @since 3.10.0
+     */
+    public var onMouseDown:Dynamic;
+    /**
+     * The Mouse Up Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseUp
+     * @type {function}
+     * @since 3.10.0
+     */
+    public var onMouseUp:Dynamic;
+    /**
+     * The Mouse Over Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseOver
+     * @type {function}
+     * @since 3.16.0
+     */
+    public var onMouseOver:Dynamic;
+    /**
+     * The Mouse Out Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseOut
+     * @type {function}
+     * @since 3.16.0
+     */
+    public var onMouseOut:Dynamic;
+    /**
+     * Internal pointerLockChange handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#pointerLockChange
+     * @type {function}
+     * @since 3.0.0
+     */
+    public var pointerLockChange:Dynamic;
+    /**
      * Attempts to disable the context menu from appearing if you right-click on the browser.
      *
      * Works by listening for the `contextmenu` event and prevent defaulting it.
@@ -94,15 +154,6 @@ extern class MouseManager {
      */
     public function requestPointerLock():Void;
     /**
-     * Internal pointerLockChange handler.
-     *
-     * @method Phaser.Input.Mouse.MouseManager#pointerLockChange
-     * @since 3.0.0
-     *
-     * @param {MouseEvent} event - The native event from the browser.
-     */
-    public function pointerLockChange(event:js.html.MouseEvent):Void;
-    /**
      * If the browser supports pointer lock, this will request that the pointer lock is released. If
      * the browser successfully enters a locked state, a 'POINTER_LOCK_CHANGE_EVENT' will be
      * dispatched - from the game's input manager - with an `isPointerLocked` property.
@@ -111,33 +162,6 @@ extern class MouseManager {
      * @since 3.0.0
      */
     public function releasePointerLock():Void;
-    /**
-     * The Mouse Move Event Handler.
-     *
-     * @method Phaser.Input.Mouse.MouseManager#onMouseMove
-     * @since 3.10.0
-     *
-     * @param {MouseEvent} event - The native DOM Mouse Move Event.
-     */
-    public function onMouseMove(event:js.html.MouseEvent):Void;
-    /**
-     * The Mouse Down Event Handler.
-     *
-     * @method Phaser.Input.Mouse.MouseManager#onMouseDown
-     * @since 3.10.0
-     *
-     * @param {MouseEvent} event - The native DOM Mouse Down Event.
-     */
-    public function onMouseDown(event:js.html.MouseEvent):Void;
-    /**
-     * The Mouse Up Event Handler.
-     *
-     * @method Phaser.Input.Mouse.MouseManager#onMouseUp
-     * @since 3.10.0
-     *
-     * @param {MouseEvent} event - The native DOM Mouse Up Event.
-     */
-    public function onMouseUp(event:js.html.MouseEvent):Void;
     /**
      * Starts the Mouse Event listeners running.
      * This is called automatically and does not need to be manually invoked.

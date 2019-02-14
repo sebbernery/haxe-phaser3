@@ -10,13 +10,13 @@ package phaser.physics.matter.components;
 extern class SetBody {
     public function new();
     /**
-     * [description]
+     * Set the body on a Game Object to a rectangle.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setRectangle
      * @since 3.0.0
      *
-     * @param {number} width - [description]
-     * @param {number} height - [description]
+     * @param {number} width - Width of the rectangle.
+     * @param {number} height - Height of the rectangle.
      * @param {object} options - [description]
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
@@ -35,28 +35,28 @@ extern class SetBody {
      */
     public function setCircle(radius:Float, options:Dynamic):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Set the body on the Game Object to a polygon shape.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setPolygon
      * @since 3.0.0
      *
-     * @param {number} radius - [description]
-     * @param {number} sides - [description]
-     * @param {object} options - [description]
+     * @param {number} radius - The radius of the polygon.
+     * @param {number} sides - The amount of sides creating the polygon.
+     * @param {object} options - A matterjs config object.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setPolygon(radius:Float, sides:Float, options:Dynamic):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Creates a new matterjs trapezoid body.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setTrapezoid
      * @since 3.0.0
      *
-     * @param {number} width - [description]
-     * @param {number} height - [description]
-     * @param {number} slope - [description]
-     * @param {object} options - [description]
+     * @param {number} width - The width of the trapezoid.
+     * @param {number} height - The height of the trapezoid.
+     * @param {number} slope - The angle of slope for the trapezoid.
+     * @param {object} options - A matterjs config object for the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */

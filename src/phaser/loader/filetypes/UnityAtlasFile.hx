@@ -23,4 +23,11 @@ package phaser.loader.filetypes;
 @:native("Phaser.Loader.FileTypes.UnityAtlasFile")
 extern class UnityAtlasFile extends phaser.loader.MultiFile {
     public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject);
+    /**
+     * Adds this file to its target cache upon successful loading and processing.
+     *
+     * @method Phaser.Loader.FileTypes.UnityAtlasFile#addToCache
+     * @since 3.7.0
+     */
+    public function addToCache():Void;
 }

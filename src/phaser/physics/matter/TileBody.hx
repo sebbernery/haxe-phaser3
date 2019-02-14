@@ -29,18 +29,11 @@ package phaser.physics.matter;
  *
  * @param {Phaser.Physics.Matter.World} world - [description]
  * @param {Phaser.Tilemaps.Tile} tile - The target tile that should have a Matter body.
- * @param {object} [options] - Options to be used when creating the Matter body. See
- * Phaser.Physics.Matter.Matter.Body for a list of what Matter accepts.
- * @param {Phaser.Physics.Matter.Matter.Body} [options.body=null] - An existing Matter body to
- * be used instead of creating a new one.
- * @param {boolean} [options.isStatic=true] - Whether or not the newly created body should be
- * made static. This defaults to true since typically tiles should not be moved.
- * @param {boolean} [options.addToWorld=true] - Whether or not to add the newly created body (or
- * existing body if options.body is used) to the Matter world.
+ * @param {MatterTileOptions} [options] - Options to be used when creating the Matter body.
  */
 @:native("Phaser.Physics.Matter.TileBody")
 extern class TileBody extends phaser.physics.matter.components.Bounce {
-    public function new(world:phaser.physics.matter.World, tile:phaser.tilemaps.Tile, ?options:Dynamic);
+    public function new(world:phaser.physics.matter.World, tile:phaser.tilemaps.Tile, ?options:MatterTileOptions);
     /**
      * The tile object the body is associated with.
      *
@@ -63,15 +56,11 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @method Phaser.Physics.Matter.TileBody#setFromTileRectangle
      * @since 3.0.0
      *
-     * @param {object} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
-     * @param {boolean} [options.isStatic=true] - Whether or not the newly created body should be
-     * made static. This defaults to true since typically tiles should not be moved.
-     * @param {boolean} [options.addToWorld=true] - Whether or not to add the newly created body (or
-     * existing body if options.body is used) to the Matter world.
+     * @param {MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
      *
      * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
      */
-    public function setFromTileRectangle(?options:Dynamic):phaser.physics.matter.TileBody;
+    public function setFromTileRectangle(?options:MatterBodyTileOptions):phaser.physics.matter.TileBody;
     /**
      * Sets the current body from the collision group associated with the Tile. This is typically
      * set up in Tiled's collision editor.
@@ -86,15 +75,11 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @method Phaser.Physics.Matter.TileBody#setFromTileCollision
      * @since 3.0.0
      *
-     * @param {object} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
-     * @param {boolean} [options.isStatic=true] - Whether or not the newly created body should be
-     * made static. This defaults to true since typically tiles should not be moved.
-     * @param {boolean} [options.addToWorld=true] - Whether or not to add the newly created body (or
-     * existing body if options.body is used) to the Matter world.
+     * @param {MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
      *
      * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
      */
-    public function setFromTileCollision(?options:Dynamic):phaser.physics.matter.TileBody;
+    public function setFromTileCollision(?options:MatterBodyTileOptions):phaser.physics.matter.TileBody;
     /**
      * Sets the current body to the given body. This will remove the previous body, if one already
      * exists.
@@ -127,7 +112,7 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function destroy():phaser.physics.matter.TileBody;
     /**
-     * [description]
+     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31. Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision categories are included in their collision masks (see {@link #setCollidesWith}).
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionCategory
      * @since 3.0.0
@@ -138,7 +123,7 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setCollisionCategory(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values, they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}). If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value, they will never collide.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionGroup
      * @since 3.0.0
@@ -149,7 +134,7 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setCollisionGroup(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0` and `(categoryB & maskA) !== 0` are both true.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollidesWith
      * @since 3.0.0
@@ -160,36 +145,36 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setCollidesWith(categories:Dynamic):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets new friction values for this Game Object's Matter Body.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFriction
      * @since 3.0.0
      *
-     * @param {number} value - [description]
-     * @param {number} [air] - [description]
-     * @param {number} [fstatic] - [description]
+     * @param {number} value - The new friction of the body, between 0 and 1, where 0 allows the Body to slide indefinitely, while 1 allows it to stop almost immediately after a force is applied.
+     * @param {number} [air] - If provided, the new air resistance of the Body. The higher the value, the faster the Body will slow as it moves through space. 0 means the body has no air resistance.
+     * @param {number} [fstatic] - If provided, the new static friction of the Body. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary. 0 means the body will never "stick" when it is nearly stationary.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setFriction(value:Float, ?air:Float, ?fstatic:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets a new air resistance for this Game Object's Matter Body. A value of 0 means the Body will never slow as it moves through space. The higher the value, the faster a Body slows when moving through space.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionAir
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new air resistance for the Body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setFrictionAir(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets a new static friction for this Game Object's Matter Body. A value of 0 means the Body will never "stick" when it is nearly stationary. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionStatic
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new static friction for the Body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
@@ -216,23 +201,23 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public var centerOfMass:Dynamic;
     /**
-     * [description]
+     * Sets the mass of the Game Object's Matter Body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setMass
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new mass of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setMass(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets density of the body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setDensity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new density of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */

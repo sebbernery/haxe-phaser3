@@ -2,7 +2,7 @@ package phaser.data;
 
 /**
  * @classdesc
- * The Data Component features a means to store pieces of data specific to a Game Object, System or Plugin.
+ * The Data Manager Component features a means to store pieces of data specific to a Game Object, System or Plugin.
  * You can then search, query it, and retrieve the data. The parent must either extend EventEmitter,
  * or have a property called `events` that is an instance of it.
  *
@@ -164,13 +164,16 @@ extern class DataManager {
      * When the value is first set, a `setdata` event is emitted.
      *
      * If the key already exists, a `changedata` event is emitted instead, along an event named after the key.
-     * For example, if you updated an existing key called `PlayerLives` then it would emit the event `changedata_PlayerLives`.
+     * For example, if you updated an existing key called `PlayerLives` then it would emit the event `changedata-PlayerLives`.
      * These events will be emitted regardless if you use this method to set the value, or the direct `values` setter.
      *
      * Please note that the data keys are case-sensitive and must be valid JavaScript Object property strings.
      * This means the keys `gold` and `Gold` are treated as two unique values within the Data Manager.
      *
      * @method Phaser.Data.DataManager#set
+     * @fires Phaser.Data.Events#SET_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA_KEY
      * @since 3.0.0
      *
      * @param {(string|object)} key - The key to set the value for. Or an object or key value pairs. If an object the `data` argument is ignored.
@@ -199,6 +202,9 @@ extern class DataManager {
      * will emit a `changedata` event.
      *
      * @method Phaser.Data.DataManager#merge
+     * @fires Phaser.Data.Events#SET_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA_KEY
      * @since 3.0.0
      *
      * @param {Object.<string, *>} data - The data to merge.
@@ -220,6 +226,7 @@ extern class DataManager {
      * ```
      *
      * @method Phaser.Data.DataManager#remove
+     * @fires Phaser.Data.Events#REMOVE_DATA
      * @since 3.0.0
      *
      * @param {(string|string[])} key - The key to remove, or an array of keys to remove.
@@ -231,6 +238,7 @@ extern class DataManager {
      * Retrieves the data associated with the given 'key', deletes it from this Data Manager, then returns it.
      *
      * @method Phaser.Data.DataManager#pop
+     * @fires Phaser.Data.Events#REMOVE_DATA
      * @since 3.0.0
      *
      * @param {string} key - The key of the value to retrieve and delete.

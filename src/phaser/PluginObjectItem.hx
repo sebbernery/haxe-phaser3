@@ -8,6 +8,7 @@ package phaser;
  * @property {boolean} [start] - Whether the plugin should be started automatically.
  * @property {string} [systemKey] - For a scene plugin, add the plugin to the scene's systems object under this key (`this.sys.KEY`, from the scene).
  * @property {string} [sceneKey] - For a scene plugin, add the plugin to the scene object under this key (`this.KEY`, from the scene).
+ * @property {string} [mapping] - If this plugin is to be injected into the Scene Systems, this is the property key map used.
  * @property {*} [data] - Arbitrary data passed to the plugin's init() method.
  *
  * @example
@@ -23,5 +24,6 @@ typedef PluginObjectItem = {
     @:optional var start:Bool;
     @:optional var systemKey:String;
     @:optional var sceneKey:String;
+    @:optional var mapping:String;
     @:optional var data:Dynamic;
 };

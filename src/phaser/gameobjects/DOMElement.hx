@@ -116,6 +116,7 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -141,6 +142,7 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -148,7 +150,7 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

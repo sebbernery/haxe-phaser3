@@ -6,6 +6,7 @@ package phaser.input.keyboard;
  * keycode must be an integer
  *
  * @class Key
+ * @extends Phaser.Events.EventEmitter
  * @memberof Phaser.Input.Keyboard
  * @constructor
  * @since 3.0.0
@@ -13,7 +14,7 @@ package phaser.input.keyboard;
  * @param {integer} keyCode - The keycode of this key.
  */
 @:native("Phaser.Input.Keyboard.Key")
-extern class Key {
+extern class Key extends phaser.events.EventEmitter {
     public function new(keyCode:Int);
     /**
      * The keycode of this key.
@@ -31,15 +32,6 @@ extern class Key {
      * @since 3.0.0
      */
     public var originalEvent:js.html.KeyboardEvent;
-    /**
-     * Should this Key prevent event propagation?
-     *
-     * @name Phaser.Input.Keyboard.Key#preventDefault
-     * @type {boolean}
-     * @default true
-     * @since 3.0.0
-     */
-    public var preventDefault:Bool;
     /**
      * Can this Key be processed?
      *
@@ -95,6 +87,16 @@ extern class Key {
      */
     public var shiftKey:Bool;
     /**
+     * The down state of the Meta key, if pressed at the same time as this key.
+     * On a Mac the Meta Key is the Command key. On Windows keyboards, it's the Windows key.
+     *
+     * @name Phaser.Input.Keyboard.Key#metaKey
+     * @type {boolean}
+     * @default false
+     * @since 3.16.0
+     */
+    public var metaKey:Bool;
+    /**
      * The location of the modifier key. 0 for standard (or unknown), 1 for left, 2 for right, 3 for numpad.
      *
      * @name Phaser.Input.Keyboard.Key#location
@@ -131,6 +133,18 @@ extern class Key {
      */
     public var timeUp:Float;
     /**
+     * When a key is held down should it continuously fire the `down` event each time it repeats?
+     *
+     * By default it will emit the `down` event just once, but if you wish to receive the event
+     * for each repeat as well, enable this property.
+     *
+     * @name Phaser.Input.Keyboard.Key#emitOnRepeat
+     * @type {boolean}
+     * @default false
+     * @since 3.16.0
+     */
+    public var emitOnRepeat:Bool;
+    /**
      * If a key is held down this holds down the number of times the key has 'repeated'.
      *
      * @name Phaser.Input.Keyboard.Key#repeats
@@ -140,9 +154,43 @@ extern class Key {
      */
     public var repeats:Float;
     /**
+     * Controls if this Key will continuously emit a `down` event while being held down (true),
+     * or emit the event just once, on first press, and then skip future events (false).
+     *
+     * @method Phaser.Input.Keyboard.Key#setEmitOnRepeat
+     * @since 3.16.0
+     *
+     * @param {boolean} value - Emit `down` events on repeated key down actions, or just once?
+     *
+     * @return {Phaser.Input.Keyboard.Key} This Key instance.
+     */
+    public function setEmitOnRepeat(value:Bool):phaser.input.keyboard.Key;
+    /**
+     * Processes the Key Down action for this Key.
+     * Called automatically by the Keyboard Plugin.
+     *
+     * @method Phaser.Input.Keyboard.Key#onDown
+     * @fires Phaser.Input.Keyboard.Events#DOWN
+     * @since 3.16.0
+     *
+     * @param {KeyboardEvent} event - The native DOM Keyboard event.
+     */
+    public function onDown(event:js.html.KeyboardEvent):Void;
+    /**
+     * Processes the Key Up action for this Key.
+     * Called automatically by the Keyboard Plugin.
+     *
+     * @method Phaser.Input.Keyboard.Key#onUp
+     * @fires Phaser.Input.Keyboard.Events#UP
+     * @since 3.16.0
+     *
+     * @param {KeyboardEvent} event - The native DOM Keyboard event.
+     */
+    public function onUp(event:js.html.KeyboardEvent):Void;
+    /**
      * Resets this Key object back to its default un-pressed state.
      *
-     * @method Phaser.Input.Keyboard.Key.reset
+     * @method Phaser.Input.Keyboard.Key#reset
      * @since 3.6.0
      *
      * @return {Phaser.Input.Keyboard.Key} This Key instance.

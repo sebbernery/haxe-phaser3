@@ -12,18 +12,19 @@ package phaser.animations;
  *
  * @class Animation
  * @memberof Phaser.Animations
+ * @extends Phaser.Events.EventEmitter
  * @constructor
  * @since 3.0.0
  *
- * @param {Phaser.Animations.AnimationManager} manager - [description]
- * @param {string} key - [description]
- * @param {AnimationConfig} config - [description]
+ * @param {Phaser.Animations.AnimationManager} manager - A reference to the global Animation Manager
+ * @param {string} key - The unique identifying string for this animation.
+ * @param {Phaser.Animations.Types.Animation} config - The Animation configuration.
  */
 @:native("Phaser.Animations.Animation")
-extern class Animation {
-    public function new(manager:phaser.animations.AnimationManager, key:String, config:AnimationConfig);
+extern class Animation extends phaser.events.EventEmitter {
+    public function new(manager:phaser.animations.AnimationManager, key:String, config:phaser.animations.types.Animation);
     /**
-     * A reference to the global Animation Manager
+     * A reference to the global Animation Manager.
      *
      * @name Phaser.Animations.Animation#manager
      * @type {Phaser.Animations.AnimationManager}
@@ -31,7 +32,7 @@ extern class Animation {
      */
     public var manager:phaser.animations.AnimationManager;
     /**
-     * The unique identifying string for this animation
+     * The unique identifying string for this animation.
      *
      * @name Phaser.Animations.Animation#key
      * @type {string}
@@ -48,7 +49,7 @@ extern class Animation {
      */
     public var type:String;
     /**
-     * Extract all the frame data into the frames array
+     * Extract all the frame data into the frames array.
      *
      * @name Phaser.Animations.Animation#frames
      * @type {Phaser.Animations.AnimationFrame[]}
@@ -110,7 +111,7 @@ extern class Animation {
      */
     public var repeat:Int;
     /**
-     * The delay in ms before the a repeat playthrough starts.
+     * The delay in ms before the a repeat play starts.
      *
      * @name Phaser.Animations.Animation#repeatDelay
      * @type {integer}
@@ -119,7 +120,7 @@ extern class Animation {
      */
     public var repeatDelay:Int;
     /**
-     * Should the animation yoyo? (reverse back down to the start) before repeating?
+     * Should the animation yoyo (reverse back down to the start) before repeating?
      *
      * @name Phaser.Animations.Animation#yoyo
      * @type {boolean}
@@ -128,7 +129,7 @@ extern class Animation {
      */
     public var yoyo:Bool;
     /**
-     * Should sprite.visible = true when the animation starts to play?
+     * Should the GameObject's `visible` property be set to `true` when the animation starts to play?
      *
      * @name Phaser.Animations.Animation#showOnStart
      * @type {boolean}
@@ -137,7 +138,7 @@ extern class Animation {
      */
     public var showOnStart:Bool;
     /**
-     * Should sprite.visible = false when the animation finishes?
+     * Should the GameObject's `visible` property be set to `false` when the animation finishes?
      *
      * @name Phaser.Animations.Animation#hideOnComplete
      * @type {boolean}
@@ -160,7 +161,7 @@ extern class Animation {
      * @method Phaser.Animations.Animation#addFrame
      * @since 3.0.0
      *
-     * @param {(string|AnimationFrameConfig[])} config - [description]
+     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} config - [description]
      *
      * @return {Phaser.Animations.Animation} This Animation object.
      */
@@ -171,8 +172,8 @@ extern class Animation {
      * @method Phaser.Animations.Animation#addFrameAt
      * @since 3.0.0
      *
-     * @param {integer} index - [description]
-     * @param {(string|AnimationFrameConfig[])} config - [description]
+     * @param {integer} index - The index to insert the frame at within the animation.
+     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} config - [description]
      *
      * @return {Phaser.Animations.Animation} This Animation object.
      */
@@ -228,7 +229,7 @@ extern class Animation {
      * @since 3.0.0
      *
      * @param {Phaser.Textures.TextureManager} textureManager - [description]
-     * @param {(string|AnimationFrameConfig[])} frames - [description]
+     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} frames - [description]
      * @param {string} [defaultTextureKey] - [description]
      *
      * @return {Phaser.Animations.AnimationFrame[]} [description]
@@ -308,13 +309,16 @@ extern class Animation {
      * [description]
      *
      * @method Phaser.Animations.Animation#repeatAnimation
+     * @fires Phaser.Animations.Events#ANIMATION_REPEAT
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_REPEAT
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_KEY_REPEAT
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Components.Animation} component - [description]
      */
     public function repeatAnimation(component:phaser.gameobjects.components.Animation):Void;
     /**
-     * [description]
+     * Sets the texture frame the animation uses for rendering.
      *
      * @method Phaser.Animations.Animation#setFrame
      * @since 3.0.0
@@ -323,14 +327,14 @@ extern class Animation {
      */
     public function setFrame(component:phaser.gameobjects.components.Animation):Void;
     /**
-     * [description]
+     * Converts the animation data to JSON.
      *
      * @method Phaser.Animations.Animation#toJSON
      * @since 3.0.0
      *
-     * @return {JSONAnimation} [description]
+     * @return {Phaser.Animations.Types.JSONAnimation} [description]
      */
-    public function toJSON():JSONAnimation;
+    public function toJSON():phaser.animations.types.JSONAnimation;
     /**
      * [description]
      *
@@ -358,11 +362,4 @@ extern class Animation {
      * @return {Phaser.Animations.Animation} This Animation object.
      */
     public function resume():phaser.animations.Animation;
-    /**
-     * [description]
-     *
-     * @method Phaser.Animations.Animation#destroy
-     * @since 3.0.0
-     */
-    public function destroy():Void;
 }

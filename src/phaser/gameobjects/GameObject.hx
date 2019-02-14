@@ -38,6 +38,21 @@ extern class GameObject extends phaser.events.EventEmitter {
      */
     public var type:String;
     /**
+     * The current state of this Game Object.
+     *
+     * Phaser itself will never modify this value, although plugins may do so.
+     *
+     * Use this property to track the state of a Game Object during its lifetime. For example, it could move from
+     * a state of 'moving', to 'attacking', to 'dead'. The state value should be an integer (ideally mapped to a constant
+     * in your game code), or a string. These are recommended to keep it light and simple, with fast comparisons.
+     * If you need to store complex data about your Game Object, look at using the Data Component instead.
+     *
+     * @name Phaser.GameObjects.GameObject#state
+     * @type {(integer|string)}
+     * @since 3.16.0
+     */
+    public var state:Dynamic;
+    /**
      * The parent Container of this Game Object, if it has one.
      *
      * @name Phaser.GameObjects.GameObject#parentContainer
@@ -168,6 +183,24 @@ extern class GameObject extends phaser.events.EventEmitter {
      */
     public function setName(value:String):Dynamic;
     /**
+     * Sets the current state of this Game Object.
+     *
+     * Phaser itself will never modify the State of a Game Object, although plugins may do so.
+     *
+     * For example, a Game Object could change from a state of 'moving', to 'attacking', to 'dead'.
+     * The state value should typically be an integer (ideally mapped to a constant
+     * in your game code), but could also be a string. It is recommended to keep it light and simple.
+     * If you need to store complex data about your Game Object, look at using the Data Component instead.
+     *
+     * @method Phaser.GameObjects.GameObject#setState
+     * @since 3.16.0
+     *
+     * @param {(integer|string)} value - The state of the Game Object.
+     *
+     * @return {this} This GameObject.
+     */
+    public function setState(value:Dynamic):Dynamic;
+    /**
      * Adds a Data Manager component to this Game Object.
      *
      * @method Phaser.GameObjects.GameObject#setDataEnabled
@@ -210,7 +243,7 @@ extern class GameObject extends phaser.events.EventEmitter {
      * When the value is first set, a `setdata` event is emitted from this Game Object.
      *
      * If the key already exists, a `changedata` event is emitted instead, along an event named after the key.
-     * For example, if you updated an existing key called `PlayerLives` then it would emit the event `changedata_PlayerLives`.
+     * For example, if you updated an existing key called `PlayerLives` then it would emit the event `changedata-PlayerLives`.
      * These events will be emitted regardless if you use this method to set the value, or the direct `values` setter.
      *
      * Please note that the data keys are case-sensitive and must be valid JavaScript Object property strings.

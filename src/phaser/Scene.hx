@@ -201,6 +201,24 @@ extern class Scene {
      */
     public var matter:phaser.physics.matter.MatterPhysics;
     /**
+     * A scene level Facebook Instant Games Plugin.
+     * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
+     *
+     * @name Phaser.Scene#facebook
+     * @type {Phaser.FacebookInstantGamesPlugin}
+     * @since 3.12.0
+     */
+    public var facebook:phaser.FacebookInstantGamesPlugin;
+    /**
+     * A reference to the global Scale Manager.
+     * This property will only be available if defined in the Scene Injection Map.
+     *
+     * @name Phaser.Scene#scale
+     * @type {Phaser.Scale.ScaleManager}
+     * @since 3.16.2
+     */
+    public var scale:phaser.scale.ScaleManager;
+    /**
      * Should be overridden by your own Scenes.
      *
      * @method Phaser.Scene#update

@@ -1,7 +1,7 @@
 package phaser.physics.arcade.components;
 
 /**
- * [description]
+ * Provides methods used for setting the debug properties of an Arcade Physics Body.
  *
  * @name Phaser.Physics.Arcade.Components.Debug
  * @since 3.0.0
@@ -10,7 +10,7 @@ package phaser.physics.arcade.components;
 extern class Debug {
     public function new();
     /**
-     * [description]
+     * Set to `true` to have this body render its outline to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugShowBody
      * @type {boolean}
@@ -18,7 +18,7 @@ extern class Debug {
      */
     public var debugShowBody:Bool;
     /**
-     * [description]
+     * Set to `true` to have this body render a velocity marker to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugShowVelocity
      * @type {boolean}
@@ -26,7 +26,7 @@ extern class Debug {
      */
     public var debugShowVelocity:Bool;
     /**
-     * [description]
+     * The color of the body outline when it renders to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugBodyColor
      * @type {number}
@@ -34,25 +34,28 @@ extern class Debug {
      */
     public var debugBodyColor:Float;
     /**
-     * [description]
+     * Sets the debug values of this body.
+     *
+     * Bodies will only draw their debug if debug has been enabled for Arcade Physics as a whole.
+     * Note that there is a performance cost in drawing debug displays. It should never be used in production.
      *
      * @method Phaser.Physics.Arcade.Components.Debug#setDebug
      * @since 3.0.0
      *
-     * @param {boolean} showBody - [description]
-     * @param {boolean} showVelocity - [description]
-     * @param {number} bodyColor - [description]
+     * @param {boolean} showBody - Set to `true` to have this body render its outline to the debug display.
+     * @param {boolean} showVelocity - Set to `true` to have this body render a velocity marker to the debug display.
+     * @param {number} bodyColor - The color of the body outline when rendered to the debug display.
      *
      * @return {this} This Game Object.
      */
     public function setDebug(showBody:Bool, showVelocity:Bool, bodyColor:Float):Dynamic;
     /**
-     * [description]
+     * Sets the color of the body outline when it renders to the debug display.
      *
      * @method Phaser.Physics.Arcade.Components.Debug#setDebugBodyColor
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The color of the body outline when rendered to the debug display.
      *
      * @return {this} This Game Object.
      */

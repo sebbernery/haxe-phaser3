@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Hard Light blend mode.
+ * Hard Light blend mode. For Canvas only.
+ * A combination of multiply and screen like overlay, but with top and bottom layer swapped.
  *
  * @name Phaser.BlendModes.HARD_LIGHT
  */

@@ -177,6 +177,15 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public var y:Float;
     /**
+     * Are any mouse or touch pointers currently over the game canvas?
+     *
+     * @name Phaser.Input.InputPlugin#isOver
+     * @type {boolean}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var isOver:Bool;
+    /**
      * The mouse has its own unique Pointer object, which you can reference directly if making a _desktop specific game_.
      * If you are supporting both desktop and touch devices then do not use this property, instead use `activePointer`
      * which will always map to the most recently interacted pointer.
@@ -390,6 +399,45 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @return {Phaser.GameObjects.GameObject[]} An array of all the interactive Game Objects the Pointer was above.
      */
     public function hitTestPointer(pointer:phaser.input.Pointer):Array<phaser.gameobjects.GameObject>;
+    /**
+     * Returns the drag state of the given Pointer for this Input Plugin.
+     *
+     * The state will be one of the following:
+     *
+     * 0 = Not dragging anything
+     * 1 = Primary button down and objects below, so collect a draglist
+     * 2 = Pointer being checked if meets drag criteria
+     * 3 = Pointer meets criteria, notify the draglist
+     * 4 = Pointer actively dragging the draglist and has moved
+     * 5 = Pointer actively dragging but has been released, notify draglist
+     *
+     * @method Phaser.Input.InputPlugin#getDragState
+     * @since 3.16.0
+     *
+     * @param {Phaser.Input.Pointer} pointer - The Pointer to get the drag state for.
+     *
+     * @return {integer} The drag state of the given Pointer.
+     */
+    public function getDragState(pointer:phaser.input.Pointer):Int;
+    /**
+     * Sets the drag state of the given Pointer for this Input Plugin.
+     *
+     * The state must be one of the following values:
+     *
+     * 0 = Not dragging anything
+     * 1 = Primary button down and objects below, so collect a draglist
+     * 2 = Pointer being checked if meets drag criteria
+     * 3 = Pointer meets criteria, notify the draglist
+     * 4 = Pointer actively dragging the draglist and has moved
+     * 5 = Pointer actively dragging but has been released, notify draglist
+     *
+     * @method Phaser.Input.InputPlugin#setDragState
+     * @since 3.16.0
+     *
+     * @param {Phaser.Input.Pointer} pointer - The Pointer to set the drag state for.
+     * @param {integer} state - The drag state value. An integer between 0 and 5.
+     */
+    public function setDragState(pointer:phaser.input.Pointer, state:Int):Void;
     /**
      * Sets the draggable state of the given array of Game Objects.
      *
@@ -635,6 +683,10 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function stopPropagation():phaser.input.InputPlugin;
     /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mouseup` or `touchend` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -657,6 +709,7 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * solve.
      *
      * @method Phaser.Input.InputPlugin#addUpCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this DOM event.
@@ -666,6 +719,10 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function addUpCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
     /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mousedown` or `touchstart` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -688,6 +745,7 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * solve.
      *
      * @method Phaser.Input.InputPlugin#addDownCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this dom event.
@@ -697,6 +755,10 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function addDownCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
     /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mousemove` or `touchmove` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -719,6 +781,7 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * solve.
      *
      * @method Phaser.Input.InputPlugin#addMoveCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this dom event.

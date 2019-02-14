@@ -35,15 +35,6 @@ extern class Particle {
      */
     public var frame:phaser.textures.Frame;
     /**
-     * The position of this Particle within its Emitter's particle pool.
-     *
-     * @name Phaser.GameObjects.Particles.Particle#index
-     * @type {number}
-     * @default 0
-     * @since 3.0.0
-     */
-    public var index:Float;
-    /**
      * The x coordinate of this Particle.
      *
      * @name Phaser.GameObjects.Particles.Particle#x
@@ -231,6 +222,13 @@ extern class Particle {
      * @return {boolean} `true` if this Particle is alive and updating, otherwise `false`.
      */
     public function isAlive():Bool;
+    /**
+     * Resets the position of this particle back to zero.
+     *
+     * @method Phaser.GameObjects.Particles.Particle#resetPosition
+     * @since 3.16.0
+     */
+    public function resetPosition():Void;
     /**
      * Starts this Particle from the given coordinates.
      *

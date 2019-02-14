@@ -60,6 +60,15 @@ extern class Animation {
      */
     public var currentFrame:phaser.animations.AnimationFrame;
     /**
+     * The key of the next Animation to be loaded into this Animation Controller when the current animation completes.
+     *
+     * @name Phaser.GameObjects.Components.Animation#nextAnim
+     * @type {?string}
+     * @default null
+     * @since 3.16.0
+     */
+    public var nextAnim:String;
+    /**
      * The frame rate of playback in frames per second.
      * The default is 24 if the `duration` property is `null`.
      *
@@ -98,6 +107,15 @@ extern class Animation {
      * @since 3.0.0
      */
     public var skipMissedFrames:Bool;
+    /**
+     * Will the playhead move forwards (`true`) or in reverse (`false`).
+     *
+     * @name Phaser.GameObjects.Components.Animation#forward
+     * @type {boolean}
+     * @default true
+     * @since 3.0.0
+     */
+    public var forward:Bool;
     /**
      * Internal time overflow accumulator.
      *
@@ -143,6 +161,26 @@ extern class Animation {
      * @since 3.4.0
      */
     public var isPaused:Bool;
+    /**
+     * Sets an animation to be played immediately after the current one completes.
+     *
+     * The current animation must enter a 'completed' state for this to happen, i.e. finish all of its repeats, delays, etc, or have the `stop` method called directly on it.
+     *
+     * An animation set to repeat forever will never enter a completed state.
+     *
+     * You can chain a new animation at any point, including before the current one starts playing, during it, or when it ends (via its `animationcomplete` callback).
+     * Chained animations are specific to a Game Object, meaning different Game Objects can have different chained animations without impacting the global animation they're playing.
+     *
+     * Call this method with no arguments to reset the chained animation.
+     *
+     * @method Phaser.GameObjects.Components.Animation#chain
+     * @since 3.16.0
+     *
+     * @param {(string|Phaser.Animations.Animation)} [key] - The string-based key of the animation to play next, as defined previously in the Animation Manager. Or an Animation instance.
+     *
+     * @return {Phaser.GameObjects.GameObject} The Game Object that owns this Animation Component.
+     */
+    public function chain(?key:Dynamic):phaser.gameobjects.GameObject;
     /**
      * Sets the amount of time, in milliseconds, that the animation will be delayed before starting playback.
      *
@@ -223,19 +261,21 @@ extern class Animation {
      */
     public function resume(?fromFrame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     /**
-     * Plays an Animation on the Game Object that owns this Animation Component.
+     * Plays an Animation on a Game Object that has the Animation component, such as a Sprite.
+     *
+     * Animations are stored in the global Animation Manager and are referenced by a unique string-based key.
      *
      * @method Phaser.GameObjects.Components.Animation#play
      * @fires Phaser.GameObjects.Components.Animation#onStartEvent
      * @since 3.0.0
      *
-     * @param {string} key - The string-based key of the animation to play, as defined previously in the Animation Manager.
+     * @param {(string|Phaser.Animations.Animation)} key - The string-based key of the animation to play, as defined previously in the Animation Manager. Or an Animation instance.
      * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
      * @param {integer} [startFrame=0] - Optionally start the animation playing from this frame index.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that owns this Animation Component.
      */
-    public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
+    public function play(key:Dynamic, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
     /**
      * Plays an Animation (in reverse mode) on the Game Object that owns this Animation Component.
      *
@@ -243,19 +283,20 @@ extern class Animation {
      * @fires Phaser.GameObjects.Components.Animation#onStartEvent
      * @since 3.12.0
      *
-     * @param {string} key - The string-based key of the animation to play, as defined previously in the Animation Manager.
+     * @param {(string|Phaser.Animations.Animation)} key - The string-based key of the animation to play, as defined previously in the Animation Manager. Or an Animation instance.
      * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
      * @param {integer} [startFrame=0] - Optionally start the animation playing from this frame index.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that owns this Animation Component.
      */
-    public function playReverse(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
+    public function playReverse(key:Dynamic, ?ignoreIfPlaying:Bool, ?startFrame:Int):phaser.gameobjects.GameObject;
     /**
-     * Load an Animation and fires 'onStartEvent' event,
-     * extracted from 'play' method
+     * Load an Animation and fires 'onStartEvent' event, extracted from 'play' method.
      *
      * @method Phaser.GameObjects.Components.Animation#_startAnimation
-     * @fires Phaser.GameObjects.Components.Animation#onStartEvent
+     * @fires Phaser.Animations.Events#START_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#SPRITE_START_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#SPRITE_START_KEY_ANIMATION_EVENT
      * @since 3.12.0
      *
      * @param {string} key - The string-based key of the animation to play, as defined previously in the Animation Manager.
@@ -265,16 +306,14 @@ extern class Animation {
      */
     public function _startAnimation(key:String, ?startFrame:Int):phaser.gameobjects.GameObject;
     /**
-     * Reverse an Animation that is already playing on the Game Object.
+     * Reverse the Animation that is already playing on the Game Object.
      *
      * @method Phaser.GameObjects.Components.Animation#reverse
      * @since 3.12.0
      *
-     * @param {string} key - The string-based key of the animation to play, as defined previously in the Animation Manager.
-     *
      * @return {Phaser.GameObjects.GameObject} The Game Object that owns this Animation Component.
      */
-    public function reverse(key:String):phaser.gameobjects.GameObject;
+    public function reverse():phaser.gameobjects.GameObject;
     /**
      * Returns a value between 0 and 1 indicating how far this animation is through, ignoring repeats and yoyos.
      * If the animation has a non-zero repeat defined, `getProgress` and `getTotalProgress` will be different
@@ -361,7 +400,9 @@ extern class Animation {
      * Restarts the current animation from its beginning, optionally including its delay value.
      *
      * @method Phaser.GameObjects.Components.Animation#restart
-     * @fires Phaser.GameObjects.Components.Animation#onRestartEvent
+     * @fires Phaser.Animations.Events#RESTART_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#SPRITE_RESTART_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#SPRITE_RESTART_KEY_ANIMATION_EVENT
      * @since 3.0.0
      *
      * @param {boolean} [includeDelay=false] - Whether to include the delay value of the animation when restarting.
@@ -371,6 +412,10 @@ extern class Animation {
     public function restart(?includeDelay:Bool):phaser.gameobjects.GameObject;
     /**
      * Immediately stops the current animation from playing and dispatches the `animationcomplete` event.
+     *
+     * If no animation is set, no event will be dispatched.
+     *
+     * If there is another animation queued (via the `chain` method) then it will start playing immediately.
      *
      * @method Phaser.GameObjects.Components.Animation#stop
      * @fires Phaser.GameObjects.Components.Animation#onCompleteEvent
@@ -409,11 +454,11 @@ extern class Animation {
      * @fires Phaser.GameObjects.Components.Animation#onCompleteEvent
      * @since 3.4.0
      *
-     * @param {Phaser.Animations.AnimationFrame} delay - The frame to check before stopping this animation.
+     * @param {Phaser.Animations.AnimationFrame} frame - The frame to check before stopping this animation.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that owns this Animation Component.
      */
-    public function stopOnFrame(delay:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
+    public function stopOnFrame(frame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     /**
      * Sets the Time Scale factor, allowing you to make the animation go go faster or slower than default.
      * Where 1 = normal speed (the default), 0.5 = half speed, 2 = double speed, etc.
@@ -467,6 +512,32 @@ extern class Animation {
      */
     public function setCurrentFrame(animationFrame:phaser.animations.AnimationFrame):phaser.gameobjects.GameObject;
     /**
+     * Advances the animation to the next frame, regardless of the time or animation state.
+     * If the animation is set to repeat, or yoyo, this will still take effect.
+     *
+     * Calling this does not change the direction of the animation. I.e. if it was currently
+     * playing in reverse, calling this method doesn't then change the direction to forwards.
+     *
+     * @method Phaser.GameObjects.Components.Animation#nextFrame
+     * @since 3.16.0
+     *
+     * @return {Phaser.GameObjects.GameObject} The Game Object this Animation Component belongs to.
+     */
+    public function nextFrame():phaser.gameobjects.GameObject;
+    /**
+     * Advances the animation to the previous frame, regardless of the time or animation state.
+     * If the animation is set to repeat, or yoyo, this will still take effect.
+     *
+     * Calling this does not change the direction of the animation. I.e. if it was currently
+     * playing in forwards, calling this method doesn't then change the direction to backwards.
+     *
+     * @method Phaser.GameObjects.Components.Animation#previousFrame
+     * @since 3.16.0
+     *
+     * @return {Phaser.GameObjects.GameObject} The Game Object this Animation Component belongs to.
+     */
+    public function previousFrame():phaser.gameobjects.GameObject;
+    /**
      * Sets if the current Animation will yoyo when it reaches the end.
      * A yoyo'ing animation will play through consecutively, and then reverse-play back to the start again.
      *
@@ -497,5 +568,4 @@ extern class Animation {
      * @since 3.0.0
      */
     public function destroy():Void;
-    public function forward():Void;
 }

@@ -11,13 +11,10 @@ package phaser.gameobjects;
  * @webglOnly
  * @since 3.0.0
  *
- * @extends Phaser.GameObjects.Components.Alpha
  * @extends Phaser.GameObjects.Components.BlendMode
  * @extends Phaser.GameObjects.Components.Depth
- * @extends Phaser.GameObjects.Components.Flip
  * @extends Phaser.GameObjects.Components.GetBounds
  * @extends Phaser.GameObjects.Components.Mask
- * @extends Phaser.GameObjects.Components.Origin
  * @extends Phaser.GameObjects.Components.Pipeline
  * @extends Phaser.GameObjects.Components.ScaleMode
  * @extends Phaser.GameObjects.Components.Size
@@ -81,84 +78,13 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The alpha value of the Game Object.
+     * This method is left intentionally empty and does not do anything.
+     * It is retained to allow a Mesh or Quad to be added to a Container.
      *
-     * This is a global value, impacting the entire Game Object, not just a region of it.
-     *
-     * @name Phaser.GameObjects.Components.Alpha#alpha
-     * @type {number}
-     * @since 3.0.0
+     * @method Phaser.GameObjects.Mesh#setAlpha
+     * @since 3.17.0
      */
-    public var alpha:Float;
-    /**
-     * The alpha value starting from the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Alpha#alphaTopLeft
-     * @type {number}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var alphaTopLeft:Float;
-    /**
-     * The alpha value starting from the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Alpha#alphaTopRight
-     * @type {number}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var alphaTopRight:Float;
-    /**
-     * The alpha value starting from the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Alpha#alphaBottomLeft
-     * @type {number}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var alphaBottomLeft:Float;
-    /**
-     * The alpha value starting from the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Alpha#alphaBottomRight
-     * @type {number}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var alphaBottomRight:Float;
-    /**
-     * Clears all alpha values associated with this Game Object.
-     *
-     * Immediately sets the alpha levels back to 1 (fully opaque).
-     *
-     * @method Phaser.GameObjects.Components.Alpha#clearAlpha
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function clearAlpha():Dynamic;
-    /**
-     * Set the Alpha level of this Game Object. The alpha controls the opacity of the Game Object as it renders.
-     * Alpha values are provided as a float between 0, fully transparent, and 1, fully opaque.
-     *
-     * If your game is running under WebGL you can optionally specify four different alpha values, each of which
-     * correspond to the four corners of the Game Object. Under Canvas only the `topLeft` value given is used.
-     *
-     * @method Phaser.GameObjects.Components.Alpha#setAlpha
-     * @since 3.0.0
-     *
-     * @param {number} [topLeft=1] - The alpha value used for the top-left of the Game Object. If this is the only value given it's applied across the whole Game Object.
-     * @param {number} [topRight] - The alpha value used for the top-right of the Game Object. WebGL only.
-     * @param {number} [bottomLeft] - The alpha value used for the bottom-left of the Game Object. WebGL only.
-     * @param {number} [bottomRight] - The alpha value used for the bottom-right of the Game Object. WebGL only.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setAlpha(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
+    public function setAlpha():Void;
     /**
      * Sets the Blend Mode being used by this Game Object.
      *
@@ -169,6 +95,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -194,6 +121,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -201,7 +129,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode
@@ -247,89 +175,6 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setDepth(value:Int):Dynamic;
-    /**
-     * The horizontally flipped state of the Game Object.
-     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
-     * Flipping always takes place from the middle of the texture and does not impact the scale value.
-     *
-     * @name Phaser.GameObjects.Components.Flip#flipX
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var flipX:Bool;
-    /**
-     * The vertically flipped state of the Game Object.
-     * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
-     * Flipping always takes place from the middle of the texture and does not impact the scale value.
-     *
-     * @name Phaser.GameObjects.Components.Flip#flipY
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var flipY:Bool;
-    /**
-     * Toggles the horizontal flipped state of this Game Object.
-     *
-     * @method Phaser.GameObjects.Components.Flip#toggleFlipX
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function toggleFlipX():Dynamic;
-    /**
-     * Toggles the vertical flipped state of this Game Object.
-     *
-     * @method Phaser.GameObjects.Components.Flip#toggleFlipY
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function toggleFlipY():Dynamic;
-    /**
-     * Sets the horizontal flipped state of this Game Object.
-     *
-     * @method Phaser.GameObjects.Components.Flip#setFlipX
-     * @since 3.0.0
-     *
-     * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setFlipX(value:Bool):Dynamic;
-    /**
-     * Sets the vertical flipped state of this Game Object.
-     *
-     * @method Phaser.GameObjects.Components.Flip#setFlipY
-     * @since 3.0.0
-     *
-     * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setFlipY(value:Bool):Dynamic;
-    /**
-     * Sets the horizontal and vertical flipped state of this Game Object.
-     *
-     * @method Phaser.GameObjects.Components.Flip#setFlip
-     * @since 3.0.0
-     *
-     * @param {boolean} x - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
-     * @param {boolean} y - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setFlip(x:Bool, y:Bool):Dynamic;
-    /**
-     * Resets the horizontal and vertical flipped state of this Game Object back to their default un-flipped state.
-     *
-     * @method Phaser.GameObjects.Components.Flip#resetFlip
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function resetFlip():Dynamic;
     /**
      * Gets the center coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
@@ -498,96 +343,6 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @return {Phaser.Display.Masks.GeometryMask} This Geometry Mask that was created.
      */
     public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
-    /**
-     * The horizontal origin of this Game Object.
-     * The origin maps the relationship between the size and position of the Game Object.
-     * The default value is 0.5, meaning all Game Objects are positioned based on their center.
-     * Setting the value to 0 means the position now relates to the left of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Origin#originX
-     * @type {number}
-     * @default 0.5
-     * @since 3.0.0
-     */
-    public var originX:Float;
-    /**
-     * The vertical origin of this Game Object.
-     * The origin maps the relationship between the size and position of the Game Object.
-     * The default value is 0.5, meaning all Game Objects are positioned based on their center.
-     * Setting the value to 0 means the position now relates to the top of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Origin#originY
-     * @type {number}
-     * @default 0.5
-     * @since 3.0.0
-     */
-    public var originY:Float;
-    /**
-     * The horizontal display origin of this Game Object.
-     * The origin is a normalized value between 0 and 1.
-     * The displayOrigin is a pixel value, based on the size of the Game Object combined with the origin.
-     *
-     * @name Phaser.GameObjects.Components.Origin#displayOriginX
-     * @type {number}
-     * @since 3.0.0
-     */
-    public var displayOriginX:Float;
-    /**
-     * The vertical display origin of this Game Object.
-     * The origin is a normalized value between 0 and 1.
-     * The displayOrigin is a pixel value, based on the size of the Game Object combined with the origin.
-     *
-     * @name Phaser.GameObjects.Components.Origin#displayOriginY
-     * @type {number}
-     * @since 3.0.0
-     */
-    public var displayOriginY:Float;
-    /**
-     * Sets the origin of this Game Object.
-     *
-     * The values are given in the range 0 to 1.
-     *
-     * @method Phaser.GameObjects.Components.Origin#setOrigin
-     * @since 3.0.0
-     *
-     * @param {number} [x=0.5] - The horizontal origin value.
-     * @param {number} [y=x] - The vertical origin value. If not defined it will be set to the value of `x`.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setOrigin(?x:Float, ?y:Float):Dynamic;
-    /**
-     * Sets the origin of this Game Object based on the Pivot values in its Frame.
-     *
-     * @method Phaser.GameObjects.Components.Origin#setOriginFromFrame
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setOriginFromFrame():Dynamic;
-    /**
-     * Sets the display origin of this Game Object.
-     * The difference between this and setting the origin is that you can use pixel values for setting the display origin.
-     *
-     * @method Phaser.GameObjects.Components.Origin#setDisplayOrigin
-     * @since 3.0.0
-     *
-     * @param {number} [x=0] - The horizontal display origin value.
-     * @param {number} [y=x] - The vertical display origin value. If not defined it will be set to the value of `x`.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setDisplayOrigin(?x:Float, ?y:Float):Dynamic;
-    /**
-     * Updates the Display Origin cached values internally stored on this Game Object.
-     * You don't usually call this directly, but it is exposed for edge-cases where you may.
-     *
-     * @method Phaser.GameObjects.Components.Origin#updateDisplayOrigin
-     * @since 3.0.0
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function updateDisplayOrigin():Dynamic;
     /**
      * The initial WebGL pipeline of this Game Object.
      *

@@ -17,7 +17,7 @@ package phaser.tilemaps;
 extern class LayerData {
     public function new(?config:Dynamic);
     /**
-     * [description]
+     * The name of the layer, if specified in Tiled.
      *
      * @name Phaser.Tilemaps.LayerData#name
      * @type {string}
@@ -25,7 +25,7 @@ extern class LayerData {
      */
     public var name:String;
     /**
-     * [description]
+     * The x offset of where to draw from the top left
      *
      * @name Phaser.Tilemaps.LayerData#x
      * @type {number}
@@ -33,7 +33,7 @@ extern class LayerData {
      */
     public var x:Float;
     /**
-     * [description]
+     * The y offset of where to draw from the top left
      *
      * @name Phaser.Tilemaps.LayerData#y
      * @type {number}
@@ -41,7 +41,7 @@ extern class LayerData {
      */
     public var y:Float;
     /**
-     * [description]
+     * The width in tile of the layer.
      *
      * @name Phaser.Tilemaps.LayerData#width
      * @type {number}
@@ -49,7 +49,7 @@ extern class LayerData {
      */
     public var width:Float;
     /**
-     * [description]
+     * The height in tiles of the layer.
      *
      * @name Phaser.Tilemaps.LayerData#height
      * @type {number}
@@ -57,7 +57,7 @@ extern class LayerData {
      */
     public var height:Float;
     /**
-     * [description]
+     * The pixel width of the tiles.
      *
      * @name Phaser.Tilemaps.LayerData#tileWidth
      * @type {number}
@@ -65,7 +65,7 @@ extern class LayerData {
      */
     public var tileWidth:Float;
     /**
-     * [description]
+     * The pixel height of the tiles.
      *
      * @name Phaser.Tilemaps.LayerData#tileHeight
      * @type {number}
@@ -89,7 +89,7 @@ extern class LayerData {
      */
     public var baseTileHeight:Float;
     /**
-     * [description]
+     * The width in pixels of the entire layer.
      *
      * @name Phaser.Tilemaps.LayerData#widthInPixels
      * @type {number}
@@ -97,7 +97,7 @@ extern class LayerData {
      */
     public var widthInPixels:Float;
     /**
-     * [description]
+     * The height in pixels of the entire layer.
      *
      * @name Phaser.Tilemaps.LayerData#heightInPixels
      * @type {number}
@@ -121,7 +121,7 @@ extern class LayerData {
      */
     public var visible:Bool;
     /**
-     * [description]
+     * Layer specific properties (can be specified in Tiled)
      *
      * @name Phaser.Tilemaps.LayerData#properties
      * @type {object}
@@ -161,13 +161,13 @@ extern class LayerData {
      */
     public var bodies:Array<Dynamic>;
     /**
-     * [description]
+     * An array of the tile indexes
      *
      * @name Phaser.Tilemaps.LayerData#data
-     * @type {array}
+     * @type {(number[])}
      * @since 3.0.0
      */
-    public var data:Array<Dynamic>;
+    public var data:Array<Float>;
     /**
      * [description]
      *

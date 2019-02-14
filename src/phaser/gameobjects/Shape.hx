@@ -146,12 +146,13 @@ extern class Shape extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Shape#setStrokeStyle
      * @since 3.13.0
      *
+     * @param {number} [lineWidth] - The width of line to stroke with. If not provided or undefined the Shape will not be stroked.
      * @param {number} [color] - The color used to stroke this shape. If not provided the Shape will not be stroked.
      * @param {number} [alpha=1] - The alpha value used when stroking this shape, if a stroke color is given.
      *
      * @return {this} This Game Object instance.
      */
-    public function setStrokeStyle(?color:Float, ?alpha:Float):Dynamic;
+    public function setStrokeStyle(?lineWidth:Float, ?color:Float, ?alpha:Float):Dynamic;
     /**
      * Sets if this Shape path is closed during rendering when stroked.
      * Note that some Shapes are always closed when stroked (such as Ellipse shapes)
@@ -263,6 +264,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -288,6 +290,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -295,7 +298,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

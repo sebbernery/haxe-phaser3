@@ -13,6 +13,10 @@ package phaser;
  * @class Game
  * @memberof Phaser
  * @constructor
+ * @fires Phaser.Core.Events#BLUR
+ * @fires Phaser.Core.Events#FOCUS
+ * @fires Phaser.Core.Events#HIDDEN
+ * @fires Phaser.Core.Events#VISIBLE
  * @since 3.0.0
  *
  * @param {GameConfig} [GameConfig] - The configuration object for your Phaser Game instance.
@@ -26,11 +30,11 @@ extern class Game {
      * The values stored within this object are read-only and should not be changed at run-time.
      *
      * @name Phaser.Game#config
-     * @type {Phaser.Boot.Config}
+     * @type {Phaser.Core.Config}
      * @readonly
      * @since 3.0.0
      */
-    public var config:phaser.boot.Config;
+    public var config:phaser.core.Config;
     /**
      * A reference to either the Canvas or WebGL Renderer that this Game is using.
      *
@@ -170,6 +174,16 @@ extern class Game {
      */
     public var device:phaser.DeviceConf;
     /**
+     * An instance of the Scale Manager.
+     *
+     * The Scale Manager is a global system responsible for handling scaling of the game canvas.
+     *
+     * @name Phaser.Game#scale
+     * @type {Phaser.Scale.ScaleManager}
+     * @since 3.16.0
+     */
+    public var scale:phaser.scale.ScaleManager;
+    /**
      * An instance of the base Sound Manager.
      *
      * The Sound Manager is a global system responsible for the playback and updating of all audio in your game.
@@ -186,10 +200,10 @@ extern class Game {
      * them and calculating delta values. It then automatically calls the game step.
      *
      * @name Phaser.Game#loop
-     * @type {Phaser.Boot.TimeStep}
+     * @type {Phaser.Core.TimeStep}
      * @since 3.0.0
      */
-    public var loop:phaser.boot.TimeStep;
+    public var loop:phaser.core.TimeStep;
     /**
      * An instance of the Plugin Manager.
      *
@@ -223,23 +237,14 @@ extern class Game {
      */
     public var hasFocus:Bool;
     /**
-     * Is the mouse pointer currently over the game canvas or not?
-     * This is modified by the VisibilityHandler.
-     *
-     * @name Phaser.Game#isOver
-     * @type {boolean}
-     * @readonly
-     * @since 3.10.0
-     */
-    public var isOver:Bool;
-    /**
      * This method is called automatically when the DOM is ready. It is responsible for creating the renderer,
      * displaying the Debug Header, adding the game canvas to the DOM and emitting the 'boot' event.
      * It listens for a 'ready' event from the base systems and once received it will call `Game.start`.
      *
      * @method Phaser.Game#boot
      * @protected
-     * @fires Phaser.Game#boot
+     * @fires Phaser.Core.Events#BOOT
+     * @listens Phaser.Textures.Events#READY
      * @since 3.0.0
      */
     public function boot():Void;
@@ -262,11 +267,11 @@ extern class Game {
      * It will then render each Scene in turn, via the Renderer. This process emits `prerender` and `postrender` events.
      *
      * @method Phaser.Game#step
-     * @fires Phaser.Game#prestepEvent
-     * @fires Phaser.Game#stepEvent
-     * @fires Phaser.Game#poststepEvent
-     * @fires Phaser.Game#prerenderEvent
-     * @fires Phaser.Game#postrenderEvent
+     * @fires Phaser.Core.Events#PRE_STEP_EVENT
+     * @fires Phaser.Core.Events#STEP_EVENT
+     * @fires Phaser.Core.Events#POST_STEP_EVENT
+     * @fires Phaser.Core.Events#PRE_RENDER_EVENT
+     * @fires Phaser.Core.Events#POST_RENDER_EVENT
      * @since 3.0.0
      *
      * @param {number} time - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.
@@ -298,7 +303,7 @@ extern class Game {
      *
      * @method Phaser.Game#onHidden
      * @protected
-     * @fires Phaser.Game#pauseEvent
+     * @fires Phaser.Core.Events#PAUSE
      * @since 3.0.0
      */
     public function onHidden():Void;
@@ -308,7 +313,7 @@ extern class Game {
      *
      * @method Phaser.Game#onVisible
      * @protected
-     * @fires Phaser.Game#resumeEvent
+     * @fires Phaser.Core.Events#RESUME
      * @since 3.0.0
      */
     public function onVisible():Void;
@@ -331,17 +336,25 @@ extern class Game {
      */
     public function onFocus():Void;
     /**
-     * Updates the Game Config with the new width and height values given.
-     * Then resizes the Renderer and Input Manager scale.
+     * Returns the current game frame.
+     * When the game starts running, the frame is incremented every time Request Animation Frame, or Set Timeout, fires.
      *
-     * @method Phaser.Game#resize
-     * @fires Phaser.Game#resizeEvent
-     * @since 3.2.0
+     * @method Phaser.Game#getFrame
+     * @since 3.16.0
      *
-     * @param {number} width - The new width of the game.
-     * @param {number} height - The new height of the game.
+     * @return {number} The current game frame.
      */
-    public function resize(width:Float, height:Float):Void;
+    public function getFrame():Float;
+    /**
+     * Returns the current game timestamp.
+     * When the game starts running, the frame is incremented every time Request Animation Frame, or Set Timeout, fires.
+     *
+     * @method Phaser.Game#getTime
+     * @since 3.16.0
+     *
+     * @return {number} The current game timestamp.
+     */
+    public function getTime():Float;
     /**
      * Flags this Game instance as needing to be destroyed on the next frame.
      * It will wait until the current frame has completed and then call `runDestroy` internally.
@@ -350,7 +363,7 @@ extern class Game {
      * memory being held by the core Phaser plugins. If you do need to create another game instance on the same page, leave this as `false`.
      *
      * @method Phaser.Game#destroy
-     * @fires Phaser.Game#destroyEvent
+     * @fires Phaser.Core.Events#DESTROY
      * @since 3.0.0
      *
      * @param {boolean} removeCanvas - Set to `true` if you would like the parent canvas element removed from the DOM, or `false` to leave it in place.

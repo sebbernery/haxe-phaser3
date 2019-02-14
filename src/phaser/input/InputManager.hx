@@ -36,6 +36,15 @@ extern class InputManager {
      */
     public var game:phaser.Game;
     /**
+     * A reference to the global Game Scale Manager.
+     * Used for all bounds checks and pointer scaling.
+     *
+     * @name Phaser.Input.InputManager#scaleManager
+     * @type {Phaser.Scale.ScaleManager}
+     * @since 3.16.0
+     */
+    public var scaleManager:phaser.scale.ScaleManager;
+    /**
      * The Canvas that is used for all DOM event input listeners.
      *
      * @name Phaser.Input.InputManager#canvas
@@ -44,13 +53,13 @@ extern class InputManager {
      */
     public var canvas:js.html.CanvasElement;
     /**
-     * The Input Configuration object, as set in the Game Config.
+     * The Game Configuration object, as set during the game boot.
      *
      * @name Phaser.Input.InputManager#config
-     * @type {object}
+     * @type {Phaser.Core.Config}
      * @since 3.0.0
      */
-    public var config:Dynamic;
+    public var config:phaser.core.Config;
     /**
      * If set, the Input Manager will run its update loop every frame.
      *
@@ -74,9 +83,20 @@ extern class InputManager {
      * @name Phaser.Input.InputManager#queue
      * @type {array}
      * @default []
+     * @deprecated
      * @since 3.0.0
      */
     public var queue:Array<Dynamic>;
+    /**
+     * Are any mouse or touch pointers currently over the game canvas?
+     * This is updated automatically by the canvas over and out handlers.
+     *
+     * @name Phaser.Input.InputManager#isOver
+     * @type {boolean}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var isOver:Bool;
     /**
      * The default CSS cursor to be used when interacting with your game.
      *
@@ -87,6 +107,14 @@ extern class InputManager {
      * @since 3.10.0
      */
     public var defaultCursor:String;
+    /**
+     * A reference to the Keyboard Manager class, if enabled via the `input.keyboard` Game Config property.
+     *
+     * @name Phaser.Input.InputManager#keyboard
+     * @type {?Phaser.Input.Keyboard.KeyboardManager}
+     * @since 3.16.0
+     */
+    public var keyboard:phaser.input.keyboard.KeyboardManager;
     /**
      * A reference to the Mouse Manager class, if enabled via the `input.mouse` Game Config property.
      *
@@ -159,14 +187,6 @@ extern class InputManager {
      */
     public var dirty:Bool;
     /**
-     * The Scale factor being applied to input coordinates.
-     *
-     * @name Phaser.Input.InputManager#scale
-     * @type { { x:number, y:number } }
-     * @since 3.0.0
-     */
-    public var scale:Dynamic;
-    /**
      * If the top-most Scene in the Scene List receives an input it will stop input from
      * propagating any lower down the scene list, i.e. if you have a UI Scene at the top
      * and click something on it, that click will not then be passed down to any other
@@ -189,37 +209,42 @@ extern class InputManager {
      */
     public var ignoreEvents:Bool;
     /**
-     * The bounds of the Input Manager, used for pointer hit test calculations.
+     * Use the internal event queue or not?
      *
-     * @name Phaser.Input.InputManager#bounds
-     * @type {Phaser.Geom.Rectangle}
-     * @since 3.0.0
+     * Set this via the Game Config with the `inputQueue` property.
+     *
+     * Phaser 3.15.1 and earlier used a event queue by default.
+     *
+     * This was changed in version 3.16 to use an immediate-mode system.
+     * The previous queue based version remains and is left under this flag for backwards
+     * compatibility. This flag, along with the legacy system, will be removed in a future version.
+     *
+     * @name Phaser.Input.InputManager#useQueue
+     * @type {boolean}
+     * @default false
+     * @since 3.16.0
      */
-    public var bounds:phaser.geom.Rectangle;
+    public var useQueue:Bool;
+    /**
+     * The time this Input Manager was last updated.
+     * This value is populated by the Game Step each frame.
+     *
+     * @name Phaser.Input.InputManager#time
+     * @type {number}
+     * @readonly
+     * @since 3.16.2
+     */
+    public var time:Float;
     /**
      * The Boot handler is called by Phaser.Game when it first starts up.
      * The renderer is available by now.
      *
      * @method Phaser.Input.InputManager#boot
      * @protected
+     * @fires Phaser.Input.Events#MANAGER_BOOT
      * @since 3.0.0
      */
     public function boot():Void;
-    /**
-     * Updates the Input Manager bounds rectangle to match the bounding client rectangle of the
-     * canvas element being used to track input events.
-     *
-     * @method Phaser.Input.InputManager#updateBounds
-     * @since 3.0.0
-     */
-    public function updateBounds():Void;
-    /**
-     * Resizes the Input Manager internal values, including the bounds and scale factor.
-     *
-     * @method Phaser.Input.InputManager#resize
-     * @since 3.2.0
-     */
-    public function resize():Void;
     /**
      * Tells the Input system to set a custom cursor.
      *
@@ -266,6 +291,22 @@ extern class InputManager {
      */
     public function addPointer(?quantity:Int):Array<phaser.input.Pointer>;
     /**
+     * Internal method that gets a list of all the active Input Plugins in the game
+     * and updates each of them in turn, in reverse order (top to bottom), to allow
+     * for DOM top-level event handling simulation.
+     *
+     * @method Phaser.Input.InputManager#updateInputPlugins
+     * @since 3.16.0
+     *
+     * @param {number} time - The time value from the most recent Game step. Typically a high-resolution timer value, or Date.now().
+     * @param {number} delta - The delta value since the last frame. This is smoothed to avoid delta spikes by the TimeStep class.
+     */
+    public function updateInputPlugins(time:Float, delta:Float):Void;
+    /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mouseup` or `touchend` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -288,6 +329,7 @@ extern class InputManager {
      * solve.
      *
      * @method Phaser.Input.InputManager#addUpCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this dom event.
@@ -297,6 +339,10 @@ extern class InputManager {
      */
     public function addUpCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
     /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mousedown` or `touchstart` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -319,6 +365,7 @@ extern class InputManager {
      * solve.
      *
      * @method Phaser.Input.InputManager#addDownCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this dom event.
@@ -328,6 +375,10 @@ extern class InputManager {
      */
     public function addDownCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
     /**
+     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
+     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
+     * will be removed in a future version.
+     *
      * Adds a callback to be invoked whenever the native DOM `mousemove` or `touchmove` events are received.
      * By setting the `isOnce` argument you can control if the callback is called once,
      * or every time the DOM event occurs.
@@ -350,6 +401,7 @@ extern class InputManager {
      * solve.
      *
      * @method Phaser.Input.InputManager#addMoveCallback
+     * @deprecated
      * @since 3.10.0
      *
      * @param {function} callback - The callback to be invoked on this dom event.
@@ -422,66 +474,9 @@ extern class InputManager {
      * @param {Phaser.Input.Pointer} pointer - The Pointer to transform the values for.
      * @param {number} pageX - The Page X value.
      * @param {number} pageY - The Page Y value.
+     * @param {boolean} wasMove - Are we transforming the Pointer from a move event, or an up / down event?
      */
-    public function transformPointer(pointer:phaser.input.Pointer, pageX:Float, pageY:Float):Void;
-    /**
-     * Transforms the pageX value into the scaled coordinate space of the Input Manager.
-     *
-     * @method Phaser.Input.InputManager#transformX
-     * @since 3.0.0
-     *
-     * @param {number} pageX - The DOM pageX value.
-     *
-     * @return {number} The translated value.
-     */
-    public function transformX(pageX:Float):Float;
-    /**
-     * Transforms the pageY value into the scaled coordinate space of the Input Manager.
-     *
-     * @method Phaser.Input.InputManager#transformY
-     * @since 3.0.0
-     *
-     * @param {number} pageY - The DOM pageY value.
-     *
-     * @return {number} The translated value.
-     */
-    public function transformY(pageY:Float):Float;
-    /**
-     * Returns the left offset of the Input bounds.
-     *
-     * @method Phaser.Input.InputManager#getOffsetX
-     * @since 3.0.0
-     *
-     * @return {number} The left bounds value.
-     */
-    public function getOffsetX():Float;
-    /**
-     * Returns the top offset of the Input bounds.
-     *
-     * @method Phaser.Input.InputManager#getOffsetY
-     * @since 3.0.0
-     *
-     * @return {number} The top bounds value.
-     */
-    public function getOffsetY():Float;
-    /**
-     * Returns the horizontal Input Scale value.
-     *
-     * @method Phaser.Input.InputManager#getScaleX
-     * @since 3.0.0
-     *
-     * @return {number} The horizontal scale factor of the input.
-     */
-    public function getScaleX():Float;
-    /**
-     * Returns the vertical Input Scale value.
-     *
-     * @method Phaser.Input.InputManager#getScaleY
-     * @since 3.0.0
-     *
-     * @return {number} The vertical scale factor of the input.
-     */
-    public function getScaleY():Float;
+    public function transformPointer(pointer:phaser.input.Pointer, pageX:Float, pageY:Float, wasMove:Bool):Void;
     /**
      * Destroys the Input Manager and all of its systems.
      *

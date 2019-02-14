@@ -68,6 +68,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * step when clearing down to avoid this.
      *
      * @method Phaser.Textures.TextureManager#remove
+     * @fires Phaser.Textures.Events#REMOVE
      * @since 3.7.0
      *
      * @param {(string|Phaser.Textures.Texture)} key - The key of the Texture to remove, or a reference to it.
@@ -79,6 +80,9 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * Adds a new Texture to the Texture Manager created from the given Base64 encoded data.
      *
      * @method Phaser.Textures.TextureManager#addBase64
+     * @fires Phaser.Textures.Events#ADD
+     * @fires Phaser.Textures.Events#ERROR
+     * @fires Phaser.Textures.Events#LOAD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
@@ -107,20 +111,22 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * Adds a new Texture to the Texture Manager created from the given Image element.
      *
      * @method Phaser.Textures.TextureManager#addImage
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addImage(key:String, source:js.html.ImageElement, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addImage(key:String, source:js.html.ImageElement, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Render Texture to the Texture Manager using the given key.
      * This allows you to then use the Render Texture as a normal texture for texture based Game Objects like Sprites.
      *
      * @method Phaser.Textures.TextureManager#addRenderTexture
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.12.0
      *
      * @param {string} key - The unique string-based key of the Texture.
@@ -153,7 +159,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
-     * @param {integer} [width=256]- The width of the Canvas element.
+     * @param {integer} [width=256] - The width of the Canvas element.
      * @param {integer} [height=256] - The height of the Canvas element.
      *
      * @return {?Phaser.Textures.CanvasTexture} The Canvas Texture that was created, or `null` if the key is already in use.
@@ -164,6 +170,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * and adds it to this Texture Manager, unless `skipCache` is true.
      *
      * @method Phaser.Textures.TextureManager#addCanvas
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
@@ -183,73 +190,77 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
      * @param {object} data - The Texture Atlas data.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement|HTMLImageElement[]|HTMLCanvasElement[]} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addAtlas(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addAtlas(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Texture Atlas to this Texture Manager.
      * The frame data of the atlas must be stored in an Array within the JSON.
      * This is known as a JSON Array in software such as Texture Packer.
      *
      * @method Phaser.Textures.TextureManager#addAtlasJSONArray
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {(HTMLImageElement|HTMLImageElement[])} source - The source Image element/s.
      * @param {(object|object[])} data - The Texture Atlas data/s.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement|HTMLImageElement[]|HTMLCanvasElement[]} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addAtlasJSONArray(key:String, source:Dynamic, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addAtlasJSONArray(key:String, source:Dynamic, data:Dynamic, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Texture Atlas to this Texture Manager.
      * The frame data of the atlas must be stored in an Object within the JSON.
      * This is known as a JSON Hash in software such as Texture Packer.
      *
      * @method Phaser.Textures.TextureManager#addAtlasJSONHash
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
      * @param {object} data - The Texture Atlas data.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement|HTMLImageElement[]|HTMLCanvasElement[]} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addAtlasJSONHash(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addAtlasJSONHash(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Texture Atlas to this Texture Manager, where the atlas data is given
      * in the XML format.
      *
      * @method Phaser.Textures.TextureManager#addAtlasXML
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.7.0
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
      * @param {object} data - The Texture Atlas XML data.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement|HTMLImageElement[]|HTMLCanvasElement[]} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addAtlasXML(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addAtlasXML(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Unity Texture Atlas to this Texture Manager.
      * The data must be in the form of a Unity YAML file.
      *
      * @method Phaser.Textures.TextureManager#addUnityAtlas
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
      * @param {object} data - The Texture Atlas data.
-     * @param {HTMLImageElement} [dataSource] - An optional data Image element.
+     * @param {HTMLImageElement|HTMLCanvasElement|HTMLImageElement[]|HTMLCanvasElement[]} [dataSource] - An optional data Image element.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addUnityAtlas(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:js.html.ImageElement):phaser.textures.Texture;
+    public function addUnityAtlas(key:String, source:js.html.ImageElement, data:Dynamic, ?dataSource:Dynamic):phaser.textures.Texture;
     /**
      * Adds a Sprite Sheet to this Texture Manager.
      *
@@ -257,6 +268,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * same size and cannot be trimmed or rotated.
      *
      * @method Phaser.Textures.TextureManager#addSpriteSheet
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
@@ -273,6 +285,7 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * same size and cannot be trimmed or rotated.
      *
      * @method Phaser.Textures.TextureManager#addSpriteSheetFromAtlas
+     * @fires Phaser.Textures.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
@@ -364,12 +377,12 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @param {integer} x - The x coordinate of the pixel within the Texture.
      * @param {integer} y - The y coordinate of the pixel within the Texture.
      * @param {string} key - The unique string-based key of the Texture.
-     * @param {(string|integer)} frame - The string or index of the Frame.
+     * @param {(string|integer)} [frame] - The string or index of the Frame.
      *
      * @return {?Phaser.Display.Color} A Color object populated with the color values of the requested pixel,
      * or `null` if the coordinates were out of bounds.
      */
-    public function getPixel(x:Int, y:Int, key:String, frame:Dynamic):phaser.display.Color;
+    public function getPixel(x:Int, y:Int, key:String, ?frame:Dynamic):phaser.display.Color;
     /**
      * Given a Texture and an `x` and `y` coordinate this method will return a value between 0 and 255
      * corresponding to the alpha value of the pixel at that location in the Texture. If the coordinate
@@ -381,11 +394,11 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @param {integer} x - The x coordinate of the pixel within the Texture.
      * @param {integer} y - The y coordinate of the pixel within the Texture.
      * @param {string} key - The unique string-based key of the Texture.
-     * @param {(string|integer)} frame - The string or index of the Frame.
+     * @param {(string|integer)} [frame] - The string or index of the Frame.
      *
      * @return {integer} A value between 0 and 255, or `null` if the coordinates were out of bounds.
      */
-    public function getPixelAlpha(x:Int, y:Int, key:String, frame:Dynamic):Int;
+    public function getPixelAlpha(x:Int, y:Int, key:String, ?frame:Dynamic):Int;
     /**
      * Sets the given Game Objects `texture` and `frame` properties so that it uses
      * the Texture and Frame specified in the `key` and `frame` arguments to this method.
@@ -395,11 +408,11 @@ extern class TextureManager extends phaser.events.EventEmitter {
      *
      * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object the texture would be set on.
      * @param {string} key - The unique string-based key of the Texture.
-     * @param {(string|integer)} frame - The string or index of the Frame.
+     * @param {(string|integer)} [frame] - The string or index of the Frame.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object the texture was set on.
      */
-    public function setTexture(gameObject:phaser.gameobjects.GameObject, key:String, frame:Dynamic):phaser.gameobjects.GameObject;
+    public function setTexture(gameObject:phaser.gameobjects.GameObject, key:String, ?frame:Dynamic):phaser.gameobjects.GameObject;
     /**
      * Changes the key being used by a Texture to the new key provided.
      *

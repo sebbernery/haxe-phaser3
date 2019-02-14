@@ -48,6 +48,7 @@ extern class Map {
     public var size:Float;
     /**
      * Adds an element with a specified `key` and `value` to this Map.
+     * If the `key` already exists, the value will be replaced.
      *
      * @method Phaser.Structs.Map#set
      * @since 3.0.0

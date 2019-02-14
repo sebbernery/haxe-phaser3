@@ -42,7 +42,7 @@ package phaser.physics.impact;
  * @extends Phaser.GameObjects.Components.Transform
  * @extends Phaser.GameObjects.Components.Visible
  *
- * @param {Phaser.Physics.Impact.World} world - [description]
+ * @param {Phaser.Physics.Impact.World} world - The physics world of the Impact physics system.
  * @param {number} x - The horizontal position of this Game Object in the world.
  * @param {number} y - The vertical position of this Game Object in the world.
  * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
@@ -52,7 +52,7 @@ package phaser.physics.impact;
 extern class ImpactImage extends phaser.gameobjects.Image {
     public function new(world:phaser.physics.impact.World, x:Float, y:Float, texture:String, ?frame:Dynamic);
     /**
-     * [description]
+     * The size of the physics Body.
      *
      * @name Phaser.Physics.Impact.ImpactImage#size
      * @type {{x: number, y: number}}
@@ -60,7 +60,7 @@ extern class ImpactImage extends phaser.gameobjects.Image {
      */
     public var size:Dynamic;
     /**
-     * [description]
+     * The X and Y offset of the Body from the left and top of the Image.
      *
      * @name Phaser.Physics.Impact.ImpactImage#offset
      * @type {{x: number, y: number}}
@@ -68,7 +68,7 @@ extern class ImpactImage extends phaser.gameobjects.Image {
      */
     public var offset:Dynamic;
     /**
-     * [description]
+     * The velocity, or rate of change the Body's position. Measured in pixels per second.
      *
      * @name Phaser.Physics.Impact.ImpactImage#vel
      * @type {{x: number, y: number}}
@@ -76,7 +76,7 @@ extern class ImpactImage extends phaser.gameobjects.Image {
      */
     public var vel:Dynamic;
     /**
-     * [description]
+     * The acceleration is the rate of change of the velocity. Measured in pixels per second squared.
      *
      * @name Phaser.Physics.Impact.ImpactImage#accel
      * @type {{x: number, y: number}}
@@ -84,7 +84,7 @@ extern class ImpactImage extends phaser.gameobjects.Image {
      */
     public var accel:Dynamic;
     /**
-     * [description]
+     * Friction between colliding bodies.
      *
      * @name Phaser.Physics.Impact.ImpactImage#friction
      * @type {{x: number, y: number}}
@@ -92,7 +92,7 @@ extern class ImpactImage extends phaser.gameobjects.Image {
      */
     public var friction:Dynamic;
     /**
-     * [description]
+     * The maximum velocity of the body.
      *
      * @name Phaser.Physics.Impact.ImpactImage#maxVel
      * @type {{x: number, y: number}}

@@ -12,7 +12,7 @@ package phaser.renderer.webgl.pipelines;
  * @constructor
  * @since 3.0.0
  *
- * @param {object} config - [description]
+ * @param {object} config - The configuration of the pipeline, same as the {@link Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline}. The fragment shader will be replaced with the lighting shader.
  */
 @:native("Phaser.Renderer.WebGL.Pipelines.ForwardDiffuseLightPipeline")
 extern class ForwardDiffuseLightPipeline extends phaser.renderer.webgl.pipelines.TextureTintPipeline {
@@ -46,7 +46,17 @@ extern class ForwardDiffuseLightPipeline extends phaser.renderer.webgl.pipelines
      * @method Phaser.Renderer.WebGL.Pipelines.ForwardDiffuseLightPipeline#setNormalMap
      * @since 3.11.0
      *
-     * @param {Phaser.GameObjects.GameObject} gameObject - [description]
+     * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to update.
      */
     public function setNormalMap(gameObject:phaser.gameobjects.GameObject):Void;
+    /**
+     * Rotates the normal map vectors inversely by the given angle.
+     * Only works in 2D space.
+     *
+     * @method Phaser.Renderer.WebGL.Pipelines.ForwardDiffuseLightPipeline#setNormalMapRotation
+     * @since 3.16.0
+     *
+     * @param {number} rotation - The angle of rotation in radians.
+     */
+    public function setNormalMapRotation(rotation:Float):Void;
 }

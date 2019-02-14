@@ -108,14 +108,14 @@ extern class Triangle {
      */
     public var bottom:Float;
     /**
-     * [description]
+     * Returns the area of a Triangle.
      *
      * @function Phaser.Geom.Triangle.Area
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to use.
      *
-     * @return {number} [description]
+     * @return {number} The area of the Triangle, always non-negative.
      */
     public function Area(triangle:phaser.geom.Triangle):Float;
     /**
@@ -180,17 +180,19 @@ extern class Triangle {
      */
     public function CenterOn(triangle:phaser.geom.Triangle, x:Float, y:Float, ?centerFunc:CenterFunction):phaser.geom.Triangle;
     /**
-     * [description]
+     * Calculates the position of a Triangle's centroid, which is also its center of mass (center of gravity).
+     *
+     * The centroid is the point in a Triangle at which its three medians (the lines drawn from the vertices to the bisectors of the opposite sides) meet. It divides each one in a 2:1 ratio.
      *
      * @function Phaser.Geom.Triangle.Centroid
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {(Phaser.Geom.Point|object)} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to use.
+     * @param {(Phaser.Geom.Point|object)} [out] - An object to store the coordinates in.
      *
-     * @return {(Phaser.Geom.Point|object)} [description]
+     * @return {(Phaser.Geom.Point|object)} The `out` object with modified `x` and `y` properties, or a new Point if none was provided.
      */
     public function Centroid(triangle:phaser.geom.Triangle, ?out:Dynamic):phaser.geom.Point;
     /**
@@ -212,41 +214,41 @@ extern class Triangle {
      */
     public function CircumCenter(triangle:phaser.geom.Triangle, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Finds the circumscribed circle (circumcircle) of a Triangle object. The circumcircle is the circle which touches all of the triangle's vertices.
      *
      * @function Phaser.Geom.Triangle.CircumCircle
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Circle} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Geom.Circle} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to use as input.
+     * @param {Phaser.Geom.Circle} [out] - An optional Circle to store the result in.
      *
-     * @return {Phaser.Geom.Circle} [description]
+     * @return {Phaser.Geom.Circle} The updated `out` Circle, or a new Circle if none was provided.
      */
     public function CircumCircle(triangle:phaser.geom.Triangle, ?out:phaser.geom.Circle):phaser.geom.Circle;
     /**
-     * [description]
+     * Clones a Triangle object.
      *
      * @function Phaser.Geom.Triangle.Clone
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} source - [description]
+     * @param {Phaser.Geom.Triangle} source - The Triangle to clone.
      *
-     * @return {Phaser.Geom.Triangle} [description]
+     * @return {Phaser.Geom.Triangle} A new Triangle identical to the given one but separate from it.
      */
     public function Clone(source:phaser.geom.Triangle):phaser.geom.Triangle;
     /**
-     * [description]
+     * Checks if a point (as a pair of coordinates) is inside a Triangle's bounds.
      *
      * @function Phaser.Geom.Triangle.Contains
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {number} x - [description]
-     * @param {number} y - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to check.
+     * @param {number} x - The X coordinate of the point to check.
+     * @param {number} y - The Y coordinate of the point to check.
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the point is inside the Triangle, otherwise `false`.
      */
     public function Contains(triangle:phaser.geom.Triangle, x:Float, y:Float):Bool;
     /**
@@ -265,17 +267,17 @@ extern class Triangle {
      */
     public function ContainsArray(triangle:phaser.geom.Triangle, points:Array<phaser.geom.Point>, ?returnFirst:Bool, ?out:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
-     * [description]
+     * Tests if a triangle contains a point.
      *
      * @function Phaser.Geom.Triangle.ContainsPoint
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Geom.Point} point - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The triangle.
+     * @param {(Phaser.Geom.Point|Phaser.Math.Vector2|any)} point - The point to test, or any point-like object with public `x` and `y` properties.
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the point is within the triangle, otherwise `false`.
      */
-    public function ContainsPoint(triangle:phaser.geom.Triangle, point:phaser.geom.Point):Bool;
+    public function ContainsPoint(triangle:phaser.geom.Triangle, point:Dynamic):Bool;
     /**
      * Copy the values of one Triangle to a destination Triangle.
      *
@@ -291,15 +293,15 @@ extern class Triangle {
      */
     public function CopyFrom(source:phaser.geom.Triangle, dest:phaser.geom.Triangle):phaser.geom.Triangle;
     /**
-     * [description]
+     * Decomposes a Triangle into an array of its points.
      *
      * @function Phaser.Geom.Triangle.Decompose
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {array} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to decompose.
+     * @param {array} [out] - An array to store the points into.
      *
-     * @return {array} [description]
+     * @return {array} The provided `out` array, or a new array if none was provided, with three objects with `x` and `y` properties representing each point of the Triangle appended to it.
      */
     public function Decompose(triangle:phaser.geom.Triangle, ?out:Array<Dynamic>):Array<Dynamic>;
     /**
@@ -315,18 +317,18 @@ extern class Triangle {
      */
     public function Equals(triangle:phaser.geom.Triangle, toCompare:phaser.geom.Triangle):Bool;
     /**
-     * [description]
+     * Returns a Point from around the perimeter of a Triangle.
      *
      * @function Phaser.Geom.Triangle.GetPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {number} position - [description]
-     * @param {(Phaser.Geom.Point|object)} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the point on its perimeter from.
+     * @param {number} position - The position along the perimeter of the triangle. A value between 0 and 1.
+     * @param {(Phaser.Geom.Point|object)} [out] - An option Point, or Point-like object to store the value in. If not given a new Point will be created.
      *
-     * @return {(Phaser.Geom.Point|object)} [description]
+     * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
      */
     public function GetPoint(triangle:phaser.geom.Triangle, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
@@ -346,32 +348,32 @@ extern class Triangle {
      */
     public function GetPoints(triangle:phaser.geom.Triangle, quantity:Int, stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
-     * [description]
+     * Calculates the position of the incenter of a Triangle object. This is the point where its three angle bisectors meet and it's also the center of the incircle, which is the circle inscribed in the triangle.
      *
      * @function Phaser.Geom.Triangle.InCenter
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to find the incenter of.
+     * @param {Phaser.Geom.Point} [out] - An optional Point in which to store the coordinates.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} Point (x, y) of the center pixel of the triangle.
      */
     public function InCenter(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Moves each point (vertex) of a Triangle by a given offset, thus moving the entire Triangle by that offset.
      *
      * @function Phaser.Geom.Triangle.Offset
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {number} x - [description]
-     * @param {number} y - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to move.
+     * @param {number} x - The horizontal offset (distance) by which to move each point. Can be positive or negative.
+     * @param {number} y - The vertical offset (distance) by which to move each point. Can be positive or negative.
      *
-     * @return {Phaser.Geom.Triangle} [description]
+     * @return {Phaser.Geom.Triangle} The modified Triangle.
      */
     public function Offset(triangle:phaser.geom.Triangle, x:Float, y:Float):phaser.geom.Triangle;
     /**
@@ -400,48 +402,48 @@ extern class Triangle {
      */
     public function Random(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Rotates a Triangle about its incenter, which is the point at which its three angle bisectors meet.
      *
      * @function Phaser.Geom.Triangle.Rotate
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {number} angle - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+     * @param {number} angle - The angle by which to rotate the Triangle, in radians.
      *
-     * @return {Phaser.Geom.Triangle} [description]
+     * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
     public function Rotate(triangle:phaser.geom.Triangle, angle:Float):phaser.geom.Triangle;
     /**
-     * [description]
+     * Rotates a Triangle at a certain angle about a given Point or object with public `x` and `y` properties.
      *
      * @function Phaser.Geom.Triangle.RotateAroundPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Geom.Point} point - [description]
-     * @param {number} angle - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+     * @param {Phaser.Geom.Point} point - The Point to rotate the Triangle about.
+     * @param {number} angle - The angle by which to rotate the Triangle, in radians.
      *
-     * @return {Phaser.Geom.Triangle} [description]
+     * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
     public function RotateAroundPoint(triangle:phaser.geom.Triangle, point:phaser.geom.Point, angle:Float):phaser.geom.Triangle;
     /**
-     * [description]
+     * Rotates an entire Triangle at a given angle about a specific point.
      *
      * @function Phaser.Geom.Triangle.RotateAroundXY
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {number} x - [description]
-     * @param {number} y - [description]
-     * @param {number} angle - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+     * @param {number} x - The X coordinate of the point to rotate the Triangle about.
+     * @param {number} y - The Y coordinate of the point to rotate the Triangle about.
+     * @param {number} angle - The angle by which to rotate the Triangle, in radians.
      *
-     * @return {Phaser.Geom.Triangle} [description]
+     * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
     public function RotateAroundXY(triangle:phaser.geom.Triangle, x:Float, y:Float, angle:Float):phaser.geom.Triangle;
     /**

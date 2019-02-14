@@ -8,6 +8,11 @@ package phaser.gameobjects;
  * draw them all to this one texture, which can they be used as the texture for other Game Object's. It's a way to generate dynamic
  * textures at run-time that are WebGL friendly and don't invoke expensive GPU uploads.
  *
+ * Note that under WebGL a FrameBuffer, which is what the Render Texture uses internally, cannot be anti-aliased. This means
+ * that when drawing objects such as Shapes to a Render Texture they will appear to be drawn with no aliasing, however this
+ * is a technical limitation of WebGL. To get around it, create your shape as a texture in an art package, then draw that
+ * to the Render Texture.
+ *
  * @class RenderTexture
  * @extends Phaser.GameObjects.GameObject
  * @memberof Phaser.GameObjects
@@ -73,8 +78,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public var globalAlpha:Float;
     /**
-     * The HTML Canvas Element that the Render Texture is drawing to.
-     * This is only populated if Phaser is running with the Canvas Renderer.
+     * The HTML Canvas Element that the Render Texture is drawing to when using the Canvas Renderer.
      *
      * @name Phaser.GameObjects.RenderTexture#canvas
      * @type {HTMLCanvasElement}
@@ -234,6 +238,54 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @return {this} This Render Texture instance.
      */
     public function clear():Dynamic;
+    /**
+     * Draws the given object, or an array of objects, to this Render Texture using a blend mode of ERASE.
+     * This has the effect of erasing any filled pixels in the objects from this Render Texture.
+     *
+     * It can accept any of the following:
+     *
+     * * Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
+     * * Dynamic and Static Tilemap Layers.
+     * * A Group. The contents of which will be iterated and drawn in turn.
+     * * A Container. The contents of which will be iterated fully, and drawn in turn.
+     * * A Scene's Display List. Pass in `Scene.children` to draw the whole list.
+     * * Another Render Texture.
+     * * A Texture Frame instance.
+     * * A string. This is used to look-up a texture from the Texture Manager.
+     *
+     * Note: You cannot erase a Render Texture from itself.
+     *
+     * If passing in a Group or Container it will only draw children that return `true`
+     * when their `willRender()` method is called. I.e. a Container with 10 children,
+     * 5 of which have `visible=false` will only draw the 5 visible ones.
+     *
+     * If passing in an array of Game Objects it will draw them all, regardless if
+     * they pass a `willRender` check or not.
+     *
+     * You can pass in a string in which case it will look for a texture in the Texture
+     * Manager matching that string, and draw the base frame.
+     *
+     * You can pass in the `x` and `y` coordinates to draw the objects at. The use of
+     * the coordinates differ based on what objects are being drawn. If the object is
+     * a Group, Container or Display List, the coordinates are _added_ to the positions
+     * of the children. For all other types of object, the coordinates are exact.
+     *
+     * Calling this method causes the WebGL batch to flush, so it can write the texture
+     * data to the framebuffer being used internally. The batch is flushed at the end,
+     * after the entries have been iterated. So if you've a bunch of objects to draw,
+     * try and pass them in an array in one single call, rather than making lots of
+     * separate calls.
+     *
+     * @method Phaser.GameObjects.RenderTexture#erase
+     * @since 3.16.0
+     *
+     * @param {any} entries - Any renderable Game Object, or Group, Container, Display List, other Render Texture, Texture Frame or an array of any of these.
+     * @param {number} [x] - The x position to draw the Frame at, or the offset applied to the object.
+     * @param {number} [y] - The y position to draw the Frame at, or the offset applied to the object.
+     *
+     * @return {this} This Render Texture instance.
+     */
+    public function erase(entries:Dynamic, ?x:Float, ?y:Float):Dynamic;
     /**
      * Draws the given object, or an array of objects, to this Render Texture.
      *
@@ -415,6 +467,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -440,6 +493,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -447,7 +501,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

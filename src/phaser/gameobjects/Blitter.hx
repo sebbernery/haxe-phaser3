@@ -48,7 +48,7 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * This List contains all of the Bob objects created by the Blitter.
      *
      * @name Phaser.GameObjects.Blitter#children
-     * @type {Phaser.Structs.List.<Phaser.GameObjects.Blitter.Bob>}
+     * @type {Phaser.Structs.List.<Phaser.GameObjects.Bob>}
      * @since 3.0.0
      */
     public var children:Dynamic;
@@ -76,23 +76,23 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * @param {boolean} [visible=true] - Should the created Bob render or not?
      * @param {integer} [index] - The position in the Blitters Display List to add the new Bob at. Defaults to the top of the list.
      *
-     * @return {Phaser.GameObjects.Blitter.Bob} The newly created Bob object.
+     * @return {Phaser.GameObjects.Bob} The newly created Bob object.
      */
-    public function create(x:Float, y:Float, ?frame:Dynamic, ?visible:Bool, ?index:Int):phaser.gameobjects.blitter.Bob;
+    public function create(x:Float, y:Float, ?frame:Dynamic, ?visible:Bool, ?index:Int):phaser.gameobjects.Bob;
     /**
      * Creates multiple Bob objects within this Blitter and then passes each of them to the specified callback.
      *
      * @method Phaser.GameObjects.Blitter#createFromCallback
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Blitter.CreateCallback} callback - The callback to invoke after creating a bob. It will be sent two arguments: The Bob and the index of the Bob.
+     * @param {CreateCallback} callback - The callback to invoke after creating a bob. It will be sent two arguments: The Bob and the index of the Bob.
      * @param {integer} quantity - The quantity of Bob objects to create.
      * @param {(string|integer|Phaser.Textures.Frame|string[]|integer[]|Phaser.Textures.Frame[])} [frame] - The Frame the Bobs will use. It must be part of the Blitter Texture.
      * @param {boolean} [visible=true] - Should the created Bob render or not?
      *
-     * @return {Phaser.GameObjects.Blitter.Bob[]} An array of Bob objects that were created.
+     * @return {Phaser.GameObjects.Bob[]} An array of Bob objects that were created.
      */
-    public function createFromCallback(callback:phaser.gameobjects.blitter.CreateCallback, quantity:Int, ?frame:Dynamic, ?visible:Bool):Array<phaser.gameobjects.blitter.Bob>;
+    public function createFromCallback(callback:CreateCallback, quantity:Int, ?frame:Dynamic, ?visible:Bool):Array<phaser.gameobjects.Bob>;
     /**
      * Creates multiple Bobs in one call.
      *
@@ -108,20 +108,20 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * @param {(string|integer|Phaser.Textures.Frame|string[]|integer[]|Phaser.Textures.Frame[])} [frame] - The Frame the Bobs will use. It must be part of the Blitter Texture.
      * @param {boolean} [visible=true] - Should the created Bob render or not?
      *
-     * @return {Phaser.GameObjects.Blitter.Bob[]} An array of Bob objects that were created.
+     * @return {Phaser.GameObjects.Bob[]} An array of Bob objects that were created.
      */
-    public function createMultiple(quantity:Int, ?frame:Dynamic, ?visible:Bool):Array<phaser.gameobjects.blitter.Bob>;
+    public function createMultiple(quantity:Int, ?frame:Dynamic, ?visible:Bool):Array<phaser.gameobjects.Bob>;
     /**
      * Checks if the given child can render or not, by checking its `visible` and `alpha` values.
      *
      * @method Phaser.GameObjects.Blitter#childCanRender
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Blitter.Bob} child - The Bob to check for rendering.
+     * @param {Phaser.GameObjects.Bob} child - The Bob to check for rendering.
      *
      * @return {boolean} Returns `true` if the given child can render, otherwise `false`.
      */
-    public function childCanRender(child:phaser.gameobjects.blitter.Bob):Bool;
+    public function childCanRender(child:phaser.gameobjects.Bob):Bool;
     /**
      * Returns an array of Bobs to be rendered.
      * If the Blitter is dirty then a new list is generated and stored in `renderList`.
@@ -129,9 +129,9 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Blitter#getRenderList
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Blitter.Bob[]} An array of Bob objects that will be rendered this frame.
+     * @return {Phaser.GameObjects.Bob[]} An array of Bob objects that will be rendered this frame.
      */
-    public function getRenderList():Array<phaser.gameobjects.blitter.Bob>;
+    public function getRenderList():Array<phaser.gameobjects.Bob>;
     /**
      * Removes all Bobs from the children List and clears the dirty flag.
      *
@@ -236,6 +236,7 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -261,6 +262,7 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -268,7 +270,7 @@ extern class Blitter extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

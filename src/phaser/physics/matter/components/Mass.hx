@@ -1,7 +1,7 @@
 package phaser.physics.matter.components;
 
 /**
- * [description]
+ * Allows accessing the mass, density, and center of mass of a Matter-enabled Game Object. Should be used as a mixin and not directly.
  *
  * @name Phaser.Physics.Matter.Components.Mass
  * @since 3.0.0
@@ -20,23 +20,23 @@ extern class Mass {
      */
     public var centerOfMass:Dynamic;
     /**
-     * [description]
+     * Sets the mass of the Game Object's Matter Body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setMass
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new mass of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setMass(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets density of the body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setDensity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new density of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */

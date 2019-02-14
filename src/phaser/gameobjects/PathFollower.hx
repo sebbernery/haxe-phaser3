@@ -47,15 +47,6 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      */
     public var rotateToPath:Bool;
     /**
-     * [description]
-     *
-     * @name Phaser.GameObjects.PathFollower#pathRotationVerticalAdjust
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var pathRotationVerticalAdjust:Bool;
-    /**
      * If the PathFollower is rotating to match the Path (@see Phaser.GameObjects.PathFollower#rotateToPath)
      * this value is added to the rotation value. This allows you to rotate objects to a path but control
      * the angle of the rotation as well.
@@ -76,7 +67,7 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      */
     public var pathOffset:phaser.math.Vector2;
     /**
-     * [description]
+     * A Vector2 that stores the current point of the path the follower is on.
      *
      * @name Phaser.GameObjects.PathFollower#pathVector
      * @type {Phaser.Math.Vector2}
@@ -122,11 +113,10 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      *
      * @param {boolean} value - Whether the PathFollower should automatically rotate to point in the direction of the Path.
      * @param {number} [offset=0] - Rotation offset in degrees.
-     * @param {boolean} [verticalAdjust=false] - [description]
      *
      * @return {Phaser.GameObjects.PathFollower} This Game Object.
      */
-    public function setRotateToPath(value:Bool, ?offset:Float, ?verticalAdjust:Bool):phaser.gameobjects.PathFollower;
+    public function setRotateToPath(value:Bool, ?offset:Float):phaser.gameobjects.PathFollower;
     /**
      * Is this PathFollower actively following a Path or not?
      *

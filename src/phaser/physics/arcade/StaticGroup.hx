@@ -35,7 +35,7 @@ extern class StaticGroup extends phaser.gameobjects.Group {
      *
      * @name Phaser.Physics.Arcade.StaticGroup#physicsType
      * @type {integer}
-     * @default STATIC_BODY
+     * @default Phaser.Physics.Arcade.STATIC_BODY
      * @since 3.0.0
      */
     public var physicsType:Int;

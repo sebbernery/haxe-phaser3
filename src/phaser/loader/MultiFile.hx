@@ -107,6 +107,15 @@ extern class MultiFile {
      */
     public function addToMultiFile(files:phaser.loader.File):phaser.loader.MultiFile;
     /**
+     * Called by each File when it finishes loading.
+     *
+     * @method Phaser.Loader.MultiFile#onFileComplete
+     * @since 3.7.0
+     *
+     * @param {Phaser.Loader.File} file - The File that has completed processing.
+     */
+    public function onFileComplete(file:phaser.loader.File):Void;
+    /**
      * Called by each File that fails to load.
      *
      * @method Phaser.Loader.MultiFile#onFileFailed
@@ -115,12 +124,4 @@ extern class MultiFile {
      * @param {Phaser.Loader.File} file - The File that has failed to load.
      */
     public function onFileFailed(file:phaser.loader.File):Void;
-    /**
-     * Adds this file to its target cache upon successful loading and processing.
-     *
-     * @method Phaser.Loader.MultiFile#addToCache
-     * @since 3.7.0
-     */
-    public function addToCache():Void;
-    @:overload(function(file:phaser.loader.File):Void{})    @:overload(function(file:phaser.loader.File):Void{})    public function onFileComplete():Void;
 }

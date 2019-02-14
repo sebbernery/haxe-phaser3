@@ -2,14 +2,26 @@ package phaser.geom;
 
 /**
  * @classdesc
- * [description]
+ * A Polygon object
+ *
+ 
+ * The polygon is a closed shape consists of a series of connected straight lines defined by list of ordered points.
+ * Several formats are supported to define the list of points, check the setTo method for details.
+ * This is a geometry object allowing you to define and inspect the shape.
+ * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
+ * To render a Polygon you should look at the capabilities of the Graphics class.
  *
  * @class Polygon
  * @memberof Phaser.Geom
  * @constructor
  * @since 3.0.0
  *
- * @param {Phaser.Geom.Point[]} [points] - [description]
+ * @param {Phaser.Geom.Point[]} [points] - List of points defining the perimeter of this Polygon. Several formats are supported:
+ * - A string containing paired x y values separated by a single space: `'40 0 40 20 100 20 100 80 40 80 40 100 0 50'`
+ * - An array of Point objects: `[new Phaser.Point(x1, y1), ...]`
+ * - An array of objects with public x y properties: `[obj1, obj2, ...]`
+ * - An array of paired numbers that represent point coordinates: `[x1,y1, x2,y2, ...]`
+ * - An array of arrays with two elements representing x/y coordinates: `[[x1, y1], [x2, y2], ...]`
  */
 @:native("Phaser.Geom.Polygon")
 extern class Polygon {
@@ -32,14 +44,14 @@ extern class Polygon {
      */
     public var points:Array<phaser.geom.Point>;
     /**
-     * [description]
+     * Create a new polygon which is a copy of the specified polygon
      *
      * @function Phaser.Geom.Polygon.Clone
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Polygon} polygon - [description]
+     * @param {Phaser.Geom.Polygon} polygon - The polygon to create a clone of
      *
-     * @return {Phaser.Geom.Polygon} [description]
+     * @return {Phaser.Geom.Polygon} A new separate Polygon cloned from the specified polygon, based on the same points.
      */
     public function Clone(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
     /**
@@ -68,17 +80,17 @@ extern class Polygon {
      */
     public function ContainsPoint(polygon:phaser.geom.Polygon, point:phaser.geom.Point):Bool;
     /**
-     * [description]
+     * Calculates the bounding AABB rectangle of a polygon.
      *
      * @function Phaser.Geom.Polygon.GetAABB
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Rectangle} O - [out,$return]
      *
-     * @param {Phaser.Geom.Polygon} polygon - [description]
-     * @param {(Phaser.Geom.Rectangle|object)} [out] - [description]
+     * @param {Phaser.Geom.Polygon} polygon - The polygon that should be calculated.
+     * @param {(Phaser.Geom.Rectangle|object)} [out] - The rectangle or object that has x, y, width, and height properties to store the result. Optional.
      *
-     * @return {(Phaser.Geom.Rectangle|object)} [description]
+     * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
      */
     public function GetAABB(polygon:phaser.geom.Polygon, ?out:Dynamic):phaser.geom.Rectangle;
     /**
@@ -151,7 +163,7 @@ extern class Polygon {
      * @method Phaser.Geom.Polygon#setTo
      * @since 3.0.0
      *
-     * @param {array} points - [description]
+     * @param {array} points - Points defining the perimeter of this polygon. Please check function description above for the different supported formats.
      *
      * @return {Phaser.Geom.Polygon} This Polygon object.
      */
@@ -180,16 +192,16 @@ extern class Polygon {
      */
     public function getPoints(quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
-     * [description]
+     * Reverses the order of the points of a Polygon.
      *
      * @function Phaser.Geom.Polygon.Reverse
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
      *
-     * @param {Phaser.Geom.Polygon} polygon - [description]
+     * @param {Phaser.Geom.Polygon} polygon - The Polygon to modify.
      *
-     * @return {Phaser.Geom.Polygon} [description]
+     * @return {Phaser.Geom.Polygon} The modified Polygon.
      */
     public function Reverse(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
     /**

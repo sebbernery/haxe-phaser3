@@ -133,16 +133,6 @@ extern class SceneManager {
      */
     public function update(time:Float, delta:Float):Void;
     /**
-     * Informs the Scenes of the Game being resized.
-     *
-     * @method Phaser.Scenes.SceneManager#resize
-     * @since 3.2.0
-     *
-     * @param {number} width - The new width of the game.
-     * @param {number} height - The new height of the game.
-     */
-    public function resize(width:Float, height:Float):Void;
-    /**
      * Renders the Scenes.
      *
      * @method Phaser.Scenes.SceneManager#render
@@ -151,6 +141,21 @@ extern class SceneManager {
      * @param {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)} renderer - The renderer to use.
      */
     public function render(renderer:Dynamic):Void;
+    /**
+     * Returns an array of all the current Scenes being managed by this Scene Manager.
+     *
+     * You can filter the output by the active state of the Scene and choose to have
+     * the array returned in normal or reversed order.
+     *
+     * @method Phaser.Scenes.SceneManager#getScenes
+     * @since 3.16.0
+     *
+     * @param {boolean} [isActive=true] - Only include Scene's that are currently active?
+     * @param {boolean} [inReverse=false] - Return the array of Scenes in reverse?
+     *
+     * @return {Phaser.Scene[]} An array containing all of the Scenes in the Scene Manager.
+     */
+    public function getScenes(?isActive:Bool, ?inReverse:Bool):Array<phaser.Scene>;
     /**
      * Retrieves a Scene.
      *

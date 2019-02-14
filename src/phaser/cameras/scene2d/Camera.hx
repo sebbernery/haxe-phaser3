@@ -187,6 +187,32 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public var context:js.html.CanvasRenderingContext2D;
     /**
+     * If this Camera has been set to render to a texture then this holds a reference
+     * to the GL Texture belonging the Camera is drawing to.
+     *
+     * Enable texture rendering using the method `setRenderToTexture`.
+     *
+     * This is only set if Phaser is running with the WebGL Renderer.
+     *
+     * @name Phaser.Cameras.Scene2D.Camera#glTexture
+     * @type {?WebGLTexture}
+     * @since 3.13.0
+     */
+    public var glTexture:js.html.webgl.Texture;
+    /**
+     * If this Camera has been set to render to a texture then this holds a reference
+     * to the GL Frame Buffer belonging the Camera is drawing to.
+     *
+     * Enable texture rendering using the method `setRenderToTexture`.
+     *
+     * This is only set if Phaser is running with the WebGL Renderer.
+     *
+     * @name Phaser.Cameras.Scene2D.Camera#framebuffer
+     * @type {?WebGLFramebuffer}
+     * @since 3.13.0
+     */
+    public var framebuffer:js.html.webgl.Framebuffer;
+    /**
      * If this Camera has been set to render to a texture and to use a custom pipeline,
      * then this holds a reference to the pipeline the Camera is drawing with.
      *
@@ -295,6 +321,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * Fades the Camera in from the given color over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#fadeIn
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_START
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_COMPLETE
      * @since 3.3.0
      *
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
@@ -313,6 +341,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * This is an alias for Camera.fade that forces the fade to start, regardless of existing fades.
      *
      * @method Phaser.Cameras.Scene2D.Camera#fadeOut
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_START
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_COMPLETE
      * @since 3.3.0
      *
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
@@ -330,6 +360,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * Fades the Camera from the given color to transparent over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#fadeFrom
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_START
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_COMPLETE
      * @since 3.5.0
      *
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
@@ -348,6 +380,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * Fades the Camera from transparent to the given color over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#fade
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_START
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_COMPLETE
      * @since 3.0.0
      *
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
@@ -366,6 +400,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * Flashes the Camera by setting it to the given color immediately and then fading it away again quickly over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#flash
+     * @fires Phaser.Cameras.Scene2D.Events#FLASH_START
+     * @fires Phaser.Cameras.Scene2D.Events#FLASH_COMPLETE
      * @since 3.0.0
      *
      * @param {integer} [duration=250] - The duration of the effect in milliseconds.
@@ -384,6 +420,8 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * Shakes the Camera by the given intensity over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#shake
+     * @fires Phaser.Cameras.Scene2D.Events#SHAKE_START
+     * @fires Phaser.Cameras.Scene2D.Events#SHAKE_COMPLETE
      * @since 3.0.0
      *
      * @param {integer} [duration=100] - The duration of the effect in milliseconds.
@@ -401,13 +439,15 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * over the duration and with the ease specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#pan
+     * @fires Phaser.Cameras.Scene2D.Events#PAN_START
+     * @fires Phaser.Cameras.Scene2D.Events#PAN_COMPLETE
      * @since 3.11.0
      *
      * @param {number} x - The destination x coordinate to scroll the center of the Camera viewport to.
      * @param {number} y - The destination y coordinate to scroll the center of the Camera viewport to.
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
-     * @param {boolean} [force=false] - Force the shake effect to start immediately, even if already running.
+     * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
      * @param {CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
@@ -420,12 +460,14 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * This effect will zoom the Camera to the given scale, over the duration and with the ease specified.
      *
      * @method Phaser.Cameras.Scene2D.Camera#zoomTo
+     * @fires Phaser.Cameras.Scene2D.Events#ZOOM_START
+     * @fires Phaser.Cameras.Scene2D.Events#ZOOM_COMPLETE
      * @since 3.11.0
      *
      * @param {number} zoom - The target Camera zoom value.
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
-     * @param {boolean} [force=false] - Force the shake effect to start immediately, even if already running.
+     * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
      * @param {CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
@@ -733,5 +775,4 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @return {this} This Game Object instance.
      */
     public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
-    public function framebuffer():Void;
 }

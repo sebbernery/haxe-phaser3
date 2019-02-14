@@ -208,6 +208,17 @@ extern class GameObjectFactory {
      */
     public function dom(x:Float, y:Float, element:String):phaser.gameobjects.DOMElement;
     /**
+     * Creates a new Extern Game Object and adds it to the Scene.
+     *
+     * Note: This method will only be available if the Extern Game Object has been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory#extern
+     * @since 3.16.0
+     *
+     * @return {Phaser.GameObjects.Extern} The Game Object that was created.
+     */
+    @:native('default') public function extern_():phaser.gameobjects.Extern;
+    /**
      * Creates a new Graphics Game Object and adds it to the Scene.
      *
      * Note: This method will only be available if the Graphics Game Object has been built into Phaser.
@@ -229,11 +240,11 @@ extern class GameObjectFactory {
      * @since 3.0.0
      *
      * @param {(Phaser.GameObjects.GameObject[]|GroupConfig|GroupConfig[])} [children] - Game Objects to add to this Group; or the `config` argument.
-     * @param {GroupConfig} [config] - A Group Configuration object.
+     * @param {GroupConfig|GroupCreateConfig} [config] - A Group Configuration object.
      *
      * @return {Phaser.GameObjects.Group} The Game Object that was created.
      */
-    public function group(?children:Dynamic, ?config:GroupConfig):phaser.gameobjects.Group;
+    public function group(?children:Dynamic, ?config:Dynamic):phaser.gameobjects.Group;
     /**
      * Creates a new Image Game Object and adds it to the Scene.
      *

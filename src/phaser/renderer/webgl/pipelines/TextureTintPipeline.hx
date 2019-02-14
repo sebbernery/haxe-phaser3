@@ -20,7 +20,7 @@ package phaser.renderer.webgl.pipelines;
  * @constructor
  * @since 3.0.0
  *
- * @param {object} config - [description]
+ * @param {object} config - The configuration options for this Texture Tint Pipeline, as described above.
  */
 @:native("Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline")
 extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
@@ -58,18 +58,29 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      */
     public var batches:Array<Dynamic>;
     /**
-     * Assigns a texture to the current batch. If a texture is already set it creates
-     * a new batch object.
+     * Assigns a texture to the current batch. If a different texture is already set it creates a new batch object.
      *
      * @method Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline#setTexture2D
      * @since 3.1.0
      *
-     * @param {WebGLTexture} texture - WebGLTexture that will be assigned to the current batch.
-     * @param {integer} textureUnit - Texture unit to which the texture needs to be bound.
+     * @param {WebGLTexture} [texture] - WebGLTexture that will be assigned to the current batch. If not given uses blankTexture.
+     * @param {integer} [unit=0] - Texture unit to which the texture needs to be bound.
      *
      * @return {Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline} This pipeline instance.
      */
-    public function setTexture2D(texture:js.html.webgl.Texture, textureUnit:Int):phaser.renderer.webgl.pipelines.TextureTintPipeline;
+    public function setTexture2D(?texture:js.html.webgl.Texture, ?unit:Int):phaser.renderer.webgl.pipelines.TextureTintPipeline;
+    /**
+     * Checks if the current batch has the same texture and texture unit, or if we need to create a new batch.
+     *
+     * @method Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline#requireTextureBatch
+     * @since 3.16.0
+     *
+     * @param {WebGLTexture} texture - WebGLTexture that will be assigned to the current batch. If not given uses blankTexture.
+     * @param {integer} unit - Texture unit to which the texture needs to be bound.
+     *
+     * @return {boolean} `true` if the pipeline needs to create a new batch, otherwise `false`.
+     */
+    public function requireTextureBatch(texture:js.html.webgl.Texture, unit:Int):Bool;
     /**
      * Creates a new batch object and pushes it to a batch array.
      * The batch object contains information relevant to the current
@@ -78,8 +89,11 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      *
      * @method Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline#pushBatch
      * @since 3.1.0
+     *
+     * @param {WebGLTexture} texture - Optional WebGLTexture that will be assigned to the created batch.
+     * @param {integer} unit - Texture unit to which the texture needs to be bound.
      */
-    public function pushBatch():Void;
+    public function pushBatch(texture:js.html.webgl.Texture, unit:Int):Void;
     /**
      * Takes a Sprite Game Object, or any object that extends it, and adds it to the batch.
      *
@@ -128,10 +142,12 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @param {number} tintBL - The bottom-left tint color value.
      * @param {number} tintBR - The bottom-right tint color value.
      * @param {(number|boolean)} tintEffect - The tint effect for the shader to use.
+     * @param {WebGLTexture} [texture] - WebGLTexture that will be assigned to the current batch if a flush occurs.
+     * @param {integer} [unit=0] - Texture unit to which the texture needs to be bound.
      *
      * @return {boolean} `true` if this method caused the batch to flush, otherwise `false`.
      */
-    public function batchQuad(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintBR:Float, tintEffect:Dynamic):Bool;
+    public function batchQuad(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintBR:Float, tintEffect:Dynamic, ?texture:js.html.webgl.Texture, ?unit:Int):Bool;
     /**
      * Adds the vertices data into the batch and flushes if full.
      *
@@ -164,10 +180,51 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @param {number} tintTR - The top-right tint color value.
      * @param {number} tintBL - The bottom-left tint color value.
      * @param {(number|boolean)} tintEffect - The tint effect for the shader to use.
+     * @param {WebGLTexture} [texture] - WebGLTexture that will be assigned to the current batch if a flush occurs.
+     * @param {integer} [unit=0] - Texture unit to which the texture needs to be bound.
      *
      * @return {boolean} `true` if this method caused the batch to flush, otherwise `false`.
      */
-    public function batchTri(x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintEffect:Dynamic):Bool;
+    public function batchTri(x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, u0:Float, v0:Float, u1:Float, v1:Float, tintTL:Float, tintTR:Float, tintBL:Float, tintEffect:Dynamic, ?texture:js.html.webgl.Texture, ?unit:Int):Bool;
+    /**
+     * Generic function for batching a textured quad using argument values instead of a Game Object.
+     *
+     * @method Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline#batchTexture
+     * @since 3.0.0
+     *
+     * @param {Phaser.GameObjects.GameObject} gameObject - Source GameObject.
+     * @param {WebGLTexture} texture - Raw WebGLTexture associated with the quad.
+     * @param {integer} textureWidth - Real texture width.
+     * @param {integer} textureHeight - Real texture height.
+     * @param {number} srcX - X coordinate of the quad.
+     * @param {number} srcY - Y coordinate of the quad.
+     * @param {number} srcWidth - Width of the quad.
+     * @param {number} srcHeight - Height of the quad.
+     * @param {number} scaleX - X component of scale.
+     * @param {number} scaleY - Y component of scale.
+     * @param {number} rotation - Rotation of the quad.
+     * @param {boolean} flipX - Indicates if the quad is horizontally flipped.
+     * @param {boolean} flipY - Indicates if the quad is vertically flipped.
+     * @param {number} scrollFactorX - By which factor is the quad affected by the camera horizontal scroll.
+     * @param {number} scrollFactorY - By which factor is the quad effected by the camera vertical scroll.
+     * @param {number} displayOriginX - Horizontal origin in pixels.
+     * @param {number} displayOriginY - Vertical origin in pixels.
+     * @param {number} frameX - X coordinate of the texture frame.
+     * @param {number} frameY - Y coordinate of the texture frame.
+     * @param {number} frameWidth - Width of the texture frame.
+     * @param {number} frameHeight - Height of the texture frame.
+     * @param {integer} tintTL - Tint for top left.
+     * @param {integer} tintTR - Tint for top right.
+     * @param {integer} tintBL - Tint for bottom left.
+     * @param {integer} tintBR - Tint for bottom right.
+     * @param {number} tintEffect - The tint effect.
+     * @param {number} uOffset - Horizontal offset on texture coordinate.
+     * @param {number} vOffset - Vertical offset on texture coordinate.
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - Current used camera.
+     * @param {Phaser.GameObjects.Components.TransformMatrix} parentTransformMatrix - Parent container.
+     * @param {boolean} [skipFlip=false] - Skip the renderTexture check.
+     */
+    public function batchTexture(gameObject:phaser.gameobjects.GameObject, texture:js.html.webgl.Texture, textureWidth:Int, textureHeight:Int, srcX:Float, srcY:Float, srcWidth:Float, srcHeight:Float, scaleX:Float, scaleY:Float, rotation:Float, flipX:Bool, flipY:Bool, scrollFactorX:Float, scrollFactorY:Float, displayOriginX:Float, displayOriginY:Float, frameX:Float, frameY:Float, frameWidth:Float, frameHeight:Float, tintTL:Int, tintTR:Int, tintBL:Int, tintBR:Int, tintEffect:Float, uOffset:Float, vOffset:Float, camera:phaser.cameras.scene2d.Camera, parentTransformMatrix:phaser.gameobjects.components.TransformMatrix, ?skipFlip:Bool):Void;
     /**
      * Adds a Texture Frame into the batch for rendering.
      *
@@ -299,5 +356,4 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @param {Float32Array} currentMatrix - Parent matrix, generally used by containers
      */
     public function batchLine(ax:Float, ay:Float, bx:Float, by:Float, aLineWidth:Float, bLineWidth:Float, currentMatrix:js.html.Float32Array):Void;
-    @:overload(function(gameObject:phaser.gameobjects.GameObject, texture:js.html.webgl.Texture, textureWidth:Int, textureHeight:Int, srcX:Float, srcY:Float, srcWidth:Float, srcHeight:Float, scaleX:Float, scaleY:Float, rotation:Float, flipX:Bool, flipY:Bool, scrollFactorX:Float, scrollFactorY:Float, displayOriginX:Float, displayOriginY:Float, frameX:Float, frameY:Float, frameWidth:Float, frameHeight:Float, tintTL:Int, tintTR:Int, tintBL:Int, tintBR:Int, tintEffect:Float, uOffset:Float, vOffset:Float, camera:phaser.cameras.scene2d.Camera, parentTransformMatrix:phaser.gameobjects.components.TransformMatrix):Void{})    @:overload(function(gameObject:phaser.gameobjects.GameObject, texture:js.html.webgl.Texture, textureWidth:Int, textureHeight:Int, srcX:Float, srcY:Float, srcWidth:Float, srcHeight:Float, scaleX:Float, scaleY:Float, rotation:Float, flipX:Bool, flipY:Bool, scrollFactorX:Float, scrollFactorY:Float, displayOriginX:Float, displayOriginY:Float, frameX:Float, frameY:Float, frameWidth:Float, frameHeight:Float, tintTL:Int, tintTR:Int, tintBL:Int, tintBR:Int, tintEffect:Float, uOffset:Float, vOffset:Float, camera:phaser.cameras.scene2d.Camera, parentTransformMatrix:phaser.gameobjects.components.TransformMatrix, ?skipFlip:Bool):Void{})    public function batchTexture():Void;
 }

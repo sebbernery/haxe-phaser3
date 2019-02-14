@@ -17,7 +17,7 @@ package phaser.input.keyboard;
  * Or, to listen for a specific key:
  *
  * ```javascript
- * this.input.keyboard.on('keydown_A', callback, context);
+ * this.input.keyboard.on('keydown-A', callback, context);
  * ```
  *
  * You can also create Key objects, which you can then poll in your game loop:
@@ -25,6 +25,10 @@ package phaser.input.keyboard;
  * ```javascript
  * var spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
  * ```
+ *
+ * If you have multiple parallel Scenes, each trying to get keyboard input, be sure to disable capture on them to stop them from
+ * stealing input from another Scene in the list. You can do this with `this.input.keyboard.enabled = false` within the
+ * Scene to stop all input, or `this.input.keyboard.preventDefault = false` to stop a Scene halting input on another Scene.
  *
  * _Note_: Many keyboards are unable to process certain combinations of keys due to hardware limitations known as ghosting.
  * See http://www.html5gamedevs.com/topic/4876-impossible-to-use-more-than-2-keyboard-input-buttons-at-the-same-time/ for more details.
@@ -44,6 +48,14 @@ package phaser.input.keyboard;
 @:native("Phaser.Input.Keyboard.KeyboardPlugin")
 extern class KeyboardPlugin extends phaser.events.EventEmitter {
     public function new(sceneInputPlugin:phaser.input.InputPlugin);
+    /**
+     * A reference to the core game, so we can listen for visibility events.
+     *
+     * @name Phaser.Input.Keyboard.KeyboardPlugin#game
+     * @type {Phaser.Game}
+     * @since 3.16.0
+     */
+    public var game:phaser.Game;
     /**
      * A reference to the Scene that this Input Plugin is responsible for.
      *
@@ -69,7 +81,15 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      */
     public var sceneInputPlugin:phaser.input.InputPlugin;
     /**
-     * A boolean that controls if the Keyboard Plugin is enabled or not.
+     * A reference to the global Keyboard Manager.
+     *
+     * @name Phaser.Input.Keyboard.KeyboardPlugin#manager
+     * @type {Phaser.Input.InputPlugin}
+     * @since 3.16.0
+     */
+    public var manager:phaser.input.InputPlugin;
+    /**
+     * A boolean that controls if this Keyboard Plugin is enabled or not.
      * Can be toggled on the fly.
      *
      * @name Phaser.Input.Keyboard.KeyboardPlugin#enabled
@@ -78,15 +98,6 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      */
     public var enabled:Bool;
-    /**
-     * The Keyboard Event target, as defined in the Scene or Game Config.
-     * Typically the browser window, but can be any interactive DOM element.
-     *
-     * @name Phaser.Input.Keyboard.KeyboardPlugin#target
-     * @type {any}
-     * @since 3.10.0
-     */
-    public var target:Dynamic;
     /**
      * An array of Key objects to process.
      *
@@ -112,6 +123,122 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @return {boolean} `true` if the plugin and the Scene it belongs to is active.
      */
     public function isActive():Bool;
+    /**
+     * By default when a key is pressed Phaser will not stop the event from propagating up to the browser.
+     * There are some keys this can be annoying for, like the arrow keys or space bar, which make the browser window scroll.
+     *
+     * This `addCapture` method enables consuming keyboard events for specific keys, so they don't bubble up the browser
+     * and cause the default behaviors.
+     *
+     * Please note that keyboard captures are global. This means that if you call this method from within a Scene, to say prevent
+     * the SPACE BAR from triggering a page scroll, then it will prevent it for any Scene in your game, not just the calling one.
+     *
+     * You can pass a single key code value:
+     *
+     * ```javascript
+     * this.input.keyboard.addCapture(62);
+     * ```
+     *
+     * An array of key codes:
+     *
+     * ```javascript
+     * this.input.keyboard.addCapture([ 62, 63, 64 ]);
+     * ```
+     *
+     * Or, a comma-delimited string:
+     *
+     * ```javascript
+     * this.input.keyboard.addCapture('W,S,A,D');
+     * ```
+     *
+     * To use non-alpha numeric keys, use a string, such as 'UP', 'SPACE' or 'LEFT'.
+     *
+     * You can also provide an array mixing both strings and key code integers.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#addCapture
+     * @since 3.16.0
+     *
+     * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to enable event capture for.
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     */
+    public function addCapture(keycode:Dynamic):phaser.input.keyboard.KeyboardPlugin;
+    /**
+     * Removes an existing key capture.
+     *
+     * Please note that keyboard captures are global. This means that if you call this method from within a Scene, to remove
+     * the capture of a key, then it will remove it for any Scene in your game, not just the calling one.
+     *
+     * You can pass a single key code value:
+     *
+     * ```javascript
+     * this.input.keyboard.removeCapture(62);
+     * ```
+     *
+     * An array of key codes:
+     *
+     * ```javascript
+     * this.input.keyboard.removeCapture([ 62, 63, 64 ]);
+     * ```
+     *
+     * Or, a comma-delimited string:
+     *
+     * ```javascript
+     * this.input.keyboard.removeCapture('W,S,A,D');
+     * ```
+     *
+     * To use non-alpha numeric keys, use a string, such as 'UP', 'SPACE' or 'LEFT'.
+     *
+     * You can also provide an array mixing both strings and key code integers.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#removeCapture
+     * @since 3.16.0
+     *
+     * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to disable event capture for.
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     */
+    public function removeCapture(keycode:Dynamic):phaser.input.keyboard.KeyboardPlugin;
+    /**
+     * Returns an array that contains all of the keyboard captures currently enabled.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#getCaptures
+     * @since 3.16.0
+     *
+     * @return {integer[]} An array of all the currently capturing key codes.
+     */
+    public function getCaptures():Array<Int>;
+    /**
+     * Allows Phaser to prevent any key captures you may have defined from bubbling up the browser.
+     * You can use this to re-enable event capturing if you had paused it via `disableGlobalCapture`.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#enableGlobalCapture
+     * @since 3.16.0
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     */
+    public function enableGlobalCapture():phaser.input.keyboard.KeyboardPlugin;
+    /**
+     * Disables Phaser from preventing any key captures you may have defined, without actually removing them.
+     * You can use this to temporarily disable event capturing if, for example, you swap to a DOM element.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#disableGlobalCapture
+     * @since 3.16.0
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     */
+    public function disableGlobalCapture():phaser.input.keyboard.KeyboardPlugin;
+    /**
+     * Removes all keyboard captures.
+     *
+     * Note that this is a global change. It will clear all event captures across your game, not just for this specific Scene.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#clearCaptures
+     * @since 3.16.0
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     */
+    public function clearCaptures():phaser.input.keyboard.KeyboardPlugin;
     /**
      * Creates and returns an object containing 4 hotkeys for Up, Down, Left and Right, and also Space Bar and shift.
      *
@@ -146,10 +273,12 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {(object|string)} keys - An object containing Key Codes, or a comma-separated string.
+     * @param {boolean} [enableCapture=true] - Automatically call `preventDefault` on the native DOM browser event for the key codes being added.
+     * @param {boolean} [emitOnRepeat=false] - Controls if the Key will continuously emit a 'down' event while being held down (true), or emit the event just once (false, the default).
      *
      * @return {object} An object containing Key objects mapped to the input properties.
      */
-    public function addKeys(keys:Dynamic):Dynamic;
+    public function addKeys(keys:Dynamic, ?enableCapture:Bool, ?emitOnRepeat:Bool):Dynamic;
     /**
      * Adds a Key object to this Keyboard Plugin.
      *
@@ -161,10 +290,12 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {(Phaser.Input.Keyboard.Key|string|integer)} key - Either a Key object, a string, such as `A` or `SPACE`, or a key code value.
+     * @param {boolean} [enableCapture=true] - Automatically call `preventDefault` on the native DOM browser event for the key codes being added.
+     * @param {boolean} [emitOnRepeat=false] - Controls if the Key will continuously emit a 'down' event while being held down (true), or emit the event just once (false, the default).
      *
      * @return {Phaser.Input.Keyboard.Key} The newly created Key object, or a reference to it if it already existed in the keys array.
      */
-    public function addKey(key:Dynamic):phaser.input.keyboard.Key;
+    public function addKey(key:Dynamic, ?enableCapture:Bool, ?emitOnRepeat:Bool):phaser.input.keyboard.Key;
     /**
      * Removes a Key object from this Keyboard Plugin.
      *
@@ -174,8 +305,10 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {(Phaser.Input.Keyboard.Key|string|integer)} key - Either a Key object, a string, such as `A` or `SPACE`, or a key code value.
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
      */
-    public function removeKey(key:Dynamic):Void;
+    public function removeKey(key:Dynamic):phaser.input.keyboard.KeyboardPlugin;
     /**
      * Creates a new KeyCombo.
      *
@@ -230,12 +363,12 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @param {Phaser.Input.Keyboard.Key} key - A Key object.
      * @param {number} [duration=0] - The duration which must have elapsed before this Key is considered as being down.
      *
-     * @return {boolean} `True` if the Key is down within the duration specified, otherwise `false`.
+     * @return {boolean} `true` if the Key is down within the duration specified, otherwise `false`.
      */
     public function checkDown(key:phaser.input.keyboard.Key, ?duration:Float):Bool;
     /**
      * Resets all Key objects created by _this_ Keyboard Plugin back to their default un-pressed states.
-     * This can only reset keys created via the `addKey`, `addKeys` or `createCursors` methods.
+     * This can only reset keys created via the `addKey`, `addKeys` or `createCursorKeys` methods.
      * If you have created a Key object directly you'll need to reset it yourself.
      *
      * This method is called automatically when the Keyboard Plugin shuts down, but can be
@@ -243,6 +376,8 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      *
      * @method Phaser.Input.Keyboard.KeyboardPlugin#resetKeys
      * @since 3.15.0
+     *
+     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
      */
-    public function resetKeys():Void;
+    public function resetKeys():phaser.input.keyboard.KeyboardPlugin;
 }

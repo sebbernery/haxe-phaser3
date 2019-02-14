@@ -25,4 +25,11 @@ package phaser.loader.filetypes;
 @:native("Phaser.Loader.FileTypes.AudioSpriteFile")
 extern class AudioSpriteFile extends phaser.loader.MultiFile {
     public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, jsonURL:String, ?audioURL:Dynamic, ?audioConfig:Dynamic, ?audioXhrSettings:XHRSettingsObject, ?jsonXhrSettings:XHRSettingsObject);
+    /**
+     * Adds this file to its target cache upon successful loading and processing.
+     *
+     * @method Phaser.Loader.FileTypes.AudioSpriteFile#addToCache
+     * @since 3.7.0
+     */
+    public function addToCache():Void;
 }

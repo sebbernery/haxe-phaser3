@@ -39,7 +39,7 @@ extern class BaseCache {
      * for setting and keeping track of. The item can only be retrieved by using this string.
      *
      * @method Phaser.Cache.BaseCache#add
-     * @fires Phaser.Cache.BaseCache#addEvent
+     * @fires Phaser.Cache.Events#ADD
      * @since 3.0.0
      *
      * @param {string} key - The unique key by which the data added to the cache will be referenced.
@@ -91,7 +91,7 @@ extern class BaseCache {
      * are relying on this item, it is up to you to sever those relationships prior to removing the item.
      *
      * @method Phaser.Cache.BaseCache#remove
-     * @fires Phaser.Cache.BaseCache#removeEvent
+     * @fires Phaser.Cache.Events#REMOVE
      * @since 3.0.0
      *
      * @param {string} key - The unique key of the item to remove from the cache.

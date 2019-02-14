@@ -331,10 +331,11 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @since 3.4.0
      *
      * @param {string} property - The property to lexically sort by.
+     * @param {function} [handler] - Provide your own custom handler function. Will receive 2 children which it should compare and return a boolean.
      *
      * @return {Phaser.GameObjects.Container} This Container instance.
      */
-    public function sort(property:String):phaser.gameobjects.Container;
+    public function sort(property:String, ?handler:Dynamic):phaser.gameobjects.Container;
     /**
      * Searches for the first instance of a child with its `name` property matching the given argument.
      * Should more than one child have the same name only the first is returned.
@@ -372,14 +373,14 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Container#getFirst
      * @since 3.4.0
      *
-     * @param {string} [property] - The property to test on each Game Object in the Container.
-     * @param {*} [value] - The value to test the property against. Must pass a strict (`===`) comparison check.
+     * @param {string} property - The property to test on each Game Object in the Container.
+     * @param {*} value - The value to test the property against. Must pass a strict (`===`) comparison check.
      * @param {integer} [startIndex=0] - An optional start index to search from.
      * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
      * @return {?Phaser.GameObjects.GameObject} The first matching Game Object, or `null` if none was found.
      */
-    public function getFirst(?property:String, ?value:Dynamic, ?startIndex:Int, ?endIndex:Int):phaser.gameobjects.GameObject;
+    public function getFirst(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):phaser.gameobjects.GameObject;
     /**
      * Returns all Game Objects in this Container.
      *
@@ -754,6 +755,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -779,6 +781,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -786,7 +789,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

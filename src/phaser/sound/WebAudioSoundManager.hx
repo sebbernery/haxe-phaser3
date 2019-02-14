@@ -19,7 +19,7 @@ extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
      * Sets the muted state of all this Sound Manager.
      *
      * @method Phaser.Sound.WebAudioSoundManager#setMute
-     * @fires Phaser.Sound.WebAudioSoundManager#muteEvent
+     * @fires Phaser.Sound.Events#GLOBAL_MUTE
      * @since 3.3.0
      *
      * @param {boolean} value - `true` to mute all sounds, `false` to unmute them.
@@ -31,7 +31,7 @@ extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
      * Sets the volume of this Sound Manager.
      *
      * @method Phaser.Sound.WebAudioSoundManager#setVolume
-     * @fires Phaser.Sound.WebAudioSoundManager#VolumeEvent
+     * @fires Phaser.Sound.Events#GLOBAL_VOLUME
      * @since 3.3.0
      *
      * @param {number} value - The global volume of this Sound Manager.

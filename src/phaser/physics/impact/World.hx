@@ -10,7 +10,7 @@ package phaser.physics.impact;
  * @constructor
  * @since 3.0.0
  *
- * @param {Phaser.Scene} scene - [description]
+ * @param {Phaser.Scene} scene - The Scene to which this Impact World instance belongs.
  * @param {Phaser.Physics.Impact.WorldConfig} config - [description]
  */
 @:native("Phaser.Physics.Impact.World")
@@ -152,20 +152,11 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - The tilemap layer to use.
-     * @param {object} [options] - Options for controlling the mapping from tiles to slope IDs.
-     * @param {string} [options.slopeTileProperty=null] - Slope IDs can be stored on tiles directly
-     * using Tiled's tileset editor. If a tile has a property with the given slopeTileProperty string
-     * name, the value of that property for the tile will be used for its slope mapping. E.g. a 45
-     * degree slope upward could be given a "slope" property with a value of 2.
-     * @param {object} [options.slopeMap=null] - A tile index to slope definition map.
-     * @param {integer} [options.defaultCollidingSlope=null] - If specified, the default slope ID to
-     * assign to a colliding tile. If not specified, the tile's index is used.
-     * @param {integer} [options.defaultNonCollidingSlope=0] - The default slope ID to assign to a
-     * non-colliding tile.
+     * @param {CollisionOptions} [options] - Options for controlling the mapping from tiles to slope IDs.
      *
      * @return {Phaser.Physics.Impact.CollisionMap} The newly created CollisionMap.
      */
-    public function setCollisionMapFromTilemapLayer(tilemapLayer:Dynamic, ?options:Dynamic):phaser.physics.impact.CollisionMap;
+    public function setCollisionMapFromTilemapLayer(tilemapLayer:Dynamic, ?options:CollisionOptions):phaser.physics.impact.CollisionMap;
     /**
      * Sets the bounds of the Physics world to match the given world pixel dimensions.
      * You can optionally set which 'walls' to create: left, right, top or bottom.
@@ -249,6 +240,7 @@ extern class World extends phaser.events.EventEmitter {
      * [description]
      *
      * @method Phaser.Physics.Impact.World#pause
+     * @fires Phaser.Physics.Impact.Events#PAUSE
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Impact.World} This World object.
@@ -258,6 +250,7 @@ extern class World extends phaser.events.EventEmitter {
      * [description]
      *
      * @method Phaser.Physics.Impact.World#resume
+     * @fires Phaser.Physics.Impact.Events#RESUME
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Impact.World} This World object.

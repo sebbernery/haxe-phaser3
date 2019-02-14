@@ -180,6 +180,19 @@ extern class Matrix4 {
      */
     public function translate(v:Dynamic):phaser.math.Matrix4;
     /**
+     * Translate this Matrix using the given values.
+     *
+     * @method Phaser.Math.Matrix4#translateXYZ
+     * @since 3.16.0
+     *
+     * @param {number} x - The x component.
+     * @param {number} y - The y component.
+     * @param {number} z - The z component.
+     *
+     * @return {Phaser.Math.Matrix4} This Matrix4.
+     */
+    public function translateXYZ(x:Float, y:Float, z:Float):phaser.math.Matrix4;
+    /**
      * Apply a scale transformation to this Matrix.
      *
      * Uses the `x`, `y` and `z` components of the given Vector to scale the Matrix.
@@ -192,6 +205,19 @@ extern class Matrix4 {
      * @return {Phaser.Math.Matrix4} This Matrix4.
      */
     public function scale(v:Dynamic):phaser.math.Matrix4;
+    /**
+     * Apply a scale transformation to this Matrix.
+     *
+     * @method Phaser.Math.Matrix4#scaleXYZ
+     * @since 3.16.0
+     *
+     * @param {number} x - The x component.
+     * @param {number} y - The y component.
+     * @param {number} z - The z component.
+     *
+     * @return {Phaser.Math.Matrix4} This Matrix4.
+     */
+    public function scaleXYZ(x:Float, y:Float, z:Float):phaser.math.Matrix4;
     /**
      * Derive a rotation matrix around the given axis.
      *

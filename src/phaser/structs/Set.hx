@@ -110,11 +110,11 @@ extern class Set {
      * @genericUse {Phaser.Structs.Set.<T>} - [$return]
      *
      * @param {EachSetCallback} callback - The callback to be invoked and passed each value this Set contains.
-     * @param {*} callbackScope - The scope of the callback.
+     * @param {*} [callbackScope] - The scope of the callback.
      *
      * @return {Phaser.Structs.Set} This Set object.
      */
-    public function each(callback:EachSetCallback, callbackScope:Dynamic):phaser.structs.Set;
+    public function each(callback:EachSetCallback, ?callbackScope:Dynamic):phaser.structs.Set;
     /**
      * Passes each value in this Set to the given callback.
      * For when you absolutely know this Set won't be modified during the iteration.
@@ -126,11 +126,11 @@ extern class Set {
      * @genericUse {Phaser.Structs.Set.<T>} - [$return]
      *
      * @param {EachSetCallback} callback - The callback to be invoked and passed each value this Set contains.
-     * @param {*} callbackScope - The scope of the callback.
+     * @param {*} [callbackScope] - The scope of the callback.
      *
      * @return {Phaser.Structs.Set} This Set object.
      */
-    public function iterate(callback:EachSetCallback, callbackScope:Dynamic):phaser.structs.Set;
+    public function iterate(callback:EachSetCallback, ?callbackScope:Dynamic):phaser.structs.Set;
     /**
      * Goes through each entry in this Set and invokes the given function on them, passing in the arguments.
      *

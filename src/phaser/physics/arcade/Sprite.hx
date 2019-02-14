@@ -2,15 +2,11 @@ package phaser.physics.arcade;
 
 /**
  * @classdesc
- * An Arcade Physics Sprite Game Object.
+ * An Arcade Physics Sprite is a Sprite with an Arcade Physics body and related components.
+ * The body can be dynamic or static.
  *
- * A Sprite Game Object is used for the display of both static and animated images in your game.
- * Sprites can have input events and physics bodies. They can also be tweened, tinted, scrolled
- * and animated.
- *
- * The main difference between a Sprite and an Image Game Object is that you cannot animate Images.
- * As such, Sprites take a fraction longer to process and have a larger API footprint due to the Animation
- * Component. If you do not require animation then you can safely use Images to replace Sprites in all cases.
+ * The main difference between an Arcade Sprite and an Arcade Image is that you cannot animate an Arcade Image.
+ * If you do not require animation then you can safely use Arcade Images instead of Arcade Sprites.
  *
  * @class Sprite
  * @extends Phaser.GameObjects.Sprite
@@ -89,85 +85,96 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public function setAccelerationY(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the angular velocity of the body.
+     *
+     * In Arcade Physics, bodies cannot rotate. They are always axis-aligned.
+     * However, they can have angular motion, which is passed on to the Game Object bound to the body,
+     * causing them to visually rotate, even though the body remains axis-aligned.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularVelocity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of angular velocity.
      *
      * @return {this} This Game Object.
      */
     public function setAngularVelocity(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the angular acceleration of the body.
+     *
+     * In Arcade Physics, bodies cannot rotate. They are always axis-aligned.
+     * However, they can have angular motion, which is passed on to the Game Object bound to the body,
+     * causing them to visually rotate, even though the body remains axis-aligned.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularAcceleration
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of angular acceleration.
      *
      * @return {this} This Game Object.
      */
     public function setAngularAcceleration(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the angular drag of the body. Drag is applied to the current velocity, providing a form of deceleration.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularDrag
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of drag.
      *
      * @return {this} This Game Object.
      */
     public function setAngularDrag(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the bounce values of this body.
+     *
+     * Bounce is the amount of restitution, or elasticity, the body has when it collides with another object.
+     * A value of 1 means that it will retain its full velocity after the rebound. A value of 0 means it will not rebound at all.
      *
      * @method Phaser.Physics.Arcade.Components.Bounce#setBounce
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} [y=x] - [description]
+     * @param {number} x - The amount of horizontal bounce to apply on collision. A float, typically between 0 and 1.
+     * @param {number} [y=x] - The amount of vertical bounce to apply on collision. A float, typically between 0 and 1.
      *
      * @return {this} This Game Object.
      */
     public function setBounce(x:Float, ?y:Float):Dynamic;
     /**
-     * [description]
+     * Sets the horizontal bounce value for this body.
      *
      * @method Phaser.Physics.Arcade.Components.Bounce#setBounceX
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of horizontal bounce to apply on collision. A float, typically between 0 and 1.
      *
      * @return {this} This Game Object.
      */
     public function setBounceX(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the vertical bounce value for this body.
      *
      * @method Phaser.Physics.Arcade.Components.Bounce#setBounceY
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of vertical bounce to apply on collision. A float, typically between 0 and 1.
      *
      * @return {this} This Game Object.
      */
     public function setBounceY(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets if this body should collide with the world bounds or not.
      *
      * @method Phaser.Physics.Arcade.Components.Bounce#setCollideWorldBounds
      * @since 3.0.0
      *
-     * @param {boolean} value - [description]
+     * @param {boolean} value - `true` if this body should collide with the world bounds, otherwise `false`.
      *
      * @return {this} This Game Object.
      */
     public function setCollideWorldBounds(value:Bool):Dynamic;
     /**
-     * [description]
+     * Set to `true` to have this body render its outline to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugShowBody
      * @type {boolean}
@@ -175,7 +182,7 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public var debugShowBody:Bool;
     /**
-     * [description]
+     * Set to `true` to have this body render a velocity marker to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugShowVelocity
      * @type {boolean}
@@ -183,7 +190,7 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public var debugShowVelocity:Bool;
     /**
-     * [description]
+     * The color of the body outline when it renders to the debug display.
      *
      * @name Phaser.Physics.Arcade.Components.Debug#debugBodyColor
      * @type {number}
@@ -191,65 +198,109 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public var debugBodyColor:Float;
     /**
-     * [description]
+     * Sets the debug values of this body.
+     *
+     * Bodies will only draw their debug if debug has been enabled for Arcade Physics as a whole.
+     * Note that there is a performance cost in drawing debug displays. It should never be used in production.
      *
      * @method Phaser.Physics.Arcade.Components.Debug#setDebug
      * @since 3.0.0
      *
-     * @param {boolean} showBody - [description]
-     * @param {boolean} showVelocity - [description]
-     * @param {number} bodyColor - [description]
+     * @param {boolean} showBody - Set to `true` to have this body render its outline to the debug display.
+     * @param {boolean} showVelocity - Set to `true` to have this body render a velocity marker to the debug display.
+     * @param {number} bodyColor - The color of the body outline when rendered to the debug display.
      *
      * @return {this} This Game Object.
      */
     public function setDebug(showBody:Bool, showVelocity:Bool, bodyColor:Float):Dynamic;
     /**
-     * [description]
+     * Sets the color of the body outline when it renders to the debug display.
      *
      * @method Phaser.Physics.Arcade.Components.Debug#setDebugBodyColor
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The color of the body outline when rendered to the debug display.
      *
      * @return {this} This Game Object.
      */
     public function setDebugBodyColor(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the body's horizontal and vertical drag. If the vertical drag value is not provided, the vertical drag is set to the same value as the horizontal drag.
+     *
+     * Drag can be considered as a form of deceleration that will return the velocity of a body back to zero over time.
+     * It is the absolute loss of velocity due to movement, in pixels per second squared.
+     * The x and y components are applied separately.
+     *
+     * When `useDamping` is true, this is 1 minus the damping factor.
+     * A value of 1 means the Body loses no velocity.
+     * A value of 0.95 means the Body loses 5% of its velocity per step.
+     * A value of 0.5 means the Body loses 50% of its velocity per step.
+     *
+     * Drag is applied only when `acceleration` is zero.
      *
      * @method Phaser.Physics.Arcade.Components.Drag#setDrag
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} [y=x] - [description]
+     * @param {number} x - The amount of horizontal drag to apply.
+     * @param {number} [y=x] - The amount of vertical drag to apply.
      *
      * @return {this} This Game Object.
      */
     public function setDrag(x:Float, ?y:Float):Dynamic;
     /**
-     * [description]
+     * Sets the body's horizontal drag.
+     *
+     * Drag can be considered as a form of deceleration that will return the velocity of a body back to zero over time.
+     * It is the absolute loss of velocity due to movement, in pixels per second squared.
+     * The x and y components are applied separately.
+     *
+     * When `useDamping` is true, this is 1 minus the damping factor.
+     * A value of 1 means the Body loses no velocity.
+     * A value of 0.95 means the Body loses 5% of its velocity per step.
+     * A value of 0.5 means the Body loses 50% of its velocity per step.
+     *
+     * Drag is applied only when `acceleration` is zero.
      *
      * @method Phaser.Physics.Arcade.Components.Drag#setDragX
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of horizontal drag to apply.
      *
      * @return {this} This Game Object.
      */
     public function setDragX(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the body's vertical drag.
+     *
+     * Drag can be considered as a form of deceleration that will return the velocity of a body back to zero over time.
+     * It is the absolute loss of velocity due to movement, in pixels per second squared.
+     * The x and y components are applied separately.
+     *
+     * When `useDamping` is true, this is 1 minus the damping factor.
+     * A value of 1 means the Body loses no velocity.
+     * A value of 0.95 means the Body loses 5% of its velocity per step.
+     * A value of 0.5 means the Body loses 50% of its velocity per step.
+     *
+     * Drag is applied only when `acceleration` is zero.
      *
      * @method Phaser.Physics.Arcade.Components.Drag#setDragY
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of vertical drag to apply.
      *
      * @return {this} This Game Object.
      */
     public function setDragY(value:Float):Dynamic;
     /**
-     * [description]
+     * If this Body is using `drag` for deceleration this function controls how the drag is applied.
+     * If set to `true` drag will use a damping effect rather than a linear approach. If you are
+     * creating a game where the Body moves freely at any angle (i.e. like the way the ship moves in
+     * the game Asteroids) then you will get a far smoother and more visually correct deceleration
+     * by using damping, avoiding the axis-drift that is prone with linear deceleration.
+     *
+     * If you enable this property then you should use far smaller `drag` values than with linear, as
+     * they are used as a multiplier on the velocity. Values such as 0.95 will give a nice slow
+     * deceleration, where-as smaller values, such as 0.5 will stop an object almost immediately.
      *
      * @method Phaser.Physics.Arcade.Components.Drag#setDamping
      * @since 3.10.0
@@ -386,23 +437,23 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public function setGravityY(y:Float):Dynamic;
     /**
-     * [description]
+     * Sets Whether this Body can be moved by collisions with another Body.
      *
      * @method Phaser.Physics.Arcade.Components.Immovable#setImmovable
      * @since 3.0.0
      *
-     * @param {boolean} [value=true] - [description]
+     * @param {boolean} [value=true] - Sets if this body can be moved by collisions with another Body.
      *
      * @return {this} This Game Object.
      */
     public function setImmovable(?value:Bool):Dynamic;
     /**
-     * [description]
+     * Sets the mass of the physics body
      *
      * @method Phaser.Physics.Arcade.Components.Mass#setMass
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - New value for the mass of the body.
      *
      * @return {this} This Game Object.
      */
@@ -434,47 +485,51 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      */
     public function setCircle(radius:Float, ?offsetX:Float, ?offsetY:Float):Dynamic;
     /**
-     * [description]
+     * Sets the velocity of the Body.
      *
      * @method Phaser.Physics.Arcade.Components.Velocity#setVelocity
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} [y=x] - [description]
+     * @param {number} x - The horizontal velocity of the body. Positive values move the body to the right, while negative values move it to the left.
+     * @param {number} [y=x] - The vertical velocity of the body. Positive values move the body down, while negative values move it up.
      *
      * @return {this} This Game Object.
      */
     public function setVelocity(x:Float, ?y:Float):Dynamic;
     /**
-     * [description]
+     * Sets the horizontal component of the body's velocity.
+     *
+     * Positive values move the body to the right, while negative values move it to the left.
      *
      * @method Phaser.Physics.Arcade.Components.Velocity#setVelocityX
      * @since 3.0.0
      *
-     * @param {number} x - [description]
+     * @param {number} x - The new horizontal velocity.
      *
      * @return {this} This Game Object.
      */
     public function setVelocityX(x:Float):Dynamic;
     /**
-     * [description]
+     * Sets the vertical component of the body's velocity.
+     *
+     * Positive values move the body down, while negative values move it up.
      *
      * @method Phaser.Physics.Arcade.Components.Velocity#setVelocityY
      * @since 3.0.0
      *
-     * @param {number} y - [description]
+     * @param {number} y - The new vertical velocity of the body.
      *
      * @return {this} This Game Object.
      */
     public function setVelocityY(y:Float):Dynamic;
     /**
-     * [description]
+     * Sets the maximum velocity of the body.
      *
      * @method Phaser.Physics.Arcade.Components.Velocity#setMaxVelocity
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} [y=x] - [description]
+     * @param {number} x - The new maximum horizontal velocity.
+     * @param {number} [y=x] - The new maximum vertical velocity.
      *
      * @return {this} This Game Object.
      */

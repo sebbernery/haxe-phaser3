@@ -97,15 +97,15 @@ extern class Pan {
      * over the duration and with the ease specified.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Pan#start
-     * @fires CameraPanStartEvent
-     * @fires CameraPanCompleteEvent
+     * @fires Phaser.Cameras.Scene2D.Events#PAN_START
+     * @fires Phaser.Cameras.Scene2D.Events#PAN_COMPLETE
      * @since 3.11.0
      *
      * @param {number} x - The destination x coordinate to scroll the center of the Camera viewport to.
      * @param {number} y - The destination y coordinate to scroll the center of the Camera viewport to.
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
-     * @param {boolean} [force=false] - Force the shake effect to start immediately, even if already running.
+     * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
      * @param {CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
@@ -128,6 +128,7 @@ extern class Pan {
      * Called internally when the effect completes.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Pan#effectComplete
+     * @fires Phaser.Cameras.Scene2D.Events#PAN_COMPLETE
      * @since 3.11.0
      */
     public function effectComplete():Void;

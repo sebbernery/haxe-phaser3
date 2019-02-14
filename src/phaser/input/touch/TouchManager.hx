@@ -91,6 +91,24 @@ extern class TouchManager {
      */
     public var onTouchCancel:Dynamic;
     /**
+     * The Touch Over event handler function.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Touch.TouchManager#onTouchOver
+     * @type {function}
+     * @since 3.16.0
+     */
+    public var onTouchOver:Dynamic;
+    /**
+     * The Touch Out event handler function.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Touch.TouchManager#onTouchOut
+     * @type {function}
+     * @since 3.16.0
+     */
+    public var onTouchOut:Dynamic;
+    /**
      * Starts the Touch Event listeners running as long as an input target is set.
      *
      * This method is called automatically if Touch Input is enabled in the game config,

@@ -2,14 +2,29 @@ package phaser.cameras.controls;
 
 /**
  * @classdesc
- * [description]
+ * A Fixed Key Camera Control.
+ *
+ * This allows you to control the movement and zoom of a camera using the defined keys.
+ *
+ * ```javascript
+ * var camControl = new FixedKeyControl({
+ *     camera: this.cameras.main,
+ *     left: cursors.left,
+ *     right: cursors.right,
+ *     speed: float OR { x: 0, y: 0 }
+ * });
+ * ```
+ *
+ * Movement is precise and has no 'smoothing' applied to it.
+ *
+ * You must call the `update` method of this controller every frame.
  *
  * @class FixedKeyControl
  * @memberof Phaser.Cameras.Controls
  * @constructor
  * @since 3.0.0
  *
- * @param {FixedKeyControlConfig} config - [description]
+ * @param {FixedKeyControlConfig} config - The Fixed Key Control configuration object.
  */
 @:native("Phaser.Cameras.Controls.FixedKeyControl")
 extern class FixedKeyControl {
@@ -142,7 +157,9 @@ extern class FixedKeyControl {
      */
     public function setCamera(camera:phaser.cameras.scene2d.Camera):phaser.cameras.controls.FixedKeyControl;
     /**
-     * [description]
+     * Applies the results of pressing the control keys to the Camera.
+     *
+     * You must call this every step, it is not called automatically.
      *
      * @method Phaser.Cameras.Controls.FixedKeyControl#update
      * @since 3.0.0

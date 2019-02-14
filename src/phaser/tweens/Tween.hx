@@ -2,22 +2,25 @@ package phaser.tweens;
 
 /**
  * @classdesc
- * [description]
+ * A Tween is able to manipulate the properties of one or more objects to any given value, based
+ * on a duration and type of ease. They are rarely instantiated directly and instead should be
+ * created via the TweenManager.
  *
  * @class Tween
  * @memberof Phaser.Tweens
  * @constructor
  * @since 3.0.0
  *
- * @param {(Phaser.Tweens.TweenManager|Phaser.Tweens.Timeline)} parent - [description]
- * @param {Phaser.Tweens.TweenDataConfig[]} data - [description]
- * @param {array} targets - [description]
+ * @param {(Phaser.Tweens.TweenManager|Phaser.Tweens.Timeline)} parent - A reference to the parent of this Tween. Either the Tween Manager or a Tween Timeline instance.
+ * @param {Phaser.Tweens.TweenDataConfig[]} data - An array of TweenData objects, each containing a unique property to be tweened.
+ * @param {array} targets - An array of targets to be tweened.
  */
 @:native("Phaser.Tweens.Tween")
 extern class Tween {
     public function new(parent:Dynamic, data:Array<phaser.tweens.TweenDataConfig>, targets:Array<Dynamic>);
     /**
-     * [description]
+     * A reference to the parent of this Tween.
+     * Either the Tween Manager or a Tween Timeline instance.
      *
      * @name Phaser.Tweens.Tween#parent
      * @type {(Phaser.Tweens.TweenManager|Phaser.Tweens.Timeline)}
@@ -41,7 +44,7 @@ extern class Tween {
      */
     public var data:Array<phaser.tweens.TweenDataConfig>;
     /**
-     * data array doesn't change, so we can cache the length
+     * The cached length of the data array.
      *
      * @name Phaser.Tweens.Tween#totalData
      * @type {integer}
@@ -49,7 +52,7 @@ extern class Tween {
      */
     public var totalData:Int;
     /**
-     * An array of references to the target/s this Tween is operating on
+     * An array of references to the target/s this Tween is operating on.
      *
      * @name Phaser.Tweens.Tween#targets
      * @type {object[]}
@@ -65,7 +68,7 @@ extern class Tween {
      */
     public var totalTargets:Int;
     /**
-     * If true then duration, delay, etc values are all frame totals.
+     * If `true` then duration, delay, etc values are all frame totals.
      *
      * @name Phaser.Tweens.Tween#useFrames
      * @type {boolean}
@@ -85,7 +88,7 @@ extern class Tween {
     public var timeScale:Float;
     /**
      * Loop this tween? Can be -1 for an infinite loop, or an integer.
-     * When enabled it will play through ALL TweenDatas again (use TweenData.repeat to loop a single TD)
+     * When enabled it will play through ALL TweenDatas again. Use TweenData.repeat to loop a single element.
      *
      * @name Phaser.Tweens.Tween#loop
      * @type {number}
@@ -228,32 +231,32 @@ extern class Tween {
      */
     public var callbacks:Dynamic;
     /**
-     * [description]
+     * Returns the current value of the Tween.
      *
      * @method Phaser.Tweens.Tween#getValue
      * @since 3.0.0
      *
-     * @return {number} [description]
+     * @return {number} The value of the Tween.
      */
     public function getValue():Float;
     /**
-     * [description]
+     * Set the scale the time applied to this Tween. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
      *
      * @method Phaser.Tweens.Tween#setTimeScale
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The scale factor for timescale.
      *
-     * @return {Phaser.Tweens.Tween} This Tween object.
+     * @return {this} - This Tween instance.
      */
-    public function setTimeScale(value:Float):phaser.tweens.Tween;
+    public function setTimeScale(value:Float):Dynamic;
     /**
-     * [description]
+     * Returns the scale of the time applied to this Tween.
      *
      * @method Phaser.Tweens.Tween#getTimeScale
      * @since 3.0.0
      *
-     * @return {number} [description]
+     * @return {number} The timescale of this tween (between 0 and 1)
      */
     public function getTimeScale():Float;
     /**
@@ -275,38 +278,43 @@ extern class Tween {
      */
     public function isPaused():Bool;
     /**
-     * [description]
+     * See if this Tween is currently acting upon the given target.
      *
      * @method Phaser.Tweens.Tween#hasTarget
      * @since 3.0.0
      *
-     * @param {object} target - [description]
+     * @param {object} target - The target to check against this Tween.
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the given target is a target of this Tween, otherwise `false`.
      */
     public function hasTarget(target:Dynamic):Bool;
     /**
-     * [description]
+     * Updates the value of a property of this Tween to a new value, without adjusting the
+     * Tween duration or current progress.
+     *
+     * You can optionally tell it to set the 'start' value to be the current value (before the change).
      *
      * @method Phaser.Tweens.Tween#updateTo
      * @since 3.0.0
      *
-     * @param {string} key - [description]
-     * @param {*} value - [description]
-     * @param {boolean} startToCurrent - [description]
+     * @param {string} key - The property to set the new value for.
+     * @param {*} value - The new value of the property.
+     * @param {boolean} [startToCurrent=false] - Should this change set the start value to be the current value?
      *
-     * @return {Phaser.Tweens.Tween} This Tween object.
+     * @return {this} - This Tween instance.
      */
-    public function updateTo(key:String, value:Dynamic, startToCurrent:Bool):phaser.tweens.Tween;
+    public function updateTo(key:String, value:Dynamic, ?startToCurrent:Bool):Dynamic;
     /**
-     * [description]
+     * Restarts the tween from the beginning.
      *
      * @method Phaser.Tweens.Tween#restart
      * @since 3.0.0
+     *
+     * @return {this} This Tween instance.
      */
-    public function restart():Void;
+    public function restart():Dynamic;
     /**
-     * [description]
+     * Internal method that calculates the overall duration of the Tween.
      *
      * @method Phaser.Tweens.Tween#calcDuration
      * @since 3.0.0
@@ -323,37 +331,41 @@ extern class Tween {
      */
     public function init():Bool;
     /**
-     * [description]
+     * Internal method that advances to the next state of the Tween during playback.
      *
      * @method Phaser.Tweens.Tween#nextState
      * @since 3.0.0
      */
     public function nextState():Void;
     /**
-     * [description]
+     * Pauses the Tween immediately. Use `resume` to continue playback.
      *
      * @method Phaser.Tweens.Tween#pause
      * @since 3.0.0
      *
-     * @return {Phaser.Tweens.Tween} This Tween object.
+     * @return {this} - This Tween instance.
      */
-    public function pause():phaser.tweens.Tween;
+    public function pause():Dynamic;
     /**
-     * [description]
+     * Starts a Tween playing.
+     *
+     * You only need to call this method if you have configured the tween to be paused on creation.
      *
      * @method Phaser.Tweens.Tween#play
      * @since 3.0.0
      *
-     * @param {boolean} resetFromTimeline - [description]
+     * @param {boolean} resetFromTimeline - Is this Tween being played as part of a Timeline?
+     *
+     * @return {this} This Tween instance.
      */
-    public function play(resetFromTimeline:Bool):Void;
+    public function play(resetFromTimeline:Bool):Dynamic;
     /**
-     * [description]
+     * Internal method that resets all of the Tween Data, including the progress and elapsed values.
      *
      * @method Phaser.Tweens.Tween#resetTweenData
      * @since 3.0.0
      *
-     * @param {boolean} resetFromLoop - [description]
+     * @param {boolean} resetFromLoop - Has this method been called as part of a loop?
      */
     public function resetTweenData(resetFromLoop:Bool):Void;
     /**
@@ -362,32 +374,34 @@ extern class Tween {
      * @method Phaser.Tweens.Tween#resume
      * @since 3.0.0
      *
-     * @return {Phaser.Tweens.Tween} This Tween object.
+     * @return {this} - This Tween instance.
      */
-    public function resume():phaser.tweens.Tween;
+    public function resume():Dynamic;
     /**
-     * [description]
+     * Attempts to seek to a specific position in a Tween.
      *
      * @method Phaser.Tweens.Tween#seek
      * @since 3.0.0
      *
-     * @param {number} toPosition - A value between 0 and 1.
+     * @param {number} toPosition - A value between 0 and 1 which represents the progress point to seek to.
+     *
+     * @return {this} This Tween instance.
      */
-    public function seek(toPosition:Float):Void;
+    public function seek(toPosition:Float):Dynamic;
     /**
-     * [description]
+     * Sets an event based callback to be invoked during playback.
      *
      * @method Phaser.Tweens.Tween#setCallback
      * @since 3.0.0
      *
-     * @param {string} type - [description]
-     * @param {function} callback - [description]
-     * @param {array} [params] - [description]
-     * @param {object} [scope] - [description]
+     * @param {string} type - Type of the callback.
+     * @param {function} callback - Callback function.
+     * @param {array} [params] - An array of parameters for specified callbacks types.
+     * @param {object} [scope] - The context the callback will be invoked in.
      *
-     * @return {Phaser.Tweens.Tween} This Tween object.
+     * @return {this} This Tween instance.
      */
-    public function setCallback(type:String, callback:Dynamic, ?params:Array<Dynamic>, ?scope:Dynamic):phaser.tweens.Tween;
+    public function setCallback(type:String, callback:Dynamic, ?params:Array<Dynamic>, ?scope:Dynamic):Dynamic;
     /**
      * Flags the Tween as being complete, whatever stage of progress it is at.
      *
@@ -400,8 +414,10 @@ extern class Tween {
      * @since 3.2.0
      *
      * @param {number} [delay=0] - The time to wait before invoking the complete callback. If zero it will fire immediately.
+     *
+     * @return {this} This Tween instance.
      */
-    public function complete(?delay:Float):Void;
+    public function complete(?delay:Float):Dynamic;
     /**
      * Stops the Tween immediately, whatever stage of progress it is at and flags it for removal by the TweenManager.
      *
@@ -409,54 +425,56 @@ extern class Tween {
      * @since 3.0.0
      *
      * @param {number} [resetTo] - A value between 0 and 1.
+     *
+     * @return {this} This Tween instance.
      */
-    public function stop(?resetTo:Float):Void;
+    public function stop(?resetTo:Float):Dynamic;
     /**
-     * [description]
+     * Internal method that advances the Tween based on the time values.
      *
      * @method Phaser.Tweens.Tween#update
      * @since 3.0.0
      *
-     * @param {number} timestamp - [description]
+     * @param {number} timestamp - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.
      * @param {number} delta - The delta time in ms since the last frame. This is a smoothed and capped value based on the FPS rate.
      *
      * @return {boolean} Returns `true` if this Tween has finished and should be removed from the Tween Manager, otherwise returns `false`.
      */
     public function update(timestamp:Float, delta:Float):Bool;
     /**
-     * [description]
+     * Internal method used as part of the playback process that sets a tween to play in reverse.
      *
      * @method Phaser.Tweens.Tween#setStateFromEnd
      * @since 3.0.0
      *
-     * @param {Phaser.Tweens.Tween} tween - [description]
-     * @param {Phaser.Tweens.TweenDataConfig} tweenData - [description]
-     * @param {number} diff - [description]
+     * @param {Phaser.Tweens.Tween} tween - The Tween to update.
+     * @param {Phaser.Tweens.TweenDataConfig} tweenData - The TweenData property to update.
+     * @param {number} diff - Any extra time that needs to be accounted for in the elapsed and progress values.
      *
      * @return {integer} The state of this Tween.
      */
     public function setStateFromEnd(tween:phaser.tweens.Tween, tweenData:phaser.tweens.TweenDataConfig, diff:Float):Int;
     /**
-     * Was PLAYING_BACKWARD and has hit the start.
+     * Internal method used as part of the playback process that sets a tween to play from the start.
      *
      * @method Phaser.Tweens.Tween#setStateFromStart
      * @since 3.0.0
      *
-     * @param {Phaser.Tweens.Tween} tween - [description]
-     * @param {Phaser.Tweens.TweenDataConfig} tweenData - [description]
-     * @param {number} diff - [description]
+     * @param {Phaser.Tweens.Tween} tween - The Tween to update.
+     * @param {Phaser.Tweens.TweenDataConfig} tweenData - The TweenData property to update.
+     * @param {number} diff - Any extra time that needs to be accounted for in the elapsed and progress values.
      *
      * @return {integer} The state of this Tween.
      */
     public function setStateFromStart(tween:phaser.tweens.Tween, tweenData:phaser.tweens.TweenDataConfig, diff:Float):Int;
     /**
-     * [description]
+     * Internal method that advances the TweenData based on the time value given.
      *
      * @method Phaser.Tweens.Tween#updateTweenData
      * @since 3.0.0
      *
-     * @param {Phaser.Tweens.Tween} tween - [description]
-     * @param {Phaser.Tweens.TweenDataConfig} tweenData - [description]
+     * @param {Phaser.Tweens.Tween} tween - The Tween to update.
+     * @param {Phaser.Tweens.TweenDataConfig} tweenData - The TweenData property to update.
      * @param {number} delta - Either a value in ms, or 1 if Tween.useFrames is true
      *
      * @return {boolean} [description]

@@ -3,10 +3,10 @@ package phaser;
 /**
  * @typedef {object} ArcadeWorldTreeMinMax
  *
- * @property {number} minX - [description]
- * @property {number} minY - [description]
- * @property {number} maxX - [description]
- * @property {number} maxY - [description]
+ * @property {number} minX - The minimum x value used in RTree searches.
+ * @property {number} minY - The minimum y value used in RTree searches.
+ * @property {number} maxX - The maximum x value used in RTree searches.
+ * @property {number} maxY - The maximum y value used in RTree searches.
  */
 typedef ArcadeWorldTreeMinMax = {
 var minX:Float;

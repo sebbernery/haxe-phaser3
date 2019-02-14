@@ -4,7 +4,7 @@ package phaser;
  * @typedef {object} ParticleEmitterConfig
  *
  * @property {boolean} [active] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#active}.
- * @property {integer} [blendMode] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#blendMode}.
+ * @property {(Phaser.BlendModes|string)} [blendMode] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#blendMode}.
  * @property {*} [callbackScope] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#deathCallbackScope} and {@link Phaser.GameObjects.Particles.ParticleEmitter#emitCallbackScope}.
  * @property {boolean} [collideBottom] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#collideBottom}.
  * @property {boolean} [collideLeft] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#collideLeft}.
@@ -54,11 +54,11 @@ package phaser;
  * @property {object} [followOffset] - Assigns to {@link Phaser.GameObjects.Particles.ParticleEmitter#followOffset}.
  * @property {number} [followOffset.x] - x-coordinate of the offset.
  * @property {number} [followOffset.y] - y-coordinate of the offset.
- * @property {number|number[]|string|string[]|Phaser.Textures.Frame|Phaser.Textures.Frame[]|ParticleEmitterFrameConfig} [frames] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#frames}.
+ * @property {number|number[]|string|string[]|Phaser.Textures.Frame|Phaser.Textures.Frame[]|ParticleEmitterFrameConfig} [frame] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#frames}.
  */
 typedef ParticleEmitterConfig = {
     @:optional var active:Bool;
-    @:optional var blendMode:Int;
+    @:optional var blendMode:Dynamic;
     @:optional var callbackScope:Dynamic;
     @:optional var collideBottom:Bool;
     @:optional var collideLeft:Bool;
@@ -106,5 +106,5 @@ typedef ParticleEmitterConfig = {
     @:optional var emitZone:Dynamic;
     @:optional var bounds:Dynamic;
     @:optional var followOffset:Dynamic;
-    @:optional var frames:Dynamic;
+    @:optional var frame:Dynamic;
 };

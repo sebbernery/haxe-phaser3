@@ -5,8 +5,7 @@ package phaser.animations;
  * A single frame in an Animation sequence.
  *
  * An AnimationFrame consists of a reference to the Texture it uses for rendering, references to other
- * frames in the animation, and index data. It also has the ability to fire its own `onUpdate` callback
- * and modify the animation timing.
+ * frames in the animation, and index data. It also has the ability to modify the animation timing.
  *
  * AnimationFrames are generated automatically by the Animation class.
  *
@@ -122,9 +121,9 @@ extern class AnimationFrame {
      * @method Phaser.Animations.AnimationFrame#toJSON
      * @since 3.0.0
      *
-     * @return {JSONAnimationFrame} The AnimationFrame data.
+     * @return {Phaser.Animations.Types.JSONAnimationFrame} The AnimationFrame data.
      */
-    public function toJSON():JSONAnimationFrame;
+    public function toJSON():phaser.animations.types.JSONAnimationFrame;
     /**
      * Destroys this object by removing references to external resources and callbacks.
      *

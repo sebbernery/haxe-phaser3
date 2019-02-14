@@ -205,13 +205,15 @@ extern class File {
      * @method Phaser.Loader.File#onError
      * @since 3.0.0
      *
+     * @param {XMLHttpRequest} xhr - The XMLHttpRequest that caused this onload event.
      * @param {ProgressEvent} event - The DOM ProgressEvent that resulted from this error.
      */
-    public function onError(event:js.html.ProgressEvent):Void;
+    public function onError(xhr:js.html.XMLHttpRequest, event:js.html.ProgressEvent):Void;
     /**
      * Called during the file load progress. Is sent a DOM ProgressEvent.
      *
      * @method Phaser.Loader.File#onProgress
+     * @fires Phaser.Loader.Events#FILE_PROGRESS
      * @since 3.0.0
      *
      * @param {ProgressEvent} event - The DOM ProgressEvent.
@@ -265,8 +267,8 @@ extern class File {
      * It will emit a `filecomplete` event from the LoaderPlugin.
      *
      * @method Phaser.Loader.File#pendingDestroy
-     * @fires Phaser.Loader.File#fileCompleteEvent
-     * @fires Phaser.Loader.File#singleFileCompleteEvent
+     * @fires Phaser.Loader.Events#FILE_COMPLETE
+     * @fires Phaser.Loader.Events#FILE_KEY_COMPLETE
      * @since 3.7.0
      */
     public function pendingDestroy():Void;

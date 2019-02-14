@@ -73,8 +73,8 @@ extern class Shake {
      * Shakes the Camera by the given intensity over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Shake#start
-     * @fires CameraShakeStartEvent
-     * @fires CameraShakeCompleteEvent
+     * @fires Phaser.Cameras.Scene2D.Events#SHAKE_START
+     * @fires Phaser.Cameras.Scene2D.Events#SHAKE_COMPLETE
      * @since 3.5.0
      *
      * @param {integer} [duration=100] - The duration of the effect in milliseconds.
@@ -108,6 +108,7 @@ extern class Shake {
      * Called internally when the effect completes.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Shake#effectComplete
+     * @fires Phaser.Cameras.Scene2D.Events#SHAKE_COMPLETE
      * @since 3.5.0
      */
     public function effectComplete():Void;

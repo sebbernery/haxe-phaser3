@@ -316,7 +316,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#event:worldbounds
+     * @see Phaser.Physics.Arcade.World#worldboundsEvent
      */
     public var onWorldBounds:Bool;
     /**
@@ -326,7 +326,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#event:collide
+     * @see Phaser.Physics.Arcade.World#collideEvent
      */
     public var onCollide:Bool;
     /**
@@ -336,7 +336,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#event:overlap
+     * @see Phaser.Physics.Arcade.World#overlapEvent
      */
     public var onOverlap:Bool;
     /**
@@ -348,6 +348,18 @@ extern class Body {
      * @since 3.0.0
      */
     public var maxVelocity:phaser.math.Vector2;
+    /**
+     * The maximum speed this Body is allowed to reach.
+     *
+     * If not negative it limits the scalar value of speed.
+     *
+     * Any negative value means no maximum is being applied.
+     *
+     * @name Phaser.Physics.Arcade.Body#maxSpeed
+     * @type {number}
+     * @since 3.16.0
+     */
+    public var maxSpeed:Float;
     /**
      * If this Body is `immovable` and in motion, `friction` is the proportion of this Body's motion received by the riding Body on each axis, relative to 1.
      * The default value (1, 0) moves the riding Body horizontally in equal proportion to this Body and vertically not at all.
@@ -517,7 +529,7 @@ extern class Body {
      */
     public var overlapR:Float;
     /**
-     * Whether this Body is overlapped with another and both have zero velocity.
+     * Whether this Body is overlapped with another and both are not moving.
      *
      * @name Phaser.Physics.Arcade.Body#embedded
      * @type {boolean}
@@ -536,7 +548,7 @@ extern class Body {
     public var collideWorldBounds:Bool;
     /**
      * Whether this Body is checked for collisions and for which directions.
-     * You can set `checkCollision.none = false` to disable collision checks.
+     * You can set `checkCollision.none = true` to disable collision checks.
      *
      * @name Phaser.Physics.Arcade.Body#checkCollision
      * @type {ArcadeBodyCollision}
@@ -601,6 +613,7 @@ extern class Body {
      * @name Phaser.Physics.Arcade.Body#physicsType
      * @type {integer}
      * @readonly
+     * @default Phaser.Physics.Arcade.DYNAMIC_BODY
      * @since 3.0.0
      */
     public var physicsType:Int;
@@ -657,7 +670,8 @@ extern class Body {
      */
     public var bottom:Float;
     /**
-     * Updates this Body's transform, dimensions, and position from its Game Object.
+     * Updates the Body's `transform`, `width`, `height`, and `center` from its Game Object.
+     * The Body's `position` isn't changed.
      *
      * @method Phaser.Physics.Arcade.Body#updateBounds
      * @since 3.0.0
@@ -677,7 +691,7 @@ extern class Body {
      * @fires Phaser.Physics.Arcade.World#worldbounds
      * @since 3.0.0
      *
-     * @param {number} delta - The delta time, in ms, elapsed since the last frame.
+     * @param {number} delta - The delta time, in seconds, elapsed since the last frame.
      */
     public function update(delta:Float):Void;
     /**
@@ -940,6 +954,17 @@ extern class Body {
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
     public function setMaxVelocity(x:Float, ?y:Float):phaser.physics.arcade.Body;
+    /**
+     * Sets the maximum speed the Body can move.
+     *
+     * @method Phaser.Physics.Arcade.Body#setMaxSpeed
+     * @since 3.16.0
+     *
+     * @param {number} value - The maximum speed value, in pixels per second. Set to a negative value to disable.
+     *
+     * @return {Phaser.Physics.Arcade.Body} This Body object.
+     */
+    public function setMaxSpeed(value:Float):phaser.physics.arcade.Body;
     /**
      * Sets the Body's bounce.
      *

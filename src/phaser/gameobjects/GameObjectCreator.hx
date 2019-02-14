@@ -133,11 +133,11 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#group
      * @since 3.0.0
      *
-     * @param {GroupConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {GroupConfig|GroupCreateConfig} config - The configuration object this Game Object will use to create itself.
      *
      * @return {Phaser.GameObjects.Group} The Game Object that was created.
      */
-    public function group(config:GroupConfig):phaser.gameobjects.Group;
+    public function group(config:Dynamic):phaser.gameobjects.Group;
     /**
      * Creates a new Image Game Object and returns it.
      *

@@ -35,7 +35,7 @@ extern class Group extends phaser.gameobjects.Group {
      *
      * @name Phaser.Physics.Arcade.Group#physicsType
      * @type {integer}
-     * @default DYNAMIC_BODY
+     * @default Phaser.Physics.Arcade.DYNAMIC_BODY
      * @since 3.0.0
      */
     public var physicsType:Int;

@@ -12,6 +12,21 @@ package phaser.gameobjects;
  * applying gradient fills to the text, or strokes, shadows and more. You can also use custom fonts
  * loaded externally, such as Google or TypeKit Web fonts.
  *
+ * **Important:** If the font you wish to use has a space or digit in its name, such as
+ * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes, either
+ * when creating the Text object, or when setting the font via `setFont` or `setFontFamily`. I.e.:
+ *
+ * ```javascript
+ * this.add.text(0, 0, 'Hello World', { fontFamily: '"Roboto Condensed"' });
+ * ```
+ *
+ * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
+ * quoted properly, too:
+ *
+ * ```javascript
+ * this.add.text(0, 0, 'Hello World', { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif' });
+ * ```
+ *
  * You can only display fonts that are currently loaded and available to the browser: therefore fonts must
  * be pre-loaded. Phaser does not do ths for you, so you will require the use of a 3rd party font loader,
  * or have the fonts ready available in the CSS on the page in which your Phaser game resides.
@@ -86,10 +101,10 @@ extern class Text extends phaser.gameobjects.GameObject {
      * Manages the style of this Text object.
      *
      * @name Phaser.GameObjects.Text#style
-     * @type {Phaser.GameObjects.Text.TextStyle}
+     * @type {Phaser.GameObjects.TextStyle}
      * @since 3.0.0
      */
-    public var style:phaser.gameobjects.text.TextStyle;
+    public var style:phaser.gameobjects.TextStyle;
     /**
      * Whether to automatically round line positions.
      *
@@ -167,11 +182,11 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @function Phaser.GameObjects.Text.MeasureText
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Text.TextStyle} textStyle - The TextStyle object to measure.
+     * @param {Phaser.GameObjects.TextStyle} textStyle - The TextStyle object to measure.
      *
      * @return {object} An object containing the ascent, descent and fontSize of the TextStyle.
      */
-    public function MeasureText(textStyle:phaser.gameobjects.text.TextStyle):Dynamic;
+    public function MeasureText(textStyle:phaser.gameobjects.TextStyle):Dynamic;
     /**
      * Initialize right to left text.
      *
@@ -274,6 +289,20 @@ extern class Text extends phaser.gameobjects.GameObject {
      * If an object is given, the `fontFamily`, `fontSize` and `fontStyle`
      * properties of that object are set.
      *
+     * **Important:** If the font you wish to use has a space or digit in its name, such as
+     * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes:
+     *
+     * ```javascript
+     * Text.setFont('"Roboto Condensed"');
+     * ```
+     *
+     * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
+     * quoted properly, too:
+     *
+     * ```javascript
+     * Text.setFont('Verdana, "Times New Roman", Tahoma, serif');
+     * ```
+     *
      * @method Phaser.GameObjects.Text#setFont
      * @since 3.0.0
      *
@@ -284,6 +313,20 @@ extern class Text extends phaser.gameobjects.GameObject {
     public function setFont(font:String):phaser.gameobjects.Text;
     /**
      * Set the font family.
+     *
+     * **Important:** If the font you wish to use has a space or digit in its name, such as
+     * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes:
+     *
+     * ```javascript
+     * Text.setFont('"Roboto Condensed"');
+     * ```
+     *
+     * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
+     * quoted properly, too:
+     *
+     * ```javascript
+     * Text.setFont('Verdana, "Times New Roman", Tahoma, serif');
+     * ```
      *
      * @method Phaser.GameObjects.Text#setFontFamily
      * @since 3.0.0
@@ -341,16 +384,21 @@ extern class Text extends phaser.gameobjects.GameObject {
      */
     public function setBackgroundColor(color:String):phaser.gameobjects.Text;
     /**
-     * Set the text fill color.
+     * Set the fill style to be used by the Text object.
+     *
+     * This can be any valid CanvasRenderingContext2D fillStyle value, such as
+     * a color (in hex, rgb, rgba, hsl or named values), a gradient or a pattern.
+     *
+     * See the [MDN fillStyle docs](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle) for more details.
      *
      * @method Phaser.GameObjects.Text#setFill
      * @since 3.0.0
      *
-     * @param {string} color - The text fill color.
+     * @param {(string|any)} color - The text fill style. Can be any valid CanvasRenderingContext `fillStyle` value.
      *
      * @return {Phaser.GameObjects.Text} This Text object.
      */
-    public function setFill(color:String):phaser.gameobjects.Text;
+    public function setFill(color:Dynamic):phaser.gameobjects.Text;
     /**
      * Set the text fill color.
      *
@@ -665,6 +713,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -690,6 +739,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -697,7 +747,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

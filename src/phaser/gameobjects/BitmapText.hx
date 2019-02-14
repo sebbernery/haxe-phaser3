@@ -15,12 +15,12 @@ package phaser.gameobjects;
  *
  * To create a BitmapText data files you need a 3rd party app such as:
  *
- * BMFont (Windows, free): http://www.angelcode.com/products/bmfont/
- * Glyph Designer (OS X, commercial): http://www.71squared.com/en/glyphdesigner
- * Littera (Web-based, free): http://kvazars.com/littera/
+ * BMFont (Windows, free): {@link http://www.angelcode.com/products/bmfont/|http://www.angelcode.com/products/bmfont/}
+ * Glyph Designer (OS X, commercial): {@link http://www.71squared.com/en/glyphdesigner|http://www.71squared.com/en/glyphdesigner}
+ * Littera (Web-based, free): {@link http://kvazars.com/littera/|http://kvazars.com/littera/}
  *
  * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of
- * converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
+ * converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: {@link http://codebeautify.org/xmltojson|http://codebeautify.org/xmltojson}
  *
  * @class BitmapText
  * @extends Phaser.GameObjects.GameObject
@@ -356,6 +356,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -381,6 +382,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -388,7 +390,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

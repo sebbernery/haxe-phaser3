@@ -325,7 +325,11 @@ extern class TransformMatrix {
      */
     public function setTransform(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Dynamic;
     /**
-     * Decompose this Matrix into its translation, scale and rotation values.
+     * Decompose this Matrix into its translation, scale and rotation values using QR decomposition.
+     *
+     * The result must be applied in the following order to reproduce the current matrix:
+     *
+     * translate -> rotate -> scale
      *
      * @method Phaser.GameObjects.Components.TransformMatrix#decomposeMatrix
      * @since 3.0.0

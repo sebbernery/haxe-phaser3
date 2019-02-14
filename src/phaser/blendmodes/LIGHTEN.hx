@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Lighten blend mode.
+ * Lighten blend mode. For Canvas only.
+ * Retains the lightest pixels of both layers.
  *
  * @name Phaser.BlendModes.LIGHTEN
  */

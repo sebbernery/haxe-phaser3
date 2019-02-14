@@ -62,14 +62,13 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var sceneManager:phaser.scenes.SceneManager;
     /**
-     * A reference to the Game Config.
+     * A reference to the Game Scale Manager.
      *
-     * @name Phaser.Cameras.Scene2D.BaseCamera#config
-     * @type {object}
-     * @readonly
-     * @since 3.12.0
+     * @name Phaser.Cameras.Scene2D.BaseCamera#scaleManager
+     * @type {Phaser.Scale.ScaleManager}
+     * @since 3.16.0
      */
-    public var config:Dynamic;
+    public var scaleManager:phaser.scale.ScaleManager;
     /**
      * The Camera ID. Assigned by the Camera Manager and used to handle camera exclusion.
      * This value is a bitmask.
@@ -90,11 +89,14 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var name:String;
     /**
+     * This property is un-used in v3.16.
+     *
      * The resolution of the Game, used in most Camera calculations.
      *
      * @name Phaser.Cameras.Scene2D.BaseCamera#resolution
      * @type {number}
      * @readonly
+     * @deprecated
      * @since 3.12.0
      */
     public var resolution:Float;
@@ -308,7 +310,7 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var zoom:Float;
     /**
-     * The x position of the center of the Camera's viewport, relative to the top-left of the game canvas.
+     * The horizontal position of the center of the Camera's viewport, relative to the left of the game canvas.
      *
      * @name Phaser.Cameras.Scene2D.BaseCamera#centerX
      * @type {number}
@@ -317,7 +319,7 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var centerX:Float;
     /**
-     * The y position of the center of the Camera's viewport, relative to the top-left of the game canvas.
+     * The vertical position of the center of the Camera's viewport, relative to the top of the game canvas.
      *
      * @name Phaser.Cameras.Scene2D.BaseCamera#centerY
      * @type {number}
@@ -386,9 +388,33 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {number} y - The vertical coordinate to center on.
      * @param {Phaser.Math.Vector2} [out] - A Vec2 to store the values in. If not given a new Vec2 is created.
      *
-     * @return {Phaser.Math.Vector2} The scroll coordinates stored in the `x` abd `y` properties.
+     * @return {Phaser.Math.Vector2} The scroll coordinates stored in the `x` and `y` properties.
      */
     public function getScroll(x:Float, y:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
+    /**
+     * Moves the Camera horizontally so that it is centered on the given x coordinate, bounds allowing.
+     * Calling this does not change the scrollY value.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#centerOnX
+     * @since 3.16.0
+     *
+     * @param {number} x - The horizontal coordinate to center on.
+     *
+     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     */
+    public function centerOnX(x:Float):phaser.cameras.scene2d.BaseCamera;
+    /**
+     * Moves the Camera vertically so that it is centered on the given y coordinate, bounds allowing.
+     * Calling this does not change the scrollX value.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#centerOnY
+     * @since 3.16.0
+     *
+     * @param {number} y - The vertical coordinate to center on.
+     *
+     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     */
+    public function centerOnY(y:Float):phaser.cameras.scene2d.BaseCamera;
     /**
      * Moves the Camera so that it is centered on the given coordinates, bounds allowing.
      *
@@ -468,10 +494,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @protected
      * @since 3.0.0
      *
-     * @param {number} baseScale - The base scale, as set in the Camera Manager.
-     * @param {number} resolution - The game resolution.
+     * @param {number} resolution - The game resolution, as set in the Scale Manager.
      */
-    public function preRender(baseScale:Float, resolution:Float):Void;
+    public function preRender(resolution:Float):Void;
     /**
      * Takes an x value and checks it's within the range of the Camera bounds, adjusting if required.
      * Do not call this method if you are not using camera bounds.
@@ -560,11 +585,26 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {integer} y - The top-left y coordinate of the bounds.
      * @param {integer} width - The width of the bounds, in pixels.
      * @param {integer} height - The height of the bounds, in pixels.
-     * @param {boolean} [centerOn] - If `true` the Camera will automatically be centered on the new bounds.
+     * @param {boolean} [centerOn=false] - If `true` the Camera will automatically be centered on the new bounds.
      *
      * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
      */
     public function setBounds(x:Int, y:Int, width:Int, height:Int, ?centerOn:Bool):phaser.cameras.scene2d.BaseCamera;
+    /**
+     * Returns a rectangle containing the bounds of the Camera.
+     *
+     * If the Camera does not have any bounds the rectangle will be empty.
+     *
+     * The rectangle is a copy of the bounds, so is safe to modify.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#getBounds
+     * @since 3.16.0
+     *
+     * @param {Phaser.Geom.Rectangle} [out] - An optional Rectangle to store the bounds in. If not given, a new Rectangle will be created.
+     *
+     * @return {Phaser.Geom.Rectangle} A rectangle containing the bounds of this Camera.
+     */
+    public function getBounds(?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Sets the name of this Camera.
      * This value is for your own use and isn't used internally.

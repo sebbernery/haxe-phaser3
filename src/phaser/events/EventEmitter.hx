@@ -115,13 +115,13 @@ extern class EventEmitter {
      * @since 3.0.0
      *
      * @param {(string|symbol)} event - The event name.
-     * @param {function} fn - Only remove the listeners that match this function.
-     * @param {*} context - Only remove the listeners that have this context.
-     * @param {boolean} once - Only remove one-time listeners.
+     * @param {function} [fn] - Only remove the listeners that match this function.
+     * @param {*} [context] - Only remove the listeners that have this context.
+     * @param {boolean} [once] - Only remove one-time listeners.
      *
      * @return {Phaser.Events.EventEmitter} `this`.
      */
-    public function removeListener(event:Dynamic, fn:Dynamic, context:Dynamic, once:Bool):phaser.events.EventEmitter;
+    public function removeListener(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):phaser.events.EventEmitter;
     /**
      * Remove the listeners of a given event.
      *
@@ -129,13 +129,13 @@ extern class EventEmitter {
      * @since 3.0.0
      *
      * @param {(string|symbol)} event - The event name.
-     * @param {function} fn - Only remove the listeners that match this function.
-     * @param {*} context - Only remove the listeners that have this context.
-     * @param {boolean} once - Only remove one-time listeners.
+     * @param {function} [fn] - Only remove the listeners that match this function.
+     * @param {*} [context] - Only remove the listeners that have this context.
+     * @param {boolean} [once] - Only remove one-time listeners.
      *
      * @return {Phaser.Events.EventEmitter} `this`.
      */
-    public function off(event:Dynamic, fn:Dynamic, context:Dynamic, once:Bool):phaser.events.EventEmitter;
+    public function off(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):phaser.events.EventEmitter;
     /**
      * Remove all listeners, or those of the specified event.
      *

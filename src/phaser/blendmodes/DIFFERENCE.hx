@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Difference blend mode.
+ * Difference blend mode. For Canvas only.
+ * Subtracts the bottom layer from the top layer or the other way round to always get a positive value.
  *
  * @name Phaser.BlendModes.DIFFERENCE
  */

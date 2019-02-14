@@ -83,42 +83,46 @@ extern class List {
      * The first item in the List or `null` for an empty List.
      *
      * @name Phaser.Structs.List#first
-     * @type {integer}
+     * @genericUse {T} - [$type]
+     * @type {*}
      * @readonly
      * @since 3.0.0
      */
-    public var first:Int;
+    public var first:Dynamic;
     /**
      * The last item in the List, or `null` for an empty List.
      *
      * @name Phaser.Structs.List#last
-     * @type {integer}
+     * @genericUse {T} - [$type]
+     * @type {*}
      * @readonly
      * @since 3.0.0
      */
-    public var last:Int;
+    public var last:Dynamic;
     /**
      * The next item in the List, or `null` if the entire List has been traversed.
      *
      * This property can be read successively after reading {@link #first} or manually setting the {@link #position} to iterate the List.
      *
      * @name Phaser.Structs.List#next
-     * @type {integer}
+     * @genericUse {T} - [$type]
+     * @type {*}
      * @readonly
      * @since 3.0.0
      */
-    public var next:Int;
+    public var next:Dynamic;
     /**
      * The previous item in the List, or `null` if the entire List has been traversed.
      *
      * This property can be read successively after reading {@link #last} or manually setting the {@link #position} to iterate the List backwards.
      *
      * @name Phaser.Structs.List#previous
-     * @type {integer}
+     * @genericUse {T} - [$type]
+     * @type {*}
      * @readonly
      * @since 3.0.0
      */
-    public var previous:Int;
+    public var previous:Dynamic;
     /**
      * Adds the given item to the end of the list. Each item must be unique.
      *
@@ -175,9 +179,8 @@ extern class List {
      */
     public function getIndex(child:Dynamic):Int;
     /**
-     * Sort the contents of this List so the items are in order based
-     * on the given property. For example, `sort('alpha')` would sort the List
-     * contents based on the value of their `alpha` property.
+     * Sort the contents of this List so the items are in order based on the given property.
+     * For example, `sort('alpha')` would sort the List contents based on the value of their `alpha` property.
      *
      * @method Phaser.Structs.List#sort
      * @since 3.0.0
@@ -185,10 +188,11 @@ extern class List {
      * @genericUse {T[]} - [children,$return]
      *
      * @param {string} property - The property to lexically sort by.
+     * @param {function} [handler] - Provide your own custom handler function. Will receive 2 children which it should compare and return a boolean.
      *
      * @return {Phaser.Structs.List} This List object.
      */
-    public function sort(property:String):phaser.structs.List;
+    public function sort(property:String, ?handler:Dynamic):phaser.structs.List;
     /**
      * Searches for the first instance of a child with its `name`
      * property matching the given argument. Should more than one child have
@@ -224,7 +228,6 @@ extern class List {
      * @method Phaser.Structs.List#getFirst
      * @since 3.0.0
      *
-     * @genericUse {T} - [value]
      * @genericUse {T | null} - [$return]
      *
      * @param {string} property - The name of the property to test or a falsey value to have no criterion.
@@ -344,7 +347,7 @@ extern class List {
      * @param {integer} [endIndex] - The position to stop removing at. The item at this position won't be removed.
      * @param {boolean} [skipCallback=false] - Skip calling the List.removeCallback.
      *
-     * @return {Array.<*>} An array of the items which were removed.[description]
+     * @return {Array.<*>} An array of the items which were removed.
      */
     public function removeBetween(?startIndex:Int, ?endIndex:Int, ?skipCallback:Bool):Array<Dynamic>;
     /**

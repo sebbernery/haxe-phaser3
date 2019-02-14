@@ -97,7 +97,8 @@ extern class Point {
      */
     public function Floor(point:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Get the centroid or geometric center of a plane figure (the arithmetic mean position of all the points in the figure).
+     * Informally, it is the point at which a cutout of the shape could be perfectly balanced on the tip of a pin.
      *
      * @function Phaser.Geom.Point.GetCentroid
      * @since 3.0.0
@@ -111,25 +112,25 @@ extern class Point {
      */
     public function GetCentroid(points:Array<phaser.geom.Point>, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Calculate the magnitude of the point, which equivalent to the length of the line from the origin to this point.
      *
      * @function Phaser.Geom.Point.GetMagnitude
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Point} point - [description]
+     * @param {Phaser.Geom.Point} point - The point to calculate the magnitude for
      *
-     * @return {number} [description]
+     * @return {number} The resulting magnitude
      */
     public function GetMagnitude(point:phaser.geom.Point):Float;
     /**
-     * [description]
+     * Calculates the square of magnitude of given point.(Can be used for fast magnitude calculation of point)
      *
      * @function Phaser.Geom.Point.GetMagnitudeSq
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Point} point - [description]
+     * @param {Phaser.Geom.Point} point - Returns square of the magnitude/length of given point.
      *
-     * @return {number} [description]
+     * @return {number} Returns square of the magnitude of given point.
      */
     public function GetMagnitudeSq(point:phaser.geom.Point):Float;
     /**
@@ -147,19 +148,19 @@ extern class Point {
      */
     public function GetRectangleFromPoints(points:Array<phaser.geom.Point>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
-     * Interpolate two given Point objects, based on `t` value. Return result either as new Point if `out` parameter is omitted or load result into Point passed as `out` parameter and return it. For `out` parameter you can also use any object with public x/y properties.
+     * [description]
      *
      * @function Phaser.Geom.Point.Interpolate
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point} pointA - [description]
-     * @param {Phaser.Geom.Point} pointB - [description]
-     * @param {number} [t=0] - [description]
-     * @param {(Phaser.Geom.Point|object)} [out] - [description]
+     * @param {Phaser.Geom.Point} pointA - The starting `Point` for the interpolation.
+     * @param {Phaser.Geom.Point} pointB - The target `Point` for the interpolation.
+     * @param {number} [t=0] - The amount to interpolate between the two points. Generally, a value between 0 (returns the starting `Point`) and 1 (returns the target `Point`). If omitted, 0 is used.
+     * @param {(Phaser.Geom.Point|object)} [out] - An optional `Point` object whose `x` and `y` values will be set to the result of the interpolation (can also be any object with `x` and `y` properties). If omitted, a new `Point` created and returned.
      *
-     * @return {(Phaser.Geom.Point|object)} [description]
+     * @return {(Phaser.Geom.Point|object)} Either the object from the `out` argument with the properties `x` and `y` set to the result of the interpolation or a newly created `Point` object.
      */
     public function Interpolate(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?t:Float, ?out:Dynamic):phaser.geom.Point;
     /**
@@ -176,17 +177,17 @@ extern class Point {
      */
     public function Invert(point:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Inverts a Point's coordinates.
      *
      * @function Phaser.Geom.Point.Negative
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point} point - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Point} point - The Point to invert.
+     * @param {Phaser.Geom.Point} [out] - The Point to return the inverted coordinates in.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} The modified `out` Point, or a new Point if none was provided.
      */
     public function Negative(point:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
@@ -232,17 +233,17 @@ extern class Point {
      */
     public function ProjectUnit(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Changes the magnitude (length) of a two-dimensional vector without changing its direction.
      *
      * @function Phaser.Geom.Point.SetMagnitude
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [point,$return]
      *
-     * @param {Phaser.Geom.Point} point - [description]
-     * @param {number} magnitude - [description]
+     * @param {Phaser.Geom.Point} point - The Point to treat as the end point of the vector.
+     * @param {number} magnitude - The new magnitude of the vector.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} The modified Point.
      */
     public function SetMagnitude(point:phaser.geom.Point, magnitude:Float):phaser.geom.Point;
 }

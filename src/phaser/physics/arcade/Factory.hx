@@ -40,7 +40,7 @@ extern class Factory {
      */
     public var sys:phaser.scenes.Systems;
     /**
-     * Create a new Arcade Physics Collider object.
+     * Creates a new Arcade Physics Collider object.
      *
      * @method Phaser.Physics.Arcade.Factory#collider
      * @since 3.0.0
@@ -55,7 +55,7 @@ extern class Factory {
      */
     public function collider(object1:Dynamic, object2:Dynamic, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):phaser.physics.arcade.Collider;
     /**
-     * Create a new Arcade Physics Collider Overlap object.
+     * Creates a new Arcade Physics Collider Overlap object.
      *
      * @method Phaser.Physics.Arcade.Factory#overlap
      * @since 3.0.0

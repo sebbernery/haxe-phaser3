@@ -74,7 +74,7 @@ extern class HTML5AudioSoundManager extends phaser.sound.BaseSoundManager {
      * Sets the muted state of all this Sound Manager.
      *
      * @method Phaser.Sound.HTML5AudioSoundManager#setMute
-     * @fires Phaser.Sound.HTML5AudioSoundManager#muteEvent
+     * @fires Phaser.Sound.Events#GLOBAL_MUTE
      * @since 3.3.0
      *
      * @param {boolean} value - `true` to mute all sounds, `false` to unmute them.
@@ -86,7 +86,7 @@ extern class HTML5AudioSoundManager extends phaser.sound.BaseSoundManager {
      * Sets the volume of this Sound Manager.
      *
      * @method Phaser.Sound.HTML5AudioSoundManager#setVolume
-     * @fires Phaser.Sound.HTML5AudioSoundManager#volumeEvent
+     * @fires Phaser.Sound.Events#GLOBAL_VOLUME
      * @since 3.3.0
      *
      * @param {number} value - The global volume of this Sound Manager.

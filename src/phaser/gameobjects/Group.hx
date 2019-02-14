@@ -50,11 +50,11 @@ extern class Group {
      * The class to create new group members from.
      *
      * @name Phaser.GameObjects.Group#classType
-     * @type {object}
+     * @type {GroupClassTypeConstructor}
      * @since 3.0.0
      * @default Phaser.GameObjects.Sprite
      */
-    public var classType:Dynamic;
+    public var classType:GroupClassTypeConstructor;
     /**
      * Whether this group runs its {@link Phaser.GameObjects.Group#preUpdate} method
      * (which may update any members).

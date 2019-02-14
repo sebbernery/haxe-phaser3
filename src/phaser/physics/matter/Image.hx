@@ -61,18 +61,18 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public var world:phaser.physics.matter.World;
     /**
-     * [description]
+     * Sets the restitution on the physics object.
      *
      * @method Phaser.Physics.Matter.Components.Bounce#setBounce
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - A Number that defines the restitution (elasticity) of the body. The value is always positive and is in the range (0, 1). A value of 0 means collisions may be perfectly inelastic and no bouncing may occur. A value of 0.8 means the body may bounce back with approximately 80% of its kinetic energy. Note that collision response is based on pairs of bodies, and that restitution values are combined with the following formula: `Math.max(bodyA.restitution, bodyB.restitution)`
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setBounce(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31. Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision categories are included in their collision masks (see {@link #setCollidesWith}).
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionCategory
      * @since 3.0.0
@@ -83,7 +83,7 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function setCollisionCategory(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values, they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}). If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value, they will never collide.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionGroup
      * @since 3.0.0
@@ -94,7 +94,7 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function setCollisionGroup(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0` and `(categoryB & maskA) !== 0` are both true.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollidesWith
      * @since 3.0.0
@@ -172,36 +172,36 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function thrustBack(speed:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets new friction values for this Game Object's Matter Body.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFriction
      * @since 3.0.0
      *
-     * @param {number} value - [description]
-     * @param {number} [air] - [description]
-     * @param {number} [fstatic] - [description]
+     * @param {number} value - The new friction of the body, between 0 and 1, where 0 allows the Body to slide indefinitely, while 1 allows it to stop almost immediately after a force is applied.
+     * @param {number} [air] - If provided, the new air resistance of the Body. The higher the value, the faster the Body will slow as it moves through space. 0 means the body has no air resistance.
+     * @param {number} [fstatic] - If provided, the new static friction of the Body. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary. 0 means the body will never "stick" when it is nearly stationary.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setFriction(value:Float, ?air:Float, ?fstatic:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets a new air resistance for this Game Object's Matter Body. A value of 0 means the Body will never slow as it moves through space. The higher the value, the faster a Body slows when moving through space.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionAir
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new air resistance for the Body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setFrictionAir(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets a new static friction for this Game Object's Matter Body. A value of 0 means the Body will never "stick" when it is nearly stationary. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionStatic
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new static friction for the Body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
@@ -228,23 +228,23 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public var centerOfMass:Dynamic;
     /**
-     * [description]
+     * Sets the mass of the Game Object's Matter Body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setMass
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new mass of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setMass(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets density of the body.
      *
      * @method Phaser.Physics.Matter.Components.Mass#setDensity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The new density of the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
@@ -270,13 +270,13 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function isSensor():Bool;
     /**
-     * [description]
+     * Set the body on a Game Object to a rectangle.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setRectangle
      * @since 3.0.0
      *
-     * @param {number} width - [description]
-     * @param {number} height - [description]
+     * @param {number} width - Width of the rectangle.
+     * @param {number} height - Height of the rectangle.
      * @param {object} options - [description]
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
@@ -295,28 +295,28 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function setCircle(radius:Float, options:Dynamic):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Set the body on the Game Object to a polygon shape.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setPolygon
      * @since 3.0.0
      *
-     * @param {number} radius - [description]
-     * @param {number} sides - [description]
-     * @param {object} options - [description]
+     * @param {number} radius - The radius of the polygon.
+     * @param {number} sides - The amount of sides creating the polygon.
+     * @param {object} options - A matterjs config object.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setPolygon(radius:Float, sides:Float, options:Dynamic):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Creates a new matterjs trapezoid body.
      *
      * @method Phaser.Physics.Matter.Components.SetBody#setTrapezoid
      * @since 3.0.0
      *
-     * @param {number} width - [description]
-     * @param {number} height - [description]
-     * @param {number} slope - [description]
-     * @param {object} options - [description]
+     * @param {number} width - The width of the trapezoid.
+     * @param {number} height - The height of the trapezoid.
+     * @param {number} slope - The angle of slope for the trapezoid.
+     * @param {object} options - A matterjs config object for the body.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
@@ -431,35 +431,35 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function setAngularVelocity(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets the horizontal velocity of the physics body.
      *
      * @method Phaser.Physics.Matter.Components.Velocity#setVelocityX
      * @since 3.0.0
      *
-     * @param {number} x - [description]
+     * @param {number} x - The horizontal velocity value.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setVelocityX(x:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets vertical velocity of the physics body.
      *
      * @method Phaser.Physics.Matter.Components.Velocity#setVelocityY
      * @since 3.0.0
      *
-     * @param {number} y - [description]
+     * @param {number} y - The vertical velocity value.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setVelocityY(y:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Sets both the horizontal and vertical velocity of the physics body.
      *
      * @method Phaser.Physics.Matter.Components.Velocity#setVelocity
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} [y=x] - [description]
+     * @param {number} x - The horizontal velocity value.
+     * @param {number} [y=x] - The vertical velocity value, it can be either positive or negative. If not given, it will be the same as the `x` value.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */

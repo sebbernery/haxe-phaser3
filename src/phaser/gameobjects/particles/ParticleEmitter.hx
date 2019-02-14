@@ -1097,18 +1097,6 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      */
     public function depthSortCallback(a:Dynamic, b:Dynamic):Int;
     /**
-     * Calculates the difference of two particles, for sorting them by index.
-     *
-     * @method Phaser.GameObjects.Particles.ParticleEmitter#indexSortCallback
-     * @since 3.0.0
-     *
-     * @param {object} a - The first particle.
-     * @param {object} b - The second particle.
-     *
-     * @return {integer} The difference of a and b's `index` properties.
-     */
-    public function indexSortCallback(a:Dynamic, b:Dynamic):Int;
-    /**
      * The Mask this Game Object is using during render.
      *
      * @name Phaser.GameObjects.Components.Mask#mask

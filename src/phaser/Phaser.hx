@@ -112,9 +112,10 @@ class Phaser {
      */
     static public var CSSBlendModes:String;
     static public var Game:Dynamic;
-    static public var Animation:Dynamic;
+    static public var Animations:Dynamic;
     static public var Cache:Dynamic;
     static public var Cameras:Dynamic;
+    static public var Core:Dynamic;
     static public var Class:Dynamic;
     static public var Data:Dynamic;
     static public var Display:Dynamic;
@@ -124,6 +125,7 @@ class Phaser {
     static public var Loader:Dynamic;
     static public var Math:Dynamic;
     static public var Plugins:Dynamic;
+    static public var Scale:Dynamic;
     static public var Scene:Dynamic;
     static public var Scenes:Dynamic;
     static public var Sound:Dynamic;

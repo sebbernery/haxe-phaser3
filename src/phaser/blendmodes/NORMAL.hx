@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Normal blend mode.
+ * Normal blend mode. For Canvas and WebGL.
+ * This is the default setting and draws new shapes on top of the existing canvas content.
  *
  * @name Phaser.BlendModes.NORMAL
  */

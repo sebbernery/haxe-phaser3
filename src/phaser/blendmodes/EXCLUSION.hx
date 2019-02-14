@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Exclusion blend mode.
+ * Exclusion blend mode. For Canvas only.
+ * Like difference, but with lower contrast.
  *
  * @name Phaser.BlendModes.EXCLUSION
  */

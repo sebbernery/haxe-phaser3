@@ -2,7 +2,7 @@ package phaser.renderer.canvas;
 
 /**
  * @classdesc
- * [description]
+ * The Canvas Renderer is responsible for managing 2D canvas rendering contexts, including the one used by the Game's canvas. It tracks the internal state of a given context and can renderer textured Game Objects to it, taking into account alpha, blending, and scaling.
  *
  * @class CanvasRenderer
  * @memberof Phaser.Renderer.Canvas
@@ -23,7 +23,7 @@ extern class CanvasRenderer {
      */
     public var game:phaser.Game;
     /**
-     * [description]
+     * A constant which allows the renderer to be easily identified as a Canvas Renderer.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#type
      * @type {integer}
@@ -31,7 +31,7 @@ extern class CanvasRenderer {
      */
     public var type:Int;
     /**
-     * [description]
+     * The total number of Game Objects which were rendered in a frame.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#drawCount
      * @type {number}
@@ -40,31 +40,31 @@ extern class CanvasRenderer {
      */
     public var drawCount:Float;
     /**
-     * [description]
+     * The width of the canvas being rendered to.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#width
-     * @type {number}
+     * @type {integer}
      * @since 3.0.0
      */
-    public var width:Float;
+    public var width:Int;
     /**
-     * [description]
+     * The height of the canvas being rendered to.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#height
-     * @type {number}
+     * @type {integer}
      * @since 3.0.0
      */
-    public var height:Float;
+    public var height:Int;
     /**
-     * [description]
+     * The local configuration settings of the CanvasRenderer.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#config
-     * @type {RendererConfig}
+     * @type {object}
      * @since 3.0.0
      */
-    public var config:RendererConfig;
+    public var config:Dynamic;
     /**
-     * [description]
+     * The scale mode which should be used by the CanvasRenderer.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#scaleMode
      * @type {integer}
@@ -72,7 +72,7 @@ extern class CanvasRenderer {
      */
     public var scaleMode:Int;
     /**
-     * [description]
+     * The canvas element which the Game uses.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#gameCanvas
      * @type {HTMLCanvasElement}
@@ -80,7 +80,7 @@ extern class CanvasRenderer {
      */
     public var gameCanvas:js.html.CanvasElement;
     /**
-     * [description]
+     * The canvas context used to render all Cameras in all Scenes during the game loop.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#gameContext
      * @type {CanvasRenderingContext2D}
@@ -88,7 +88,7 @@ extern class CanvasRenderer {
      */
     public var gameContext:js.html.CanvasRenderingContext2D;
     /**
-     * [description]
+     * The canvas context currently used by the CanvasRenderer for all rendering operations.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#currentContext
      * @type {CanvasRenderingContext2D}
@@ -96,7 +96,9 @@ extern class CanvasRenderer {
      */
     public var currentContext:js.html.CanvasRenderingContext2D;
     /**
-     * [description]
+     * The blend modes supported by the Canvas Renderer.
+     *
+     * This object maps the {@link Phaser.BlendModes} to canvas compositing operations.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#blendModes
      * @type {array}
@@ -104,7 +106,7 @@ extern class CanvasRenderer {
      */
     public var blendModes:Array<Dynamic>;
     /**
-     * [description]
+     * The scale mode currently in use by the Canvas Renderer.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#currentScaleMode
      * @type {number}
@@ -113,85 +115,80 @@ extern class CanvasRenderer {
      */
     public var currentScaleMode:Float;
     /**
-     * [description]
+     * Details about the currently scheduled snapshot.
      *
-     * @name Phaser.Renderer.Canvas.CanvasRenderer#snapshotCallback
-     * @type {?SnapshotCallback}
-     * @default null
-     * @since 3.0.0
-     */
-    public var snapshotCallback:SnapshotCallback;
-    /**
-     * [description]
+     * If a non-null `callback` is set in this object, a snapshot of the canvas will be taken after the current frame is fully rendered.
      *
-     * @name Phaser.Renderer.Canvas.CanvasRenderer#snapshotType
-     * @type {?string}
-     * @default null
-     * @since 3.0.0
+     * @name Phaser.Renderer.Canvas.CanvasRenderer#snapshotState
+     * @type {SnapshotState}
+     * @since 3.16.0
      */
-    public var snapshotType:String;
+    public var snapshotState:SnapshotState;
     /**
-     * [description]
-     *
-     * @name Phaser.Renderer.Canvas.CanvasRenderer#snapshotEncoder
-     * @type {?number}
-     * @default null
-     * @since 3.0.0
-     */
-    public var snapshotEncoder:Float;
-    /**
-     * [description]
+     * Prepares the game canvas for rendering.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#init
      * @since 3.0.0
      */
     public function init():Void;
     /**
+     * The event handler that manages the `resize` event dispatched by the Scale Manager.
+     *
+     * @method Phaser.Renderer.Canvas.CanvasRenderer#onResize
+     * @since 3.16.0
+     *
+     * @param {Phaser.Structs.Size} gameSize - The default Game Size object. This is the un-modified game dimensions.
+     * @param {Phaser.Structs.Size} baseSize - The base Size object. The game dimensions multiplied by the resolution. The canvas width / height values match this.
+     * @param {Phaser.Structs.Size} displaySize - The display Size object. The size of the canvas style width / height attributes.
+     * @param {number} [resolution] - The Scale Manager resolution setting.
+     */
+    public function onResize(gameSize:phaser.structs.Size, baseSize:phaser.structs.Size, displaySize:phaser.structs.Size, ?resolution:Float):Void;
+    /**
      * Resize the main game canvas.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#resize
      * @since 3.0.0
      *
-     * @param {integer} width - [description]
-     * @param {integer} height - [description]
+     * @param {number} [width] - The new width of the renderer.
+     * @param {number} [height] - The new height of the renderer.
      */
-    public function resize(width:Int, height:Int):Void;
+    public function resize(?width:Float, ?height:Float):Void;
     /**
-     * [description]
+     * A NOOP method for handling lost context. Intentionally empty.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#onContextLost
      * @since 3.0.0
      *
-     * @param {function} callback - [description]
+     * @param {function} callback - Ignored parameter.
      */
     public function onContextLost(callback:Dynamic):Void;
     /**
-     * [description]
+     * A NOOP method for handling restored context. Intentionally empty.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#onContextRestored
      * @since 3.0.0
      *
-     * @param {function} callback - [description]
+     * @param {function} callback - Ignored parameter.
      */
     public function onContextRestored(callback:Dynamic):Void;
     /**
-     * [description]
+     * Resets the transformation matrix of the current context to the identity matrix, thus resetting any transformation.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#resetTransform
      * @since 3.0.0
      */
     public function resetTransform():Void;
     /**
-     * [description]
+     * Sets the blend mode (compositing operation) of the current context.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#setBlendMode
      * @since 3.0.0
      *
-     * @param {number} blendMode - [description]
+     * @param {string} blendMode - The new blend mode which should be used.
      *
-     * @return {this} [description]
+     * @return {this} This CanvasRenderer object.
      */
-    public function setBlendMode(blendMode:Float):Dynamic;
+    public function setBlendMode(blendMode:String):Dynamic;
     /**
      * Changes the Canvas Rendering Context that all draw operations are performed against.
      *
@@ -204,14 +201,14 @@ extern class CanvasRenderer {
      */
     public function setContext(?ctx:js.html.CanvasRenderingContext2D):Dynamic;
     /**
-     * [description]
+     * Sets the global alpha of the current context.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#setAlpha
      * @since 3.0.0
      *
-     * @param {number} alpha - [description]
+     * @param {number} alpha - The new alpha to use, where 0 is fully transparent and 1 is fully opaque.
      *
-     * @return {this} [description]
+     * @return {this} This CanvasRenderer object.
      */
     public function setAlpha(alpha:Float):Dynamic;
     /**
@@ -227,30 +224,89 @@ extern class CanvasRenderer {
      * @method Phaser.Renderer.Canvas.CanvasRenderer#render
      * @since 3.0.0
      *
-     * @param {Phaser.Scene} scene - [description]
-     * @param {Phaser.GameObjects.DisplayList} children - [description]
-     * @param {number} interpolationPercentage - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} camera - [description]
+     * @param {Phaser.Scene} scene - The Scene to render.
+     * @param {Phaser.GameObjects.DisplayList} children - The Game Objects within the Scene to be rendered.
+     * @param {number} interpolationPercentage - The interpolation percentage to apply. Currently unused.
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - The Scene Camera to render with.
      */
     public function render(scene:phaser.Scene, children:phaser.gameobjects.DisplayList, interpolationPercentage:Float, camera:phaser.cameras.scene2d.Camera):Void;
     /**
-     * [description]
+     * Restores the game context's global settings and takes a snapshot if one is scheduled.
+     *
+     * The post-render step happens after all Cameras in all Scenes have been rendered.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#postRender
      * @since 3.0.0
      */
     public function postRender():Void;
     /**
-     * [description]
+     * Schedules a snapshot of the entire game viewport to be taken after the current frame is rendered.
+     *
+     * To capture a specific area see the `snapshotArea` method. To capture a specific pixel, see `snapshotPixel`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotPixel`, for example, then
+     * calling this method will override it.
+     *
+     * Snapshots work by creating an Image object from the canvas data, this is a blocking process, which gets
+     * more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#snapshot
      * @since 3.0.0
      *
-     * @param {SnapshotCallback} callback - [description]
-     * @param {string} type - [description]
-     * @param {number} encoderOptions - [description]
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
+     *
+     * @return {this} This WebGL Renderer.
      */
-    public function snapshot(callback:SnapshotCallback, type:String, encoderOptions:Float):Void;
+    public function snapshot(callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    /**
+     * Schedules a snapshot of the given area of the game viewport to be taken after the current frame is rendered.
+     *
+     * To capture the whole game viewport see the `snapshot` method. To capture a specific pixel, see `snapshotPixel`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotPixel`, for example, then
+     * calling this method will override it.
+     *
+     * Snapshots work by creating an Image object from the canvas data, this is a blocking process, which gets
+     * more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
+     *
+     * @method Phaser.Renderer.Canvas.CanvasRenderer#snapshotArea
+     * @since 3.16.0
+     *
+     * @param {integer} x - The x coordinate to grab from.
+     * @param {integer} y - The y coordinate to grab from.
+     * @param {integer} width - The width of the area to grab.
+     * @param {integer} height - The height of the area to grab.
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
+     *
+     * @return {this} This WebGL Renderer.
+     */
+    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    /**
+     * Schedules a snapshot of the given pixel from the game viewport to be taken after the current frame is rendered.
+     *
+     * To capture the whole game viewport see the `snapshot` method. To capture a specific area, see `snapshotArea`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotArea`, for example, then
+     * calling this method will override it.
+     *
+     * Unlike the other two snapshot methods, this one will return a `Color` object containing the color data for
+     * the requested pixel. It doesn't need to create an internal Canvas or Image object, so is a lot faster to execute,
+     * using less memory.
+     *
+     * @method Phaser.Renderer.Canvas.CanvasRenderer#snapshotPixel
+     * @since 3.16.0
+     *
+     * @param {integer} x - The x coordinate of the pixel to get.
+     * @param {integer} y - The y coordinate of the pixel to get.
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
+     *
+     * @return {this} This WebGL Renderer.
+     */
+    public function snapshotPixel(x:Int, y:Int, callback:SnapshotCallback):Dynamic;
     /**
      * Takes a Sprite Game Object, or any object that extends it, and draws it to the current context.
      *
@@ -264,7 +320,7 @@ extern class CanvasRenderer {
      */
     public function batchSprite(sprite:phaser.gameobjects.GameObject, frame:phaser.textures.Frame, camera:phaser.cameras.scene2d.Camera, ?parentTransformMatrix:phaser.gameobjects.components.TransformMatrix):Void;
     /**
-     * [description]
+     * Destroys all object references in the Canvas Renderer.
      *
      * @method Phaser.Renderer.Canvas.CanvasRenderer#destroy
      * @since 3.0.0

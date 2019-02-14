@@ -16,14 +16,14 @@ package phaser.physics.arcade;
  * @constructor
  * @since 3.0.0
  *
- * @param {Phaser.Physics.Arcade.World} world - [description]
- * @param {Phaser.GameObjects.GameObject} gameObject - [description]
+ * @param {Phaser.Physics.Arcade.World} world - The Arcade Physics simulation this Static Body belongs to.
+ * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object this Static Body belongs to.
  */
 @:native("Phaser.Physics.Arcade.StaticBody")
 extern class StaticBody {
     public function new(world:phaser.physics.arcade.World, gameObject:phaser.gameobjects.GameObject);
     /**
-     * [description]
+     * The Arcade Physics simulation this Static Body belongs to.
      *
      * @name Phaser.Physics.Arcade.StaticBody#world
      * @type {Phaser.Physics.Arcade.World}
@@ -31,7 +31,7 @@ extern class StaticBody {
      */
     public var world:phaser.physics.arcade.World;
     /**
-     * [description]
+     * The Game Object this Static Body belongs to.
      *
      * @name Phaser.Physics.Arcade.StaticBody#gameObject
      * @type {Phaser.GameObjects.GameObject}
@@ -39,7 +39,7 @@ extern class StaticBody {
      */
     public var gameObject:phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Whether the Static Body's boundary is drawn to the debug display.
      *
      * @name Phaser.Physics.Arcade.StaticBody#debugShowBody
      * @type {boolean}
@@ -47,7 +47,7 @@ extern class StaticBody {
      */
     public var debugShowBody:Bool;
     /**
-     * [description]
+     * The color of this Static Body on the debug display.
      *
      * @name Phaser.Physics.Arcade.StaticBody#debugBodyColor
      * @type {integer}
@@ -55,7 +55,7 @@ extern class StaticBody {
      */
     public var debugBodyColor:Int;
     /**
-     * [description]
+     * Whether this Static Body is updated by the physics simulation.
      *
      * @name Phaser.Physics.Arcade.StaticBody#enable
      * @type {boolean}
@@ -64,7 +64,7 @@ extern class StaticBody {
      */
     public var enable:Bool;
     /**
-     * [description]
+     * Whether this Static Body's boundary is circular (`true`) or rectangular (`false`).
      *
      * @name Phaser.Physics.Arcade.StaticBody#isCircle
      * @type {boolean}
@@ -73,7 +73,8 @@ extern class StaticBody {
      */
     public var isCircle:Bool;
     /**
-     * [description]
+     * If this Static Body is circular, this is the unscaled radius of the Static Body's boundary, as set by {@link #setCircle}, in source pixels.
+     * The true radius is equal to `halfWidth`.
      *
      * @name Phaser.Physics.Arcade.StaticBody#radius
      * @type {number}
@@ -82,7 +83,9 @@ extern class StaticBody {
      */
     public var radius:Float;
     /**
-     * [description]
+     * The offset of this Static Body's actual position from any updated position.
+     *
+     * Unlike a dynamic Body, a Static Body does not follow its Game Object. As such, this offset is only applied when resizing the Static Body.
      *
      * @name Phaser.Physics.Arcade.StaticBody#offset
      * @type {Phaser.Math.Vector2}
@@ -90,7 +93,7 @@ extern class StaticBody {
      */
     public var offset:phaser.math.Vector2;
     /**
-     * [description]
+     * The position of this Static Body within the simulation.
      *
      * @name Phaser.Physics.Arcade.StaticBody#position
      * @type {Phaser.Math.Vector2}
@@ -98,7 +101,8 @@ extern class StaticBody {
      */
     public var position:phaser.math.Vector2;
     /**
-     * [description]
+     * The width of the Static Body's boundary, in pixels.
+     * If the Static Body is circular, this is also the Static Body's diameter.
      *
      * @name Phaser.Physics.Arcade.StaticBody#width
      * @type {number}
@@ -106,7 +110,8 @@ extern class StaticBody {
      */
     public var width:Float;
     /**
-     * [description]
+     * The height of the Static Body's boundary, in pixels.
+     * If the Static Body is circular, this is also the Static Body's diameter.
      *
      * @name Phaser.Physics.Arcade.StaticBody#height
      * @type {number}
@@ -114,7 +119,8 @@ extern class StaticBody {
      */
     public var height:Float;
     /**
-     * [description]
+     * Half the Static Body's width, in pixels.
+     * If the Static Body is circular, this is also the Static Body's radius.
      *
      * @name Phaser.Physics.Arcade.StaticBody#halfWidth
      * @type {number}
@@ -122,7 +128,8 @@ extern class StaticBody {
      */
     public var halfWidth:Float;
     /**
-     * [description]
+     * Half the Static Body's height, in pixels.
+     * If the Static Body is circular, this is also the Static Body's radius.
      *
      * @name Phaser.Physics.Arcade.StaticBody#halfHeight
      * @type {number}
@@ -130,7 +137,8 @@ extern class StaticBody {
      */
     public var halfHeight:Float;
     /**
-     * [description]
+     * The center of the Static Body's boundary.
+     * This is the midpoint of its `position` (top-left corner) and its bottom-right corner.
      *
      * @name Phaser.Physics.Arcade.StaticBody#center
      * @type {Phaser.Math.Vector2}
@@ -138,7 +146,7 @@ extern class StaticBody {
      */
     public var center:phaser.math.Vector2;
     /**
-     * [description]
+     * A constant zero velocity used by the Arcade Physics simulation for calculations.
      *
      * @name Phaser.Physics.Arcade.StaticBody#velocity
      * @type {Phaser.Math.Vector2}
@@ -147,7 +155,7 @@ extern class StaticBody {
      */
     public var velocity:phaser.math.Vector2;
     /**
-     * [description]
+     * A constant `false` value expected by the Arcade Physics simulation.
      *
      * @name Phaser.Physics.Arcade.StaticBody#allowGravity
      * @type {boolean}
@@ -175,10 +183,12 @@ extern class StaticBody {
      */
     public var bounce:phaser.math.Vector2;
     /**
-     * Whether the simulation emits a `worldbounds` event when this StaticBody collides with the world boundary (and `collideWorldBounds` is also true).
+     * Whether the simulation emits a `worldbounds` event when this StaticBody collides with the world boundary.
+     * Always false for a Static Body. (Static Bodies never collide with the world boundary and never trigger a `worldbounds` event.)
      *
      * @name Phaser.Physics.Arcade.StaticBody#onWorldBounds
      * @type {boolean}
+     * @readonly
      * @default false
      * @since 3.0.0
      */
@@ -220,7 +230,7 @@ extern class StaticBody {
      */
     public var immovable:Bool;
     /**
-     * A flag disabling the default horizontal separation of colliding bodies. Pass your own `processHandler` to the collider.
+     * A flag disabling the default horizontal separation of colliding bodies. Pass your own `collideHandler` to the collider.
      *
      * @name Phaser.Physics.Arcade.StaticBody#customSeparateX
      * @type {boolean}
@@ -229,7 +239,7 @@ extern class StaticBody {
      */
     public var customSeparateX:Bool;
     /**
-     * A flag disabling the default vertical separation of colliding bodies. Pass your own `processHandler` to the collider.
+     * A flag disabling the default vertical separation of colliding bodies. Pass your own `collideHandler` to the collider.
      *
      * @name Phaser.Physics.Arcade.StaticBody#customSeparateY
      * @type {boolean}
@@ -265,7 +275,7 @@ extern class StaticBody {
      */
     public var overlapR:Float;
     /**
-     * Whether this StaticBody is overlapped with another and both have zero velocity.
+     * Whether this StaticBody has ever overlapped with another while both were not moving.
      *
      * @name Phaser.Physics.Arcade.StaticBody#embedded
      * @type {boolean}
@@ -275,9 +285,11 @@ extern class StaticBody {
     public var embedded:Bool;
     /**
      * Whether this StaticBody interacts with the world boundary.
+     * Always false for a Static Body. (Static Bodies never collide with the world boundary.)
      *
      * @name Phaser.Physics.Arcade.StaticBody#collideWorldBounds
      * @type {boolean}
+     * @readonly
      * @default false
      * @since 3.0.0
      */
@@ -291,7 +303,7 @@ extern class StaticBody {
      */
     public var checkCollision:ArcadeBodyCollision;
     /**
-     * Whether this StaticBody is colliding with another and in which direction.
+     * Whether this StaticBody has ever collided with another body and in which direction.
      *
      * @name Phaser.Physics.Arcade.StaticBody#touching
      * @type {ArcadeBodyCollision}
@@ -299,7 +311,7 @@ extern class StaticBody {
      */
     public var touching:ArcadeBodyCollision;
     /**
-     * Whether this StaticBody was colliding with another during the last step, and in which direction.
+     * Whether this StaticBody was colliding with another body during the last step or any previous step, and in which direction.
      *
      * @name Phaser.Physics.Arcade.StaticBody#wasTouching
      * @type {ArcadeBodyCollision}
@@ -307,7 +319,7 @@ extern class StaticBody {
      */
     public var wasTouching:ArcadeBodyCollision;
     /**
-     * Whether this StaticBody is colliding with a tile or the world boundary.
+     * Whether this StaticBody has ever collided with a tile or the world boundary.
      *
      * @name Phaser.Physics.Arcade.StaticBody#blocked
      * @type {ArcadeBodyCollision}
@@ -319,6 +331,7 @@ extern class StaticBody {
      *
      * @name Phaser.Physics.Arcade.StaticBody#physicsType
      * @type {integer}
+     * @default Phaser.Physics.Arcade.STATIC_BODY
      * @since 3.0.0
      */
     public var physicsType:Int;
@@ -448,16 +461,16 @@ extern class StaticBody {
      */
     public function updateCenter():Void;
     /**
-     * Updates this Static Body's position based on the current Game Object it is bound to.
+     * Resets this Body to the given coordinates. Also positions its parent Game Object to the same coordinates.
      * Similar to `updateFromGameObject`, but doesn't modify the Body's dimensions.
      *
      * @method Phaser.Physics.Arcade.StaticBody#reset
      * @since 3.0.0
      *
-     * @param {number} x - The x coordinate to reset the body to.
-     * @param {number} y - The y coordinate to reset the body to.
+     * @param {number} [x] - The x coordinate to reset the body to. If not given will use the parent Game Object's coordinate.
+     * @param {number} [y] - The y coordinate to reset the body to. If not given will use the parent Game Object's coordinate.
      */
-    public function reset(x:Float, y:Float):Void;
+    public function reset(?x:Float, ?y:Float):Void;
     /**
      * NOOP function. A Static Body cannot be stopped.
      *
@@ -521,7 +534,7 @@ extern class StaticBody {
      * @method Phaser.Physics.Arcade.StaticBody#deltaX
      * @since 3.0.0
      *
-     * @return {number} Always zero for a Static Body.
+     * @return {number} The change in this StaticBody's velocity from the previous step. Always zero.
      */
     public function deltaX():Float;
     /**
@@ -530,16 +543,16 @@ extern class StaticBody {
      * @method Phaser.Physics.Arcade.StaticBody#deltaY
      * @since 3.0.0
      *
-     * @return {number} 0
+     * @return {number} The change in this StaticBody's velocity from the previous step. Always zero.
      */
     public function deltaY():Float;
     /**
-     * [description]
+     * The change in this StaticBody's rotation from the previous step. Always zero.
      *
      * @method Phaser.Physics.Arcade.StaticBody#deltaZ
      * @since 3.0.0
      *
-     * @return {number} 0
+     * @return {number} The change in this StaticBody's rotation from the previous step. Always zero.
      */
     public function deltaZ():Float;
     /**

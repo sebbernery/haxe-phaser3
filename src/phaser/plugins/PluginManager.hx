@@ -11,8 +11,8 @@ package phaser.plugins;
  *
  * There are two types of plugin:
  *
- * 1) A Global Plugin
- * 2) A Scene Plugin
+ * 1. A Global Plugin
+ * 2. A Scene Plugin
  *
  * A Global Plugin is a plugin that lives within the Plugin Manager rather than a Scene. You can get
  * access to it by calling `PluginManager.get` and providing a key. Any Scene that requests a plugin in
@@ -26,9 +26,9 @@ package phaser.plugins;
  *
  * You can add a plugin to Phaser in three different ways:
  *
- * 1) Preload it
- * 2) Include it in your source code and install it via the Game Config
- * 3) Include it in your source code and install it within a Scene
+ * 1. Preload it
+ * 2. Include it in your source code and install it via the Game Config
+ * 3. Include it in your source code and install it within a Scene
  *
  * For examples of all of these approaches please see the Phaser 3 Examples Repo `plugins` folder.
  *
@@ -160,8 +160,10 @@ extern class PluginManager {
      * @param {boolean} [start=false] - Automatically start the plugin running? This is always `true` if you provide a mapping value.
      * @param {string} [mapping] - If this plugin is injected into the Phaser.Scene class, this is the property key to use.
      * @param {any} [data] - A value passed to the plugin's `init` method.
+     *
+     * @return {?Phaser.Plugins.BasePlugin} The plugin that was started, or `null` if `start` was false, or game isn't yet booted.
      */
-    public function install(key:String, plugin:Dynamic, ?start:Bool, ?mapping:String, ?data:Dynamic):Void;
+    public function install(key:String, plugin:Dynamic, ?start:Bool, ?mapping:String, ?data:Dynamic):phaser.plugins.BasePlugin;
     /**
      * Gets an index of a global plugin based on the given key.
      *

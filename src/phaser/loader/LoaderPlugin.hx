@@ -42,7 +42,6 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @name Phaser.Loader.LoaderPlugin#scene
      * @type {Phaser.Scene}
-     * @protected
      * @since 3.0.0
      */
     public var scene:phaser.Scene;
@@ -51,7 +50,6 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @name Phaser.Loader.LoaderPlugin#systems
      * @type {Phaser.Scenes.Systems}
-     * @protected
      * @since 3.0.0
      */
     public var systems:phaser.scenes.Systems;
@@ -60,7 +58,6 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @name Phaser.Loader.LoaderPlugin#cacheManager
      * @type {Phaser.Cache.CacheManager}
-     * @protected
      * @since 3.7.0
      */
     public var cacheManager:phaser.cache.CacheManager;
@@ -69,10 +66,18 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @name Phaser.Loader.LoaderPlugin#textureManager
      * @type {Phaser.Textures.TextureManager}
-     * @protected
      * @since 3.7.0
      */
     public var textureManager:phaser.textures.TextureManager;
+    /**
+     * A reference to the global Scene Manager.
+     *
+     * @name Phaser.Loader.LoaderPlugin#sceneManager
+     * @type {Phaser.Scenes.SceneManager}
+     * @protected
+     * @since 3.16.0
+     */
+    public var sceneManager:phaser.scenes.SceneManager;
     /**
      * An optional prefix that is automatically prepended to the start of every file key.
      * If prefix was `MENU.` and you load an image with the key 'Background' the resulting key would be `MENU.Background`.
@@ -327,7 +332,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * however you can call this as long as the file given to it is well formed.
      *
      * @method Phaser.Loader.LoaderPlugin#addFile
-     * @fires Phaser.Loader.LoaderPlugin#addFileEvent
+     * @fires Phaser.Loader.Events#ADD
      * @since 3.0.0
      *
      * @param {(Phaser.Loader.File|Phaser.Loader.File[])} file - The file, or array of files, to be added to the load queue.
@@ -393,7 +398,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * If the Loader is already running this method will simply return.
      *
      * @method Phaser.Loader.LoaderPlugin#start
-     * @fires Phaser.Loader.LoaderPlugin#startEvent
+     * @fires Phaser.Loader.Events#START
      * @since 3.0.0
      */
     public function start():Void;
@@ -403,7 +408,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * display a loading bar in your game.
      *
      * @method Phaser.Loader.LoaderPlugin#updateProgress
-     * @fires Phaser.Loader.LoaderPlugin#progressEvent
+     * @fires Phaser.Loader.Events#PROGRESS
      * @since 3.0.0
      */
     public function updateProgress():Void;
@@ -421,8 +426,8 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * If the file was successful its `onProcess` method is called, otherwise it is added to the delete queue.
      *
      * @method Phaser.Loader.LoaderPlugin#nextFile
-     * @fires Phaser.Loader.LoaderPlugin#loadEvent
-     * @fires Phaser.Loader.LoaderPlugin#loadErrorEvent
+     * @fires Phaser.Loader.Events#FILE_LOAD
+     * @fires Phaser.Loader.Events#FILE_LOAD_ERROR
      * @since 3.0.0
      *
      * @param {Phaser.Loader.File} file - The File that just finished loading, or errored during load.
@@ -449,7 +454,8 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * Also clears down the Sets, puts progress to 1 and clears the deletion queue.
      *
      * @method Phaser.Loader.LoaderPlugin#loadComplete
-     * @fires Phaser.Loader.LoaderPlugin#completeEvent
+     * @fires Phaser.Loader.Events#COMPLETE
+     * @fires Phaser.Loader.Events#POST_PROCESS
      * @since 3.7.0
      */
     public function loadComplete():Void;
@@ -1795,7 +1801,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @param {(string|Phaser.Loader.FileTypes.PluginFileConfig|Phaser.Loader.FileTypes.PluginFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {(string|function)} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js". Or, a plugin function.
-     * @param {boolean} [start] - The plugin mapping configuration object.
+     * @param {boolean} [start] - Automatically start the plugin after loading?
      * @param {string} [mapping] - If this plugin is to be injected into the Scene, this is the property key used.
      * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
@@ -1920,6 +1926,102 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
     public function svg(key:Dynamic, ?url:String, ?svgConfig:phaser.loader.filetypes.SVGSizeConfig, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    /**
+     * Adds an external Scene file, or array of Scene files, to the current load queue.
+     *
+     * You can call this method from within your Scene's `preload`, along with any other files you wish to load:
+     *
+     * ```javascript
+     * function preload ()
+     * {
+     *     this.load.sceneFile('Level1', 'src/Level1.js');
+     * }
+     * ```
+     *
+     * The file is **not** loaded right away. It is added to a queue ready to be loaded either when the loader starts,
+     * or if it's already running, when the next free load slot becomes available. This happens automatically if you
+     * are calling this from within the Scene's `preload` method, or a related callback. Because the file is queued
+     * it means you cannot use the file immediately after calling this method, but must wait for the file to complete.
+     * The typical flow for a Phaser Scene is that you load assets in the Scene's `preload` method and then when the
+     * Scene's `create` method is called you are guaranteed that all of those assets are ready for use and have been
+     * loaded.
+     *
+     * The key must be a unique String. It is used to add the file to the global Scene Manager upon a successful load.
+     *
+     * For a Scene File it's vitally important that the key matches the class name in the JavaScript file.
+     *
+     * For example here is the source file:
+     *
+     * ```javascript
+     * class ExternalScene extends Phaser.Scene {
+     *
+     *     constructor ()
+     *     {
+     *         super('myScene');
+     *     }
+     *
+     * }
+     * ```
+     *
+     * Because the class is called `ExternalScene` that is the exact same key you must use when loading it:
+     *
+     * ```javascript
+     * function preload ()
+     * {
+     *     this.load.sceneFile('ExternalScene', 'src/yourScene.js');
+     * }
+     * ```
+     *
+     * The key that is used within the Scene Manager can either be set to the same, or you can override it in the Scene
+     * constructor, as we've done in the example above, where the Scene key was changed to `myScene`.
+     *
+     * The key should be unique both in terms of files being loaded and Scenes already present in the Scene Manager.
+     * Loading a file using a key that is already taken will result in a warning. If you wish to replace an existing file
+     * then remove it from the Scene Manager first, before loading a new one.
+     *
+     * Instead of passing arguments you can pass a configuration object, such as:
+     *
+     * ```javascript
+     * this.load.sceneFile({
+     *     key: 'Level1',
+     *     url: 'src/Level1.js'
+     * });
+     * ```
+     *
+     * See the documentation for `Phaser.Loader.FileTypes.SceneFileConfig` for more details.
+     *
+     * Once the file has finished loading it will be added to the Scene Manager.
+     *
+     * ```javascript
+     * this.load.sceneFile('Level1', 'src/Level1.js');
+     * // and later in your game ...
+     * this.scene.start('Level1');
+     * ```
+     *
+     * If you have specified a prefix in the loader, via `Loader.setPrefix` then this value will be prepended to this files
+     * key. For example, if the prefix was `WORLD1.` and the key was `Story` the final key will be `WORLD1.Story` and
+     * this is what you would use to retrieve the text from the Scene Manager.
+     *
+     * The URL can be relative or absolute. If the URL is relative the `Loader.baseURL` and `Loader.path` values will be prepended to it.
+     *
+     * If the URL isn't specified the Loader will take the key and create a filename from that. For example if the key is "story"
+     * and no URL is given then the Loader will set the URL to be "story.js". It will always add `.js` as the extension, although
+     * this can be overridden if using an object instead of method arguments. If you do not desire this action then provide a URL.
+     *
+     * Note: The ability to load this type of file will only be available if the Scene File type has been built into Phaser.
+     * It is available in the default build but can be excluded from custom builds.
+     *
+     * @method Phaser.Loader.LoaderPlugin#sceneFile
+     * @fires Phaser.Loader.LoaderPlugin#addFileEvent
+     * @since 3.16.0
+     *
+     * @param {(string|Phaser.Loader.FileTypes.SceneFileConfig|Phaser.Loader.FileTypes.SceneFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js".
+     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     *
+     * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
+     */
+    public function sceneFile(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Scene Plugin Script file, or array of plugin files, to the current load queue.
      *

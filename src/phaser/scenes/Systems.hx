@@ -39,10 +39,10 @@ extern class Systems {
      * The Facebook Instant Games Plugin.
      *
      * @name Phaser.Scenes.Systems#facebook
-     * @type {any}
+     * @type {Phaser.FacebookInstantGamesPlugin}
      * @since 3.12.0
      */
-    public var facebook:Dynamic;
+    public var facebook:phaser.FacebookInstantGamesPlugin;
     /**
      * The Scene Configuration object, as passed in when creating the Scene.
      *
@@ -117,6 +117,16 @@ extern class Systems {
      * @since 3.0.0
      */
     public var registry:phaser.data.DataManager;
+    /**
+     * A reference to the global Scale Manager.
+     *
+     * In the default set-up you can access this from within a Scene via the `this.scale` property.
+     *
+     * @name Phaser.Scenes.Systems#scale
+     * @type {Phaser.Scale.ScaleManager}
+     * @since 3.15.0
+     */
+    public var scale:phaser.scale.ScaleManager;
     /**
      * A reference to the global Sound Manager.
      *
@@ -234,6 +244,7 @@ extern class Systems {
      *
      * @method Phaser.Scenes.Systems#init
      * @protected
+     * @fires Phaser.Scenes.Events#BOOT
      * @since 3.0.0
      *
      * @param {Phaser.Game} game - A reference to the Phaser Game instance.
@@ -244,6 +255,9 @@ extern class Systems {
      * Frame or Set Timeout call to the main Game instance.
      *
      * @method Phaser.Scenes.Systems#step
+     * @fires Phaser.Scenes.Events#PRE_UPDATE
+     * @fires Phaser.Scenes.Events#_UPDATE
+     * @fires Phaser.Scenes.Events#POST_UPDATE
      * @since 3.0.0
      *
      * @param {number} time - The time value from the most recent Game step. Typically a high-resolution timer value, or Date.now().
@@ -255,6 +269,7 @@ extern class Systems {
      * Instructs the Scene to render itself via its Camera Manager to the renderer given.
      *
      * @method Phaser.Scenes.Systems#render
+     * @fires Phaser.Scenes.Events#RENDER
      * @since 3.0.0
      *
      * @param {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)} renderer - The renderer that invoked the render call.
@@ -279,6 +294,7 @@ extern class Systems {
      * A paused Scene still renders, it just doesn't run ANY of its update handlers or systems.
      *
      * @method Phaser.Scenes.Systems#pause
+     * @fires Phaser.Scenes.Events#PAUSE
      * @since 3.0.0
      *
      * @param {object} [data] - A data object that will be passed in the 'pause' event.
@@ -290,6 +306,7 @@ extern class Systems {
      * Resume this Scene from a paused state.
      *
      * @method Phaser.Scenes.Systems#resume
+     * @fires Phaser.Scenes.Events#RESUME
      * @since 3.0.0
      *
      * @param {object} [data] - A data object that will be passed in the 'resume' event.
@@ -306,6 +323,7 @@ extern class Systems {
      * from other Scenes may still invoke changes within it, so be careful what is left active.
      *
      * @method Phaser.Scenes.Systems#sleep
+     * @fires Phaser.Scenes.Events#SLEEP
      * @since 3.0.0
      *
      * @param {object} [data] - A data object that will be passed in the 'sleep' event.
@@ -317,6 +335,7 @@ extern class Systems {
      * Wake-up this Scene if it was previously asleep.
      *
      * @method Phaser.Scenes.Systems#wake
+     * @fires Phaser.Scenes.Events#WAKE
      * @since 3.0.0
      *
      * @param {object} [data] - A data object that will be passed in the 'wake' event.
@@ -418,22 +437,13 @@ extern class Systems {
      * Called automatically by the SceneManager.
      *
      * @method Phaser.Scenes.Systems#start
+     * @fires Phaser.Scenes.Events#START
+     * @fires Phaser.Scenes.Events#READY
      * @since 3.0.0
      *
      * @param {object} data - Optional data object that may have been passed to this Scene from another.
      */
     public function start(data:Dynamic):Void;
-    /**
-     * Called automatically by the SceneManager if the Game resizes.
-     * Dispatches an event you can respond to in your game code.
-     *
-     * @method Phaser.Scenes.Systems#resize
-     * @since 3.2.0
-     *
-     * @param {number} width - The new width of the game.
-     * @param {number} height - The new height of the game.
-     */
-    public function resize(width:Float, height:Float):Void;
     /**
      * Shutdown this Scene and send a shutdown event to all of its systems.
      * A Scene that has been shutdown will not run its update loop or render, but it does
@@ -442,6 +452,7 @@ extern class Systems {
      * to free-up resources.
      *
      * @method Phaser.Scenes.Systems#shutdown
+     * @fires Phaser.Scenes.Events#SHUTDOWN
      * @since 3.0.0
      *
      * @param {object} [data] - A data object that will be passed in the 'shutdown' event.

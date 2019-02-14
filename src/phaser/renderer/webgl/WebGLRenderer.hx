@@ -24,10 +24,10 @@ extern class WebGLRenderer {
      * The local configuration settings of this WebGL Renderer.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#config
-     * @type {RendererConfig}
+     * @type {object}
      * @since 3.0.0
      */
-    public var config:RendererConfig;
+    public var config:Dynamic;
     /**
      * The Game instance which owns this WebGL Renderer.
      *
@@ -46,6 +46,7 @@ extern class WebGLRenderer {
     public var type:Int;
     /**
      * The width of the canvas being rendered to.
+     * This is populated in the onResize event handler.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#width
      * @type {integer}
@@ -54,6 +55,7 @@ extern class WebGLRenderer {
     public var width:Int;
     /**
      * The height of the canvas being rendered to.
+     * This is populated in the onResize event handler.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#height
      * @type {integer}
@@ -290,8 +292,15 @@ extern class WebGLRenderer {
      */
     public var blankTexture:js.html.webgl.Texture;
     /**
-     * Creates a new WebGLRenderingContext and initializes all internal
-     * state.
+     * A default Camera used in calls when no other camera has been provided.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#defaultCamera
+     * @type {Phaser.Cameras.Scene2D.BaseCamera}
+     * @since 3.12.0
+     */
+    public var defaultCamera:phaser.cameras.scene2d.BaseCamera;
+    /**
+     * Creates a new WebGLRenderingContext and initializes all internal state.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#init
      * @since 3.0.0
@@ -302,17 +311,30 @@ extern class WebGLRenderer {
      */
     public function init(config:Dynamic):Dynamic;
     /**
-     * Resizes the drawing buffer.
+     * The event handler that manages the `resize` event dispatched by the Scale Manager.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#onResize
+     * @since 3.16.0
+     *
+     * @param {Phaser.Structs.Size} gameSize - The default Game Size object. This is the un-modified game dimensions.
+     * @param {Phaser.Structs.Size} baseSize - The base Size object. The game dimensions multiplied by the resolution. The canvas width / height values match this.
+     * @param {Phaser.Structs.Size} displaySize - The display Size object. The size of the canvas style width / height attributes.
+     * @param {number} [resolution] - The Scale Manager resolution setting.
+     */
+    public function onResize(gameSize:phaser.structs.Size, baseSize:phaser.structs.Size, displaySize:phaser.structs.Size, ?resolution:Float):Void;
+    /**
+     * Resizes the drawing buffer to match that required by the Scale Manager.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#resize
      * @since 3.0.0
      *
-     * @param {number} width - The width of the renderer.
-     * @param {number} height - The height of the renderer.
+     * @param {number} [width] - The new width of the renderer.
+     * @param {number} [height] - The new height of the renderer.
+     * @param {number} [resolution] - The new resolution of the renderer.
      *
      * @return {this} This WebGLRenderer instance.
      */
-    public function resize(width:Float, height:Float):Dynamic;
+    public function resize(?width:Float, ?height:Float, ?resolution:Float):Dynamic;
     /**
      * Adds a callback to be invoked when the WebGL context has been restored by the browser.
      *
@@ -408,7 +430,7 @@ extern class WebGLRenderer {
      * @param {string} pipelineName - A unique string-based key for the pipeline.
      * @param {Phaser.Renderer.WebGL.WebGLPipeline} pipelineInstance - A pipeline instance which must extend WebGLPipeline.
      *
-     * @return {Phaser.Renderer.WebGL.WebGLPipeline} The pipline instance that was passed.
+     * @return {Phaser.Renderer.WebGL.WebGLPipeline} The pipeline instance that was passed.
      */
     public function addPipeline(pipelineName:String, pipelineInstance:phaser.renderer.webgl.WebGLPipeline):phaser.renderer.webgl.WebGLPipeline;
     /**
@@ -421,10 +443,11 @@ extern class WebGLRenderer {
      * @param {integer} y - The y position of the scissor.
      * @param {integer} width - The width of the scissor.
      * @param {integer} height - The height of the scissor.
+     * @param {integer} [drawingBufferHeight] - Optional drawingBufferHeight override value.
      *
      * @return {integer[]} An array containing the scissor values.
      */
-    public function pushScissor(x:Int, y:Int, width:Int, height:Int):Array<Int>;
+    public function pushScissor(x:Int, y:Int, width:Int, height:Int, ?drawingBufferHeight:Int):Array<Int>;
     /**
      * Sets the current scissor state.
      *
@@ -435,8 +458,9 @@ extern class WebGLRenderer {
      * @param {integer} y - The y position of the scissor.
      * @param {integer} width - The width of the scissor.
      * @param {integer} height - The height of the scissor.
+     * @param {integer} [drawingBufferHeight] - Optional drawingBufferHeight override value.
      */
-    public function setScissor(x:Int, y:Int, width:Int, height:Int):Void;
+    public function setScissor(x:Int, y:Int, width:Int, height:Int, ?drawingBufferHeight:Int):Void;
     /**
      * Pops the last scissor state and sets it.
      *
@@ -457,6 +481,36 @@ extern class WebGLRenderer {
      */
     public function setPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline, ?gameObject:phaser.gameobjects.GameObject):phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Use this to reset the gl context to the state that Phaser requires to continue rendering.
+     * Calling this will:
+     *
+     * * Disable `DEPTH_TEST`, `CULL_FACE` and `STENCIL_TEST`.
+     * * Clear the depth buffer and stencil buffers.
+     * * Reset the viewport size.
+     * * Reset the blend mode.
+     * * Bind a blank texture as the active texture on texture unit zero.
+     * * Rebinds the given pipeline instance.
+     *
+     * You should call this having previously called `clearPipeline` and then wishing to return
+     * control to Phaser again.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#rebindPipeline
+     * @since 3.16.0
+     *
+     * @param {Phaser.Renderer.WebGL.WebGLPipeline} pipelineInstance - The pipeline instance to be activated.
+     */
+    public function rebindPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline):Void;
+    /**
+     * Flushes the current WebGLPipeline being used and then clears it, along with the
+     * the current shader program and vertex buffer. Then resets the blend mode to NORMAL.
+     * Call this before jumping to your own gl context handler, and then call `rebindPipeline` when
+     * you wish to return control to Phaser again.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#clearPipeline
+     * @since 3.16.0
+     */
+    public function clearPipeline():Void;
+    /**
      * Sets the blend mode to the value given.
      *
      * If the current blend mode is different from the one given, the pipeline is flushed and the new
@@ -466,10 +520,11 @@ extern class WebGLRenderer {
      * @since 3.0.0
      *
      * @param {integer} blendModeId - The blend mode to be set. Can be a `BlendModes` const or an integer value.
+     * @param {boolean} [force=false] - Force the blend mode to be set, regardless of the currently set blend mode.
      *
      * @return {boolean} `true` if the blend mode was changed as a result of this call, forcing a flush, otherwise `false`.
      */
-    public function setBlendMode(blendModeId:Int):Bool;
+    public function setBlendMode(blendModeId:Int, ?force:Bool):Bool;
     /**
      * Creates a new custom blend mode for the renderer.
      *
@@ -516,10 +571,11 @@ extern class WebGLRenderer {
      *
      * @param {WebGLTexture} texture - The WebGL texture that needs to be bound.
      * @param {integer} textureUnit - The texture unit to which the texture will be bound.
+     * @param {boolean} [flush=true] - Will the current pipeline be flushed if this is a new texture, or not?
      *
      * @return {this} This WebGLRenderer instance.
      */
-    public function setTexture2D(texture:js.html.webgl.Texture, textureUnit:Int):Dynamic;
+    public function setTexture2D(texture:js.html.webgl.Texture, textureUnit:Int, ?flush:Bool):Dynamic;
     /**
      * Binds a framebuffer. If there was another framebuffer already bound it will force a pipeline flush.
      *
@@ -527,10 +583,11 @@ extern class WebGLRenderer {
      * @since 3.0.0
      *
      * @param {WebGLFramebuffer} framebuffer - The framebuffer that needs to be bound.
+     * @param {boolean} [updateScissor=false] - If a framebuffer is given, set the gl scissor to match the frame buffer size? Or, if `null` given, pop the scissor from the stack.
      *
      * @return {this} This WebGLRenderer instance.
      */
-    public function setFramebuffer(framebuffer:js.html.webgl.Framebuffer):Dynamic;
+    public function setFramebuffer(framebuffer:js.html.webgl.Framebuffer, ?updateScissor:Bool):Dynamic;
     /**
      * Binds a program. If there was another program already bound it will force a pipeline flush.
      *
@@ -720,8 +777,14 @@ extern class WebGLRenderer {
      */
     public function preRender():Void;
     /**
-     * The core render step for a Scene.
+     * The core render step for a Scene Camera.
+     *
      * Iterates through the given Game Object's array and renders them with the given Camera.
+     *
+     * This is called by the `CameraManager.render` method. The Camera Manager instance belongs to a Scene, and is invoked
+     * by the Scene Systems.render method.
+     *
+     * This method is not called if `Camera.visible` is `false`, or `Camera.alpha` is zero.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#render
      * @since 3.0.0
@@ -740,18 +803,77 @@ extern class WebGLRenderer {
      */
     public function postRender():Void;
     /**
-     * Schedules a snapshot to be taken after the current frame is rendered.
+     * Schedules a snapshot of the entire game viewport to be taken after the current frame is rendered.
+     *
+     * To capture a specific area see the `snapshotArea` method. To capture a specific pixel, see `snapshotPixel`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotPixel`, for example, then
+     * calling this method will override it.
+     *
+     * Snapshots work by using the WebGL `readPixels` feature to grab every pixel from the frame buffer into an ArrayBufferView.
+     * It then parses this, copying the contents to a temporary Canvas and finally creating an Image object from it,
+     * which is the image returned to the callback provided. All in all, this is a computationally expensive and blocking process,
+     * which gets more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#snapshot
      * @since 3.0.0
      *
-     * @param {SnapshotCallback} callback - Function to invoke after the snapshot is created.
-     * @param {string} type - The format of the image to create, usually `image/png`.
-     * @param {number} encoderOptions - The image quality, between 0 and 1, to use for image formats with lossy compression (such as `image/jpeg`).
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
-     * @return {Phaser.Renderer.WebGL.WebGLRenderer} This WebGL Renderer.
+     * @return {this} This WebGL Renderer.
      */
-    public function snapshot(callback:SnapshotCallback, type:String, encoderOptions:Float):phaser.renderer.webgl.WebGLRenderer;
+    public function snapshot(callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    /**
+     * Schedules a snapshot of the given area of the game viewport to be taken after the current frame is rendered.
+     *
+     * To capture the whole game viewport see the `snapshot` method. To capture a specific pixel, see `snapshotPixel`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotPixel`, for example, then
+     * calling this method will override it.
+     *
+     * Snapshots work by using the WebGL `readPixels` feature to grab every pixel from the frame buffer into an ArrayBufferView.
+     * It then parses this, copying the contents to a temporary Canvas and finally creating an Image object from it,
+     * which is the image returned to the callback provided. All in all, this is a computationally expensive and blocking process,
+     * which gets more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#snapshotArea
+     * @since 3.16.0
+     *
+     * @param {integer} x - The x coordinate to grab from.
+     * @param {integer} y - The y coordinate to grab from.
+     * @param {integer} width - The width of the area to grab.
+     * @param {integer} height - The height of the area to grab.
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
+     *
+     * @return {this} This WebGL Renderer.
+     */
+    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    /**
+     * Schedules a snapshot of the given pixel from the game viewport to be taken after the current frame is rendered.
+     *
+     * To capture the whole game viewport see the `snapshot` method. To capture a specific area, see `snapshotArea`.
+     *
+     * Only one snapshot can be active _per frame_. If you have already called `snapshotArea`, for example, then
+     * calling this method will override it.
+     *
+     * Unlike the other two snapshot methods, this one will return a `Color` object containing the color data for
+     * the requested pixel. It doesn't need to create an internal Canvas or Image object, so is a lot faster to execute,
+     * using less memory.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#snapshotPixel
+     * @since 3.16.0
+     *
+     * @param {integer} x - The x coordinate of the pixel to get.
+     * @param {integer} y - The y coordinate of the pixel to get.
+     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
+     *
+     * @return {this} This WebGL Renderer.
+     */
+    public function snapshotPixel(x:Int, y:Int, callback:SnapshotCallback):Dynamic;
     /**
      * Creates a WebGL Texture based on the given canvas element.
      *
@@ -908,8 +1030,8 @@ extern class WebGLRenderer {
      *
      * @param {WebGLProgram} program - The target WebGLProgram from which the uniform location will be looked-up.
      * @param {string} name - The name of the uniform to look-up and modify.
-     * @param {integer} x - [description]
-     * @param {integer} y - [description]
+     * @param {integer} x - The new X component
+     * @param {integer} y - The new Y component
      *
      * @return {this} This WebGL Renderer instance.
      */
@@ -922,9 +1044,9 @@ extern class WebGLRenderer {
      *
      * @param {WebGLProgram} program - The target WebGLProgram from which the uniform location will be looked-up.
      * @param {string} name - The name of the uniform to look-up and modify.
-     * @param {integer} x - [description]
-     * @param {integer} y - [description]
-     * @param {integer} z - [description]
+     * @param {integer} x - The new X component
+     * @param {integer} y - The new Y component
+     * @param {integer} z - The new Z component
      *
      * @return {this} This WebGL Renderer instance.
      */
@@ -946,15 +1068,15 @@ extern class WebGLRenderer {
      */
     public function setInt4(program:js.html.webgl.Program, name:String, x:Int, y:Int, z:Int, w:Int):Dynamic;
     /**
-     * [description]
+     * Sets the value of a 2x2 matrix uniform variable in the given WebGLProgram.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#setMatrix2
      * @since 3.0.0
      *
      * @param {WebGLProgram} program - The target WebGLProgram from which the uniform location will be looked-up.
      * @param {string} name - The name of the uniform to look-up and modify.
-     * @param {boolean} transpose - [description]
-     * @param {Float32Array} matrix - [description]
+     * @param {boolean} transpose - The value indicating whether to transpose the matrix. Must be false.
+     * @param {Float32Array} matrix - The new matrix value.
      *
      * @return {this} This WebGL Renderer instance.
      */
@@ -1008,7 +1130,7 @@ extern class WebGLRenderer {
      */
     public function getMaxTextureSize():Int;
     /**
-     * [description]
+     * Destroy this WebGLRenderer, cleaning up all related resources such as pipelines, native textures, etc.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#destroy
      * @since 3.0.0

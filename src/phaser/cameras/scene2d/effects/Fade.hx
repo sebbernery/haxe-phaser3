@@ -86,10 +86,8 @@ extern class Fade {
      * Fades the Camera to or from the given color over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Fade#start
-     * @fires CameraFadeInStartEvent
-     * @fires CameraFadeInCompleteEvent
-     * @fires CameraFadeOutStartEvent
-     * @fires CameraFadeOutCompleteEvent
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_START
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_START
      * @since 3.5.0
      *
      * @param {boolean} [direction=true] - The direction of the fade. `true` = fade out (transparent to color), `false` = fade in (color to transparent)
@@ -142,6 +140,8 @@ extern class Fade {
      * Called internally when the effect completes.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Fade#effectComplete
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_COMPLETE
+     * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_COMPLETE
      * @since 3.5.0
      */
     public function effectComplete():Void;

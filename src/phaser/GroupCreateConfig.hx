@@ -13,7 +13,7 @@ package phaser;
  *
  * `key` is required. {@link Phaser.GameObjects.Group#defaultKey} is not used.
  *
- * @property {?object} [classType] - The class of each new Game Object.
+ * @property {?GroupClassTypeConstructor} [classType] - The class of each new Game Object.
  * @property {string} [key] - The texture key of each new Game Object.
  * @property {?(string|integer)} [frame=null] - The texture frame of each new Game Object.
  * @property {?boolean} [visible=true] - The visible state of each new Game Object.
@@ -54,7 +54,7 @@ package phaser;
  * @see Phaser.Utils.Array.Range
  */
 typedef GroupCreateConfig = {
-    @:optional var classType:Dynamic;
+    @:optional var classType:GroupClassTypeConstructor;
     @:optional var key:String;
     @:optional var frame:Dynamic;
     @:optional var visible:Bool;

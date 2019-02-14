@@ -190,7 +190,7 @@ extern class World extends phaser.events.EventEmitter {
      */
     public function createDebugGraphic():phaser.gameobjects.Graphics;
     /**
-     * [description]
+     * Sets the world's gravity and gravity scale to 0.
      *
      * @method Phaser.Physics.Matter.World#disableGravity
      * @since 3.0.0
@@ -199,13 +199,13 @@ extern class World extends phaser.events.EventEmitter {
      */
     public function disableGravity():phaser.physics.matter.World;
     /**
-     * [description]
+     * Sets the world's gravity
      *
      * @method Phaser.Physics.Matter.World#setGravity
      * @since 3.0.0
      *
-     * @param {number} [x=0] - [description]
-     * @param {number} [y=1] - [description]
+     * @param {number} [x=0] - The world gravity x component.
+     * @param {number} [y=1] - The world gravity y component.
      * @param {number} [scale] - [description]
      *
      * @return {Phaser.Physics.Matter.World} This Matter World object.
@@ -227,7 +227,7 @@ extern class World extends phaser.events.EventEmitter {
      */
     public function create(x:Float, y:Float, width:Float, height:Float, options:Dynamic):matterjs.Body;
     /**
-     * [description]
+     * Adds an object to the world.
      *
      * @method Phaser.Physics.Matter.World#add
      * @since 3.0.0
@@ -305,13 +305,14 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Matter.World#nextCategory
      * @since 3.0.0
      *
-     * @return {number} [description]
+     * @return {number} Returns the next unique category bitfield.
      */
     public function nextCategory():Float;
     /**
      * [description]
      *
      * @method Phaser.Physics.Matter.World#pause
+     * @fires Phaser.Physics.Matter.Events#PAUSE
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Matter.World} This Matter World object.
@@ -321,6 +322,7 @@ extern class World extends phaser.events.EventEmitter {
      * [description]
      *
      * @method Phaser.Physics.Matter.World#resume
+     * @fires Phaser.Physics.Matter.Events#RESUME
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Matter.World} This Matter World object.

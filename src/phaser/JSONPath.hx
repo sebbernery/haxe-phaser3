@@ -4,8 +4,8 @@ package phaser;
  * @typedef {object} JSONPath
  *
  * @property {string} type - The of the curve.
- * @property {number} x - [description]
- * @property {number} y - [description]
+ * @property {number} x - The X coordinate of the curve's starting point.
+ * @property {number} y - The Y coordinate of the path's starting point.
  * @property {boolean} autoClose - The path is auto closed.
  * @property {JSONCurve[]} curves - The list of the curves
  */

@@ -305,7 +305,7 @@ extern class Body {
      */
     public function skipHash():Bool;
     /**
-     * [description]
+     * Determines whether the body collides with the `other` one or not.
      *
      * @method Phaser.Physics.Impact.Body#touches
      * @since 3.0.0
@@ -330,12 +330,12 @@ extern class Body {
      */
     public function resetSize(x:Float, y:Float, width:Float, height:Float):phaser.physics.impact.Body;
     /**
-     * [description]
+     * Export this body object to JSON.
      *
      * @method Phaser.Physics.Impact.Body#toJSON
      * @since 3.0.0
      *
-     * @return {JSONImpactBody} [description]
+     * @return {JSONImpactBody} JSON representation of this body object.
      */
     public function toJSON():JSONImpactBody;
     /**

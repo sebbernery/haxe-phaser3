@@ -425,7 +425,7 @@ extern class World extends phaser.events.EventEmitter {
      * checks.
      *
      * @method Phaser.Physics.Arcade.World#pause
-     * @fires Phaser.Physics.Arcade.World#pause
+     * @fires Phaser.Physics.Arcade.Events#PAUSE
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Arcade.World} This World object.
@@ -435,7 +435,7 @@ extern class World extends phaser.events.EventEmitter {
      * Resumes the simulation, if paused.
      *
      * @method Phaser.Physics.Arcade.World#resume
-     * @fires Phaser.Physics.Arcade.World#resume
+     * @fires Phaser.Physics.Arcade.Events#RESUME
      * @since 3.0.0
      *
      * @return {Phaser.Physics.Arcade.World} This World object.
@@ -540,12 +540,12 @@ extern class World extends phaser.events.EventEmitter {
      */
     public function update(time:Float, delta:Float):Void;
     /**
-     * Advances the simulation by one step.
+     * Advances the simulation by a time increment.
      *
      * @method Phaser.Physics.Arcade.World#step
      * @since 3.10.0
      *
-     * @param {number} delta - The delta time amount, in ms, by which to advance the simulation.
+     * @param {number} delta - The delta time amount, in seconds, by which to advance the simulation.
      */
     public function step(delta:Float):Void;
     /**
@@ -562,7 +562,7 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.Physics.Arcade.Body} body - The Body to be updated.
-     * @param {number} delta - The delta value to be used in the motion calculations.
+     * @param {number} delta - The delta value to be used in the motion calculations, in seconds.
      */
     public function updateMotion(body:phaser.physics.arcade.Body, delta:Float):Void;
     /**
@@ -572,7 +572,7 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {Phaser.Physics.Arcade.Body} body - The Body to compute the velocity for.
-     * @param {number} delta - The delta value to be used in the calculation.
+     * @param {number} delta - The delta value to be used in the calculation, in seconds.
      */
     public function computeAngularVelocity(body:phaser.physics.arcade.Body, delta:Float):Void;
     /**
@@ -582,15 +582,15 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.Physics.Arcade.Body} body - The Body to compute the velocity for.
-     * @param {number} delta - The delta value to be used in the calculation.
+     * @param {number} delta - The delta value to be used in the calculation, in seconds.
      */
     public function computeVelocity(body:phaser.physics.arcade.Body, delta:Float):Void;
     /**
      * Separates two Bodies.
      *
      * @method Phaser.Physics.Arcade.World#separate
-     * @fires Phaser.Physics.Arcade.World#collide
-     * @fires Phaser.Physics.Arcade.World#overlap
+     * @fires Phaser.Physics.Arcade.Events#COLLIDE
+     * @fires Phaser.Physics.Arcade.Events#OVERLAP
      * @since 3.0.0
      *
      * @param {Phaser.Physics.Arcade.Body} body1 - The first Body to be separated.
@@ -606,18 +606,18 @@ extern class World extends phaser.events.EventEmitter {
      * Separates two Bodies, when both are circular.
      *
      * @method Phaser.Physics.Arcade.World#separateCircle
-     * @fires Phaser.Physics.Arcade.World#collide
-     * @fires Phaser.Physics.Arcade.World#overlap
+     * @fires Phaser.Physics.Arcade.Events#COLLIDE
+     * @fires Phaser.Physics.Arcade.Events#OVERLAP
      * @since 3.0.0
      *
      * @param {Phaser.Physics.Arcade.Body} body1 - The first Body to be separated.
      * @param {Phaser.Physics.Arcade.Body} body2 - The second Body to be separated.
      * @param {boolean} [overlapOnly] - If this a collide or overlap check?
-     * @param {number} bias - A small value added to the calculations.
+     * @param {number} [bias] - A small value added to the calculations.
      *
      * @return {boolean} True if separation occurred, otherwise false.
      */
-    public function separateCircle(body1:phaser.physics.arcade.Body, body2:phaser.physics.arcade.Body, ?overlapOnly:Bool, bias:Float):Bool;
+    public function separateCircle(body1:phaser.physics.arcade.Body, body2:phaser.physics.arcade.Body, ?overlapOnly:Bool, ?bias:Float):Bool;
     /**
      * Checks to see if two Bodies intersect at all.
      *
@@ -682,125 +682,30 @@ extern class World extends phaser.events.EventEmitter {
      * @param {ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
      * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
-     * @param {*} [callbackContext] - The context in which to run the callbacks.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
      *
-     * @return {boolean} True if any overlapping Game Objects were separated, otherwise false.
+     * @return {boolean} `true` if any overlapping Game Objects were separated, otherwise `false`.
      */
     public function collide(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     /**
-     * Helper for Phaser.Physics.Arcade.World#collide.
-     *
-     * @method Phaser.Physics.Arcade.World#collideObjects
-     * @since 3.0.0
-     *
-     * @param {ArcadeColliderType} object1 - [description]
-     * @param {ArcadeColliderType} [object2] - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
-     */
-    public function collideObjects(object1:ArcadeColliderType, ?object2:ArcadeColliderType, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Helper for Phaser.Physics.Arcade.World#collide and Phaser.Physics.Arcade.World#overlap.
-     *
-     * @method Phaser.Physics.Arcade.World#collideHandler
-     * @since 3.0.0
-     *
-     * @param {ArcadeColliderType} object1 - [description]
-     * @param {ArcadeColliderType} [object2] - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
-     */
-    public function collideHandler(object1:ArcadeColliderType, ?object2:ArcadeColliderType, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Handler for Sprite vs. Sprite collisions.
-     *
-     * @method Phaser.Physics.Arcade.World#collideSpriteVsSprite
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.GameObject} sprite1 - [description]
-     * @param {Phaser.GameObjects.GameObject} sprite2 - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} [description]
-     */
-    public function collideSpriteVsSprite(sprite1:phaser.gameobjects.GameObject, sprite2:phaser.gameobjects.GameObject, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Handler for Sprite vs. Group collisions.
-     *
-     * @method Phaser.Physics.Arcade.World#collideSpriteVsGroup
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.GameObject} sprite - [description]
-     * @param {Phaser.GameObjects.Group} group - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} [description]
-     */
-    public function collideSpriteVsGroup(sprite:phaser.gameobjects.GameObject, group:phaser.gameobjects.Group, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Helper for Group vs. Tilemap collisions.
-     *
-     * @method Phaser.Physics.Arcade.World#collideGroupVsTilemapLayer
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.Group} group - [description]
-     * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} [description]
-     */
-    public function collideGroupVsTilemapLayer(group:phaser.gameobjects.Group, tilemapLayer:Dynamic, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Helper for Sprite vs. Tilemap collisions.
+     * Internal handler for Sprite vs. Tilemap collisions.
+     * Please use Phaser.Physics.Arcade.World#collide instead.
      *
      * @method Phaser.Physics.Arcade.World#collideSpriteVsTilemapLayer
-     * @fires Phaser.Physics.Arcade.World#collide
-     * @fires Phaser.Physics.Arcade.World#overlap
+     * @fires Phaser.Physics.Arcade.Events#TILE_COLLIDE
+     * @fires Phaser.Physics.Arcade.Events#TILE_OVERLAP
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.GameObject} sprite - [description]
-     * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
+     * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
+     * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - The second object to check for collision.
+     * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
+     * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
+     * @param {boolean} [overlapOnly] - Whether this is a collision or overlap check.
      *
-     * @return {boolean} [description]
+     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
      */
-    public function collideSpriteVsTilemapLayer(sprite:phaser.gameobjects.GameObject, tilemapLayer:Dynamic, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
-    /**
-     * Helper for Group vs. Group collisions.
-     *
-     * @method Phaser.Physics.Arcade.World#collideGroupVsGroup
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.Group} group1 - [description]
-     * @param {Phaser.GameObjects.Group} group2 - [description]
-     * @param {ArcadePhysicsCallback} collideCallback - [description]
-     * @param {ArcadePhysicsCallback} processCallback - [description]
-     * @param {*} callbackContext - [description]
-     * @param {boolean} overlapOnly - Whether this is a collision or overlap check.
-     *
-     * @return {boolean} [description]
-     */
-    public function collideGroupVsGroup(group1:phaser.gameobjects.Group, group2:phaser.gameobjects.Group, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic, overlapOnly:Bool):Bool;
+    public function collideSpriteVsTilemapLayer(sprite:phaser.gameobjects.GameObject, tilemapLayer:Dynamic, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic, ?overlapOnly:Bool):Bool;
     /**
      * Wrap an object's coordinates (or several objects' coordinates) within {@link Phaser.Physics.Arcade.World#bounds}.
      *

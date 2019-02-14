@@ -98,7 +98,7 @@ extern class ScenePlugin {
      *
      * This Scene can either be sent to sleep at the end of the transition, or stopped. The default is to stop.
      *
-     * There are also 5 transition related events: This scene will emit the event `transitionto` when
+     * There are also 5 transition related events: This scene will emit the event `transitionout` when
      * the transition begins, which is typically the frame after calling this method.
      *
      * The target Scene will emit the event `transitioninit` when that Scene's `init` method is called.
@@ -117,13 +117,14 @@ extern class ScenePlugin {
      * override this understand that until the target Scene completes it might never be unlocked for input events.
      *
      * @method Phaser.Scenes.ScenePlugin#transition
+     * @fires Phaser.Scenes.Events#TRANSITION_OUT
      * @since 3.5.0
      *
-     * @param {Phaser.Scenes.ScenePlugin.SceneTransitionConfig} config - The transition configuration object.
+     * @param {SceneTransitionConfig} config - The transition configuration object.
      *
      * @return {boolean} `true` is the transition was started, otherwise `false`.
      */
-    public function transition(config:phaser.scenes.sceneplugin.SceneTransitionConfig):Bool;
+    public function transition(config:SceneTransitionConfig):Bool;
     /**
      * Add the Scene into the Scene Manager and start it if 'autoStart' is true or the Scene config 'active' property is set.
      *
@@ -133,10 +134,11 @@ extern class ScenePlugin {
      * @param {string} key - The Scene key.
      * @param {(Phaser.Scene|Phaser.Scenes.Settings.Config|function)} sceneConfig - The config for the Scene.
      * @param {boolean} autoStart - Whether to start the Scene after it's added.
+     * @param {object} [data] - Optional data object. This will be set as Scene.settings.data and passed to `Scene.init`.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function add(key:String, sceneConfig:Dynamic, autoStart:Bool):phaser.scenes.ScenePlugin;
+    public function add(key:String, sceneConfig:Dynamic, autoStart:Bool, ?data:Dynamic):phaser.scenes.ScenePlugin;
     /**
      * Launch the given Scene and run it in parallel with this one.
      *
@@ -232,11 +234,11 @@ extern class ScenePlugin {
      * @method Phaser.Scenes.ScenePlugin#stop
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to stop.
+     * @param {string} [key] - The Scene to stop.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function stop(key:String):phaser.scenes.ScenePlugin;
+    public function stop(?key:String):phaser.scenes.ScenePlugin;
     /**
      * Sets the active state of the given Scene.
      *
@@ -268,33 +270,33 @@ extern class ScenePlugin {
      * @method Phaser.Scenes.ScenePlugin#isSleeping
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {string} [key] - The Scene to check.
      *
      * @return {boolean} Whether the Scene is sleeping.
      */
-    public function isSleeping(key:String):Bool;
+    public function isSleeping(?key:String):Bool;
     /**
      * Checks if the given Scene is active or not?
      *
      * @method Phaser.Scenes.ScenePlugin#isActive
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {string} [key] - The Scene to check.
      *
      * @return {boolean} Whether the Scene is active.
      */
-    public function isActive(key:String):Bool;
+    public function isActive(?key:String):Bool;
     /**
      * Checks if the given Scene is visible or not?
      *
      * @method Phaser.Scenes.ScenePlugin#isVisible
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {string} [key] - The Scene to check.
      *
      * @return {boolean} Whether the Scene is visible.
      */
-    public function isVisible(key:String):Bool;
+    public function isVisible(?key:String):Bool;
     /**
      * Swaps the position of two scenes in the Scenes list.
      *
@@ -349,33 +351,33 @@ extern class ScenePlugin {
      * @method Phaser.Scenes.ScenePlugin#remove
      * @since 3.2.0
      *
-     * @param {(string|Phaser.Scene)} key - The Scene to be removed.
+     * @param {(string|Phaser.Scene)} [key] - The Scene to be removed.
      *
      * @return {Phaser.Scenes.SceneManager} This SceneManager.
      */
-    public function remove(key:Dynamic):phaser.scenes.SceneManager;
+    public function remove(?key:Dynamic):phaser.scenes.SceneManager;
     /**
      * Moves a Scene up one position in the Scenes list.
      *
      * @method Phaser.Scenes.ScenePlugin#moveUp
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to move.
+     * @param {string} [key] - The Scene to move.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function moveUp(key:String):phaser.scenes.ScenePlugin;
+    public function moveUp(?key:String):phaser.scenes.ScenePlugin;
     /**
      * Moves a Scene down one position in the Scenes list.
      *
      * @method Phaser.Scenes.ScenePlugin#moveDown
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to move.
+     * @param {string} [key] - The Scene to move.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function moveDown(key:String):phaser.scenes.ScenePlugin;
+    public function moveDown(?key:String):phaser.scenes.ScenePlugin;
     /**
      * Brings a Scene to the top of the Scenes list.
      *
@@ -384,11 +386,11 @@ extern class ScenePlugin {
      * @method Phaser.Scenes.ScenePlugin#bringToTop
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to move.
+     * @param {string} [key] - The Scene to move.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function bringToTop(key:String):phaser.scenes.ScenePlugin;
+    public function bringToTop(?key:String):phaser.scenes.ScenePlugin;
     /**
      * Sends a Scene to the back of the Scenes list.
      *
@@ -397,11 +399,11 @@ extern class ScenePlugin {
      * @method Phaser.Scenes.ScenePlugin#sendToBack
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to move.
+     * @param {string} [key] - The Scene to move.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function sendToBack(key:String):phaser.scenes.ScenePlugin;
+    public function sendToBack(?key:String):phaser.scenes.ScenePlugin;
     /**
      * Retrieve a Scene.
      *

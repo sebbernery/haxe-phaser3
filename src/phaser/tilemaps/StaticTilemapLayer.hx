@@ -165,9 +165,9 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      *
      * It will be sent 3 arguments:
      *
-     * 1) The Phaser.Tilemaps.LayerData object for this Layer
-     * 2) The Camera that is culling the layer. You can check its `dirty` property to see if it has changed since the last cull.
-     * 3) A reference to the `culledTiles` array, which should be used to store the tiles you want rendered.
+     * 1. The Phaser.Tilemaps.LayerData object for this Layer
+     * 2. The Camera that is culling the layer. You can check its `dirty` property to see if it has changed since the last cull.
+     * 3. A reference to the `culledTiles` array, which should be used to store the tiles you want rendered.
      *
      * See the `TilemapComponents.CullTiles` source code for details on implementing your own culling system.
      *
@@ -244,10 +244,10 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#calculateFacesWithin
      * @since 3.0.0
      *
-     * @param {integer} [tileX=0] - [description]
-     * @param {integer} [tileY=0] - [description]
-     * @param {integer} [width=max width based on tileX] - [description]
-     * @param {integer} [height=max height based on tileY] - [description]
+     * @param {integer} [tileX=0] - The left most tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
      *
      * @return {Phaser.Tilemaps.StaticTilemapLayer} This Tilemap Layer object.
      */
@@ -348,21 +348,15 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {function} callback - The callback. Each tile in the given area will be passed to this
      * callback as the first and only parameter.
      * @param {object} [context] - The context under which the callback should be run.
-     * @param {integer} [tileX=0] - [description]
-     * @param {integer} [tileY=0] - [description]
-     * @param {integer} [width=max width based on tileX] - [description]
-     * @param {integer} [height=max height based on tileY] - [description]
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide
-     * on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
+     * @param {integer} [tileX=0] - The left most tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [tileY=0] - The topmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {?Phaser.Tilemaps.Tile}
      */
-    public function findTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.Tile;
+    public function findTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions):phaser.tilemaps.Tile;
     /**
      * For each tile in the given rectangular area (in tile coordinates) of the layer, run the given
      * filter callback function. Any tiles that pass the filter test (i.e. where the callback returns
@@ -375,21 +369,15 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * callback as the first and only parameter. The callback should return true for tiles that pass the
      * filter.
      * @param {object} [context] - The context under which the callback should be run.
-     * @param {integer} [tileX=0] - [description]
-     * @param {integer} [tileY=0] - [description]
-     * @param {integer} [width=max width based on tileX] - [description]
-     * @param {integer} [height=max height based on tileY] - [description]
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide
-     * on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
+     * @param {integer} [tileX=0] - The leftmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [tileY=0] - The topmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions):Array<phaser.tilemaps.Tile>;
     /**
      * For each tile in the given rectangular area (in tile coordinates) of the layer, run the given
      * callback. Similar to Array.prototype.forEach in vanilla JS.
@@ -400,21 +388,15 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {function} callback - The callback. Each tile in the given area will be passed to this
      * callback as the first and only parameter.
      * @param {object} [context] - The context under which the callback should be run.
-     * @param {integer} [tileX=0] - [description]
-     * @param {integer} [tileY=0] - [description]
-     * @param {integer} [width=max width based on tileX] - [description]
-     * @param {integer} [height=max height based on tileY] - [description]
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide
-     * on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
+     * @param {integer} [tileX=0] - The leftmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [tileY=0] - The topmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.StaticTilemapLayer} This Tilemap Layer object.
      */
-    public function forEachTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.StaticTilemapLayer;
+    public function forEachTile(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions):phaser.tilemaps.StaticTilemapLayer;
     /**
      * Gets a tile at the given tile coordinates from the given layer.
      *
@@ -439,7 +421,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {number} worldY - Y position to get the tile from (given in pixels)
      * @param {boolean} [nonNull=false] - If true, function won't return null for empty tiles, but a Tile
      * object with an index of -1.
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      *
      * @return {Phaser.Tilemaps.Tile} The tile at the given coordinates or null if no tile was found or the coordinates
      * were invalid.
@@ -451,43 +433,31 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#getTilesWithin
      * @since 3.0.0
      *
-     * @param {integer} [tileX=0] - [description]
-     * @param {integer} [tileY=0] - [description]
-     * @param {integer} [width=max width based on tileX] - [description]
-     * @param {integer} [height=max height based on tileY] - [description]
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on
-     * at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
+     * @param {integer} [tileX=0] - The leftmost tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} [tileY=0] - The topmost tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles in the given rectangular area (in world coordinates) of the layer.
      *
      * @method Phaser.Tilemaps.StaticTilemapLayer#getTilesWithinWorldXY
      * @since 3.0.0
      *
-     * @param {number} worldX - [description]
-     * @param {number} worldY - [description]
-     * @param {number} width - [description]
-     * @param {number} height - [description]
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on
-     * at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {number} worldX - The leftmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {number} worldY - The topmost tile index (in tile coordinates) to use as the origin of the area to filter.
+     * @param {number} width - How many tiles wide from the `tileX` index the area will be.
+     * @param {number} height - How many tiles high from the `tileY` index the area will be.
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:FilteringOptions, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles that overlap with the given shape in the given layer. The shape must be a Circle,
      * Line, Rectangle or Triangle. The shape should be in world coordinates.
@@ -496,18 +466,12 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(Phaser.Geom.Circle|Phaser.Geom.Line|Phaser.Geom.Rectangle|Phaser.Geom.Triangle)} shape - A shape in world (pixel) coordinates
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have
-     * -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on
-     * at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that
-     * have at least one interesting face.
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:FilteringOptions, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Checks if there is a tile at the given location (in tile coordinates) in the given layer. Returns
      * false if there is no tile or if the tile at that location has an index of -1.
@@ -515,8 +479,8 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#hasTileAt
      * @since 3.0.0
      *
-     * @param {integer} tileX - [description]
-     * @param {integer} tileY - [description]
+     * @param {integer} tileX - X position to get the tile from in tile coordinates.
+     * @param {integer} tileY - Y position to get the tile from in tile coordinates.
      *
      * @return {boolean}
      */
@@ -528,9 +492,9 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#hasTileAtWorldXY
      * @since 3.0.0
      *
-     * @param {number} worldX - [description]
-     * @param {number} worldY - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {number} worldX - The X coordinate of the world position.
+     * @param {number} worldY - The Y coordinate of the world position.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      *
      * @return {boolean}
      */
@@ -545,17 +509,11 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
-     * @param {object} styleConfig - An object specifying the colors to use for the debug drawing.
-     * @param {?Color} [styleConfig.tileColor=blue] - Color to use for drawing a filled rectangle at
-     * non-colliding tile locations. If set to null, non-colliding tiles will not be drawn.
-     * @param {?Color} [styleConfig.collidingTileColor=orange] - Color to use for drawing a filled
-     * rectangle at colliding tile locations. If set to null, colliding tiles will not be drawn.
-     * @param {?Color} [styleConfig.faceColor=grey] - Color to use for drawing a line at interesting
-     * tile faces. If set to null, interesting tile faces will not be drawn.
+     * @param {StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
      *
      * @return {Phaser.Tilemaps.StaticTilemapLayer} This Tilemap Layer object.
      */
-    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:Dynamic):phaser.tilemaps.StaticTilemapLayer;
+    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:StyleConfig):phaser.tilemaps.StaticTilemapLayer;
     /**
      * Sets collision on the given tile or tiles within a layer by index. You can pass in either a
      * single numeric index or an array of indexes: [2, 3, 15, 20]. The `collides` parameter controls if
@@ -673,10 +631,10 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#setTileLocationCallback
      * @since 3.0.0
      *
-     * @param {integer} tileX - [description]
-     * @param {integer} tileY - [description]
-     * @param {integer} width - [description]
-     * @param {integer} height - [description]
+     * @param {integer} tileX - The leftmost tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} tileY - The topmost tile index (in tile coordinates) to use as the origin of the area.
+     * @param {integer} width - How many tiles wide from the `tileX` index the area will be.
+     * @param {integer} height - How many tiles tall from the `tileY` index the area will be.
      * @param {function} callback - The callback that will be invoked when the tile is collided with.
      * @param {object} [callbackContext] - The context under which the callback is called.
      *
@@ -690,8 +648,8 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#tileToWorldX
      * @since 3.0.0
      *
-     * @param {integer} tileX - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {integer} tileX - The X coordinate, in tile coordinates.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the world values from the tile index.
      *
      * @return {number}
      */
@@ -703,8 +661,8 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#tileToWorldY
      * @since 3.0.0
      *
-     * @param {integer} tileY - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {integer} tileY - The Y coordinate, in tile coordinates.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the world values from the tile index.
      *
      * @return {number}
      */
@@ -717,10 +675,10 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#tileToWorldXY
      * @since 3.0.0
      *
-     * @param {integer} tileX - [description]
-     * @param {integer} tileY - [description]
-     * @param {Phaser.Math.Vector2} [point] - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {integer} tileX - The X coordinate, in tile coordinates.
+     * @param {integer} tileY - The Y coordinate, in tile coordinates.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2 to store the coordinates in. If not given, a new Vector2 is created.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the world values from the tile index.
      *
      * @return {Phaser.Math.Vector2}
      */
@@ -732,10 +690,10 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#worldToTileX
      * @since 3.0.0
      *
-     * @param {number} worldX - [description]
+     * @param {number} worldX - The X coordinate, in world pixels.
      * @param {boolean} [snapToFloor=true] - Whether or not to round the tile coordinate down to the
      * nearest integer.
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.]
      *
      * @return {number}
      */
@@ -747,10 +705,10 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#worldToTileY
      * @since 3.0.0
      *
-     * @param {number} worldY - [description]
+     * @param {number} worldY - The Y coordinate, in world pixels.
      * @param {boolean} [snapToFloor=true] - Whether or not to round the tile coordinate down to the
      * nearest integer.
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      *
      * @return {number}
      */
@@ -763,12 +721,12 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.StaticTilemapLayer#worldToTileXY
      * @since 3.0.0
      *
-     * @param {number} worldX - [description]
-     * @param {number} worldY - [description]
+     * @param {number} worldX - The X coordinate, in world pixels.
+     * @param {number} worldY - The Y coordinate, in world pixels.
      * @param {boolean} [snapToFloor=true] - Whether or not to round the tile coordinate down to the
      * nearest integer.
-     * @param {Phaser.Math.Vector2} [point] - [description]
-     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - [description]
+     * @param {Phaser.Math.Vector2} [point] - A Vector2 to store the coordinates in. If not given, a new Vector2 is created.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      *
      * @return {Phaser.Math.Vector2}
      */
@@ -862,6 +820,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -887,6 +846,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -894,7 +854,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

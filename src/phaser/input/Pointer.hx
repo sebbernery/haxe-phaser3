@@ -52,6 +52,24 @@ extern class Pointer {
      */
     public var event:Dynamic;
     /**
+     * The DOM element the Pointer was pressed down on, taken from the DOM event.
+     *
+     * @name Phaser.Input.Pointer#downElement
+     * @type {any}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var downElement:Dynamic;
+    /**
+     * The DOM element the Pointer was released on, taken from the DOM event.
+     *
+     * @name Phaser.Input.Pointer#upElement
+     * @type {any}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var upElement:Dynamic;
+    /**
      * The camera the Pointer interacted with during its last update.
      *
      * A Pointer can only ever interact with one camera at once, which will be the top-most camera
@@ -85,6 +103,7 @@ extern class Pointer {
      *
      * @name Phaser.Input.Pointer#position
      * @type {Phaser.Math.Vector2}
+     * @readonly
      * @since 3.0.0
      */
     public var position:phaser.math.Vector2;
@@ -93,14 +112,93 @@ extern class Pointer {
      *
      * The old x and y values are stored in here during the InputManager.transformPointer call.
      *
-     * You can use it to track how fast the pointer is moving, or to smoothly interpolate between the old and current position.
-     * See the `Pointer.getInterpolatedPosition` method to assist in this.
+     * Use the properties `velocity`, `angle` and `distance` to create your own gesture recognition.
      *
      * @name Phaser.Input.Pointer#prevPosition
      * @type {Phaser.Math.Vector2}
+     * @readonly
      * @since 3.11.0
      */
     public var prevPosition:phaser.math.Vector2;
+    /**
+     * The current velocity of the Pointer, based on its current and previous positions.
+     *
+     * This value is smoothed out each frame, according to the `motionFactor` property.
+     *
+     * This property is updated whenever the Pointer moves, regardless of any button states. In other words,
+     * it changes based on movement alone - a button doesn't have to be pressed first.
+     *
+     * @name Phaser.Input.Pointer#velocity
+     * @type {Phaser.Math.Vector2}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var velocity:phaser.math.Vector2;
+    /**
+     * The current angle the Pointer is moving, in radians, based on its previous and current position.
+     *
+     * The angle is based on the old position facing to the current position.
+     *
+     * This property is updated whenever the Pointer moves, regardless of any button states. In other words,
+     * it changes based on movement alone - a button doesn't have to be pressed first.
+     *
+     * @name Phaser.Input.Pointer#angle
+     * @type {number}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var angle:Float;
+    /**
+     * The distance the Pointer has moved, based on its previous and current position.
+     *
+     * This value is smoothed out each frame, according to the `motionFactor` property.
+     *
+     * This property is updated whenever the Pointer moves, regardless of any button states. In other words,
+     * it changes based on movement alone - a button doesn't have to be pressed first.
+     *
+     * If you need the total distance travelled since the primary buttons was pressed down,
+     * then use the `Pointer.getDistance` method.
+     *
+     * @name Phaser.Input.Pointer#distance
+     * @type {number}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var distance:Float;
+    /**
+     * The smoothing factor to apply to the Pointer position.
+     *
+     * Due to their nature, pointer positions are inherently noisy. While this is fine for lots of games, if you need cleaner positions
+     * then you can set this value to apply an automatic smoothing to the positions as they are recorded.
+     *
+     * The default value of zero means 'no smoothing'.
+     * Set to a small value, such as 0.2, to apply an average level of smoothing between positions. You can do this by changing this
+     * value directly, or by setting the `input.smoothFactor` property in the Game Config.
+     *
+     * Positions are only smoothed when the pointer moves. If the primary button on this Pointer enters an Up or Down state, then the position
+     * is always precise, and not smoothed.
+     *
+     * @name Phaser.Input.Pointer#smoothFactor
+     * @type {number}
+     * @default 0
+     * @since 3.16.0
+     */
+    public var smoothFactor:Float;
+    /**
+     * The factor applied to the motion smoothing each frame.
+     *
+     * This value is passed to the Smooth Step Interpolation that is used to calculate the velocity,
+     * angle and distance of the Pointer. It's applied every frame, until the midPoint reaches the current
+     * position of the Pointer. 0.2 provides a good average but can be increased if you need a
+     * quicker update and are working in a high performance environment. Never set this value to
+     * zero.
+     *
+     * @name Phaser.Input.Pointer#motionFactor
+     * @type {number}
+     * @default 0.2
+     * @since 3.16.0
+     */
+    public var motionFactor:Float;
     /**
      * The x position of this Pointer, translated into the coordinate space of the most recent Camera it interacted with.
      *
@@ -119,6 +217,15 @@ extern class Pointer {
      * @since 3.10.0
      */
     public var worldY:Float;
+    /**
+     * Time when this Pointer was most recently moved (regardless of the state of its buttons, if any)
+     *
+     * @name Phaser.Input.Pointer#moveTime
+     * @type {number}
+     * @default 0
+     * @since 3.0.0
+     */
+    public var moveTime:Float;
     /**
      * X coordinate of the Pointer when Button 1 (left button), or Touch, was pressed, used for dragging objects.
      *
@@ -182,19 +289,6 @@ extern class Pointer {
      * @since 3.0.0
      */
     public var primaryDown:Bool;
-    /**
-     * The Drag State of the Pointer:
-     *
-     * 0 = Not dragging anything
-     * 1 = Being checked if dragging
-     * 2 = Dragging something
-     *
-     * @name Phaser.Input.Pointer#dragState
-     * @type {number}
-     * @default 0
-     * @since 3.0.0
-     */
-    public var dragState:Float;
     /**
      * Is _any_ button on this pointer considered as being down?
      *
@@ -305,6 +399,14 @@ extern class Pointer {
      */
     public var active:Bool;
     /**
+     * Time when this Pointer was most recently updated by the Game step.
+     *
+     * @name Phaser.Input.Pointer#time
+     * @type {number}
+     * @since 3.16.0
+     */
+    public var time:Float;
+    /**
      * The x position of this Pointer.
      * The value is in screen space.
      * See `worldX` to get a camera converted position.
@@ -392,15 +494,78 @@ extern class Pointer {
      */
     public function forwardButtonDown():Bool;
     /**
-     * Returns the distance between the Pointer's current position and where it was
-     * first pressed down (the `downX` and `downY` properties)
+     * If the Pointer has a button pressed down at the time this method is called, it will return the
+     * distance between the Pointer's `downX` and `downY` values and the current position.
+     *
+     * If no button is held down, it will return the last recorded distance, based on where
+     * the Pointer was when the button was released.
+     *
+     * If you wish to get the distance being travelled currently, based on the velocity of the Pointer,
+     * then see the `Pointer.distance` property.
      *
      * @method Phaser.Input.Pointer#getDistance
      * @since 3.13.0
      *
-     * @return {number} The distance the Pointer has moved since being pressed down.
+     * @return {number} The distance the Pointer moved.
      */
     public function getDistance():Float;
+    /**
+     * If the Pointer has a button pressed down at the time this method is called, it will return the
+     * horizontal distance between the Pointer's `downX` and `downY` values and the current position.
+     *
+     * If no button is held down, it will return the last recorded horizontal distance, based on where
+     * the Pointer was when the button was released.
+     *
+     * @method Phaser.Input.Pointer#getDistanceX
+     * @since 3.16.0
+     *
+     * @return {number} The horizontal distance the Pointer moved.
+     */
+    public function getDistanceX():Float;
+    /**
+     * If the Pointer has a button pressed down at the time this method is called, it will return the
+     * vertical distance between the Pointer's `downX` and `downY` values and the current position.
+     *
+     * If no button is held down, it will return the last recorded vertical distance, based on where
+     * the Pointer was when the button was released.
+     *
+     * @method Phaser.Input.Pointer#getDistanceY
+     * @since 3.16.0
+     *
+     * @return {number} The vertical distance the Pointer moved.
+     */
+    public function getDistanceY():Float;
+    /**
+     * If the Pointer has a button pressed down at the time this method is called, it will return the
+     * duration since the Pointer's was pressed down.
+     *
+     * If no button is held down, it will return the last recorded duration, based on the time
+     * the Pointer button was released.
+     *
+     * @method Phaser.Input.Pointer#getDuration
+     * @since 3.16.0
+     *
+     * @return {number} The duration the Pointer was held down for in milliseconds.
+     */
+    public function getDuration():Float;
+    /**
+     * If the Pointer has a button pressed down at the time this method is called, it will return the
+     * angle between the Pointer's `downX` and `downY` values and the current position.
+     *
+     * If no button is held down, it will return the last recorded angle, based on where
+     * the Pointer was when the button was released.
+     *
+     * The angle is based on the old position facing to the current position.
+     *
+     * If you wish to get the current angle, based on the velocity of the Pointer, then
+     * see the `Pointer.angle` property.
+     *
+     * @method Phaser.Input.Pointer#getAngle
+     * @since 3.16.0
+     *
+     * @return {number} The angle between the Pointer's coordinates in radians.
+     */
+    public function getAngle():Float;
     /**
      * Takes the previous and current Pointer positions and then generates an array of interpolated values between
      * the two. The array will be populated up to the size of the `steps` argument.

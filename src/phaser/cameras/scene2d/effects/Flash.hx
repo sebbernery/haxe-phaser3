@@ -63,8 +63,8 @@ extern class Flash {
      * Flashes the Camera to or from the given color over the duration specified.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Flash#start
-     * @fires CameraFlashStartEvent
-     * @fires CameraFlashCompleteEvent
+     * @fires Phaser.Cameras.Scene2D.Events#FLASH_START
+     * @fires Phaser.Cameras.Scene2D.Events#FLASH_COMPLETE
      * @since 3.5.0
      *
      * @param {integer} [duration=250] - The duration of the effect in milliseconds.
@@ -116,6 +116,7 @@ extern class Flash {
      * Called internally when the effect completes.
      *
      * @method Phaser.Cameras.Scene2D.Effects.Flash#effectComplete
+     * @fires Phaser.Cameras.Scene2D.Events#FLASH_COMPLETE
      * @since 3.5.0
      */
     public function effectComplete():Void;

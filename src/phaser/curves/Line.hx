@@ -2,7 +2,7 @@ package phaser.curves;
 
 /**
  * @classdesc
- * [description]
+ * A LineCurve is a "curve" comprising exactly two points (a line segment).
  *
  * @class Line
  * @extends Phaser.Curves.Curve
@@ -10,14 +10,14 @@ package phaser.curves;
  * @constructor
  * @since 3.0.0
  *
- * @param {(Phaser.Math.Vector2|number[])} p0 - [description]
- * @param {Phaser.Math.Vector2} [p1] - [description]
+ * @param {(Phaser.Math.Vector2|number[])} p0 - The first endpoint.
+ * @param {Phaser.Math.Vector2} [p1] - The second endpoint.
  */
 @:native("Phaser.Curves.Line")
 extern class Line extends phaser.curves.Curve {
     public function new(p0:Dynamic, ?p1:phaser.math.Vector2);
     /**
-     * [description]
+     * The first endpoint.
      *
      * @name Phaser.Curves.Line#p0
      * @type {Phaser.Math.Vector2}
@@ -25,7 +25,7 @@ extern class Line extends phaser.curves.Curve {
      */
     public var p0:phaser.math.Vector2;
     /**
-     * [description]
+     * The second endpoint.
      *
      * @name Phaser.Curves.Line#p1
      * @type {Phaser.Math.Vector2}
@@ -33,14 +33,14 @@ extern class Line extends phaser.curves.Curve {
      */
     public var p1:phaser.math.Vector2;
     /**
-     * [description]
+     * Gets the resolution of the line.
      *
      * @method Phaser.Curves.Line#getResolution
      * @since 3.0.0
      *
-     * @param {number} [divisions=1] - [description]
+     * @param {number} [divisions=1] - The number of divisions to consider.
      *
-     * @return {number} [description]
+     * @return {number} The resolution. Equal to the number of divisions.
      */
     public function getResolution(?divisions:Float):Float;
     /**
@@ -58,7 +58,7 @@ extern class Line extends phaser.curves.Curve {
      */
     public function getPoint(t:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Gets a JSON representation of the line.
      *
      * @method Phaser.Curves.Line#toJSON
      * @since 3.0.0
@@ -67,14 +67,14 @@ extern class Line extends phaser.curves.Curve {
      */
     public function toJSON():JSONCurve;
     /**
-     * [description]
+     * Configures this line from a JSON representation.
      *
      * @function Phaser.Curves.Line.fromJSON
      * @since 3.0.0
      *
      * @param {JSONCurve} data - The JSON object containing this curve data.
      *
-     * @return {Phaser.Curves.Line} [description]
+     * @return {Phaser.Curves.Line} A new LineCurve object.
      */
     public function fromJSON(data:JSONCurve):phaser.curves.Line;
 }

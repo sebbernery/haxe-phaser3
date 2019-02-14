@@ -3,7 +3,7 @@ package phaser;
 /**
  * @typedef {object} GroupConfig
  *
- * @property {?object} [classType=Sprite] - Sets {@link Phaser.GameObjects.Group#classType}.
+ * @property {?GroupClassTypeConstructor} [classType=Sprite] - Sets {@link Phaser.GameObjects.Group#classType}.
  * @property {?boolean} [active=true] - Sets {@link Phaser.GameObjects.Group#active}.
  * @property {?number} [maxSize=-1] - Sets {@link Phaser.GameObjects.Group#maxSize}.
  * @property {?string} [defaultKey=null] - Sets {@link Phaser.GameObjects.Group#defaultKey}.
@@ -14,7 +14,7 @@ package phaser;
  * @property {?GroupMultipleCreateCallback} [createMultipleCallback=null] - Sets {@link Phaser.GameObjects.Group#createMultipleCallback}.
  */
 typedef GroupConfig = {
-    @:optional var classType:Dynamic;
+    @:optional var classType:GroupClassTypeConstructor;
     @:optional var active:Bool;
     @:optional var maxSize:Float;
     @:optional var defaultKey:String;

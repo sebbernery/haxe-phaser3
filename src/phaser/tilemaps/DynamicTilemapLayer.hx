@@ -152,9 +152,9 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      *
      * It will be sent 3 arguments:
      *
-     * 1) The Phaser.Tilemaps.LayerData object for this Layer
-     * 2) The Camera that is culling the layer. You can check its `dirty` property to see if it has changed since the last cull.
-     * 3) A reference to the `culledTiles` array, which should be used to store the tiles you want rendered.
+     * 1. The Phaser.Tilemaps.LayerData object for this Layer
+     * 2. The Camera that is culling the layer. You can check its `dirty` property to see if it has changed since the last cull.
+     * 3. A reference to the `culledTiles` array, which should be used to store the tiles you want rendered.
      *
      * See the `TilemapComponents.CullTiles` source code for details on implementing your own culling system.
      *
@@ -313,14 +313,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to filter.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Searches the entire map layer for the first tile matching the given index, then returns that Tile
      * object. If no match is found, it returns null. The search starts from the top-left tile and
@@ -353,14 +350,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {?Phaser.Tilemaps.Tile}
      */
-    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.Tile;
+    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):phaser.tilemaps.Tile;
     /**
      * For each tile in the given rectangular area (in tile coordinates) of the layer, run the given
      * callback. Similar to Array.prototype.forEach in vanilla JS.
@@ -374,14 +368,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
-    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Gets a tile at the given tile coordinates from the given layer.
      *
@@ -420,14 +411,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles that overlap with the given shape in the given layer. The shape must be a Circle,
      * Line, Rectangle or Triangle. The shape should be in world coordinates.
@@ -436,15 +424,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(Phaser.Geom.Circle|Phaser.Geom.Line|Phaser.Geom.Rectangle|Phaser.Geom.Triangle)} shape - A shape in world (pixel) coordinates
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinShape(shape:Dynamic, ?FilteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles in the given rectangular area (in world coordinates) of the layer.
      *
@@ -455,15 +440,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {number} worldY - The world y coordinate for the top-left of the area.
      * @param {number} width - The width of the area.
      * @param {number} height - The height of the area.
-     * @param {object} [filteringOptions] - Optional filters to apply when getting the tiles.
-     * @param {boolean} [filteringOptions.isNotEmpty=false] - If true, only return tiles that don't have -1 for an index.
-     * @param {boolean} [filteringOptions.isColliding=false] - If true, only return tiles that collide on at least one side.
-     * @param {boolean} [filteringOptions.hasInterestingFace=false] - If true, only return tiles that have at least one interesting face.
+     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?FilteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Checks if there is a tile at the given location (in tile coordinates) in the given layer. Returns
      * false if there is no tile or if the tile at that location has an index of -1.
@@ -604,17 +586,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
-     * @param {object} styleConfig - An object specifying the colors to use for the debug drawing.
-     * @param {?Color} [styleConfig.tileColor=blue] - Color to use for drawing a filled rectangle at
-     * non-colliding tile locations. If set to null, non-colliding tiles will not be drawn.
-     * @param {?Color} [styleConfig.collidingTileColor=orange] - Color to use for drawing a filled
-     * rectangle at colliding tile locations. If set to null, colliding tiles will not be drawn.
-     * @param {?Color} [styleConfig.faceColor=grey] - Color to use for drawing a line at interesting
-     * tile faces. If set to null, interesting tile faces will not be drawn.
+     * @param {StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
-    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:StyleConfig):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Scans the given rectangular area (given in tile coordinates) for tiles with an index matching
      * `findIndex` and updates their index to match `newIndex`. This only modifies the index and does
@@ -672,10 +648,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(integer|array)} indexes - Either a single tile index, or an array of tile indexes.
-     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear
-     * collision.
-     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the
-     * update.
+     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
+     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the update.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
@@ -691,10 +665,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      *
      * @param {integer} start - The first index of the tile to be set for collision.
      * @param {integer} stop - The last index of the tile to be set for collision.
-     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear
-     * collision.
-     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the
-     * update.
+     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
+     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the update.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
@@ -711,12 +683,9 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.DynamicTilemapLayer#setCollisionByProperty
      * @since 3.0.0
      *
-     * @param {object} properties - An object with tile properties and corresponding values that should
-     * be checked.
-     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear
-     * collision.
-     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the
-     * update.
+     * @param {object} properties - An object with tile properties and corresponding values that should be checked.
+     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
+     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the update.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
@@ -730,10 +699,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {integer[]} indexes - An array of the tile indexes to not be counted for collision.
-     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear
-     * collision.
-     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the
-     * update.
+     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
+     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the update.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
@@ -747,10 +714,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.DynamicTilemapLayer#setCollisionFromCollisionGroup
      * @since 3.0.0
      *
-     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear
-     * collision.
-     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the
-     * update.
+     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
+     * @param {boolean} [recalculateFaces=true] - Whether or not to recalculate the tile faces after the update.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
@@ -764,8 +729,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @method Phaser.Tilemaps.DynamicTilemapLayer#setTileIndexCallback
      * @since 3.0.0
      *
-     * @param {(integer|array)} indexes - Either a single tile index, or an array of tile indexes to have a
-     * collision callback set for.
+     * @param {(integer|integer[])} indexes - Either a single tile index, or an array of tile indexes to have a collision callback set for.
      * @param {function} callback - The callback that will be invoked when the tile is collided with.
      * @param {object} callbackContext - The context under which the callback is called.
      *
@@ -784,12 +748,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {function} callback - The callback that will be invoked when the tile is collided with.
+     * @param {function} [callback] - The callback that will be invoked when the tile is collided with.
      * @param {object} [callbackContext] - The context under which the callback is called.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
-    public function setTileLocationCallback(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, callback:Dynamic, ?callbackContext:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function setTileLocationCallback(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?callback:Dynamic, ?callbackContext:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Shuffles the tiles in a rectangular region (specified in tile coordinates) within the given
      * layer. It will only randomize the tiles in that area, so if they're all the same nothing will
@@ -1030,6 +994,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -1055,6 +1020,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -1062,7 +1028,7 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

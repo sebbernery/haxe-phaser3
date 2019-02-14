@@ -1,7 +1,7 @@
 package phaser.physics.arcade.components;
 
 /**
- * [description]
+ * Provides methods used for setting the angular acceleration properties of an Arcade Physics Body.
  *
  * @name Phaser.Physics.Arcade.Components.Angular
  * @since 3.0.0
@@ -10,34 +10,42 @@ package phaser.physics.arcade.components;
 extern class Angular {
     public function new();
     /**
-     * [description]
+     * Sets the angular velocity of the body.
+     *
+     * In Arcade Physics, bodies cannot rotate. They are always axis-aligned.
+     * However, they can have angular motion, which is passed on to the Game Object bound to the body,
+     * causing them to visually rotate, even though the body remains axis-aligned.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularVelocity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of angular velocity.
      *
      * @return {this} This Game Object.
      */
     public function setAngularVelocity(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the angular acceleration of the body.
+     *
+     * In Arcade Physics, bodies cannot rotate. They are always axis-aligned.
+     * However, they can have angular motion, which is passed on to the Game Object bound to the body,
+     * causing them to visually rotate, even though the body remains axis-aligned.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularAcceleration
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of angular acceleration.
      *
      * @return {this} This Game Object.
      */
     public function setAngularAcceleration(value:Float):Dynamic;
     /**
-     * [description]
+     * Sets the angular drag of the body. Drag is applied to the current velocity, providing a form of deceleration.
      *
      * @method Phaser.Physics.Arcade.Components.Angular#setAngularDrag
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The amount of drag.
      *
      * @return {this} This Game Object.
      */

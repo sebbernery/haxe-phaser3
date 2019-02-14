@@ -3,12 +3,12 @@ package phaser;
 /**
  * @typedef {object} ArcadeWorldDefaults
  *
- * @property {boolean} debugShowBody - [description]
- * @property {boolean} debugShowStaticBody - [description]
- * @property {boolean} debugShowVelocity - [description]
- * @property {number} bodyDebugColor - [description]
- * @property {number} staticBodyDebugColor - [description]
- * @property {number} velocityDebugColor - [description]
+ * @property {boolean} debugShowBody - Set to `true` to render dynamic body outlines to the debug display.
+ * @property {boolean} debugShowStaticBody - Set to `true` to render static body outlines to the debug display.
+ * @property {boolean} debugShowVelocity - Set to `true` to render body velocity markers to the debug display.
+ * @property {number} bodyDebugColor - The color of dynamic body outlines when rendered to the debug display.
+ * @property {number} staticBodyDebugColor - The color of static body outlines when rendered to the debug display.
+ * @property {number} velocityDebugColor - The color of the velocity markers when rendered to the debug display.
  */
 typedef ArcadeWorldDefaults = {
 var debugShowBody:Bool;

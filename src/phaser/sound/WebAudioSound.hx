@@ -25,6 +25,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @name Phaser.Sound.WebAudioSound#rate
      * @type {number}
      * @default 1
+     * @fires Phaser.Sound.Events#RATE
      * @since 3.0.0
      */
     public var rate:Float;
@@ -35,6 +36,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @name Phaser.Sound.WebAudioSound#detune
      * @type {number}
      * @default 0
+     * @fires Phaser.Sound.Events#DETUNE
      * @since 3.0.0
      */
     public var detune:Float;
@@ -45,6 +47,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @name Phaser.Sound.WebAudioSound#mute
      * @type {boolean}
      * @default false
+     * @fires Phaser.Sound.Events#MUTE
      * @since 3.0.0
      */
     public var mute:Bool;
@@ -54,6 +57,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @name Phaser.Sound.WebAudioSound#volume
      * @type {number}
      * @default 1
+     * @fires Phaser.Sound.Events#VOLUME
      * @since 3.0.0
      */
     public var volume:Float;
@@ -65,6 +69,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @name Phaser.Sound.WebAudioSound#seek
      * @type {number}
+     * @fires Phaser.Sound.Events#SEEK
      * @since 3.0.0
      */
     public var seek:Float;
@@ -74,6 +79,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @name Phaser.Sound.WebAudioSound#loop
      * @type {boolean}
      * @default false
+     * @fires Phaser.Sound.Events#LOOP
      * @since 3.0.0
      */
     public var loop:Bool;
@@ -84,7 +90,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * and 2.0 doubles the audios playback speed.
      *
      * @method Phaser.Sound.WebAudioSound#setRate
-     * @fires Phaser.Sound.WebAudioSound#rateEvent
+     * @fires Phaser.Sound.Events#RATE
      * @since 3.3.0
      *
      * @param {number} value - The playback rate at of this Sound.
@@ -97,7 +103,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
      *
      * @method Phaser.Sound.WebAudioSound#setDetune
-     * @fires Phaser.Sound.WebAudioSound#detuneEvent
+     * @fires Phaser.Sound.Events#DETUNE
      * @since 3.3.0
      *
      * @param {number} value - The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
@@ -109,7 +115,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * Sets the muted state of this Sound.
      *
      * @method Phaser.Sound.WebAudioSound#setMute
-     * @fires Phaser.Sound.WebAudioSound#muteEvent
+     * @fires Phaser.Sound.Events#MUTE
      * @since 3.4.0
      *
      * @param {boolean} value - `true` to mute this sound, `false` to unmute it.
@@ -121,7 +127,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * Sets the volume of this Sound.
      *
      * @method Phaser.Sound.WebAudioSound#setVolume
-     * @fires Phaser.Sound.WebAudioSound#volumeEvent
+     * @fires Phaser.Sound.Events#VOLUME
      * @since 3.4.0
      *
      * @param {number} value - The volume of the sound.
@@ -133,7 +139,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * Seeks to a specific point in this sound.
      *
      * @method Phaser.Sound.WebAudioSound#setSeek
-     * @fires Phaser.Sound.WebAudioSound#seekEvent
+     * @fires Phaser.Sound.Events#SEEK
      * @since 3.4.0
      *
      * @param {number} value - The point in the sound to seek to.
@@ -145,7 +151,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * Sets the loop state of this Sound.
      *
      * @method Phaser.Sound.WebAudioSound#setLoop
-     * @fires Phaser.Sound.WebAudioSound#loopEvent
+     * @fires Phaser.Sound.Events#LOOP
      * @since 3.4.0
      *
      * @param {boolean} value - `true` to loop this sound, `false` to not loop it.

@@ -1,7 +1,8 @@
 package phaser.blendmodes;
 
 /**
- * Darken blend mode.
+ * Darken blend mode. For Canvas only.
+ * Retains the darkest pixels of both layers.
  *
  * @name Phaser.BlendModes.DARKEN
  */

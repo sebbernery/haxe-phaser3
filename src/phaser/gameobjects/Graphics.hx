@@ -286,6 +286,18 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      */
     public function fillPath():phaser.gameobjects.Graphics;
     /**
+     * Fill the current path.
+     *
+     * This is an alias for `Graphics.fillPath` and does the same thing.
+     * It was added to match the CanvasRenderingContext 2D API.
+     *
+     * @method Phaser.GameObjects.Graphics#fill
+     * @since 3.16.0
+     *
+     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     */
+    public function fill():phaser.gameobjects.Graphics;
+    /**
      * Stroke the current path.
      *
      * @method Phaser.GameObjects.Graphics#strokePath
@@ -294,6 +306,18 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
     public function strokePath():phaser.gameobjects.Graphics;
+    /**
+     * Stroke the current path.
+     *
+     * This is an alias for `Graphics.strokePath` and does the same thing.
+     * It was added to match the CanvasRenderingContext 2D API.
+     *
+     * @method Phaser.GameObjects.Graphics#stroke
+     * @since 3.16.0
+     *
+     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     */
+    public function stroke():phaser.gameobjects.Graphics;
     /**
      * Fill the given circle.
      *
@@ -402,15 +426,11 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the top-left of the rectangle.
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
-     * @param {number} [radius = 20] - The corner radius; It can also be an object to specify different radii for corners
-     * @param {number} [radius.tl = 20] Top left
-     * @param {number} [radius.tr = 20] Top right
-     * @param {number} [radius.br = 20] Bottom right
-     * @param {number} [radius.bl = 20] Bottom left
+     * @param {(RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function fillRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Float):phaser.gameobjects.Graphics;
+    public function fillRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):phaser.gameobjects.Graphics;
     /**
      * Stroke a rounded rectangle with the given position, size and radius.
      *
@@ -421,15 +441,11 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the top-left of the rectangle.
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
-     * @param {number} [radius = 20] - The corner radius; It can also be an object to specify different radii for corners
-     * @param {number} [radius.tl = 20] Top left
-     * @param {number} [radius.tr = 20] Top right
-     * @param {number} [radius.br = 20] Bottom right
-     * @param {number} [radius.bl = 20] Bottom left
+     * @param {(RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function strokeRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Float):phaser.gameobjects.Graphics;
+    public function strokeRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):phaser.gameobjects.Graphics;
     /**
      * Fill the given point.
      *
@@ -565,29 +581,29 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      */
     public function moveTo(x:Float, y:Float):phaser.gameobjects.Graphics;
     /**
-     * [description]
+     * Draw a line from the current drawing position to the given position with a specific width and color.
      *
      * @method Phaser.GameObjects.Graphics#lineFxTo
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} y - [description]
-     * @param {number} width - [description]
-     * @param {number} rgb - [description]
+     * @param {number} x - The x coordinate to draw the line to.
+     * @param {number} y - The y coordinate to draw the line to.
+     * @param {number} width - The width of the stroke.
+     * @param {number} rgb - The color of the stroke.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
     public function lineFxTo(x:Float, y:Float, width:Float, rgb:Float):phaser.gameobjects.Graphics;
     /**
-     * [description]
+     * Move the current drawing position to the given position and change the pen width and color.
      *
      * @method Phaser.GameObjects.Graphics#moveFxTo
      * @since 3.0.0
      *
-     * @param {number} x - [description]
-     * @param {number} y - [description]
-     * @param {number} width - [description]
-     * @param {number} rgb - [description]
+     * @param {number} x - The x coordinate to move to.
+     * @param {number} y - The y coordinate to move to.
+     * @param {number} width - The new stroke width.
+     * @param {number} rgb - The new stroke color.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
@@ -913,6 +929,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE
      *
      * Canvas has more available depending on browser support.
      *
@@ -938,6 +955,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * * ADD
      * * MULTIPLY
      * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
      *
      * Canvas has more available depending on browser support.
      *
@@ -945,7 +963,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
      * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-     * reasons try to be careful about the construction of your Scene and the frequency of which blend modes
+     * reasons try to be careful about the construction of your Scene and the frequency in which blend modes
      * are used.
      *
      * @method Phaser.GameObjects.Components.BlendMode#setBlendMode

@@ -1,9 +1,8 @@
 package phaser.display.color;
 
 /**
- * Interpolates color values
- *
  * @namespace Phaser.Display.Color.Interpolate
+ * @memberof Phaser.Display.Color
  * @since 3.0.0
  */
 @:native("Phaser.Display.Color.Interpolate")

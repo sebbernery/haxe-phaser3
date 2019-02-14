@@ -158,6 +158,26 @@ extern class Line {
      */
     public function Equals(line:phaser.geom.Line, toCompare:phaser.geom.Line):Bool;
     /**
+     * Extends the start and end points of a Line by the given amounts.
+     *
+     * The amounts can be positive or negative. Positive points will increase the length of the line,
+     * while negative ones will decrease it.
+     *
+     * If no `right` value is provided it will extend the length of the line equally in both directions.
+     *
+     * Pass a value of zero to leave the start or end point unchanged.
+     *
+     * @function Phaser.Geom.Line.Extend
+     * @since 3.16.0
+     *
+     * @param {Phaser.Geom.Line} line - The line instance to extend.
+     * @param {number} left - The amount to extend the start of the line by.
+     * @param {number} [right] - The amount to extend the end of the line by. If not given it will be set to the `left` value.
+     *
+     * @return {Phaser.Geom.Line} The modified Line instance.
+     */
+    public function Extend(line:phaser.geom.Line, left:Float, ?right:Float):phaser.geom.Line;
+    /**
      * Get the midpoint of the given line.
      *
      * @function Phaser.Geom.Line.GetMidPoint
@@ -171,6 +191,21 @@ extern class Line {
      * @return {(Phaser.Geom.Point|object)} The midpoint of the Line.
      */
     public function GetMidPoint(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
+    /**
+     * Get the nearest point on a line perpendicular to the given point.
+     *
+     * @function Phaser.Geom.Line.GetNearestPoint
+     * @since 3.16.0
+     *
+     * @generic {Phaser.Geom.Point} O - [out,$return]
+     *
+     * @param {Phaser.Geom.Line} line - The line to get the nearest point on.
+     * @param {(Phaser.Geom.Point|object)} point - The point to get the nearest point to.
+     * @param {(Phaser.Geom.Point|object)} [out] - An optional point, or point-like object, to store the coordinates of the nearest point on the line.
+     *
+     * @return {(Phaser.Geom.Point|object)} The nearest point on the line.
+     */
+    public function GetNearestPoint(line:phaser.geom.Line, point:Dynamic, ?out:Dynamic):phaser.geom.Point;
     /**
      * Calculate the normal of the given line.
      *
@@ -223,6 +258,20 @@ extern class Line {
      * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
      */
     public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    /**
+     * Get the shortest distance from a Line to the given Point.
+     *
+     * @function Phaser.Geom.Line.GetShortestDistance
+     * @since 3.16.0
+     *
+     * @generic {Phaser.Geom.Point} O - [out,$return]
+     *
+     * @param {Phaser.Geom.Line} line - The line to get the distance from.
+     * @param {(Phaser.Geom.Point|object)} point - The point to get the shortest distance to.
+     *
+     * @return {number} The shortest distance from the line to the point.
+     */
+    public function GetShortestDistance(line:phaser.geom.Line, point:Dynamic):Float;
     /**
      * Calculate the height of the given line.
      *
@@ -355,14 +404,15 @@ extern class Line {
      */
     public function NormalX(line:phaser.geom.Line):Float;
     /**
-     * [description]
+     * The Y value of the normal of the given line.
+     * The normal of a line is a vector that points perpendicular from it.
      *
      * @function Phaser.Geom.Line.NormalY
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Line} line - [description]
+     * @param {Phaser.Geom.Line} line - The line to calculate the normal of.
      *
-     * @return {number} [description]
+     * @return {number} The Y value of the normal of the Line.
      */
     public function NormalY(line:phaser.geom.Line):Float;
     /**
