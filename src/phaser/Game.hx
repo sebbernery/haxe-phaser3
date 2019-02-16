@@ -225,7 +225,7 @@ extern class Game {
      * @type {Phaser.FacebookInstantGamesPlugin}
      * @since 3.13.0
      */
-    public var facebook:phaser.FacebookInstantGamesPlugin;
+    public var facebook:Dynamic;
     /**
      * Does the window the game is running in currently have focus or not?
      * This is modified by the VisibilityHandler.

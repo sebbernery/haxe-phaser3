@@ -1,8 +1,19 @@
 package phaser;
 
+/**
+ * @classdesc
+ * A base Phaser.Scene class which you could extend for your own use.
+ *
+ * @class Scene
+ * @memberof Phaser
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {(string|Phaser.Scenes.Settings.Config)} config - Scene specific configuration settings.
+ */
 @:native("Phaser.Scene")
 extern class Scene {
-    public function new();
+    public function new(config:Dynamic);
     /**
      * The Scene Systems. You must never overwrite this property, or all hell will break lose.
      *
@@ -208,7 +219,7 @@ extern class Scene {
      * @type {Phaser.FacebookInstantGamesPlugin}
      * @since 3.12.0
      */
-    public var facebook:phaser.FacebookInstantGamesPlugin;
+    public var facebook:Dynamic;
     /**
      * A reference to the global Scale Manager.
      * This property will only be available if defined in the Scene Injection Map.

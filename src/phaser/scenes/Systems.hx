@@ -42,7 +42,7 @@ extern class Systems {
      * @type {Phaser.FacebookInstantGamesPlugin}
      * @since 3.12.0
      */
-    public var facebook:phaser.FacebookInstantGamesPlugin;
+    public var facebook:Dynamic;
     /**
      * The Scene Configuration object, as passed in when creating the Scene.
      *

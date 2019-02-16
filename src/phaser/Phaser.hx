@@ -112,36 +112,6 @@ class Phaser {
      */
     static public var CSSBlendModes:String;
     static public var Game:Dynamic;
-    static public var Animations:Dynamic;
-    static public var Cache:Dynamic;
-    static public var Cameras:Dynamic;
-    static public var Core:Dynamic;
-    static public var Class:Dynamic;
-    static public var Data:Dynamic;
-    static public var Display:Dynamic;
-    static public var Events:Dynamic;
-    static public var GameObjects:Dynamic;
-    static public var Input:Dynamic;
-    static public var Loader:Dynamic;
-    static public var Math:Dynamic;
-    static public var Plugins:Dynamic;
-    static public var Scale:Dynamic;
-    static public var Scene:Dynamic;
-    static public var Scenes:Dynamic;
-    static public var Sound:Dynamic;
-    static public var Structs:Dynamic;
-    static public var Textures:Dynamic;
-    static public var Time:Dynamic;
-    static public var Tweens:Dynamic;
-    static public var Actions:Dynamic;
-    static public var Create:Dynamic;
-    static public var Curves:Dynamic;
-    static public var DOM:Dynamic;
-    static public var Geom:Dynamic;
-    static public var Physics:Dynamic;
-    static public var Renderer:Dynamic;
-    static public var Tilemaps:Dynamic;
-    static public var Utils:Dynamic;
     /**
      * Phaser Blend Modes.
      *
