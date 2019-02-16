@@ -1,12 +1,11 @@
 package phaser;
 
 /**
- * @callback EachMapCallback
- * @generic E - [entry]
+ * @callback EachMapCallback<E>
  *
- * @param {string} key - [description]
- * @param {*} entry - [description]
+ * @param {string} key - The key of the Map entry.
+ * @param {E} entry - The value of the Map entry.
  *
- * @return {?boolean} [description]
+ * @return {?boolean} The callback result.
  */
 typedef EachMapCallback = Dynamic;
