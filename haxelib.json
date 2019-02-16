@@ -5,8 +5,8 @@
     "tags": ["js", "game"],
     "description": "Haxe bindings for Phaser 3. Experimental.",
     "contributors": ["Sebbernery"],
-    "version": "3.16.202",
-    "releasenote": "Updated to support Phaser 3.16.2. Bugfix: < and > were present in filenames. Bugfix: added some unbinded stuff",
+    "version": "3.16.203",
+    "releasenote": "Updated to support Phaser 3.16.2. Bugfix: < and > were present in filenames. Bugfix: added some unbinded stuff. Bugfix: handles @extends on Typedef",
     "classPath": "src",
     "dependencies": {}
 }

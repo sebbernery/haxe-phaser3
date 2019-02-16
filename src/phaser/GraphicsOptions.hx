@@ -12,4 +12,6 @@ package phaser;
 typedef GraphicsOptions = {
     @:optional var x:Float;
     @:optional var y:Float;
+    @:optional var lineStyle:GraphicsLineStyle;
+    @:optional var fillStyle:GraphicsFillStyle;
 };
