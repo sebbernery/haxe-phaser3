@@ -34,10 +34,10 @@ extern class ScenePlugin {
      * The settings of the Scene this ScenePlugin belongs to.
      *
      * @name Phaser.Scenes.ScenePlugin#settings
-     * @type {Phaser.Scenes.Settings.Object}
+     * @type {Phaser.Types.Scenes.SettingsObject}
      * @since 3.0.0
      */
-    public var settings:phaser.scenes.settings.Object;
+    public var settings:phaser.types.scenes.SettingsObject;
     /**
      * The key of the Scene this ScenePlugin belongs to.
      *
@@ -120,11 +120,11 @@ extern class ScenePlugin {
      * @fires Phaser.Scenes.Events#TRANSITION_OUT
      * @since 3.5.0
      *
-     * @param {SceneTransitionConfig} config - The transition configuration object.
+     * @param {Phaser.Types.Scenes.SceneTransitionConfig} config - The transition configuration object.
      *
      * @return {boolean} `true` is the transition was started, otherwise `false`.
      */
-    public function transition(config:SceneTransitionConfig):Bool;
+    public function transition(config:phaser.types.scenes.SceneTransitionConfig):Bool;
     /**
      * Add the Scene into the Scene Manager and start it if 'autoStart' is true or the Scene config 'active' property is set.
      *
@@ -132,13 +132,13 @@ extern class ScenePlugin {
      * @since 3.0.0
      *
      * @param {string} key - The Scene key.
-     * @param {(Phaser.Scene|Phaser.Scenes.Settings.Config|function)} sceneConfig - The config for the Scene.
+     * @param {(Phaser.Scene|Phaser.Types.Scenes.SettingsConfig|Phaser.Types.Scenes.CreateSceneFromObjectConfig|function)} sceneConfig - The config for the Scene.
      * @param {boolean} autoStart - Whether to start the Scene after it's added.
      * @param {object} [data] - Optional data object. This will be set as Scene.settings.data and passed to `Scene.init`.
      *
-     * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
+     * @return {Phaser.Scene} An instance of the Scene that was added to the Scene Manager.
      */
-    public function add(key:String, sceneConfig:Dynamic, autoStart:Bool, ?data:Dynamic):phaser.scenes.ScenePlugin;
+    public function add(key:String, sceneConfig:Dynamic, autoStart:Bool, ?data:Dynamic):phaser.Scene;
     /**
      * Launch the given Scene and run it in parallel with this one.
      *
@@ -220,6 +220,11 @@ extern class ScenePlugin {
     /**
      * Makes this Scene sleep then starts the Scene given.
      *
+     * No checks are made to see if an instance of the given Scene is already running.
+     * Because Scenes in Phaser are non-exclusive, you are allowed to run multiple
+     * instances of them _at the same time_. This means, calling this function
+     * may launch another instance of the requested Scene if it's already running.
+     *
      * @method Phaser.Scenes.ScenePlugin#switch
      * @since 3.0.0
      *
@@ -276,16 +281,27 @@ extern class ScenePlugin {
      */
     public function isSleeping(?key:String):Bool;
     /**
-     * Checks if the given Scene is active or not?
+     * Checks if the given Scene is running or not?
      *
      * @method Phaser.Scenes.ScenePlugin#isActive
      * @since 3.0.0
      *
      * @param {string} [key] - The Scene to check.
      *
-     * @return {boolean} Whether the Scene is active.
+     * @return {boolean} Whether the Scene is running.
      */
     public function isActive(?key:String):Bool;
+    /**
+     * Checks if the given Scene is paused or not?
+     *
+     * @method Phaser.Scenes.ScenePlugin#isPaused
+     * @since 3.17.0
+     *
+     * @param {string} [key] - The Scene to check.
+     *
+     * @return {boolean} Whether the Scene is paused.
+     */
+    public function isPaused(?key:String):Bool;
     /**
      * Checks if the given Scene is visible or not?
      *

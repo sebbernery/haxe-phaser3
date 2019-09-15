@@ -25,7 +25,6 @@ package phaser.tilemaps;
  * @extends Phaser.GameObjects.Components.GetBounds
  * @extends Phaser.GameObjects.Components.Origin
  * @extends Phaser.GameObjects.Components.Pipeline
- * @extends Phaser.GameObjects.Components.ScaleMode
  * @extends Phaser.GameObjects.Components.ScrollFactor
  * @extends Phaser.GameObjects.Components.Transform
  * @extends Phaser.GameObjects.Components.Visible
@@ -240,14 +239,14 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {(integer|array)} replacements - The tile index, or array of indexes, to change a converted
      * tile to. Set to `null` to leave the tiles unchanged. If an array is given, it is assumed to be a
      * one-to-one mapping with the indexes array.
-     * @param {SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e.
+     * @param {Phaser.Types.GameObjects.Sprite.SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e.
      * scene.make.sprite).
      * @param {Phaser.Scene} [scene=scene the map is within] - The Scene to create the Sprites within.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when determining the world XY
      *
      * @return {Phaser.GameObjects.Sprite[]} An array of the Sprites that were created.
      */
-    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;
+    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:phaser.types.gameobjects.sprite.SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.gameobjects.Sprite>;
     /**
      * Returns the tiles in the given layer that are within the cameras viewport.
      * This is used internally.
@@ -313,11 +312,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to filter.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions):Array<phaser.tilemaps.Tile>;
     /**
      * Searches the entire map layer for the first tile matching the given index, then returns that Tile
      * object. If no match is found, it returns null. The search starts from the top-left tile and
@@ -350,11 +349,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {?Phaser.Tilemaps.Tile}
      */
-    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):phaser.tilemaps.Tile;
+    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions):phaser.tilemaps.Tile;
     /**
      * For each tile in the given rectangular area (in tile coordinates) of the layer, run the given
      * callback. Similar to Array.prototype.forEach in vanilla JS.
@@ -368,11 +367,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
-    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):phaser.tilemaps.DynamicTilemapLayer;
+    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Gets a tile at the given tile coordinates from the given layer.
      *
@@ -411,11 +410,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?FilteringOptions:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles that overlap with the given shape in the given layer. The shape must be a Circle,
      * Line, Rectangle or Triangle. The shape should be in world coordinates.
@@ -424,12 +423,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(Phaser.Geom.Circle|Phaser.Geom.Line|Phaser.Geom.Rectangle|Phaser.Geom.Triangle)} shape - A shape in world (pixel) coordinates
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinShape(shape:Dynamic, ?FilteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles in the given rectangular area (in world coordinates) of the layer.
      *
@@ -440,12 +439,12 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @param {number} worldY - The world y coordinate for the top-left of the area.
      * @param {number} width - The width of the area.
      * @param {number} height - The height of the area.
-     * @param {object} [FilteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      *
      * @return {Phaser.Tilemaps.Tile[]} An array of Tile objects.
      */
-    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?FilteringOptions:Dynamic, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?camera:phaser.cameras.scene2d.Camera):Array<phaser.tilemaps.Tile>;
     /**
      * Checks if there is a tile at the given location (in tile coordinates) in the given layer. Returns
      * false if there is no tile or if the tile at that location has an index of -1.
@@ -586,11 +585,11 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
-     * @param {StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
+     * @param {Phaser.Types.Tilemaps.StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
      *
      * @return {Phaser.Tilemaps.DynamicTilemapLayer} This Tilemap Layer object.
      */
-    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:StyleConfig):phaser.tilemaps.DynamicTilemapLayer;
+    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:phaser.types.tilemaps.StyleConfig):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Scans the given rectangular area (given in tile coordinates) for tiles with an index matching
      * `findIndex` and updates their index to match `newIndex`. This only modifies the index and does
@@ -1158,8 +1157,10 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function setDepth(value:Int):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
+     *
      * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipX
      * @type {boolean}
@@ -1169,8 +1170,10 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var flipX:Bool;
     /**
      * The vertically flipped state of the Game Object.
+     *
      * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipY
      * @type {boolean}
@@ -1180,6 +1183,10 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var flipY:Bool;
     /**
      * Toggles the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#toggleFlipX
      * @since 3.0.0
@@ -1198,6 +1205,10 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function toggleFlipY():Dynamic;
     /**
      * Sets the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlipX
      * @since 3.0.0
@@ -1220,6 +1231,10 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public function setFlipY(value:Bool):Dynamic;
     /**
      * Sets the horizontal and vertical flipped state of this Game Object.
+     *
+     * A Game Object that is flipped will render inversed on the flipped axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlip
      * @since 3.0.0
@@ -1269,6 +1284,21 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      */
     public function getTopLeft(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
+     * Gets the top-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getTopCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getTopCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
      * Gets the top-right corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
      *
@@ -1284,6 +1314,36 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      */
     public function getTopRight(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
+     * Gets the left-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getLeftCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getLeftCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
+     * Gets the right-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getRightCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getRightCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
      * Gets the bottom-left corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
      *
@@ -1298,6 +1358,21 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
      */
     public function getBottomLeft(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
+     * Gets the bottom-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getBottomCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getBottomCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
      * Gets the bottom-right corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
@@ -1483,27 +1558,6 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      */
     public function getPipelineName():String;
     /**
-     * The Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @name Phaser.GameObjects.Components.ScaleMode#scaleMode
-     * @type {Phaser.ScaleModes}
-     * @since 3.0.0
-     */
-    public var scaleMode:Dynamic;
-    /**
-     * Sets the Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @method Phaser.GameObjects.Components.ScaleMode#setScaleMode
-     * @since 3.0.0
-     *
-     * @param {Phaser.ScaleModes} value - The Scale Mode to be used by this Game Object.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setScaleMode(value:Dynamic):Dynamic;
-    /**
      * The horizontal scroll factor of this Game Object.
      *
      * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
@@ -1613,6 +1667,19 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -1633,7 +1700,8 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -1645,6 +1713,9 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -1789,6 +1860,17 @@ extern class DynamicTilemapLayer extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

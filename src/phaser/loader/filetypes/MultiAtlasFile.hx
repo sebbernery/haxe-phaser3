@@ -19,12 +19,12 @@ package phaser.loader.filetypes;
  * @param {string} [atlasURL] - The absolute or relative URL to load the multi atlas json file from.
  * @param {string} [path] - Optional path to use when loading the textures defined in the atlas data.
  * @param {string} [baseURL] - Optional Base URL to use when loading the textures defined in the atlas data.
- * @param {XHRSettingsObject} [atlasXhrSettings] - Extra XHR Settings specifically for the atlas json file.
- * @param {XHRSettingsObject} [textureXhrSettings] - Extra XHR Settings specifically for the texture files.
+ * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - Extra XHR Settings specifically for the atlas json file.
+ * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - Extra XHR Settings specifically for the texture files.
  */
 @:native("Phaser.Loader.FileTypes.MultiAtlasFile")
 extern class MultiAtlasFile extends phaser.loader.MultiFile {
-    public function new(loader:phaser.loader.LoaderPlugin, key:String, ?atlasURL:String, ?path:String, ?baseURL:String, ?atlasXhrSettings:XHRSettingsObject, ?textureXhrSettings:XHRSettingsObject);
+    public function new(loader:phaser.loader.LoaderPlugin, key:String, ?atlasURL:String, ?path:String, ?baseURL:String, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject);
     /**
      * Adds this file to its target cache upon successful loading and processing.
      *

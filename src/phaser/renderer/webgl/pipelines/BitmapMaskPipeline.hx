@@ -65,7 +65,7 @@ extern class BitmapMaskPipeline extends phaser.renderer.webgl.WebGLPipeline {
      */
     public function beginMask(mask:phaser.gameobjects.GameObject, maskedObject:phaser.gameobjects.GameObject, camera:phaser.cameras.scene2d.Camera):Void;
     /**
-     * The masked game object's framebuffer is unbound and it's texture
+     * The masked game objects framebuffer is unbound and its texture
      * is bound together with the mask texture and the mask shader and
      * a draw call with a single quad is processed. Here is where the
      * masking effect is applied.

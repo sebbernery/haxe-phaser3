@@ -54,6 +54,14 @@ class Input {
      */
     static public var TOUCH_END:Int;
     /**
+     * The pointer lock has changed.
+     *
+     * @name Phaser.Input.POINTER_LOCK_CHANGE
+     * @type {integer}
+     * @since 3.10.0
+     */
+    static public var POINTER_LOCK_CHANGE:Int;
+    /**
      * A touch pointer has been been cancelled by the browser.
      *
      * @name Phaser.Input.TOUCH_CANCEL
@@ -62,11 +70,11 @@ class Input {
      */
     static public var TOUCH_CANCEL:Int;
     /**
-     * The pointer lock has changed.
+     * The mouse wheel changes.
      *
-     * @name Phaser.Input.POINTER_LOCK_CHANGE
+     * @name Phaser.Input.MOUSE_WHEEL
      * @type {integer}
-     * @since 3.10.0
+     * @since 3.18.0
      */
-    static public var POINTER_LOCK_CHANGE:Int;
+    static public var MOUSE_WHEEL:Int;
 }

@@ -78,18 +78,18 @@ extern class Spline extends phaser.curves.Curve {
      * @method Phaser.Curves.Spline#toJSON
      * @since 3.0.0
      *
-     * @return {JSONCurve} The JSON object containing this curve data.
+     * @return {Phaser.Types.Curves.JSONCurve} The JSON object containing this curve data.
      */
-    public function toJSON():JSONCurve;
+    public function toJSON():phaser.types.curves.JSONCurve;
     /**
      * [description]
      *
      * @function Phaser.Curves.Spline.fromJSON
      * @since 3.0.0
      *
-     * @param {JSONCurve} data - The JSON object containing this curve data.
+     * @param {Phaser.Types.Curves.JSONCurve} data - The JSON object containing this curve data.
      *
      * @return {Phaser.Curves.Spline} [description]
      */
-    public function fromJSON(data:JSONCurve):phaser.curves.Spline;
+    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Spline;
 }

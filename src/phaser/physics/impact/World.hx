@@ -11,11 +11,11 @@ package phaser.physics.impact;
  * @since 3.0.0
  *
  * @param {Phaser.Scene} scene - The Scene to which this Impact World instance belongs.
- * @param {Phaser.Physics.Impact.WorldConfig} config - [description]
+ * @param {Phaser.Types.Physics.Impact.WorldConfig} config - [description]
  */
 @:native("Phaser.Physics.Impact.World")
 extern class World extends phaser.events.EventEmitter {
-    public function new(scene:phaser.Scene, config:phaser.physics.impact.WorldConfig);
+    public function new(scene:phaser.Scene, config:phaser.types.physics.impact.WorldConfig);
     /**
      * [description]
      *
@@ -105,18 +105,18 @@ extern class World extends phaser.events.EventEmitter {
      * [description]
      *
      * @name Phaser.Physics.Impact.World#defaults
-     * @type {Phaser.Physics.Impact.WorldDefaults}
+     * @type {Phaser.Types.Physics.Impact.WorldDefaults}
      * @since 3.0.0
      */
-    public var defaults:phaser.physics.impact.WorldDefaults;
+    public var defaults:phaser.types.physics.impact.WorldDefaults;
     /**
      * An object containing the 4 wall bodies that bound the physics world.
      *
      * @name Phaser.Physics.Impact.World#walls
-     * @type {Phaser.Physics.Impact.WorldWalls}
+     * @type {Phaser.Types.Physics.Impact.WorldWalls}
      * @since 3.0.0
      */
-    public var walls:phaser.physics.impact.WorldWalls;
+    public var walls:phaser.types.physics.impact.WorldWalls;
     /**
      * [description]
      *
@@ -152,11 +152,11 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - The tilemap layer to use.
-     * @param {CollisionOptions} [options] - Options for controlling the mapping from tiles to slope IDs.
+     * @param {Phaser.Types.Physics.Impact.CollisionOptions} [options] - Options for controlling the mapping from tiles to slope IDs.
      *
      * @return {Phaser.Physics.Impact.CollisionMap} The newly created CollisionMap.
      */
-    public function setCollisionMapFromTilemapLayer(tilemapLayer:Dynamic, ?options:CollisionOptions):phaser.physics.impact.CollisionMap;
+    public function setCollisionMapFromTilemapLayer(tilemapLayer:Dynamic, ?options:phaser.types.physics.impact.CollisionOptions):phaser.physics.impact.CollisionMap;
     /**
      * Sets the bounds of the Physics world to match the given world pixel dimensions.
      * You can optionally set which 'walls' to create: left, right, top or bottom.

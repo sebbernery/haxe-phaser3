@@ -72,18 +72,18 @@ extern class QuadraticBezier extends phaser.curves.Curve {
      * @method Phaser.Curves.QuadraticBezier#toJSON
      * @since 3.2.0
      *
-     * @return {JSONCurve} The JSON object containing this curve data.
+     * @return {Phaser.Types.Curves.JSONCurve} The JSON object containing this curve data.
      */
-    public function toJSON():JSONCurve;
+    public function toJSON():phaser.types.curves.JSONCurve;
     /**
      * Creates a curve from a JSON object, e. g. created by `toJSON`.
      *
      * @function Phaser.Curves.QuadraticBezier.fromJSON
      * @since 3.2.0
      *
-     * @param {JSONCurve} data - The JSON object containing this curve data.
+     * @param {Phaser.Types.Curves.JSONCurve} data - The JSON object containing this curve data.
      *
      * @return {Phaser.Curves.QuadraticBezier} The created curve instance.
      */
-    public function fromJSON(data:JSONCurve):phaser.curves.QuadraticBezier;
+    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.QuadraticBezier;
 }

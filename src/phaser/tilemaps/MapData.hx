@@ -11,11 +11,11 @@ package phaser.tilemaps;
  * @constructor
  * @since 3.0.0
  *
- * @param {MapDataConfig} [config] - [description]
+ * @param {Phaser.Types.Tilemaps.MapDataConfig} [config] - The Map configuration object.
  */
 @:native("Phaser.Tilemaps.MapData")
 extern class MapData {
-    public function new(?config:MapDataConfig);
+    public function new(?config:phaser.types.tilemaps.MapDataConfig);
     /**
      * The key in the Phaser cache that corresponds to the loaded tilemap data.
      *
@@ -40,6 +40,14 @@ extern class MapData {
      * @since 3.0.0
      */
     public var height:Float;
+    /**
+     * If the map is infinite or not.
+     *
+     * @name Phaser.Tilemaps.MapData#infinite
+     * @type {boolean}
+     * @since 3.17.0
+     */
+    public var infinite:Bool;
     /**
      * The width of the tiles.
      *

@@ -14,11 +14,11 @@ package phaser.gameobjects;
  * @since 3.0.0
  *
  * @param {Phaser.GameObjects.Text} text - The Text object that this TextStyle is styling.
- * @param {object} style - The style settings to set.
+ * @param {Phaser.Types.GameObjects.Text.TextStyle} style - The style settings to set.
  */
 @:native("Phaser.GameObjects.TextStyle")
 extern class TextStyle {
-    public function new(text:phaser.gameobjects.Text, style:Dynamic);
+    public function new(text:phaser.gameobjects.Text, style:phaser.types.gameobjects.text.TextStyle);
     /**
      * The Text object that this TextStyle is styling.
      *
@@ -211,7 +211,7 @@ extern class TextStyle {
      */
     public var testString:String;
     /**
-     * The amount of horizontal padding adding to the width of the text when calculating the font metrics.
+     * The amount of horizontal padding added to the width of the text when calculating the font metrics.
      *
      * @name Phaser.GameObjects.TextStyle#baselineX
      * @type {number}
@@ -220,7 +220,7 @@ extern class TextStyle {
      */
     public var baselineX:Float;
     /**
-     * The amount of vertical padding adding to the width of the text when calculating the font metrics.
+     * The amount of vertical padding added to the height of the text when calculating the font metrics.
      *
      * @name Phaser.GameObjects.TextStyle#baselineY
      * @type {number}
@@ -243,13 +243,13 @@ extern class TextStyle {
      * @method Phaser.GameObjects.TextStyle#setStyle
      * @since 3.0.0
      *
-     * @param {object} style - The style settings to set.
+     * @param {Phaser.Types.GameObjects.Text.TextStyle} style - The style settings to set.
      * @param {boolean} [updateText=true] - Whether to update the text immediately.
      * @param {boolean} [setDefaults=false] - Use the default values is not set, or the local values.
      *
      * @return {Phaser.GameObjects.Text} The parent Text object.
      */
-    public function setStyle(style:Dynamic, ?updateText:Bool, ?setDefaults:Bool):phaser.gameobjects.Text;
+    public function setStyle(style:phaser.types.gameobjects.text.TextStyle, ?updateText:Bool, ?setDefaults:Bool):phaser.gameobjects.Text;
     /**
      * Synchronize the font settings to the given Canvas Rendering Context.
      *
@@ -537,18 +537,20 @@ extern class TextStyle {
      */
     public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
     /**
-     * Set the text alignment.
+     * Set the alignment of the text in this Text object.
      *
-     * Expects values like `'left'`, `'right'`, `'center'` or `'justified'`.
+     * The argument can be one of: `left`, `right`, `center` or `justify`.
+     *
+     * Alignment only works if the Text object has more than one line of text.
      *
      * @method Phaser.GameObjects.TextStyle#setAlign
      * @since 3.0.0
      *
-     * @param {string} align - The text alignment.
+     * @param {string} [align='left'] - The text alignment for multi-line text.
      *
      * @return {Phaser.GameObjects.Text} The parent Text object.
      */
-    public function setAlign(align:String):phaser.gameobjects.Text;
+    public function setAlign(?align:String):phaser.gameobjects.Text;
     /**
      * Set the maximum number of lines to draw.
      *
@@ -566,9 +568,9 @@ extern class TextStyle {
      * @method Phaser.GameObjects.TextStyle#getTextMetrics
      * @since 3.0.0
      *
-     * @return {BitmapTextMetrics} The text metrics.
+     * @return {Phaser.Types.GameObjects.Text.TextMetrics} The text metrics.
      */
-    public function getTextMetrics():BitmapTextMetrics;
+    public function getTextMetrics():phaser.types.gameobjects.text.TextMetrics;
     /**
      * Build a JSON representation of this Text Style.
      *

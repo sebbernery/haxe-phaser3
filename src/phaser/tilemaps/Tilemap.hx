@@ -249,7 +249,7 @@ extern class Tilemap {
      */
     public function addTilesetImage(tilesetName:String, ?key:String, ?tileWidth:Int, ?tileHeight:Int, ?tileMargin:Int, ?tileSpacing:Int, ?gid:Int):phaser.tilemaps.Tileset;
     /**
-     * Turns the StaticTilemapLayer associated with the given layer into a DynamicTilemapLayer. If
+     * Turns the DynamicTilemapLayer associated with the given layer into a StaticTilemapLayer. If
      * no layer specified, the map's current layer is used. This is useful if you want to manipulate
      * a map at the start of a scene, but then make it non-manipulable and optimize it for speed.
      * Note: the DynamicTilemapLayer passed in is destroyed, so make sure to store the value
@@ -302,7 +302,7 @@ extern class Tilemap {
      * @param {integer} [tileWidth] - The width of the tiles the layer uses for calculations. If not specified, it will default to the map's tileWidth.
      * @param {integer} [tileHeight] - The height of the tiles the layer uses for calculations. If not specified, it will default to the map's tileHeight.
      *
-     * @return {?Phaser.Tilemaps.DynamicTilemapLayer} Returns the new layer was created, or null if it failed.
+     * @return {?Phaser.Tilemaps.DynamicTilemapLayer} Returns the new layer that was created, or `null` if it failed.
      */
     public function createBlankDynamicLayer(name:String, tileset:Dynamic, ?x:Float, ?y:Float, ?width:Int, ?height:Int, ?tileWidth:Int, ?tileHeight:Int):phaser.tilemaps.DynamicTilemapLayer;
     /**
@@ -321,12 +321,12 @@ extern class Tilemap {
      *
      * @param {(integer|string)} layerID - The layer array index value, or if a string is given, the layer name from Tiled.
      * @param {(string|string[]|Phaser.Tilemaps.Tileset|Phaser.Tilemaps.Tileset[])} tileset - The tileset, or an array of tilesets, used to render this layer. Can be a string or a Tileset object.
-     * @param {number} x - The x position to place the layer in the world. If not specified, it will default to the layer offset from Tiled or 0.
-     * @param {number} y - The y position to place the layer in the world. If not specified, it will default to the layer offset from Tiled or 0.
+     * @param {number} [x=0] - The x position to place the layer in the world. If not specified, it will default to the layer offset from Tiled or 0.
+     * @param {number} [y=0] - The y position to place the layer in the world. If not specified, it will default to the layer offset from Tiled or 0.
      *
      * @return {?Phaser.Tilemaps.DynamicTilemapLayer} Returns the new layer was created, or null if it failed.
      */
-    public function createDynamicLayer(layerID:Dynamic, tileset:Dynamic, x:Float, y:Float):phaser.tilemaps.DynamicTilemapLayer;
+    public function createDynamicLayer(layerID:Dynamic, tileset:Dynamic, ?x:Float, ?y:Float):phaser.tilemaps.DynamicTilemapLayer;
     /**
      * Creates a Sprite for every object matching the given gid in the map data. All properties from
      * the map data objectgroup are copied into the `spriteConfig`, so you can use this as an easy
@@ -343,13 +343,13 @@ extern class Tilemap {
      * @param {(integer|string)} id - Either the id (object), gid (tile object) or name (object or
      * tile object) from Tiled. Ids are unique in Tiled, but a gid is shared by all tile objects
      * with the same graphic. The same name can be used on multiple objects.
-     * @param {SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e.
+     * @param {Phaser.Types.GameObjects.Sprite.SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e.
      * scene.make.sprite).
      * @param {Phaser.Scene} [scene=the scene the map is within] - The Scene to create the Sprites within.
      *
      * @return {Phaser.GameObjects.Sprite[]} An array of the Sprites that were created.
      */
-    public function createFromObjects(name:String, id:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene):Array<phaser.gameobjects.Sprite>;
+    public function createFromObjects(name:String, id:Dynamic, spriteConfig:phaser.types.gameobjects.sprite.SpriteConfig, ?scene:phaser.Scene):Array<phaser.gameobjects.Sprite>;
     /**
      * Creates a Sprite for every object matching the given tile indexes in the layer. You can
      * optionally specify if each tile will be replaced with a new tile after the Sprite has been
@@ -363,14 +363,14 @@ extern class Tilemap {
      * @param {(integer|array)} replacements - The tile index, or array of indexes, to change a converted
      * tile to. Set to `null` to leave the tiles unchanged. If an array is given, it is assumed to be a
      * one-to-one mapping with the indexes array.
-     * @param {SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e. scene.make.sprite).
+     * @param {Phaser.Types.GameObjects.Sprite.SpriteConfig} spriteConfig - The config object to pass into the Sprite creator (i.e. scene.make.sprite).
      * @param {Phaser.Scene} [scene=scene the map is within] - The Scene to create the Sprites within.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when calculating the tile index from the world values.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.GameObjects.Sprite[]} Returns an array of Tiles, or null if the layer given was invalid.
      */
-    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.gameobjects.Sprite>;
+    public function createFromTiles(indexes:Dynamic, replacements:Dynamic, spriteConfig:phaser.types.gameobjects.sprite.SpriteConfig, ?scene:phaser.Scene, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.gameobjects.Sprite>;
     /**
      * Creates a new StaticTilemapLayer that renders the LayerData associated with the given
      * `layerID`. The currently selected layer in the map is set to this new layer.
@@ -455,12 +455,12 @@ extern class Tilemap {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to filter.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tile[]} Returns an array of Tiles, or null if the layer given was invalid.
      */
-    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function filterTiles(callback:Dynamic, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Searches the entire map layer for the first tile matching the given index, then returns that Tile
      * object. If no match is found, it returns null. The search starts from the top-left tile and
@@ -510,12 +510,12 @@ extern class Tilemap {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The Tile layer to run the search on. If not provided will use the current layer.
      *
      * @return {?Phaser.Tilemaps.Tile} Returns a Tiles, or null if the layer given was invalid.
      */
-    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions, ?layer:Dynamic):phaser.tilemaps.Tile;
+    public function findTile(callback:FindTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?layer:Dynamic):phaser.tilemaps.Tile;
     /**
      * For each tile in the given rectangular area (in tile coordinates) of the layer, run the given
      * callback. Similar to Array.prototype.forEach in vanilla JS.
@@ -531,12 +531,12 @@ extern class Tilemap {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area to search.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The Tile layer to run the search on. If not provided will use the current layer.
      *
      * @return {?Phaser.Tilemaps.Tilemap} Returns this, or null if the layer given was invalid.
      */
-    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions, ?layer:Dynamic):phaser.tilemaps.Tilemap;
+    public function forEachTile(callback:EachTileCallback, ?context:Dynamic, ?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?layer:Dynamic):phaser.tilemaps.Tilemap;
     /**
      * Gets the image layer index based on its name.
      *
@@ -655,12 +655,12 @@ extern class Tilemap {
      * @param {integer} [tileY=0] - The top most tile index (in tile coordinates) to use as the origin of the area.
      * @param {integer} [width=max width based on tileX] - How many tiles wide from the `tileX` index the area will be.
      * @param {integer} [height=max height based on tileY] - How many tiles tall from the `tileY` index the area will be.
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tile[]} Returns an array of Tiles, or null if the layer given was invalid.
      */
-    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:FilteringOptions, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles that overlap with the given shape in the given layer. The shape must be a Circle,
      * Line, Rectangle or Triangle. The shape should be in world coordinates.
@@ -670,13 +670,13 @@ extern class Tilemap {
      * @since 3.0.0
      *
      * @param {(Phaser.Geom.Circle|Phaser.Geom.Line|Phaser.Geom.Rectangle|Phaser.Geom.Triangle)} shape - A shape in world (pixel) coordinates
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tile[]} Returns an array of Tiles, or null if the layer given was invalid.
      */
-    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:FilteringOptions, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinShape(shape:Dynamic, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the tiles in the given rectangular area (in world coordinates) of the layer.
      * If no layer specified, the maps current layer is used.
@@ -688,13 +688,13 @@ extern class Tilemap {
      * @param {number} worldY - The world y coordinate for the top-left of the area.
      * @param {number} width - The width of the area.
      * @param {number} height - The height of the area.
-     * @param {FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
+     * @param {Phaser.Types.Tilemaps.FilteringOptions} [filteringOptions] - Optional filters to apply when getting the tiles.
      * @param {Phaser.Cameras.Scene2D.Camera} [camera=main camera] - The Camera to use when factoring in which tiles to return.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tile[]} Returns an array of Tiles, or null if the layer given was invalid.
      */
-    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:FilteringOptions, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
+    public function getTilesWithinWorldXY(worldX:Float, worldY:Float, width:Float, height:Float, ?filteringOptions:phaser.types.tilemaps.FilteringOptions, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):Array<phaser.tilemaps.Tile>;
     /**
      * Gets the Tileset that has the given `name`, or null if an invalid `name` is given.
      *
@@ -819,7 +819,7 @@ extern class Tilemap {
     public function putTilesAt(tile:Dynamic, tileX:Int, tileY:Int, ?recalculateFaces:Bool, ?layer:Dynamic):phaser.tilemaps.Tilemap;
     /**
      * Randomizes the indexes of a rectangular region of tiles (in tile coordinates) within the
-     * specified layer. Each tile will recieve a new index. If an array of indexes is passed in, then
+     * specified layer. Each tile will receive a new index. If an array of indexes is passed in, then
      * those will be used for randomly assigning new tile indexes. If an array is not provided, the
      * indexes found within the region (excluding -1) will be used for randomly assigning new tile
      * indexes. This method only modifies tile indexes and does not change collision information.
@@ -877,6 +877,32 @@ extern class Tilemap {
      */
     public function calculateFacesWithin(?tileX:Int, ?tileY:Int, ?width:Int, ?height:Int, ?layer:Dynamic):phaser.tilemaps.Tilemap;
     /**
+     * Removes the given TilemapLayer from this Tilemap without destroying it.
+     *
+     * If no layer specified, the map's current layer is used.
+     *
+     * @method Phaser.Tilemaps.Tilemap#removeLayer
+     * @since 3.17.0
+     *
+     * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to be removed.
+     *
+     * @return {?Phaser.Tilemaps.Tilemap} Returns this, or null if the layer given was invalid.
+     */
+    public function removeLayer(?layer:Dynamic):phaser.tilemaps.Tilemap;
+    /**
+     * Destroys the given TilemapLayer and removes it from this Tilemap.
+     *
+     * If no layer specified, the map's current layer is used.
+     *
+     * @method Phaser.Tilemaps.Tilemap#destroyLayer
+     * @since 3.17.0
+     *
+     * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to be destroyed.
+     *
+     * @return {?Phaser.Tilemaps.Tilemap} Returns this, or null if the layer given was invalid.
+     */
+    public function destroyLayer(?layer:Dynamic):phaser.tilemaps.Tilemap;
+    /**
      * Removes all layers from this Tilemap and destroys any associated StaticTilemapLayers or
      * DynamicTilemapLayers.
      *
@@ -886,6 +912,22 @@ extern class Tilemap {
      * @return {Phaser.Tilemaps.Tilemap} This Tilemap object.
      */
     public function removeAllLayers():phaser.tilemaps.Tilemap;
+    /**
+     * Removes the given Tile, or an array of Tiles, from the layer to which they belong,
+     * and optionally recalculates the collision information.
+     *
+     * This cannot be applied to Tiles that belong to Static Tilemap Layers.
+     *
+     * @method Phaser.Tilemaps.Tilemap#removeTile
+     * @since 3.17.0
+     *
+     * @param {(Phaser.Tilemaps.Tile|Phaser.Tilemaps.Tile[])} tiles - The Tile to remove, or an array of Tiles.
+     * @param {integer} [replaceIndex=-1] - After removing the Tile, insert a brand new Tile into its location with the given index. Leave as -1 to just remove the tile.
+     * @param {boolean} [recalculateFaces=true] - `true` if the faces data should be recalculated.
+     *
+     * @return {Phaser.Tilemaps.Tile[]} Returns an array of Tiles that were removed.
+     */
+    public function removeTile(tiles:Dynamic, ?replaceIndex:Int, ?recalculateFaces:Bool):Array<phaser.tilemaps.Tile>;
     /**
      * Removes the tile at the given tile coordinates in the specified layer and updates the layer's
      * collision information.
@@ -902,7 +944,7 @@ extern class Tilemap {
      * @param {boolean} [recalculateFaces=true] - `true` if the faces data should be recalculated.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
-     * @return {?Phaser.Tilemaps.Tile} Returns a Tile, or null if the layer given was invalid.
+     * @return {?Phaser.Tilemaps.Tile} Returns the Tile that was removed, or null if the layer given was invalid.
      */
     public function removeTileAt(tileX:Int, tileY:Int, ?replaceWithNull:Bool, ?recalculateFaces:Bool, ?layer:Dynamic):phaser.tilemaps.Tile;
     /**
@@ -937,12 +979,29 @@ extern class Tilemap {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
-     * @param {StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
+     * @param {Phaser.Types.Tilemaps.StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
      * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tilemap} Return this Tilemap object, or null if the layer given was invalid.
      */
-    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:StyleConfig, ?layer:Dynamic):phaser.tilemaps.Tilemap;
+    public function renderDebug(graphics:phaser.gameobjects.Graphics, styleConfig:phaser.types.tilemaps.StyleConfig, ?layer:Dynamic):phaser.tilemaps.Tilemap;
+    /**
+     * Draws a debug representation of all layers within this Tilemap to the given Graphics object.
+     *
+     * This is helpful when you want to get a quick idea of which of your tiles are colliding and which
+     * have interesting faces. The tiles are drawn starting at (0, 0) in the Graphics, allowing you to
+     * place the debug representation wherever you want on the screen.
+     *
+     * @method Phaser.Tilemaps.Tilemap#renderDebugFull
+     * @since 3.17.0
+     *
+     * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
+     * @param {Phaser.Types.Tilemaps.StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
+     * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
+     *
+     * @return {?Phaser.Tilemaps.Tilemap} Return this Tilemap object, or null if the layer given was invalid.
+     */
+    public function renderDebugFull(graphics:phaser.gameobjects.Graphics, styleConfig:phaser.types.tilemaps.StyleConfig, ?layer:Dynamic):phaser.tilemaps.Tilemap;
     /**
      * Scans the given rectangular area (given in tile coordinates) for tiles with an index matching
      * `findIndex` and updates their index to match `newIndex`. This only modifies the index and does

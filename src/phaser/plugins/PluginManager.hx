@@ -57,10 +57,10 @@ extern class PluginManager {
      * A plugin must have been started at least once in order to appear in this list.
      *
      * @name Phaser.Plugins.PluginManager#plugins
-     * @type {GlobalPlugin[]}
+     * @type {Phaser.Types.Plugins.GlobalPlugin[]}
      * @since 3.8.0
      */
-    public var plugins:Array<GlobalPlugin>;
+    public var plugins:Array<phaser.types.plugins.GlobalPlugin>;
     /**
      * A list of plugin keys that should be installed into Scenes as well as the Core Plugins.
      *
@@ -130,8 +130,9 @@ extern class PluginManager {
      * @param {function} plugin - The plugin code. This should be the non-instantiated version.
      * @param {string} [mapping] - If this plugin is injected into the Phaser.Scene class, this is the property key to use.
      * @param {Phaser.Scene} [addToScene] - Optionally automatically add this plugin to the given Scene.
+     * @param {boolean} [fromLoader=false] - Is this being called by the Loader?
      */
-    public function installScenePlugin(key:String, plugin:Dynamic, ?mapping:String, ?addToScene:phaser.Scene):Void;
+    public function installScenePlugin(key:String, plugin:Dynamic, ?mapping:String, ?addToScene:phaser.Scene, ?fromLoader:Bool):Void;
     /**
      * Installs a new Global Plugin into the Plugin Manager and optionally starts it running.
      * A global plugin belongs to the Plugin Manager, rather than a specific Scene, and can be accessed
@@ -185,9 +186,9 @@ extern class PluginManager {
      *
      * @param {string} key - The unique plugin key.
      *
-     * @return {GlobalPlugin} The plugin entry.
+     * @return {Phaser.Types.Plugins.GlobalPlugin} The plugin entry.
      */
-    public function getEntry(key:String):GlobalPlugin;
+    public function getEntry(key:String):phaser.types.plugins.GlobalPlugin;
     /**
      * Checks if the given global plugin, based on its key, is active or not.
      *
@@ -321,6 +322,18 @@ extern class PluginManager {
      * @param {function} [creatorCallback] - The callback to invoke when the Game Object Creator is called.
      */
     public function registerGameObject(key:String, ?factoryCallback:Dynamic, ?creatorCallback:Dynamic):Void;
+    /**
+     * Removes a previously registered Game Object from the global Game Object Factory and / or Creator.
+     * This is usually called from within your Plugin destruction code to help clean-up after your plugin has been removed.
+     *
+     * @method Phaser.Plugins.PluginManager#removeGameObject
+     * @since 3.19.0
+     *
+     * @param {string} key - The key of the Game Object to be removed from the factories.
+     * @param {boolean} [removeFromFactory=true] - Should the Game Object be removed from the Game Object Factory?
+     * @param {boolean} [removeFromCreator=true] - Should the Game Object be removed from the Game Object Creator?
+     */
+    public function removeGameObject(key:String, ?removeFromFactory:Bool, ?removeFromCreator:Bool):Void;
     /**
      * Registers a new file type with the global File Types Manager, making it available to all Loader
      * Plugins created after this.

@@ -71,22 +71,6 @@ extern class WebGLRenderer {
      */
     public var canvas:js.html.CanvasElement;
     /**
-     * An array of functions to invoke if the WebGL context is lost.
-     *
-     * @name Phaser.Renderer.WebGL.WebGLRenderer#lostContextCallbacks
-     * @type {WebGLContextCallback[]}
-     * @since 3.0.0
-     */
-    public var lostContextCallbacks:Array<WebGLContextCallback>;
-    /**
-     * An array of functions to invoke if the WebGL context is restored.
-     *
-     * @name Phaser.Renderer.WebGL.WebGLRenderer#restoredContextCallbacks
-     * @type {WebGLContextCallback[]}
-     * @since 3.0.0
-     */
-    public var restoredContextCallbacks:Array<WebGLContextCallback>;
-    /**
      * An array of blend modes supported by the WebGL Renderer.
      *
      * This array includes the default blend modes as well as any custom blend modes added through {@link #addBlendMode}.
@@ -107,7 +91,7 @@ extern class WebGLRenderer {
      */
     public var nativeTextures:Array<Dynamic>;
     /**
-     * Set to `true` if the WebGL context of the renderer is lost.
+     * This property is set to `true` if the WebGL context of the renderer is lost.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#contextLost
      * @type {boolean}
@@ -130,10 +114,10 @@ extern class WebGLRenderer {
      * If a non-null `callback` is set in this object, a snapshot of the canvas will be taken after the current frame is fully rendered.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#snapshotState
-     * @type {SnapshotState}
+     * @type {Phaser.Types.Renderer.Snapshot.SnapshotState}
      * @since 3.0.0
      */
-    public var snapshotState:SnapshotState;
+    public var snapshotState:phaser.types.renderer.snapshot.SnapshotState;
     /**
      * Cached value for the last texture unit that was used
      *
@@ -229,6 +213,24 @@ extern class WebGLRenderer {
      */
     public var scissorStack:js.html.Uint32Array;
     /**
+     * The handler to invoke when the context is lost.
+     * This should not be changed and is set in the boot method.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#contextLostHandler
+     * @type {function}
+     * @since 3.19.0
+     */
+    public var contextLostHandler:Dynamic;
+    /**
+     * The handler to invoke when the context is restored.
+     * This should not be changed and is set in the boot method.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#contextRestoredHandler
+     * @type {function}
+     * @since 3.19.0
+     */
+    public var contextRestoredHandler:Dynamic;
+    /**
      * The underlying WebGL context of the renderer.
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#gl
@@ -300,6 +302,74 @@ extern class WebGLRenderer {
      */
     public var defaultCamera:phaser.cameras.scene2d.BaseCamera;
     /**
+     * The total number of masks currently stacked.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#maskCount
+     * @type {integer}
+     * @since 3.17.0
+     */
+    public var maskCount:Int;
+    /**
+     * The mask stack.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#maskStack
+     * @type {Phaser.Display.Masks.GeometryMask[]}
+     * @since 3.17.0
+     */
+    public var maskStack:Array<phaser.display.masks.GeometryMask>;
+    /**
+     * Internal property that tracks the currently set mask.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#currentMask
+     * @type {any}
+     * @since 3.17.0
+     */
+    public var currentMask:Dynamic;
+    /**
+     * Internal property that tracks the currently set camera mask.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#currentCameraMask
+     * @type {any}
+     * @since 3.17.0
+     */
+    public var currentCameraMask:Dynamic;
+    /**
+     * Internal gl function mapping for uniform look-up.
+     * https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/uniform
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#glFuncMap
+     * @type {any}
+     * @since 3.17.0
+     */
+    public var glFuncMap:Dynamic;
+    /**
+     * The `type` of the Game Object being currently rendered.
+     * This can be used by advanced render functions for batching look-ahead.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#currentType
+     * @type {string}
+     * @since 3.19.0
+     */
+    public var currentType:String;
+    /**
+     * Is the `type` of the Game Object being currently rendered different than the
+     * type of the object before it in the display list? I.e. it's a 'new' type.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#newType
+     * @type {boolean}
+     * @since 3.19.0
+     */
+    public var newType:Bool;
+    /**
+     * Does the `type` of the next Game Object in the display list match that
+     * of the object being currently rendered?
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#nextTypeMatch
+     * @type {boolean}
+     * @since 3.19.0
+     */
+    public var nextTypeMatch:Bool;
+    /**
      * Creates a new WebGLRenderingContext and initializes all internal state.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#init
@@ -335,30 +405,6 @@ extern class WebGLRenderer {
      * @return {this} This WebGLRenderer instance.
      */
     public function resize(?width:Float, ?height:Float, ?resolution:Float):Dynamic;
-    /**
-     * Adds a callback to be invoked when the WebGL context has been restored by the browser.
-     *
-     * @method Phaser.Renderer.WebGL.WebGLRenderer#onContextRestored
-     * @since 3.0.0
-     *
-     * @param {WebGLContextCallback} callback - The callback to be invoked on context restoration.
-     * @param {object} target - The context of the callback.
-     *
-     * @return {this} This WebGLRenderer instance.
-     */
-    public function onContextRestored(callback:WebGLContextCallback, target:Dynamic):Dynamic;
-    /**
-     * Adds a callback to be invoked when the WebGL context has been lost by the browser.
-     *
-     * @method Phaser.Renderer.WebGL.WebGLRenderer#onContextLost
-     * @since 3.0.0
-     *
-     * @param {WebGLContextCallback} callback - The callback to be invoked on context loss.
-     * @param {object} target - The context of the callback.
-     *
-     * @return {this} This WebGLRenderer instance.
-     */
-    public function onContextLost(callback:WebGLContextCallback, target:Dynamic):Dynamic;
     /**
      * Checks if a WebGL extension is supported
      *
@@ -481,6 +527,15 @@ extern class WebGLRenderer {
      */
     public function setPipeline(pipelineInstance:phaser.renderer.webgl.WebGLPipeline, ?gameObject:phaser.gameobjects.GameObject):phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Is there an active stencil mask?
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#hasActiveStencilMask
+     * @since 3.17.0
+     *
+     * @return {boolean} `true` if there is an active stencil mask, otherwise `false`.
+     */
+    public function hasActiveStencilMask():Bool;
+    /**
      * Use this to reset the gl context to the state that Phaser requires to continue rendering.
      * Calling this will:
      *
@@ -528,15 +583,17 @@ extern class WebGLRenderer {
     /**
      * Creates a new custom blend mode for the renderer.
      *
+     * See https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants#Blending_modes
+     *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#addBlendMode
      * @since 3.0.0
      *
-     * @param {function} func - An array containing the WebGL functions to use for the source and the destination blending factors, respectively. See the possible constants for {@link WebGLRenderingContext#blendFunc()}.
-     * @param {function} equation - The equation to use for combining the RGB and alpha components of a new pixel with a rendered one. See the possible constants for {@link WebGLRenderingContext#blendEquation()}.
+     * @param {GLenum[]} func - An array containing the WebGL functions to use for the source and the destination blending factors, respectively. See the possible constants for {@link WebGLRenderingContext#blendFunc()}.
+     * @param {GLenum} equation - The equation to use for combining the RGB and alpha components of a new pixel with a rendered one. See the possible constants for {@link WebGLRenderingContext#blendEquation()}.
      *
      * @return {integer} The index of the new blend mode, used for referencing it in the future.
      */
-    public function addBlendMode(func:Dynamic, equation:Dynamic):Int;
+    public function addBlendMode(func:Array<Dynamic>, equation:Dynamic):Int;
     /**
      * Updates the function bound to a given custom blend mode.
      *
@@ -818,13 +875,13 @@ extern class WebGLRenderer {
      * @method Phaser.Renderer.WebGL.WebGLRenderer#snapshot
      * @since 3.0.0
      *
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
      * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
      * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshot(callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    public function snapshot(callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Schedules a snapshot of the given area of the game viewport to be taken after the current frame is rendered.
      *
@@ -845,13 +902,13 @@ extern class WebGLRenderer {
      * @param {integer} y - The y coordinate to grab from.
      * @param {integer} width - The width of the area to grab.
      * @param {integer} height - The height of the area to grab.
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
      * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
      * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Schedules a snapshot of the given pixel from the game viewport to be taken after the current frame is rendered.
      *
@@ -869,11 +926,39 @@ extern class WebGLRenderer {
      *
      * @param {integer} x - The x coordinate of the pixel to get.
      * @param {integer} y - The y coordinate of the pixel to get.
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshotPixel(x:Int, y:Int, callback:SnapshotCallback):Dynamic;
+    public function snapshotPixel(x:Int, y:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback):Dynamic;
+    /**
+     * Takes a snapshot of the given area of the given frame buffer.
+     *
+     * Unlike the other snapshot methods, this one is processed immediately and doesn't wait for the next render.
+     *
+     * Snapshots work by using the WebGL `readPixels` feature to grab every pixel from the frame buffer into an ArrayBufferView.
+     * It then parses this, copying the contents to a temporary Canvas and finally creating an Image object from it,
+     * which is the image returned to the callback provided. All in all, this is a computationally expensive and blocking process,
+     * which gets more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#snapshotFramebuffer
+     * @since 3.19.0
+     *
+     * @param {WebGLFramebuffer} framebuffer - The framebuffer to grab from.
+     * @param {integer} bufferWidth - The width of the framebuffer.
+     * @param {integer} bufferHeight - The height of the framebuffer.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {boolean} [getPixel=false] - Grab a single pixel as a Color object, or an area as an Image object?
+     * @param {integer} [x=0] - The x coordinate to grab from.
+     * @param {integer} [y=0] - The y coordinate to grab from.
+     * @param {integer} [width=bufferWidth] - The width of the area to grab.
+     * @param {integer} [height=bufferHeight] - The height of the area to grab.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
+     *
+     * @return {this} This WebGL Renderer.
+     */
+    public function snapshotFramebuffer(framebuffer:js.html.webgl.Framebuffer, bufferWidth:Int, bufferHeight:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?getPixel:Bool, ?x:Int, ?y:Int, ?width:Int, ?height:Int, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Creates a WebGL Texture based on the given canvas element.
      *

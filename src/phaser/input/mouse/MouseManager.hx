@@ -94,6 +94,26 @@ extern class MouseManager {
      */
     public var onMouseUp:Dynamic;
     /**
+     * The Mouse Down Event handler specifically for events on the Window.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseDownWindow
+     * @type {function}
+     * @since 3.17.0
+     */
+    public var onMouseDownWindow:Dynamic;
+    /**
+     * The Mouse Up Event handler specifically for events on the Window.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseUpWindow
+     * @type {function}
+     * @since 3.17.0
+     */
+    public var onMouseUpWindow:Dynamic;
+    /**
      * The Mouse Over Event handler.
      * This function is sent the native DOM MouseEvent.
      * Initially empty and bound in the `startListeners` method.
@@ -113,6 +133,16 @@ extern class MouseManager {
      * @since 3.16.0
      */
     public var onMouseOut:Dynamic;
+    /**
+     * The Mouse Wheel Event handler.
+     * This function is sent the native DOM MouseEvent.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#onMouseWheel
+     * @type {function}
+     * @since 3.18.0
+     */
+    public var onMouseWheel:Dynamic;
     /**
      * Internal pointerLockChange handler.
      * This function is sent the native DOM MouseEvent.

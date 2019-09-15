@@ -96,6 +96,17 @@ extern class CameraManager {
      */
     public var main:phaser.cameras.scene2d.Camera;
     /**
+     * A default un-transformed Camera that doesn't exist on the camera list and doesn't
+     * count towards the total number of cameras being managed. It exists for other
+     * systems, as well as your own code, should they require a basic un-transformed
+     * camera instance from which to calculate a view matrix.
+     *
+     * @name Phaser.Cameras.Scene2D.CameraManager#default
+     * @type {Phaser.Cameras.Scene2D.Camera}
+     * @since 3.17.0
+     */
+    @:native('default') public var default_:phaser.cameras.scene2d.Camera;
+    /**
      * Adds a new Camera into the Camera Manager. The Camera Manager can support up to 31 different Cameras.
      *
      * Each Camera has its own viewport, which controls the size of the Camera and its position within the canvas.
@@ -163,12 +174,12 @@ extern class CameraManager {
     /**
      * Populates this Camera Manager based on the given configuration object, or an array of config objects.
      *
-     * See the `InputJSONCameraObject` documentation for details of the object structure.
+     * See the `Phaser.Types.Cameras.Scene2D.CameraConfig` documentation for details of the object structure.
      *
      * @method Phaser.Cameras.Scene2D.CameraManager#fromJSON
      * @since 3.0.0
      *
-     * @param {(InputJSONCameraObject|InputJSONCameraObject[])} config - A Camera configuration object, or an array of them, to be added to this Camera Manager.
+     * @param {(Phaser.Types.Cameras.Scene2D.CameraConfig|Phaser.Types.Cameras.Scene2D.CameraConfig[])} config - A Camera configuration object, or an array of them, to be added to this Camera Manager.
      *
      * @return {Phaser.Cameras.Scene2D.CameraManager} This Camera Manager instance.
      */
@@ -257,6 +268,16 @@ extern class CameraManager {
      * @param {number} delta - The delta time, in ms, elapsed since the last frame.
      */
     public function update(time:Int, delta:Float):Void;
+    /**
+     * The event handler that manages the `resize` event dispatched by the Scale Manager.
+     *
+     * @method Phaser.Cameras.Scene2D.CameraManager#onResize
+     * @since 3.18.0
+     *
+     * @param {Phaser.Structs.Size} gameSize - The default Game Size object. This is the un-modified game dimensions.
+     * @param {Phaser.Structs.Size} baseSize - The base Size object. The game dimensions multiplied by the resolution. The canvas width / height values match this.
+     */
+    public function onResize(gameSize:phaser.structs.Size, baseSize:phaser.structs.Size):Void;
     /**
      * Resizes all cameras to the given dimensions.
      *

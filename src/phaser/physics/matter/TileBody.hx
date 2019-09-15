@@ -29,11 +29,11 @@ package phaser.physics.matter;
  *
  * @param {Phaser.Physics.Matter.World} world - [description]
  * @param {Phaser.Tilemaps.Tile} tile - The target tile that should have a Matter body.
- * @param {MatterTileOptions} [options] - Options to be used when creating the Matter body.
+ * @param {Phaser.Types.Physics.Matter.MatterTileOptions} [options] - Options to be used when creating the Matter body.
  */
 @:native("Phaser.Physics.Matter.TileBody")
 extern class TileBody extends phaser.physics.matter.components.Bounce {
-    public function new(world:phaser.physics.matter.World, tile:phaser.tilemaps.Tile, ?options:MatterTileOptions);
+    public function new(world:phaser.physics.matter.World, tile:phaser.tilemaps.Tile, ?options:phaser.types.physics.matter.MatterTileOptions);
     /**
      * The tile object the body is associated with.
      *
@@ -56,11 +56,11 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @method Phaser.Physics.Matter.TileBody#setFromTileRectangle
      * @since 3.0.0
      *
-     * @param {MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
+     * @param {Phaser.Types.Physics.Matter.MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
      *
      * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
      */
-    public function setFromTileRectangle(?options:MatterBodyTileOptions):phaser.physics.matter.TileBody;
+    public function setFromTileRectangle(?options:phaser.types.physics.matter.MatterBodyTileOptions):phaser.physics.matter.TileBody;
     /**
      * Sets the current body from the collision group associated with the Tile. This is typically
      * set up in Tiled's collision editor.
@@ -75,11 +75,11 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @method Phaser.Physics.Matter.TileBody#setFromTileCollision
      * @since 3.0.0
      *
-     * @param {MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
+     * @param {Phaser.Types.Physics.Matter.MatterBodyTileOptions} [options] - Options to be used when creating the Matter body. See MatterJS.Body for a list of what Matter accepts.
      *
      * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
      */
-    public function setFromTileCollision(?options:MatterBodyTileOptions):phaser.physics.matter.TileBody;
+    public function setFromTileCollision(?options:phaser.types.physics.matter.MatterBodyTileOptions):phaser.physics.matter.TileBody;
     /**
      * Sets the current body to the given body. This will remove the previous body, if one already
      * exists.
@@ -194,12 +194,13 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * The body's center of mass.
      *
      * @name Phaser.Physics.Matter.Components.Mass#centerOfMass
+     * @type {Phaser.Math.Vector2}
      * @readonly
      * @since 3.10.0
      *
      * @return {Phaser.Math.Vector2} The center of mass.
      */
-    public var centerOfMass:Dynamic;
+    public var centerOfMass:phaser.math.Vector2;
     /**
      * Sets the mass of the Game Object's Matter Body.
      *

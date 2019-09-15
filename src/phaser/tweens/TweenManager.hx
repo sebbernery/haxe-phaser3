@@ -47,29 +47,29 @@ extern class TweenManager {
      * @method Phaser.Tweens.TweenManager#createTimeline
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object for the Timeline and its Tweens.
+     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} config - The configuration object for the Timeline and its Tweens.
      *
      * @return {Phaser.Tweens.Timeline} The created Timeline object.
      */
-    public function createTimeline(config:Dynamic):phaser.tweens.Timeline;
+    public function createTimeline(config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
     /**
      * Create a Tween Timeline and add it to the active Tween list/
      *
      * @method Phaser.Tweens.TweenManager#timeline
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object for the Timeline and its Tweens.
+     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} config - The configuration object for the Timeline and its Tweens.
      *
      * @return {Phaser.Tweens.Timeline} The created Timeline object.
      */
-    public function timeline(config:Dynamic):phaser.tweens.Timeline;
+    public function timeline(config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
     /**
      * Create a Tween and return it, but do NOT add it to the active or pending Tween lists.
      *
      * @method Phaser.Tweens.TweenManager#create
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object for the Tween as per {@link Phaser.Tweens.Builders.TweenBuilder}.
+     * @param {Phaser.Types.Tweens.TweenBuilderConfig|object} config - The configuration object for the Tween.
      *
      * @return {Phaser.Tweens.Tween} The created Tween object.
      */
@@ -80,7 +80,7 @@ extern class TweenManager {
      * @method Phaser.Tweens.TweenManager#add
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object for the Tween as per the {@link Phaser.Tweens.Builders.TweenBuilder}.
+     * @param {Phaser.Types.Tweens.TweenBuilderConfig|object} config - The configuration object for the Tween.
      *
      * @return {Phaser.Tweens.Tween} The created Tween.
      */
@@ -97,16 +97,57 @@ extern class TweenManager {
      */
     public function existing(tween:phaser.tweens.Tween):phaser.tweens.TweenManager;
     /**
-     * Create a Tween and add it to the active Tween list.
+     * Create a Number Tween and add it to the active Tween list.
      *
      * @method Phaser.Tweens.TweenManager#addCounter
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object for the Number Tween as per the {@link Phaser.Tweens.Builders.NumberTweenBuilder}.
+     * @param {Phaser.Types.Tweens.NumberTweenBuilderConfig} config - The configuration object for the Number Tween.
      *
      * @return {Phaser.Tweens.Tween} The created Number Tween.
      */
-    public function addCounter(config:Dynamic):phaser.tweens.Tween;
+    public function addCounter(config:phaser.types.tweens.NumberTweenBuilderConfig):phaser.tweens.Tween;
+    /**
+     * Creates a Stagger function to be used by a Tween property.
+     *
+     * The stagger function will allow you to stagger changes to the value of the property across all targets of the tween.
+     *
+     * This is only worth using if the tween has multiple targets.
+     *
+     * The following will stagger the delay by 100ms across all targets of the tween, causing them to scale down to 0.2
+     * over the duration specified:
+     *
+     * ```javascript
+     * this.tweens.add({
+     *     targets: [ ... ],
+     *     scale: 0.2,
+     *     ease: 'linear',
+     *     duration: 1000,
+     *     delay: this.tweens.stagger(100)
+     * });
+     * ```
+     *
+     * The following will stagger the delay by 500ms across all targets of the tween using a 10 x 6 grid, staggering
+     * from the center out, using a cubic ease.
+     *
+     * ```javascript
+     * this.tweens.add({
+     *     targets: [ ... ],
+     *     scale: 0.2,
+     *     ease: 'linear',
+     *     duration: 1000,
+     *     delay: this.tweens.stagger(500, { grid: [ 10, 6 ], from: 'center', ease: 'cubic.out' })
+     * });
+     * ```
+     *
+     * @method Phaser.Tweens.TweenManager#stagger
+     * @since 3.19.0
+     *
+     * @param {Phaser.Types.Tweens.StaggerConfig} config - The configuration object for the Stagger function.
+     *
+     * @return {function} The stagger function.
+     */
+    public function stagger(config:phaser.types.tweens.StaggerConfig):Dynamic;
     /**
      * Updates the Tween Manager's internal lists at the start of the frame.
      *
@@ -126,6 +167,17 @@ extern class TweenManager {
      * @param {number} delta - The delta time in ms since the last frame. This is a smoothed and capped value based on the FPS rate.
      */
     public function update(timestamp:Float, delta:Float):Void;
+    /**
+     * Removes the given tween from the Tween Manager, regardless of its state (pending or active).
+     *
+     * @method Phaser.Tweens.TweenManager#remove
+     * @since 3.17.0
+     *
+     * @param {Phaser.Tweens.Tween} tween - The Tween to be removed.
+     *
+     * @return {Phaser.Tweens.TweenManager} This Tween Manager object.
+     */
+    public function remove(tween:phaser.tweens.Tween):phaser.tweens.TweenManager;
     /**
      * Checks if a Tween or Timeline is active and adds it to the Tween Manager at the start of the frame if it isn't.
      *

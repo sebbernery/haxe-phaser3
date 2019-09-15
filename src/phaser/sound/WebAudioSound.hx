@@ -12,11 +12,11 @@ package phaser.sound;
  *
  * @param {Phaser.Sound.WebAudioSoundManager} manager - Reference to the current sound manager instance.
  * @param {string} key - Asset key for the sound.
- * @param {SoundConfig} [config={}] - An optional config object containing default sound settings.
+ * @param {Phaser.Types.Sound.SoundConfig} [config={}] - An optional config object containing default sound settings.
  */
 @:native("Phaser.Sound.WebAudioSound")
 extern class WebAudioSound extends phaser.sound.BaseSound {
-    public function new(manager:phaser.sound.WebAudioSoundManager, key:String, ?config:SoundConfig);
+    public function new(manager:phaser.sound.WebAudioSoundManager, key:String, ?config:phaser.types.sound.SoundConfig);
     /**
      * Rate at which this Sound will be played.
      * Value of 1.0 plays the audio at full speed, 0.5 plays the audio at half speed

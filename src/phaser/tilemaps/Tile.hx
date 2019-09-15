@@ -122,7 +122,7 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
      * Tile specific properties. These usually come from Tiled.
      *
      * @name Phaser.Tilemaps.Tile#properties
-     * @type {object}
+     * @type {any}
      * @since 3.0.0
      */
     public var properties:Dynamic;
@@ -532,8 +532,10 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public function updatePixelXY():phaser.tilemaps.Tile;
     /**
      * The horizontally flipped state of the Game Object.
+     *
      * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipX
      * @type {boolean}
@@ -543,8 +545,10 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public var flipX:Bool;
     /**
      * The vertically flipped state of the Game Object.
+     *
      * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipY
      * @type {boolean}
@@ -554,6 +558,10 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public var flipY:Bool;
     /**
      * Toggles the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#toggleFlipX
      * @since 3.0.0
@@ -572,6 +580,10 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public function toggleFlipY():Dynamic;
     /**
      * Sets the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlipX
      * @since 3.0.0
@@ -594,6 +606,10 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public function setFlipY(value:Bool):Dynamic;
     /**
      * Sets the horizontal and vertical flipped state of this Game Object.
+     *
+     * A Game Object that is flipped will render inversed on the flipped axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlip
      * @since 3.0.0

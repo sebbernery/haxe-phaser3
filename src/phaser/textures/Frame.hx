@@ -401,7 +401,7 @@ extern class Frame {
      */
     public function clone():phaser.textures.Frame;
     /**
-     * Destroys this Frames references.
+     * Destroys this Frame by nulling its reference to the parent Texture and and data objects.
      *
      * @method Phaser.Textures.Frame#destroy
      * @since 3.0.0

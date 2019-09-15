@@ -37,7 +37,6 @@ package phaser.physics.matter;
  * @extends Phaser.GameObjects.Components.GetBounds
  * @extends Phaser.GameObjects.Components.Origin
  * @extends Phaser.GameObjects.Components.Pipeline
- * @extends Phaser.GameObjects.Components.ScaleMode
  * @extends Phaser.GameObjects.Components.ScrollFactor
  * @extends Phaser.GameObjects.Components.Size
  * @extends Phaser.GameObjects.Components.Texture
@@ -224,12 +223,13 @@ extern class Sprite extends phaser.gameobjects.Sprite {
      * The body's center of mass.
      *
      * @name Phaser.Physics.Matter.Components.Mass#centerOfMass
+     * @type {Phaser.Math.Vector2}
      * @readonly
      * @since 3.10.0
      *
      * @return {Phaser.Math.Vector2} The center of mass.
      */
-    public var centerOfMass:Dynamic;
+    public var centerOfMass:phaser.math.Vector2;
     /**
      * Sets the mass of the Game Object's Matter Body.
      *

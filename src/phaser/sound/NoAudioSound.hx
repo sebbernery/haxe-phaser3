@@ -17,9 +17,9 @@ package phaser.sound;
  *
  * @param {Phaser.Sound.NoAudioSoundManager} manager - Reference to the current sound manager instance.
  * @param {string} key - Asset key for the sound.
- * @param {SoundConfig} [config={}] - An optional config object containing default sound settings.
+ * @param {Phaser.Types.Sound.SoundConfig} [config={}] - An optional config object containing default sound settings.
  */
 @:native("Phaser.Sound.NoAudioSound")
 extern class NoAudioSound extends phaser.sound.BaseSound {
-    public function new(manager:phaser.sound.NoAudioSoundManager, key:String, ?config:SoundConfig);
+    public function new(manager:phaser.sound.NoAudioSoundManager, key:String, ?config:phaser.types.sound.SoundConfig);
 }

@@ -53,6 +53,7 @@ extern class Pointer {
     public var event:Dynamic;
     /**
      * The DOM element the Pointer was pressed down on, taken from the DOM event.
+     * In a default set-up this will be the Canvas that Phaser is rendering to, or the Window element.
      *
      * @name Phaser.Input.Pointer#downElement
      * @type {any}
@@ -62,6 +63,7 @@ extern class Pointer {
     public var downElement:Dynamic;
     /**
      * The DOM element the Pointer was released on, taken from the DOM event.
+     * In a default set-up this will be the Canvas that Phaser is rendering to, or the Window element.
      *
      * @name Phaser.Input.Pointer#upElement
      * @type {any}
@@ -81,6 +83,23 @@ extern class Pointer {
      * @since 3.0.0
      */
     public var camera:phaser.cameras.scene2d.Camera;
+    /**
+     * A read-only property that indicates which button was pressed, or released, on the pointer
+     * during the most recent event. It is only set during `up` and `down` events.
+     *
+     * On Touch devices the value is always 0.
+     *
+     * Users may change the configuration of buttons on their pointing device so that if an event's button property
+     * is zero, it may not have been caused by the button that is physically left–most on the pointing device;
+     * however, it should behave as if the left button was clicked in the standard button layout.
+     *
+     * @name Phaser.Input.Pointer#button
+     * @type {integer}
+     * @readonly
+     * @default 0
+     * @since 3.18.0
+     */
+    public var button:Int;
     /**
      * 0: No button or un-initialized
      * 1: Left button
@@ -202,6 +221,9 @@ extern class Pointer {
     /**
      * The x position of this Pointer, translated into the coordinate space of the most recent Camera it interacted with.
      *
+     * If you wish to use this value _outside_ of an input event handler then you should update it first by calling
+     * the `Pointer.updateWorldPoint` method.
+     *
      * @name Phaser.Input.Pointer#worldX
      * @type {number}
      * @default 0
@@ -210,6 +232,9 @@ extern class Pointer {
     public var worldX:Float;
     /**
      * The y position of this Pointer, translated into the coordinate space of the most recent Camera it interacted with.
+     *
+     * If you wish to use this value _outside_ of an input event handler then you should update it first by calling
+     * the `Pointer.updateWorldPoint` method.
      *
      * @name Phaser.Input.Pointer#worldY
      * @type {number}
@@ -299,42 +324,6 @@ extern class Pointer {
      */
     public var isDown:Bool;
     /**
-     * A dirty flag for this Pointer, used internally by the Input Plugin.
-     *
-     * @name Phaser.Input.Pointer#dirty
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var dirty:Bool;
-    /**
-     * Is this Pointer considered as being "just down" or not?
-     *
-     * @name Phaser.Input.Pointer#justDown
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var justDown:Bool;
-    /**
-     * Is this Pointer considered as being "just up" or not?
-     *
-     * @name Phaser.Input.Pointer#justUp
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var justUp:Bool;
-    /**
-     * Is this Pointer considered as being "just moved" or not?
-     *
-     * @name Phaser.Input.Pointer#justMoved
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var justMoved:Bool;
-    /**
      * Did the previous input event come from a Touch input (true) or Mouse? (false)
      *
      * @name Phaser.Input.Pointer#wasTouch
@@ -399,13 +388,48 @@ extern class Pointer {
      */
     public var active:Bool;
     /**
-     * Time when this Pointer was most recently updated by the Game step.
+     * Is this pointer Pointer Locked?
      *
-     * @name Phaser.Input.Pointer#time
-     * @type {number}
-     * @since 3.16.0
+     * Only a mouse pointer can be locked and it only becomes locked when requested via
+     * the browsers Pointer Lock API.
+     *
+     * You can request this by calling the `this.input.mouse.requestPointerLock()` method from
+     * a `pointerdown` or `pointerup` event handler.
+     *
+     * @name Phaser.Input.Pointer#locked
+     * @readonly
+     * @type {boolean}
+     * @since 3.19.0
      */
-    public var time:Float;
+    public var locked:Bool;
+    /**
+     * The horizontal scroll amount that occurred due to the user moving a mouse wheel or similar input device.
+     *
+     * @name Phaser.Input.Pointer#deltaX
+     * @type {number}
+     * @default 0
+     * @since 3.18.0
+     */
+    public var deltaX:Float;
+    /**
+     * The vertical scroll amount that occurred due to the user moving a mouse wheel or similar input device.
+     * This value will typically be less than 0 if the user scrolls up and greater than zero if scrolling down.
+     *
+     * @name Phaser.Input.Pointer#deltaY
+     * @type {number}
+     * @default 0
+     * @since 3.18.0
+     */
+    public var deltaY:Float;
+    /**
+     * The z-axis scroll amount that occurred due to the user moving a mouse wheel or similar input device.
+     *
+     * @name Phaser.Input.Pointer#deltaZ
+     * @type {number}
+     * @default 0
+     * @since 3.18.0
+     */
+    public var deltaZ:Float;
     /**
      * The x position of this Pointer.
      * The value is in screen space.
@@ -426,6 +450,32 @@ extern class Pointer {
      * @since 3.0.0
      */
     public var y:Float;
+    /**
+     * Time when this Pointer was most recently updated by a DOM Event.
+     * This comes directly from the `event.timeStamp` property.
+     * If no event has yet taken place, it will return zero.
+     *
+     * @name Phaser.Input.Pointer#time
+     * @type {number}
+     * @readonly
+     * @since 3.16.0
+     */
+    public var time:Float;
+    /**
+     * Takes a Camera and updates this Pointer's `worldX` and `worldY` values so they are
+     * the result of a translation through the given Camera.
+     *
+     * Note that the values will be automatically replaced the moment the Pointer is
+     * updated by an input event, such as a mouse move, so should be used immediately.
+     *
+     * @method Phaser.Input.Pointer#updateWorldPoint
+     * @since 3.19.0
+     *
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera which is being tested against.
+     *
+     * @return {this} This Pointer object.
+     */
+    public function updateWorldPoint(camera:phaser.cameras.scene2d.Camera):Dynamic;
     /**
      * Takes a Camera and returns a Vector2 containing the translated position of this Pointer
      * within that Camera. This can be used to convert this Pointers position into camera space.
@@ -494,6 +544,51 @@ extern class Pointer {
      */
     public function forwardButtonDown():Bool;
     /**
+     * Checks to see if the left button was just released on this Pointer.
+     *
+     * @method Phaser.Input.Pointer#leftButtonReleased
+     * @since 3.18.0
+     *
+     * @return {boolean} `true` if the left button was just released.
+     */
+    public function leftButtonReleased():Bool;
+    /**
+     * Checks to see if the right button was just released on this Pointer.
+     *
+     * @method Phaser.Input.Pointer#rightButtonReleased
+     * @since 3.18.0
+     *
+     * @return {boolean} `true` if the right button was just released.
+     */
+    public function rightButtonReleased():Bool;
+    /**
+     * Checks to see if the middle button was just released on this Pointer.
+     *
+     * @method Phaser.Input.Pointer#middleButtonReleased
+     * @since 3.18.0
+     *
+     * @return {boolean} `true` if the middle button was just released.
+     */
+    public function middleButtonReleased():Bool;
+    /**
+     * Checks to see if the back button was just released on this Pointer.
+     *
+     * @method Phaser.Input.Pointer#backButtonReleased
+     * @since 3.18.0
+     *
+     * @return {boolean} `true` if the back button was just released.
+     */
+    public function backButtonReleased():Bool;
+    /**
+     * Checks to see if the forward button was just released on this Pointer.
+     *
+     * @method Phaser.Input.Pointer#forwardButtonReleased
+     * @since 3.18.0
+     *
+     * @return {boolean} `true` if the forward button was just released.
+     */
+    public function forwardButtonReleased():Bool;
+    /**
      * If the Pointer has a button pressed down at the time this method is called, it will return the
      * distance between the Pointer's `downX` and `downY` values and the current position.
      *
@@ -537,7 +632,7 @@ extern class Pointer {
     public function getDistanceY():Float;
     /**
      * If the Pointer has a button pressed down at the time this method is called, it will return the
-     * duration since the Pointer's was pressed down.
+     * duration since the button was pressed down.
      *
      * If no button is held down, it will return the last recorded duration, based on the time
      * the Pointer button was released.

@@ -11,11 +11,20 @@ package phaser.input.keyboard;
  * @constructor
  * @since 3.0.0
  *
+ * @param {Phaser.Input.Keyboard.KeyboardPlugin} plugin - The Keyboard Plugin instance that owns this Key object.
  * @param {integer} keyCode - The keycode of this key.
  */
 @:native("Phaser.Input.Keyboard.Key")
 extern class Key extends phaser.events.EventEmitter {
-    public function new(keyCode:Int);
+    public function new(plugin:phaser.input.keyboard.KeyboardPlugin, keyCode:Int);
+    /**
+     * The Keyboard Plugin instance that owns this Key object.
+     *
+     * @name Phaser.Input.Keyboard.Key#plugin
+     * @type {Phaser.Input.Keyboard.KeyboardPlugin}
+     * @since 3.17.0
+     */
+    public var plugin:phaser.input.keyboard.KeyboardPlugin;
     /**
      * The keycode of this key.
      *
@@ -116,6 +125,8 @@ extern class Key extends phaser.events.EventEmitter {
     public var timeDown:Float;
     /**
      * The number of milliseconds this key was held down for in the previous down - up sequence.
+     * This value isn't updated every game step, only when the Key changes state.
+     * To get the current duration use the `getDuration` method.
      *
      * @name Phaser.Input.Keyboard.Key#duration
      * @type {number}
@@ -196,4 +207,18 @@ extern class Key extends phaser.events.EventEmitter {
      * @return {Phaser.Input.Keyboard.Key} This Key instance.
      */
     public function reset():phaser.input.keyboard.Key;
+    /**
+     * Returns the duration, in ms, that the Key has been held down for.
+     *
+     * If the key is not currently down it will return zero.
+     *
+     * The get the duration the Key was held down for in the previous up-down cycle,
+     * use the `Key.duration` property value instead.
+     *
+     * @method Phaser.Input.Keyboard.Key#getDuration
+     * @since 3.17.0
+     *
+     * @return {number} The duration, in ms, that the Key has been held down for if currently down.
+     */
+    public function getDuration():Float;
 }

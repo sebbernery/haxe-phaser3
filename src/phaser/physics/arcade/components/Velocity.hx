@@ -5,7 +5,7 @@ package phaser.physics.arcade.components;
  *
  * Should be applied as a mixin and not used directly.
  *
- * @name Phaser.Physics.Arcade.Components.Velocity
+ * @namespace Phaser.Physics.Arcade.Components.Velocity
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Arcade.Components.Velocity")

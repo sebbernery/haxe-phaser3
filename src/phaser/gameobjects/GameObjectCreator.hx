@@ -63,12 +63,12 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#dynamicBitmapText
      * @since 3.0.0
      *²
-     * @param {BitmapTextConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.BitmapText.BitmapTextConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.DynamicBitmapText} The Game Object that was created.
      */
-    public function dynamicBitmapText(config:BitmapTextConfig, ?addToScene:Bool):phaser.gameobjects.DynamicBitmapText;
+    public function dynamicBitmapText(config:phaser.types.gameobjects.bitmaptext.BitmapTextConfig, ?addToScene:Bool):phaser.gameobjects.DynamicBitmapText;
     /**
      * Creates a new Bitmap Text Game Object and returns it.
      *
@@ -77,12 +77,12 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#bitmapText
      * @since 3.0.0
      *
-     * @param {BitmapTextConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.BitmapText.BitmapTextConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.BitmapText} The Game Object that was created.
      */
-    public function bitmapText(config:BitmapTextConfig, ?addToScene:Bool):phaser.gameobjects.BitmapText;
+    public function bitmapText(config:phaser.types.gameobjects.bitmaptext.BitmapTextConfig, ?addToScene:Bool):phaser.gameobjects.BitmapText;
     /**
      * Creates a new Blitter Game Object and returns it.
      *
@@ -133,7 +133,7 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#group
      * @since 3.0.0
      *
-     * @param {GroupConfig|GroupCreateConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.Group.GroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig} config - The configuration object this Game Object will use to create itself.
      *
      * @return {Phaser.GameObjects.Group} The Game Object that was created.
      */
@@ -202,12 +202,26 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#renderTexture
      * @since 3.2.0
      *
-     * @param {RenderTextureConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.RenderTexture.RenderTextureConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.RenderTexture} The Game Object that was created.
      */
-    public function renderTexture(config:RenderTextureConfig, ?addToScene:Bool):phaser.gameobjects.RenderTexture;
+    public function renderTexture(config:phaser.types.gameobjects.rendertexture.RenderTextureConfig, ?addToScene:Bool):phaser.gameobjects.RenderTexture;
+    /**
+     * Creates a new Shader Game Object and returns it.
+     *
+     * Note: This method will only be available if the Shader Game Object and WebGL support have been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectCreator#shader
+     * @since 3.17.0
+     *
+     * @param {object} config - The configuration object this Game Object will use to create itself.
+     * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
+     *
+     * @return {Phaser.GameObjects.Shader} The Game Object that was created.
+     */
+    public function shader(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Shader;
     /**
      * Creates a new Sprite Game Object and returns it.
      *
@@ -216,12 +230,12 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#sprite
      * @since 3.0.0
      *
-     * @param {SpriteConfig} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.Sprite.SpriteConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.Sprite} The Game Object that was created.
      */
-    public function sprite(config:SpriteConfig, ?addToScene:Bool):phaser.gameobjects.Sprite;
+    public function sprite(config:phaser.types.gameobjects.sprite.SpriteConfig, ?addToScene:Bool):phaser.gameobjects.Sprite;
     /**
      * Creates a new Text Game Object and returns it.
      *
@@ -244,12 +258,12 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#tileSprite
      * @since 3.0.0
      *
-     * @param {TileSprite} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.TileSprite.TileSpriteConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.TileSprite} The Game Object that was created.
      */
-    public function tileSprite(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.TileSprite;
+    public function tileSprite(config:phaser.types.gameobjects.tilesprite.TileSpriteConfig, ?addToScene:Bool):phaser.gameobjects.TileSprite;
     /**
      * Creates a new Zone Game Object and returns it.
      *
@@ -272,11 +286,11 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#tilemap
      * @since 3.0.0
      *
-     * @param {TilemapConfig} [config] - The config options for the Tilemap.
+     * @param {Phaser.Types.Tilemaps.TilemapConfig} [config] - The config options for the Tilemap.
      *
      * @return {Phaser.Tilemaps.Tilemap}
      */
-    public function tilemap(?config:TilemapConfig):phaser.tilemaps.Tilemap;
+    public function tilemap(?config:phaser.types.tilemaps.TilemapConfig):phaser.tilemaps.Tilemap;
     /**
      * Creates a new Tween object and returns it.
      *
@@ -285,7 +299,7 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#tween
      * @since 3.0.0
      *
-     * @param {object} config - The Tween configuration.
+     * @param {Phaser.Types.Tweens.TweenBuilderConfig|object} config - The Tween configuration.
      *
      * @return {Phaser.Tweens.Tween} The Tween that was created.
      */

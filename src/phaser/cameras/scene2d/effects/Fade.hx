@@ -96,13 +96,13 @@ extern class Fade {
      * @param {integer} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
      * @param {integer} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {boolean} [force=false] - Force the effect to start immediately, even if already running.
-     * @param {CameraFadeCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
+     * @param {Phaser.Types.Cameras.Scene2D.CameraFadeCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {Phaser.Cameras.Scene2D.Camera} The Camera on which the effect was started.
      */
-    public function start(?direction:Bool, ?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:CameraFadeCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function start(?direction:Bool, ?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraFadeCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * The main update loop for this effect. Called automatically by the Camera.
      *

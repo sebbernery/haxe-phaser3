@@ -21,6 +21,16 @@ package phaser.geom;
 extern class Circle {
     public function new(?x:Float, ?y:Float, ?radius:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.CIRCLE`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Circle#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The x position of the center of the circle.
      *
      * @name Phaser.Geom.Circle#x

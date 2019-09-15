@@ -11,6 +11,7 @@ package phaser.gameobjects.particles;
  * @since 3.0.0
  *
  * @extends Phaser.GameObjects.Components.Depth
+ * @extends Phaser.GameObjects.Components.Mask
  * @extends Phaser.GameObjects.Components.Pipeline
  * @extends Phaser.GameObjects.Components.Transform
  * @extends Phaser.GameObjects.Components.Visible
@@ -18,7 +19,7 @@ package phaser.gameobjects.particles;
  * @param {Phaser.Scene} scene - The Scene to which this Emitter Manager belongs.
  * @param {string} texture - The key of the Texture this Emitter Manager will use to render particles, as stored in the Texture Manager.
  * @param {(string|integer)} [frame] - An optional frame from the Texture this Emitter Manager will use to render particles.
- * @param {ParticleEmitterConfig|ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
+ * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
  */
 @:native("Phaser.GameObjects.Particles.ParticleEmitterManager")
 extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
@@ -134,11 +135,11 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Particles.ParticleEmitterManager#createEmitter
      * @since 3.0.0
      *
-     * @param {ParticleEmitterConfig} config - Configuration settings for the Particle Emitter to create.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig} config - Configuration settings for the Particle Emitter to create.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} The Particle Emitter that was created.
      */
-    public function createEmitter(config:ParticleEmitterConfig):phaser.gameobjects.particles.ParticleEmitter;
+    public function createEmitter(config:phaser.types.gameobjects.particles.ParticleEmitterConfig):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Adds an existing Gravity Well object to this Emitter Manager.
      *
@@ -156,11 +157,11 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Particles.ParticleEmitterManager#createGravityWell
      * @since 3.0.0
      *
-     * @param {GravityWellConfig} config - Configuration settings for the Gravity Well to create.
+     * @param {Phaser.Types.GameObjects.Particles.GravityWellConfig} config - Configuration settings for the Gravity Well to create.
      *
      * @return {Phaser.GameObjects.Particles.GravityWell} The Gravity Well that was created.
      */
-    public function createGravityWell(config:GravityWellConfig):phaser.gameobjects.particles.GravityWell;
+    public function createGravityWell(config:phaser.types.gameobjects.particles.GravityWellConfig):phaser.gameobjects.particles.GravityWell;
     /**
      * Emits particles from each active emitter.
      *
@@ -264,6 +265,86 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      */
     public function setDepth(value:Int):Dynamic;
     /**
+     * The Mask this Game Object is using during render.
+     *
+     * @name Phaser.GameObjects.Components.Mask#mask
+     * @type {Phaser.Display.Masks.BitmapMask|Phaser.Display.Masks.GeometryMask}
+     * @since 3.0.0
+     */
+    public var mask:Dynamic;
+    /**
+     * Sets the mask that this Game Object will use to render with.
+     *
+     * The mask must have been previously created and can be either a GeometryMask or a BitmapMask.
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
+     * If a mask is already set on this Game Object it will be immediately replaced.
+     *
+     * Masks are positioned in global space and are not relative to the Game Object to which they
+     * are applied. The reason for this is that multiple Game Objects can all share the same mask.
+     *
+     * Masks have no impact on physics or input detection. They are purely a rendering component
+     * that allows you to limit what is visible during the render pass.
+     *
+     * @method Phaser.GameObjects.Components.Mask#setMask
+     * @since 3.6.2
+     *
+     * @param {Phaser.Display.Masks.BitmapMask|Phaser.Display.Masks.GeometryMask} mask - The mask this Game Object will use when rendering.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setMask(mask:Dynamic):Dynamic;
+    /**
+     * Clears the mask that this Game Object was using.
+     *
+     * @method Phaser.GameObjects.Components.Mask#clearMask
+     * @since 3.6.2
+     *
+     * @param {boolean} [destroyMask=false] - Destroy the mask before clearing it?
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function clearMask(?destroyMask:Bool):Dynamic;
+    /**
+     * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
+     * including this one.
+     *
+     * To create the mask you need to pass in a reference to a renderable Game Object.
+     * A renderable Game Object is one that uses a texture to render with, such as an
+     * Image, Sprite, Render Texture or BitmapText.
+     *
+     * If you do not provide a renderable object, and this Game Object has a texture,
+     * it will use itself as the object. This means you can call this method to create
+     * a Bitmap Mask from any renderable Game Object.
+     *
+     * @method Phaser.GameObjects.Components.Mask#createBitmapMask
+     * @since 3.6.2
+     *
+     * @param {Phaser.GameObjects.GameObject} [renderable] - A renderable Game Object that uses a texture, such as a Sprite.
+     *
+     * @return {Phaser.Display.Masks.BitmapMask} This Bitmap Mask that was created.
+     */
+    public function createBitmapMask(?renderable:phaser.gameobjects.GameObject):phaser.display.masks.BitmapMask;
+    /**
+     * Creates and returns a Geometry Mask. This mask can be used by any Game Object,
+     * including this one.
+     *
+     * To create the mask you need to pass in a reference to a Graphics Game Object.
+     *
+     * If you do not provide a graphics object, and this Game Object is an instance
+     * of a Graphics object, then it will use itself to create the mask.
+     *
+     * This means you can call this method to create a Geometry Mask from any Graphics Game Object.
+     *
+     * @method Phaser.GameObjects.Components.Mask#createGeometryMask
+     * @since 3.6.2
+     *
+     * @param {Phaser.GameObjects.Graphics} [graphics] - A Graphics Game Object. The geometry within it will be used as the mask.
+     *
+     * @return {Phaser.Display.Masks.GeometryMask} This Geometry Mask that was created.
+     */
+    public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
+    /**
      * The initial WebGL pipeline of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
@@ -366,6 +447,19 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -386,7 +480,8 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -398,6 +493,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -542,6 +640,17 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

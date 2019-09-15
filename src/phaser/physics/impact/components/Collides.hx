@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Collides component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.Collides
+ * @namespace Phaser.Physics.Impact.Components.Collides
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.Collides")

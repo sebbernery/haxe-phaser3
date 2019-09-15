@@ -16,11 +16,11 @@ package phaser.gameobjects.particles;
  * @extends Phaser.GameObjects.Components.Visible
  *
  * @param {Phaser.GameObjects.Particles.ParticleEmitterManager} manager - The Emitter Manager this Emitter belongs to.
- * @param {ParticleEmitterConfig} config - Settings for this emitter.
+ * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig} config - Settings for this emitter.
  */
 @:native("Phaser.GameObjects.Particles.ParticleEmitter")
 extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
-    public function new(manager:phaser.gameobjects.particles.ParticleEmitterManager, config:ParticleEmitterConfig);
+    public function new(manager:phaser.gameobjects.particles.ParticleEmitterManager, config:phaser.types.gameobjects.particles.ParticleEmitterConfig);
     /**
      * The Emitter Manager this Emitter belongs to.
      *
@@ -316,11 +316,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * A function to call when a particle is emitted.
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#emitCallback
-     * @type {?ParticleEmitterCallback}
+     * @type {?Phaser.Types.GameObjects.Particles.ParticleEmitterCallback}
      * @default null
      * @since 3.0.0
      */
-    public var emitCallback:ParticleEmitterCallback;
+    public var emitCallback:phaser.types.gameobjects.particles.ParticleEmitterCallback;
     /**
      * The calling context for {@link Phaser.GameObjects.Particles.ParticleEmitter#emitCallback}.
      *
@@ -334,11 +334,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * A function to call when a particle dies.
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#deathCallback
-     * @type {?ParticleDeathCallback}
+     * @type {?Phaser.Types.GameObjects.Particles.ParticleDeathCallback}
      * @default null
      * @since 3.0.0
      */
-    public var deathCallback:ParticleDeathCallback;
+    public var deathCallback:phaser.types.gameobjects.particles.ParticleDeathCallback;
     /**
      * The calling context for {@link Phaser.GameObjects.Particles.ParticleEmitter#deathCallback}.
      *
@@ -567,11 +567,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#fromJSON
      * @since 3.0.0
      *
-     * @param {ParticleEmitterConfig} config - Settings for this emitter.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig} config - Settings for this emitter.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function fromJSON(config:ParticleEmitterConfig):phaser.gameobjects.particles.ParticleEmitter;
+    public function fromJSON(config:phaser.types.gameobjects.particles.ParticleEmitterConfig):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Creates a description of this emitter suitable for JSON serialization.
      *
@@ -621,7 +621,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setFrame
      * @since 3.0.0
      *
-     * @param {(array|string|integer|ParticleEmitterFrameConfig)} frames - One or more texture frames, or a configuration object.
+     * @param {(array|string|integer|Phaser.Types.GameObjects.Particles.ParticleEmitterFrameConfig)} frames - One or more texture frames, or a configuration object.
      * @param {boolean} [pickRandom=true] - Whether frames should be assigned at random from `frames`.
      * @param {integer} [quantity=1] - The number of consecutive particles that will receive each frame.
      *
@@ -646,12 +646,12 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setPosition
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} x - The x-coordinate of the particle origin.
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} y - The y-coordinate of the particle origin.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} x - The x-coordinate of the particle origin.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} y - The y-coordinate of the particle origin.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setPosition(x:Dynamic, y:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setPosition(x:phaser.types.gameobjects.particles.EmitterOpOnEmitType, y:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets or modifies a rectangular boundary constraining the particles.
      *
@@ -660,7 +660,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setBounds
      * @since 3.0.0
      *
-     * @param {(number|ParticleEmitterBounds|ParticleEmitterBoundsAlt)} x - The x-coordinate of the left edge of the boundary, or an object representing a rectangle.
+     * @param {(number|Phaser.Types.GameObjects.Particles.ParticleEmitterBounds|Phaser.Types.GameObjects.Particles.ParticleEmitterBoundsAlt)} x - The x-coordinate of the left edge of the boundary, or an object representing a rectangle.
      * @param {number} y - The y-coordinate of the top edge of the boundary.
      * @param {number} width - The width of the boundary.
      * @param {number} height - The height of the boundary.
@@ -675,11 +675,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setSpeedX
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The speed, in pixels per second.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The speed, in pixels per second.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setSpeedX(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setSpeedX(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the initial vertical speed of emitted particles.
      * Changes the emitter to point mode.
@@ -687,11 +687,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setSpeedY
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The speed, in pixels per second.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The speed, in pixels per second.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setSpeedY(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setSpeedY(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the initial radial speed of emitted particles.
      * Changes the emitter to radial mode.
@@ -699,18 +699,18 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setSpeed
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The speed, in pixels per second.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The speed, in pixels per second.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setSpeed(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setSpeed(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the horizontal scale of emitted particles.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setScaleX
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnUpdateCallback|object} value - The scale, relative to 1.
+     * @param {(Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType|Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateType)} value - The scale, relative to 1.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
@@ -721,7 +721,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setScaleY
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnUpdateCallback|object} value - The scale, relative to 1.
+     * @param {(Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType|Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateType)} value - The scale, relative to 1.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
@@ -732,7 +732,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setScale
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnUpdateCallback|object} value - The scale, relative to 1.
+     * @param {(Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType|Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateType)} value - The scale, relative to 1.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
@@ -777,7 +777,7 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setAlpha
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnUpdateCallback|object} value - A value between 0 (transparent) and 1 (opaque).
+     * @param {(Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType|Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateType)} value - A value between 0 (transparent) and 1 (opaque).
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
@@ -788,44 +788,44 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setEmitterAngle
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The angle of the initial velocity of emitted particles.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The angle of the initial velocity of emitted particles.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setEmitterAngle(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setEmitterAngle(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the angle of a {@link Phaser.GameObjects.Particles.ParticleEmitter#radial} particle stream.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setAngle
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The angle of the initial velocity of emitted particles.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The angle of the initial velocity of emitted particles.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setAngle(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setAngle(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the lifespan of newly emitted particles.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setLifespan
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} value - The particle lifespan, in ms.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} value - The particle lifespan, in ms.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setLifespan(value:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setLifespan(value:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the number of particles released at each flow cycle or explosion.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setQuantity
      * @since 3.0.0
      *
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} quantity - The number of particles to release at each flow cycle or explosion.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} quantity - The number of particles to release at each flow cycle or explosion.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setQuantity(quantity:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setQuantity(quantity:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets the emitter's {@link Phaser.GameObjects.Particles.ParticleEmitter#frequency}
      * and {@link Phaser.GameObjects.Particles.ParticleEmitter#quantity}.
@@ -834,22 +834,22 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @since 3.0.0
      *
      * @param {number} frequency - The time interval (>= 0) of each flow cycle, in ms; or -1 to put the emitter in explosion mode.
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} [quantity] - The number of particles to release at each flow cycle or explosion.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} [quantity] - The number of particles to release at each flow cycle or explosion.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setFrequency(frequency:Float, ?quantity:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function setFrequency(frequency:Float, ?quantity:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets or removes the {@link Phaser.GameObjects.Particles.ParticleEmitter#emitZone}.
      *
-     * An {@link ParticleEmitterEdgeZoneConfig EdgeZone} places particles on its edges. Its {@link EdgeZoneSource source} can be a Curve, Path, Circle, Ellipse, Line, Polygon, Rectangle, or Triangle; or any object with a suitable {@link EdgeZoneSourceCallback getPoints} method.
+     * An {@link Phaser.Types.GameObjects.Particles.ParticleEmitterEdgeZoneConfig EdgeZone} places particles on its edges. Its {@link Phaser.Types.GameObjects.Particles.EdgeZoneSource source} can be a Curve, Path, Circle, Ellipse, Line, Polygon, Rectangle, or Triangle; or any object with a suitable {@link Phaser.Types.GameObjects.Particles.EdgeZoneSourceCallback getPoints} method.
      *
-     * A {@link ParticleEmitterRandomZoneConfig RandomZone} places randomly within its interior. Its {@link RandomZoneSource source} can be a Circle, Ellipse, Line, Polygon, Rectangle, or Triangle; or any object with a suitable {@link RandomZoneSourceCallback getRandomPoint} method.
+     * A {@link Phaser.Types.GameObjects.Particles.ParticleEmitterRandomZoneConfig RandomZone} places randomly within its interior. Its {@link RandomZoneSource source} can be a Circle, Ellipse, Line, Polygon, Rectangle, or Triangle; or any object with a suitable {@link Phaser.Types.GameObjects.Particles.RandomZoneSourceCallback getRandomPoint} method.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setEmitZone
      * @since 3.0.0
      *
-     * @param {ParticleEmitterEdgeZoneConfig|ParticleEmitterRandomZoneConfig} [zoneConfig] - An object describing the zone, or `undefined` to remove any current emit zone.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterEdgeZoneConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterRandomZoneConfig} [zoneConfig] - An object describing the zone, or `undefined` to remove any current emit zone.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
@@ -860,11 +860,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setDeathZone
      * @since 3.0.0
      *
-     * @param {ParticleEmitterDeathZoneConfig} [zoneConfig] - An object describing the zone, or `undefined` to remove any current death zone.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterDeathZoneConfig} [zoneConfig] - An object describing the zone, or `undefined` to remove any current death zone.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function setDeathZone(?zoneConfig:ParticleEmitterDeathZoneConfig):phaser.gameobjects.particles.ParticleEmitter;
+    public function setDeathZone(?zoneConfig:phaser.types.gameobjects.particles.ParticleEmitterDeathZoneConfig):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Creates inactive particles and adds them to this emitter's pool.
      *
@@ -918,24 +918,24 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#onParticleEmit
      * @since 3.0.0
      *
-     * @param {ParticleEmitterCallback} callback - The function.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterCallback} callback - The function.
      * @param {*} [context] - The calling context.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function onParticleEmit(callback:ParticleEmitterCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function onParticleEmit(callback:phaser.types.gameobjects.particles.ParticleEmitterCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Sets a function to call for each particle death.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#onParticleDeath
      * @since 3.0.0
      *
-     * @param {ParticleDeathCallback} callback - The function.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleDeathCallback} callback - The function.
      * @param {*} [context] - The function's calling context.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function onParticleDeath(callback:ParticleDeathCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function onParticleDeath(callback:phaser.types.gameobjects.particles.ParticleDeathCallback, ?context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Deactivates every particle in this emitter.
      *
@@ -951,24 +951,24 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#forEachAlive
      * @since 3.0.0
      *
-     * @param {ParticleEmitterCallback} callback - The function.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterCallback} callback - The function.
      * @param {*} context - The function's calling context.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function forEachAlive(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function forEachAlive(callback:phaser.types.gameobjects.particles.ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Calls a function for each inactive particle in this emitter.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#forEachDead
      * @since 3.0.0
      *
-     * @param {ParticleEmitterCallback} callback - The function.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterCallback} callback - The function.
      * @param {*} context - The function's calling context.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function forEachDead(callback:ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function forEachDead(callback:phaser.types.gameobjects.particles.ParticleEmitterCallback, context:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Turns {@link Phaser.GameObjects.Particles.ParticleEmitter#on} the emitter and resets the flow counter.
      *
@@ -1028,11 +1028,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @since 3.0.0
      *
      * @param {number} frequency - The time interval (>= 0) of each flow cycle, in ms.
-     * @param {number|float[]|EmitterOpOnEmitCallback|object} [count=1] - The number of particles to emit at each flow cycle.
+     * @param {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} [count=1] - The number of particles to emit at each flow cycle.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} This Particle Emitter.
      */
-    public function flow(frequency:Float, ?count:Dynamic):phaser.gameobjects.particles.ParticleEmitter;
+    public function flow(frequency:Float, ?count:phaser.types.gameobjects.particles.EmitterOpOnEmitType):phaser.gameobjects.particles.ParticleEmitter;
     /**
      * Puts the emitter in explode mode (frequency = -1), stopping any current particle flow, and emits several particles all at once.
      *

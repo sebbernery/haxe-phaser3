@@ -15,11 +15,11 @@ package phaser.loader.filetypes;
  * @since 3.0.0
  *
  * @param {Phaser.Loader.LoaderPlugin} loader - A reference to the Loader that is responsible for this file.
- * @param {(string|Phaser.Loader.FileTypes.AudioFileConfig)} key - The key to use for this file, or a file configuration object.
+ * @param {(string|Phaser.Types.Loader.FileTypes.AudioFileConfig)} key - The key to use for this file, or a file configuration object.
  * @param {string} [urlConfig] - The absolute or relative URL to load this file from.
- * @param {XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
+ * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
  */
 @:native("Phaser.Loader.FileTypes.HTML5AudioFile")
 extern class HTML5AudioFile extends phaser.loader.File {
-    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?urlConfig:String, ?xhrSettings:XHRSettingsObject);
+    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?urlConfig:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject);
 }

@@ -2,14 +2,16 @@ package phaser;
 
 /**
  * @classdesc
- * A base Phaser.Scene class which you could extend for your own use.
+ * A base Phaser.Scene class which can be extended for your own use.
+ *
+ * You can also define the optional methods {@link Phaser.Types.Scenes.SceneInitCallback init()}, {@link Phaser.Types.Scenes.ScenePreloadCallback preload()}, and {@link Phaser.Types.Scenes.SceneCreateCallback create()}.
  *
  * @class Scene
  * @memberof Phaser
  * @constructor
  * @since 3.0.0
  *
- * @param {(string|Phaser.Scenes.Settings.Config)} config - Scene specific configuration settings.
+ * @param {(string|Phaser.Types.Scenes.SettingsConfig)} config - Scene specific configuration settings.
  */
 @:native("Phaser.Scene")
 extern class Scene {
@@ -230,10 +232,21 @@ extern class Scene {
      */
     public var scale:phaser.scale.ScaleManager;
     /**
+     * A reference to the Plugin Manager.
+     *
+     * The Plugin Manager is a global system that allows plugins to register themselves with it, and can then install
+     * those plugins into Scenes as required.
+     *
+     * @name Phaser.Scene#plugins
+     * @type {Phaser.Plugins.PluginManager}
+     * @since 3.0.0
+     */
+    public var plugins:phaser.plugins.PluginManager;
+    /**
      * Should be overridden by your own Scenes.
+     * This method is called once per game step while the scene is running.
      *
      * @method Phaser.Scene#update
-     * @override
      * @since 3.0.0
      *
      * @param {number} time - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.

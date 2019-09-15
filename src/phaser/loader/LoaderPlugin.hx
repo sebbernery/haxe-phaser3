@@ -143,10 +143,10 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * xhr specific global settings (can be overridden on a per-file basis)
      *
      * @name Phaser.Loader.LoaderPlugin#xhr
-     * @type {XHRSettingsObject}
+     * @type {Phaser.Types.Loader.XHRSettingsObject}
      * @since 3.0.0
      */
-    public var xhr:XHRSettingsObject;
+    public var xhr:phaser.types.loader.XHRSettingsObject;
     /**
      * The crossOrigin value applied to loaded images. Very often this needs to be set to 'anonymous'.
      *
@@ -546,7 +546,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.JSONFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.JSONFileConfig` for more details.
      *
      * Once the file has finished loading it will automatically be passed to the global Animation Managers `fromJSON` method.
      * This will parse all of the JSON data and create animation data from it. This process happens at the very end
@@ -599,14 +599,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.JSONFileConfig|Phaser.Loader.FileTypes.JSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.JSONFileConfig|Phaser.Types.Loader.FileTypes.JSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
      * @param {string} [dataKey] - When the Animation JSON file loads only this property will be stored in the Cache and used to create animation data.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function animation(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function animation(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a JSON based Texture Atlas, or array of atlases, to the current load queue.
      *
@@ -652,7 +652,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.AtlasJSONFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.AtlasJSONFileConfig` for more details.
      *
      * Instead of passing a URL for the atlas JSON data you can also pass in a well formed JSON object instead.
      *
@@ -704,15 +704,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.AtlasJSONFileConfig|Phaser.Loader.FileTypes.AtlasJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.AtlasJSONFileConfig|Phaser.Types.Loader.FileTypes.AtlasJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [textureURL] - The absolute or relative URL to load the texture image file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
      * @param {string} [atlasURL] - The absolute or relative URL to load the texture atlas json data file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
-     * @param {XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
-     * @param {XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas json file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas json file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function atlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function atlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an XML based Texture Atlas, or array of atlases, to the current load queue.
      *
@@ -756,7 +756,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.AtlasXMLFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.AtlasXMLFileConfig` for more details.
      *
      * Once the atlas has finished loading you can use frames from it as textures for a Game Object by referencing its key:
      *
@@ -806,15 +806,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.7.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.AtlasXMLFileConfig|Phaser.Loader.FileTypes.AtlasXMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.AtlasXMLFileConfig|Phaser.Types.Loader.FileTypes.AtlasXMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [textureURL] - The absolute or relative URL to load the texture image file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
      * @param {string} [atlasURL] - The absolute or relative URL to load the texture atlas xml data file from. If undefined or `null` it will be set to `<key>.xml`, i.e. if `key` was "alien" then the URL will be "alien.xml".
-     * @param {XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
-     * @param {XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas xml file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas xml file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function atlasXML(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function atlasXML(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an Audio or HTML5Audio file, or array of audio files, to the current load queue.
      *
@@ -849,7 +849,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.AudioFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.AudioFileConfig` for more details.
      *
      * The URLs can be relative or absolute. If the URLs are relative the `Loader.baseURL` and `Loader.path` values will be prepended to them.
      *
@@ -866,14 +866,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.AudioFileConfig|Phaser.Loader.FileTypes.AudioFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.AudioFileConfig|Phaser.Types.Loader.FileTypes.AudioFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {(string|string[])} [urls] - The absolute or relative URL to load the audio files from.
      * @param {any} [config] - An object containing an `instances` property for HTML5Audio. Defaults to 1.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function audio(key:Dynamic, ?urls:Dynamic, ?config:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function audio(key:Dynamic, ?urls:Dynamic, ?config:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a JSON based Audio Sprite, or array of audio sprites, to the current load queue.
      *
@@ -933,7 +933,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.AudioSpriteFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.AudioSpriteFileConfig` for more details.
      *
      * Instead of passing a URL for the audio JSON data you can also pass in a well formed JSON object instead.
      *
@@ -965,16 +965,16 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.AudioSpriteFileConfig|Phaser.Loader.FileTypes.AudioSpriteFileConfig[])} key - The key to use for this file, or a file configuration object, or an array of objects.
+     * @param {(string|Phaser.Types.Loader.FileTypes.AudioSpriteFileConfig|Phaser.Types.Loader.FileTypes.AudioSpriteFileConfig[])} key - The key to use for this file, or a file configuration object, or an array of objects.
      * @param {string} jsonURL - The absolute or relative URL to load the json file from. Or a well formed JSON object to use instead.
      * @param {(string|string[])} [audioURL] - The absolute or relative URL to load the audio file from. If empty it will be obtained by parsing the JSON file.
      * @param {any} [audioConfig] - The audio configuration options.
-     * @param {XHRSettingsObject} [audioXhrSettings] - An XHR Settings configuration object for the audio file. Used in replacement of the Loaders default XHR Settings.
-     * @param {XHRSettingsObject} [jsonXhrSettings] - An XHR Settings configuration object for the json file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [audioXhrSettings] - An XHR Settings configuration object for the audio file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [jsonXhrSettings] - An XHR Settings configuration object for the json file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader.
      */
-    public function audioSprite(key:Dynamic, jsonURL:String, ?audioURL:Dynamic, ?audioConfig:Dynamic, ?audioXhrSettings:XHRSettingsObject, ?jsonXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function audioSprite(key:Dynamic, jsonURL:String, ?audioURL:Dynamic, ?audioConfig:Dynamic, ?audioXhrSettings:phaser.types.loader.XHRSettingsObject, ?jsonXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Binary file, or array of Binary files, to the current load queue.
      *
@@ -1010,7 +1010,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.BinaryFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.BinaryFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -1037,14 +1037,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.BinaryFileConfig|Phaser.Loader.FileTypes.BinaryFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.BinaryFileConfig|Phaser.Types.Loader.FileTypes.BinaryFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.bin`, i.e. if `key` was "alien" then the URL will be "alien.bin".
      * @param {any} [dataType] - Optional type to cast the binary file to once loaded. For example, `Uint8Array`.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function binary(key:Dynamic, ?url:String, ?dataType:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function binary(key:Dynamic, ?url:String, ?dataType:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an XML based Bitmap Font, or array of fonts, to the current load queue.
      *
@@ -1089,7 +1089,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.BitmapFontFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.BitmapFontFileConfig` for more details.
      *
      * Once the atlas has finished loading you can use key of it when creating a Bitmap Text Game Object:
      *
@@ -1137,15 +1137,72 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.BitmapFontFileConfig|Phaser.Loader.FileTypes.BitmapFontFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.BitmapFontFileConfig|Phaser.Types.Loader.FileTypes.BitmapFontFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [textureURL] - The absolute or relative URL to load the font image file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
      * @param {string} [fontDataURL] - The absolute or relative URL to load the font xml data file from. If undefined or `null` it will be set to `<key>.xml`, i.e. if `key` was "alien" then the URL will be "alien.xml".
-     * @param {XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the font image file. Used in replacement of the Loaders default XHR Settings.
-     * @param {XHRSettingsObject} [fontDataXhrSettings] - An XHR Settings configuration object for the font data xml file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the font image file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [fontDataXhrSettings] - An XHR Settings configuration object for the font data xml file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function bitmapFont(key:Dynamic, ?textureURL:Dynamic, ?fontDataURL:String, ?textureXhrSettings:XHRSettingsObject, ?fontDataXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function bitmapFont(key:Dynamic, ?textureURL:Dynamic, ?fontDataURL:String, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?fontDataXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
+    /**
+     * Adds a CSS file, or array of CSS files, to the current load queue.
+     *
+     * You can call this method from within your Scene's `preload`, along with any other files you wish to load:
+     *
+     * ```javascript
+     * function preload ()
+     * {
+     *     this.load.css('headers', 'styles/headers.css');
+     * }
+     * ```
+     *
+     * The file is **not** loaded right away. It is added to a queue ready to be loaded either when the loader starts,
+     * or if it's already running, when the next free load slot becomes available. This happens automatically if you
+     * are calling this from within the Scene's `preload` method, or a related callback. Because the file is queued
+     * it means you cannot use the file immediately after calling this method, but must wait for the file to complete.
+     * The typical flow for a Phaser Scene is that you load assets in the Scene's `preload` method and then when the
+     * Scene's `create` method is called you are guaranteed that all of those assets are ready for use and have been
+     * loaded.
+     *
+     * The key must be a unique String and not already in-use by another file in the Loader.
+     *
+     * Instead of passing arguments you can pass a configuration object, such as:
+     *
+     * ```javascript
+     * this.load.css({
+     *     key: 'headers',
+     *     url: 'styles/headers.css'
+     * });
+     * ```
+     *
+     * See the documentation for `Phaser.Types.Loader.FileTypes.CSSFileConfig` for more details.
+     *
+     * Once the file has finished loading it will automatically be converted into a style DOM element
+     * via `document.createElement('style')`. It will have its `defer` property set to false and then the
+     * resulting element will be appended to `document.head`. The CSS styles are then applied to the current document.
+     *
+     * The URL can be relative or absolute. If the URL is relative the `Loader.baseURL` and `Loader.path` values will be prepended to it.
+     *
+     * If the URL isn't specified the Loader will take the key and create a filename from that. For example if the key is "alien"
+     * and no URL is given then the Loader will set the URL to be "alien.css". It will always add `.css` as the extension, although
+     * this can be overridden if using an object instead of method arguments. If you do not desire this action then provide a URL.
+     *
+     * Note: The ability to load this type of file will only be available if the CSS File type has been built into Phaser.
+     * It is available in the default build but can be excluded from custom builds.
+     *
+     * @method Phaser.Loader.LoaderPlugin#css
+     * @fires Phaser.Loader.LoaderPlugin#addFileEvent
+     * @since 3.17.0
+     *
+     * @param {(string|Phaser.Types.Loader.FileTypes.CSSFileConfig|Phaser.Types.Loader.FileTypes.CSSFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.css`, i.e. if `key` was "alien" then the URL will be "alien.css".
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     *
+     * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
+     */
+    public function css(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a GLSL file, or array of GLSL files, to the current load queue.
      * In Phaser 3 GLSL files are just plain Text files at the current moment in time.
@@ -1177,11 +1234,12 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * ```javascript
      * this.load.glsl({
      *     key: 'plasma',
+     *     shaderType: 'fragment',
      *     url: 'shaders/Plasma.glsl'
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.GLSLFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.GLSLFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -1208,13 +1266,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.GLSLFileConfig|Phaser.Loader.FileTypes.GLSLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.GLSLFileConfig|Phaser.Types.Loader.FileTypes.GLSLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.glsl`, i.e. if `key` was "alien" then the URL will be "alien.glsl".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {string} [shaderType='fragment'] - The type of shader. Either `fragment` for a fragment shader, or `vertex` for a vertex shader. This is ignored if you load a shader bundle.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function glsl(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function glsl(key:Dynamic, ?url:String, ?shaderType:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an HTML file, or array of HTML files, to the current load queue.
      *
@@ -1249,7 +1308,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.HTMLFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.HTMLFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -1276,13 +1335,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.12.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.HTMLFileConfig|Phaser.Loader.FileTypes.HTMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.HTMLFileConfig|Phaser.Types.Loader.FileTypes.HTMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.html`, i.e. if `key` was "alien" then the URL will be "alien.html".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function html(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function html(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an HTML File, or array of HTML Files, to the current load queue. When the files are loaded they
      * will be rendered to textures and stored in the Texture Manager.
@@ -1320,7 +1379,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.HTMLTextureFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.HTMLTextureFileConfig` for more details.
      *
      * Once the file has finished loading you can use it as a texture for a Game Object by referencing its key:
      *
@@ -1356,15 +1415,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.12.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.HTMLTextureFileConfig|Phaser.Loader.FileTypes.HTMLTextureFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.HTMLTextureFileConfig|Phaser.Types.Loader.FileTypes.HTMLTextureFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.html`, i.e. if `key` was "alien" then the URL will be "alien.html".
      * @param {integer} [width=512] - The width of the texture the HTML will be rendered to.
      * @param {integer} [height=512] - The height of the texture the HTML will be rendered to.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function htmlTexture(key:Dynamic, ?url:String, ?width:Int, ?height:Int, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function htmlTexture(key:Dynamic, ?url:String, ?width:Int, ?height:Int, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an Image, or array of Images, to the current load queue.
      *
@@ -1403,7 +1462,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.ImageFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.ImageFileConfig` for more details.
      *
      * Once the file has finished loading you can use it as a texture for a Game Object by referencing its key:
      *
@@ -1450,13 +1509,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.ImageFileConfig|Phaser.Loader.FileTypes.ImageFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.ImageFileConfig|Phaser.Types.Loader.FileTypes.ImageFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function image(key:Dynamic, ?url:Dynamic, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function image(key:Dynamic, ?url:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a JSON file, or array of JSON files, to the current load queue.
      *
@@ -1491,7 +1550,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.JSONFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.JSONFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -1536,14 +1595,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.JSONFileConfig|Phaser.Loader.FileTypes.JSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.JSONFileConfig|Phaser.Types.Loader.FileTypes.JSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
      * @param {string} [dataKey] - When the JSON file loads only this property will be stored in the Cache.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function json(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function json(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Multi Texture Atlas, or array of multi atlases, to the current load queue.
      *
@@ -1588,7 +1647,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.MultiAtlasFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.MultiAtlasFileConfig` for more details.
      *
      * Instead of passing a URL for the atlas JSON data you can also pass in a well formed JSON object instead.
      *
@@ -1619,15 +1678,91 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.7.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.MultiAtlasFileConfig|Phaser.Loader.FileTypes.MultiAtlasFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.MultiAtlasFileConfig|Phaser.Types.Loader.FileTypes.MultiAtlasFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [atlasURL] - The absolute or relative URL to load the texture atlas json data file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
      * @param {string} [path] - Optional path to use when loading the textures defined in the atlas data.
      * @param {string} [baseURL] - Optional Base URL to use when loading the textures defined in the atlas data.
-     * @param {XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas json file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas json file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function multiatlas(key:Dynamic, ?atlasURL:String, ?path:String, ?baseURL:String, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function multiatlas(key:Dynamic, ?atlasURL:String, ?path:String, ?baseURL:String, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
+    /**
+     * Adds an array of Script files to the current load queue.
+     *
+     * The difference between this and the `ScriptFile` file type is that you give an array of scripts to this method,
+     * and the scripts are then processed _exactly_ in that order. This allows you to load a bunch of scripts that
+     * may have dependancies on each other without worrying about the async nature of traditional script loading.
+     *
+     * You can call this method from within your Scene's `preload`, along with any other files you wish to load:
+     *
+     * ```javascript
+     * function preload ()
+     * {
+     *     this.load.scripts('PostProcess', [
+     *         'libs/shaders/CopyShader.js',
+     *         'libs/postprocessing/EffectComposer.js',
+     *         'libs/postprocessing/RenderPass.js',
+     *         'libs/postprocessing/MaskPass.js',
+     *         'libs/postprocessing/ShaderPass.js',
+     *         'libs/postprocessing/AfterimagePass.js'
+     *    ]);
+     * }
+     * ```
+     *
+     * In the code above the script files will all be loaded in parallel but only processed (i.e. invoked) in the exact
+     * order given in the array.
+     *
+     * The files are **not** loaded right away. They are added to a queue ready to be loaded either when the loader starts,
+     * or if it's already running, when the next free load slot becomes available. This happens automatically if you
+     * are calling this from within the Scene's `preload` method, or a related callback. Because the files are queued
+     * it means you cannot use the files immediately after calling this method, but must wait for the files to complete.
+     * The typical flow for a Phaser Scene is that you load assets in the Scene's `preload` method and then when the
+     * Scene's `create` method is called you are guaranteed that all of those assets are ready for use and have been
+     * loaded.
+     *
+     * The key must be a unique String and not already in-use by another file in the Loader.
+     *
+     * Instead of passing arguments you can pass a configuration object, such as:
+     *
+     * ```javascript
+     * this.load.scripts({
+     *     key: 'PostProcess',
+     *     url: [
+     *         'libs/shaders/CopyShader.js',
+     *         'libs/postprocessing/EffectComposer.js',
+     *         'libs/postprocessing/RenderPass.js',
+     *         'libs/postprocessing/MaskPass.js',
+     *         'libs/postprocessing/ShaderPass.js',
+     *         'libs/postprocessing/AfterimagePass.js'
+     *        ]
+     * });
+     * ```
+     *
+     * See the documentation for `Phaser.Types.Loader.FileTypes.MultiScriptFileConfig` for more details.
+     *
+     * Once all the files have finished loading they will automatically be converted into a script element
+     * via `document.createElement('script')`. They will have their language set to JavaScript, `defer` set to
+     * false and then the resulting element will be appended to `document.head`. Any code then in the
+     * script will be executed. This is done in the exact order the files are specified in the url array.
+     *
+     * The URLs can be relative or absolute. If the URLs are relative the `Loader.baseURL` and `Loader.path` values will be prepended to them.
+     *
+     * Note: The ability to load this type of file will only be available if the MultiScript File type has been built into Phaser.
+     * It is available in the default build but can be excluded from custom builds.
+     *
+     * @method Phaser.Loader.LoaderPlugin#scripts
+     * @fires Phaser.Loader.LoaderPlugin#addFileEvent
+     * @since 3.17.0
+     *
+     * @param {(string|Phaser.Types.Loader.FileTypes.MultiScriptFileConfig|Phaser.Types.Loader.FileTypes.MultiScriptFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {string[]} [url] - An array of absolute or relative URLs to load the script files from. They are processed in the order given in the array.
+     * @param {string} [extension='js'] - The default file extension to use if no url is provided.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for these files.
+     *
+     * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
+     */
+    public function scripts(key:Dynamic, ?url:Array<String>, ?extension:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a JSON File Pack, or array of packs, to the current load queue.
      *
@@ -1703,7 +1838,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.PackFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.PackFileConfig` for more details.
      *
      * If you have specified a prefix in the loader, via `Loader.setPrefix` then this value will be prepended to this files
      * key. For example, if the prefix was `LEVEL1.` and the key was `Waves` the final key will be `LEVEL1.Waves` and
@@ -1740,14 +1875,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.7.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.PackFileConfig|Phaser.Loader.FileTypes.PackFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.PackFileConfig|Phaser.Types.Loader.FileTypes.PackFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
      * @param {string} [dataKey] - When the JSON file loads only this property will be stored in the Cache.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function pack(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function pack(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Plugin Script file, or array of plugin files, to the current load queue.
      *
@@ -1779,7 +1914,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.PluginFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.PluginFileConfig` for more details.
      *
      * Once the file has finished loading it will automatically be converted into a script element
      * via `document.createElement('script')`. It will have its language set to JavaScript, `defer` set to
@@ -1799,15 +1934,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.PluginFileConfig|Phaser.Loader.FileTypes.PluginFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.PluginFileConfig|Phaser.Types.Loader.FileTypes.PluginFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {(string|function)} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js". Or, a plugin function.
      * @param {boolean} [start] - Automatically start the plugin after loading?
      * @param {string} [mapping] - If this plugin is to be injected into the Scene, this is the property key used.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function plugin(key:Dynamic, ?url:Dynamic, ?start:Bool, ?mapping:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function plugin(key:Dynamic, ?url:Dynamic, ?start:Bool, ?mapping:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an SVG File, or array of SVG Files, to the current load queue. When the files are loaded they
      * will be rendered to bitmap textures and stored in the Texture Manager.
@@ -1843,7 +1978,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.SVGFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.SVGFileConfig` for more details.
      *
      * Once the file has finished loading you can use it as a texture for a Game Object by referencing its key:
      *
@@ -1918,14 +2053,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.SVGFileConfig|Phaser.Loader.FileTypes.SVGFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.SVGFileConfig|Phaser.Types.Loader.FileTypes.SVGFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.svg`, i.e. if `key` was "alien" then the URL will be "alien.svg".
-     * @param {Phaser.Loader.FileTypes.SVGSizeConfig} [svgConfig] - The svg size configuration object.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.FileTypes.SVGSizeConfig} [svgConfig] - The svg size configuration object.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function svg(key:Dynamic, ?url:String, ?svgConfig:phaser.loader.filetypes.SVGSizeConfig, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function svg(key:Dynamic, ?url:String, ?svgConfig:phaser.types.loader.filetypes.SVGSizeConfig, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an external Scene file, or array of Scene files, to the current load queue.
      *
@@ -1988,7 +2123,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.SceneFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.SceneFileConfig` for more details.
      *
      * Once the file has finished loading it will be added to the Scene Manager.
      *
@@ -2015,13 +2150,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.16.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.SceneFileConfig|Phaser.Loader.FileTypes.SceneFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.SceneFileConfig|Phaser.Types.Loader.FileTypes.SceneFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function sceneFile(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function sceneFile(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Scene Plugin Script file, or array of plugin files, to the current load queue.
      *
@@ -2053,7 +2188,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.ScenePluginFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.ScenePluginFileConfig` for more details.
      *
      * Once the file has finished loading it will automatically be converted into a script element
      * via `document.createElement('script')`. It will have its language set to JavaScript, `defer` set to
@@ -2073,15 +2208,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.8.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.ScenePluginFileConfig|Phaser.Loader.FileTypes.ScenePluginFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.ScenePluginFileConfig|Phaser.Types.Loader.FileTypes.ScenePluginFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {(string|function)} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js". Or, set to a plugin function.
      * @param {string} [systemKey] - If this plugin is to be added to Scene.Systems, this is the property key for it.
      * @param {string} [sceneKey] - If this plugin is to be added to the Scene, this is the property key for it.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function scenePlugin(key:Dynamic, ?url:Dynamic, ?systemKey:String, ?sceneKey:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function scenePlugin(key:Dynamic, ?url:Dynamic, ?systemKey:String, ?sceneKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Script file, or array of Script files, to the current load queue.
      *
@@ -2113,7 +2248,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.ScriptFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.ScriptFileConfig` for more details.
      *
      * Once the file has finished loading it will automatically be converted into a script element
      * via `document.createElement('script')`. It will have its language set to JavaScript, `defer` set to
@@ -2133,13 +2268,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.ScriptFileConfig|Phaser.Loader.FileTypes.ScriptFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.ScriptFileConfig|Phaser.Types.Loader.FileTypes.ScriptFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function script(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function script(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Sprite Sheet Image, or array of Sprite Sheet Images, to the current load queue.
      *
@@ -2190,7 +2325,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.SpriteSheetFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.SpriteSheetFileConfig` for more details.
      *
      * Once the file has finished loading you can use it as a texture for a Game Object by referencing its key:
      *
@@ -2241,14 +2376,14 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.SpriteSheetFileConfig|Phaser.Loader.FileTypes.SpriteSheetFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.SpriteSheetFileConfig|Phaser.Types.Loader.FileTypes.SpriteSheetFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
-     * @param {Phaser.Loader.FileTypes.ImageFrameConfig} [frameConfig] - The frame configuration object. At a minimum it should have a `frameWidth` property.
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.FileTypes.ImageFrameConfig} [frameConfig] - The frame configuration object. At a minimum it should have a `frameWidth` property.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function spritesheet(key:Dynamic, ?url:String, ?frameConfig:phaser.loader.filetypes.ImageFrameConfig, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function spritesheet(key:Dynamic, ?url:String, ?frameConfig:phaser.types.loader.filetypes.ImageFrameConfig, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Text file, or array of Text files, to the current load queue.
      *
@@ -2283,7 +2418,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.TextFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.TextFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -2310,13 +2445,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.TextFileConfig|Phaser.Loader.FileTypes.TextFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.TextFileConfig|Phaser.Types.Loader.FileTypes.TextFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.txt`, i.e. if `key` was "alien" then the URL will be "alien.txt".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function text(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function text(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a CSV Tilemap file, or array of CSV files, to the current load queue.
      *
@@ -2353,7 +2488,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.TilemapCSVFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.TilemapCSVFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -2380,13 +2515,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.TilemapCSVFileConfig|Phaser.Loader.FileTypes.TilemapCSVFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.TilemapCSVFileConfig|Phaser.Types.Loader.FileTypes.TilemapCSVFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.csv`, i.e. if `key` was "alien" then the URL will be "alien.csv".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function tilemapCSV(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function tilemapCSV(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an Impact.js Tilemap file, or array of map files, to the current load queue.
      *
@@ -2423,7 +2558,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.TilemapImpactFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.TilemapImpactFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -2450,13 +2585,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.7.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.TilemapImpactFileConfig|Phaser.Loader.FileTypes.TilemapImpactFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.TilemapImpactFileConfig|Phaser.Types.Loader.FileTypes.TilemapImpactFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function tilemapImpact(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function tilemapImpact(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Tiled JSON Tilemap file, or array of map files, to the current load queue.
      *
@@ -2493,7 +2628,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.TilemapJSONFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -2520,13 +2655,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.TilemapJSONFileConfig|Phaser.Loader.FileTypes.TilemapJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig|Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function tilemapTiledJSON(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function tilemapTiledJSON(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds a Unity YAML based Texture Atlas, or array of atlases, to the current load queue.
      *
@@ -2569,7 +2704,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.UnityAtlasFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.UnityAtlasFileConfig` for more details.
      *
      * Once the atlas has finished loading you can use frames from it as textures for a Game Object by referencing its key:
      *
@@ -2619,15 +2754,15 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.UnityAtlasFileConfig|Phaser.Loader.FileTypes.UnityAtlasFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.UnityAtlasFileConfig|Phaser.Types.Loader.FileTypes.UnityAtlasFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [textureURL] - The absolute or relative URL to load the texture image file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
      * @param {string} [atlasURL] - The absolute or relative URL to load the texture atlas data file from. If undefined or `null` it will be set to `<key>.txt`, i.e. if `key` was "alien" then the URL will be "alien.txt".
-     * @param {XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
-     * @param {XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas data file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas data file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function unityAtlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:XHRSettingsObject, ?atlasXhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function unityAtlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
     /**
      * Adds an XML file, or array of XML files, to the current load queue.
      *
@@ -2662,7 +2797,7 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * });
      * ```
      *
-     * See the documentation for `Phaser.Loader.FileTypes.XMLFileConfig` for more details.
+     * See the documentation for `Phaser.Types.Loader.FileTypes.XMLFileConfig` for more details.
      *
      * Once the file has finished loading you can access it from its Cache using its key:
      *
@@ -2689,11 +2824,11 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @fires Phaser.Loader.LoaderPlugin#addFileEvent
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Loader.FileTypes.XMLFileConfig|Phaser.Loader.FileTypes.XMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
+     * @param {(string|Phaser.Types.Loader.FileTypes.XMLFileConfig|Phaser.Types.Loader.FileTypes.XMLFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.xml`, i.e. if `key` was "alien" then the URL will be "alien.xml".
-     * @param {XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
+     * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {Phaser.Loader.LoaderPlugin} The Loader instance.
      */
-    public function xml(key:Dynamic, ?url:String, ?xhrSettings:XHRSettingsObject):phaser.loader.LoaderPlugin;
+    public function xml(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):phaser.loader.LoaderPlugin;
 }

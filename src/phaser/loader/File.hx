@@ -11,11 +11,11 @@ package phaser.loader;
  * @since 3.0.0
  *
  * @param {Phaser.Loader.LoaderPlugin} loader - The Loader that is going to load this File.
- * @param {FileConfig} fileConfig - The file configuration object, as created by the file type.
+ * @param {Phaser.Types.Loader.FileConfig} fileConfig - The file configuration object, as created by the file type.
  */
 @:native("Phaser.Loader.File")
 extern class File {
-    public function new(loader:phaser.loader.LoaderPlugin, fileConfig:FileConfig);
+    public function new(loader:phaser.loader.LoaderPlugin, fileConfig:phaser.types.loader.FileConfig);
     /**
      * A reference to the Loader that is going to load this file.
      *
@@ -70,10 +70,10 @@ extern class File {
      * The merged XHRSettings for this file.
      *
      * @name Phaser.Loader.File#xhrSettings
-     * @type {XHRSettingsObject}
+     * @type {Phaser.Types.Loader.XHRSettingsObject}
      * @since 3.0.0
      */
-    public var xhrSettings:XHRSettingsObject;
+    public var xhrSettings:phaser.types.loader.XHRSettingsObject;
     /**
      * The XMLHttpRequest instance (as created by XHR Loader) that is loading this File.
      *
@@ -285,6 +285,8 @@ extern class File {
      *
      * @method Phaser.Loader.File.createObjectURL
      * @static
+     * @since 3.7.0
+     *
      * @param {HTMLImageElement} image - Image object which 'src' attribute should be set to object URL.
      * @param {Blob} blob - A Blob object to create an object URL for.
      * @param {string} defaultType - Default mime type used if blob type is not available.
@@ -296,6 +298,8 @@ extern class File {
      *
      * @method Phaser.Loader.File.revokeObjectURL
      * @static
+     * @since 3.7.0
+     *
      * @param {HTMLImageElement} image - Image object which 'src' attribute should be revoked.
      */
     public function revokeObjectURL(image:js.html.ImageElement):Void;

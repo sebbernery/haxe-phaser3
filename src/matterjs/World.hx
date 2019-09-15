@@ -10,6 +10,7 @@ package matterjs;
  *
  * @class MatterJS.World
  * @extends MatterJS.Composite
+ * @since 3.0.0
  */
 @:native("MatterJS.World")
 extern class World extends matterjs.Composite {

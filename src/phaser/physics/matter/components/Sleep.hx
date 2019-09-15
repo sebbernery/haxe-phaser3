@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * [description]
  *
- * @name Phaser.Physics.Matter.Components.Sleep
+ * @namespace Phaser.Physics.Matter.Components.Sleep
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Sleep")

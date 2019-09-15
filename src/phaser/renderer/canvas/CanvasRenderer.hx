@@ -120,10 +120,10 @@ extern class CanvasRenderer {
      * If a non-null `callback` is set in this object, a snapshot of the canvas will be taken after the current frame is fully rendered.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#snapshotState
-     * @type {SnapshotState}
+     * @type {Phaser.Types.Renderer.Snapshot.SnapshotState}
      * @since 3.16.0
      */
-    public var snapshotState:SnapshotState;
+    public var snapshotState:phaser.types.renderer.snapshot.SnapshotState;
     /**
      * Prepares the game canvas for rendering.
      *
@@ -153,24 +153,6 @@ extern class CanvasRenderer {
      * @param {number} [height] - The new height of the renderer.
      */
     public function resize(?width:Float, ?height:Float):Void;
-    /**
-     * A NOOP method for handling lost context. Intentionally empty.
-     *
-     * @method Phaser.Renderer.Canvas.CanvasRenderer#onContextLost
-     * @since 3.0.0
-     *
-     * @param {function} callback - Ignored parameter.
-     */
-    public function onContextLost(callback:Dynamic):Void;
-    /**
-     * A NOOP method for handling restored context. Intentionally empty.
-     *
-     * @method Phaser.Renderer.Canvas.CanvasRenderer#onContextRestored
-     * @since 3.0.0
-     *
-     * @param {function} callback - Ignored parameter.
-     */
-    public function onContextRestored(callback:Dynamic):Void;
     /**
      * Resets the transformation matrix of the current context to the identity matrix, thus resetting any transformation.
      *
@@ -240,6 +222,30 @@ extern class CanvasRenderer {
      */
     public function postRender():Void;
     /**
+     * Takes a snapshot of the given area of the given canvas.
+     *
+     * Unlike the other snapshot methods, this one is processed immediately and doesn't wait for the next render.
+     *
+     * Snapshots work by creating an Image object from the canvas data, this is a blocking process, which gets
+     * more expensive the larger the canvas size gets, so please be careful how you employ this in your game.
+     *
+     * @method Phaser.Renderer.Canvas.CanvasRenderer#snapshotCanvas
+     * @since 3.19.0
+     *
+     * @param {HTMLCanvasElement} canvas - The canvas to grab from.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {boolean} [getPixel=false] - Grab a single pixel as a Color object, or an area as an Image object?
+     * @param {integer} [x=0] - The x coordinate to grab from.
+     * @param {integer} [y=0] - The y coordinate to grab from.
+     * @param {integer} [width=canvas.width] - The width of the area to grab.
+     * @param {integer} [height=canvas.height] - The height of the area to grab.
+     * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
+     * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
+     *
+     * @return {this} This Canvas Renderer.
+     */
+    public function snapshotCanvas(canvas:js.html.CanvasElement, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?getPixel:Bool, ?x:Int, ?y:Int, ?width:Int, ?height:Int, ?type:String, ?encoderOptions:Float):Dynamic;
+    /**
      * Schedules a snapshot of the entire game viewport to be taken after the current frame is rendered.
      *
      * To capture a specific area see the `snapshotArea` method. To capture a specific pixel, see `snapshotPixel`.
@@ -253,13 +259,13 @@ extern class CanvasRenderer {
      * @method Phaser.Renderer.Canvas.CanvasRenderer#snapshot
      * @since 3.0.0
      *
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
      * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
      * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshot(callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    public function snapshot(callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Schedules a snapshot of the given area of the game viewport to be taken after the current frame is rendered.
      *
@@ -278,13 +284,13 @@ extern class CanvasRenderer {
      * @param {integer} y - The y coordinate to grab from.
      * @param {integer} width - The width of the area to grab.
      * @param {integer} height - The height of the area to grab.
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
      * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
      * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Schedules a snapshot of the given pixel from the game viewport to be taken after the current frame is rendered.
      *
@@ -302,11 +308,11 @@ extern class CanvasRenderer {
      *
      * @param {integer} x - The x coordinate of the pixel to get.
      * @param {integer} y - The y coordinate of the pixel to get.
-     * @param {SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
+     * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
      *
      * @return {this} This WebGL Renderer.
      */
-    public function snapshotPixel(x:Int, y:Int, callback:SnapshotCallback):Dynamic;
+    public function snapshotPixel(x:Int, y:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback):Dynamic;
     /**
      * Takes a Sprite Game Object, or any object that extends it, and draws it to the current context.
      *

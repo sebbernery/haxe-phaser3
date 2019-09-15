@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * A component to set restitution on objects.
  *
- * @name Phaser.Physics.Matter.Components.Bounce
+ * @namespace Phaser.Physics.Matter.Components.Bounce
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Bounce")

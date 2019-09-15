@@ -98,7 +98,15 @@ extern class BitmapMask {
      */
     public var maskFramebuffer:js.html.webgl.Framebuffer;
     /**
-     * Whether to invert the mask's alpha.
+     * The previous framebuffer set in the renderer before this one was enabled.
+     *
+     * @name Phaser.Display.Masks.BitmapMask#prevFramebuffer
+     * @type {WebGLFramebuffer}
+     * @since 3.17.0
+     */
+    public var prevFramebuffer:js.html.webgl.Framebuffer;
+    /**
+     * Whether to invert the masks alpha.
      *
      * If `true`, the alpha of the masking pixel will be inverted before it's multiplied with the masked pixel. Essentially, this means that a masked area will be visible only if the corresponding area in the mask is invisible.
      *
@@ -107,6 +115,15 @@ extern class BitmapMask {
      * @since 3.1.2
      */
     public var invertAlpha:Bool;
+    /**
+     * Is this mask a stencil mask?
+     *
+     * @name Phaser.Display.Masks.BitmapMask#isStencil
+     * @type {boolean}
+     * @readonly
+     * @since 3.17.0
+     */
+    public var isStencil:Bool;
     /**
      * Sets a new masking Game Object for the Bitmap Mask.
      *

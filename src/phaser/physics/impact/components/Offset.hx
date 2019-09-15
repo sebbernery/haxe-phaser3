@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Offset component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.Offset
+ * @namespace Phaser.Physics.Impact.Components.Offset
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.Offset")

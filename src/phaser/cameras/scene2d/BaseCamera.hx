@@ -70,6 +70,14 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var scaleManager:phaser.scale.ScaleManager;
     /**
+     * A reference to the Scene's Camera Manager to which this Camera belongs.
+     *
+     * @name Phaser.Cameras.Scene2D.BaseCamera#cameraManager
+     * @type {Phaser.Cameras.Scene2D.CameraManager}
+     * @since 3.17.0
+     */
+    public var cameraManager:phaser.cameras.scene2d.CameraManager;
+    /**
      * The Camera ID. Assigned by the Camera Manager and used to handle camera exclusion.
      * This value is a bitmask.
      *
@@ -218,6 +226,15 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @since 3.11.0
      */
     public var originY:Float;
+    /**
+     * The Mask this Camera is using during render.
+     * Set the mask using the `setMask` method. Remove the mask using the `clearMask` method.
+     *
+     * @name Phaser.Cameras.Scene2D.BaseCamera#mask
+     * @type {?(Phaser.Display.Masks.BitmapMask|Phaser.Display.Masks.GeometryMask)}
+     * @since 3.17.0
+     */
+    public var mask:Dynamic;
     /**
      * The x position of the Camera viewport, relative to the top-left of the game canvas.
      * The viewport is the area into which the camera renders.
@@ -554,7 +571,7 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @method Phaser.Cameras.Scene2D.BaseCamera#setBackgroundColor
      * @since 3.0.0
      *
-     * @param {(string|number|InputColorObject)} [color='rgba(0,0,0,0)'] - The color value. In CSS, hex or numeric color notation.
+     * @param {(string|number|Phaser.Types.Display.InputColorObject)} [color='rgba(0,0,0,0)'] - The color value. In CSS, hex or numeric color notation.
      *
      * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
      */
@@ -743,14 +760,48 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public function setZoom(?value:Float):phaser.cameras.scene2d.BaseCamera;
     /**
+     * Sets the mask to be applied to this Camera during rendering.
+     *
+     * The mask must have been previously created and can be either a GeometryMask or a BitmapMask.
+     *
+     * Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
+     * If a mask is already set on this Camera it will be immediately replaced.
+     *
+     * Masks have no impact on physics or input detection. They are purely a rendering component
+     * that allows you to limit what is visible during the render pass.
+     *
+     * Note: You cannot mask a Camera that has `renderToTexture` set.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#setMask
+     * @since 3.17.0
+     *
+     * @param {(Phaser.Display.Masks.BitmapMask|Phaser.Display.Masks.GeometryMask)} mask - The mask this Camera will use when rendering.
+     * @param {boolean} [fixedPosition=true] - Should the mask translate along with the Camera, or be fixed in place and not impacted by the Cameras transform?
+     *
+     * @return {this} This Camera instance.
+     */
+    public function setMask(mask:Dynamic, ?fixedPosition:Bool):Dynamic;
+    /**
+     * Clears the mask that this Camera was using.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#clearMask
+     * @since 3.17.0
+     *
+     * @param {boolean} [destroyMask=false] - Destroy the mask before clearing it?
+     *
+     * @return {this} This Camera instance.
+     */
+    public function clearMask(?destroyMask:Bool):Dynamic;
+    /**
      * Returns an Object suitable for JSON storage containing all of the Camera viewport and rendering properties.
      *
      * @method Phaser.Cameras.Scene2D.BaseCamera#toJSON
      * @since 3.0.0
      *
-     * @return {JSONCamera} A well-formed object suitable for conversion to JSON.
+     * @return {Phaser.Types.Cameras.Scene2D.JSONCamera} A well-formed object suitable for conversion to JSON.
      */
-    public function toJSON():JSONCamera;
+    public function toJSON():phaser.types.cameras.scene2d.JSONCamera;
     /**
      * Internal method called automatically by the Camera Manager.
      *

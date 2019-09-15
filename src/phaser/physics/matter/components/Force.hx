@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * A component to apply force to Matter.js bodies.
  *
- * @name Phaser.Physics.Matter.Components.Force
+ * @namespace Phaser.Physics.Matter.Components.Force
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Force")

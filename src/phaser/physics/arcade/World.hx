@@ -15,11 +15,11 @@ package phaser.physics.arcade;
  * @since 3.0.0
  *
  * @param {Phaser.Scene} scene - The Scene to which this World instance belongs.
- * @param {ArcadeWorldConfig} config - An Arcade Physics Configuration object.
+ * @param {Phaser.Types.Physics.Arcade.ArcadeWorldConfig} config - An Arcade Physics Configuration object.
  */
 @:native("Phaser.Physics.Arcade.World")
 extern class World extends phaser.events.EventEmitter {
-    public function new(scene:phaser.Scene, config:ArcadeWorldConfig);
+    public function new(scene:phaser.Scene, config:phaser.types.physics.arcade.ArcadeWorldConfig);
     /**
      * The Scene this simulation belongs to.
      *
@@ -80,10 +80,10 @@ extern class World extends phaser.events.EventEmitter {
      * The boundary edges that Bodies can collide with.
      *
      * @name Phaser.Physics.Arcade.World#checkCollision
-     * @type {CheckCollisionObject}
+     * @type {Phaser.Types.Physics.Arcade.CheckCollisionObject}
      * @since 3.0.0
      */
-    public var checkCollision:CheckCollisionObject;
+    public var checkCollision:phaser.types.physics.arcade.CheckCollisionObject;
     /**
      * The number of physics steps to be taken per second.
      *
@@ -113,11 +113,11 @@ extern class World extends phaser.events.EventEmitter {
      * - 0.5 = double speed
      *
      * @name Phaser.Physics.Arcade.World#timeScale
-     * @property {number}
+     * @type {number}
      * @default 1
      * @since 3.10.0
      */
-    public var timeScale:Dynamic;
+    public var timeScale:Float;
     /**
      * The maximum absolute difference of a Body's per-step velocity and its overlap with another Body that will result in separation on *each axis*.
      * Larger values favor separation.
@@ -181,10 +181,10 @@ extern class World extends phaser.events.EventEmitter {
      * Default debug display settings for new Bodies.
      *
      * @name Phaser.Physics.Arcade.World#defaults
-     * @type {ArcadeWorldDefaults}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeWorldDefaults}
      * @since 3.0.0
      */
-    public var defaults:ArcadeWorldDefaults;
+    public var defaults:phaser.types.physics.arcade.ArcadeWorldDefaults;
     /**
      * The maximum number of items per node on the RTree.
      *
@@ -199,18 +199,19 @@ extern class World extends phaser.events.EventEmitter {
      */
     public var maxEntries:Int;
     /**
-     * Should this Arcade Physics World use an RTree for Dynamic Physics bodies or not?
+     * Should this Arcade Physics World use an RTree for Dynamic and Static Physics bodies?
      *
-     * An RTree is a fast way of spatially sorting of all the moving bodies in the world.
+     * An RTree is a fast way of spatially sorting of all the bodies in the world.
      * However, at certain limits, the cost of clearing and inserting the bodies into the
      * tree every frame becomes more expensive than the search speed gains it provides.
      *
      * If you have a large number of dynamic bodies in your world then it may be best to
-     * disable the use of the RTree by setting this property to `true`.
+     * disable the use of the RTree by setting this property to `false` in the physics config.
+     *
      * The number it can cope with depends on browser and device, but a conservative estimate
      * of around 5,000 bodies should be considered the max before disabling it.
      *
-     * Note this only applies to dynamic bodies. Static bodies are always kept in an RTree,
+     * This only applies to dynamic bodies. Static bodies are always kept in an RTree,
      * because they don't have to be cleared every frame, so you benefit from the
      * massive search speeds all the time.
      *
@@ -240,10 +241,10 @@ extern class World extends phaser.events.EventEmitter {
      * Recycled input for tree searches.
      *
      * @name Phaser.Physics.Arcade.World#treeMinMax
-     * @type {ArcadeWorldTreeMinMax}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeWorldTreeMinMax}
      * @since 3.0.0
      */
-    public var treeMinMax:ArcadeWorldTreeMinMax;
+    public var treeMinMax:phaser.types.physics.arcade.ArcadeWorldTreeMinMax;
     /**
      * Adds an Arcade Physics Body to a Game Object, an array of Game Objects, or the children of a Group.
      *
@@ -456,15 +457,15 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      * @see Phaser.Physics.Arcade.World#collide
      *
-     * @param {ArcadeColliderType} object1 - The first object to check for collision.
-     * @param {ArcadeColliderType} object2 - The second object to check for collision.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object to check for collision.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object2 - The second object to check for collision.
      * @param {ArcadePhysicsCallback} [collideCallback] - The callback to invoke when the two objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - The callback to invoke when the two objects collide. Must return a boolean.
      * @param {*} [callbackContext] - The scope in which to call the callbacks.
      *
      * @return {Phaser.Physics.Arcade.Collider} The Collider that was created.
      */
-    public function addCollider(object1:ArcadeColliderType, object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):phaser.physics.arcade.Collider;
+    public function addCollider(object1:phaser.types.physics.arcade.ArcadeColliderType, object2:phaser.types.physics.arcade.ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):phaser.physics.arcade.Collider;
     /**
      * Creates a new Overlap Collider object and adds it to the simulation.
      *
@@ -479,15 +480,15 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Arcade.World#addOverlap
      * @since 3.0.0
      *
-     * @param {ArcadeColliderType} object1 - The first object to check for overlap.
-     * @param {ArcadeColliderType} object2 - The second object to check for overlap.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object to check for overlap.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object2 - The second object to check for overlap.
      * @param {ArcadePhysicsCallback} [collideCallback] - The callback to invoke when the two objects overlap.
      * @param {ArcadePhysicsCallback} [processCallback] - The callback to invoke when the two objects overlap. Must return a boolean.
      * @param {*} [callbackContext] - The scope in which to call the callbacks.
      *
      * @return {Phaser.Physics.Arcade.Collider} The Collider that was created.
      */
-    public function addOverlap(object1:ArcadeColliderType, object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):phaser.physics.arcade.Collider;
+    public function addOverlap(object1:phaser.types.physics.arcade.ArcadeColliderType, object2:phaser.types.physics.arcade.ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):phaser.physics.arcade.Collider;
     /**
      * Removes a Collider from the simulation so it is no longer processed.
      *
@@ -533,6 +534,7 @@ extern class World extends phaser.events.EventEmitter {
      *
      * @method Phaser.Physics.Arcade.World#update
      * @protected
+     * @fires Phaser.Physics.Arcade.Events#WORLD_STEP
      * @since 3.0.0
      *
      * @param {number} time - The current timestamp as generated by the Request Animation Frame or SetTimeout.
@@ -543,6 +545,7 @@ extern class World extends phaser.events.EventEmitter {
      * Advances the simulation by a time increment.
      *
      * @method Phaser.Physics.Arcade.World#step
+     * @fires Phaser.Physics.Arcade.Events#WORLD_STEP
      * @since 3.10.0
      *
      * @param {number} delta - The delta time amount, in seconds, by which to advance the simulation.
@@ -648,15 +651,15 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Arcade.World#overlap
      * @since 3.0.0
      *
-     * @param {ArcadeColliderType} object1 - The first object or array of objects to check.
-     * @param {ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object or array of objects to check.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
      * @param {ArcadePhysicsCallback} [overlapCallback] - An optional callback function that is called if the objects overlap.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they overlap. If this is set then `overlapCallback` will only be called if this callback returns `true`.
      * @param {*} [callbackContext] - The context in which to run the callbacks.
      *
      * @return {boolean} True if at least one Game Object overlaps another.
      */
-    public function overlap(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?overlapCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function overlap(object1:phaser.types.physics.arcade.ArcadeColliderType, ?object2:phaser.types.physics.arcade.ArcadeColliderType, ?overlapCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     /**
      * Performs a collision check and separation between the two physics enabled objects given, which can be single
      * Game Objects, arrays of Game Objects, Physics Groups, arrays of Physics Groups or normal Groups.
@@ -665,7 +668,9 @@ extern class World extends phaser.events.EventEmitter {
      *
      * If two Groups or arrays are passed, each member of one will be tested against each member of the other.
      *
-     * If one Group **only** is passed (as `object1`), each member of the Group will be collided against the other members.
+     * If **only** one Group is passed (as `object1`), each member of the Group will be collided against the other members.
+     *
+     * If **only** one Array is passed, the array is iterated and every element in it is tested against the others.
      *
      * Two callbacks can be provided. The `collideCallback` is invoked if a collision occurs and the two colliding
      * objects are passed to it.
@@ -678,15 +683,68 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Arcade.World#collide
      * @since 3.0.0
      *
-     * @param {ArcadeColliderType} object1 - The first object or array of objects to check.
-     * @param {ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object or array of objects to check.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
      * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
      * @param {any} [callbackContext] - The context in which to run the callbacks.
      *
      * @return {boolean} `true` if any overlapping Game Objects were separated, otherwise `false`.
      */
-    public function collide(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function collide(object1:phaser.types.physics.arcade.ArcadeColliderType, ?object2:phaser.types.physics.arcade.ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    /**
+     * This advanced method is specifically for testing for collision between a single Sprite and an array of Tile objects.
+     *
+     * You should generally use the `collide` method instead, with a Sprite vs. a Tilemap Layer, as that will perform
+     * tile filtering and culling for you, as well as handle the interesting face collision automatically.
+     *
+     * This method is offered for those who would like to check for collision with specific Tiles in a layer, without
+     * having to set any collision attributes on the tiles in question. This allows you to perform quick dynamic collisions
+     * on small sets of Tiles. As such, no culling or checks are made to the array of Tiles given to this method,
+     * you should filter them before passing them to this method.
+     *
+     * Important: Use of this method skips the `interesting faces` system that Tilemap Layers use. This means if you have
+     * say a row or column of tiles, and you jump into, or walk over them, it's possible to get stuck on the edges of the
+     * tiles as the interesting face calculations are skipped. However, for quick-fire small collision set tests on
+     * dynamic maps, this method can prove very useful.
+     *
+     * @method Phaser.Physics.Arcade.World#collideTiles
+     * @fires Phaser.Physics.Arcade.Events#TILE_COLLIDE
+     * @since 3.17.0
+     *
+     * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
+     * @param {Phaser.Tilemaps.Tile[]} tiles - An array of Tiles to check for collision against.
+     * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
+     * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
+     *
+     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
+     */
+    public function collideTiles(sprite:phaser.gameobjects.GameObject, tiles:Array<phaser.tilemaps.Tile>, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    /**
+     * This advanced method is specifically for testing for overlaps between a single Sprite and an array of Tile objects.
+     *
+     * You should generally use the `overlap` method instead, with a Sprite vs. a Tilemap Layer, as that will perform
+     * tile filtering and culling for you, as well as handle the interesting face collision automatically.
+     *
+     * This method is offered for those who would like to check for overlaps with specific Tiles in a layer, without
+     * having to set any collision attributes on the tiles in question. This allows you to perform quick dynamic overlap
+     * tests on small sets of Tiles. As such, no culling or checks are made to the array of Tiles given to this method,
+     * you should filter them before passing them to this method.
+     *
+     * @method Phaser.Physics.Arcade.World#overlapTiles
+     * @fires Phaser.Physics.Arcade.Events#TILE_OVERLAP
+     * @since 3.17.0
+     *
+     * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
+     * @param {Phaser.Tilemaps.Tile[]} tiles - An array of Tiles to check for collision against.
+     * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects overlap.
+     * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
+     *
+     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
+     */
+    public function overlapTiles(sprite:phaser.gameobjects.GameObject, tiles:Array<phaser.tilemaps.Tile>, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     /**
      * Internal handler for Sprite vs. Tilemap collisions.
      * Please use Phaser.Physics.Arcade.World#collide instead.

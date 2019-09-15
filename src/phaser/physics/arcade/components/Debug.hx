@@ -3,7 +3,7 @@ package phaser.physics.arcade.components;
 /**
  * Provides methods used for setting the debug properties of an Arcade Physics Body.
  *
- * @name Phaser.Physics.Arcade.Components.Debug
+ * @namespace Phaser.Physics.Arcade.Components.Debug
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Arcade.Components.Debug")

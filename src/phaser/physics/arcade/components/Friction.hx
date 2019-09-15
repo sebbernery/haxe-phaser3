@@ -3,7 +3,7 @@ package phaser.physics.arcade.components;
 /**
  * Sets the friction (e.g. the amount of velocity reduced over time) of the physics body when moving horizontally in the X axis. The higher than friction, the faster the body will slow down once force stops being applied to it.
  *
- * @name Phaser.Physics.Arcade.Components.Friction
+ * @namespace Phaser.Physics.Arcade.Components.Friction
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Arcade.Components.Friction")

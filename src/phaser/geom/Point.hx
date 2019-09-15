@@ -16,6 +16,16 @@ package phaser.geom;
 extern class Point {
     public function new(?x:Float, ?y:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.POINT`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Point#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The x coordinate of this Point.
      *
      * @name Phaser.Geom.Point#x

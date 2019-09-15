@@ -14,7 +14,7 @@ package phaser.scenes;
  * @since 3.0.0
  *
  * @param {Phaser.Scene} scene - The Scene that owns this Systems instance.
- * @param {(string|Phaser.Scenes.Settings.Config)} config - Scene specific configuration settings.
+ * @param {(string|Phaser.Types.Scenes.SettingsConfig)} config - Scene specific configuration settings.
  */
 @:native("Phaser.Scenes.Systems")
 extern class Systems {
@@ -36,6 +36,14 @@ extern class Systems {
      */
     public var game:phaser.Game;
     /**
+     * A reference to either the Canvas or WebGL Renderer that this Game is using.
+     *
+     * @name Phaser.Scenes.Systems#renderer
+     * @type {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)}
+     * @since 3.17.0
+     */
+    public var renderer:Dynamic;
+    /**
      * The Facebook Instant Games Plugin.
      *
      * @name Phaser.Scenes.Systems#facebook
@@ -47,7 +55,7 @@ extern class Systems {
      * The Scene Configuration object, as passed in when creating the Scene.
      *
      * @name Phaser.Scenes.Systems#config
-     * @type {(string|Phaser.Scenes.Settings.Config)}
+     * @type {(string|Phaser.Types.Scenes.SettingsConfig)}
      * @since 3.0.0
      */
     public var config:Dynamic;
@@ -55,10 +63,10 @@ extern class Systems {
      * The Scene Settings. This is the parsed output based on the Scene configuration.
      *
      * @name Phaser.Scenes.Systems#settings
-     * @type {Phaser.Scenes.Settings.Object}
+     * @type {Phaser.Types.Scenes.SettingsObject}
      * @since 3.0.0
      */
-    public var settings:phaser.scenes.settings.Object;
+    public var settings:phaser.types.scenes.SettingsObject;
     /**
      * A handy reference to the Scene canvas / context.
      *
@@ -133,10 +141,10 @@ extern class Systems {
      * In the default set-up you can access this from within a Scene via the `this.sound` property.
      *
      * @name Phaser.Scenes.Systems#sound
-     * @type {Phaser.Sound.BaseSoundManager}
+     * @type {(Phaser.Sound.NoAudioSoundManager|Phaser.Sound.HTML5AudioSoundManager|Phaser.Sound.WebAudioSoundManager)}
      * @since 3.0.0
      */
-    public var sound:phaser.sound.BaseSoundManager;
+    public var sound:Dynamic;
     /**
      * A reference to the global Texture Manager.
      *
@@ -353,12 +361,12 @@ extern class Systems {
      */
     public function isSleeping():Bool;
     /**
-     * Is this Scene active?
+     * Is this Scene running?
      *
      * @method Phaser.Scenes.Systems#isActive
      * @since 3.0.0
      *
-     * @return {boolean} `true` if this Scene is active, otherwise `false`.
+     * @return {boolean} `true` if this Scene is running, otherwise `false`.
      */
     public function isActive():Bool;
     /**

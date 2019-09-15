@@ -19,11 +19,11 @@ package phaser;
  * @fires Phaser.Core.Events#VISIBLE
  * @since 3.0.0
  *
- * @param {GameConfig} [GameConfig] - The configuration object for your Phaser Game instance.
+ * @param {Phaser.Types.Core.GameConfig} [GameConfig] - The configuration object for your Phaser Game instance.
  */
 @:native("Phaser.Game")
 extern class Game {
-    public function new(?GameConfig:GameConfig);
+    public function new(?GameConfig:phaser.types.core.GameConfig);
     /**
      * The parsed Game Configuration object.
      *
@@ -44,7 +44,7 @@ extern class Game {
      */
     public var renderer:Dynamic;
     /**
-     * A reference to an HTML Div Element used as a DOM Element Container.
+     * A reference to an HTML Div Element used as the DOM Element Container.
      *
      * Only set if `createDOMContainer` is `true` in the game config (by default it is `false`) and
      * if you provide a parent element to insert the Phaser Game inside.
@@ -53,7 +53,7 @@ extern class Game {
      *
      * @name Phaser.Game#domContainer
      * @type {HTMLDivElement}
-     * @since 3.12.0
+     * @since 3.17.0
      */
     public var domContainer:js.html.DivElement;
     /**
@@ -188,11 +188,13 @@ extern class Game {
      *
      * The Sound Manager is a global system responsible for the playback and updating of all audio in your game.
      *
+     * You can disable the inclusion of the Sound Manager in your build by toggling the webpack `FEATURE_SOUND` flag.
+     *
      * @name Phaser.Game#sound
-     * @type {Phaser.Sound.BaseSoundManager}
+     * @type {(Phaser.Sound.NoAudioSoundManager|Phaser.Sound.HTML5AudioSoundManager|Phaser.Sound.WebAudioSoundManager)}
      * @since 3.0.0
      */
-    public var sound:phaser.sound.BaseSoundManager;
+    public var sound:Dynamic;
     /**
      * An instance of the Time Step.
      *
@@ -337,6 +339,7 @@ extern class Game {
     public function onFocus():Void;
     /**
      * Returns the current game frame.
+     *
      * When the game starts running, the frame is incremented every time Request Animation Frame, or Set Timeout, fires.
      *
      * @method Phaser.Game#getFrame
@@ -346,8 +349,7 @@ extern class Game {
      */
     public function getFrame():Float;
     /**
-     * Returns the current game timestamp.
-     * When the game starts running, the frame is incremented every time Request Animation Frame, or Set Timeout, fires.
+     * Returns the time that the current game step started at, as based on `performance.now`.
      *
      * @method Phaser.Game#getTime
      * @since 3.16.0
@@ -356,8 +358,11 @@ extern class Game {
      */
     public function getTime():Float;
     /**
-     * Flags this Game instance as needing to be destroyed on the next frame.
+     * Flags this Game instance as needing to be destroyed on the _next frame_, making this an asynchronous operation.
+     *
      * It will wait until the current frame has completed and then call `runDestroy` internally.
+     *
+     * If you need to react to the games eventual destruction, listen for the `DESTROY` event.
      *
      * If you **do not** need to run Phaser again on the same web page you can set the `noReturn` argument to `true` and it will free-up
      * memory being held by the core Phaser plugins. If you do need to create another game instance on the same page, leave this as `false`.

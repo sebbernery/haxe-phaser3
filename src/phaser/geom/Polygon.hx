@@ -27,6 +27,16 @@ package phaser.geom;
 extern class Polygon {
     public function new(?points:Array<phaser.geom.Point>);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.POLYGON`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Polygon#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The area of this Polygon.
      *
      * @name Phaser.Geom.Polygon#area

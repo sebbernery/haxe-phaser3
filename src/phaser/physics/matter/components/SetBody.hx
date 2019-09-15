@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * [description]
  *
- * @name Phaser.Physics.Matter.Components.SetBody
+ * @namespace Phaser.Physics.Matter.Components.SetBody
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.SetBody")

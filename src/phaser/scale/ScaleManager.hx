@@ -224,6 +224,15 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      */
     public var zoom:Float;
     /**
+     * Internal flag set when the game zoom factor is modified.
+     *
+     * @name Phaser.Scale.ScaleManager#_resetZoom
+     * @type {boolean}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var _resetZoom:Bool;
+    /**
      * The scale factor between the baseSize and the canvasBounds.
      *
      * @name Phaser.Scale.ScaleManager#displayScale
@@ -404,18 +413,18 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @protected
      * @since 3.16.0
      *
-     * @param {GameConfig} config - The Game configuration object.
+     * @param {Phaser.Types.Core.GameConfig} config - The Game configuration object.
      */
-    public function parseConfig(config:GameConfig):Void;
+    public function parseConfig(config:phaser.types.core.GameConfig):Void;
     /**
      * Determines the parent element of the game canvas, if any, based on the game configuration.
      *
      * @method Phaser.Scale.ScaleManager#getParent
      * @since 3.16.0
      *
-     * @param {GameConfig} config - The Game configuration object.
+     * @param {Phaser.Types.Core.GameConfig} config - The Game configuration object.
      */
-    public function getParent(config:GameConfig):Void;
+    public function getParent(config:phaser.types.core.GameConfig):Void;
     /**
      * Calculates the size of the parent bounds and updates the `parentSize` component, if the canvas has a dom parent.
      *
@@ -458,6 +467,10 @@ extern class ScaleManager extends phaser.events.EventEmitter {
     /**
      * This method will set a new size for your game.
      *
+     * It should only be used if you're looking to change the base size of your game and are using
+     * one of the Scale Manager scaling modes, i.e. `FIT`. If you're using `NO_SCALE` and wish to
+     * change the game and canvas size directly, then please use the `resize` method instead.
+     *
      * @method Phaser.Scale.ScaleManager#setGameSize
      * @fires Phaser.Scale.Events#RESIZE
      * @since 3.16.0
@@ -476,7 +489,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * If all you want to do is change the size of the parent, see the `setParentSize` method.
      *
      * If all you want is to change the base size of the game, but still have the Scale Manager
-     * manage all the scaling, then see the `setGameSize` method.
+     * manage all the scaling (i.e. you're **not** using `NO_SCALE`), then see the `setGameSize` method.
      *
      * This method will set the `gameSize`, `baseSize` and `displaySize` components to the given
      * dimensions. It will then resize the canvas width and height to the values given, by
@@ -532,9 +545,12 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @fires Phaser.Scale.Events#RESIZE
      * @since 3.16.0
      *
+     * @param {number} [previousWidth] - The previous width of the game. Only set if the gameSize has changed.
+     * @param {number} [previousHeight] - The previous height of the game. Only set if the gameSize has changed.
+     *
      * @return {this} The Scale Manager instance.
      */
-    public function refresh():Dynamic;
+    public function refresh(?previousWidth:Float, ?previousHeight:Float):Dynamic;
     /**
      * Internal method that checks the current screen orientation, only if the internal check flag is set.
      *
@@ -615,13 +631,18 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      *
      * If the browser does not support this, a `FULLSCREEN_UNSUPPORTED` event will be emitted.
      *
-     * This method _must_ be called from a user-input gesture, such as `pointerdown`. You cannot launch
+     * This method _must_ be called from a user-input gesture, such as `pointerup`. You cannot launch
      * games fullscreen without this, as most browsers block it. Games within an iframe will also be blocked
      * from fullscreen unless the iframe has the `allowfullscreen` attribute.
      *
+     * On touch devices, such as Android and iOS Safari, you should always use `pointerup` and NOT `pointerdown`,
+     * otherwise the request will fail unless the document in which your game is embedded has already received
+     * some form of touch input, which you cannot guarantee. Activating fullscreen via `pointerup` circumvents
+     * this issue.
+     *
      * Performing an action that navigates to another page, or opens another tab, will automatically cancel
-     * fullscreen mode, as will the user pressing the ESC key. To cancel fullscreen mode from your game, i.e.
-     * from clicking an icon, call the `stopFullscreen` method.
+     * fullscreen mode, as will the user pressing the ESC key. To cancel fullscreen mode directly from your game,
+     * i.e. by clicking an icon, call the `stopFullscreen` method.
      *
      * A browser can only send one DOM element into fullscreen. You can control which element this is by
      * setting the `fullscreenTarget` property in your game config, or changing the property in the Scale Manager.
@@ -631,6 +652,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      *
      * @method Phaser.Scale.ScaleManager#startFullscreen
      * @fires Phaser.Scale.Events#ENTER_FULLSCREEN
+     * @fires Phaser.Scale.Events#FULLSCREEN_FAILED
      * @fires Phaser.Scale.Events#FULLSCREEN_UNSUPPORTED
      * @fires Phaser.Scale.Events#RESIZE
      * @since 3.16.0
@@ -647,6 +669,13 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @return {object} The fullscreen target element.
      */
     public function getFullscreenTarget():Dynamic;
+    /**
+     * Removes the fullscreen target that was added to the DOM.
+     *
+     * @method Phaser.Scale.ScaleManager#removeFullscreenTarget
+     * @since 3.17.0
+     */
+    public function removeFullscreenTarget():Void;
     /**
      * Calling this method will cancel fullscreen mode, if the browser has entered it.
      *

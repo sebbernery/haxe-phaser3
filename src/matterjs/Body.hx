@@ -7,6 +7,7 @@ package matterjs;
  * Factories for commonly used body configurations (such as rectangles, circles and other polygons) can be found in the module `Matter.Bodies`.
  *
  * @class MatterJS.Body
+ * @since 3.0.0
  */
 @:native("MatterJS.Body")
 extern class Body {

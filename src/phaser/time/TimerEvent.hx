@@ -11,11 +11,11 @@ package phaser.time;
  * @constructor
  * @since 3.0.0
  *
- * @param {TimerEventConfig} config - The configuration for the Timer Event, including its delay and callback.
+ * @param {Phaser.Types.Time.TimerEventConfig} config - The configuration for the Timer Event, including its delay and callback.
  */
 @:native("Phaser.Time.TimerEvent")
 extern class TimerEvent {
-    public function new(config:TimerEventConfig);
+    public function new(config:phaser.types.time.TimerEventConfig);
     /**
      * The delay in ms at which this TimerEvent fires.
      *
@@ -134,11 +134,11 @@ extern class TimerEvent {
      * @method Phaser.Time.TimerEvent#reset
      * @since 3.0.0
      *
-     * @param {TimerEventConfig} config - The new state for the Timer Event.
+     * @param {Phaser.Types.Time.TimerEventConfig} config - The new state for the Timer Event.
      *
      * @return {Phaser.Time.TimerEvent} This TimerEvent object.
      */
-    public function reset(config:TimerEventConfig):phaser.time.TimerEvent;
+    public function reset(config:phaser.types.time.TimerEventConfig):phaser.time.TimerEvent;
     /**
      * Gets the progress of the current iteration, not factoring in repeats.
      *
@@ -192,7 +192,7 @@ extern class TimerEvent {
      * @method Phaser.Time.TimerEvent#remove
      * @since 3.0.0
      *
-     * @param {boolean} [dispatchCallback] - If `true` (by default `false`), the function of the Timer Event will be called before its removal from its Clock.
+     * @param {boolean} [dispatchCallback=false] - If `true`, the function of the Timer Event will be called before its removal.
      */
     public function remove(?dispatchCallback:Bool):Void;
     /**

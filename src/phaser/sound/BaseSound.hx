@@ -12,11 +12,11 @@ package phaser.sound;
  *
  * @param {Phaser.Sound.BaseSoundManager} manager - Reference to the current sound manager instance.
  * @param {string} key - Asset key for the sound.
- * @param {SoundConfig} [config] - An optional config object containing default sound settings.
+ * @param {Phaser.Types.Sound.SoundConfig} [config] - An optional config object containing default sound settings.
  */
 @:native("Phaser.Sound.BaseSound")
 extern class BaseSound extends phaser.events.EventEmitter {
-    public function new(manager:phaser.sound.BaseSoundManager, key:String, ?config:SoundConfig);
+    public function new(manager:phaser.sound.BaseSoundManager, key:String, ?config:phaser.types.sound.SoundConfig);
     /**
      * Asset key for the sound.
      *
@@ -81,7 +81,7 @@ extern class BaseSound extends phaser.events.EventEmitter {
      * Object containing markers definitions.
      *
      * @name Phaser.Sound.BaseSound#markers
-     * @type {Object.<string, SoundMarker>}
+     * @type {Object.<string, Phaser.Types.Sound.SoundMarker>}
      * @default {}
      * @readonly
      * @since 3.0.0
@@ -92,12 +92,12 @@ extern class BaseSound extends phaser.events.EventEmitter {
      * 'null' if whole sound is playing.
      *
      * @name Phaser.Sound.BaseSound#currentMarker
-     * @type {SoundMarker}
+     * @type {Phaser.Types.Sound.SoundMarker}
      * @default null
      * @readonly
      * @since 3.0.0
      */
-    public var currentMarker:SoundMarker;
+    public var currentMarker:phaser.types.sound.SoundMarker;
     /**
      * Adds a marker into the current sound. A marker is represented by name, start time, duration, and optionally config object.
      * This allows you to bundle multiple sounds together into a single audio file and use markers to jump between them for playback.
@@ -105,22 +105,22 @@ extern class BaseSound extends phaser.events.EventEmitter {
      * @method Phaser.Sound.BaseSound#addMarker
      * @since 3.0.0
      *
-     * @param {SoundMarker} marker - Marker object.
+     * @param {Phaser.Types.Sound.SoundMarker} marker - Marker object.
      *
      * @return {boolean} Whether the marker was added successfully.
      */
-    public function addMarker(marker:SoundMarker):Bool;
+    public function addMarker(marker:phaser.types.sound.SoundMarker):Bool;
     /**
      * Updates previously added marker.
      *
      * @method Phaser.Sound.BaseSound#updateMarker
      * @since 3.0.0
      *
-     * @param {SoundMarker} marker - Marker object with updated values.
+     * @param {Phaser.Types.Sound.SoundMarker} marker - Marker object with updated values.
      *
      * @return {boolean} Whether the marker was updated successfully.
      */
-    public function updateMarker(marker:SoundMarker):Bool;
+    public function updateMarker(marker:phaser.types.sound.SoundMarker):Bool;
     /**
      * Removes a marker from the sound.
      *
@@ -129,9 +129,9 @@ extern class BaseSound extends phaser.events.EventEmitter {
      *
      * @param {string} markerName - The name of the marker to remove.
      *
-     * @return {?SoundMarker} Removed marker object or 'null' if there was no marker with provided name.
+     * @return {?Phaser.Types.Sound.SoundMarker} Removed marker object or 'null' if there was no marker with provided name.
      */
-    public function removeMarker(markerName:String):SoundMarker;
+    public function removeMarker(markerName:String):phaser.types.sound.SoundMarker;
     /**
      * Play this sound, or a marked section of it.
      * It always plays the sound from the start. If you want to start playback from a specific time
@@ -141,11 +141,11 @@ extern class BaseSound extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} [markerName=''] - If you want to play a marker then provide the marker name here, otherwise omit it to play the full sound.
-     * @param {SoundConfig} [config] - Optional sound config object to be applied to this marker or entire sound if no marker name is provided. It gets memorized for future plays of current section of the sound.
+     * @param {Phaser.Types.Sound.SoundConfig} [config] - Optional sound config object to be applied to this marker or entire sound if no marker name is provided. It gets memorized for future plays of current section of the sound.
      *
      * @return {boolean} Whether the sound started playing successfully.
      */
-    public function play(?markerName:String, ?config:SoundConfig):Bool;
+    public function play(?markerName:String, ?config:phaser.types.sound.SoundConfig):Bool;
     /**
      * Pauses the sound.
      *

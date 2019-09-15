@@ -12,15 +12,15 @@ package phaser.physics.arcade;
  *
  * @param {Phaser.Physics.Arcade.World} world - The Arcade physics World that will manage the collisions.
  * @param {boolean} overlapOnly - Whether to check for collisions or overlap.
- * @param {ArcadeColliderType} object1 - The first object to check for collision.
- * @param {ArcadeColliderType} object2 - The second object to check for collision.
+ * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object to check for collision.
+ * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object2 - The second object to check for collision.
  * @param {ArcadePhysicsCallback} collideCallback - The callback to invoke when the two objects collide.
  * @param {ArcadePhysicsCallback} processCallback - The callback to invoke when the two objects collide. Must return a boolean.
  * @param {any} callbackContext - The scope in which to call the callbacks.
  */
 @:native("Phaser.Physics.Arcade.Collider")
 extern class Collider {
-    public function new(world:phaser.physics.arcade.World, overlapOnly:Bool, object1:ArcadeColliderType, object2:ArcadeColliderType, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic);
+    public function new(world:phaser.physics.arcade.World, overlapOnly:Bool, object1:phaser.types.physics.arcade.ArcadeColliderType, object2:phaser.types.physics.arcade.ArcadeColliderType, collideCallback:ArcadePhysicsCallback, processCallback:ArcadePhysicsCallback, callbackContext:Dynamic);
     /**
      * The world in which the bodies will collide.
      *
@@ -58,18 +58,18 @@ extern class Collider {
      * The first object to check for collision.
      *
      * @name Phaser.Physics.Arcade.Collider#object1
-     * @type {ArcadeColliderType}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeColliderType}
      * @since 3.0.0
      */
-    public var object1:ArcadeColliderType;
+    public var object1:phaser.types.physics.arcade.ArcadeColliderType;
     /**
      * The second object to check for collision.
      *
      * @name Phaser.Physics.Arcade.Collider#object2
-     * @type {ArcadeColliderType}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeColliderType}
      * @since 3.0.0
      */
-    public var object2:ArcadeColliderType;
+    public var object2:phaser.types.physics.arcade.ArcadeColliderType;
     /**
      * The callback to invoke when the two objects collide.
      *

@@ -14,7 +14,7 @@ package phaser.display.masks;
  * The Geometry Mask's location matches the location of its Graphics object, not the location of the masked objects.
  * Moving or transforming the underlying Graphics object will change the mask (and affect the visibility
  * of any masked objects), whereas moving or transforming a masked object will not affect the mask.
- * You can think of the Geometry Mask (or rather, of the its Graphics object) as an invisible curtain placed
+ * You can think of the Geometry Mask (or rather, of its Graphics object) as an invisible curtain placed
  * in front of all masked objects which has its own visual properties and, naturally, respects the camera's
  * visual properties, but isn't affected by and doesn't follow the masked objects by itself.
  *
@@ -47,14 +47,37 @@ extern class GeometryMask {
      */
     public var invertAlpha:Bool;
     /**
+     * Is this mask a stencil mask?
+     *
+     * @name Phaser.Display.Masks.GeometryMask#isStencil
+     * @type {boolean}
+     * @readonly
+     * @since 3.17.0
+     */
+    public var isStencil:Bool;
+    /**
      * Sets a new Graphics object for the Geometry Mask.
      *
      * @method Phaser.Display.Masks.GeometryMask#setShape
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.Graphics} graphicsGeometry - The Graphics object which will be used for the Geometry Mask.
+     *
+     * @return {this} This Geometry Mask
      */
-    public function setShape(graphicsGeometry:phaser.gameobjects.Graphics):Void;
+    public function setShape(graphicsGeometry:phaser.gameobjects.Graphics):Dynamic;
+    /**
+     * Sets the `invertAlpha` property of this Geometry Mask.
+     * Inverting the alpha essentially flips the way the mask works.
+     *
+     * @method Phaser.Display.Masks.GeometryMask#setInvertAlpha
+     * @since 3.17.0
+     *
+     * @param {boolean} [value=true] - Invert the alpha of this mask?
+     *
+     * @return {this} This Geometry Mask
+     */
+    public function setInvertAlpha(?value:Bool):Dynamic;
     /**
      * Renders the Geometry Mask's underlying Graphics object to the OpenGL stencil buffer and enables the stencil test, which clips rendered pixels according to the mask.
      *
@@ -62,10 +85,21 @@ extern class GeometryMask {
      * @since 3.0.0
      *
      * @param {Phaser.Renderer.WebGL.WebGLRenderer} renderer - The WebGL Renderer instance to draw to.
-     * @param {Phaser.GameObjects.GameObject} mask - The Game Object being rendered.
+     * @param {Phaser.GameObjects.GameObject} child - The Game Object being rendered.
      * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera the Game Object is being rendered through.
      */
-    public function preRenderWebGL(renderer:phaser.renderer.webgl.WebGLRenderer, mask:phaser.gameobjects.GameObject, camera:phaser.cameras.scene2d.Camera):Void;
+    public function preRenderWebGL(renderer:phaser.renderer.webgl.WebGLRenderer, child:phaser.gameobjects.GameObject, camera:phaser.cameras.scene2d.Camera):Void;
+    /**
+     * Applies the current stencil mask to the renderer.
+     *
+     * @method Phaser.Display.Masks.GeometryMask#applyStencil
+     * @since 3.17.0
+     *
+     * @param {Phaser.Renderer.WebGL.WebGLRenderer} renderer - The WebGL Renderer instance to draw to.
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera the Game Object is being rendered through.
+     * @param {boolean} inc - Is this an INCR stencil or a DECR stencil?
+     */
+    public function applyStencil(renderer:phaser.renderer.webgl.WebGLRenderer, camera:phaser.cameras.scene2d.Camera, inc:Bool):Void;
     /**
      * Flushes all rendered pixels and disables the stencil test of a WebGL context, thus disabling the mask for it.
      *

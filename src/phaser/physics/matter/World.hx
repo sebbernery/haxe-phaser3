@@ -11,11 +11,11 @@ package phaser.physics.matter;
  * @since 3.0.0
  *
  * @param {Phaser.Scene} scene - The Scene to which this Matter World instance belongs.
- * @param {object} config - [description]
+ * @param {Phaser.Types.Physics.Matter.MatterWorldConfig} config - The Matter World configuration object.
  */
 @:native("Phaser.Physics.Matter.World")
 extern class World extends phaser.events.EventEmitter {
-    public function new(scene:phaser.Scene, config:Dynamic);
+    public function new(scene:phaser.Scene, config:phaser.types.physics.matter.MatterWorldConfig);
     /**
      * The Scene to which this Matter World instance belongs.
      *
@@ -396,4 +396,16 @@ extern class World extends phaser.events.EventEmitter {
      * @return {array} [description]
      */
     public function fromPath(path:String, points:Array<Dynamic>):Array<Dynamic>;
+    /**
+     * Resets the internal collision IDs that Matter.JS uses for Body collision groups.
+     *
+     * You should call this before destroying your game if you need to restart the game
+     * again on the same page, without first reloading the page. Or, if you wish to
+     * consistently destroy a Scene that contains Matter.js and then run it again
+     * later in the same game.
+     *
+     * @method Phaser.Physics.Matter.World#resetCollisionIDs
+     * @since 3.17.0
+     */
+    public function resetCollisionIDs():Void;
 }

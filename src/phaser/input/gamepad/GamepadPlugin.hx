@@ -58,10 +58,10 @@ extern class GamepadPlugin extends phaser.events.EventEmitter {
      * A reference to the Scene Systems Settings.
      *
      * @name Phaser.Input.Gamepad.GamepadPlugin#settings
-     * @type {Phaser.Scenes.Settings.Object}
+     * @type {Phaser.Types.Scenes.SettingsObject}
      * @since 3.10.0
      */
-    public var settings:phaser.scenes.settings.Object;
+    public var settings:phaser.types.scenes.SettingsObject;
     /**
      * A reference to the Scene Input Plugin that created this Keyboard Plugin.
      *

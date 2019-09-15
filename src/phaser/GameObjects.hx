@@ -9,6 +9,7 @@ class GameObjects {
     static public var GameObjectCreator:Dynamic;
     static public var GameObjectFactory:Dynamic;
     static public var UpdateList:Dynamic;
+    static public var Components:Dynamic;
     static public var GameObject:Dynamic;
     static public var Graphics:Dynamic;
     static public var Image:Dynamic;

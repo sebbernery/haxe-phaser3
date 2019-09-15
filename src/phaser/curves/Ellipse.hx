@@ -12,13 +12,13 @@ package phaser.curves;
  * @constructor
  * @since 3.0.0
  *
- * @param {(number|EllipseCurveConfig)} [x=0] - The x coordinate of the ellipse, or an Ellipse Curve configuration object.
+ * @param {(number|Phaser.Types.Curves.EllipseCurveConfig)} [x=0] - The x coordinate of the ellipse, or an Ellipse Curve configuration object.
  * @param {number} [y=0] - The y coordinate of the ellipse.
  * @param {number} [xRadius=0] - The horizontal radius of ellipse.
  * @param {number} [yRadius=0] - The vertical radius of ellipse.
  * @param {integer} [startAngle=0] - The start angle of the ellipse, in degrees.
  * @param {integer} [endAngle=360] - The end angle of the ellipse, in degrees.
- * @param {boolean} [clockwise=false] - Sets if the the ellipse rotation is clockwise (true) or anti-clockwise (false)
+ * @param {boolean} [clockwise=false] - Whether the ellipse angles are given as clockwise (`true`) or counter-clockwise (`false`).
  * @param {integer} [rotation=0] - The rotation of the ellipse, in degrees.
  */
 @:native("Phaser.Curves.Ellipse")
@@ -223,18 +223,18 @@ extern class Ellipse extends phaser.curves.Curve {
      * @method Phaser.Curves.Ellipse#toJSON
      * @since 3.0.0
      *
-     * @return {JSONEllipseCurve} The JSON object containing this curve data.
+     * @return {Phaser.Types.Curves.JSONEllipseCurve} The JSON object containing this curve data.
      */
-    public function toJSON():JSONEllipseCurve;
+    public function toJSON():phaser.types.curves.JSONEllipseCurve;
     /**
      * Creates a curve from the provided Ellipse Curve Configuration object.
      *
      * @function Phaser.Curves.Ellipse.fromJSON
      * @since 3.0.0
      *
-     * @param {JSONEllipseCurve} data - The JSON object containing this curve data.
+     * @param {Phaser.Types.Curves.JSONEllipseCurve} data - The JSON object containing this curve data.
      *
      * @return {Phaser.Curves.Ellipse} The ellipse curve constructed from the configuration object.
      */
-    public function fromJSON(data:JSONEllipseCurve):phaser.curves.Ellipse;
+    public function fromJSON(data:phaser.types.curves.JSONEllipseCurve):phaser.curves.Ellipse;
 }

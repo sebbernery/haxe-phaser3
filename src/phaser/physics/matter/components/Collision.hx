@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * Contains methods for changing the collision filter of a Matter Body. Should be used as a mixin and not called directly.
  *
- * @name Phaser.Physics.Matter.Components.Collision
+ * @namespace Phaser.Physics.Matter.Components.Collision
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Collision")

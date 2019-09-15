@@ -34,7 +34,6 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.Mask
  * @extends Phaser.GameObjects.Components.Origin
  * @extends Phaser.GameObjects.Components.Pipeline
- * @extends Phaser.GameObjects.Components.ScaleMode
  * @extends Phaser.GameObjects.Components.ScrollFactor
  * @extends Phaser.GameObjects.Components.Texture
  * @extends Phaser.GameObjects.Components.Tint
@@ -66,11 +65,11 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * The data of the Bitmap Font used by this Bitmap Text.
      *
      * @name Phaser.GameObjects.BitmapText#fontData
-     * @type {BitmapFontData}
+     * @type {Phaser.Types.GameObjects.BitmapText.BitmapFontData}
      * @readonly
      * @since 3.0.0
      */
-    public var fontData:BitmapFontData;
+    public var fontData:phaser.types.gameobjects.bitmaptext.BitmapFontData;
     /**
      * Controls the alignment of each line of text in this BitmapText object.
      *
@@ -165,6 +164,41 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var ALIGN_RIGHT:Int;
     /**
+     * Parse an XML Bitmap Font from an Atlas.
+     *
+     * Adds the parsed Bitmap Font data to the cache with the `fontName` key.
+     *
+     * @name Phaser.GameObjects.BitmapText.ParseFromAtlas
+     * @type {function}
+     * @since 3.0.0
+     *
+     * @param {Phaser.Scene} scene - The Scene to parse the Bitmap Font for.
+     * @param {string} fontName - The key of the font to add to the Bitmap Font cache.
+     * @param {string} textureKey - The key of the BitmapFont's texture.
+     * @param {string} frameKey - The key of the BitmapFont texture's frame.
+     * @param {string} xmlKey - The key of the XML data of the font to parse.
+     * @param {integer} [xSpacing] - The x-axis spacing to add between each letter.
+     * @param {integer} [ySpacing] - The y-axis spacing to add to the line height.
+     *
+     * @return {boolean} Whether the parsing was successful or not.
+     */
+    public var ParseFromAtlas:Dynamic;
+    /**
+     * Parse an XML font to Bitmap Font data for the Bitmap Font cache.
+     *
+     * @name Phaser.GameObjects.BitmapText.ParseXMLBitmapFont
+     * @type {function}
+     * @since 3.17.0
+     *
+     * @param {XMLDocument} xml - The XML Document to parse the font from.
+     * @param {integer} [xSpacing=0] - The x-axis spacing to add between each letter.
+     * @param {integer} [ySpacing=0] - The y-axis spacing to add to the line height.
+     * @param {Phaser.Textures.Frame} [frame] - The texture frame to take into account while parsing.
+     *
+     * @return {Phaser.Types.GameObjects.BitmapText.BitmapFontData} The parsed Bitmap Font data.
+     */
+    public var ParseXMLBitmapFont:Dynamic;
+    /**
      * Set the lines of text in this BitmapText to be left-aligned.
      * This only has any effect if this BitmapText contains more than one line of text.
      *
@@ -248,9 +282,9 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      *
      * @param {boolean} [round] - Whether to round the results to the nearest integer.
      *
-     * @return {BitmapTextSize} An object that describes the size of this Bitmap Text.
+     * @return {Phaser.Types.GameObjects.BitmapText.BitmapTextSize} An object that describes the size of this Bitmap Text.
      */
-    public function getTextBounds(?round:Bool):BitmapTextSize;
+    public function getTextBounds(?round:Bool):phaser.types.gameobjects.bitmaptext.BitmapTextSize;
     /**
      * Changes the font this BitmapText is using to render.
      *
@@ -672,27 +706,6 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public function getPipelineName():String;
     /**
-     * The Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @name Phaser.GameObjects.Components.ScaleMode#scaleMode
-     * @type {Phaser.ScaleModes}
-     * @since 3.0.0
-     */
-    public var scaleMode:Dynamic;
-    /**
-     * Sets the Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @method Phaser.GameObjects.Components.ScaleMode#setScaleMode
-     * @since 3.0.0
-     *
-     * @param {Phaser.ScaleModes} value - The Scale Mode to be used by this Game Object.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setScaleMode(value:Dynamic):Dynamic;
-    /**
      * The horizontal scroll factor of this Game Object.
      *
      * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
@@ -865,6 +878,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public var tintBottomRight:Int;
     /**
      * The tint value being applied to the whole of the Game Object.
+     * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
      * @type {integer}
@@ -990,6 +1004,19 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -1010,7 +1037,8 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -1022,6 +1050,9 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -1166,6 +1197,17 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

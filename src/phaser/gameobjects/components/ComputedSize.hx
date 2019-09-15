@@ -4,7 +4,7 @@ package phaser.gameobjects.components;
  * Provides methods used for calculating and setting the size of a non-Frame based Game Object.
  * Should be applied as a mixin and not used directly.
  *
- * @name Phaser.GameObjects.Components.ComputedSize
+ * @namespace Phaser.GameObjects.Components.ComputedSize
  * @since 3.0.0
  */
 @:native("Phaser.GameObjects.Components.ComputedSize")

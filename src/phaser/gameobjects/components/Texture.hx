@@ -3,7 +3,7 @@ package phaser.gameobjects.components;
 /**
  * Provides methods used for getting and setting the texture of a Game Object.
  *
- * @name Phaser.GameObjects.Components.Texture
+ * @namespace Phaser.GameObjects.Components.Texture
  * @since 3.0.0
  */
 @:native("Phaser.GameObjects.Components.Texture")

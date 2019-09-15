@@ -8,7 +8,6 @@ package phaser.cameras.controls;
  * Unlike the Fixed Camera Control you can also provide physics values for acceleration, drag and maxSpeed for smoothing effects.
  *
  * ```javascript
- *
  * var controlConfig = {
  *     camera: this.cameras.main,
  *     left: cursors.left,
@@ -31,11 +30,11 @@ package phaser.cameras.controls;
  * @constructor
  * @since 3.0.0
  *
- * @param {SmoothedKeyControlConfig} config - The Smoothed Key Control configuration object.
+ * @param {Phaser.Types.Cameras.Controls.SmoothedKeyControlConfig} config - The Smoothed Key Control configuration object.
  */
 @:native("Phaser.Cameras.Controls.SmoothedKeyControl")
 extern class SmoothedKeyControl {
-    public function new(config:SmoothedKeyControlConfig);
+    public function new(config:phaser.types.cameras.controls.SmoothedKeyControlConfig);
     /**
      * The Camera that this Control will update.
      *

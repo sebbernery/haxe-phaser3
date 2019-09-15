@@ -437,7 +437,7 @@ extern class Body {
      */
     public var mass:Float;
     /**
-     * The calculated angle of this Body's velocity vector, in degrees, during the last step.
+     * The calculated angle of this Body's velocity vector, in radians, during the last step.
      *
      * @name Phaser.Physics.Arcade.Body#angle
      * @type {number}
@@ -551,34 +551,34 @@ extern class Body {
      * You can set `checkCollision.none = true` to disable collision checks.
      *
      * @name Phaser.Physics.Arcade.Body#checkCollision
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var checkCollision:ArcadeBodyCollision;
+    public var checkCollision:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this Body is colliding with another and in which direction.
      *
      * @name Phaser.Physics.Arcade.Body#touching
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var touching:ArcadeBodyCollision;
+    public var touching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this Body was colliding with another during the last step, and in which direction.
      *
      * @name Phaser.Physics.Arcade.Body#wasTouching
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var wasTouching:ArcadeBodyCollision;
+    public var wasTouching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this Body is colliding with a tile or the world boundary.
      *
      * @name Phaser.Physics.Arcade.Body#blocked
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var blocked:ArcadeBodyCollision;
+    public var blocked:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether to automatically synchronize this Body's dimensions to the dimensions of its Game Object's visual bounds.
      *
@@ -589,24 +589,6 @@ extern class Body {
      * @see Phaser.GameObjects.Components.GetBounds#getBounds
      */
     public var syncBounds:Bool;
-    /**
-     * Whether this Body is being moved by the `moveTo` or `moveFrom` methods.
-     *
-     * @name Phaser.Physics.Arcade.Body#isMoving
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var isMoving:Bool;
-    /**
-     * Whether this Body's movement by `moveTo` or `moveFrom` will be stopped by collisions with other bodies.
-     *
-     * @name Phaser.Physics.Arcade.Body#stopVelocityOnCollide
-     * @type {boolean}
-     * @default true
-     * @since 3.0.0
-     */
-    public var stopVelocityOnCollide:Bool;
     /**
      * The Body's physics type (dynamic or static).
      *
@@ -685,10 +667,35 @@ extern class Body {
      */
     public function updateCenter():Void;
     /**
-     * Updates the Body.
+     * Prepares the Body for a physics step by resetting the `wasTouching`, `touching` and `blocked` states.
+     *
+     * This method is only called if the physics world is going to run a step this frame.
+     *
+     * @method Phaser.Physics.Arcade.Body#resetFlags
+     * @since 3.18.0
+     */
+    public function resetFlags():Void;
+    /**
+     * Syncs the position body position with the parent Game Object.
+     *
+     * This method is called every game frame, regardless if the world steps or not.
+     *
+     * @method Phaser.Physics.Arcade.Body#preUpdate
+     * @since 3.17.0
+     *
+     * @param {boolean} willStep - Will this Body run an update as well?
+     * @param {number} delta - The delta time, in seconds, elapsed since the last frame.
+     */
+    public function preUpdate(willStep:Bool, delta:Float):Void;
+    /**
+     * Performs a single physics step and updates the body velocity, angle, speed and other properties.
+     *
+     * This method can be called multiple times per game frame, depending on the physics step rate.
+     *
+     * The results are synced back to the Game Object in `postUpdate`.
      *
      * @method Phaser.Physics.Arcade.Body#update
-     * @fires Phaser.Physics.Arcade.World#worldbounds
+     * @fires Phaser.Physics.Arcade.Events#WORLD_BOUNDS
      * @since 3.0.0
      *
      * @param {number} delta - The delta time, in seconds, elapsed since the last frame.
@@ -697,12 +704,12 @@ extern class Body {
     /**
      * Feeds the Body results back into the parent Game Object.
      *
+     * This method is called every game frame, regardless if the world steps or not.
+     *
      * @method Phaser.Physics.Arcade.Body#postUpdate
      * @since 3.0.0
-     *
-     * @param {boolean} resetDelta - Reset the delta properties?
      */
-    public function postUpdate(resetDelta:Bool):Void;
+    public function postUpdate():Void;
     /**
      * Checks for collisions between this Body and the world boundary and separates them.
      *
@@ -778,11 +785,11 @@ extern class Body {
      * @method Phaser.Physics.Arcade.Body#getBounds
      * @since 3.0.0
      *
-     * @param {ArcadeBodyBounds} obj - An object to copy the values into.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} obj - An object to copy the values into.
      *
-     * @return {ArcadeBodyBounds} - An object with {x, y, right, bottom}.
+     * @return {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} - An object with {x, y, right, bottom}.
      */
-    public function getBounds(obj:ArcadeBodyBounds):ArcadeBodyBounds;
+    public function getBounds(obj:phaser.types.physics.arcade.ArcadeBodyBounds):phaser.types.physics.arcade.ArcadeBodyBounds;
     /**
      * Tests if the coordinates are within this Body's boundary.
      *
@@ -900,14 +907,18 @@ extern class Body {
     /**
      * Sets whether this Body collides with the world boundary.
      *
+     * Optionally also sets the World Bounce values. If the `Body.worldBounce` is null, it's set to a new Vec2 first.
+     *
      * @method Phaser.Physics.Arcade.Body#setCollideWorldBounds
      * @since 3.0.0
      *
-     * @param {boolean} [value=true] - True (collisions) or false (no collisions).
+     * @param {boolean} [value=true] - `true` if this body should collide with the world bounds, otherwise `false`.
+     * @param {number} [bounceX] - If given this will be replace the `worldBounce.x` value.
+     * @param {number} [bounceY] - If given this will be replace the `worldBounce.y` value.
      *
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
-    public function setCollideWorldBounds(?value:Bool):phaser.physics.arcade.Body;
+    public function setCollideWorldBounds(?value:Bool, ?bounceX:Float, ?bounceY:Float):phaser.physics.arcade.Body;
     /**
      * Sets the Body's velocity.
      *

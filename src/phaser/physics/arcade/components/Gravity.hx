@@ -4,7 +4,7 @@ package phaser.physics.arcade.components;
  * Provides methods for setting the gravity properties of an Arcade Physics Game Object.
  * Should be applied as a mixin and not used directly.
  *
- * @name Phaser.Physics.Arcade.Components.Gravity
+ * @namespace Phaser.Physics.Arcade.Components.Gravity
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Arcade.Components.Gravity")

@@ -7,6 +7,7 @@ package matterjs;
  * A `Matter.Body` maintains a set of vertices to represent the shape of the object (its convex hull).
  *
  * @class MatterJS.Vertices
+ * @since 3.0.0
  */
 @:native("MatterJS.Vertices")
 extern class Vertices {

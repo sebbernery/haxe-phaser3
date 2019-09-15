@@ -65,6 +65,22 @@ extern class MatterPhysics {
      */
     public var verts:matterjs.Vertices;
     /**
+     * A reference to the `Matter.Body` module which contains methods for creating and manipulating body models.
+     *
+     * @name Phaser.Physics.Matter.MatterPhysics#body
+     * @type {MatterJS.Body}
+     * @since 3.18.0
+     */
+    public var body:matterjs.Body;
+    /**
+     * A reference to the `Matter.Bodies` module which contains methods for creating bodies.
+     *
+     * @name Phaser.Physics.Matter.MatterPhysics#bodies
+     * @type {MatterJS.Bodies}
+     * @since 3.18.0
+     */
+    public var bodies:matterjs.Bodies;
+    /**
      * [description]
      *
      * @method Phaser.Physics.Matter.MatterPhysics#getConfig

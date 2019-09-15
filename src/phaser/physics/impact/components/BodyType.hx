@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Body Type component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.BodyType
+ * @namespace Phaser.Physics.Impact.Components.BodyType
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.BodyType")

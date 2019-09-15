@@ -78,12 +78,12 @@ extern class Factory {
      * @param {number} x - The X coordinate of the center of the Body.
      * @param {number} y - The Y coordinate of the center of the Body.
      * @param {number} radius - The radius of the circle.
-     * @param {object} options - An object of properties to set on the Body. You can also specify a `chamfer` property to automatically adjust the body.
-     * @param {number} maxSides - The maximum amount of sides to use for the polygon which will approximate this circle.
+     * @param {object} [options] - An object of properties to set on the Body. You can also specify a `chamfer` property to automatically adjust the body.
+     * @param {number} [maxSides] - The maximum amount of sides to use for the polygon which will approximate this circle.
      *
      * @return {MatterJS.Body} A Matter JS Body.
      */
-    public function circle(x:Float, y:Float, radius:Float, options:Dynamic, maxSides:Float):matterjs.Body;
+    public function circle(x:Float, y:Float, radius:Float, ?options:Dynamic, ?maxSides:Float):matterjs.Body;
     /**
      * Creates a new rigid polygonal Body and adds it to the World.
      *
@@ -108,15 +108,15 @@ extern class Factory {
      *
      * @param {number} x - The X coordinate of the center of the Body.
      * @param {number} y - The Y coordinate of the center of the Body.
-     * @param {array} vertexSets - [description]
-     * @param {object} options - [description]
-     * @param {boolean} flagInternal - Flag internal edges (coincident part edges)
-     * @param {boolean} removeCollinear - Whether Matter.js will discard collinear edges (to improve performance).
-     * @param {number} minimumArea - During decomposition discard parts that have an area less than this
+     * @param {(string|array)} vertexSets - [description]
+     * @param {object} [options] - [description]
+     * @param {boolean} [flagInternal=false] - Flag internal edges (coincident part edges)
+     * @param {number} [removeCollinear=0.01] - Whether Matter.js will discard collinear edges (to improve performance).
+     * @param {number} [minimumArea=10] - During decomposition discard parts that have an area less than this.
      *
      * @return {MatterJS.Body} A Matter JS Body.
      */
-    public function fromVertices(x:Float, y:Float, vertexSets:Array<Dynamic>, options:Dynamic, flagInternal:Bool, removeCollinear:Bool, minimumArea:Float):matterjs.Body;
+    public function fromVertices(x:Float, y:Float, vertexSets:Dynamic, ?options:Dynamic, ?flagInternal:Bool, ?removeCollinear:Float, ?minimumArea:Float):matterjs.Body;
     /**
      * Create a new composite containing Matter Image objects created in a grid arrangement.
      * This function uses the body bounds to prevent overlaps.
@@ -260,15 +260,15 @@ extern class Factory {
      * @method Phaser.Physics.Matter.Factory#joint
      * @since 3.0.0
      *
-     * @param {MatterJS.Body} bodyA - [description]
-     * @param {MatterJS.Body} bodyB - [description]
-     * @param {number} length - [description]
-     * @param {number} [stiffness=1] - [description]
+     * @param {MatterJS.Body} bodyA - The first possible `Body` that this constraint is attached to.
+     * @param {MatterJS.Body} bodyB - The second possible `Body` that this constraint is attached to.
+     * @param {number} [length] - A Number that specifies the target resting length of the constraint. If not given it is calculated automatically in `Constraint.create` from initial positions of the `constraint.bodyA` and `constraint.bodyB`.
+     * @param {number} [stiffness=1] - A Number that specifies the stiffness of the constraint, i.e. the rate at which it returns to its resting `constraint.length`. A value of `1` means the constraint should be very stiff. A value of `0.2` means the constraint acts as a soft spring.
      * @param {object} [options={}] - [description]
      *
      * @return {MatterJS.Constraint} A Matter JS Constraint.
      */
-    public function joint(bodyA:matterjs.Body, bodyB:matterjs.Body, length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
+    public function joint(bodyA:matterjs.Body, bodyB:matterjs.Body, ?length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
     /**
      * [description]
      *
@@ -277,42 +277,42 @@ extern class Factory {
      *
      * @param {MatterJS.Body} bodyA - The first possible `Body` that this constraint is attached to.
      * @param {MatterJS.Body} bodyB - The second possible `Body` that this constraint is attached to.
-     * @param {number} length - A Number that specifies the target resting length of the constraint. It is calculated automatically in `Constraint.create` from initial positions of the `constraint.bodyA` and `constraint.bodyB`
+     * @param {number} [length] - A Number that specifies the target resting length of the constraint. If not given it is calculated automatically in `Constraint.create` from initial positions of the `constraint.bodyA` and `constraint.bodyB`.
      * @param {number} [stiffness=1] - A Number that specifies the stiffness of the constraint, i.e. the rate at which it returns to its resting `constraint.length`. A value of `1` means the constraint should be very stiff. A value of `0.2` means the constraint acts as a soft spring.
      * @param {object} [options={}] - [description]
      *
      * @return {MatterJS.Constraint} A Matter JS Constraint.
      */
-    public function spring(bodyA:matterjs.Body, bodyB:matterjs.Body, length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
+    public function spring(bodyA:matterjs.Body, bodyB:matterjs.Body, ?length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
     /**
      * [description]
      *
      * @method Phaser.Physics.Matter.Factory#constraint
      * @since 3.0.0
      *
-     * @param {MatterJS.Body} bodyA - [description]
-     * @param {MatterJS.Body} bodyB - [description]
-     * @param {number} length - [description]
-     * @param {number} [stiffness=1] - [description]
+     * @param {MatterJS.Body} bodyA - The first possible `Body` that this constraint is attached to.
+     * @param {MatterJS.Body} bodyB - The second possible `Body` that this constraint is attached to.
+     * @param {number} [length] - A Number that specifies the target resting length of the constraint. If not given it is calculated automatically in `Constraint.create` from initial positions of the `constraint.bodyA` and `constraint.bodyB`.
+     * @param {number} [stiffness=1] - A Number that specifies the stiffness of the constraint, i.e. the rate at which it returns to its resting `constraint.length`. A value of `1` means the constraint should be very stiff. A value of `0.2` means the constraint acts as a soft spring.
      * @param {object} [options={}] - [description]
      *
      * @return {MatterJS.Constraint} A Matter JS Constraint.
      */
-    public function constraint(bodyA:matterjs.Body, bodyB:matterjs.Body, length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
+    public function constraint(bodyA:matterjs.Body, bodyB:matterjs.Body, ?length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
     /**
      * [description]
      *
      * @method Phaser.Physics.Matter.Factory#worldConstraint
      * @since 3.0.0
      *
-     * @param {MatterJS.Body} bodyB - [description]
-     * @param {number} length - [description]
-     * @param {number} [stiffness=1] - [description]
+     * @param {MatterJS.Body} bodyB - The second possible `Body` that this constraint is attached to.
+     * @param {number} [length] - A Number that specifies the target resting length of the constraint. If not given it is calculated automatically in `Constraint.create` from initial positions of the `constraint.bodyA` and `constraint.bodyB`.
+     * @param {number} [stiffness=1] - A Number that specifies the stiffness of the constraint, i.e. the rate at which it returns to its resting `constraint.length`. A value of `1` means the constraint should be very stiff. A value of `0.2` means the constraint acts as a soft spring.
      * @param {object} [options={}] - [description]
      *
      * @return {MatterJS.Constraint} A Matter JS Constraint.
      */
-    public function worldConstraint(bodyB:matterjs.Body, length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
+    public function worldConstraint(bodyB:matterjs.Body, ?length:Float, ?stiffness:Float, ?options:Dynamic):matterjs.Constraint;
     /**
      * [description]
      *
@@ -384,11 +384,52 @@ extern class Factory {
      * @since 3.3.0
      *
      * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to inject the Matter Body in to.
-     * @param {object} options - [description]
+     * @param {(object|MatterJS.Body)} options - A Matter Body configuration object, or an instance of a Matter Body.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that had the Matter Body injected into it.
      */
     public function gameObject(gameObject:phaser.gameobjects.GameObject, options:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * Instantly sets the linear velocity of the given body. Position, angle, force etc. are unchanged.
+     *
+     * See also `force`.
+     *
+     * @method Phaser.Physics.Matter.Factory#velocity
+     * @since 3.18.0
+     *
+     * @param {MatterJS.Body} body - The Matter Body to set the velocity on.
+     * @param {Phaser.Types.Math.Vector2Like} velocity - The velocity to set. An object with public `x` and `y` components.
+     *
+     * @return {MatterJS.Body} The Matter body.
+     */
+    public function velocity(body:matterjs.Body, velocity:phaser.types.math.Vector2Like):matterjs.Body;
+    /**
+     * Instantly sets the angular velocity of the given body. Position, angle, force etc. are unchanged.
+     *
+     * See also `force`.
+     *
+     * @method Phaser.Physics.Matter.Factory#angularVelocity
+     * @since 3.18.0
+     *
+     * @param {MatterJS.Body} body - The Matter Body to set the velocity on.
+     * @param {number} velocity - The angular velocity to set.
+     *
+     * @return {MatterJS.Body} The Matter body.
+     */
+    public function angularVelocity(body:matterjs.Body, velocity:Float):matterjs.Body;
+    /**
+     * Applies a force to a body from a given world-space position, including resulting torque.
+     *
+     * @method Phaser.Physics.Matter.Factory#force
+     * @since 3.18.0
+     *
+     * @param {MatterJS.Body} body - The Matter Body to set the force on.
+     * @param {Phaser.Types.Math.Vector2Like} position - The world position to apply the force from. An object with public `x` and `y` components.
+     * @param {Phaser.Types.Math.Vector2Like} force - The force to set. An object with public `x` and `y` components.
+     *
+     * @return {MatterJS.Body} The Matter body.
+     */
+    public function force(body:matterjs.Body, position:phaser.types.math.Vector2Like, force:phaser.types.math.Vector2Like):matterjs.Body;
     /**
      * Destroys this Factory.
      *

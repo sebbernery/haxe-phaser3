@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Debug component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.Debug
+ * @namespace Phaser.Physics.Impact.Components.Debug
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.Debug")

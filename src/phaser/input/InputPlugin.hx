@@ -23,7 +23,12 @@ package phaser.input;
  * sprite.on('pointerdown', callback, context);
  * ```
  *
- * Please see the Input examples and tutorials for more information.
+ * There are lots of game configuration options available relating to input.
+ * See the [Input Config object]{@linkcode Phaser.Types.Core.InputConfig} for more details, including how to deal with Phaser
+ * listening for input events outside of the canvas, how to set a default number of pointers, input
+ * capture settings and more.
+ *
+ * Please also see the Input examples and tutorials for further information.
  *
  * @class InputPlugin
  * @extends Phaser.Events.EventEmitter
@@ -56,10 +61,10 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * A reference to the Scene Systems Settings.
      *
      * @name Phaser.Input.InputPlugin#settings
-     * @type {Phaser.Scenes.Settings.Object}
+     * @type {Phaser.Types.Scenes.SettingsObject}
      * @since 3.5.0
      */
-    public var settings:phaser.scenes.settings.Object;
+    public var settings:phaser.types.scenes.SettingsObject;
     /**
      * A reference to the Game Input Manager.
      *
@@ -69,7 +74,7 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public var manager:phaser.input.InputManager;
     /**
-     * If set, the Input Plugin will run its update loop every frame.
+     * If `true` this Input Plugin will process DOM input events.
      *
      * @name Phaser.Input.InputPlugin#enabled
      * @type {boolean}
@@ -128,7 +133,7 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      *
      * This property only controls how often they will be polled if they have not been updated.
      * You should set this if you want to have Game Objects constantly check against the pointers, even
-     * if the pointer didn't move itself.
+     * if the pointer didn't itself move.
      *
      * Set to 0 to poll constantly. Set to -1 to only poll on user movement.
      *
@@ -333,6 +338,19 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function isActive():Bool;
     /**
+     * This is called automatically by the Input Manager.
+     * It emits events for plugins to listen to and also handles polling updates, if enabled.
+     *
+     * @method Phaser.Input.InputPlugin#updatePoll
+     * @since 3.18.0
+     *
+     * @param {number} time - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.
+     * @param {number} delta - The delta time in ms since the last frame. This is a smoothed and capped value based on the FPS rate.
+     *
+     * @return {boolean} `true` if the plugin and the Scene it belongs to is active.
+     */
+    public function updatePoll(time:Float, delta:Float):Bool;
+    /**
      * Clears a Game Object so it no longer has an Interactive Object associated with it.
      * The Game Object is then queued for removal from the Input Plugin on the next update.
      *
@@ -340,10 +358,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object that will have its Interactive Object removed.
+     * @param {boolean} [skipQueue=false] - Skip adding this Game Object into the removal queue?
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that had its Interactive Object removed.
      */
-    public function clear(gameObject:phaser.gameobjects.GameObject):phaser.gameobjects.GameObject;
+    public function clear(gameObject:phaser.gameobjects.GameObject, ?skipQueue:Bool):phaser.gameobjects.GameObject;
     /**
      * Disables Input on a single Game Object.
      *
@@ -377,13 +396,13 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to be enabled for input.
-     * @param {(Phaser.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
      * @param {boolean} [dropZone=false] - Is this Game Object a drop zone or not?
      *
      * @return {Phaser.Input.InputPlugin} This Input Plugin.
      */
-    public function enable(gameObject:phaser.gameobjects.GameObject, ?shape:Dynamic, ?callback:HitAreaCallback, ?dropZone:Bool):phaser.input.InputPlugin;
+    public function enable(gameObject:phaser.gameobjects.GameObject, ?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):phaser.input.InputPlugin;
     /**
      * Takes the given Pointer and performs a hit test against it, to see which interactive Game Objects
      * it is currently above.
@@ -505,12 +524,12 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[])} gameObjects - An array of Game Objects to set the hit area on.
-     * @param {(Phaser.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitArea(gameObjects:Dynamic, ?shape:Dynamic, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitArea(gameObjects:Dynamic, ?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Circle` shape, using
      * the given coordinates and radius to control its position and size.
@@ -522,11 +541,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @param {number} x - The center of the circle.
      * @param {number} y - The center of the circle.
      * @param {number} radius - The radius of the circle.
-     * @param {HitAreaCallback} [callback] - The hit area callback. If undefined it uses Circle.Contains.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The hit area callback. If undefined it uses Circle.Contains.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitAreaCircle(gameObjects:Dynamic, x:Float, y:Float, radius:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaCircle(gameObjects:Dynamic, x:Float, y:Float, radius:Float, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Ellipse` shape, using
      * the given coordinates and dimensions to control its position and size.
@@ -539,11 +558,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @param {number} y - The center of the ellipse.
      * @param {number} width - The width of the ellipse.
      * @param {number} height - The height of the ellipse.
-     * @param {HitAreaCallback} [callback] - The hit area callback. If undefined it uses Ellipse.Contains.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The hit area callback. If undefined it uses Ellipse.Contains.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitAreaEllipse(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaEllipse(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Rectangle` shape, using
      * the Game Objects texture frame to define the position and size of the hit area.
@@ -552,11 +571,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[])} gameObjects - An array of Game Objects to set as having an ellipse hit area.
-     * @param {HitAreaCallback} [callback] - The hit area callback. If undefined it uses Rectangle.Contains.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The hit area callback. If undefined it uses Rectangle.Contains.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitAreaFromTexture(gameObjects:Dynamic, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaFromTexture(gameObjects:Dynamic, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Rectangle` shape, using
      * the given coordinates and dimensions to control its position and size.
@@ -569,11 +588,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @param {number} y - The top-left of the rectangle.
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
-     * @param {HitAreaCallback} [callback] - The hit area callback. If undefined it uses Rectangle.Contains.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The hit area callback. If undefined it uses Rectangle.Contains.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitAreaRectangle(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaRectangle(gameObjects:Dynamic, x:Float, y:Float, width:Float, height:Float, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Triangle` shape, using
      * the given coordinates to control the position of its points.
@@ -588,11 +607,58 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @param {number} y2 - The y coordinate of the second point of the triangle.
      * @param {number} x3 - The x coordinate of the third point of the triangle.
      * @param {number} y3 - The y coordinate of the third point of the triangle.
-     * @param {HitAreaCallback} [callback] - The hit area callback. If undefined it uses Triangle.Contains.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The hit area callback. If undefined it uses Triangle.Contains.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
-    public function setHitAreaTriangle(gameObjects:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, ?callback:HitAreaCallback):phaser.input.InputPlugin;
+    public function setHitAreaTriangle(gameObjects:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, ?callback:phaser.types.input.HitAreaCallback):phaser.input.InputPlugin;
+    /**
+     * Creates an Input Debug Shape for the given Game Object.
+     *
+     * The Game Object must have _already_ been enabled for input prior to calling this method.
+     *
+     * This is intended to assist you during development and debugging.
+     *
+     * Debug Shapes can only be created for Game Objects that are using standard Phaser Geometry for input,
+     * including: Circle, Ellipse, Line, Polygon, Rectangle and Triangle.
+     *
+     * Game Objects that are using their automatic hit areas are using Rectangles by default, so will also work.
+     *
+     * The Debug Shape is created and added to the display list and is then kept in sync with the Game Object
+     * it is connected with. Should you need to modify it yourself, such as to hide it, you can access it via
+     * the Game Object property: `GameObject.input.hitAreaDebug`.
+     *
+     * Calling this method on a Game Object that already has a Debug Shape will first destroy the old shape,
+     * before creating a new one. If you wish to remove the Debug Shape entirely, you should call the
+     * method `InputPlugin.removeDebug`.
+     *
+     * Note that the debug shape will only show the outline of the input area. If the input test is using a
+     * pixel perfect check, for example, then this is not displayed. If you are using a custom shape, that
+     * doesn't extend one of the base Phaser Geometry objects, as your hit area, then this method will not
+     * work.
+     *
+     * @method Phaser.Input.InputPlugin#enableDebug
+     * @since 3.19.0
+     *
+     * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to create the input debug shape for.
+     * @param {number} [color=0x00ff00] - The outline color of the debug shape.
+     *
+     * @return {Phaser.Input.InputPlugin} This Input Plugin.
+     */
+    public function enableDebug(gameObject:phaser.gameobjects.GameObject, ?color:Float):phaser.input.InputPlugin;
+    /**
+     * Removes an Input Debug Shape from the given Game Object.
+     *
+     * The shape is destroyed immediately and the `hitAreaDebug` property is set to `null`.
+     *
+     * @method Phaser.Input.InputPlugin#removeDebug
+     * @since 3.19.0
+     *
+     * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to remove the input debug shape from.
+     *
+     * @return {Phaser.Input.InputPlugin} This Input Plugin.
+     */
+    public function removeDebug(gameObject:phaser.gameobjects.GameObject):phaser.input.InputPlugin;
     /**
      * Sets the Pointers to always poll.
      *
@@ -635,14 +701,13 @@ extern class InputPlugin extends phaser.events.EventEmitter {
     public function setPollRate(value:Float):phaser.input.InputPlugin;
     /**
      * When set to `true` the global Input Manager will emulate DOM behavior by only emitting events from
-     * the top-most Game Objects in the Display List.
-     *
-     * If set to `false` it will emit events from all Game Objects below a Pointer, not just the top one.
+     * the top-most Scene in the Scene List. By default, if a Scene receives an input event it will then stop the event
+     * from flowing down to any Scenes below it in the Scene list. To disable this behavior call this method with `false`.
      *
      * @method Phaser.Input.InputPlugin#setGlobalTopOnly
      * @since 3.0.0
      *
-     * @param {boolean} value - `true` to only include the top-most Game Object, or `false` to include all Game Objects in a hit test.
+     * @param {boolean} value - Set to `true` to stop processing input events on the Scene that receives it, or `false` to let the event continue down the Scene list.
      *
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
@@ -674,7 +739,10 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function sortGameObjects(gameObjects:Array<phaser.gameobjects.GameObject>):Array<phaser.gameobjects.GameObject>;
     /**
-     * Causes the Input Manager to stop emitting any events for the remainder of this game step.
+     * This method should be called from within an input event handler, such as `pointerdown`.
+     *
+     * When called, it stops the Input Manager from allowing _this specific event_ to be processed by any other Scene
+     * not yet handled in the scene list.
      *
      * @method Phaser.Input.InputPlugin#stopPropagation
      * @since 3.0.0
@@ -682,114 +750,6 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @return {Phaser.Input.InputPlugin} This InputPlugin object.
      */
     public function stopPropagation():phaser.input.InputPlugin;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mouseup` or `touchend` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is released, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputPlugin#addUpCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this DOM event.
-     * @param {boolean} [isOnce=true] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Plugin.
-     */
-    public function addUpCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mousedown` or `touchstart` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is down, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputPlugin#addDownCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this dom event.
-     * @param {boolean} [isOnce=true] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Plugin.
-     */
-    public function addDownCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mousemove` or `touchmove` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is moved, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputPlugin#addMoveCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this dom event.
-     * @param {boolean} [isOnce=false] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Plugin.
-     */
-    public function addMoveCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
     /**
      * Adds new Pointer objects to the Input Manager.
      *

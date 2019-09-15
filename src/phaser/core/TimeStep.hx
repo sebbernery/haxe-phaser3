@@ -10,11 +10,11 @@ package phaser.core;
  * @since 3.0.0
  *
  * @param {Phaser.Game} game - A reference to the Phaser.Game instance that owns this Time Step.
- * @param {FPSConfig} config
+ * @param {Phaser.Types.Core.FPSConfig} config
  */
 @:native("Phaser.Core.TimeStep")
 extern class TimeStep {
-    public function new(game:phaser.Game, config:FPSConfig);
+    public function new(game:phaser.Game, config:phaser.types.core.FPSConfig);
     /**
      * A reference to the Phaser.Game instance.
      *
@@ -112,11 +112,11 @@ extern class TimeStep {
      * A callback to be invoked each time the Time Step steps.
      *
      * @name Phaser.Core.TimeStep#callback
-     * @type {TimeStepCallback}
+     * @type {Phaser.Types.Core.TimeStepCallback}
      * @default NOOP
      * @since 3.0.0
      */
-    public var callback:TimeStepCallback;
+    public var callback:phaser.types.core.TimeStepCallback;
     /**
      * You can force the Time Step to use Set Timeout instead of Request Animation Frame by setting
      * the `forceSetTimeOut` property to `true` in the Game Configuration object. It cannot be changed at run-time.
@@ -129,34 +129,36 @@ extern class TimeStep {
      */
     public var forceSetTimeOut:Bool;
     /**
-     * [description]
+     * The time, calculated at the start of the current step, as smoothed by the delta value.
      *
      * @name Phaser.Core.TimeStep#time
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var time:Int;
+    public var time:Float;
     /**
-     * [description]
+     * The time at which the game started running. This value is adjusted if the game is then
+     * paused and resumes.
      *
      * @name Phaser.Core.TimeStep#startTime
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var startTime:Int;
+    public var startTime:Float;
     /**
-     * [description]
+     * The time, as returned by `performance.now` of the previous step.
      *
      * @name Phaser.Core.TimeStep#lastTime
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var lastTime:Int;
+    public var lastTime:Float;
     /**
-     * [description]
+     * The current frame the game is on. This counter is incremented once every game step, regardless of how much
+     * time has passed and is unaffected by delta smoothing.
      *
      * @name Phaser.Core.TimeStep#frame
      * @type {integer}
@@ -166,7 +168,8 @@ extern class TimeStep {
      */
     public var frame:Int;
     /**
-     * [description]
+     * Is the browser currently considered in focus by the Page Visibility API?
+     * This value is set in the `blur` method, which is called automatically by the Game instance.
      *
      * @name Phaser.Core.TimeStep#inFocus
      * @type {boolean}
@@ -176,7 +179,7 @@ extern class TimeStep {
      */
     public var inFocus:Bool;
     /**
-     * [description]
+     * The delta time, in ms, since the last game step. This is a clamped and smoothed average value.
      *
      * @name Phaser.Core.TimeStep#delta
      * @type {integer}
@@ -185,7 +188,7 @@ extern class TimeStep {
      */
     public var delta:Int;
     /**
-     * [description]
+     * Internal index of the delta history position.
      *
      * @name Phaser.Core.TimeStep#deltaIndex
      * @type {integer}
@@ -194,7 +197,7 @@ extern class TimeStep {
      */
     public var deltaIndex:Int;
     /**
-     * [description]
+     * Internal array holding the previous delta values, used for delta smoothing.
      *
      * @name Phaser.Core.TimeStep#deltaHistory
      * @type {integer[]}
@@ -202,7 +205,9 @@ extern class TimeStep {
      */
     public var deltaHistory:Array<Int>;
     /**
-     * [description]
+     * The maximum number of delta values that are retained in order to calculate a smoothed moving average.
+     *
+     * This can be changed in the Game Config via the `fps.deltaHistory` property. The default is 10.
      *
      * @name Phaser.Core.TimeStep#deltaSmoothingMax
      * @type {integer}
@@ -211,7 +216,10 @@ extern class TimeStep {
      */
     public var deltaSmoothingMax:Int;
     /**
-     * [description]
+     * The number of frames that the cooldown is set to after the browser panics over the FPS rate, usually
+     * as a result of switching tabs and regaining focus.
+     *
+     * This can be changed in the Game Config via the `fps.panicMax` property. The default is 120.
      *
      * @name Phaser.Core.TimeStep#panicMax
      * @type {integer}
@@ -221,8 +229,9 @@ extern class TimeStep {
     public var panicMax:Int;
     /**
      * The actual elapsed time in ms between one update and the next.
-     * Unlike with `delta` no smoothing, capping, or averaging is applied to this value.
-     * So please be careful when using this value in calculations.
+     *
+     * Unlike with `delta`, no smoothing, capping, or averaging is applied to this value.
+     * So please be careful when using this value in math calculations.
      *
      * @name Phaser.Core.TimeStep#rawDelta
      * @type {number}
@@ -231,14 +240,24 @@ extern class TimeStep {
      */
     public var rawDelta:Float;
     /**
-     * Called when the DOM window.onBlur event triggers.
+     * The time, as returned by `performance.now` at the very start of the current step.
+     * This can differ from the `time` value in that it isn't calculated based on the delta value.
+     *
+     * @name Phaser.Core.TimeStep#now
+     * @type {number}
+     * @default 0
+     * @since 3.18.0
+     */
+    public var now:Float;
+    /**
+     * Called by the Game instance when the DOM window.onBlur event triggers.
      *
      * @method Phaser.Core.TimeStep#blur
      * @since 3.0.0
      */
     public function blur():Void;
     /**
-     * Called when the DOM window.onFocus event triggers.
+     * Called by the Game instance when the DOM window.onFocus event triggers.
      *
      * @method Phaser.Core.TimeStep#focus
      * @since 3.0.0
@@ -259,7 +278,8 @@ extern class TimeStep {
      */
     public function resume():Void;
     /**
-     * [description]
+     * Resets the time, lastTime, fps averages and delta history.
+     * Called automatically when a browser sleeps them resumes.
      *
      * @method Phaser.Core.TimeStep#resetDelta
      * @since 3.0.0
@@ -272,9 +292,9 @@ extern class TimeStep {
      * @method Phaser.Core.TimeStep#start
      * @since 3.0.0
      *
-     * @param {TimeStepCallback} callback - The callback to be invoked each time the Time Step steps.
+     * @param {Phaser.Types.Core.TimeStepCallback} callback - The callback to be invoked each time the Time Step steps.
      */
-    public function start(callback:TimeStepCallback):Void;
+    public function start(callback:phaser.types.core.TimeStepCallback):Void;
     /**
      * The main step method. This is called each time the browser updates, either by Request Animation Frame,
      * or by Set Timeout. It is responsible for calculating the delta values, frame totals, cool down history and more.
@@ -282,12 +302,10 @@ extern class TimeStep {
      *
      * @method Phaser.Core.TimeStep#step
      * @since 3.0.0
-     *
-     * @param {number} time - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.
      */
-    public function step(time:Float):Void;
+    public function step():Void;
     /**
-     * Manually calls TimeStep.step, passing in the performance.now value to it.
+     * Manually calls `TimeStep.step`.
      *
      * @method Phaser.Core.TimeStep#tick
      * @since 3.0.0
@@ -310,6 +328,24 @@ extern class TimeStep {
      * @param {boolean} [seamless=false] - Adjust the startTime based on the lastTime values.
      */
     public function wake(?seamless:Bool):Void;
+    /**
+     * Gets the duration which the game has been running, in seconds.
+     *
+     * @method Phaser.Core.TimeStep#getDuration
+     * @since 3.17.0
+     *
+     * @return {number} The duration in seconds.
+     */
+    public function getDuration():Float;
+    /**
+     * Gets the duration which the game has been running, in ms.
+     *
+     * @method Phaser.Core.TimeStep#getDurationMS
+     * @since 3.17.0
+     *
+     * @return {number} The duration in ms.
+     */
+    public function getDurationMS():Float;
     /**
      * Stops the TimeStep running.
      *

@@ -16,8 +16,8 @@ package phaser.physics.arcade;
  *
  * @param {Phaser.Physics.Arcade.World} world - The physics simulation.
  * @param {Phaser.Scene} scene - The scene this group belongs to.
- * @param {(Phaser.GameObjects.GameObject[]|PhysicsGroupConfig|GroupCreateConfig)} [children] - Game Objects to add to this group; or the `config` argument.
- * @param {PhysicsGroupConfig|GroupCreateConfig} [config] - Settings for this group.
+ * @param {(Phaser.GameObjects.GameObject[]|Phaser.Types.Physics.Arcade.PhysicsGroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig)} [children] - Game Objects to add to this group; or the `config` argument.
+ * @param {Phaser.Types.Physics.Arcade.PhysicsGroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig} [config] - Settings for this group.
  */
 @:native("Phaser.Physics.Arcade.Group")
 extern class Group extends phaser.gameobjects.Group {
@@ -43,10 +43,10 @@ extern class Group extends phaser.gameobjects.Group {
      * Default physics properties applied to Game Objects added to the Group or created by the Group. Derived from the `config` argument.
      *
      * @name Phaser.Physics.Arcade.Group#defaults
-     * @type {PhysicsGroupDefaults}
+     * @type {Phaser.Types.Physics.Arcade.PhysicsGroupDefaults}
      * @since 3.0.0
      */
-    public var defaults:PhysicsGroupDefaults;
+    public var defaults:phaser.types.physics.arcade.PhysicsGroupDefaults;
     /**
      * Enables a Game Object's Body and assigns `defaults`. Called when a Group member is added or created.
      *

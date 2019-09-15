@@ -106,11 +106,11 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} key - Asset key for the sound.
-     * @param {SoundConfig} [config] - An optional config object containing default sound settings.
+     * @param {Phaser.Types.Sound.SoundConfig} [config] - An optional config object containing default sound settings.
      *
      * @return {Phaser.Sound.BaseSound} The new sound instance.
      */
-    public function add(key:String, ?config:SoundConfig):phaser.sound.BaseSound;
+    public function add(key:String, ?config:phaser.types.sound.SoundConfig):phaser.sound.BaseSound;
     /**
      * Adds a new audio sprite sound into the sound manager.
      * Audio Sprites are a combination of audio files and a JSON configuration.
@@ -120,11 +120,11 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} key - Asset key for the sound.
-     * @param {SoundConfig} [config] - An optional config object containing default sound settings.
+     * @param {Phaser.Types.Sound.SoundConfig} [config] - An optional config object containing default sound settings.
      *
-     * @return {AudioSpriteSound} The new audio sprite sound instance.
+     * @return {Phaser.Types.Sound.AudioSpriteSound} The new audio sprite sound instance.
      */
-    public function addAudioSprite(key:String, ?config:SoundConfig):AudioSpriteSound;
+    public function addAudioSprite(key:String, ?config:phaser.types.sound.SoundConfig):phaser.types.sound.AudioSpriteSound;
     /**
      * Enables playing sound on the fly without the need to keep a reference to it.
      * Sound will auto destroy once its playback ends.
@@ -134,7 +134,7 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} key - Asset key for the sound.
-     * @param {(SoundConfig|SoundMarker)} [extra] - An optional additional object containing settings to be applied to the sound. It could be either config or marker object.
+     * @param {(Phaser.Types.Sound.SoundConfig|Phaser.Types.Sound.SoundMarker)} [extra] - An optional additional object containing settings to be applied to the sound. It could be either config or marker object.
      *
      * @return {boolean} Whether the sound started playing successfully.
      */
@@ -149,11 +149,11 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      *
      * @param {string} key - Asset key for the sound.
      * @param {string} spriteName - The name of the sound sprite to play.
-     * @param {SoundConfig} [config] - An optional config object containing default sound settings.
+     * @param {Phaser.Types.Sound.SoundConfig} [config] - An optional config object containing default sound settings.
      *
      * @return {boolean} Whether the audio sprite sound started playing successfully.
      */
-    public function playAudioSprite(key:String, spriteName:String, ?config:SoundConfig):Bool;
+    public function playAudioSprite(key:String, spriteName:String, ?config:phaser.types.sound.SoundConfig):Bool;
     /**
      * Removes a sound from the sound manager.
      * The removed sound is destroyed before removal.

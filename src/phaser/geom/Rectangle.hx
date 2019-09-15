@@ -18,6 +18,16 @@ package phaser.geom;
 extern class Rectangle {
     public function new(?x:Float, ?y:Float, ?width:Float, ?height:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.RECTANGLE`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Rectangle#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The X coordinate of the top left corner of the Rectangle.
      *
      * @name Phaser.Geom.Rectangle#x
@@ -257,7 +267,7 @@ extern class Rectangle {
      * @generic {Phaser.Geom.Rectangle} O - [target,$return]
      *
      * @param {Phaser.Geom.Rectangle} target - The target rectangle to adjust.
-     * @param {Phaser.Geom.Rectangle} source - The source rectangle to envlope the target in.
+     * @param {Phaser.Geom.Rectangle} source - The source rectangle to envelop the target in.
      *
      * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
      */
@@ -377,7 +387,8 @@ extern class Rectangle {
      */
     public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     /**
-     * [description]
+     *  The size of the Rectangle object, expressed as a Point object
+     *  with the values of the width and height properties.
      *
      * @function Phaser.Geom.Rectangle.GetSize
      * @since 3.0.0
@@ -425,7 +436,8 @@ extern class Rectangle {
      */
     public function Intersection(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
-     * [description]
+     *  Return an array of points from the perimeter of the rectangle
+     *  each spaced out based on the quantity or step required
      *
      * @function Phaser.Geom.Rectangle.MarchingAnts
      * @since 3.0.0

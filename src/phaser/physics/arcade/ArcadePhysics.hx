@@ -7,6 +7,11 @@ package phaser.physics.arcade;
  *
  * You can access it from within a Scene using `this.physics`.
  *
+ * Arcade Physics uses the Projection Method of collision resolution and separation. While it's fast and suitable
+ * for 'arcade' style games it lacks stability when multiple objects are in close proximity or resting upon each other.
+ * The separation that stops two objects penetrating may create a new penetration against a different object. If you
+ * require a high level of stability please consider using an alternative physics system, such as Matter.js.
+ *
  * @class ArcadePhysics
  * @memberof Phaser.Physics.Arcade
  * @constructor
@@ -72,8 +77,8 @@ extern class ArcadePhysics {
      * @method Phaser.Physics.Arcade.ArcadePhysics#overlap
      * @since 3.0.0
      *
-     * @param {ArcadeColliderType} object1 - The first object or array of objects to check.
-     * @param {ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object or array of objects to check.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
      * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they overlap. If this is set then `collideCallback` will only be called if this callback returns `true`.
      * @param {*} [callbackContext] - The context in which to run the callbacks.
@@ -82,15 +87,32 @@ extern class ArcadePhysics {
      *
      * @see Phaser.Physics.Arcade.World#overlap
      */
-    public function overlap(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function overlap(object1:phaser.types.physics.arcade.ArcadeColliderType, ?object2:phaser.types.physics.arcade.ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     /**
-     * Tests if Game Objects overlap and separates them (if possible). See {@link Phaser.Physics.Arcade.World#collide}.
+     * Performs a collision check and separation between the two physics enabled objects given, which can be single
+     * Game Objects, arrays of Game Objects, Physics Groups, arrays of Physics Groups or normal Groups.
+     *
+     * If you don't require separation then use {@link #overlap} instead.
+     *
+     * If two Groups or arrays are passed, each member of one will be tested against each member of the other.
+     *
+     * If **only** one Group is passed (as `object1`), each member of the Group will be collided against the other members.
+     *
+     * If **only** one Array is passed, the array is iterated and every element in it is tested against the others.
+     *
+     * Two callbacks can be provided. The `collideCallback` is invoked if a collision occurs and the two colliding
+     * objects are passed to it.
+     *
+     * Arcade Physics uses the Projection Method of collision resolution and separation. While it's fast and suitable
+     * for 'arcade' style games it lacks stability when multiple objects are in close proximity or resting upon each other.
+     * The separation that stops two objects penetrating may create a new penetration against a different object. If you
+     * require a high level of stability please consider using an alternative physics system, such as Matter.js.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#collide
      * @since 3.0.0
      *
-     * @param {ArcadeColliderType} object1 - The first object or array of objects to check.
-     * @param {ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} object1 - The first object or array of objects to check.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeColliderType} [object2] - The second object or array of objects to check, or `undefined`.
      * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
      * @param {*} [callbackContext] - The context in which to run the callbacks.
@@ -99,7 +121,60 @@ extern class ArcadePhysics {
      *
      * @see Phaser.Physics.Arcade.World#collide
      */
-    public function collide(object1:ArcadeColliderType, ?object2:ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    public function collide(object1:phaser.types.physics.arcade.ArcadeColliderType, ?object2:phaser.types.physics.arcade.ArcadeColliderType, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    /**
+     * This advanced method is specifically for testing for collision between a single Sprite and an array of Tile objects.
+     *
+     * You should generally use the `collide` method instead, with a Sprite vs. a Tilemap Layer, as that will perform
+     * tile filtering and culling for you, as well as handle the interesting face collision automatically.
+     *
+     * This method is offered for those who would like to check for collision with specific Tiles in a layer, without
+     * having to set any collision attributes on the tiles in question. This allows you to perform quick dynamic collisions
+     * on small sets of Tiles. As such, no culling or checks are made to the array of Tiles given to this method,
+     * you should filter them before passing them to this method.
+     *
+     * Important: Use of this method skips the `interesting faces` system that Tilemap Layers use. This means if you have
+     * say a row or column of tiles, and you jump into, or walk over them, it's possible to get stuck on the edges of the
+     * tiles as the interesting face calculations are skipped. However, for quick-fire small collision set tests on
+     * dynamic maps, this method can prove very useful.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#collideTiles
+     * @fires Phaser.Physics.Arcade.Events#TILE_COLLIDE
+     * @since 3.17.0
+     *
+     * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
+     * @param {Phaser.Tilemaps.Tile[]} tiles - An array of Tiles to check for collision against.
+     * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
+     * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
+     *
+     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
+     */
+    public function collideTiles(sprite:phaser.gameobjects.GameObject, tiles:Array<phaser.tilemaps.Tile>, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
+    /**
+     * This advanced method is specifically for testing for overlaps between a single Sprite and an array of Tile objects.
+     *
+     * You should generally use the `overlap` method instead, with a Sprite vs. a Tilemap Layer, as that will perform
+     * tile filtering and culling for you, as well as handle the interesting face collision automatically.
+     *
+     * This method is offered for those who would like to check for overlaps with specific Tiles in a layer, without
+     * having to set any collision attributes on the tiles in question. This allows you to perform quick dynamic overlap
+     * tests on small sets of Tiles. As such, no culling or checks are made to the array of Tiles given to this method,
+     * you should filter them before passing them to this method.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#overlapTiles
+     * @fires Phaser.Physics.Arcade.Events#TILE_OVERLAP
+     * @since 3.17.0
+     *
+     * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
+     * @param {Phaser.Tilemaps.Tile[]} tiles - An array of Tiles to check for collision against.
+     * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects overlap.
+     * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
+     * @param {any} [callbackContext] - The context in which to run the callbacks.
+     *
+     * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
+     */
+    public function overlapTiles(sprite:phaser.gameobjects.GameObject, tiles:Array<phaser.tilemaps.Tile>, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic):Bool;
     /**
      * Pauses the simulation.
      *
@@ -160,25 +235,31 @@ extern class ArcadePhysics {
      */
     public function accelerateToObject(gameObject:phaser.gameobjects.GameObject, destination:phaser.gameobjects.GameObject, ?speed:Float, ?xSpeedMax:Float, ?ySpeedMax:Float):Float;
     /**
-     * Finds the Body closest to a source point or object.
+     * Finds the Dynamic Body closest to a source point or object.
+     *
+     * If two or more bodies are the exact same distance from the source point, only the first body
+     * is returned.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#closest
      * @since 3.0.0
      *
-     * @param {object} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
+     * @param {any} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
      *
-     * @return {Phaser.Physics.Arcade.Body} The closest Body to the given source point.
+     * @return {Phaser.Physics.Arcade.Body} The closest Dynamic Body to the given source point.
      */
     public function closest(source:Dynamic):phaser.physics.arcade.Body;
     /**
-     * Finds the Body farthest from a source point or object.
+     * Finds the Dynamic Body farthest from a source point or object.
+     *
+     * If two or more bodies are the exact same distance from the source point, only the first body
+     * is returned.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#furthest
      * @since 3.0.0
      *
-     * @param {object} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
+     * @param {any} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
      *
-     * @return {Phaser.Physics.Arcade.Body} The Body furthest from the given source point.
+     * @return {Phaser.Physics.Arcade.Body} The Dynamic Body furthest away from the given source point.
      */
     public function furthest(source:Dynamic):phaser.physics.arcade.Body;
     /**
@@ -248,6 +329,29 @@ extern class ArcadePhysics {
      * @return {Phaser.Math.Vector2} The Vector2 that stores the velocity.
      */
     public function velocityFromRotation(rotation:Float, ?speed:Float, ?vec2:phaser.math.Vector2):phaser.math.Vector2;
+    /**
+     * This method will search the given rectangular area and return an array of all physics bodies that
+     * overlap with it. It can return either Dynamic, Static bodies or a mixture of both.
+     *
+     * A body only has to intersect with the search area to be considered, it doesn't have to be fully
+     * contained within it.
+     *
+     * If Arcade Physics is set to use the RTree (which it is by default) then the search for is extremely fast,
+     * otherwise the search is O(N) for Dynamic Bodies.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#overlapRect
+     * @since 3.17.0
+     *
+     * @param {number} x - The top-left x coordinate of the area to search within.
+     * @param {number} y - The top-left y coordinate of the area to search within.
+     * @param {number} width - The width of the area to search within.
+     * @param {number} height - The height of the area to search within.
+     * @param {boolean} [includeDynamic=true] - Should the search include Dynamic Bodies?
+     * @param {boolean} [includeStatic=false] - Should the search include Static Bodies?
+     *
+     * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
+     */
+    public function overlapRect(x:Float, y:Float, width:Float, height:Float, ?includeDynamic:Bool, ?includeStatic:Bool):Array<phaser.physics.arcade.Body>;
     /**
      * The Scene that owns this plugin is shutting down.
      * We need to kill and reset all internal properties as well as stop listening to Scene events.

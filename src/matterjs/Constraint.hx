@@ -7,6 +7,7 @@ package matterjs;
  * The stiffness of constraints can be modified to create springs or elastic.
  *
  * @class MatterJS.Constraint
+ * @since 3.0.0
  */
 @:native("MatterJS.Constraint")
 extern class Constraint {

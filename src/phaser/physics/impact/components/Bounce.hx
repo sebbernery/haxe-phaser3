@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Bounce component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.Bounce
+ * @namespace Phaser.Physics.Impact.Components.Bounce
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.Bounce")

@@ -12,11 +12,11 @@ package phaser.sound;
  *
  * @param {Phaser.Sound.HTML5AudioSoundManager} manager - Reference to the current sound manager instance.
  * @param {string} key - Asset key for the sound.
- * @param {SoundConfig} [config={}] - An optional config object containing default sound settings.
+ * @param {Phaser.Types.Sound.SoundConfig} [config={}] - An optional config object containing default sound settings.
  */
 @:native("Phaser.Sound.HTML5AudioSound")
 extern class HTML5AudioSound extends phaser.sound.BaseSound {
-    public function new(manager:phaser.sound.HTML5AudioSoundManager, key:String, ?config:SoundConfig);
+    public function new(manager:phaser.sound.HTML5AudioSoundManager, key:String, ?config:phaser.types.sound.SoundConfig);
     /**
      * Boolean indicating whether the sound is muted or not.
      * Gets or sets the muted state of this sound.

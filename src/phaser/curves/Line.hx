@@ -63,18 +63,18 @@ extern class Line extends phaser.curves.Curve {
      * @method Phaser.Curves.Line#toJSON
      * @since 3.0.0
      *
-     * @return {JSONCurve} The JSON object containing this curve data.
+     * @return {Phaser.Types.Curves.JSONCurve} The JSON object containing this curve data.
      */
-    public function toJSON():JSONCurve;
+    public function toJSON():phaser.types.curves.JSONCurve;
     /**
      * Configures this line from a JSON representation.
      *
      * @function Phaser.Curves.Line.fromJSON
      * @since 3.0.0
      *
-     * @param {JSONCurve} data - The JSON object containing this curve data.
+     * @param {Phaser.Types.Curves.JSONCurve} data - The JSON object containing this curve data.
      *
      * @return {Phaser.Curves.Line} A new LineCurve object.
      */
-    public function fromJSON(data:JSONCurve):phaser.curves.Line;
+    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Line;
 }

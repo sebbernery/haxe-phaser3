@@ -84,7 +84,7 @@ extern class MoveTo {
      * @method Phaser.Curves.MoveTo#toJSON
      * @since 3.0.0
      *
-     * @return {JSONCurve} A primitive object with the curve's type and only point.
+     * @return {Phaser.Types.Curves.JSONCurve} A primitive object with the curve's type and only point.
      */
-    public function toJSON():JSONCurve;
+    public function toJSON():phaser.types.curves.JSONCurve;
 }

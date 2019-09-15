@@ -13,11 +13,11 @@ package phaser.input.gamepad;
  * @since 3.0.0
  *
  * @param {Phaser.Input.Gamepad.GamepadPlugin} manager - A reference to the Gamepad Plugin.
- * @param {Pad} pad - The Gamepad object, as extracted from GamepadEvent.
+ * @param {Phaser.Types.Input.Gamepad.Pad} pad - The Gamepad object, as extracted from GamepadEvent.
  */
 @:native("Phaser.Input.Gamepad.Gamepad")
 extern class Gamepad extends phaser.events.EventEmitter {
-    public function new(manager:phaser.input.gamepad.GamepadPlugin, pad:Pad);
+    public function new(manager:phaser.input.gamepad.GamepadPlugin, pad:phaser.types.input.gamepad.Pad);
     /**
      * A reference to the Gamepad Plugin.
      *

@@ -3,7 +3,7 @@ package phaser.physics.arcade.components;
 /**
  * Provides methods used for setting the angular acceleration properties of an Arcade Physics Body.
  *
- * @name Phaser.Physics.Arcade.Components.Angular
+ * @namespace Phaser.Physics.Arcade.Components.Angular
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Arcade.Components.Angular")

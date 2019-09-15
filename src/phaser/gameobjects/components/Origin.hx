@@ -6,7 +6,7 @@ package phaser.gameobjects.components;
  * Display values contain the calculated pixel values.
  * Should be applied as a mixin and not used directly.
  *
- * @name Phaser.GameObjects.Components.Origin
+ * @namespace Phaser.GameObjects.Components.Origin
  * @since 3.0.0
  */
 @:native("Phaser.GameObjects.Components.Origin")

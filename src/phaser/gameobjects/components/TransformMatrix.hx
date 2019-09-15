@@ -18,8 +18,8 @@ package phaser.gameobjects.components;
  * @since 3.0.0
  *
  * @param {number} [a=1] - The Scale X value.
- * @param {number} [b=0] - The Shear Y value.
- * @param {number} [c=0] - The Shear X value.
+ * @param {number} [b=0] - The Skew Y value.
+ * @param {number} [c=0] - The Skew X value.
  * @param {number} [d=1] - The Scale Y value.
  * @param {number} [tx=0] - The Translate X value.
  * @param {number} [ty=0] - The Translate Y value.
@@ -52,7 +52,7 @@ extern class TransformMatrix {
      */
     public var a:Float;
     /**
-     * The Shear Y value.
+     * The Skew Y value.
      *
      * @name Phaser.GameObjects.Components.TransformMatrix#b
      * @type {number}
@@ -60,7 +60,7 @@ extern class TransformMatrix {
      */
     public var b:Float;
     /**
-     * The Shear X value.
+     * The Skew X value.
      *
      * @name Phaser.GameObjects.Components.TransformMatrix#c
      * @type {number}
@@ -108,7 +108,7 @@ extern class TransformMatrix {
      */
     public var ty:Float;
     /**
-     * The rotation of the Matrix.
+     * The rotation of the Matrix. Value is in radians.
      *
      * @name Phaser.GameObjects.Components.TransformMatrix#rotation
      * @type {number}
@@ -117,7 +117,17 @@ extern class TransformMatrix {
      */
     public var rotation:Float;
     /**
-     * The horizontal scale of the Matrix.
+     * The rotation of the Matrix, normalized to be within the Phaser right-handed
+     * clockwise rotation space. Value is in radians.
+     *
+     * @name Phaser.GameObjects.Components.TransformMatrix#rotationNormalized
+     * @type {number}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var rotationNormalized:Float;
+    /**
+     * The decomposed horizontal scale of the Matrix. This value is always positive.
      *
      * @name Phaser.GameObjects.Components.TransformMatrix#scaleX
      * @type {number}
@@ -126,7 +136,7 @@ extern class TransformMatrix {
      */
     public var scaleX:Float;
     /**
-     * The vertical scale of the Matrix.
+     * The decomposed vertical scale of the Matrix. This value is always positive.
      *
      * @name Phaser.GameObjects.Components.TransformMatrix#scaleY
      * @type {number}

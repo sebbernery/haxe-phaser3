@@ -64,6 +64,15 @@ extern class TouchManager {
      */
     public var onTouchStart:Dynamic;
     /**
+     * The Touch Start event handler function specifically for events on the Window.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Touch.TouchManager#onTouchStartWindow
+     * @type {function}
+     * @since 3.17.0
+     */
+    public var onTouchStartWindow:Dynamic;
+    /**
      * The Touch Move event handler function.
      * Initially empty and bound in the `startListeners` method.
      *
@@ -82,6 +91,15 @@ extern class TouchManager {
      */
     public var onTouchEnd:Dynamic;
     /**
+     * The Touch End event handler function specifically for events on the Window.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Touch.TouchManager#onTouchEndWindow
+     * @type {function}
+     * @since 3.17.0
+     */
+    public var onTouchEndWindow:Dynamic;
+    /**
      * The Touch Cancel event handler function.
      * Initially empty and bound in the `startListeners` method.
      *
@@ -90,6 +108,15 @@ extern class TouchManager {
      * @since 3.15.0
      */
     public var onTouchCancel:Dynamic;
+    /**
+     * The Touch Cancel event handler function specifically for events on the Window.
+     * Initially empty and bound in the `startListeners` method.
+     *
+     * @name Phaser.Input.Touch.TouchManager#onTouchCancelWindow
+     * @type {function}
+     * @since 3.18.0
+     */
+    public var onTouchCancelWindow:Dynamic;
     /**
      * The Touch Over event handler function.
      * Initially empty and bound in the `startListeners` method.

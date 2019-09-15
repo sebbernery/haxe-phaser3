@@ -396,6 +396,16 @@ extern class Size {
      */
     public function toString():String;
     /**
+     * Sets the values of this Size component to the `element.style.width` and `height`
+     * properties of the given DOM Element. The properties are set as `px` values.
+     *
+     * @method Phaser.Structs.Size#setCSS
+     * @since 3.17.0
+     *
+     * @param {HTMLElement} element - The DOM Element to set the CSS style on.
+     */
+    public function setCSS(element:js.html.HtmlElement):Void;
+    /**
      * Copies the aspect mode, aspect ratio, width and height from this Size component
      * to the given Size component. Note that the parent, if set, is not copied across.
      *

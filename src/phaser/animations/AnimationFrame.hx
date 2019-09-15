@@ -121,9 +121,9 @@ extern class AnimationFrame {
      * @method Phaser.Animations.AnimationFrame#toJSON
      * @since 3.0.0
      *
-     * @return {Phaser.Animations.Types.JSONAnimationFrame} The AnimationFrame data.
+     * @return {Phaser.Types.Animations.JSONAnimationFrame} The AnimationFrame data.
      */
-    public function toJSON():phaser.animations.types.JSONAnimationFrame;
+    public function toJSON():phaser.types.animations.JSONAnimationFrame;
     /**
      * Destroys this object by removing references to external resources and callbacks.
      *

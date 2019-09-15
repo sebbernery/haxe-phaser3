@@ -92,14 +92,14 @@ extern class Zoom {
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the Zoom. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the zoom effect to start immediately, even if already running.
-     * @param {CameraZoomCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
+     * @param {Phaser.Types.Cameras.Scene2D.CameraZoomCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent three arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * and the current camera zoom value.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {Phaser.Cameras.Scene2D.Camera} The Camera on which the effect was started.
      */
-    public function start(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:CameraZoomCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function start(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraZoomCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * The main update loop for this effect. Called automatically by the Camera.
      *

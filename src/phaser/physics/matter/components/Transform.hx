@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * Provides methods used for getting and setting the position, scale and rotation of a Game Object.
  *
- * @name Phaser.Physics.Matter.Components.Transform
+ * @namespace Phaser.Physics.Matter.Components.Transform
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Transform")

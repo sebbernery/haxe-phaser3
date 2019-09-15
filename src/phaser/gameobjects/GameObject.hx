@@ -132,11 +132,11 @@ extern class GameObject extends phaser.events.EventEmitter {
      * Not usually set directly. Instead call `GameObject.setInteractive()`.
      *
      * @name Phaser.GameObjects.GameObject#input
-     * @type {?Phaser.Input.InteractiveObject}
+     * @type {?Phaser.Types.Input.InteractiveObject}
      * @default null
      * @since 3.0.0
      */
-    public var input:phaser.input.InteractiveObject;
+    public var input:phaser.types.input.InteractiveObject;
     /**
      * If this Game Object is enabled for physics then this property will contain a reference to a Physics Body.
      *
@@ -252,12 +252,12 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @method Phaser.GameObjects.GameObject#setData
      * @since 3.0.0
      *
-     * @param {(string|object)} key - The key to set the value for. Or an object or key value pairs. If an object the `data` argument is ignored.
-     * @param {*} data - The value to set for the given key. If an object is provided as the key this argument is ignored.
+     * @param {(string|object)} key - The key to set the value for. Or an object of key value pairs. If an object the `data` argument is ignored.
+     * @param {*} [data] - The value to set for the given key. If an object is provided as the key this argument is ignored.
      *
      * @return {this} This GameObject.
      */
-    public function setData(key:Dynamic, data:Dynamic):Dynamic;
+    public function setData(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Retrieves the value for the given key in this Game Objects Data Manager, or undefined if it doesn't exist.
      *
@@ -305,13 +305,13 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @method Phaser.GameObjects.GameObject#setInteractive
      * @since 3.0.0
      *
-     * @param {(Phaser.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {HitAreaCallback} [callback] - A callback to be invoked when the Game Object is interacted with. If you provide a shape you must also provide a callback.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - A callback to be invoked when the Game Object is interacted with. If you provide a shape you must also provide a callback.
      * @param {boolean} [dropZone=false] - Should this Game Object be treated as a drop zone target?
      *
      * @return {this} This GameObject.
      */
-    public function setInteractive(?shape:Dynamic, ?callback:HitAreaCallback, ?dropZone:Bool):Dynamic;
+    public function setInteractive(?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):Dynamic;
     /**
      * If this Game Object has previously been enabled for input, this will disable it.
      *
@@ -368,9 +368,9 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @method Phaser.GameObjects.GameObject#toJSON
      * @since 3.0.0
      *
-     * @return {JSONGameObject} A JSON representation of the Game Object.
+     * @return {Phaser.Types.GameObjects.JSONGameObject} A JSON representation of the Game Object.
      */
-    public function toJSON():JSONGameObject;
+    public function toJSON():phaser.types.gameobjects.JSONGameObject;
     /**
      * Compares the renderMask with the renderFlags to see if this Game Object will render or not.
      * Also checks the Game Object against the given Cameras exclusion list.

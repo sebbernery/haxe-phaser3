@@ -74,66 +74,66 @@ extern class Body {
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#size
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var size:Dynamic;
+    public var size:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#offset
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var offset:Dynamic;
+    public var offset:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#pos
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var pos:Dynamic;
+    public var pos:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#last
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var last:Dynamic;
+    public var last:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#vel
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var vel:Dynamic;
+    public var vel:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#accel
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var accel:Dynamic;
+    public var accel:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#friction
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var friction:Dynamic;
+    public var friction:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#maxVel
-     * @type {{x: number, y: number}}
+     * @type {Phaser.Types.Math.Vector2Like}
      * @since 3.0.0
      */
-    public var maxVel:Dynamic;
+    public var maxVel:phaser.types.math.Vector2Like;
     /**
      * [description]
      *
@@ -246,10 +246,10 @@ extern class Body {
      * [description]
      *
      * @name Phaser.Physics.Impact.Body#updateCallback
-     * @type {?BodyUpdateCallback}
+     * @type {?Phaser.Types.Physics.Impact.BodyUpdateCallback}
      * @since 3.0.0
      */
-    public var updateCallback:BodyUpdateCallback;
+    public var updateCallback:phaser.types.physics.impact.BodyUpdateCallback;
     /**
      * min 44 deg, max 136 deg
      *
@@ -335,9 +335,9 @@ extern class Body {
      * @method Phaser.Physics.Impact.Body#toJSON
      * @since 3.0.0
      *
-     * @return {JSONImpactBody} JSON representation of this body object.
+     * @return {Phaser.Types.Physics.Impact.JSONImpactBody} JSON representation of this body object.
      */
-    public function toJSON():JSONImpactBody;
+    public function toJSON():phaser.types.physics.impact.JSONImpactBody;
     /**
      * [description]
      *

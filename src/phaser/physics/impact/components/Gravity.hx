@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Gravity component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.Gravity
+ * @namespace Phaser.Physics.Impact.Components.Gravity
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.Gravity")

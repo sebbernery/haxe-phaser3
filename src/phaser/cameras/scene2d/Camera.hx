@@ -425,7 +425,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @since 3.0.0
      *
      * @param {integer} [duration=100] - The duration of the effect in milliseconds.
-     * @param {number} [intensity=0.05] - The intensity of the shake.
+     * @param {(number|Phaser.Math.Vector2)} [intensity=0.05] - The intensity of the shake.
      * @param {boolean} [force=false] - Force the shake effect to start immediately, even if already running.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
@@ -433,7 +433,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
      */
-    public function shake(?duration:Int, ?intensity:Float, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function shake(?duration:Int, ?intensity:Dynamic, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * This effect will scroll the Camera so that the center of its viewport finishes at the given destination,
      * over the duration and with the ease specified.
@@ -448,14 +448,14 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
-     * @param {CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
+     * @param {Phaser.Types.Cameras.Scene2D.CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
      */
-    public function pan(x:Float, y:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function pan(x:Float, y:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * This effect will zoom the Camera to the given scale, over the duration and with the ease specified.
      *
@@ -468,14 +468,14 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
-     * @param {CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
+     * @param {Phaser.Types.Cameras.Scene2D.CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
      */
-    public function zoomTo(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function zoomTo(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * Sets the linear interpolation value to use when following a target.
      *
@@ -556,8 +556,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public function resetFX():phaser.cameras.scene2d.Camera;
     /**
      * The horizontally flipped state of the Game Object.
+     *
      * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipX
      * @type {boolean}
@@ -567,8 +569,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public var flipX:Bool;
     /**
      * The vertically flipped state of the Game Object.
+     *
      * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipY
      * @type {boolean}
@@ -578,6 +582,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public var flipY:Bool;
     /**
      * Toggles the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#toggleFlipX
      * @since 3.0.0
@@ -596,6 +604,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public function toggleFlipY():Dynamic;
     /**
      * Sets the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlipX
      * @since 3.0.0
@@ -618,6 +630,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public function setFlipY(value:Bool):Dynamic;
     /**
      * Sets the horizontal and vertical flipped state of this Game Object.
+     *
+     * A Game Object that is flipped will render inversed on the flipped axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlip
      * @since 3.0.0
@@ -688,6 +704,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
     public var tintBottomRight:Int;
     /**
      * The tint value being applied to the whole of the Game Object.
+     * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
      * @type {integer}

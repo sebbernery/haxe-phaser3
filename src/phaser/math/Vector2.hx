@@ -11,7 +11,7 @@ package phaser.math;
  * @constructor
  * @since 3.0.0
  *
- * @param {number|Vector2Like} [x] - The x component, or an object with `x` and `y` properties.
+ * @param {number|Phaser.Types.Math.Vector2Like} [x] - The x component, or an object with `x` and `y` properties.
  * @param {number} [y] - The y component.
  */
 @:native("Phaser.Math.Vector2")
@@ -61,11 +61,11 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#setFromObject
      * @since 3.0.0
      *
-     * @param {Vector2Like} obj - The object containing the component values to set for this Vector.
+     * @param {Phaser.Types.Math.Vector2Like} obj - The object containing the component values to set for this Vector.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function setFromObject(obj:Vector2Like):phaser.math.Vector2;
+    public function setFromObject(obj:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Set the `x` and `y` components of the this Vector to the given `x` and `y` values.
      *

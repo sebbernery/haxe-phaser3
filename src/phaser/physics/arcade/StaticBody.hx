@@ -298,34 +298,34 @@ extern class StaticBody {
      * Whether this StaticBody is checked for collisions and for which directions. You can set `checkCollision.none = false` to disable collision checks.
      *
      * @name Phaser.Physics.Arcade.StaticBody#checkCollision
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var checkCollision:ArcadeBodyCollision;
+    public var checkCollision:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this StaticBody has ever collided with another body and in which direction.
      *
      * @name Phaser.Physics.Arcade.StaticBody#touching
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var touching:ArcadeBodyCollision;
+    public var touching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this StaticBody was colliding with another body during the last step or any previous step, and in which direction.
      *
      * @name Phaser.Physics.Arcade.StaticBody#wasTouching
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var wasTouching:ArcadeBodyCollision;
+    public var wasTouching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * Whether this StaticBody has ever collided with a tile or the world boundary.
      *
      * @name Phaser.Physics.Arcade.StaticBody#blocked
-     * @type {ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
      */
-    public var blocked:ArcadeBodyCollision;
+    public var blocked:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
      * The StaticBody's physics type (static by default).
      *
@@ -434,12 +434,11 @@ extern class StaticBody {
      *
      * @param {integer} [width] - The width of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
      * @param {integer} [height] - The height of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
-     * @param {number} [offsetX] - The horizontal offset of the Body from the Game Object's center.
-     * @param {number} [offsetY] - The vertical offset of the Body from the Game Object's center.
+     * @param {boolean} [center=true] - Modify the Body's `offset`, placing the Body's center on its Game Object's center. Only works if the Game Object has the `getCenter` method.
      *
      * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
      */
-    public function setSize(?width:Int, ?height:Int, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.StaticBody;
+    public function setSize(?width:Int, ?height:Int, ?center:Bool):phaser.physics.arcade.StaticBody;
     /**
      * Sets this Static Body to have a circular body and sets its sizes and position.
      *
@@ -486,11 +485,11 @@ extern class StaticBody {
      * @method Phaser.Physics.Arcade.StaticBody#getBounds
      * @since 3.0.0
      *
-     * @param {ArcadeBodyBounds} obj - The object which will hold the coordinates of the bounds.
+     * @param {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} obj - The object which will hold the coordinates of the bounds.
      *
-     * @return {ArcadeBodyBounds} The same object that was passed with `x`, `y`, `right` and `bottom` values matching the respective values of the StaticBody.
+     * @return {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} The same object that was passed with `x`, `y`, `right` and `bottom` values matching the respective values of the StaticBody.
      */
-    public function getBounds(obj:ArcadeBodyBounds):ArcadeBodyBounds;
+    public function getBounds(obj:phaser.types.physics.arcade.ArcadeBodyBounds):phaser.types.physics.arcade.ArcadeBodyBounds;
     /**
      * Checks to see if a given x,y coordinate is colliding with this Static Body.
      *

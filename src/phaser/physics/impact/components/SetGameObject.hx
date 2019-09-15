@@ -4,7 +4,7 @@ package phaser.physics.impact.components;
  * The Impact Set Game Object component.
  * Should be applied as a mixin.
  *
- * @name Phaser.Physics.Impact.Components.SetGameObject
+ * @namespace Phaser.Physics.Impact.Components.SetGameObject
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Impact.Components.SetGameObject")

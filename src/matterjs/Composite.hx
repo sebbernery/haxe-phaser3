@@ -8,6 +8,7 @@ package matterjs;
  * Note that the `Matter.World` object is also a type of `Matter.Composite` and as such all composite methods here can also operate on a `Matter.World`.
  *
  * @class MatterJS.Composite
+ * @since 3.0.0
  */
 @:native("MatterJS.Composite")
 extern class Composite {

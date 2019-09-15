@@ -23,7 +23,6 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.Mask
  * @extends Phaser.GameObjects.Components.Origin
  * @extends Phaser.GameObjects.Components.Pipeline
- * @extends Phaser.GameObjects.Components.ScaleMode
  * @extends Phaser.GameObjects.Components.ScrollFactor
  * @extends Phaser.GameObjects.Components.Size
  * @extends Phaser.GameObjects.Components.TextureCrop
@@ -211,8 +210,10 @@ extern class Image extends phaser.gameobjects.GameObject {
     public function setDepth(value:Int):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
+     *
      * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipX
      * @type {boolean}
@@ -222,8 +223,10 @@ extern class Image extends phaser.gameobjects.GameObject {
     public var flipX:Bool;
     /**
      * The vertically flipped state of the Game Object.
+     *
      * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
      * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @name Phaser.GameObjects.Components.Flip#flipY
      * @type {boolean}
@@ -233,6 +236,10 @@ extern class Image extends phaser.gameobjects.GameObject {
     public var flipY:Bool;
     /**
      * Toggles the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#toggleFlipX
      * @since 3.0.0
@@ -251,6 +258,10 @@ extern class Image extends phaser.gameobjects.GameObject {
     public function toggleFlipY():Dynamic;
     /**
      * Sets the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlipX
      * @since 3.0.0
@@ -273,6 +284,10 @@ extern class Image extends phaser.gameobjects.GameObject {
     public function setFlipY(value:Bool):Dynamic;
     /**
      * Sets the horizontal and vertical flipped state of this Game Object.
+     *
+     * A Game Object that is flipped will render inversed on the flipped axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
      *
      * @method Phaser.GameObjects.Components.Flip#setFlip
      * @since 3.0.0
@@ -322,6 +337,21 @@ extern class Image extends phaser.gameobjects.GameObject {
      */
     public function getTopLeft(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
+     * Gets the top-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getTopCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getTopCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
      * Gets the top-right corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
      *
@@ -337,6 +367,36 @@ extern class Image extends phaser.gameobjects.GameObject {
      */
     public function getTopRight(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
+     * Gets the left-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getLeftCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getLeftCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
+     * Gets the right-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getRightCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getRightCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
      * Gets the bottom-left corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
      *
@@ -351,6 +411,21 @@ extern class Image extends phaser.gameobjects.GameObject {
      * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
      */
     public function getBottomLeft(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
+    /**
+     * Gets the bottom-center coordinate of this Game Object, regardless of origin.
+     * The returned point is calculated in local space and does not factor in any parent containers
+     *
+     * @method Phaser.GameObjects.Components.GetBounds#getBottomCenter
+     * @since 3.18.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [output,$return]
+     *
+     * @param {(Phaser.Math.Vector2|object)} [output] - An object to store the values in. If not provided a new Vector2 will be created.
+     * @param {boolean} [includeParent=false] - If this Game Object has a parent Container, include it (and all other ancestors) in the resulting vector?
+     *
+     * @return {(Phaser.Math.Vector2|object)} The values stored in the output object.
+     */
+    public function getBottomCenter(?output:Dynamic, ?includeParent:Bool):phaser.math.Vector2;
     /**
      * Gets the bottom-right corner coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
@@ -615,27 +690,6 @@ extern class Image extends phaser.gameobjects.GameObject {
      * @return {string} The string-based name of the pipeline being used by this Game Object.
      */
     public function getPipelineName():String;
-    /**
-     * The Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @name Phaser.GameObjects.Components.ScaleMode#scaleMode
-     * @type {Phaser.ScaleModes}
-     * @since 3.0.0
-     */
-    public var scaleMode:Dynamic;
-    /**
-     * Sets the Scale Mode being used by this Game Object.
-     * Can be either `ScaleModes.LINEAR` or `ScaleModes.NEAREST`.
-     *
-     * @method Phaser.GameObjects.Components.ScaleMode#setScaleMode
-     * @since 3.0.0
-     *
-     * @param {Phaser.ScaleModes} value - The Scale Mode to be used by this Game Object.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setScaleMode(value:Dynamic):Dynamic;
     /**
      * The horizontal scroll factor of this Game Object.
      *
@@ -954,6 +1008,7 @@ extern class Image extends phaser.gameobjects.GameObject {
     public var tintBottomRight:Int;
     /**
      * The tint value being applied to the whole of the Game Object.
+     * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
      * @type {integer}
@@ -1079,6 +1134,19 @@ extern class Image extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -1099,7 +1167,8 @@ extern class Image extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -1111,6 +1180,9 @@ extern class Image extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -1255,6 +1327,17 @@ extern class Image extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

@@ -193,20 +193,72 @@ extern class GameObjectFactory {
      */
     public function container(x:Float, y:Float, ?children:Dynamic):phaser.gameobjects.Container;
     /**
-     * Creates a new Image Game Object and adds it to the Scene.
+     * DOM Element Game Objects are a way to control and manipulate HTML Elements over the top of your game.
      *
-     * Note: This method will only be available if the Image Game Object has been built into Phaser.
+     * In order for DOM Elements to display you have to enable them by adding the following to your game
+     * configuration object:
+     *
+     * ```javascript
+     * dom {
+     *   createContainer: true
+     * }
+     * ```
+     *
+     * When this is added, Phaser will automatically create a DOM Container div that is positioned over the top
+     * of the game canvas. This div is sized to match the canvas, and if the canvas size changes, as a result of
+     * settings within the Scale Manager, the dom container is resized accordingly.
+     *
+     * You can create a DOM Element by either passing in DOMStrings, or by passing in a reference to an existing
+     * Element that you wish to be placed under the control of Phaser. For example:
+     *
+     * ```javascript
+     * this.add.dom(x, y, 'div', 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', 'Phaser');
+     * ```
+     *
+     * The above code will insert a div element into the DOM Container at the given x/y coordinate. The DOMString in
+     * the 4th argument sets the initial CSS style of the div and the final argument is the inner text. In this case,
+     * it will create a lime colored div that is 220px by 100px in size with the text Phaser in it, in an Arial font.
+     *
+     * You should nearly always, without exception, use explicitly sized HTML Elements, in order to fully control
+     * alignment and positioning of the elements next to regular game content.
+     *
+     * Rather than specify the CSS and HTML directly you can use the `load.html` File Loader to load it into the
+     * cache and then use the `createFromCache` method instead. You can also use `createFromHTML` and various other
+     * methods available in this class to help construct your elements.
+     *
+     * Once the element has been created you can then control it like you would any other Game Object. You can set its
+     * position, scale, rotation, alpha and other properties. It will move as the main Scene Camera moves and be clipped
+     * at the edge of the canvas. It's important to remember some limitations of DOM Elements: The obvious one is that
+     * they appear above or below your game canvas. You cannot blend them into the display list, meaning you cannot have
+     * a DOM Element, then a Sprite, then another DOM Element behind it.
+     *
+     * They also cannot be enabled for input. To do that, you have to use the `addListener` method to add native event
+     * listeners directly. The final limitation is to do with cameras. The DOM Container is sized to match the game canvas
+     * entirely and clipped accordingly. DOM Elements respect camera scrolling and scrollFactor settings, but if you
+     * change the size of the camera so it no longer matches the size of the canvas, they won't be clipped accordingly.
+     *
+     * Also, all DOM Elements are inserted into the same DOM Container, regardless of which Scene they are created in.
+     *
+     * DOM Elements are a powerful way to align native HTML with your Phaser Game Objects. For example, you can insert
+     * a login form for a multiplayer game directly into your title screen. Or a text input box for a highscore table.
+     * Or a banner ad from a 3rd party service. Or perhaps you'd like to use them for high resolution text display and
+     * UI. The choice is up to you, just remember that you're dealing with standard HTML and CSS floating over the top
+     * of your game, and should treat it accordingly.
+     *
+     * Note: This method will only be available if the DOM Element Game Object has been built into Phaser.
      *
      * @method Phaser.GameObjects.GameObjectFactory#dom
-     * @since 3.12.0
+     * @since 3.17.0
      *
-     * @param {number} x - The horizontal position of this Game Object in the world.
-     * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} element - The DOM element.
+     * @param {number} x - The horizontal position of this DOM Element in the world.
+     * @param {number} y - The vertical position of this DOM Element in the world.
+     * @param {(HTMLElement|string)} [element] - An existing DOM element, or a string. If a string starting with a # it will do a `getElementById` look-up on the string (minus the hash). Without a hash, it represents the type of element to create, i.e. 'div'.
+     * @param {(string|any)} [style] - If a string, will be set directly as the elements `style` property value. If a plain object, will be iterated and the values transferred. In both cases the values replacing whatever CSS styles may have been previously set.
+     * @param {string} [innerText] - If given, will be set directly as the elements `innerText` property value, replacing whatever was there before.
      *
      * @return {Phaser.GameObjects.DOMElement} The Game Object that was created.
      */
-    public function dom(x:Float, y:Float, element:String):phaser.gameobjects.DOMElement;
+    public function dom(x:Float, y:Float, ?element:Dynamic, ?style:Dynamic, ?innerText:String):phaser.gameobjects.DOMElement;
     /**
      * Creates a new Extern Game Object and adds it to the Scene.
      *
@@ -226,11 +278,11 @@ extern class GameObjectFactory {
      * @method Phaser.GameObjects.GameObjectFactory#graphics
      * @since 3.0.0
      *
-     * @param {GraphicsOptions} [config] - The Graphics configuration.
+     * @param {Phaser.Types.GameObjects.Graphics.Options} [config] - The Graphics configuration.
      *
      * @return {Phaser.GameObjects.Graphics} The Game Object that was created.
      */
-    public function graphics(?config:GraphicsOptions):phaser.gameobjects.Graphics;
+    public function graphics(?config:phaser.types.gameobjects.graphics.Options):phaser.gameobjects.Graphics;
     /**
      * Creates a new Group Game Object and adds it to the Scene.
      *
@@ -239,8 +291,8 @@ extern class GameObjectFactory {
      * @method Phaser.GameObjects.GameObjectFactory#group
      * @since 3.0.0
      *
-     * @param {(Phaser.GameObjects.GameObject[]|GroupConfig|GroupConfig[])} [children] - Game Objects to add to this Group; or the `config` argument.
-     * @param {GroupConfig|GroupCreateConfig} [config] - A Group Configuration object.
+     * @param {(Phaser.GameObjects.GameObject[]|Phaser.Types.GameObjects.Group.GroupConfig|Phaser.Types.GameObjects.Group.GroupConfig[])} [children] - Game Objects to add to this Group; or the `config` argument.
+     * @param {Phaser.Types.GameObjects.Group.GroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig} [config] - A Group Configuration object.
      *
      * @return {Phaser.GameObjects.Group} The Game Object that was created.
      */
@@ -292,7 +344,7 @@ extern class GameObjectFactory {
      *
      * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer|object)} [frame] - An optional frame from the Texture this Game Object is rendering with.
-     * @param {ParticleEmitterConfig|ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} The Game Object that was created.
      */
@@ -347,10 +399,31 @@ extern class GameObjectFactory {
      * @param {number} y - The vertical position of this Game Object in the world.
      * @param {integer} [width=32] - The width of the Render Texture.
      * @param {integer} [height=32] - The height of the Render Texture.
+     * @property {string} [key] - The texture key to make the RenderTexture from.
+     * @property {string} [frame] - the frame to make the RenderTexture from.
      *
      * @return {Phaser.GameObjects.RenderTexture} The Game Object that was created.
      */
     public function renderTexture(x:Float, y:Float, ?width:Int, ?height:Int):phaser.gameobjects.RenderTexture;
+    /**
+     * Creates a new Shader Game Object and adds it to the Scene.
+     *
+     * Note: This method will only be available if the Shader Game Object and WebGL support have been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory#shader
+     * @webglOnly
+     * @since 3.17.0
+     *
+     * @param {(string|Phaser.Display.BaseShader)} key - The key of the shader to use from the shader cache, or a BaseShader instance.
+     * @param {number} [x=0] - The horizontal position of this Game Object in the world.
+     * @param {number} [y=0] - The vertical position of this Game Object in the world.
+     * @param {number} [width=128] - The width of the Game Object.
+     * @param {number} [height=128] - The height of the Game Object.
+     * @param {string[]} [textures] - Optional array of texture keys to bind to the iChannel0...3 uniforms. The textures must already exist in the Texture Manager.
+     *
+     * @return {Phaser.GameObjects.Shader} The Game Object that was created.
+     */
+    public function shader(key:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?textures:Array<String>):phaser.gameobjects.Shader;
     /**
      * Creates a new Arc Shape Game Object and adds it to the Scene.
      *
@@ -857,12 +930,12 @@ extern class GameObjectFactory {
     /**
      * Creates a new Tween object.
      *
-     * Note: This method will only be available Tweens have been built into Phaser.
+     * Note: This method will only be available if Tweens have been built into Phaser.
      *
      * @method Phaser.GameObjects.GameObjectFactory#tween
      * @since 3.0.0
      *
-     * @param {object} config - The Tween configuration.
+     * @param {Phaser.Types.Tweens.TweenBuilderConfig|object} config - The Tween configuration.
      *
      * @return {Phaser.Tweens.Tween} The Tween that was created.
      */

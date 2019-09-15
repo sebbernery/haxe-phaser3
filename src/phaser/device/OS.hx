@@ -11,8 +11,6 @@ package phaser.device;
  *
  * @property {boolean} android - Is running on android?
  * @property {boolean} chromeOS - Is running on chromeOS?
- * @property {boolean} cocoonJS - Is the game running under CocoonJS?
- * @property {boolean} cocoonJSApp - Is this game running with CocoonJS.App?
  * @property {boolean} cordova - Is the game running under Apache Cordova?
  * @property {boolean} crosswalk - Is the game running under the Intel Crosswalk XDK?
  * @property {boolean} desktop - Is running on a desktop?
@@ -35,8 +33,6 @@ package phaser.device;
 typedef OS = {
 var android:Bool;
 var chromeOS:Bool;
-var cocoonJS:Bool;
-var cocoonJSApp:Bool;
 var cordova:Bool;
 var crosswalk:Bool;
 var desktop:Bool;

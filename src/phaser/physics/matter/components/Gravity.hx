@@ -3,7 +3,7 @@ package phaser.physics.matter.components;
 /**
  * A component to manipulate world gravity for Matter.js bodies.
  *
- * @name Phaser.Physics.Matter.Components.Gravity
+ * @namespace Phaser.Physics.Matter.Components.Gravity
  * @since 3.0.0
  */
 @:native("Phaser.Physics.Matter.Components.Gravity")

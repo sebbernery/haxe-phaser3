@@ -11,14 +11,14 @@ package phaser.gameobjects.particles;
  * @constructor
  * @since 3.0.0
  *
- * @param {ParticleEmitterConfig} config - Settings for the Particle Emitter that owns this property.
+ * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig} config - Settings for the Particle Emitter that owns this property.
  * @param {string} key - The name of the property.
  * @param {number} defaultValue - The default value of the property.
  * @param {boolean} [emitOnly=false] - Whether the property can only be modified when a Particle is emitted.
  */
 @:native("Phaser.GameObjects.Particles.EmitterOp")
 extern class EmitterOp {
-    public function new(config:ParticleEmitterConfig, key:String, defaultValue:Float, ?emitOnly:Bool);
+    public function new(config:phaser.types.gameobjects.particles.ParticleEmitterConfig, key:String, defaultValue:Float, ?emitOnly:Bool);
     /**
      * The name of this property.
      *
@@ -106,18 +106,18 @@ extern class EmitterOp {
      * The callback to run for Particles when they are emitted from the Particle Emitter.
      *
      * @name Phaser.GameObjects.Particles.EmitterOp#onEmit
-     * @type {EmitterOpOnEmitCallback}
+     * @type {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitCallback}
      * @since 3.0.0
      */
-    public var onEmit:EmitterOpOnEmitCallback;
+    public var onEmit:phaser.types.gameobjects.particles.EmitterOpOnEmitCallback;
     /**
      * The callback to run for Particles when they are updated.
      *
      * @name Phaser.GameObjects.Particles.EmitterOp#onUpdate
-     * @type {EmitterOpOnUpdateCallback}
+     * @type {Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateCallback}
      * @since 3.0.0
      */
-    public var onUpdate:EmitterOpOnUpdateCallback;
+    public var onUpdate:phaser.types.gameobjects.particles.EmitterOpOnUpdateCallback;
     /**
      * Load the property from a Particle Emitter configuration object.
      *
@@ -126,10 +126,10 @@ extern class EmitterOp {
      * @method Phaser.GameObjects.Particles.EmitterOp#loadConfig
      * @since 3.0.0
      *
-     * @param {ParticleEmitterConfig} [config] - Settings for the Particle Emitter that owns this property.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig} [config] - Settings for the Particle Emitter that owns this property.
      * @param {string} [newKey] - The new key to use for this property, if any.
      */
-    public function loadConfig(?config:ParticleEmitterConfig, ?newKey:String):Void;
+    public function loadConfig(?config:phaser.types.gameobjects.particles.ParticleEmitterConfig, ?newKey:String):Void;
     /**
      * Build a JSON representation of this Particle Emitter property.
      *
@@ -209,7 +209,7 @@ extern class EmitterOp {
      * @param {string} key - The name of the property.
      * @param {number} [value] - The current value of the property.
      *
-     * @return {number} The new value of hte property.
+     * @return {number} The new value of the property.
      */
     public function defaultEmit(particle:phaser.gameobjects.particles.Particle, key:String, ?value:Float):Float;
     /**
@@ -278,9 +278,9 @@ extern class EmitterOp {
      */
     public function steppedEmit():Float;
     /**
-     * An `onEmit` callback that returns an eased value between the
-     * {@link Phaser.GameObjects.Particles.EmitterOp#start} and {@link Phaser.GameObjects.Particles.EmitterOp#end}
-     * range.
+     * An `onEmit` callback for an eased property.
+     *
+     * It prepares the particle for easing by {@link Phaser.GameObjects.Particles.EmitterOp#easeValueUpdate}.
      *
      * @method Phaser.GameObjects.Particles.EmitterOp#easedValueEmit
      * @since 3.0.0
@@ -288,7 +288,7 @@ extern class EmitterOp {
      * @param {Phaser.GameObjects.Particles.Particle} particle - The particle.
      * @param {string} key - The name of the property.
      *
-     * @return {number} The new value of the property.
+     * @return {number} {@link Phaser.GameObjects.Particles.EmitterOp#start}, as the new value of the property.
      */
     public function easedValueEmit(particle:phaser.gameobjects.particles.Particle, key:String):Float;
     /**

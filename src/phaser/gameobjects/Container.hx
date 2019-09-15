@@ -47,7 +47,6 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.ComputedSize
  * @extends Phaser.GameObjects.Components.Depth
  * @extends Phaser.GameObjects.Components.Mask
- * @extends Phaser.GameObjects.Components.ScrollFactor
  * @extends Phaser.GameObjects.Components.Transform
  * @extends Phaser.GameObjects.Components.Visible
  *
@@ -113,6 +112,58 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @since 3.4.0
      */
     public var localTransform:phaser.gameobjects.components.TransformMatrix;
+    /**
+     * The horizontal scroll factor of this Container.
+     *
+     * The scroll factor controls the influence of the movement of a Camera upon this Container.
+     *
+     * When a camera scrolls it will change the location at which this Container is rendered on-screen.
+     * It does not change the Containers actual position values.
+     *
+     * For a Container, setting this value will only update the Container itself, not its children.
+     * If you wish to change the scrollFactor of the children as well, use the `setScrollFactor` method.
+     *
+     * A value of 1 means it will move exactly in sync with a camera.
+     * A value of 0 means it will not move at all, even if the camera moves.
+     * Other values control the degree to which the camera movement is mapped to this Container.
+     *
+     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
+     * calculating physics collisions. Bodies always collide based on their world position, but changing
+     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
+     * them from physics bodies if not accounted for in your code.
+     *
+     * @name Phaser.GameObjects.Container#scrollFactorX
+     * @type {number}
+     * @default 1
+     * @since 3.0.0
+     */
+    public var scrollFactorX:Float;
+    /**
+     * The vertical scroll factor of this Container.
+     *
+     * The scroll factor controls the influence of the movement of a Camera upon this Container.
+     *
+     * When a camera scrolls it will change the location at which this Container is rendered on-screen.
+     * It does not change the Containers actual position values.
+     *
+     * For a Container, setting this value will only update the Container itself, not its children.
+     * If you wish to change the scrollFactor of the children as well, use the `setScrollFactor` method.
+     *
+     * A value of 1 means it will move exactly in sync with a camera.
+     * A value of 0 means it will not move at all, even if the camera moves.
+     * Other values control the degree to which the camera movement is mapped to this Container.
+     *
+     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
+     * calculating physics collisions. Bodies always collide based on their world position, but changing
+     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
+     * them from physics bodies if not accounted for in your code.
+     *
+     * @name Phaser.GameObjects.Container#scrollFactorY
+     * @type {number}
+     * @default 1
+     * @since 3.0.0
+     */
+    public var scrollFactorY:Float;
     /**
      * Internal value to allow Containers to be used for input and physics.
      * Do not change this value. It has no effect other than to break things.
@@ -659,6 +710,33 @@ extern class Container extends phaser.gameobjects.GameObject {
      */
     public function iterate(callback:Dynamic, ?context:Dynamic, ?args:Dynamic):phaser.gameobjects.Container;
     /**
+     * Sets the scroll factor of this Container and optionally all of its children.
+     *
+     * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
+     *
+     * When a camera scrolls it will change the location at which this Game Object is rendered on-screen.
+     * It does not change the Game Objects actual position values.
+     *
+     * A value of 1 means it will move exactly in sync with a camera.
+     * A value of 0 means it will not move at all, even if the camera moves.
+     * Other values control the degree to which the camera movement is mapped to this Game Object.
+     *
+     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
+     * calculating physics collisions. Bodies always collide based on their world position, but changing
+     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
+     * them from physics bodies if not accounted for in your code.
+     *
+     * @method Phaser.GameObjects.Container#setScrollFactor
+     * @since 3.0.0
+     *
+     * @param {number} x - The horizontal scroll factor of this Game Object.
+     * @param {number} [y=x] - The vertical scroll factor of this Game Object. If not set it will use the `x` value.
+     * @param {boolean} [updateChildren=false] - Apply this scrollFactor to all Container children as well?
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setScrollFactor(x:Float, ?y:Float, ?updateChildren:Bool):Dynamic;
+    /**
      * Internal destroy handler, called as part of the destroy process.
      *
      * @method Phaser.GameObjects.Container#preDestroy
@@ -998,78 +1076,6 @@ extern class Container extends phaser.gameobjects.GameObject {
      */
     public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
     /**
-     * The horizontal scroll factor of this Game Object.
-     *
-     * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
-     *
-     * When a camera scrolls it will change the location at which this Game Object is rendered on-screen.
-     * It does not change the Game Objects actual position values.
-     *
-     * A value of 1 means it will move exactly in sync with a camera.
-     * A value of 0 means it will not move at all, even if the camera moves.
-     * Other values control the degree to which the camera movement is mapped to this Game Object.
-     *
-     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
-     * calculating physics collisions. Bodies always collide based on their world position, but changing
-     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
-     * them from physics bodies if not accounted for in your code.
-     *
-     * @name Phaser.GameObjects.Components.ScrollFactor#scrollFactorX
-     * @type {number}
-     * @default 1
-     * @since 3.0.0
-     */
-    public var scrollFactorX:Float;
-    /**
-     * The vertical scroll factor of this Game Object.
-     *
-     * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
-     *
-     * When a camera scrolls it will change the location at which this Game Object is rendered on-screen.
-     * It does not change the Game Objects actual position values.
-     *
-     * A value of 1 means it will move exactly in sync with a camera.
-     * A value of 0 means it will not move at all, even if the camera moves.
-     * Other values control the degree to which the camera movement is mapped to this Game Object.
-     *
-     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
-     * calculating physics collisions. Bodies always collide based on their world position, but changing
-     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
-     * them from physics bodies if not accounted for in your code.
-     *
-     * @name Phaser.GameObjects.Components.ScrollFactor#scrollFactorY
-     * @type {number}
-     * @default 1
-     * @since 3.0.0
-     */
-    public var scrollFactorY:Float;
-    /**
-     * Sets the scroll factor of this Game Object.
-     *
-     * The scroll factor controls the influence of the movement of a Camera upon this Game Object.
-     *
-     * When a camera scrolls it will change the location at which this Game Object is rendered on-screen.
-     * It does not change the Game Objects actual position values.
-     *
-     * A value of 1 means it will move exactly in sync with a camera.
-     * A value of 0 means it will not move at all, even if the camera moves.
-     * Other values control the degree to which the camera movement is mapped to this Game Object.
-     *
-     * Please be aware that scroll factor values other than 1 are not taken in to consideration when
-     * calculating physics collisions. Bodies always collide based on their world position, but changing
-     * the scroll factor is a visual adjustment to where the textures are rendered, which can offset
-     * them from physics bodies if not accounted for in your code.
-     *
-     * @method Phaser.GameObjects.Components.ScrollFactor#setScrollFactor
-     * @since 3.0.0
-     *
-     * @param {number} x - The horizontal scroll factor of this Game Object.
-     * @param {number} [y=x] - The vertical scroll factor of this Game Object. If not set it will use the `x` value.
-     *
-     * @return {this} This Game Object instance.
-     */
-    public function setScrollFactor(x:Float, ?y:Float):Dynamic;
-    /**
      * The x position of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#x
@@ -1107,6 +1113,19 @@ extern class Container extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -1127,7 +1146,8 @@ extern class Container extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -1139,6 +1159,9 @@ extern class Container extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -1283,6 +1306,17 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

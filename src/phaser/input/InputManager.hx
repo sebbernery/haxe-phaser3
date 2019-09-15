@@ -8,7 +8,7 @@ package phaser.input;
  *
  * Keyboard and Gamepad are plugins, handled directly by the InputPlugin class.
  *
- * It then manages the event queue, pointer creation and general hit test related operations.
+ * It then manages the events, pointer creation and general hit test related operations.
  *
  * You rarely need to interact with the Input Manager directly, and as such, all of its properties and methods
  * should be considered private. Instead, you should use the Input Plugin, which is a Scene level system, responsible
@@ -77,16 +77,6 @@ extern class InputManager {
      * @since 3.0.0
      */
     public var events:phaser.events.EventEmitter;
-    /**
-     * A standard FIFO queue for the native DOM events waiting to be handled by the Input Manager.
-     *
-     * @name Phaser.Input.InputManager#queue
-     * @type {array}
-     * @default []
-     * @deprecated
-     * @since 3.0.0
-     */
-    public var queue:Array<Dynamic>;
     /**
      * Are any mouse or touch pointers currently over the game canvas?
      * This is updated automatically by the canvas over and out handlers.
@@ -179,14 +169,6 @@ extern class InputManager {
      */
     public var activePointer:phaser.input.Pointer;
     /**
-     * Reset every frame. Set to `true` if any of the Pointers are dirty this frame.
-     *
-     * @name Phaser.Input.InputManager#dirty
-     * @type {boolean}
-     * @since 3.10.0
-     */
-    public var dirty:Bool;
-    /**
      * If the top-most Scene in the Scene List receives an input it will stop input from
      * propagating any lower down the scene list, i.e. if you have a UI Scene at the top
      * and click something on it, that click will not then be passed down to any other
@@ -198,33 +180,6 @@ extern class InputManager {
      * @since 3.0.0
      */
     public var globalTopOnly:Bool;
-    /**
-     * An internal flag that controls if the Input Manager will ignore or process native DOM events this frame.
-     * Set via the InputPlugin.stopPropagation method.
-     *
-     * @name Phaser.Input.InputManager#ignoreEvents
-     * @type {boolean}
-     * @default false
-     * @since 3.0.0
-     */
-    public var ignoreEvents:Bool;
-    /**
-     * Use the internal event queue or not?
-     *
-     * Set this via the Game Config with the `inputQueue` property.
-     *
-     * Phaser 3.15.1 and earlier used a event queue by default.
-     *
-     * This was changed in version 3.16 to use an immediate-mode system.
-     * The previous queue based version remains and is left under this flag for backwards
-     * compatibility. This flag, along with the legacy system, will be removed in a future version.
-     *
-     * @name Phaser.Input.InputManager#useQueue
-     * @type {boolean}
-     * @default false
-     * @since 3.16.0
-     */
-    public var useQueue:Bool;
     /**
      * The time this Input Manager was last updated.
      * This value is populated by the Game Step each frame.
@@ -298,118 +253,10 @@ extern class InputManager {
      * @method Phaser.Input.InputManager#updateInputPlugins
      * @since 3.16.0
      *
-     * @param {number} time - The time value from the most recent Game step. Typically a high-resolution timer value, or Date.now().
-     * @param {number} delta - The delta value since the last frame. This is smoothed to avoid delta spikes by the TimeStep class.
+     * @param {integer} type - The type of event to process.
+     * @param {Phaser.Input.Pointer[]} pointers - An array of Pointers on which the event occurred.
      */
-    public function updateInputPlugins(time:Float, delta:Float):Void;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mouseup` or `touchend` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is released, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputManager#addUpCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this dom event.
-     * @param {boolean} [isOnce=true] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Manager.
-     */
-    public function addUpCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mousedown` or `touchstart` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is down, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputManager#addDownCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this dom event.
-     * @param {boolean} [isOnce=true] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Manager.
-     */
-    public function addDownCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
-    /**
-     * **Note:** As of Phaser 3.16 this method is no longer required _unless_ you have set `input.queue = true`
-     * in your game config, to force it to use the legacy event queue system. This method is deprecated and
-     * will be removed in a future version.
-     *
-     * Adds a callback to be invoked whenever the native DOM `mousemove` or `touchmove` events are received.
-     * By setting the `isOnce` argument you can control if the callback is called once,
-     * or every time the DOM event occurs.
-     *
-     * Callbacks passed to this method are invoked _immediately_ when the DOM event happens,
-     * within the scope of the DOM event handler. Therefore, they are considered as 'native'
-     * from the perspective of the browser. This means they can be used for tasks such as
-     * opening new browser windows, or anything which explicitly requires user input to activate.
-     * However, as a result of this, they come with their own risks, and as such should not be used
-     * for general game input, but instead be reserved for special circumstances.
-     *
-     * If all you're trying to do is execute a callback when a pointer is moved, then
-     * please use the internal Input event system instead.
-     *
-     * Please understand that these callbacks are invoked when the browser feels like doing so,
-     * which may be entirely out of the normal flow of the Phaser Game Loop. Therefore, you should absolutely keep
-     * Phaser related operations to a minimum in these callbacks. For example, don't destroy Game Objects,
-     * change Scenes or manipulate internal systems, otherwise you run a very real risk of creating
-     * heisenbugs (https://en.wikipedia.org/wiki/Heisenbug) that prove a challenge to reproduce, never mind
-     * solve.
-     *
-     * @method Phaser.Input.InputManager#addMoveCallback
-     * @deprecated
-     * @since 3.10.0
-     *
-     * @param {function} callback - The callback to be invoked on this dom event.
-     * @param {boolean} [isOnce=false] - `true` if the callback will only be invoked once, `false` to call every time this event happens.
-     *
-     * @return {this} The Input Manager.
-     */
-    public function addMoveCallback(callback:Dynamic, ?isOnce:Bool):Dynamic;
+    public function updateInputPlugins(type:Int, pointers:Array<phaser.input.Pointer>):Void;
     /**
      * Performs a hit test using the given Pointer and camera, against an array of interactive Game Objects.
      *
@@ -458,13 +305,13 @@ extern class InputManager {
      * @method Phaser.Input.InputManager#pointWithinInteractiveObject
      * @since 3.0.0
      *
-     * @param {Phaser.Input.InteractiveObject} object - The Interactive Object to check against.
+     * @param {Phaser.Types.Input.InteractiveObject} object - The Interactive Object to check against.
      * @param {number} x - The translated x coordinate for the hit test.
      * @param {number} y - The translated y coordinate for the hit test.
      *
      * @return {boolean} `true` if the coordinates were inside the Game Objects hit area, otherwise `false`.
      */
-    public function pointWithinInteractiveObject(object:phaser.input.InteractiveObject, x:Float, y:Float):Bool;
+    public function pointWithinInteractiveObject(object:phaser.types.input.InteractiveObject, x:Float, y:Float):Bool;
     /**
      * Transforms the pageX and pageY values of a Pointer into the scaled coordinate space of the Input Manager.
      *

@@ -100,6 +100,15 @@ extern class BaseCache {
      */
     public function remove(key:String):phaser.cache.BaseCache;
     /**
+     * Returns all keys in use in this cache.
+     *
+     * @method Phaser.Cache.BaseCache#getKeys
+     * @since 3.17.0
+     *
+     * @return {string[]} Array containing all the keys.
+     */
+    public function getKeys():Array<String>;
+    /**
      * Destroys this cache and all items within it.
      *
      * @method Phaser.Cache.BaseCache#destroy

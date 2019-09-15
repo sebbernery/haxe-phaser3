@@ -18,6 +18,16 @@ package phaser.geom;
 extern class Line {
     public function new(?x1:Float, ?y1:Float, ?x2:Float, ?y2:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.LINE`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Line#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The x coordinate of the lines starting point.
      *
      * @name Phaser.Geom.Line#x1

@@ -68,10 +68,10 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * A reference to the Scene Systems Settings.
      *
      * @name Phaser.Input.Keyboard.KeyboardPlugin#settings
-     * @type {Phaser.Scenes.Settings.Object}
+     * @type {Phaser.Types.Scenes.SettingsObject}
      * @since 3.10.0
      */
-    public var settings:phaser.scenes.settings.Object;
+    public var settings:phaser.types.scenes.SettingsObject;
     /**
      * A reference to the Scene Input Plugin that created this Keyboard Plugin.
      *
@@ -245,9 +245,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.KeyboardPlugin#createCursorKeys
      * @since 3.10.0
      *
-     * @return {CursorKeys} An object containing the properties: `up`, `down`, `left`, `right`, `space` and `shift`.
+     * @return {Phaser.Types.Input.Keyboard.CursorKeys} An object containing the properties: `up`, `down`, `left`, `right`, `space` and `shift`.
      */
-    public function createCursorKeys():CursorKeys;
+    public function createCursorKeys():phaser.types.input.keyboard.CursorKeys;
     /**
      * A practical way to create an object containing user selected hotkeys.
      *
@@ -305,10 +305,11 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {(Phaser.Input.Keyboard.Key|string|integer)} key - Either a Key object, a string, such as `A` or `SPACE`, or a key code value.
+     * @param {boolean} [destroy=false] - Call `Key.destroy` on the removed Key object?
      *
      * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
      */
-    public function removeKey(key:Dynamic):phaser.input.keyboard.KeyboardPlugin;
+    public function removeKey(key:Dynamic, ?destroy:Bool):phaser.input.keyboard.KeyboardPlugin;
     /**
      * Creates a new KeyCombo.
      *
@@ -342,11 +343,11 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @since 3.10.0
      *
      * @param {(string|integer[]|object[])} keys - The keys that comprise this combo.
-     * @param {KeyComboConfig} [config] - A Key Combo configuration object.
+     * @param {Phaser.Types.Input.Keyboard.KeyComboConfig} [config] - A Key Combo configuration object.
      *
      * @return {Phaser.Input.Keyboard.KeyCombo} The new KeyCombo object.
      */
-    public function createCombo(keys:Dynamic, ?config:KeyComboConfig):phaser.input.keyboard.KeyCombo;
+    public function createCombo(keys:Dynamic, ?config:phaser.types.input.keyboard.KeyComboConfig):phaser.input.keyboard.KeyCombo;
     /**
      * Checks if the given Key object is currently being held down.
      *

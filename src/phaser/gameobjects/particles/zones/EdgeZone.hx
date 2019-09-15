@@ -9,7 +9,7 @@ package phaser.gameobjects.particles.zones;
  * @constructor
  * @since 3.0.0
  *
- * @param {EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
+ * @param {Phaser.Types.GameObjects.Particles.EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
  * @param {integer} quantity - The number of particles to place on the source edge. Set to 0 to use `stepRate` instead.
  * @param {number} stepRate - The distance between each particle. When set, `quantity` is implied and should be set to 0.
  * @param {boolean} [yoyo=false] - Whether particles are placed from start to end and then end to start.
@@ -17,12 +17,12 @@ package phaser.gameobjects.particles.zones;
  */
 @:native("Phaser.GameObjects.Particles.Zones.EdgeZone")
 extern class EdgeZone {
-    public function new(source:EdgeZoneSource, quantity:Int, stepRate:Float, ?yoyo:Bool, ?seamless:Bool);
+    public function new(source:phaser.types.gameobjects.particles.EdgeZoneSource, quantity:Int, stepRate:Float, ?yoyo:Bool, ?seamless:Bool);
     /**
      * An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
      *
      * @name Phaser.GameObjects.Particles.Zones.EdgeZone#source
-     * @type {EdgeZoneSource|RandomZoneSource}
+     * @type {Phaser.Types.GameObjects.Particles.EdgeZoneSource|Phaser.Types.GameObjects.Particles.RandomZoneSource}
      * @since 3.0.0
      */
     public var source:Dynamic;
@@ -89,16 +89,16 @@ extern class EdgeZone {
      */
     public function updateSource():phaser.gameobjects.particles.zones.EdgeZone;
     /**
-     * Change the EdgeZone's source.
+     * Change the source of the EdgeZone.
      *
      * @method Phaser.GameObjects.Particles.Zones.EdgeZone#changeSource
      * @since 3.0.0
      *
-     * @param {EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
+     * @param {Phaser.Types.GameObjects.Particles.EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
      *
      * @return {Phaser.GameObjects.Particles.Zones.EdgeZone} This Edge Zone.
      */
-    public function changeSource(source:EdgeZoneSource):phaser.gameobjects.particles.zones.EdgeZone;
+    public function changeSource(source:phaser.types.gameobjects.particles.EdgeZoneSource):phaser.gameobjects.particles.zones.EdgeZone;
     /**
      * Get the next point in the Zone and set its coordinates on the given Particle.
      *

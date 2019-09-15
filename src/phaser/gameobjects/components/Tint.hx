@@ -4,7 +4,7 @@ package phaser.gameobjects.components;
  * Provides methods used for setting the tint of a Game Object.
  * Should be applied as a mixin and not used directly.
  *
- * @name Phaser.GameObjects.Components.Tint
+ * @namespace Phaser.GameObjects.Components.Tint
  * @webglOnly
  * @since 3.0.0
  */
@@ -62,6 +62,7 @@ extern class Tint {
     public var tintBottomRight:Int;
     /**
      * The tint value being applied to the whole of the Game Object.
+     * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
      * @type {integer}

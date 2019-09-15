@@ -15,12 +15,12 @@ package phaser.loader.filetypes;
  * @since 3.0.0
  *
  * @param {Phaser.Loader.LoaderPlugin} loader - A reference to the Loader that is responsible for this file.
- * @param {(string|Phaser.Loader.FileTypes.ImageFileConfig)} key - The key to use for this file, or a file configuration object.
+ * @param {(string|Phaser.Types.Loader.FileTypes.ImageFileConfig)} key - The key to use for this file, or a file configuration object.
  * @param {string|string[]} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
- * @param {XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
- * @param {Phaser.Loader.FileTypes.ImageFrameConfig} [frameConfig] - The frame configuration object. Only provided for, and used by, Sprite Sheets.
+ * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
+ * @param {Phaser.Types.Loader.FileTypes.ImageFrameConfig} [frameConfig] - The frame configuration object. Only provided for, and used by, Sprite Sheets.
  */
 @:native("Phaser.Loader.FileTypes.ImageFile")
 extern class ImageFile extends phaser.loader.File {
-    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:Dynamic, ?xhrSettings:XHRSettingsObject, ?frameConfig:phaser.loader.filetypes.ImageFrameConfig);
+    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject, ?frameConfig:phaser.types.loader.filetypes.ImageFrameConfig);
 }

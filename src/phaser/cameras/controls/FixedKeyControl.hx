@@ -24,11 +24,11 @@ package phaser.cameras.controls;
  * @constructor
  * @since 3.0.0
  *
- * @param {FixedKeyControlConfig} config - The Fixed Key Control configuration object.
+ * @param {Phaser.Types.Cameras.Controls.FixedKeyControlConfig} config - The Fixed Key Control configuration object.
  */
 @:native("Phaser.Cameras.Controls.FixedKeyControl")
 extern class FixedKeyControl {
-    public function new(config:FixedKeyControlConfig);
+    public function new(config:phaser.types.cameras.controls.FixedKeyControlConfig);
     /**
      * The Camera that this Control will update.
      *

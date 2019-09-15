@@ -4,7 +4,8 @@ package phaser.tweens;
  * @classdesc
  * A Timeline combines multiple Tweens into one. Its overall behavior is otherwise similar to a single Tween.
  *
- * The Timeline updates all of its Tweens simultaneously. Its methods allow you to easily build a sequence of Tweens (each one starting after the previous one) or run multiple Tweens at once during given parts of the Timeline.
+ * The Timeline updates all of its Tweens simultaneously. Its methods allow you to easily build a sequence
+ * of Tweens (each one starting after the previous one) or run multiple Tweens at once during given parts of the Timeline.
  *
  * @class Timeline
  * @memberof Phaser.Tweens
@@ -44,7 +45,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var data:Array<Dynamic>;
     /**
-     * data array doesn't usually change, so we can cache the length
+     * The cached size of the data array.
      *
      * @name Phaser.Tweens.Timeline#totalData
      * @type {number}
@@ -53,7 +54,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var totalData:Float;
     /**
-     * If true then duration, delay, etc values are all frame totals.
+     * If true then duration, delay, etc values are all frame totals, rather than ms.
      *
      * @name Phaser.Tweens.Timeline#useFrames
      * @type {boolean}
@@ -62,8 +63,8 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var useFrames:Bool;
     /**
-     * Scales the time applied to this Tween. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
-     * Value isn't used when calculating total duration of the tween, it's a run-time delta adjustment only.
+     * Scales the time applied to this Timeline. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
+     * Value isn't used when calculating total duration of the Timeline, it's a run-time delta adjustment only.
      *
      * @name Phaser.Tweens.Timeline#timeScale
      * @type {number}
@@ -72,8 +73,8 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var timeScale:Float;
     /**
-     * Loop this tween? Can be -1 for an infinite loop, or an integer.
-     * When enabled it will play through ALL TweenDatas again (use TweenData.repeat to loop a single TD)
+     * Loop this Timeline? Can be -1 for an infinite loop, or an integer.
+     * When enabled it will play through ALL Tweens again (use Tween.repeat to loop a single tween)
      *
      * @name Phaser.Tweens.Timeline#loop
      * @type {number}
@@ -82,7 +83,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var loop:Float;
     /**
-     * Time in ms/frames before the tween loops.
+     * Time in ms/frames before this Timeline loops.
      *
      * @name Phaser.Tweens.Timeline#loopDelay
      * @type {number}
@@ -109,7 +110,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var completeDelay:Float;
     /**
-     * Countdown timer (used by loopDelay and completeDelay)
+     * Countdown timer value, as used by `loopDelay` and `completeDelay`.
      *
      * @name Phaser.Tweens.Timeline#countdown
      * @type {number}
@@ -118,7 +119,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var countdown:Float;
     /**
-     * The current state of the tween
+     * The current state of the Timeline.
      *
      * @name Phaser.Tweens.Timeline#state
      * @type {integer}
@@ -126,7 +127,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var state:Int;
     /**
-     * Does the Tween start off paused? (if so it needs to be started with Tween.play)
+     * Does the Timeline start off paused? (if so it needs to be started with Timeline.play)
      *
      * @name Phaser.Tweens.Timeline#paused
      * @type {boolean}
@@ -135,7 +136,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var paused:Bool;
     /**
-     * Elapsed time in ms/frames of this run through the Tween.
+     * Elapsed time in ms/frames of this run through of the Timeline.
      *
      * @name Phaser.Tweens.Timeline#elapsed
      * @type {number}
@@ -144,7 +145,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var elapsed:Float;
     /**
-     * Total elapsed time in ms/frames of the entire Tween, including looping.
+     * Total elapsed time in ms/frames of the entire Timeline, including looping.
      *
      * @name Phaser.Tweens.Timeline#totalElapsed
      * @type {number}
@@ -153,7 +154,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var totalElapsed:Float;
     /**
-     * Time in ms/frames for the whole Tween to play through once, excluding loop amounts and loop delays.
+     * Time in ms/frames for the whole Timeline to play through once, excluding loop amounts and loop delays.
      *
      * @name Phaser.Tweens.Timeline#duration
      * @type {number}
@@ -162,7 +163,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var duration:Float;
     /**
-     * Value between 0 and 1. The amount through the Tween, excluding loops.
+     * Value between 0 and 1. The amount of progress through the Timeline, _excluding loops_.
      *
      * @name Phaser.Tweens.Timeline#progress
      * @type {number}
@@ -171,7 +172,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var progress:Float;
     /**
-     * Time in ms/frames for all Tweens to complete (including looping)
+     * Time in ms/frames for all Tweens in this Timeline to complete (including looping)
      *
      * @name Phaser.Tweens.Timeline#totalDuration
      * @type {number}
@@ -180,7 +181,7 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var totalDuration:Float;
     /**
-     * Value between 0 and 1. The amount through the entire Tween, including looping.
+     * Value between 0 and 1. The amount through the entire Timeline, including looping.
      *
      * @name Phaser.Tweens.Timeline#totalProgress
      * @type {number}
@@ -189,24 +190,61 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public var totalProgress:Float;
     /**
-     * Sets the value of the time scale applied to this Timeline. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
-     * Value isn't used when calculating total duration of the tween, it's a run-time delta adjustment only.
+     * An object containing the different Tween callback functions.
+     *
+     * You can either set these in the Tween config, or by calling the `Tween.setCallback` method.
+     *
+     * `onComplete` When the Timeline finishes playback fully or `Timeline.stop` is called. Never invoked if timeline is set to repeat infinitely.
+     * `onLoop` When a Timeline loops.
+     * `onStart` When the Timeline starts playing.
+     * `onUpdate` When a Timeline updates a child Tween.
+     * `onYoyo` When a Timeline starts a yoyo.
+     *
+     * @name Phaser.Tweens.Timeline#callbacks
+     * @type {object}
+     * @since 3.0.0
+     */
+    public var callbacks:Dynamic;
+    /**
+     * The context in which all callbacks are invoked.
+     *
+     * @name Phaser.Tweens.Timeline#callbackScope
+     * @type {any}
+     * @since 3.0.0
+     */
+    public var callbackScope:Dynamic;
+    /**
+     * Internal method that will emit a Timeline based Event and invoke the given callback.
+     *
+     * @method Phaser.Tweens.Timeline#dispatchTimelineEvent
+     * @since 3.19.0
+     *
+     * @param {Phaser.Types.Tweens.Event} event - The Event to be dispatched.
+     * @param {function} callback - The callback to be invoked. Can be `null` or `undefined` to skip invocation.
+     */
+    public function dispatchTimelineEvent(event:phaser.types.tweens.Event, callback:Dynamic):Void;
+    /**
+     * Sets the value of the time scale applied to this Timeline. A value of 1 runs in real-time.
+     * A value of 0.5 runs 50% slower, and so on.
+     *
+     * The value isn't used when calculating total duration of the tween, it's a run-time delta adjustment only.
      *
      * @method Phaser.Tweens.Timeline#setTimeScale
      * @since 3.0.0
      *
      * @param {number} value - The time scale value to set.
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function setTimeScale(value:Float):phaser.tweens.Timeline;
+    public function setTimeScale(value:Float):Dynamic;
     /**
-     * Gets the value of the time scale applied to this Timeline. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
+     * Gets the value of the time scale applied to this Timeline. A value of 1 runs in real-time.
+     * A value of 0.5 runs 50% slower, and so on.
      *
      * @method Phaser.Tweens.Timeline#getTimeScale
      * @since 3.0.0
      *
-     * @return {number} The value of the time scale applied to this Tween.
+     * @return {number} The value of the time scale applied to this Timeline.
      */
     public function getTimeScale():Float;
     /**
@@ -219,36 +257,36 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public function isPlaying():Bool;
     /**
-     * [description]
+     * Creates a new Tween, based on the given Tween Config, and adds it to this Timeline.
      *
      * @method Phaser.Tweens.Timeline#add
      * @since 3.0.0
      *
-     * @param {object} config - [description]
+     * @param {(Phaser.Types.Tweens.TweenBuilderConfig|object)} config - The configuration object for the Tween.
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function add(config:Dynamic):phaser.tweens.Timeline;
+    public function add(config:Dynamic):Dynamic;
     /**
-     * [description]
+     * Adds an existing Tween to this Timeline.
      *
      * @method Phaser.Tweens.Timeline#queue
      * @since 3.0.0
      *
-     * @param {Phaser.Tweens.Tween} tween - [description]
+     * @param {Phaser.Tweens.Tween} tween - The Tween to be added to this Timeline.
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function queue(tween:phaser.tweens.Tween):phaser.tweens.Timeline;
+    public function queue(tween:phaser.tweens.Tween):Dynamic;
     /**
-     * [description]
+     * Checks whether a Tween has an offset value.
      *
      * @method Phaser.Tweens.Timeline#hasOffset
      * @since 3.0.0
      *
-     * @param {Phaser.Tweens.Tween} tween - [description]
+     * @param {Phaser.Tweens.Tween} tween - The Tween to check.
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the tween has a non-null offset.
      */
     public function hasOffset(tween:phaser.tweens.Tween):Bool;
     /**
@@ -257,20 +295,21 @@ extern class Timeline extends phaser.events.EventEmitter {
      * @method Phaser.Tweens.Timeline#isOffsetAbsolute
      * @since 3.0.0
      *
-     * @param {number} value - The offset value to be evaluated
+     * @param {number} value - The offset value to be evaluated.
      *
-     * @return {boolean} True if the result is a number, false if it is a directive like " -= 1000"
+     * @return {boolean} `true` if the result is a number, `false` if it is a directive like " -= 1000".
      */
     public function isOffsetAbsolute(value:Float):Bool;
     /**
-     * Checks if the offset is a relative value rather than an absolute one. If the value is just a number, this returns false.
+     * Checks if the offset is a relative value rather than an absolute one.
+     * If the value is just a number, this returns false.
      *
      * @method Phaser.Tweens.Timeline#isOffsetRelative
      * @since 3.0.0
      *
-     * @param {string} value - The offset value to be evaluated
+     * @param {string} value - The offset value to be evaluated.
      *
-     * @return {boolean} Returns true if the value is relative, i.e " -= 1000". If false, the offset is absolute.
+     * @return {boolean} `true` if the value is relative, i.e " -= 1000". If `false`, the offset is absolute.
      */
     public function isOffsetRelative(value:String):Bool;
     /**
@@ -282,32 +321,38 @@ extern class Timeline extends phaser.events.EventEmitter {
      * @param {string} value - The relative offset, in the format of '-=500', for example. The first character determines whether it will be a positive or negative number. Spacing matters here.
      * @param {number} base - The value to use as the offset.
      *
-     * @return {number} The returned number value.
+     * @return {number} The parsed offset value.
      */
     public function getRelativeOffset(value:String, base:Float):Float;
     /**
-     * Calculates the total duration of the timeline.  Computes all tween's durations and returns the full duration of the timeline. The resulting number is stored in the timeline, not as a return value.
+     * Calculates the total duration of the timeline.
+     *
+     * Computes all tween durations and returns the full duration of the timeline.
+     *
+     * The resulting number is stored in the timeline, not as a return value.
      *
      * @method Phaser.Tweens.Timeline#calcDuration
      * @since 3.0.0
      */
     public function calcDuration():Void;
     /**
-     * Initializes the timeline, which means all Tweens get their init() called, and the total duration will be computed. Returns a boolean indicating whether the timeline is auto-started or not.
+     * Initializes the timeline, which means all Tweens get their init() called, and the total duration will be computed.
+     * Returns a boolean indicating whether the timeline is auto-started or not.
      *
      * @method Phaser.Tweens.Timeline#init
      * @since 3.0.0
      *
-     * @return {boolean} Returns true if the timeline is started. False if it is paused.
+     * @return {boolean} `true` if the Timeline is started. `false` if it is paused.
      */
     public function init():Bool;
     /**
-     * Resets all of the timeline's tweens back to their initial states.  The boolean parameter indicates whether tweens that are looping should reset as well, or not.
+     * Resets all of the timeline's tweens back to their initial states.
+     * The boolean parameter indicates whether tweens that are looping should reset as well, or not.
      *
      * @method Phaser.Tweens.Timeline#resetTweens
      * @since 3.0.0
      *
-     * @param {boolean} resetFromLoop - If true, resets all looping tweens to their initial values.
+     * @param {boolean} resetFromLoop - If `true`, resets all looping tweens to their initial values.
      */
     public function resetTweens(resetFromLoop:Bool):Void;
     /**
@@ -321,22 +366,22 @@ extern class Timeline extends phaser.events.EventEmitter {
      * @param {array} [params] - The parameters to pass to the callback.
      * @param {object} [scope] - The context scope of the callback.
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function setCallback(type:String, callback:Dynamic, ?params:Array<Dynamic>, ?scope:Dynamic):phaser.tweens.Timeline;
+    public function setCallback(type:String, callback:Dynamic, ?params:Array<Dynamic>, ?scope:Dynamic):Dynamic;
     /**
-     * Delegates #makeActive to the Tween manager.
+     * Passed a Tween to the Tween Manager and requests it be made active.
      *
      * @method Phaser.Tweens.Timeline#makeActive
      * @since 3.3.0
      *
      * @param {Phaser.Tweens.Tween} tween - The tween object to make active.
      *
-     * @return {Phaser.Tweens.TweenManager} The Timeline's Tween Manager object.
+     * @return {Phaser.Tweens.TweenManager} The Timeline's Tween Manager reference.
      */
     public function makeActive(tween:phaser.tweens.Tween):phaser.tweens.TweenManager;
     /**
-     * Starts playing the timeline.
+     * Starts playing the Timeline.
      *
      * @method Phaser.Tweens.Timeline#play
      * @fires Phaser.Tweens.Events#TIMELINE_START
@@ -344,12 +389,14 @@ extern class Timeline extends phaser.events.EventEmitter {
      */
     public function play():Void;
     /**
-     * [description]
+     * Updates the Timeline's `state` and fires callbacks and events.
      *
      * @method Phaser.Tweens.Timeline#nextState
      * @fires Phaser.Tweens.Events#TIMELINE_COMPLETE
      * @fires Phaser.Tweens.Events#TIMELINE_LOOP
      * @since 3.0.0
+     *
+     * @see Phaser.Tweens.Timeline#update
      */
     public function nextState():Void;
     /**
@@ -361,48 +408,54 @@ extern class Timeline extends phaser.events.EventEmitter {
      * @fires Phaser.Tweens.Events#TIMELINE_UPDATE
      * @since 3.0.0
      *
-     * @param {number} timestamp - [description]
+     * @param {number} timestamp - The current time. Either a High Resolution Timer value if it comes from Request Animation Frame, or Date.now if using SetTimeout.
      * @param {number} delta - The delta time in ms since the last frame. This is a smoothed and capped value based on the FPS rate.
      *
      * @return {boolean} Returns `true` if this Timeline has finished and should be removed from the Tween Manager.
      */
     public function update(timestamp:Float, delta:Float):Bool;
     /**
-     * Stops the Tween immediately, whatever stage of progress it is at and flags it for removal by the TweenManager.
+     * Stops the Timeline immediately, whatever stage of progress it is at and flags it for removal by the TweenManager.
      *
      * @method Phaser.Tweens.Timeline#stop
      * @since 3.0.0
      */
     public function stop():Void;
     /**
-     * Pauses the timeline, retaining its internal state.
+     * Pauses the Timeline, retaining its internal state.
+     *
+     * Calling this on a Timeline that is already paused has no effect and fires no event.
      *
      * @method Phaser.Tweens.Timeline#pause
      * @fires Phaser.Tweens.Events#TIMELINE_PAUSE
      * @since 3.0.0
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function pause():phaser.tweens.Timeline;
+    public function pause():Dynamic;
     /**
-     * Resumes the timeline from where it was when it was paused.
+     * Resumes a paused Timeline from where it was when it was paused.
+     *
+     * Calling this on a Timeline that isn't paused has no effect and fires no event.
      *
      * @method Phaser.Tweens.Timeline#resume
      * @fires Phaser.Tweens.Events#TIMELINE_RESUME
      * @since 3.0.0
      *
-     * @return {Phaser.Tweens.Timeline} This Timeline object.
+     * @return {this} This Timeline object.
      */
-    public function resume():phaser.tweens.Timeline;
+    public function resume():Dynamic;
     /**
-     * Checks if any of the tweens has the target as the object they are operating on. Retuns false if no tweens operate on the target object.
+     * Checks if any of the Tweens in this Timeline as operating on the target object.
+     *
+     * Returns `false` if no Tweens operate on the target object.
      *
      * @method Phaser.Tweens.Timeline#hasTarget
      * @since 3.0.0
      *
-     * @param {object} target - The target to check all tweens against.
+     * @param {object} target - The target to check all Tweens against.
      *
-     * @return {boolean} True if there at least a single tween that operates on the target object. False otherwise.
+     * @return {boolean} `true` if there is at least a single Tween that operates on the target object, otherwise `false`.
      */
     public function hasTarget(target:Dynamic):Bool;
 }

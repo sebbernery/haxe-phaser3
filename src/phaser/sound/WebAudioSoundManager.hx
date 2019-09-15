@@ -16,6 +16,29 @@ package phaser.sound;
 extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
     public function new(game:phaser.Game);
     /**
+     * Decode audio data into a format ready for playback via Web Audio.
+     *
+     * The audio data can be a base64 encoded string, an audio media-type data uri, or an ArrayBuffer instance.
+     *
+     * The `audioKey` is the key that will be used to save the decoded audio to the audio cache.
+     *
+     * Instead of passing a single entry you can instead pass an array of `Phaser.Types.Sound.DecodeAudioConfig`
+     * objects as the first and only argument.
+     *
+     * Decoding is an async process, so be sure to listen for the events to know when decoding has completed.
+     *
+     * Once the audio has decoded it can be added to the Sound Manager or played via its key.
+     *
+     * @method Phaser.Sound.WebAudioSoundManager#decodeAudio
+     * @fires Phaser.Sound.Events#DECODED
+     * @fires Phaser.Sound.Events#DECODED_ALL
+     * @since 3.18.0
+     *
+     * @param {(Phaser.Types.Sound.DecodeAudioConfig[]|string)} [audioKey] - The string-based key to be used to reference the decoded audio in the audio cache, or an array of audio config objects.
+     * @param {(ArrayBuffer|string)} [audioData] - The audio data, either a base64 encoded string, an audio media-type data uri, or an ArrayBuffer instance.
+     */
+    public function decodeAudio(?audioKey:Dynamic, ?audioData:Dynamic):Void;
+    /**
      * Sets the muted state of all this Sound Manager.
      *
      * @method Phaser.Sound.WebAudioSoundManager#setMute

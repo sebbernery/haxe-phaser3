@@ -14,21 +14,21 @@ package phaser.gameobjects.particles.zones;
  * @constructor
  * @since 3.0.0
  *
- * @param {DeathZoneSource} source - An object instance that has a `contains` method that returns a boolean when given `x` and `y` arguments.
+ * @param {Phaser.Types.GameObjects.Particles.DeathZoneSource} source - An object instance that has a `contains` method that returns a boolean when given `x` and `y` arguments.
  * @param {boolean} killOnEnter - Should the Particle be killed when it enters the zone? `true` or leaves it? `false`
  */
 @:native("Phaser.GameObjects.Particles.Zones.DeathZone")
 extern class DeathZone {
-    public function new(source:DeathZoneSource, killOnEnter:Bool);
+    public function new(source:phaser.types.gameobjects.particles.DeathZoneSource, killOnEnter:Bool);
     /**
      * An object instance that has a `contains` method that returns a boolean when given `x` and `y` arguments.
      * This could be a Geometry shape, such as `Phaser.Geom.Circle`, or your own custom object.
      *
      * @name Phaser.GameObjects.Particles.Zones.DeathZone#source
-     * @type {DeathZoneSource}
+     * @type {Phaser.Types.GameObjects.Particles.DeathZoneSource}
      * @since 3.0.0
      */
-    public var source:DeathZoneSource;
+    public var source:phaser.types.gameobjects.particles.DeathZoneSource;
     /**
      * Set to `true` if the Particle should be killed if it enters this zone.
      * Set to `false` to kill the Particle if it leaves this zone.

@@ -22,6 +22,16 @@ package phaser.geom;
 extern class Ellipse {
     public function new(?x:Float, ?y:Float, ?width:Float, ?height:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.ELLIPSE`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Ellipse#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * The x position of the center of the ellipse.
      *
      * @name Phaser.Geom.Ellipse#x

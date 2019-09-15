@@ -15,13 +15,13 @@ package phaser.loader.filetypes;
  * @since 3.0.0
  *
  * @param {Phaser.Loader.LoaderPlugin} loader - A reference to the Loader that is responsible for this file.
- * @param {(string|Phaser.Loader.FileTypes.PluginFileConfig)} key - The key to use for this file, or a file configuration object.
+ * @param {(string|Phaser.Types.Loader.FileTypes.PluginFileConfig)} key - The key to use for this file, or a file configuration object.
  * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.js`, i.e. if `key` was "alien" then the URL will be "alien.js".
  * @param {boolean} [start=false] - Automatically start the plugin after loading?
  * @param {string} [mapping] - If this plugin is to be injected into the Scene, this is the property key used.
- * @param {XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
+ * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
  */
 @:native("Phaser.Loader.FileTypes.PluginFile")
 extern class PluginFile extends phaser.loader.File {
-    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:String, ?start:Bool, ?mapping:String, ?xhrSettings:XHRSettingsObject);
+    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:String, ?start:Bool, ?mapping:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject);
 }

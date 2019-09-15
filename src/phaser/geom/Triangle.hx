@@ -22,6 +22,16 @@ package phaser.geom;
 extern class Triangle {
     public function new(?x1:Float, ?y1:Float, ?x2:Float, ?y2:Float, ?x3:Float, ?y3:Float);
     /**
+     * The geometry constant type of this object: `GEOM_CONST.TRIANGLE`.
+     * Used for fast type comparisons.
+     *
+     * @name Phaser.Geom.Triangle#type
+     * @type {integer}
+     * @readonly
+     * @since 3.19.0
+     */
+    public var type:Int;
+    /**
      * `x` coordinate of the first point.
      *
      * @name Phaser.Geom.Triangle#x1

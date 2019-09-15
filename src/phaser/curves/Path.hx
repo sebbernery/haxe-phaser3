@@ -2,16 +2,18 @@ package phaser.curves;
 
 /**
  * @classdesc
- * A Path combines multiple Curves into one continuous compound curve. It does not matter how many Curves are in the Path or what type they are.
+ * A Path combines multiple Curves into one continuous compound curve.
+ * It does not matter how many Curves are in the Path or what type they are.
  *
- * A Curve in a Path does not have to start where the previous Curve ends - that is to say, a Path does not have to be an uninterrupted curve. Only the order of the Curves influences the actual points on the Path.
+ * A Curve in a Path does not have to start where the previous Curve ends - that is to say, a Path does not
+ * have to be an uninterrupted curve. Only the order of the Curves influences the actual points on the Path.
  *
  * @class Path
  * @memberof Phaser.Curves
  * @constructor
  * @since 3.0.0
  *
- * @param {number} [x=0] - The X coordinate of the Path's starting point or a {@link JSONPath}.
+ * @param {number} [x=0] - The X coordinate of the Path's starting point or a {@link Phaser.Types.Curves.JSONPath}.
  * @param {number} [y=0] - The Y coordinate of the Path's starting point.
  */
 @:native("Phaser.Curves.Path")
@@ -155,29 +157,29 @@ extern class Path {
      * @method Phaser.Curves.Path#ellipseTo
      * @since 3.0.0
      *
-     * @param {number} xRadius - The horizontal radius of the ellipse.
-     * @param {number} yRadius - The vertical radius of the ellipse.
-     * @param {number} startAngle - The start angle of the ellipse, in degrees.
-     * @param {number} endAngle - The end angle of the ellipse, in degrees.
-     * @param {boolean} clockwise - Whether the ellipse should be rotated clockwise (`true`) or counter-clockwise (`false`).
-     * @param {number} rotation - The rotation of the ellipse, in degrees.
+     * @param {number} [xRadius=0] - The horizontal radius of ellipse.
+     * @param {number} [yRadius=0] - The vertical radius of ellipse.
+     * @param {integer} [startAngle=0] - The start angle of the ellipse, in degrees.
+     * @param {integer} [endAngle=360] - The end angle of the ellipse, in degrees.
+     * @param {boolean} [clockwise=false] - Whether the ellipse angles are given as clockwise (`true`) or counter-clockwise (`false`).
+     * @param {number} [rotation=0] - The rotation of the ellipse, in degrees.
      *
      * @return {Phaser.Curves.Path} This Path object.
      */
-    public function ellipseTo(xRadius:Float, yRadius:Float, startAngle:Float, endAngle:Float, clockwise:Bool, rotation:Float):phaser.curves.Path;
+    public function ellipseTo(?xRadius:Float, ?yRadius:Float, ?startAngle:Int, ?endAngle:Int, ?clockwise:Bool, ?rotation:Float):phaser.curves.Path;
     /**
      * Creates a Path from a Path Configuration object.
      *
-     * The provided object should be a {@link JSONPath}, as returned by {@link #toJSON}. Providing a malformed object may cause errors.
+     * The provided object should be a {@link Phaser.Types.Curves.JSONPath}, as returned by {@link #toJSON}. Providing a malformed object may cause errors.
      *
      * @method Phaser.Curves.Path#fromJSON
      * @since 3.0.0
      *
-     * @param {object} data - The JSON object containing the Path data.
+     * @param {Phaser.Types.Curves.JSONPath} data - The JSON object containing the Path data.
      *
      * @return {Phaser.Curves.Path} This Path object.
      */
-    public function fromJSON(data:Dynamic):phaser.curves.Path;
+    public function fromJSON(data:phaser.types.curves.JSONPath):phaser.curves.Path;
     /**
      * Returns a Rectangle with a position and size matching the bounds of this Path.
      *
@@ -296,7 +298,7 @@ extern class Path {
      */
     public function getStartPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Creates a line curve from the previous end point to x/y
      *
      * @method Phaser.Curves.Path#lineTo
      * @since 3.0.0
@@ -336,11 +338,11 @@ extern class Path {
      * @method Phaser.Curves.Path#toJSON
      * @since 3.0.0
      *
-     * @return {JSONPath} [description]
+     * @return {Phaser.Types.Curves.JSONPath} [description]
      */
-    public function toJSON():JSONPath;
+    public function toJSON():phaser.types.curves.JSONPath;
     /**
-     * [description]
+     * cacheLengths must be recalculated.
      *
      * @method Phaser.Curves.Path#updateArcLengths
      * @since 3.0.0

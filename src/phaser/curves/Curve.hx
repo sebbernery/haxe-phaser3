@@ -125,7 +125,7 @@ extern class Curve {
      */
     public function getEndPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Get total curve arc length
      *
      * @method Phaser.Curves.Curve#getLength
      * @since 3.0.0
@@ -134,7 +134,7 @@ extern class Curve {
      */
     public function getLength():Float;
     /**
-     * [description]
+     * Get list of cumulative segment lengths
      *
      * @method Phaser.Curves.Curve#getLengths
      * @since 3.0.0
@@ -207,7 +207,10 @@ extern class Curve {
      */
     public function getStartPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Returns a unit vector tangent at t
+     * In case any sub curve does not implement its tangent derivation,
+     * 2 points a small delta apart will be used to find its gradient
+     * which seems to give a reasonable approximation
      *
      * @method Phaser.Curves.Curve#getTangent
      * @since 3.0.0

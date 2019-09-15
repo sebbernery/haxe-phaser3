@@ -36,11 +36,11 @@ package phaser.input.keyboard;
  *
  * @param {Phaser.Input.Keyboard.KeyboardPlugin} keyboardPlugin - A reference to the Keyboard Plugin.
  * @param {(string|integer[]|object[])} keys - The keys that comprise this combo.
- * @param {KeyComboConfig} [config] - A Key Combo configuration object.
+ * @param {Phaser.Types.Input.Keyboard.KeyComboConfig} [config] - A Key Combo configuration object.
  */
 @:native("Phaser.Input.Keyboard.KeyCombo")
 extern class KeyCombo {
-    public function new(keyboardPlugin:phaser.input.keyboard.KeyboardPlugin, keys:Dynamic, ?config:KeyComboConfig);
+    public function new(keyboardPlugin:phaser.input.keyboard.KeyboardPlugin, keys:Dynamic, ?config:phaser.types.input.keyboard.KeyComboConfig);
     /**
      * A reference to the Keyboard Manager
      *

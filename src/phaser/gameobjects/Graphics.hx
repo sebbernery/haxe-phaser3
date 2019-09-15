@@ -57,11 +57,11 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.ScrollFactor
  *
  * @param {Phaser.Scene} scene - The Scene to which this Graphics object belongs.
- * @param {GraphicsOptions} [options] - Options that set the position and default style of this Graphics object.
+ * @param {Phaser.Types.GameObjects.Graphics.Options} [options] - Options that set the position and default style of this Graphics object.
  */
 @:native("Phaser.GameObjects.Graphics")
 extern class Graphics extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, ?options:GraphicsOptions);
+    public function new(scene:phaser.Scene, ?options:phaser.types.gameobjects.graphics.Options);
     /**
      * The horizontal display origin of the Graphics.
      *
@@ -148,11 +148,11 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#setDefaultStyles
      * @since 3.0.0
      *
-     * @param {GraphicsStyles} options - The styles to set as defaults.
+     * @param {Phaser.Types.GameObjects.Graphics.Styles} options - The styles to set as defaults.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function setDefaultStyles(options:GraphicsStyles):phaser.gameobjects.Graphics;
+    public function setDefaultStyles(options:phaser.types.gameobjects.graphics.Styles):phaser.gameobjects.Graphics;
     /**
      * Set the current line style.
      *
@@ -426,7 +426,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the top-left of the rectangle.
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
-     * @param {(RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
+     * @param {(Phaser.Types.GameObjects.Graphics.RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
@@ -441,7 +441,7 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the top-left of the rectangle.
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
-     * @param {(RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
+     * @param {(Phaser.Types.GameObjects.Graphics.RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
@@ -581,63 +581,41 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      */
     public function moveTo(x:Float, y:Float):phaser.gameobjects.Graphics;
     /**
-     * Draw a line from the current drawing position to the given position with a specific width and color.
-     *
-     * @method Phaser.GameObjects.Graphics#lineFxTo
-     * @since 3.0.0
-     *
-     * @param {number} x - The x coordinate to draw the line to.
-     * @param {number} y - The y coordinate to draw the line to.
-     * @param {number} width - The width of the stroke.
-     * @param {number} rgb - The color of the stroke.
-     *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
-     */
-    public function lineFxTo(x:Float, y:Float, width:Float, rgb:Float):phaser.gameobjects.Graphics;
-    /**
-     * Move the current drawing position to the given position and change the pen width and color.
-     *
-     * @method Phaser.GameObjects.Graphics#moveFxTo
-     * @since 3.0.0
-     *
-     * @param {number} x - The x coordinate to move to.
-     * @param {number} y - The y coordinate to move to.
-     * @param {number} width - The new stroke width.
-     * @param {number} rgb - The new stroke color.
-     *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
-     */
-    public function moveFxTo(x:Float, y:Float, width:Float, rgb:Float):phaser.gameobjects.Graphics;
-    /**
      * Stroke the shape represented by the given array of points.
      *
-     * Pass `true` to `autoClose` to close the shape automatically.
+     * Pass `closeShape` to automatically close the shape by joining the last to the first point.
+     *
+     * Pass `closePath` to automatically close the path before it is stroked.
      *
      * @method Phaser.GameObjects.Graphics#strokePoints
      * @since 3.0.0
      *
      * @param {(array|Phaser.Geom.Point[])} points - The points to stroke.
-     * @param {boolean} [autoClose=false] - When `true`, the shape is closed by joining the last point to the first point.
+     * @param {boolean} [closeShape=false] - When `true`, the shape is closed by joining the last point to the first point.
+     * @param {boolean} [closePath=false] - When `true`, the path is closed before being stroked.
      * @param {integer} [endIndex] - The index of `points` to stop drawing at. Defaults to `points.length`.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function strokePoints(points:Dynamic, ?autoClose:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
+    public function strokePoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
     /**
      * Fill the shape represented by the given array of points.
      *
-     * Pass `true` to `autoClose` to close the shape automatically.
+     * Pass `closeShape` to automatically close the shape by joining the last to the first point.
+     *
+     * Pass `closePath` to automatically close the path before it is filled.
      *
      * @method Phaser.GameObjects.Graphics#fillPoints
      * @since 3.0.0
      *
      * @param {(array|Phaser.Geom.Point[])} points - The points to fill.
-     * @param {boolean} [autoClose=false] - Whether to automatically close the polygon.
+     * @param {boolean} [closeShape=false] - When `true`, the shape is closed by joining the last point to the first point.
+     * @param {boolean} [closePath=false] - When `true`, the path is closed before being stroked.
      * @param {integer} [endIndex] - The index of `points` to stop at. Defaults to `points.length`.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function fillPoints(points:Dynamic, ?autoClose:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
+    public function fillPoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
     /**
      * Stroke the given ellipse.
      *
@@ -770,9 +748,15 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      */
     public function restore():phaser.gameobjects.Graphics;
     /**
-     * Translate the graphics.
+     * Inserts a translation command into this Graphics objects command buffer.
      *
-     * @method Phaser.GameObjects.Graphics#translate
+     * All objects drawn _after_ calling this method will be translated
+     * by the given amount.
+     *
+     * This does not change the position of the Graphics object itself,
+     * only of the objects drawn by it after calling this method.
+     *
+     * @method Phaser.GameObjects.Graphics#translateCanvas
      * @since 3.0.0
      *
      * @param {number} x - The horizontal translation to apply.
@@ -780,11 +764,17 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function translate(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function translateCanvas(x:Float, y:Float):phaser.gameobjects.Graphics;
     /**
-     * Scale the graphics.
+     * Inserts a scale command into this Graphics objects command buffer.
      *
-     * @method Phaser.GameObjects.Graphics#scale
+     * All objects drawn _after_ calling this method will be scaled
+     * by the given amount.
+     *
+     * This does not change the scale of the Graphics object itself,
+     * only of the objects drawn by it after calling this method.
+     *
+     * @method Phaser.GameObjects.Graphics#scaleCanvas
      * @since 3.0.0
      *
      * @param {number} x - The horizontal scale to apply.
@@ -792,18 +782,24 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function scale(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function scaleCanvas(x:Float, y:Float):phaser.gameobjects.Graphics;
     /**
-     * Rotate the graphics.
+     * Inserts a rotation command into this Graphics objects command buffer.
      *
-     * @method Phaser.GameObjects.Graphics#rotate
+     * All objects drawn _after_ calling this method will be rotated
+     * by the given amount.
+     *
+     * This does not change the rotation of the Graphics object itself,
+     * only of the objects drawn by it after calling this method.
+     *
+     * @method Phaser.GameObjects.Graphics#rotateCanvas
      * @since 3.0.0
      *
      * @param {number} radians - The rotation angle, in radians.
      *
      * @return {Phaser.GameObjects.Graphics} This Game Object.
      */
-    public function rotate(radians:Float):phaser.gameobjects.Graphics;
+    public function rotateCanvas(radians:Float):phaser.gameobjects.Graphics;
     /**
      * Clear the command buffer and reset the fill style and line style to their defaults.
      *
@@ -1192,6 +1188,19 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      */
     public var w:Float;
     /**
+     * This is a special setter that allows you to set both the horizontal and vertical scale of this Game Object
+     * to the same value, at the same time. When reading this value the result returned is `(scaleX + scaleY) / 2`.
+     *
+     * Use of this property implies you wish the horizontal and vertical scales to be equal to each other. If this
+     * isn't the case, use the `scaleX` or `scaleY` properties instead.
+     *
+     * @name Phaser.GameObjects.Components.Transform#scale
+     * @type {number}
+     * @default 1
+     * @since 3.18.0
+     */
+    public var scale:Float;
+    /**
      * The horizontal scale of this Game Object.
      *
      * @name Phaser.GameObjects.Components.Transform#scaleX
@@ -1212,7 +1221,8 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object as expressed in degrees.
      *
-     * Where 0 is to the right, 90 is down, 180 is left.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in radians, see the `rotation` property instead.
      *
@@ -1224,6 +1234,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     public var angle:Int;
     /**
      * The angle of this Game Object in radians.
+     *
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
+     * and -90 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *
@@ -1368,6 +1381,17 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Gets the sum total rotation of all of this Game Objects parent Containers.
+     *
+     * The returned value is in radians and will be zero if this Game Object has no parent container.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getParentRotation
+     * @since 3.18.0
+     *
+     * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
+     */
+    public function getParentRotation():Float;
     /**
      * The visible state of the Game Object.
      *

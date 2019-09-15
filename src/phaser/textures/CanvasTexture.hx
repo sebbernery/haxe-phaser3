@@ -26,7 +26,7 @@ package phaser.textures;
  * @constructor
  * @since 3.7.0
  *
- * @param {Phaser.Textures.CanvasTexture} manager - A reference to the Texture Manager this Texture belongs to.
+ * @param {Phaser.Textures.TextureManager} manager - A reference to the Texture Manager this Texture belongs to.
  * @param {string} key - The unique string-based key of this Texture.
  * @param {HTMLCanvasElement} source - The canvas element that is used as the base of this texture.
  * @param {integer} width - The width of the canvas.
@@ -34,7 +34,7 @@ package phaser.textures;
  */
 @:native("Phaser.Textures.CanvasTexture")
 extern class CanvasTexture extends phaser.textures.Texture {
-    public function new(manager:phaser.textures.CanvasTexture, key:String, source:js.html.CanvasElement, width:Int, height:Int);
+    public function new(manager:phaser.textures.TextureManager, key:String, source:js.html.CanvasElement, width:Int, height:Int);
     /**
      * The source Canvas Element.
      *
@@ -227,14 +227,14 @@ extern class CanvasTexture extends phaser.textures.Texture {
      * @method Phaser.Textures.CanvasTexture#getPixels
      * @since 3.16.0
      *
-     * @param {integer} x - The x coordinate of the top-left of the region. Must lay within the dimensions of this CanvasTexture and be an integer.
-     * @param {integer} y - The y coordinate of the top-left of the region. Must lay within the dimensions of this CanvasTexture and be an integer.
-     * @param {integer} width - The width of the region to get. Must be an integer.
+     * @param {integer} [x=0] - The x coordinate of the top-left of the region. Must lay within the dimensions of this CanvasTexture and be an integer.
+     * @param {integer} [y=0] - The y coordinate of the top-left of the region. Must lay within the dimensions of this CanvasTexture and be an integer.
+     * @param {integer} [width] - The width of the region to get. Must be an integer. Defaults to the canvas width if not given.
      * @param {integer} [height] - The height of the region to get. Must be an integer. If not given will be set to the `width`.
      *
-     * @return {PixelConfig[]} An array of Pixel objects.
+     * @return {Phaser.Types.Textures.PixelConfig[]} An array of Pixel objects.
      */
-    public function getPixels(x:Int, y:Int, width:Int, ?height:Int):Array<PixelConfig>;
+    public function getPixels(?x:Int, ?y:Int, ?width:Int, ?height:Int):Array<phaser.types.textures.PixelConfig>;
     /**
      * Returns the Image Data index for the given pixel in this CanvasTexture.
      *

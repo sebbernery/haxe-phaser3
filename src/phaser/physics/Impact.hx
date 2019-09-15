@@ -17,36 +17,4 @@ package phaser.physics;
  */
 @:native("Phaser.Physics.Impact")
 class Impact {
-    /**
-     * Collision Types - Determine if and how entities collide with each other.
-     *
-     * In ACTIVE vs. LITE or FIXED vs. ANY collisions, only the "weak" entity moves,
-     * while the other one stays fixed. In ACTIVE vs. ACTIVE and ACTIVE vs. PASSIVE
-     * collisions, both entities are moved. LITE or PASSIVE entities don't collide
-     * with other LITE or PASSIVE entities at all. The behavior for FIXED vs.
-     * FIXED collisions is undefined.
-     *
-     * @name Phaser.Physics.Impact.COLLIDES
-     * @enum {integer}
-     * @memberof Phaser.Physics.Impact
-     * @readonly
-     * @since 3.0.0
-     */
-    static public var COLLIDES:Int;
-    /**
-     * Collision Types - Determine if and how entities collide with each other.
-     *
-     * In ACTIVE vs. LITE or FIXED vs. ANY collisions, only the "weak" entity moves,
-     * while the other one stays fixed. In ACTIVE vs. ACTIVE and ACTIVE vs. PASSIVE
-     * collisions, both entities are moved. LITE or PASSIVE entities don't collide
-     * with other LITE or PASSIVE entities at all. The behavior for FIXED vs.
-     * FIXED collisions is undefined.
-     *
-     * @name Phaser.Physics.Impact.TYPE
-     * @enum {integer}
-     * @memberof Phaser.Physics.Impact
-     * @readonly
-     * @since 3.0.0
-     */
-    static public var TYPE:Int;
 }

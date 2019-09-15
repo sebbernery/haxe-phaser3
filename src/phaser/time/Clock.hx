@@ -68,11 +68,11 @@ extern class Clock {
      * @method Phaser.Time.Clock#addEvent
      * @since 3.0.0
      *
-     * @param {TimerEventConfig} config - The configuration for the Timer Event.
+     * @param {Phaser.Types.Time.TimerEventConfig} config - The configuration for the Timer Event.
      *
      * @return {Phaser.Time.TimerEvent} The Timer Event which was created.
      */
-    public function addEvent(config:TimerEventConfig):phaser.time.TimerEvent;
+    public function addEvent(config:phaser.types.time.TimerEventConfig):phaser.time.TimerEvent;
     /**
      * Creates a Timer Event and adds it to the Clock at the start of the frame.
      *

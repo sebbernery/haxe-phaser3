@@ -7,6 +7,9 @@ package phaser.textures;
  * may have many Frames, one for each element within the atlas. Where-as a single image would have
  * just one frame, that encompasses the whole image.
  *
+ * Every Texture, no matter where it comes from, always has at least 1 frame called the `__BASE` frame.
+ * This frame represents the entirety of the source image.
+ *
  * Textures are managed by the global TextureManager. This is a singleton class that is
  * responsible for creating and delivering Textures and their corresponding Frames to Game Objects.
  *
@@ -86,7 +89,10 @@ extern class Texture {
      */
     public var firstFrame:String;
     /**
-     * The total number of Frames in this Texture.
+     * The total number of Frames in this Texture, including the `__BASE` frame.
+     *
+     * A Texture will always contain at least 1 frame because every Texture contains a `__BASE` frame by default,
+     * in addition to any extra frames that have been added to it, such as when parsing a Sprite Sheet or Texture Atlas.
      *
      * @name Phaser.Textures.Texture#frameTotal
      * @type {integer}
@@ -99,6 +105,8 @@ extern class Texture {
      *
      * A Frame is a rectangular region of a TextureSource with a unique index or string-based key.
      *
+     * The name given must be unique within this Texture. If it already exists, this method will return `null`.
+     *
      * @method Phaser.Textures.Texture#add
      * @since 3.0.0
      *
@@ -109,9 +117,23 @@ extern class Texture {
      * @param {number} width - The width of this Frame.
      * @param {number} height - The height of this Frame.
      *
-     * @return {Phaser.Textures.Frame} The Frame that was added to this Texture.
+     * @return {?Phaser.Textures.Frame} The Frame that was added to this Texture, or `null` if the given name already exists.
      */
     public function add(name:Dynamic, sourceIndex:Int, x:Float, y:Float, width:Float, height:Float):phaser.textures.Frame;
+    /**
+     * Removes the given Frame from this Texture. The Frame is destroyed immediately.
+     *
+     * Any Game Objects using this Frame should stop using it _before_ you remove it,
+     * as it does not happen automatically.
+     *
+     * @method Phaser.Textures.Texture#remove
+     * @since 3.19.0
+     *
+     * @param {string} name - The key of the Frame to remove.
+     *
+     * @return {boolean} True if a Frame with the matching key was removed from this Texture.
+     */
+    public function remove(name:String):Bool;
     /**
      * Checks to see if a Frame matching the given key exists within this Texture.
      *

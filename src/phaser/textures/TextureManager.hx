@@ -77,6 +77,17 @@ extern class TextureManager extends phaser.events.EventEmitter {
      */
     public function remove(key:Dynamic):phaser.textures.TextureManager;
     /**
+     * Removes a key from the Texture Manager but does not destroy the Texture that was using the key.
+     *
+     * @method Phaser.Textures.TextureManager#removeKey
+     * @since 3.17.0
+     *
+     * @param {string} key - The key to remove from the texture list.
+     *
+     * @return {Phaser.Textures.TextureManager} The Texture Manager.
+     */
+    public function removeKey(key:String):phaser.textures.TextureManager;
+    /**
      * Adds a new Texture to the Texture Manager created from the given Base64 encoded data.
      *
      * @method Phaser.Textures.TextureManager#addBase64
@@ -95,6 +106,10 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * Gets an existing texture frame and converts it into a base64 encoded image and returns the base64 data.
      *
      * You can also provide the image type and encoder options.
+     *
+     * This will only work with bitmap based texture frames, such as those created from Texture Atlases.
+     * It will not work with GL Texture objects, such as Shaders, or Render Textures. For those please
+     * see the WebGL Snapshot function instead.
      *
      * @method Phaser.Textures.TextureManager#getBase64
      * @since 3.12.0
@@ -121,6 +136,23 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
     public function addImage(key:String, source:js.html.ImageElement, ?dataSource:Dynamic):phaser.textures.Texture;
+    /**
+     * Takes a WebGL Texture and creates a Phaser Texture from it, which is added to the Texture Manager using the given key.
+     *
+     * This allows you to then use the Texture as a normal texture for texture based Game Objects like Sprites.
+     *
+     * This is a WebGL only feature.
+     *
+     * @method Phaser.Textures.TextureManager#addGLTexture
+     * @fires Phaser.Textures.Events#ADD
+     * @since 3.19.0
+     *
+     * @param {string} key - The unique string-based key of the Texture.
+     * @param {WebGLTexture} glTexture - The source Render Texture.
+     *
+     * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
+     */
+    public function addGLTexture(key:String, glTexture:js.html.webgl.Texture):phaser.textures.Texture;
     /**
      * Adds a Render Texture to the Texture Manager using the given key.
      * This allows you to then use the Render Texture as a normal texture for texture based Game Objects like Sprites.
@@ -273,11 +305,11 @@ extern class TextureManager extends phaser.events.EventEmitter {
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {HTMLImageElement} source - The source Image element.
-     * @param {SpriteSheetConfig} config - The configuration object for this Sprite Sheet.
+     * @param {Phaser.Types.Textures.SpriteSheetConfig} config - The configuration object for this Sprite Sheet.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addSpriteSheet(key:String, source:js.html.ImageElement, config:SpriteSheetConfig):phaser.textures.Texture;
+    public function addSpriteSheet(key:String, source:js.html.ImageElement, config:phaser.types.textures.SpriteSheetConfig):phaser.textures.Texture;
     /**
      * Adds a Sprite Sheet to this Texture Manager, where the Sprite Sheet exists as a Frame within a Texture Atlas.
      *
@@ -289,11 +321,11 @@ extern class TextureManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {string} key - The unique string-based key of the Texture.
-     * @param {SpriteSheetFromAtlasConfig} config - The configuration object for this Sprite Sheet.
+     * @param {Phaser.Types.Textures.SpriteSheetFromAtlasConfig} config - The configuration object for this Sprite Sheet.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addSpriteSheetFromAtlas(key:String, config:SpriteSheetFromAtlasConfig):phaser.textures.Texture;
+    public function addSpriteSheetFromAtlas(key:String, config:phaser.types.textures.SpriteSheetFromAtlasConfig):phaser.textures.Texture;
     /**
      * Creates a new Texture using the given source and dimensions.
      *

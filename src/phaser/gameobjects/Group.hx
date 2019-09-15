@@ -1,7 +1,8 @@
 package phaser.gameobjects;
 
 /**
- * @classdesc A Group is a way for you to create, manipulate, or recycle similar Game Objects.
+ * @classdesc
+ * A Group is a way for you to create, manipulate, or recycle similar Game Objects.
  *
  * Group membership is non-exclusive. A Game Object can belong to several groups, one group, or none.
  *
@@ -12,8 +13,8 @@ package phaser.gameobjects;
  * @constructor
  * @since 3.0.0
  * @param {Phaser.Scene} scene - The scene this group belongs to.
- * @param {(Phaser.GameObjects.GameObject[]|GroupConfig|GroupCreateConfig)} [children] - Game Objects to add to this group; or the `config` argument.
- * @param {GroupConfig|GroupCreateConfig} [config] - Settings for this group. If `key` is set, Phaser.GameObjects.Group#createMultiple is also called with these settings.
+ * @param {(Phaser.GameObjects.GameObject[]|Phaser.Types.GameObjects.Group.GroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig)} [children] - Game Objects to add to this group; or the `config` argument.
+ * @param {Phaser.Types.GameObjects.Group.GroupConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig} [config] - Settings for this group. If `key` is set, Phaser.GameObjects.Group#createMultiple is also called with these settings.
  *
  * @see Phaser.Physics.Arcade.Group
  * @see Phaser.Physics.Arcade.StaticGroup
@@ -50,11 +51,21 @@ extern class Group {
      * The class to create new group members from.
      *
      * @name Phaser.GameObjects.Group#classType
-     * @type {GroupClassTypeConstructor}
+     * @type {Function}
      * @since 3.0.0
      * @default Phaser.GameObjects.Sprite
      */
-    public var classType:GroupClassTypeConstructor;
+    public var classType:Dynamic;
+    /**
+     * The name of this group.
+     * Empty by default and never populated by Phaser, this is left for developers to use.
+     *
+     * @name Phaser.GameObjects.Group#name
+     * @type {string}
+     * @default ''
+     * @since 3.18.0
+     */
+    public var name:String;
     /**
      * Whether this group runs its {@link Phaser.GameObjects.Group#preUpdate} method
      * (which may update any members).
@@ -106,26 +117,26 @@ extern class Group {
      * A function to be called when adding or creating group members.
      *
      * @name Phaser.GameObjects.Group#createCallback
-     * @type {?GroupCallback}
+     * @type {?Phaser.Types.GameObjects.Group.GroupCallback}
      * @since 3.0.0
      */
-    public var createCallback:GroupCallback;
+    public var createCallback:phaser.types.gameobjects.group.GroupCallback;
     /**
      * A function to be called when removing group members.
      *
      * @name Phaser.GameObjects.Group#removeCallback
-     * @type {?GroupCallback}
+     * @type {?Phaser.Types.GameObjects.Group.GroupCallback}
      * @since 3.0.0
      */
-    public var removeCallback:GroupCallback;
+    public var removeCallback:phaser.types.gameobjects.group.GroupCallback;
     /**
      * A function to be called when creating several group members at once.
      *
      * @name Phaser.GameObjects.Group#createMultipleCallback
-     * @type {?GroupMultipleCreateCallback}
+     * @type {?Phaser.Types.GameObjects.Group.GroupMultipleCreateCallback}
      * @since 3.0.0
      */
-    public var createMultipleCallback:GroupMultipleCreateCallback;
+    public var createMultipleCallback:phaser.types.gameobjects.group.GroupMultipleCreateCallback;
     /**
      * Creates a new Game Object and adds it to this group, unless the group {@link Phaser.GameObjects.Group#isFull is full}.
      *
@@ -154,7 +165,7 @@ extern class Group {
      * @method Phaser.GameObjects.Group#createMultiple
      * @since 3.0.0
      *
-     * @param {GroupCreateConfig|GroupCreateConfig[]} config - Creation settings. This can be a single configuration object or an array of such objects, which will be applied in turn.
+     * @param {Phaser.Types.GameObjects.Group.GroupCreateConfig|Phaser.Types.GameObjects.Group.GroupCreateConfig[]} config - Creation settings. This can be a single configuration object or an array of such objects, which will be applied in turn.
      *
      * @return {any[]} The newly created Game Objects.
      */
@@ -165,11 +176,11 @@ extern class Group {
      * @method Phaser.GameObjects.Group#createFromConfig
      * @since 3.0.0
      *
-     * @param {GroupCreateConfig} options - Creation settings.
+     * @param {Phaser.Types.GameObjects.Group.GroupCreateConfig} options - Creation settings.
      *
      * @return {any[]} The newly created Game Objects.
      */
-    public function createFromConfig(options:GroupCreateConfig):Array<Dynamic>;
+    public function createFromConfig(options:phaser.types.gameobjects.group.GroupCreateConfig):Array<Dynamic>;
     /**
      * Updates any group members, if {@link Phaser.GameObjects.Group#runChildUpdate} is enabled.
      *

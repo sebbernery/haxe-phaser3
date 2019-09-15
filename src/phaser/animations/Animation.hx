@@ -18,11 +18,11 @@ package phaser.animations;
  *
  * @param {Phaser.Animations.AnimationManager} manager - A reference to the global Animation Manager
  * @param {string} key - The unique identifying string for this animation.
- * @param {Phaser.Animations.Types.Animation} config - The Animation configuration.
+ * @param {Phaser.Types.Animations.Animation} config - The Animation configuration.
  */
 @:native("Phaser.Animations.Animation")
 extern class Animation extends phaser.events.EventEmitter {
-    public function new(manager:phaser.animations.AnimationManager, key:String, config:phaser.animations.types.Animation);
+    public function new(manager:phaser.animations.AnimationManager, key:String, config:phaser.types.animations.Animation);
     /**
      * A reference to the global Animation Manager.
      *
@@ -161,7 +161,7 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#addFrame
      * @since 3.0.0
      *
-     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} config - [description]
+     * @param {(string|Phaser.Types.Animations.AnimationFrame[])} config - [description]
      *
      * @return {Phaser.Animations.Animation} This Animation object.
      */
@@ -173,7 +173,7 @@ extern class Animation extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {integer} index - The index to insert the frame at within the animation.
-     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} config - [description]
+     * @param {(string|Phaser.Types.Animations.AnimationFrame[])} config - [description]
      *
      * @return {Phaser.Animations.Animation} This Animation object.
      */
@@ -229,7 +229,7 @@ extern class Animation extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.Textures.TextureManager} textureManager - [description]
-     * @param {(string|Phaser.Animations.Types.AnimationFrame[])} frames - [description]
+     * @param {(string|Phaser.Types.Animations.AnimationFrame[])} frames - [description]
      * @param {string} [defaultTextureKey] - [description]
      *
      * @return {Phaser.Animations.AnimationFrame[]} [description]
@@ -332,9 +332,9 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#toJSON
      * @since 3.0.0
      *
-     * @return {Phaser.Animations.Types.JSONAnimation} [description]
+     * @return {Phaser.Types.Animations.JSONAnimation} [description]
      */
-    public function toJSON():phaser.animations.types.JSONAnimation;
+    public function toJSON():phaser.types.animations.JSONAnimation;
     /**
      * [description]
      *
