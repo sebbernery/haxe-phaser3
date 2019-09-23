@@ -8,7 +8,7 @@ package phaser;
 @:native("Sleeping")
 extern class Sleeping {
     public function new();
-    public function update():Void;
-    public function afterCollisions():Void;
-    public function set():Void;
+    static public function update():Void;
+    static public function afterCollisions():Void;
+    static public function set():Void;
 }

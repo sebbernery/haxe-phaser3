@@ -85,5 +85,5 @@ extern class QuadraticBezier extends phaser.curves.Curve {
      *
      * @return {Phaser.Curves.QuadraticBezier} The created curve instance.
      */
-    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.QuadraticBezier;
+    static public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.QuadraticBezier;
 }

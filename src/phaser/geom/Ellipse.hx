@@ -109,7 +109,7 @@ extern class Ellipse {
      *
      * @return {number} The area of the Ellipse.
      */
-    public function Area(ellipse:phaser.geom.Ellipse):Float;
+    static public function Area(ellipse:phaser.geom.Ellipse):Float;
     /**
      * Returns the circumference of the given Ellipse.
      *
@@ -120,7 +120,7 @@ extern class Ellipse {
      *
      * @return {number} The circumference of th Ellipse.
      */
-    public function Circumference(ellipse:phaser.geom.Ellipse):Float;
+    static public function Circumference(ellipse:phaser.geom.Ellipse):Float;
     /**
      * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse based on the given angle.
      *
@@ -135,7 +135,7 @@ extern class Ellipse {
      *
      * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
      */
-    public function CircumferencePoint(ellipse:phaser.geom.Ellipse, angle:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function CircumferencePoint(ellipse:phaser.geom.Ellipse, angle:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Creates a new Ellipse instance based on the values contained in the given source.
      *
@@ -146,7 +146,7 @@ extern class Ellipse {
      *
      * @return {Phaser.Geom.Ellipse} A clone of the source Ellipse.
      */
-    public function Clone(source:phaser.geom.Ellipse):phaser.geom.Ellipse;
+    static public function Clone(source:phaser.geom.Ellipse):phaser.geom.Ellipse;
     /**
      * Check to see if the Ellipse contains the given x / y coordinates.
      *
@@ -159,7 +159,7 @@ extern class Ellipse {
      *
      * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
      */
-    public function Contains(ellipse:phaser.geom.Ellipse, x:Float, y:Float):Bool;
+    static public function Contains(ellipse:phaser.geom.Ellipse, x:Float, y:Float):Bool;
     /**
      * Check to see if the Ellipse contains the given Point object.
      *
@@ -171,7 +171,7 @@ extern class Ellipse {
      *
      * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
      */
-    public function ContainsPoint(ellipse:phaser.geom.Ellipse, point:Dynamic):Bool;
+    static public function ContainsPoint(ellipse:phaser.geom.Ellipse, point:Dynamic):Bool;
     /**
      * Check to see if the Ellipse contains all four points of the given Rectangle object.
      *
@@ -183,7 +183,7 @@ extern class Ellipse {
      *
      * @return {boolean} True if all of the Rectangle coordinates are within the ellipse, otherwise false.
      */
-    public function ContainsRect(ellipse:phaser.geom.Ellipse, rect:Dynamic):Bool;
+    static public function ContainsRect(ellipse:phaser.geom.Ellipse, rect:Dynamic):Bool;
     /**
      * Copies the `x`, `y`, `width` and `height` properties from the `source` Ellipse
      * into the given `dest` Ellipse, then returns the `dest` Ellipse.
@@ -198,7 +198,7 @@ extern class Ellipse {
      *
      * @return {Phaser.Geom.Ellipse} The destination Ellipse.
      */
-    public function CopyFrom(source:phaser.geom.Ellipse, dest:phaser.geom.Ellipse):phaser.geom.Ellipse;
+    static public function CopyFrom(source:phaser.geom.Ellipse, dest:phaser.geom.Ellipse):phaser.geom.Ellipse;
     /**
      * Check to see if the Ellipse contains the given x / y coordinates.
      *
@@ -342,7 +342,7 @@ extern class Ellipse {
      *
      * @return {boolean} `true` if the two Ellipse equal each other, otherwise `false`.
      */
-    public function Equals(ellipse:phaser.geom.Ellipse, toCompare:phaser.geom.Ellipse):Bool;
+    static public function Equals(ellipse:phaser.geom.Ellipse, toCompare:phaser.geom.Ellipse):Bool;
     /**
      * Returns the bounds of the Ellipse object.
      *
@@ -356,7 +356,7 @@ extern class Ellipse {
      *
      * @return {(Phaser.Geom.Rectangle|object)} The Rectangle object containing the Ellipse bounds.
      */
-    public function GetBounds(ellipse:phaser.geom.Ellipse, ?out:Dynamic):phaser.geom.Rectangle;
+    static public function GetBounds(ellipse:phaser.geom.Ellipse, ?out:Dynamic):phaser.geom.Rectangle;
     /**
      * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
      * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
@@ -373,7 +373,7 @@ extern class Ellipse {
      *
      * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
      */
-    public function GetPoint(ellipse:phaser.geom.Ellipse, position:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function GetPoint(ellipse:phaser.geom.Ellipse, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
      * based on the given quantity or stepRate values.
@@ -390,7 +390,7 @@ extern class Ellipse {
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
      */
-    public function GetPoints(ellipse:phaser.geom.Ellipse, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(ellipse:phaser.geom.Ellipse, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Offsets the Ellipse by the values given.
      *
@@ -405,7 +405,7 @@ extern class Ellipse {
      *
      * @return {Phaser.Geom.Ellipse} The Ellipse that was offset.
      */
-    public function Offset(ellipse:phaser.geom.Ellipse, x:Float, y:Float):phaser.geom.Ellipse;
+    static public function Offset(ellipse:phaser.geom.Ellipse, x:Float, y:Float):phaser.geom.Ellipse;
     /**
      * Offsets the Ellipse by the values given in the `x` and `y` properties of the Point object.
      *
@@ -419,7 +419,7 @@ extern class Ellipse {
      *
      * @return {Phaser.Geom.Ellipse} The Ellipse that was offset.
      */
-    public function OffsetPoint(ellipse:phaser.geom.Ellipse, point:Dynamic):phaser.geom.Ellipse;
+    static public function OffsetPoint(ellipse:phaser.geom.Ellipse, point:Dynamic):phaser.geom.Ellipse;
     /**
      * Returns a uniformly distributed random point from anywhere within the given Ellipse.
      *
@@ -433,5 +433,5 @@ extern class Ellipse {
      *
      * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
      */
-    public function Random(ellipse:phaser.geom.Ellipse, ?out:Dynamic):phaser.geom.Point;
+    static public function Random(ellipse:phaser.geom.Ellipse, ?out:Dynamic):phaser.geom.Point;
 }

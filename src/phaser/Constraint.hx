@@ -12,9 +12,9 @@ package phaser;
 @:native("Constraint")
 extern class Constraint {
     public function new();
-    public function create():Void;
-    public function preSolveAll():Void;
-    public function solveAll():Void;
-    public function solve():Void;
-    public function postSolveAll():Void;
+    static public function create():Void;
+    static public function preSolveAll():Void;
+    static public function solveAll():Void;
+    static public function solve():Void;
+    static public function postSolveAll():Void;
 }

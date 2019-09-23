@@ -106,7 +106,7 @@ extern class Circle {
      *
      * @return {number} The area of the Circle.
      */
-    public function Area(circle:phaser.geom.Circle):Float;
+    static public function Area(circle:phaser.geom.Circle):Float;
     /**
      * Check to see if the Circle contains the given x / y coordinates.
      *
@@ -218,7 +218,7 @@ extern class Circle {
      *
      * @return {number} The circumference of the Circle.
      */
-    public function Circumference(circle:phaser.geom.Circle):Float;
+    static public function Circumference(circle:phaser.geom.Circle):Float;
     /**
      * Returns a Point object containing the coordinates of a point on the circumference of the Circle based on the given angle.
      *
@@ -233,7 +233,7 @@ extern class Circle {
      *
      * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
      */
-    public function CircumferencePoint(circle:phaser.geom.Circle, angle:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function CircumferencePoint(circle:phaser.geom.Circle, angle:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Creates a new Circle instance based on the values contained in the given source.
      *
@@ -244,7 +244,7 @@ extern class Circle {
      *
      * @return {Phaser.Geom.Circle} A clone of the source Circle.
      */
-    public function Clone(source:Dynamic):phaser.geom.Circle;
+    static public function Clone(source:Dynamic):phaser.geom.Circle;
     /**
      * Check to see if the Circle contains the given x / y coordinates.
      *
@@ -257,7 +257,7 @@ extern class Circle {
      *
      * @return {boolean} True if the coordinates are within the circle, otherwise false.
      */
-    public function Contains(circle:phaser.geom.Circle, x:Float, y:Float):Bool;
+    static public function Contains(circle:phaser.geom.Circle, x:Float, y:Float):Bool;
     /**
      * Check to see if the Circle contains the given Point object.
      *
@@ -269,7 +269,7 @@ extern class Circle {
      *
      * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
      */
-    public function ContainsPoint(circle:phaser.geom.Circle, point:Dynamic):Bool;
+    static public function ContainsPoint(circle:phaser.geom.Circle, point:Dynamic):Bool;
     /**
      * Check to see if the Circle contains all four points of the given Rectangle object.
      *
@@ -281,7 +281,7 @@ extern class Circle {
      *
      * @return {boolean} True if all of the Rectangle coordinates are within the circle, otherwise false.
      */
-    public function ContainsRect(circle:phaser.geom.Circle, rect:Dynamic):Bool;
+    static public function ContainsRect(circle:phaser.geom.Circle, rect:Dynamic):Bool;
     /**
      * Copies the `x`, `y` and `radius` properties from the `source` Circle
      * into the given `dest` Circle, then returns the `dest` Circle.
@@ -296,7 +296,7 @@ extern class Circle {
      *
      * @return {Phaser.Geom.Circle} The destination Circle.
      */
-    public function CopyFrom(source:phaser.geom.Circle, dest:phaser.geom.Circle):phaser.geom.Circle;
+    static public function CopyFrom(source:phaser.geom.Circle, dest:phaser.geom.Circle):phaser.geom.Circle;
     /**
      * Compares the `x`, `y` and `radius` properties of the two given Circles.
      * Returns `true` if they all match, otherwise returns `false`.
@@ -309,7 +309,7 @@ extern class Circle {
      *
      * @return {boolean} `true` if the two Circles equal each other, otherwise `false`.
      */
-    public function Equals(circle:phaser.geom.Circle, toCompare:phaser.geom.Circle):Bool;
+    static public function Equals(circle:phaser.geom.Circle, toCompare:phaser.geom.Circle):Bool;
     /**
      * Returns the bounds of the Circle object.
      *
@@ -323,7 +323,7 @@ extern class Circle {
      *
      * @return {(Phaser.Geom.Rectangle|object)} The Rectangle object containing the Circles bounds.
      */
-    public function GetBounds(circle:phaser.geom.Circle, ?out:Dynamic):phaser.geom.Rectangle;
+    static public function GetBounds(circle:phaser.geom.Circle, ?out:Dynamic):phaser.geom.Rectangle;
     /**
      * Returns a Point object containing the coordinates of a point on the circumference of the Circle
      * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
@@ -340,7 +340,7 @@ extern class Circle {
      *
      * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
      */
-    public function GetPoint(circle:phaser.geom.Circle, position:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function GetPoint(circle:phaser.geom.Circle, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
      * based on the given quantity or stepRate values.
@@ -355,7 +355,7 @@ extern class Circle {
      *
      * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the circumference of the circle.
      */
-    public function GetPoints(circle:phaser.geom.Circle, quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
+    static public function GetPoints(circle:phaser.geom.Circle, quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
      * Offsets the Circle by the values given.
      *
@@ -370,7 +370,7 @@ extern class Circle {
      *
      * @return {Phaser.Geom.Circle} The Circle that was offset.
      */
-    public function Offset(circle:phaser.geom.Circle, x:Float, y:Float):phaser.geom.Circle;
+    static public function Offset(circle:phaser.geom.Circle, x:Float, y:Float):phaser.geom.Circle;
     /**
      * Offsets the Circle by the values given in the `x` and `y` properties of the Point object.
      *
@@ -384,7 +384,7 @@ extern class Circle {
      *
      * @return {Phaser.Geom.Circle} The Circle that was offset.
      */
-    public function OffsetPoint(circle:phaser.geom.Circle, point:Dynamic):phaser.geom.Circle;
+    static public function OffsetPoint(circle:phaser.geom.Circle, point:Dynamic):phaser.geom.Circle;
     /**
      * Returns a uniformly distributed random point from anywhere within the given Circle.
      *
@@ -398,5 +398,5 @@ extern class Circle {
      *
      * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
      */
-    public function Random(circle:phaser.geom.Circle, ?out:Dynamic):phaser.geom.Point;
+    static public function Random(circle:phaser.geom.Circle, ?out:Dynamic):phaser.geom.Point;
 }

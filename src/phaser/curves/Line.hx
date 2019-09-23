@@ -76,5 +76,5 @@ extern class Line extends phaser.curves.Curve {
      *
      * @return {Phaser.Curves.Line} A new LineCurve object.
      */
-    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Line;
+    static public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Line;
 }

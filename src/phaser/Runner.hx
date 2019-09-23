@@ -14,9 +14,9 @@ package phaser;
 @:native("Runner")
 extern class Runner {
     public function new();
-    public function create():Void;
-    public function run():Void;
-    public function tick():Void;
-    public function stop():Void;
-    public function start():Void;
+    static public function create():Void;
+    static public function run():Void;
+    static public function tick():Void;
+    static public function stop():Void;
+    static public function start():Void;
 }

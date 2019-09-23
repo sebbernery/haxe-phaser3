@@ -236,5 +236,5 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @return {Phaser.Curves.Ellipse} The ellipse curve constructed from the configuration object.
      */
-    public function fromJSON(data:phaser.types.curves.JSONEllipseCurve):phaser.curves.Ellipse;
+    static public function fromJSON(data:phaser.types.curves.JSONEllipseCurve):phaser.curves.Ellipse;
 }

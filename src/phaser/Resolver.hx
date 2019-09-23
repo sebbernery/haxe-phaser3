@@ -8,9 +8,9 @@ package phaser;
 @:native("Resolver")
 extern class Resolver {
     public function new();
-    public function preSolvePosition():Void;
-    public function solvePosition():Void;
-    public function postSolvePosition():Void;
-    public function preSolveVelocity():Void;
-    public function solveVelocity():Void;
+    static public function preSolvePosition():Void;
+    static public function solvePosition():Void;
+    static public function postSolvePosition():Void;
+    static public function preSolveVelocity():Void;
+    static public function solveVelocity():Void;
 }

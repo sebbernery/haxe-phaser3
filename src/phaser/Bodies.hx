@@ -11,9 +11,9 @@ package phaser;
 @:native("Bodies")
 extern class Bodies {
     public function new();
-    public function rectangle():Void;
-    public function trapezoid():Void;
-    public function circle():Void;
-    public function polygon():Void;
-    public function fromVertices():Void;
+    static public function rectangle():Void;
+    static public function trapezoid():Void;
+    static public function circle():Void;
+    static public function polygon():Void;
+    static public function fromVertices():Void;
 }

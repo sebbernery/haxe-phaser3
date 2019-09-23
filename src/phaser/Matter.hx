@@ -8,7 +8,7 @@ package phaser;
 @:native("Matter")
 extern class Matter {
     public function new();
-    public function use():Void;
-    public function before():Void;
-    public function after():Void;
+    static public function use():Void;
+    static public function before():Void;
+    static public function after():Void;
 }

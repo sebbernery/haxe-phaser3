@@ -8,10 +8,10 @@ package phaser;
 @:native("Bounds")
 extern class Bounds {
     public function new();
-    public function create():Void;
-    public function update():Void;
-    public function contains():Void;
-    public function overlaps():Void;
-    public function translate():Void;
-    public function shift():Void;
+    static public function create():Void;
+    static public function update():Void;
+    static public function contains():Void;
+    static public function overlaps():Void;
+    static public function translate():Void;
+    static public function shift():Void;
 }

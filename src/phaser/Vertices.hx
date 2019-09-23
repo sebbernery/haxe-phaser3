@@ -12,18 +12,18 @@ package phaser;
 @:native("Vertices")
 extern class Vertices {
     public function new();
-    public function create():Void;
-    public function fromPath():Void;
-    public function centre():Void;
-    public function mean():Void;
-    public function area():Void;
-    public function inertia():Void;
-    public function translate():Void;
-    public function rotate():Void;
-    public function contains():Void;
-    public function scale():Void;
-    public function chamfer():Void;
-    public function clockwiseSort():Void;
-    public function isConvex():Void;
-    public function hull():Void;
+    static public function create():Void;
+    static public function fromPath():Void;
+    static public function centre():Void;
+    static public function mean():Void;
+    static public function area():Void;
+    static public function inertia():Void;
+    static public function translate():Void;
+    static public function rotate():Void;
+    static public function contains():Void;
+    static public function scale():Void;
+    static public function chamfer():Void;
+    static public function clockwiseSort():Void;
+    static public function isConvex():Void;
+    static public function hull():Void;
 }

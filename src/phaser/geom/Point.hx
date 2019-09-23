@@ -55,7 +55,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The Point with `Math.ceil()` applied to its coordinates.
      */
-    public function Ceil(point:phaser.geom.Point):phaser.geom.Point;
+    static public function Ceil(point:phaser.geom.Point):phaser.geom.Point;
     /**
      * Clone the given Point.
      *
@@ -66,7 +66,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The cloned Point.
      */
-    public function Clone(source:phaser.geom.Point):phaser.geom.Point;
+    static public function Clone(source:phaser.geom.Point):phaser.geom.Point;
     /**
      * Copy the values of one Point to a destination Point.
      *
@@ -80,7 +80,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The destination Point.
      */
-    public function CopyFrom(source:phaser.geom.Point, dest:phaser.geom.Point):phaser.geom.Point;
+    static public function CopyFrom(source:phaser.geom.Point, dest:phaser.geom.Point):phaser.geom.Point;
     /**
      * A comparison of two `Point` objects to see if they are equal.
      *
@@ -92,7 +92,7 @@ extern class Point {
      *
      * @return {boolean} Returns true if the both `Point` objects are equal.
      */
-    public function Equals(point:phaser.geom.Point, toCompare:phaser.geom.Point):Bool;
+    static public function Equals(point:phaser.geom.Point, toCompare:phaser.geom.Point):Bool;
     /**
      * Apply `Math.ceil()` to each coordinate of the given Point.
      *
@@ -105,7 +105,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The Point with `Math.floor()` applied to its coordinates.
      */
-    public function Floor(point:phaser.geom.Point):phaser.geom.Point;
+    static public function Floor(point:phaser.geom.Point):phaser.geom.Point;
     /**
      * Get the centroid or geometric center of a plane figure (the arithmetic mean position of all the points in the figure).
      * Informally, it is the point at which a cutout of the shape could be perfectly balanced on the tip of a pin.
@@ -120,7 +120,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function GetCentroid(points:Array<phaser.geom.Point>, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function GetCentroid(points:Array<phaser.geom.Point>, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Calculate the magnitude of the point, which equivalent to the length of the line from the origin to this point.
      *
@@ -131,7 +131,7 @@ extern class Point {
      *
      * @return {number} The resulting magnitude
      */
-    public function GetMagnitude(point:phaser.geom.Point):Float;
+    static public function GetMagnitude(point:phaser.geom.Point):Float;
     /**
      * Calculates the square of magnitude of given point.(Can be used for fast magnitude calculation of point)
      *
@@ -142,7 +142,7 @@ extern class Point {
      *
      * @return {number} Returns square of the magnitude of given point.
      */
-    public function GetMagnitudeSq(point:phaser.geom.Point):Float;
+    static public function GetMagnitudeSq(point:phaser.geom.Point):Float;
     /**
      * Calculates the Axis Aligned Bounding Box (or aabb) from an array of points.
      *
@@ -156,7 +156,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Rectangle} [description]
      */
-    public function GetRectangleFromPoints(points:Array<phaser.geom.Point>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function GetRectangleFromPoints(points:Array<phaser.geom.Point>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * [description]
      *
@@ -172,7 +172,7 @@ extern class Point {
      *
      * @return {(Phaser.Geom.Point|object)} Either the object from the `out` argument with the properties `x` and `y` set to the result of the interpolation or a newly created `Point` object.
      */
-    public function Interpolate(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?t:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function Interpolate(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?t:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Swaps the X and the Y coordinate of a point.
      *
@@ -185,7 +185,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The modified `point`.
      */
-    public function Invert(point:phaser.geom.Point):phaser.geom.Point;
+    static public function Invert(point:phaser.geom.Point):phaser.geom.Point;
     /**
      * Inverts a Point's coordinates.
      *
@@ -199,7 +199,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The modified `out` Point, or a new Point if none was provided.
      */
-    public function Negative(point:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function Negative(point:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Set the x and y coordinates of the point to the given values.
      *
@@ -226,7 +226,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function Project(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function Project(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * [description]
      *
@@ -241,7 +241,7 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function ProjectUnit(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function ProjectUnit(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Changes the magnitude (length) of a two-dimensional vector without changing its direction.
      *
@@ -255,5 +255,5 @@ extern class Point {
      *
      * @return {Phaser.Geom.Point} The modified Point.
      */
-    public function SetMagnitude(point:phaser.geom.Point, magnitude:Float):phaser.geom.Point;
+    static public function SetMagnitude(point:phaser.geom.Point, magnitude:Float):phaser.geom.Point;
 }

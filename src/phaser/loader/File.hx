@@ -291,7 +291,7 @@ extern class File {
      * @param {Blob} blob - A Blob object to create an object URL for.
      * @param {string} defaultType - Default mime type used if blob type is not available.
      */
-    public function createObjectURL(image:js.html.ImageElement, blob:js.html.Blob, defaultType:String):Void;
+    static public function createObjectURL(image:js.html.ImageElement, blob:js.html.Blob, defaultType:String):Void;
     /**
      * Static method for releasing an existing object URL which was previously created
      * by calling {@link File#createObjectURL} method.
@@ -302,5 +302,5 @@ extern class File {
      *
      * @param {HTMLImageElement} image - Image object which 'src' attribute should be revoked.
      */
-    public function revokeObjectURL(image:js.html.ImageElement):Void;
+    static public function revokeObjectURL(image:js.html.ImageElement):Void;
 }

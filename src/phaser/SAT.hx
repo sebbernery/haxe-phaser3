@@ -8,8 +8,8 @@ package phaser;
 @:native("SAT")
 extern class SAT {
     public function new();
-    public function collides():Void;
-    public function _overlapAxes():Void;
-    public function _projectToAxis():Void;
-    public function _findSupports():Void;
+    static public function collides():Void;
+    static public function _overlapAxes():Void;
+    static public function _projectToAxis():Void;
+    static public function _findSupports():Void;
 }

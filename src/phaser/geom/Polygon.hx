@@ -63,7 +63,7 @@ extern class Polygon {
      *
      * @return {Phaser.Geom.Polygon} A new separate Polygon cloned from the specified polygon, based on the same points.
      */
-    public function Clone(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
+    static public function Clone(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
     /**
      * Checks if a point is within the bounds of a Polygon.
      *
@@ -76,7 +76,7 @@ extern class Polygon {
      *
      * @return {boolean} `true` if the point is within the bounds of the Polygon, otherwise `false`.
      */
-    public function Contains(polygon:phaser.geom.Polygon, x:Float, y:Float):Bool;
+    static public function Contains(polygon:phaser.geom.Polygon, x:Float, y:Float):Bool;
     /**
      * [description]
      *
@@ -88,7 +88,7 @@ extern class Polygon {
      *
      * @return {boolean} [description]
      */
-    public function ContainsPoint(polygon:phaser.geom.Polygon, point:phaser.geom.Point):Bool;
+    static public function ContainsPoint(polygon:phaser.geom.Polygon, point:phaser.geom.Point):Bool;
     /**
      * Calculates the bounding AABB rectangle of a polygon.
      *
@@ -102,7 +102,7 @@ extern class Polygon {
      *
      * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
      */
-    public function GetAABB(polygon:phaser.geom.Polygon, ?out:Dynamic):phaser.geom.Rectangle;
+    static public function GetAABB(polygon:phaser.geom.Polygon, ?out:Dynamic):phaser.geom.Rectangle;
     /**
      * Stores all of the points of a Polygon into a flat array of numbers following the sequence [ x,y, x,y, x,y ],
      * i.e. each point of the Polygon, in the order it's defined, corresponds to two elements of the resultant
@@ -118,7 +118,7 @@ extern class Polygon {
      *
      * @return {(array|number[])} The modified `output` array, or a new array if none was given.
      */
-    public function GetNumberArray(polygon:phaser.geom.Polygon, ?output:Dynamic):Array<Dynamic>;
+    static public function GetNumberArray(polygon:phaser.geom.Polygon, ?output:Dynamic):Array<Dynamic>;
     /**
      * Returns an array of Point objects containing the coordinates of the points around the perimeter of the Polygon,
      * based on the given quantity or stepRate values.
@@ -133,7 +133,7 @@ extern class Polygon {
      *
      * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
      */
-    public function GetPoints(polygon:phaser.geom.Polygon, quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
+    static public function GetPoints(polygon:phaser.geom.Polygon, quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
      * Returns the perimeter of the given Polygon.
      *
@@ -144,7 +144,7 @@ extern class Polygon {
      *
      * @return {number} The perimeter of the Polygon.
      */
-    public function Perimeter(polygon:phaser.geom.Polygon):Float;
+    static public function Perimeter(polygon:phaser.geom.Polygon):Float;
     /**
      * Check to see if the Polygon contains the given x / y coordinates.
      *
@@ -213,7 +213,7 @@ extern class Polygon {
      *
      * @return {Phaser.Geom.Polygon} The modified Polygon.
      */
-    public function Reverse(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
+    static public function Reverse(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
     /**
      * Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
      *
@@ -226,5 +226,5 @@ extern class Polygon {
      *
      * @return {Phaser.Geom.Polygon} The input polygon.
      */
-    public function Smooth(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
+    static public function Smooth(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
 }

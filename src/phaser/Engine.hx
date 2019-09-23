@@ -12,11 +12,11 @@ package phaser;
 @:native("Engine")
 extern class Engine {
     public function new();
-    public function create():Void;
-    public function update():Void;
-    public function merge():Void;
-    public function clear():Void;
-    public function _bodiesClearForces():Void;
-    public function _bodiesApplyGravity():Void;
-    public function _bodiesUpdate():Void;
+    static public function create():Void;
+    static public function update():Void;
+    static public function merge():Void;
+    static public function clear():Void;
+    static public function _bodiesClearForces():Void;
+    static public function _bodiesApplyGravity():Void;
+    static public function _bodiesUpdate():Void;
 }

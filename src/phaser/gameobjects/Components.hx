@@ -18,5 +18,5 @@ extern class Components {
      *
      * @return {Phaser.Types.GameObjects.JSONGameObject} A JSON representation of the Game Object.
      */
-    public function ToJSON(gameObject:phaser.gameobjects.GameObject):phaser.types.gameobjects.JSONGameObject;
+    static public function ToJSON(gameObject:phaser.gameobjects.GameObject):phaser.types.gameobjects.JSONGameObject;
 }

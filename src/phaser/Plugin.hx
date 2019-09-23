@@ -8,15 +8,15 @@ package phaser;
 @:native("Plugin")
 extern class Plugin {
     public function new();
-    public function register():Void;
-    public function resolve():Void;
-    public function toString():Void;
-    public function isPlugin():Void;
-    public function isUsed():Void;
-    public function isFor():Void;
-    public function use():Void;
-    public function dependencies():Void;
-    public function dependencyParse():Void;
-    public function versionParse():Void;
-    public function versionSatisfies():Void;
+    static public function register():Void;
+    static public function resolve():Void;
+    static public function toString():Void;
+    static public function isPlugin():Void;
+    static public function isUsed():Void;
+    static public function isFor():Void;
+    static public function use():Void;
+    static public function dependencies():Void;
+    static public function dependencyParse():Void;
+    static public function versionParse():Void;
+    static public function versionSatisfies():Void;
 }

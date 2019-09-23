@@ -91,5 +91,5 @@ extern class Spline extends phaser.curves.Curve {
      *
      * @return {Phaser.Curves.Spline} [description]
      */
-    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Spline;
+    static public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.Spline;
 }

@@ -125,7 +125,7 @@ extern class Rectangle {
      *
      * @return {number} The area of the Rectangle object.
      */
-    public function Area(rect:phaser.geom.Rectangle):Float;
+    static public function Area(rect:phaser.geom.Rectangle):Float;
     /**
      * Rounds a Rectangle's position up to the smallest integer greater than or equal to each current coordinate.
      *
@@ -138,7 +138,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
      */
-    public function Ceil(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function Ceil(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Rounds a Rectangle's position and size up to the smallest integer greater than or equal to each respective value.
      *
@@ -151,7 +151,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified Rectangle.
      */
-    public function CeilAll(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function CeilAll(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Moves the top-left corner of a Rectangle so that its center is at the given coordinates.
      *
@@ -166,7 +166,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The centered rectangle.
      */
-    public function CenterOn(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    static public function CenterOn(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     /**
      * Creates a new Rectangle which is identical to the given one.
      *
@@ -177,7 +177,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The newly created Rectangle, which is separate from the given one.
      */
-    public function Clone(source:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function Clone(source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Checks if a given point is inside a Rectangle's bounds.
      *
@@ -190,7 +190,7 @@ extern class Rectangle {
      *
      * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
      */
-    public function Contains(rect:phaser.geom.Rectangle, x:Float, y:Float):Bool;
+    static public function Contains(rect:phaser.geom.Rectangle, x:Float, y:Float):Bool;
     /**
      * Determines whether the specified point is contained within the rectangular region defined by this Rectangle object.
      *
@@ -202,7 +202,7 @@ extern class Rectangle {
      *
      * @return {boolean} A value of true if the Rectangle object contains the specified point, otherwise false.
      */
-    public function ContainsPoint(rect:phaser.geom.Rectangle, point:phaser.geom.Point):Bool;
+    static public function ContainsPoint(rect:phaser.geom.Rectangle, point:phaser.geom.Point):Bool;
     /**
      * Tests if one rectangle fully contains another.
      *
@@ -214,7 +214,7 @@ extern class Rectangle {
      *
      * @return {boolean} True only if rectA fully contains rectB.
      */
-    public function ContainsRect(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle):Bool;
+    static public function ContainsRect(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle):Bool;
     /**
      * Copy the values of one Rectangle to a destination Rectangle.
      *
@@ -228,7 +228,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The destination Rectangle.
      */
-    public function CopyFrom(source:phaser.geom.Rectangle, dest:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function CopyFrom(source:phaser.geom.Rectangle, dest:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Create an array of points for each corner of a Rectangle
      * If an array is specified, each point object will be added to the end of the array, otherwise a new array will be created.
@@ -241,7 +241,7 @@ extern class Rectangle {
      *
      * @return {array} Will return the array you specified or a new array containing the points of the Rectangle.
      */
-    public function Decompose(rect:phaser.geom.Rectangle, ?out:Array<Dynamic>):Array<Dynamic>;
+    static public function Decompose(rect:phaser.geom.Rectangle, ?out:Array<Dynamic>):Array<Dynamic>;
     /**
      * Compares the `x`, `y`, `width` and `height` properties of two rectangles.
      *
@@ -253,7 +253,7 @@ extern class Rectangle {
      *
      * @return {boolean} `true` if the rectangles' properties are an exact match, otherwise `false`.
      */
-    public function Equals(rect:phaser.geom.Rectangle, toCompare:phaser.geom.Rectangle):Bool;
+    static public function Equals(rect:phaser.geom.Rectangle, toCompare:phaser.geom.Rectangle):Bool;
     /**
      * Adjusts the target rectangle, changing its width, height and position,
      * so that it fits inside the area of the source rectangle, while maintaining its original
@@ -271,7 +271,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
      */
-    public function FitInside(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function FitInside(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Adjusts the target rectangle, changing its width, height and position,
      * so that it fully covers the area of the source rectangle, while maintaining its original
@@ -289,7 +289,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
      */
-    public function FitOutside(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function FitOutside(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Rounds down (floors) the top left X and Y co-ordinates of the given Rectangle to the largest integer less than or equal to them
      *
@@ -302,7 +302,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The rectangle that was passed to this function with its co-ordinates floored.
      */
-    public function Floor(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function Floor(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Rounds a Rectangle's position and size down to the largest integer less than or equal to each current coordinate or dimension.
      *
@@ -315,7 +315,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
      */
-    public function FloorAll(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function FloorAll(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Constructs new Rectangle or repositions and resizes an existing Rectangle so that all of the given points are on or within its bounds.
      *
@@ -329,7 +329,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
      */
-    public function FromPoints(points:Array<Dynamic>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function FromPoints(points:Array<Dynamic>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Calculates the width/height ratio of a rectangle.
      *
@@ -340,7 +340,7 @@ extern class Rectangle {
      *
      * @return {number} The width/height ratio of the rectangle.
      */
-    public function GetAspectRatio(rect:phaser.geom.Rectangle):Float;
+    static public function GetAspectRatio(rect:phaser.geom.Rectangle):Float;
     /**
      * Returns the center of a Rectangle as a Point.
      *
@@ -354,7 +354,7 @@ extern class Rectangle {
      *
      * @return {(Phaser.Geom.Point|object)} The modified `out` object, or a new Point if none was provided.
      */
-    public function GetCenter(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
+    static public function GetCenter(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
     /**
      * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.
      *
@@ -369,7 +369,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function GetPoint(rectangle:phaser.geom.Rectangle, position:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function GetPoint(rectangle:phaser.geom.Rectangle, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Return an array of points from the perimeter of the rectangle, each spaced out based on the quantity or step required.
      *
@@ -385,7 +385,7 @@ extern class Rectangle {
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
      */
-    public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     /**
      *  The size of the Rectangle object, expressed as a Point object
      *  with the values of the width and height properties.
@@ -400,7 +400,7 @@ extern class Rectangle {
      *
      * @return {(Phaser.Geom.Point|object)} [description]
      */
-    public function GetSize(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
+    static public function GetSize(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
     /**
      * Increases the size of a Rectangle by a specified amount.
      *
@@ -417,7 +417,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The inflated Rectangle.
      */
-    public function Inflate(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    static public function Inflate(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     /**
      * Takes two Rectangles and first checks to see if they intersect.
      * If they intersect it will return the area of intersection in the `out` Rectangle.
@@ -434,7 +434,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The intersection result. If the width and height are zero, no intersection occurred.
      */
-    public function Intersection(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function Intersection(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      *  Return an array of points from the perimeter of the rectangle
      *  each spaced out based on the quantity or step required
@@ -451,7 +451,7 @@ extern class Rectangle {
      *
      * @return {(array|Phaser.Geom.Point[])} [description]
      */
-    public function MarchingAnts(rect:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
+    static public function MarchingAnts(rect:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     /**
      * Merges a Rectangle with a list of points by repositioning and/or resizing it such that all points are located on or within its bounds.
      *
@@ -465,7 +465,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified Rectangle.
      */
-    public function MergePoints(target:phaser.geom.Rectangle, points:Array<phaser.geom.Point>):phaser.geom.Rectangle;
+    static public function MergePoints(target:phaser.geom.Rectangle, points:Array<phaser.geom.Point>):phaser.geom.Rectangle;
     /**
      * Merges the source rectangle into the target rectangle and returns the target.
      * Neither rectangle should have a negative width or height.
@@ -480,7 +480,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} Modified target rectangle that contains source rectangle.
      */
-    public function MergeRect(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function MergeRect(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Merges a Rectangle with a point by repositioning and/or resizing it so that the point is on or within its bounds.
      *
@@ -495,7 +495,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified `target` Rectangle.
      */
-    public function MergeXY(target:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    static public function MergeXY(target:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     /**
      * Nudges (translates) the top left corner of a Rectangle by a given offset.
      *
@@ -510,7 +510,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
      */
-    public function Offset(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    static public function Offset(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     /**
      * Nudges (translates) the top-left corner of a Rectangle by the coordinates of a point (translation vector).
      *
@@ -524,7 +524,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
      */
-    public function OffsetPoint(rect:phaser.geom.Rectangle, point:Dynamic):phaser.geom.Rectangle;
+    static public function OffsetPoint(rect:phaser.geom.Rectangle, point:Dynamic):phaser.geom.Rectangle;
     /**
      * Checks if two Rectangles overlap. If a Rectangle is within another Rectangle, the two will be considered overlapping. Thus, the Rectangles are treated as "solid".
      *
@@ -536,7 +536,7 @@ extern class Rectangle {
      *
      * @return {boolean} `true` if the two Rectangles overlap, `false` otherwise.
      */
-    public function Overlaps(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle):Bool;
+    static public function Overlaps(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle):Bool;
     /**
      * Calculates the perimeter of a Rectangle.
      *
@@ -547,7 +547,7 @@ extern class Rectangle {
      *
      * @return {number} The perimeter of the Rectangle, equal to `(width * 2) + (height * 2)`.
      */
-    public function Perimeter(rect:phaser.geom.Rectangle):Float;
+    static public function Perimeter(rect:phaser.geom.Rectangle):Float;
     /**
      * [description]
      *
@@ -562,7 +562,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Returns a random point within a Rectangle.
      *
@@ -576,7 +576,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Point} The modified `out` object, or a new Point if none was provided.
      */
-    public function Random(rect:phaser.geom.Rectangle, out:phaser.geom.Point):phaser.geom.Point;
+    static public function Random(rect:phaser.geom.Rectangle, out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Calculates a random point that lies within the `outer` Rectangle, but outside of the `inner` Rectangle.
      * The inner Rectangle must be fully contained within the outer rectangle.
@@ -592,7 +592,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Point} A Point object containing the random values in its `x` and `y` properties.
      */
-    public function RandomOutside(outer:phaser.geom.Rectangle, inner:phaser.geom.Rectangle, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function RandomOutside(outer:phaser.geom.Rectangle, inner:phaser.geom.Rectangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Checks if the given point is inside the Rectangle's bounds.
      *
@@ -770,7 +770,7 @@ extern class Rectangle {
      *
      * @return {boolean} `true` if the objects have equivalent values for the `width` and `height` properties, otherwise `false`.
      */
-    public function SameDimensions(rect:phaser.geom.Rectangle, toCompare:phaser.geom.Rectangle):Bool;
+    static public function SameDimensions(rect:phaser.geom.Rectangle, toCompare:phaser.geom.Rectangle):Bool;
     /**
      * Scales the width and height of this Rectangle by the given amounts.
      *
@@ -785,7 +785,7 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The rectangle object with updated `width` and `height` properties as calculated from the scaling factor(s).
      */
-    public function Scale(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
+    static public function Scale(rect:phaser.geom.Rectangle, x:Float, y:Float):phaser.geom.Rectangle;
     /**
      * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
      *
@@ -800,5 +800,5 @@ extern class Rectangle {
      *
      * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
      */
-    public function Union(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function Union(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
 }

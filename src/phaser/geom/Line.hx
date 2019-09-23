@@ -101,7 +101,7 @@ extern class Line {
      *
      * @return {number} The angle of the line, in radians.
      */
-    public function Angle(line:phaser.geom.Line):Float;
+    static public function Angle(line:phaser.geom.Line):Float;
     /**
      * Using Bresenham's line algorithm this will return an array of all coordinates on this line.
      *
@@ -116,7 +116,7 @@ extern class Line {
      *
      * @return {object[]} The array of coordinates on the line.
      */
-    public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Int, ?results:Array<Dynamic>):Array<Dynamic>;
+    static public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Int, ?results:Array<Dynamic>):Array<Dynamic>;
     /**
      * Center a line on the given coordinates.
      *
@@ -129,7 +129,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The centered line.
      */
-    public function CenterOn(line:phaser.geom.Line, x:Float, y:Float):phaser.geom.Line;
+    static public function CenterOn(line:phaser.geom.Line, x:Float, y:Float):phaser.geom.Line;
     /**
      * Clone the given line.
      *
@@ -140,7 +140,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The cloned line.
      */
-    public function Clone(source:phaser.geom.Line):phaser.geom.Line;
+    static public function Clone(source:phaser.geom.Line):phaser.geom.Line;
     /**
      * Copy the values of one line to a destination line.
      *
@@ -154,7 +154,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The destination line.
      */
-    public function CopyFrom(source:phaser.geom.Line, dest:phaser.geom.Line):phaser.geom.Line;
+    static public function CopyFrom(source:phaser.geom.Line, dest:phaser.geom.Line):phaser.geom.Line;
     /**
      * Compare two lines for strict equality.
      *
@@ -166,7 +166,7 @@ extern class Line {
      *
      * @return {boolean} Whether the two lines are equal.
      */
-    public function Equals(line:phaser.geom.Line, toCompare:phaser.geom.Line):Bool;
+    static public function Equals(line:phaser.geom.Line, toCompare:phaser.geom.Line):Bool;
     /**
      * Extends the start and end points of a Line by the given amounts.
      *
@@ -186,7 +186,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The modified Line instance.
      */
-    public function Extend(line:phaser.geom.Line, left:Float, ?right:Float):phaser.geom.Line;
+    static public function Extend(line:phaser.geom.Line, left:Float, ?right:Float):phaser.geom.Line;
     /**
      * Get the midpoint of the given line.
      *
@@ -200,7 +200,7 @@ extern class Line {
      *
      * @return {(Phaser.Geom.Point|object)} The midpoint of the Line.
      */
-    public function GetMidPoint(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
+    static public function GetMidPoint(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
     /**
      * Get the nearest point on a line perpendicular to the given point.
      *
@@ -215,7 +215,7 @@ extern class Line {
      *
      * @return {(Phaser.Geom.Point|object)} The nearest point on the line.
      */
-    public function GetNearestPoint(line:phaser.geom.Line, point:Dynamic, ?out:Dynamic):phaser.geom.Point;
+    static public function GetNearestPoint(line:phaser.geom.Line, point:Dynamic, ?out:Dynamic):phaser.geom.Point;
     /**
      * Calculate the normal of the given line.
      *
@@ -231,7 +231,7 @@ extern class Line {
      *
      * @return {(Phaser.Geom.Point|object)} The normal of the Line.
      */
-    public function GetNormal(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
+    static public function GetNormal(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
     /**
      * Get a point on a line that's a given percentage along its length.
      *
@@ -246,7 +246,7 @@ extern class Line {
      *
      * @return {(Phaser.Geom.Point|object)} The point on the line.
      */
-    public function GetPoint(line:phaser.geom.Line, position:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function GetPoint(line:phaser.geom.Line, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Get a number of points along a line's length.
      *
@@ -267,7 +267,7 @@ extern class Line {
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
      */
-    public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Get the shortest distance from a Line to the given Point.
      *
@@ -281,7 +281,7 @@ extern class Line {
      *
      * @return {number} The shortest distance from the line to the point.
      */
-    public function GetShortestDistance(line:phaser.geom.Line, point:Dynamic):Float;
+    static public function GetShortestDistance(line:phaser.geom.Line, point:Dynamic):Float;
     /**
      * Calculate the height of the given line.
      *
@@ -292,7 +292,7 @@ extern class Line {
      *
      * @return {number} The height of the line.
      */
-    public function Height(line:phaser.geom.Line):Float;
+    static public function Height(line:phaser.geom.Line):Float;
     /**
      * Calculate the length of the given line.
      *
@@ -303,7 +303,7 @@ extern class Line {
      *
      * @return {number} The length of the line.
      */
-    public function Length(line:phaser.geom.Line):Float;
+    static public function Length(line:phaser.geom.Line):Float;
     /**
      * Get a point on a line that's a given percentage along its length.
      *
@@ -401,7 +401,7 @@ extern class Line {
      *
      * @return {number} The angle of the normal of the line in radians.
      */
-    public function NormalAngle(line:phaser.geom.Line):Float;
+    static public function NormalAngle(line:phaser.geom.Line):Float;
     /**
      * [description]
      *
@@ -412,7 +412,7 @@ extern class Line {
      *
      * @return {number} [description]
      */
-    public function NormalX(line:phaser.geom.Line):Float;
+    static public function NormalX(line:phaser.geom.Line):Float;
     /**
      * The Y value of the normal of the given line.
      * The normal of a line is a vector that points perpendicular from it.
@@ -424,7 +424,7 @@ extern class Line {
      *
      * @return {number} The Y value of the normal of the Line.
      */
-    public function NormalY(line:phaser.geom.Line):Float;
+    static public function NormalY(line:phaser.geom.Line):Float;
     /**
      * Offset a line by the given amount.
      *
@@ -439,7 +439,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The offset line.
      */
-    public function Offset(line:phaser.geom.Line, x:Float, y:Float):phaser.geom.Line;
+    static public function Offset(line:phaser.geom.Line, x:Float, y:Float):phaser.geom.Line;
     /**
      * Calculate the perpendicular slope of the given line.
      *
@@ -450,7 +450,7 @@ extern class Line {
      *
      * @return {number} The perpendicular slope of the line.
      */
-    public function PerpSlope(line:phaser.geom.Line):Float;
+    static public function PerpSlope(line:phaser.geom.Line):Float;
     /**
      * Returns a random point on a given Line.
      *
@@ -464,7 +464,7 @@ extern class Line {
      *
      * @return {(Phaser.Geom.Point|object)} A random Point on the Line.
      */
-    public function Random(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
+    static public function Random(line:phaser.geom.Line, ?out:Dynamic):phaser.geom.Point;
     /**
      * Calculate the reflected angle between two lines.
      *
@@ -478,7 +478,7 @@ extern class Line {
      *
      * @return {number} The reflected angle between each line.
      */
-    public function ReflectAngle(lineA:phaser.geom.Line, lineB:phaser.geom.Line):Float;
+    static public function ReflectAngle(lineA:phaser.geom.Line, lineB:phaser.geom.Line):Float;
     /**
      * Rotate a line around its midpoint by the given angle in radians.
      *
@@ -492,7 +492,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The rotated line.
      */
-    public function Rotate(line:phaser.geom.Line, angle:Float):phaser.geom.Line;
+    static public function Rotate(line:phaser.geom.Line, angle:Float):phaser.geom.Line;
     /**
      * Rotate a line around a point by the given angle in radians.
      *
@@ -507,7 +507,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The rotated line.
      */
-    public function RotateAroundPoint(line:phaser.geom.Line, point:Dynamic, angle:Float):phaser.geom.Line;
+    static public function RotateAroundPoint(line:phaser.geom.Line, point:Dynamic, angle:Float):phaser.geom.Line;
     /**
      * Rotate a line around the given coordinates by the given angle in radians.
      *
@@ -523,7 +523,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The rotated line.
      */
-    public function RotateAroundXY(line:phaser.geom.Line, x:Float, y:Float, angle:Float):phaser.geom.Line;
+    static public function RotateAroundXY(line:phaser.geom.Line, x:Float, y:Float, angle:Float):phaser.geom.Line;
     /**
      * Set a line to a given position, angle and length.
      *
@@ -540,7 +540,7 @@ extern class Line {
      *
      * @return {Phaser.Geom.Line} The updated line.
      */
-    public function SetToAngle(line:phaser.geom.Line, x:Float, y:Float, angle:Float, length:Float):phaser.geom.Line;
+    static public function SetToAngle(line:phaser.geom.Line, x:Float, y:Float, angle:Float, length:Float):phaser.geom.Line;
     /**
      * Calculate the slope of the given line.
      *
@@ -551,7 +551,7 @@ extern class Line {
      *
      * @return {number} The slope of the line.
      */
-    public function Slope(line:phaser.geom.Line):Float;
+    static public function Slope(line:phaser.geom.Line):Float;
     /**
      * Calculate the width of the given line.
      *
@@ -562,5 +562,5 @@ extern class Line {
      *
      * @return {number} The width of the line.
      */
-    public function Width(line:phaser.geom.Line):Float;
+    static public function Width(line:phaser.geom.Line):Float;
 }

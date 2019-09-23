@@ -28,5 +28,5 @@ extern class Components {
      *
      * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
      */
-    public function OverlapRect(x:Float, y:Float, width:Float, height:Float, ?includeDynamic:Bool, ?includeStatic:Bool):Array<phaser.physics.arcade.Body>;
+    static public function OverlapRect(x:Float, y:Float, width:Float, height:Float, ?includeDynamic:Bool, ?includeStatic:Bool):Array<phaser.physics.arcade.Body>;
 }

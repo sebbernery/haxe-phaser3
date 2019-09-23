@@ -174,7 +174,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @return {object} An object containing dimensions of the Text object.
      */
-    public function GetTextSize(text:phaser.gameobjects.Text, size:phaser.types.gameobjects.text.TextMetrics, lines:Array<Dynamic>):Dynamic;
+    static public function GetTextSize(text:phaser.gameobjects.Text, size:phaser.types.gameobjects.text.TextMetrics, lines:Array<Dynamic>):Dynamic;
     /**
      * Calculates the ascent, descent and fontSize of a given font style.
      *
@@ -185,7 +185,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @return {Phaser.Types.GameObjects.Text.TextMetrics} An object containing the ascent, descent and fontSize of the TextStyle.
      */
-    public function MeasureText(textStyle:phaser.gameobjects.TextStyle):phaser.types.gameobjects.text.TextMetrics;
+    static public function MeasureText(textStyle:phaser.gameobjects.TextStyle):phaser.types.gameobjects.text.TextMetrics;
     /**
      * Initialize right to left text.
      *

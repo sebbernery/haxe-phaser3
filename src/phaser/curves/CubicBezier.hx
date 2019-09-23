@@ -94,5 +94,5 @@ extern class CubicBezier extends phaser.curves.Curve {
      *
      * @return {Phaser.Curves.CubicBezier} The curve generated from the JSON object.
      */
-    public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.CubicBezier;
+    static public function fromJSON(data:phaser.types.curves.JSONCurve):phaser.curves.CubicBezier;
 }

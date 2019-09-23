@@ -12,6 +12,6 @@ package phaser;
 @:native("Svg")
 extern class Svg {
     public function new();
-    public function pathToVertices():Void;
-    public function _svgPathToAbsolute():Void;
+    static public function pathToVertices():Void;
+    static public function _svgPathToAbsolute():Void;
 }

@@ -10,8 +10,8 @@ package phaser;
 @:native("Query")
 extern class Query {
     public function new();
-    public function collides():Void;
-    public function ray():Void;
-    public function region():Void;
-    public function point():Void;
+    static public function collides():Void;
+    static public function ray():Void;
+    static public function region():Void;
+    static public function point():Void;
 }

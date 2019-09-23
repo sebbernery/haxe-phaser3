@@ -11,11 +11,11 @@ package phaser;
 @:native("Composites")
 extern class Composites {
     public function new();
-    public function stack():Void;
-    public function chain():Void;
-    public function mesh():Void;
-    public function pyramid():Void;
-    public function newtonsCradle():Void;
-    public function car():Void;
-    public function softBody():Void;
+    static public function stack():Void;
+    static public function chain():Void;
+    static public function mesh():Void;
+    static public function pyramid():Void;
+    static public function newtonsCradle():Void;
+    static public function car():Void;
+    static public function softBody():Void;
 }

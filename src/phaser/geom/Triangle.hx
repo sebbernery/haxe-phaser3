@@ -127,7 +127,7 @@ extern class Triangle {
      *
      * @return {number} The area of the Triangle, always non-negative.
      */
-    public function Area(triangle:phaser.geom.Triangle):Float;
+    static public function Area(triangle:phaser.geom.Triangle):Float;
     /**
      * Builds an equilateral triangle. In the equilateral triangle, all the sides are the same length (congruent) and all the angles are the same size (congruent).
      * The x/y specifies the top-middle of the triangle (x1/y1) and length is the length of each side.
@@ -141,7 +141,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The Triangle object of the given size.
      */
-    public function BuildEquilateral(x:Float, y:Float, length:Float):phaser.geom.Triangle;
+    static public function BuildEquilateral(x:Float, y:Float, length:Float):phaser.geom.Triangle;
     /**
      * [description]
      *
@@ -158,7 +158,7 @@ extern class Triangle {
      *
      * @return {(array|Phaser.Geom.Triangle[])} [description]
      */
-    public function BuildFromPolygon(data:Array<Dynamic>, ?holes:Array<Dynamic>, ?scaleX:Float, ?scaleY:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function BuildFromPolygon(data:Array<Dynamic>, ?holes:Array<Dynamic>, ?scaleX:Float, ?scaleY:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Builds a right triangle, i.e. one which has a 90-degree angle and two acute angles.
      *
@@ -172,7 +172,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The constructed right Triangle.
      */
-    public function BuildRight(x:Float, y:Float, width:Float, height:Float):phaser.geom.Triangle;
+    static public function BuildRight(x:Float, y:Float, width:Float, height:Float):phaser.geom.Triangle;
     /**
      * Positions the Triangle so that it is centered on the given coordinates.
      *
@@ -188,7 +188,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The Triangle that was centered.
      */
-    public function CenterOn(triangle:phaser.geom.Triangle, x:Float, y:Float, ?centerFunc:CenterFunction):phaser.geom.Triangle;
+    static public function CenterOn(triangle:phaser.geom.Triangle, x:Float, y:Float, ?centerFunc:CenterFunction):phaser.geom.Triangle;
     /**
      * Calculates the position of a Triangle's centroid, which is also its center of mass (center of gravity).
      *
@@ -204,7 +204,7 @@ extern class Triangle {
      *
      * @return {(Phaser.Geom.Point|object)} The `out` object with modified `x` and `y` properties, or a new Point if none was provided.
      */
-    public function Centroid(triangle:phaser.geom.Triangle, ?out:Dynamic):phaser.geom.Point;
+    static public function Centroid(triangle:phaser.geom.Triangle, ?out:Dynamic):phaser.geom.Point;
     /**
      * Computes the circumcentre of a triangle. The circumcentre is the centre of
      * the circumcircle, the smallest circle which encloses the triangle. It is also
@@ -222,7 +222,7 @@ extern class Triangle {
      *
      * @return {Phaser.Math.Vector2} [description]
      */
-    public function CircumCenter(triangle:phaser.geom.Triangle, ?out:phaser.math.Vector2):phaser.math.Vector2;
+    static public function CircumCenter(triangle:phaser.geom.Triangle, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
      * Finds the circumscribed circle (circumcircle) of a Triangle object. The circumcircle is the circle which touches all of the triangle's vertices.
      *
@@ -236,7 +236,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Circle} The updated `out` Circle, or a new Circle if none was provided.
      */
-    public function CircumCircle(triangle:phaser.geom.Triangle, ?out:phaser.geom.Circle):phaser.geom.Circle;
+    static public function CircumCircle(triangle:phaser.geom.Triangle, ?out:phaser.geom.Circle):phaser.geom.Circle;
     /**
      * Clones a Triangle object.
      *
@@ -247,7 +247,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} A new Triangle identical to the given one but separate from it.
      */
-    public function Clone(source:phaser.geom.Triangle):phaser.geom.Triangle;
+    static public function Clone(source:phaser.geom.Triangle):phaser.geom.Triangle;
     /**
      * Checks if a point (as a pair of coordinates) is inside a Triangle's bounds.
      *
@@ -260,7 +260,7 @@ extern class Triangle {
      *
      * @return {boolean} `true` if the point is inside the Triangle, otherwise `false`.
      */
-    public function Contains(triangle:phaser.geom.Triangle, x:Float, y:Float):Bool;
+    static public function Contains(triangle:phaser.geom.Triangle, x:Float, y:Float):Bool;
     /**
      * Filters an array of point-like objects to only those contained within a triangle.
      * If `returnFirst` is true, will return an array containing only the first point in the provided array that is within the triangle (or an empty array if there are no such points).
@@ -275,7 +275,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Point[]} An array containing all the points from `points` that are within the triangle, if an array was provided as `out`, points will be appended to that array and it will also be returned here.
      */
-    public function ContainsArray(triangle:phaser.geom.Triangle, points:Array<phaser.geom.Point>, ?returnFirst:Bool, ?out:Array<Dynamic>):Array<phaser.geom.Point>;
+    static public function ContainsArray(triangle:phaser.geom.Triangle, points:Array<phaser.geom.Point>, ?returnFirst:Bool, ?out:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
      * Tests if a triangle contains a point.
      *
@@ -287,7 +287,7 @@ extern class Triangle {
      *
      * @return {boolean} `true` if the point is within the triangle, otherwise `false`.
      */
-    public function ContainsPoint(triangle:phaser.geom.Triangle, point:Dynamic):Bool;
+    static public function ContainsPoint(triangle:phaser.geom.Triangle, point:Dynamic):Bool;
     /**
      * Copy the values of one Triangle to a destination Triangle.
      *
@@ -301,7 +301,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The destination Triangle.
      */
-    public function CopyFrom(source:phaser.geom.Triangle, dest:phaser.geom.Triangle):phaser.geom.Triangle;
+    static public function CopyFrom(source:phaser.geom.Triangle, dest:phaser.geom.Triangle):phaser.geom.Triangle;
     /**
      * Decomposes a Triangle into an array of its points.
      *
@@ -313,7 +313,7 @@ extern class Triangle {
      *
      * @return {array} The provided `out` array, or a new array if none was provided, with three objects with `x` and `y` properties representing each point of the Triangle appended to it.
      */
-    public function Decompose(triangle:phaser.geom.Triangle, ?out:Array<Dynamic>):Array<Dynamic>;
+    static public function Decompose(triangle:phaser.geom.Triangle, ?out:Array<Dynamic>):Array<Dynamic>;
     /**
      * Returns true if two triangles have the same coordinates.
      *
@@ -325,7 +325,7 @@ extern class Triangle {
      *
      * @return {boolean} `true` if the two given triangles have the exact same coordinates, otherwise `false`.
      */
-    public function Equals(triangle:phaser.geom.Triangle, toCompare:phaser.geom.Triangle):Bool;
+    static public function Equals(triangle:phaser.geom.Triangle, toCompare:phaser.geom.Triangle):Bool;
     /**
      * Returns a Point from around the perimeter of a Triangle.
      *
@@ -340,7 +340,7 @@ extern class Triangle {
      *
      * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
      */
-    public function GetPoint(triangle:phaser.geom.Triangle, position:Float, ?out:Dynamic):phaser.geom.Point;
+    static public function GetPoint(triangle:phaser.geom.Triangle, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
      * Returns an array of evenly spaced points on the perimeter of a Triangle.
      *
@@ -356,7 +356,7 @@ extern class Triangle {
      *
      * @return {(array|Phaser.Geom.Point[])} The modified `out` array, or a new array if none was provided.
      */
-    public function GetPoints(triangle:phaser.geom.Triangle, quantity:Int, stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(triangle:phaser.geom.Triangle, quantity:Int, stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Calculates the position of the incenter of a Triangle object. This is the point where its three angle bisectors meet and it's also the center of the incircle, which is the circle inscribed in the triangle.
      *
@@ -370,7 +370,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Point} Point (x, y) of the center pixel of the triangle.
      */
-    public function InCenter(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function InCenter(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Moves each point (vertex) of a Triangle by a given offset, thus moving the entire Triangle by that offset.
      *
@@ -385,7 +385,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The modified Triangle.
      */
-    public function Offset(triangle:phaser.geom.Triangle, x:Float, y:Float):phaser.geom.Triangle;
+    static public function Offset(triangle:phaser.geom.Triangle, x:Float, y:Float):phaser.geom.Triangle;
     /**
      * Gets the length of the perimeter of the given triangle.
      *
@@ -396,7 +396,7 @@ extern class Triangle {
      *
      * @return {number} [description]
      */
-    public function Perimeter(triangle:phaser.geom.Triangle):Float;
+    static public function Perimeter(triangle:phaser.geom.Triangle):Float;
     /**
      * [description]
      *
@@ -410,7 +410,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Point} [description]
      */
-    public function Random(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function Random(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Rotates a Triangle about its incenter, which is the point at which its three angle bisectors meet.
      *
@@ -424,7 +424,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
-    public function Rotate(triangle:phaser.geom.Triangle, angle:Float):phaser.geom.Triangle;
+    static public function Rotate(triangle:phaser.geom.Triangle, angle:Float):phaser.geom.Triangle;
     /**
      * Rotates a Triangle at a certain angle about a given Point or object with public `x` and `y` properties.
      *
@@ -439,7 +439,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
-    public function RotateAroundPoint(triangle:phaser.geom.Triangle, point:phaser.geom.Point, angle:Float):phaser.geom.Triangle;
+    static public function RotateAroundPoint(triangle:phaser.geom.Triangle, point:phaser.geom.Point, angle:Float):phaser.geom.Triangle;
     /**
      * Rotates an entire Triangle at a given angle about a specific point.
      *
@@ -455,7 +455,7 @@ extern class Triangle {
      *
      * @return {Phaser.Geom.Triangle} The rotated Triangle.
      */
-    public function RotateAroundXY(triangle:phaser.geom.Triangle, x:Float, y:Float, angle:Float):phaser.geom.Triangle;
+    static public function RotateAroundXY(triangle:phaser.geom.Triangle, x:Float, y:Float, angle:Float):phaser.geom.Triangle;
     /**
      * Checks whether a given points lies within the triangle.
      *
