@@ -40,7 +40,7 @@ class ModelViewProjection {
      * @type {?Float32Array}
      * @since 3.0.0
      */
-    static public var modelMatrix:js.html.Float32Array;
+    static public var modelMatrix:js.lib.Float32Array;
     /**
      * View matrix
      *
@@ -48,7 +48,7 @@ class ModelViewProjection {
      * @type {?Float32Array}
      * @since 3.0.0
      */
-    static public var viewMatrix:js.html.Float32Array;
+    static public var viewMatrix:js.lib.Float32Array;
     /**
      * Projection matrix
      *
@@ -56,5 +56,5 @@ class ModelViewProjection {
      * @type {?Float32Array}
      * @since 3.0.0
      */
-    static public var projectionMatrix:js.html.Float32Array;
+    static public var projectionMatrix:js.lib.Float32Array;
 }

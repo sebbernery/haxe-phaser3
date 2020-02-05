@@ -32,7 +32,7 @@ extern class BitmapMaskPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var vertexViewF32:js.html.Float32Array;
+    public var vertexViewF32:js.lib.Float32Array;
     /**
      * Size of the batch.
      *

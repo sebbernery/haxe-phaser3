@@ -23,7 +23,7 @@ extern class Matrix3 {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var val:js.html.Float32Array;
+    public var val:js.lib.Float32Array;
     /**
      * Make a clone of this Matrix3.
      *

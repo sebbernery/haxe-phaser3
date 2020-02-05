@@ -91,7 +91,7 @@ extern class CanvasTexture extends phaser.textures.Texture {
      * @type {Uint8ClampedArray}
      * @since 3.13.0
      */
-    public var data:js.html.Uint8ClampedArray;
+    public var data:js.lib.Uint8ClampedArray;
     /**
      * An Uint32Array view into the `buffer`.
      *
@@ -99,7 +99,7 @@ extern class CanvasTexture extends phaser.textures.Texture {
      * @type {Uint32Array}
      * @since 3.13.0
      */
-    public var pixels:js.html.Uint32Array;
+    public var pixels:js.lib.Uint32Array;
     /**
      * An ArrayBuffer the same size as the context ImageData.
      *
@@ -107,7 +107,7 @@ extern class CanvasTexture extends phaser.textures.Texture {
      * @type {ArrayBuffer}
      * @since 3.13.0
      */
-    public var buffer:js.html.ArrayBuffer;
+    public var buffer:js.lib.ArrayBuffer;
     /**
      * This re-creates the `imageData` from the current context.
      * It then re-builds the ArrayBuffer, the `data` Uint8ClampedArray reference and the `pixels` Int32Array.

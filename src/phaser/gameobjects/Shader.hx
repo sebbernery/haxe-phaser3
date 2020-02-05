@@ -102,7 +102,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @type {ArrayBuffer}
      * @since 3.17.0
      */
-    public var vertexData:js.html.ArrayBuffer;
+    public var vertexData:js.lib.ArrayBuffer;
     /**
      * The WebGL vertex buffer object this shader uses.
      *
@@ -126,7 +126,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @type {Uint8Array}
      * @since 3.17.0
      */
-    public var bytes:js.html.Uint8Array;
+    public var bytes:js.lib.Uint8Array;
     /**
      * Float32 view of the array buffer containing the shaders vertices.
      *
@@ -134,7 +134,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @type {Float32Array}
      * @since 3.17.0
      */
-    public var vertexViewF32:js.html.Float32Array;
+    public var vertexViewF32:js.lib.Float32Array;
     /**
      * The view matrix the shader uses during rendering.
      *
@@ -143,7 +143,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @readonly
      * @since 3.17.0
      */
-    public var viewMatrix:js.html.Float32Array;
+    public var viewMatrix:js.lib.Float32Array;
     /**
      * The projection matrix the shader uses during rendering.
      *
@@ -152,7 +152,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @readonly
      * @since 3.17.0
      */
-    public var projectionMatrix:js.html.Float32Array;
+    public var projectionMatrix:js.lib.Float32Array;
     /**
      * The default uniform mappings. These can be added to (or replaced) by specifying your own uniforms when
      * creating this shader game object. The uniforms are updated automatically during the render step.

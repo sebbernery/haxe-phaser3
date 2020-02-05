@@ -203,7 +203,7 @@ extern class WebGLRenderer {
      * @type {Uint32Array}
      * @since 3.0.0
      */
-    public var currentScissor:js.html.Uint32Array;
+    public var currentScissor:js.lib.Uint32Array;
     /**
      * Stack of scissor data
      *
@@ -211,7 +211,7 @@ extern class WebGLRenderer {
      * @type {Uint32Array}
      * @since 3.0.0
      */
-    public var scissorStack:js.html.Uint32Array;
+    public var scissorStack:js.lib.Uint32Array;
     /**
      * The handler to invoke when the context is lost.
      * This should not be changed and is set in the boot method.
@@ -776,7 +776,7 @@ extern class WebGLRenderer {
      *
      * @return {WebGLBuffer} Raw vertex buffer
      */
-    public function createVertexBuffer(initialDataOrSize:js.html.ArrayBuffer, bufferUsage:Int):js.html.webgl.Buffer;
+    public function createVertexBuffer(initialDataOrSize:js.lib.ArrayBuffer, bufferUsage:Int):js.html.webgl.Buffer;
     /**
      * Wrapper for creating a vertex buffer.
      *
@@ -788,7 +788,7 @@ extern class WebGLRenderer {
      *
      * @return {WebGLBuffer} Raw index buffer
      */
-    public function createIndexBuffer(initialDataOrSize:js.html.ArrayBuffer, bufferUsage:Int):js.html.webgl.Buffer;
+    public function createIndexBuffer(initialDataOrSize:js.lib.ArrayBuffer, bufferUsage:Int):js.html.webgl.Buffer;
     /**
      * Removes the given texture from the nativeTextures array and then deletes it from the GPU.
      *
@@ -1136,7 +1136,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setFloat1v(program:js.html.webgl.Program, name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat1v(program:js.html.webgl.Program, name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Sets the value of a uniform variable in the given WebGLProgram.
      *
@@ -1149,7 +1149,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setFloat2v(program:js.html.webgl.Program, name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat2v(program:js.html.webgl.Program, name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Sets the value of a uniform variable in the given WebGLProgram.
      *
@@ -1162,7 +1162,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setFloat3v(program:js.html.webgl.Program, name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat3v(program:js.html.webgl.Program, name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Sets the value of a uniform variable in the given WebGLProgram.
      *
@@ -1175,7 +1175,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setFloat4v(program:js.html.webgl.Program, name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat4v(program:js.html.webgl.Program, name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Sets the value of a uniform variable in the given WebGLProgram.
      *
@@ -1247,7 +1247,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setMatrix2(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix2(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
     /**
      * [description]
      *
@@ -1261,7 +1261,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setMatrix3(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix3(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
     /**
      * Sets uniform of a WebGLProgram
      *
@@ -1275,7 +1275,7 @@ extern class WebGLRenderer {
      *
      * @return {this} This WebGL Renderer instance.
      */
-    public function setMatrix4(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix4(program:js.html.webgl.Program, name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
     /**
      * Returns the maximum number of texture units that can be used in a fragment shader.
      *

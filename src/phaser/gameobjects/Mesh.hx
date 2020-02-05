@@ -41,7 +41,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var vertices:js.html.Float32Array;
+    public var vertices:js.lib.Float32Array;
     /**
      * An array containing the uv data for this Mesh.
      *
@@ -49,7 +49,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var uv:js.html.Float32Array;
+    public var uv:js.lib.Float32Array;
     /**
      * An array containing the color data for this Mesh.
      *
@@ -57,7 +57,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @type {Uint32Array}
      * @since 3.0.0
      */
-    public var colors:js.html.Uint32Array;
+    public var colors:js.lib.Uint32Array;
     /**
      * An array containing the alpha data for this Mesh.
      *
@@ -65,7 +65,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var alphas:js.html.Float32Array;
+    public var alphas:js.lib.Float32Array;
     /**
      * Fill or additive mode used when blending the color values?
      *

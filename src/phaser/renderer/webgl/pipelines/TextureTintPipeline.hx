@@ -32,7 +32,7 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var vertexViewF32:js.html.Float32Array;
+    public var vertexViewF32:js.lib.Float32Array;
     /**
      * Uint32 view of the array buffer containing the pipeline's vertices.
      *
@@ -40,7 +40,7 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @type {Uint32Array}
      * @since 3.0.0
      */
-    public var vertexViewU32:js.html.Uint32Array;
+    public var vertexViewU32:js.lib.Uint32Array;
     /**
      * Size of the batch.
      *
@@ -355,5 +355,5 @@ extern class TextureTintPipeline extends phaser.renderer.webgl.WebGLPipeline {
      * @param {number} bLineWidth - Width of the end of the line
      * @param {Float32Array} currentMatrix - Parent matrix, generally used by containers
      */
-    public function batchLine(ax:Float, ay:Float, bx:Float, by:Float, aLineWidth:Float, bLineWidth:Float, currentMatrix:js.html.Float32Array):Void;
+    public function batchLine(ax:Float, ay:Float, bx:Float, by:Float, aLineWidth:Float, bLineWidth:Float, currentMatrix:js.lib.Float32Array):Void;
 }

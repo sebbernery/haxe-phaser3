@@ -34,7 +34,7 @@ extern class TransformMatrix {
      * @type {Float32Array}
      * @since 3.0.0
      */
-    public var matrix:js.html.Float32Array;
+    public var matrix:js.lib.Float32Array;
     /**
      * The decomposed matrix.
      *

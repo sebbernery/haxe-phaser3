@@ -130,7 +130,7 @@ extern class WebGLPipeline {
      * @type {ArrayBuffer}
      * @since 3.0.0
      */
-    public var vertexData:js.html.ArrayBuffer;
+    public var vertexData:js.lib.ArrayBuffer;
     /**
      * The handle to a WebGL vertex buffer object.
      *
@@ -179,7 +179,7 @@ extern class WebGLPipeline {
      * @type {Uint8Array}
      * @since 3.0.0
      */
-    public var bytes:js.html.Uint8Array;
+    public var bytes:js.lib.Uint8Array;
     /**
      * This will store the amount of components of 32 bit length
      *
@@ -387,7 +387,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setFloat1v(name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat1v(name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -399,7 +399,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setFloat2v(name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat2v(name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -411,7 +411,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setFloat3v(name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat3v(name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -423,7 +423,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setFloat4v(name:String, arr:js.html.Float32Array):Dynamic;
+    public function setFloat4v(name:String, arr:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -490,7 +490,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setMatrix2(name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix2(name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -503,7 +503,7 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setMatrix3(name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix3(name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
     /**
      * Set a uniform value of the current pipeline program.
      *
@@ -516,5 +516,5 @@ extern class WebGLPipeline {
      *
      * @return {this} This WebGLPipeline instance.
      */
-    public function setMatrix4(name:String, transpose:Bool, matrix:js.html.Float32Array):Dynamic;
+    public function setMatrix4(name:String, transpose:Bool, matrix:js.lib.Float32Array):Dynamic;
 }
