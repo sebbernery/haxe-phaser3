@@ -83,46 +83,55 @@ extern class PointerConstraint {
      * The body that is currently being dragged, if any.
      *
      * @name Phaser.Physics.Matter.PointerConstraint#body
-     * @type {?MatterJS.Body}
+     * @type {?MatterJS.BodyType}
      * @since 3.16.2
      */
-    public var body:matterjs.Body;
+    public var body:Dynamic;
     /**
      * The part of the body that was clicked on to start the drag.
      *
      * @name Phaser.Physics.Matter.PointerConstraint#part
-     * @type {?MatterJS.Body}
+     * @type {?MatterJS.BodyType}
      * @since 3.16.2
      */
-    public var part:matterjs.Body;
+    public var part:Dynamic;
     /**
      * The native Matter Constraint that is used to attach to bodies.
      *
      * @name Phaser.Physics.Matter.PointerConstraint#constraint
-     * @type {object}
+     * @type {MatterJS.ConstraintType}
      * @since 3.0.0
      */
     public var constraint:Dynamic;
     /**
      * A Pointer has been pressed down onto the Scene.
      *
-     * If this Constraint doesn't have an active Pointer then a hit test is
-     * run against all active bodies in the world. If one is found it is bound
-     * to this constraint and the drag begins.
+     * If this Constraint doesn't have an active Pointer then a hit test is set to
+     * run against all active bodies in the world during the _next_ call to `update`.
+     * If a body is found, it is bound to this constraint and the drag begins.
      *
      * @method Phaser.Physics.Matter.PointerConstraint#onDown
-     * @fires Phaser.Physics.Matter.Events#DRAG_START
      * @since 3.0.0
      *
      * @param {Phaser.Input.Pointer} pointer - A reference to the Pointer that was pressed.
      */
     public function onDown(pointer:phaser.input.Pointer):Void;
     /**
+     * A Pointer has been released from the Scene. If it was the one this constraint was using, it's cleared.
+     *
+     * @method Phaser.Physics.Matter.PointerConstraint#onUp
+     * @since 3.22.0
+     *
+     * @param {Phaser.Input.Pointer} pointer - A reference to the Pointer that was pressed.
+     */
+    public function onUp(pointer:phaser.input.Pointer):Void;
+    /**
      * Scans all active bodies in the current Matter World to see if any of them
      * are hit by the Pointer. The _first one_ found to hit is set as the active contraint
      * body.
      *
      * @method Phaser.Physics.Matter.PointerConstraint#getBody
+     * @fires Phaser.Physics.Matter.Events#DRAG_START
      * @since 3.16.2
      *
      * @return {boolean} `true` if a body was found and set, otherwise `false`.
@@ -136,12 +145,12 @@ extern class PointerConstraint {
      * @method Phaser.Physics.Matter.PointerConstraint#hitTestBody
      * @since 3.16.2
      *
-     * @param {MatterJS.Body} body - The Matter Body to check.
+     * @param {MatterJS.BodyType} body - The Matter Body to check.
      * @param {Phaser.Math.Vector2} position - A translated hit test position.
      *
      * @return {boolean} `true` if a part of the body was hit, otherwise `false`.
      */
-    public function hitTestBody(body:matterjs.Body, position:phaser.math.Vector2):Bool;
+    public function hitTestBody(body:Dynamic, position:phaser.math.Vector2):Bool;
     /**
      * Internal update handler. Called in the Matter BEFORE_UPDATE step.
      *

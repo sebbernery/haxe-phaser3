@@ -17,4 +17,6 @@ extern class Constraint {
     static public function solveAll():Void;
     static public function solve():Void;
     static public function postSolveAll():Void;
+    static public function pointAWorld():Void;
+    static public function pointBWorld():Void;
 }

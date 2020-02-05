@@ -42,7 +42,8 @@ extern class Transform {
      */
     public var scaleY:Float;
     /**
-     * Use `angle` to set or get rotation of the physics body associated to this GameObject. Unlike rotation, when using set the value can be in degrees, which will be converted to radians internally.
+     * Use `angle` to set or get rotation of the physics body associated to this GameObject.
+     * Unlike rotation, when using set the value can be in degrees, which will be converted to radians internally.
      *
      * @name Phaser.Physics.Matter.Components.Transform#angle
      * @type {number}
@@ -50,7 +51,8 @@ extern class Transform {
      */
     public var angle:Float;
     /**
-     * Use `rotation` to set or get the rotation of the physics body associated with this GameObject. The value when set must be in radians.
+     * Use `rotation` to set or get the rotation of the physics body associated with this GameObject.
+     * The value when set must be in radians.
      *
      * @name Phaser.Physics.Matter.Components.Transform#rotation
      * @type {number}
@@ -58,7 +60,9 @@ extern class Transform {
      */
     public var rotation:Float;
     /**
-     * Sets the position of the physics body along x and y axes. Both the parameters to this function are optional and if not passed any they default to 0.
+     * Sets the position of the physics body along x and y axes.
+     * Both the parameters to this function are optional and if not passed any they default to 0.
+     * Velocity, angle, force etc. are unchanged.
      *
      * @method Phaser.Physics.Matter.Components.Transform#setPosition
      * @since 3.0.0
@@ -70,18 +74,20 @@ extern class Transform {
      */
     public function setPosition(?x:Float, ?y:Float):Dynamic;
     /**
-     * [description]
+     * Immediately sets the angle of the Body.
+     * Angular velocity, position, force etc. are unchanged.
      *
      * @method Phaser.Physics.Matter.Components.Transform#setRotation
      * @since 3.0.0
      *
-     * @param {number} [radians=0] - [description]
+     * @param {number} [radians=0] - The angle of the body, in radians.
      *
      * @return {this} This Game Object.
      */
     public function setRotation(?radians:Float):Dynamic;
     /**
-     * [description]
+     * Setting fixed rotation sets the Body inertia to Infinity, which stops it
+     * from being able to rotate when forces are applied to it.
      *
      * @method Phaser.Physics.Matter.Components.Transform#setFixedRotation
      * @since 3.0.0
@@ -90,12 +96,13 @@ extern class Transform {
      */
     public function setFixedRotation():Dynamic;
     /**
-     * [description]
+     * Immediately sets the angle of the Body.
+     * Angular velocity, position, force etc. are unchanged.
      *
      * @method Phaser.Physics.Matter.Components.Transform#setAngle
      * @since 3.0.0
      *
-     * @param {number} [degrees=0] - [description]
+     * @param {number} [degrees=0] - The angle to set, in degrees.
      *
      * @return {this} This Game Object.
      */

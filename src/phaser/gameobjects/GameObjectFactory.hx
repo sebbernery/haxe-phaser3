@@ -48,7 +48,7 @@ extern class GameObjectFactory {
     /**
      * A reference to the Scene Update List.
      *
-     * @name Phaser.GameObjects.GameObjectFactory#updateList;
+     * @name Phaser.GameObjects.GameObjectFactory#updateList
      * @type {Phaser.GameObjects.UpdateList}
      * @protected
      * @since 3.0.0
@@ -75,11 +75,37 @@ extern class GameObjectFactory {
      * @method Phaser.GameObjects.GameObjectFactory#existing
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.GameObject} child - The child to be added to this Scene.
+     * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.Group)} child - The child to be added to this Scene.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object that was added.
      */
-    public function existing(child:phaser.gameobjects.GameObject):phaser.gameobjects.GameObject;
+    public function existing(child:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * Static method called directly by the Game Object factory functions.
+     * With this method you can register a custom GameObject factory in the GameObjectFactory,
+     * providing a name (`factoryType`) and the constructor (`factoryFunction`) in order
+     * to be called when you call to Phaser.Scene.add[ factoryType ] method.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory.register
+     * @static
+     * @since 3.0.0
+     *
+     * @param {string} factoryType - The key of the factory that you will use to call to Phaser.Scene.add[ factoryType ] method.
+     * @param {function} factoryFunction - The constructor function to be called when you invoke to the Phaser.Scene.add method.
+     */
+    static public function register(factoryType:String, factoryFunction:Dynamic):Void;
+    /**
+     * Static method called directly by the Game Object factory functions.
+     * With this method you can remove a custom GameObject factory registered in the GameObjectFactory,
+     * providing a its `factoryType`.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory.remove
+     * @static
+     * @since 3.0.0
+     *
+     * @param {string} factoryType - The key of the factory that you want to remove from the GameObjectFactory.
+     */
+    static public function remove(factoryType:String):Void;
     /**
      * Creates a new Dynamic Bitmap Text Game Object and adds it to the Scene.
      *
@@ -695,7 +721,7 @@ extern class GameObjectFactory {
      * The Polygon Shape is created by providing a list of points, which are then used to create an
      * internal Polygon geometry object. The points can be set from a variety of formats:
      *
-     * - An array of Point or Vector2 objects: `[new Phaser.Math.Vec2(x1, y1), ...]`
+     * - An array of Point or Vector2 objects: `[new Phaser.Math.Vector2(x1, y1), ...]`
      * - An array of objects with public x/y properties: `[obj1, obj2, ...]`
      * - An array of paired numbers that represent point coordinates: `[x1,y1, x2,y2, ...]`
      * - An array of arrays with two elements representing x/y coordinates: `[[x1, y1], [x2, y2], ...]`

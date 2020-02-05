@@ -11,7 +11,7 @@ package phaser.curves;
  * @constructor
  * @since 3.0.0
  *
- * @param {string} type - [description]
+ * @param {string} type - The curve type.
  */
 @:native("Phaser.Curves.Curve")
 extern class Curve {
@@ -61,7 +61,7 @@ extern class Curve {
      */
     public var needsUpdate:Bool;
     /**
-     * [description]
+     * For a curve on a Path, `false` means the Path will ignore this curve.
      *
      * @name Phaser.Curves.Curve#active
      * @type {boolean}
@@ -114,7 +114,7 @@ extern class Curve {
      */
     public function getDistancePoints(distance:Int):Array<phaser.geom.Point>;
     /**
-     * [description]
+     * Get a point at the end of the curve.
      *
      * @method Phaser.Curves.Curve#getEndPoint
      * @since 3.0.0
@@ -130,86 +130,110 @@ extern class Curve {
      * @method Phaser.Curves.Curve#getLength
      * @since 3.0.0
      *
-     * @return {number} [description]
+     * @return {number} The total length of the curve.
      */
     public function getLength():Float;
     /**
-     * Get list of cumulative segment lengths
+     * Get a list of cumulative segment lengths.
+     *
+     * These lengths are
+     *
+     * - [0] 0
+     * - [1] The first segment
+     * - [2] The first and second segment
+     * - ...
+     * - [divisions] All segments
      *
      * @method Phaser.Curves.Curve#getLengths
      * @since 3.0.0
      *
-     * @param {integer} [divisions] - [description]
+     * @param {integer} [divisions] - The number of divisions or segments.
      *
-     * @return {number[]} [description]
+     * @return {number[]} An array of cumulative lengths.
      */
     public function getLengths(?divisions:Int):Array<Float>;
     /**
-     * [description]
+     * Get a point at a relative position on the curve, by arc length.
      *
      * @method Phaser.Curves.Curve#getPointAt
      * @since 3.0.0
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {number} u - [description]
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {number} u - The relative position, [0..1].
+     * @param {Phaser.Math.Vector2} [out] - A point to store the result in.
      *
-     * @return {Phaser.Math.Vector2} [description]
+     * @return {Phaser.Math.Vector2} The point.
      */
     public function getPointAt(u:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Get a sequence of evenly spaced points from the curve.
+     *
+     * You can pass `divisions`, `stepRate`, or neither.
+     *
+     * The number of divisions will be
+     *
+     * 1. `divisions`, if `divisions` > 0; or
+     * 2. `this.getLength / stepRate`, if `stepRate` > 0; or
+     * 3. `this.defaultDivisions`
+     *
+     * `1 + divisions` points will be returned.
      *
      * @method Phaser.Curves.Curve#getPoints
      * @since 3.0.0
      *
-     * @param {integer} divisions - The number of evenly spaced points from the curve to return. If falsy, step param will be used to calculate the number of points.
-     * @param {number} step - Step between points. Used to calculate the number of points to return when divisions is falsy. Ignored if divisions is positive.
+     * @generic {Phaser.Math.Vector2[]} O - [out,$return]
+     *
+     * @param {integer} [divisions] - The number of divisions to make.
+     * @param {number} [stepRate] - The curve distance between points, implying `divisions`.
      * @param {(array|Phaser.Math.Vector2[])} [out] - An optional array to store the points in.
      *
      * @return {(array|Phaser.Math.Vector2[])} An array of Points from the curve.
      */
-    public function getPoints(divisions:Int, step:Float, ?out:Dynamic):Array<Dynamic>;
+    public function getPoints(?divisions:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
-     * [description]
+     * Get a random point from the curve.
      *
      * @method Phaser.Curves.Curve#getRandomPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {Phaser.Math.Vector2} [out] - A point object to store the result in.
      *
-     * @return {Phaser.Math.Vector2} [description]
+     * @return {Phaser.Math.Vector2} The point.
      */
     public function getRandomPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Get a sequence of equally spaced points (by arc distance) from the curve.
+     *
+     * `1 + divisions` points will be returned.
      *
      * @method Phaser.Curves.Curve#getSpacedPoints
      * @since 3.0.0
      *
-     * @param {integer} [divisions] - [description]
+     * @param {integer} [divisions=this.defaultDivisions] - The number of divisions to make.
+     * @param {number} [stepRate] - Step between points. Used to calculate the number of points to return when divisions is falsy. Ignored if divisions is positive.
+     * @param {(array|Phaser.Math.Vector2[])} [out] - An optional array to store the points in.
      *
-     * @return {Phaser.Math.Vector2[]} [description]
+     * @return {Phaser.Math.Vector2[]} An array of points.
      */
-    public function getSpacedPoints(?divisions:Int):Array<phaser.math.Vector2>;
+    public function getSpacedPoints(?divisions:Int, ?stepRate:Float, ?out:Dynamic):Array<phaser.math.Vector2>;
     /**
-     * [description]
+     * Get a point at the start of the curve.
      *
      * @method Phaser.Curves.Curve#getStartPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {Phaser.Math.Vector2} [out] - A point to store the result in.
      *
-     * @return {Phaser.Math.Vector2} [description]
+     * @return {Phaser.Math.Vector2} The point.
      */
     public function getStartPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * Returns a unit vector tangent at t
+     * Get a unit vector tangent at a relative position on the curve.
      * In case any sub curve does not implement its tangent derivation,
      * 2 points a small delta apart will be used to find its gradient
      * which seems to give a reasonable approximation
@@ -219,24 +243,24 @@ extern class Curve {
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {number} t - [description]
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {number} t - The relative position on the curve, [0..1].
+     * @param {Phaser.Math.Vector2} [out] - A vector to store the result in.
      *
      * @return {Phaser.Math.Vector2} Vector approximating the tangent line at the point t (delta +/- 0.0001)
      */
     public function getTangent(t:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Get a unit vector tangent at a relative position on the curve, by arc length.
      *
      * @method Phaser.Curves.Curve#getTangentAt
      * @since 3.0.0
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {number} u - [description]
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {number} u - The relative position on the curve, [0..1].
+     * @param {Phaser.Math.Vector2} [out] - A vector to store the result in.
      *
-     * @return {Phaser.Math.Vector2} [description]
+     * @return {Phaser.Math.Vector2} The tangent vector.
      */
     public function getTangentAt(u:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
@@ -265,10 +289,12 @@ extern class Curve {
      */
     public function getUtoTmapping(u:Float, distance:Int, ?divisions:Int):Float;
     /**
-     * [description]
+     * Calculate and cache the arc lengths.
      *
      * @method Phaser.Curves.Curve#updateArcLengths
      * @since 3.0.0
+     *
+     * @see Phaser.Curves.Curve#getLengths()
      */
     public function updateArcLengths():Void;
 }

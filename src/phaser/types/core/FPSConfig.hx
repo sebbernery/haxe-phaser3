@@ -9,6 +9,7 @@ package phaser.types.core;
  * @property {boolean} [forceSetTimeOut=false] - Use setTimeout instead of requestAnimationFrame to run the game loop.
  * @property {integer} [deltaHistory=10] - Calculate the average frame delta from this many consecutive frame intervals.
  * @property {integer} [panicMax=120] - The amount of frames the time step counts before we trust the delta values again.
+ * @property {boolean} [smoothStep=true] - Apply delta smoothing during the game update to help avoid spikes?
  */
 typedef FPSConfig = {
     @:optional var min:Int;
@@ -16,4 +17,5 @@ typedef FPSConfig = {
     @:optional var forceSetTimeOut:Bool;
     @:optional var deltaHistory:Int;
     @:optional var panicMax:Int;
+    @:optional var smoothStep:Bool;
 };

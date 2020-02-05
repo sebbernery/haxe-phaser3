@@ -148,7 +148,7 @@ extern class Body {
      */
     public var rotation:Float;
     /**
-     * The Body's rotation, in degrees, during the previous step.
+     * The Body rotation, in degrees, during the previous step.
      *
      * @name Phaser.Physics.Arcade.Body#preRotation
      * @type {number}
@@ -156,21 +156,25 @@ extern class Body {
      */
     public var preRotation:Float;
     /**
-     * The width of the Body's boundary, in pixels.
-     * If the Body is circular, this is also the Body's diameter.
+     * The width of the Body boundary, in pixels.
+     * If the Body is circular, this is also the diameter.
+     * If you wish to change the width use the `Body.setSize` method.
      *
      * @name Phaser.Physics.Arcade.Body#width
      * @type {number}
+     * @readonly
      * @default 64
      * @since 3.0.0
      */
     public var width:Float;
     /**
-     * The height of the Body's boundary, in pixels.
-     * If the Body is circular, this is also the Body's diameter.
+     * The height of the Body boundary, in pixels.
+     * If the Body is circular, this is also the diameter.
+     * If you wish to change the height use the `Body.setSize` method.
      *
      * @name Phaser.Physics.Arcade.Body#height
      * @type {number}
+     * @readonly
      * @default 64
      * @since 3.0.0
      */
@@ -229,7 +233,9 @@ extern class Body {
      */
     public var velocity:phaser.math.Vector2;
     /**
-     * The Body's calculated velocity, in pixels per second, at the last step.
+     * The Body's change in position (due to velocity) at the last step, in pixels.
+     *
+     * The size of this value depends on the simulation's step rate.
      *
      * @name Phaser.Physics.Arcade.Body#newVelocity
      * @type {Phaser.Math.Vector2}
@@ -370,22 +376,23 @@ extern class Body {
      */
     public var maxVelocity:phaser.math.Vector2;
     /**
-     * The maximum speed this Body is allowed to reach.
+     * The maximum speed this Body is allowed to reach, in pixels per second.
      *
      * If not negative it limits the scalar value of speed.
      *
-     * Any negative value means no maximum is being applied.
+     * Any negative value means no maximum is being applied (the default).
      *
      * @name Phaser.Physics.Arcade.Body#maxSpeed
      * @type {number}
+     * @default -1
      * @since 3.16.0
      */
     public var maxSpeed:Float;
     /**
      * If this Body is `immovable` and in motion, `friction` is the proportion of this Body's motion received by the riding Body on each axis, relative to 1.
-     * The default value (1, 0) moves the riding Body horizontally in equal proportion to this Body and vertically not at all.
      * The horizontal component (x) is applied only when two colliding Bodies are separated vertically.
      * The vertical component (y) is applied only when two colliding Bodies are separated horizontally.
+     * The default value (1, 0) moves the riding Body horizontally in equal proportion to this Body and vertically not at all.
      *
      * @name Phaser.Physics.Arcade.Body#friction
      * @type {Phaser.Math.Vector2}
@@ -550,7 +557,7 @@ extern class Body {
      */
     public var overlapR:Float;
     /**
-     * Whether this Body is overlapped with another and both are not moving.
+     * Whether this Body is overlapped with another and both are not moving, on at least one axis.
      *
      * @name Phaser.Physics.Arcade.Body#embedded
      * @type {boolean}
@@ -577,27 +584,37 @@ extern class Body {
      */
     public var checkCollision:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this Body is colliding with another and in which direction.
+     * Whether this Body is colliding with a Body or Static Body and in which direction.
+     * In a collision where both bodies have zero velocity, `embedded` will be set instead.
      *
      * @name Phaser.Physics.Arcade.Body#touching
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
+     *
+     * @see Phaser.Physics.Arcade.Body#blocked
+     * @see Phaser.Physics.Arcade.Body#embedded
      */
     public var touching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this Body was colliding with another during the last step, and in which direction.
+     * This Body's `touching` value during the previous step.
      *
      * @name Phaser.Physics.Arcade.Body#wasTouching
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
+     *
+     * @see Phaser.Physics.Arcade.Body#touching
      */
     public var wasTouching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this Body is colliding with a tile or the world boundary.
+     * Whether this Body is colliding with a Static Body, a tile, or the world boundary.
+     * In a collision with a Static Body, if this Body has zero velocity then `embedded` will be set instead.
      *
      * @name Phaser.Physics.Arcade.Body#blocked
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
      * @since 3.0.0
+     *
+     * @see Phaser.Physics.Arcade.Body#embedded
+     * @see Phaser.Physics.Arcade.Body#touching
      */
     public var blocked:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
@@ -887,6 +904,9 @@ extern class Body {
      * The change in this Body's horizontal position from the previous step.
      * This value is set during the Body's update phase.
      *
+     * As a Body can update multiple times per step this may not hold the final
+     * delta value for the Body. In this case, please see the `deltaXFinal` method.
+     *
      * @method Phaser.Physics.Arcade.Body#deltaX
      * @since 3.0.0
      *
@@ -897,12 +917,49 @@ extern class Body {
      * The change in this Body's vertical position from the previous step.
      * This value is set during the Body's update phase.
      *
+     * As a Body can update multiple times per step this may not hold the final
+     * delta value for the Body. In this case, please see the `deltaYFinal` method.
+     *
      * @method Phaser.Physics.Arcade.Body#deltaY
      * @since 3.0.0
      *
      * @return {number} The delta value.
      */
     public function deltaY():Float;
+    /**
+     * The change in this Body's horizontal position from the previous game update.
+     *
+     * This value is set during the `postUpdate` phase and takes into account the
+     * `deltaMax` and final position of the Body.
+     *
+     * Because this value is not calculated until `postUpdate`, you must listen for it
+     * during a Scene `POST_UPDATE` or `RENDER` event, and not in `update`, as it will
+     * not be calculated by that point. If you _do_ use these values in `update` they
+     * will represent the delta from the _previous_ game frame.
+     *
+     * @method Phaser.Physics.Arcade.Body#deltaXFinal
+     * @since 3.22.0
+     *
+     * @return {number} The final delta x value.
+     */
+    public function deltaXFinal():Float;
+    /**
+     * The change in this Body's vertical position from the previous game update.
+     *
+     * This value is set during the `postUpdate` phase and takes into account the
+     * `deltaMax` and final position of the Body.
+     *
+     * Because this value is not calculated until `postUpdate`, you must listen for it
+     * during a Scene `POST_UPDATE` or `RENDER` event, and not in `update`, as it will
+     * not be calculated by that point. If you _do_ use these values in `update` they
+     * will represent the delta from the _previous_ game frame.
+     *
+     * @method Phaser.Physics.Arcade.Body#deltaYFinal
+     * @since 3.22.0
+     *
+     * @return {number} The final delta y value.
+     */
+    public function deltaYFinal():Float;
     /**
      * The change in this Body's rotation from the previous step, in degrees.
      *
@@ -940,7 +997,7 @@ extern class Body {
     /**
      * Sets whether this Body collides with the world boundary.
      *
-     * Optionally also sets the World Bounce values. If the `Body.worldBounce` is null, it's set to a new Vec2 first.
+     * Optionally also sets the World Bounce values. If the `Body.worldBounce` is null, it's set to a new Phaser.Math.Vector2 first.
      *
      * @method Phaser.Physics.Arcade.Body#setCollideWorldBounds
      * @since 3.0.0

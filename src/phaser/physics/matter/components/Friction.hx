@@ -23,7 +23,9 @@ extern class Friction {
      */
     public function setFriction(value:Float, ?air:Float, ?fstatic:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets a new air resistance for this Game Object's Matter Body. A value of 0 means the Body will never slow as it moves through space. The higher the value, the faster a Body slows when moving through space.
+     * Sets a new air resistance for this Game Object's Matter Body.
+     * A value of 0 means the Body will never slow as it moves through space.
+     * The higher the value, the faster a Body slows when moving through space.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionAir
      * @since 3.0.0
@@ -34,7 +36,9 @@ extern class Friction {
      */
     public function setFrictionAir(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets a new static friction for this Game Object's Matter Body. A value of 0 means the Body will never "stick" when it is nearly stationary. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
+     * Sets a new static friction for this Game Object's Matter Body.
+     * A value of 0 means the Body will never "stick" when it is nearly stationary.
+     * The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionStatic
      * @since 3.0.0

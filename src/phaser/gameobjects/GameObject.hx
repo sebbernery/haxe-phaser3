@@ -42,7 +42,7 @@ extern class GameObject extends phaser.events.EventEmitter {
      *
      * Phaser itself will never modify this value, although plugins may do so.
      *
-     * Use this property to track the state of a Game Object during its lifetime. For example, it could move from
+     * Use this property to track the state of a Game Object during its lifetime. For example, it could change from
      * a state of 'moving', to 'attacking', to 'dead'. The state value should be an integer (ideally mapped to a constant
      * in your game code), or a string. These are recommended to keep it light and simple, with fast comparisons.
      * If you need to store complex data about your Game Object, look at using the Data Component instead.

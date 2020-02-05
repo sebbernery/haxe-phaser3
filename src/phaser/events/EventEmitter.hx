@@ -32,9 +32,9 @@ extern class EventEmitter {
      * @method Phaser.Events.EventEmitter#eventNames
      * @since 3.0.0
      *
-     * @return {array}
+     * @return {Array.<string|symbol>}
      */
-    public function eventNames():Array<Dynamic>;
+    public function eventNames():Array<String>;
     /**
      * Return the listeners registered for a given event.
      *
@@ -43,7 +43,7 @@ extern class EventEmitter {
      *
      * @param {(string|symbol)} event - The event name.
      *
-     * @return {array} The registered listeners.
+     * @return {Function[]} The registered listeners.
      */
     public function listeners(event:Dynamic):Array<Dynamic>;
     /**
@@ -79,9 +79,9 @@ extern class EventEmitter {
      * @param {function} fn - The listener function.
      * @param {*} [context=this] - The context to invoke the listener with.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function on(event:Dynamic, fn:Dynamic, ?context:Dynamic):phaser.events.EventEmitter;
+    public function on(event:Dynamic, fn:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Add a listener for a given event.
      *
@@ -92,9 +92,9 @@ extern class EventEmitter {
      * @param {function} fn - The listener function.
      * @param {*} [context=this] - The context to invoke the listener with.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function addListener(event:Dynamic, fn:Dynamic, ?context:Dynamic):phaser.events.EventEmitter;
+    public function addListener(event:Dynamic, fn:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Add a one-time listener for a given event.
      *
@@ -105,9 +105,9 @@ extern class EventEmitter {
      * @param {function} fn - The listener function.
      * @param {*} [context=this] - The context to invoke the listener with.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function once(event:Dynamic, fn:Dynamic, ?context:Dynamic):phaser.events.EventEmitter;
+    public function once(event:Dynamic, fn:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Remove the listeners of a given event.
      *
@@ -119,9 +119,9 @@ extern class EventEmitter {
      * @param {*} [context] - Only remove the listeners that have this context.
      * @param {boolean} [once] - Only remove one-time listeners.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function removeListener(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):phaser.events.EventEmitter;
+    public function removeListener(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):Dynamic;
     /**
      * Remove the listeners of a given event.
      *
@@ -133,9 +133,9 @@ extern class EventEmitter {
      * @param {*} [context] - Only remove the listeners that have this context.
      * @param {boolean} [once] - Only remove one-time listeners.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function off(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):phaser.events.EventEmitter;
+    public function off(event:Dynamic, ?fn:Dynamic, ?context:Dynamic, ?once:Bool):Dynamic;
     /**
      * Remove all listeners, or those of the specified event.
      *
@@ -144,7 +144,7 @@ extern class EventEmitter {
      *
      * @param {(string|symbol)} [event] - The event name.
      *
-     * @return {Phaser.Events.EventEmitter} `this`.
+     * @return {this} `this`.
      */
-    public function removeAllListeners(?event:Dynamic):phaser.events.EventEmitter;
+    public function removeAllListeners(?event:Dynamic):Dynamic;
 }

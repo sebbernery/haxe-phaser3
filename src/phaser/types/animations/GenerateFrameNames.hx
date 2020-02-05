@@ -10,7 +10,7 @@ package phaser.types.animations;
  * @property {string} [suffix=''] - The string to append to every resulting frame name if using a range or an array of `frames`.
  * @property {integer} [zeroPad=0] - The minimum expected lengths of each resulting frame's number. Numbers will be left-padded with zeroes until they are this long, then prepended and appended to create the resulting frame name.
  * @property {Phaser.Types.Animations.AnimationFrame[]} [outputArray=[]] - The array to append the created configuration objects to.
- * @property {boolean} [frames=false] - If provided as an array, the range defined by `start` and `end` will be ignored and these frame numbers will be used.
+ * @property {(boolean|integer[])} [frames=false] - If provided as an array, the range defined by `start` and `end` will be ignored and these frame numbers will be used.
  */
 typedef GenerateFrameNames = {
     @:optional var prefix:String;
@@ -19,5 +19,5 @@ typedef GenerateFrameNames = {
     @:optional var suffix:String;
     @:optional var zeroPad:Int;
     @:optional var outputArray:Array<phaser.types.animations.AnimationFrame>;
-    @:optional var frames:Bool;
+    @:optional var frames:Dynamic;
 };

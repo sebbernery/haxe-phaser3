@@ -16,4 +16,5 @@ extern class Bodies {
     static public function circle():Void;
     static public function polygon():Void;
     static public function fromVertices():Void;
+    static public function flagCoincidentParts():Void;
 }

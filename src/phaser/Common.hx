@@ -37,5 +37,4 @@ extern class Common {
     static public function chain():Void;
     static public function chainPathBefore():Void;
     static public function chainPathAfter():Void;
-    static public function _requireGlobal():Void;
 }

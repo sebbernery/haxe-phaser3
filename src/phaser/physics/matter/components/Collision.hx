@@ -10,7 +10,9 @@ package phaser.physics.matter.components;
 extern class Collision {
     public function new();
     /**
-     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31. Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision categories are included in their collision masks (see {@link #setCollidesWith}).
+     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31.
+     * Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision
+     * categories are included in their collision masks (see {@link #setCollidesWith}).
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionCategory
      * @since 3.0.0
@@ -21,7 +23,10 @@ extern class Collision {
      */
     public function setCollisionCategory(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values, they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}). If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value, they will never collide.
+     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values,
+     * they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}).
+     * If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value,
+     * they will never collide.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionGroup
      * @since 3.0.0
@@ -32,7 +37,9 @@ extern class Collision {
      */
     public function setCollisionGroup(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0` and `(categoryB & maskA) !== 0` are both true.
+     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only
+     * collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0`
+     * and `(categoryB & maskA) !== 0` are both true.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollidesWith
      * @since 3.0.0
@@ -42,4 +49,61 @@ extern class Collision {
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setCollidesWith(categories:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollide
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke when this body starts colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollide(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideEnd
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke when this body stops colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideEnd(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideActive
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke for the duration of this body colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideActive(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a reference to the other body, along with a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideWith
+     * @since 3.22.0
+     *
+     * @param {(MatterJS.Body|MatterJS.Body[])} body - The body, or an array of bodies, to test for collisions with.
+     * @param {function} callback - The callback to invoke when this body collides with the given body or bodies.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideWith(body:Dynamic, callback:Dynamic):phaser.gameobjects.GameObject;
 }

@@ -4,7 +4,7 @@ package phaser.types.physics.matter;
  * @typedef {object} Phaser.Types.Physics.Matter.MatterWorldConfig
  * @since 3.0.0
  *
- * @property {Phaser.Types.Math.Vector2Like} [gravity] - Sets {@link Phaser.Physics.Matter.World#gravity}.
+ * @property {(Phaser.Types.Math.Vector2Like|boolean)} [gravity] - Sets {@link Phaser.Physics.Matter.World#gravity}. If `false` Gravity will be set to zero.
  * @property {(object|boolean)} [setBounds] - Should the world have bounds enabled by default?
  * @property {number} [setBounds.x=0] - The x coordinate of the world bounds.
  * @property {number} [setBounds.y=0] - The y coordinate of the world bounds.
@@ -21,28 +21,23 @@ package phaser.types.physics.matter;
  * @property {boolean} [enableSleeping=false] - A flag that specifies whether the engine should allow sleeping via the `Matter.Sleeping` module. Sleeping can improve stability and performance, but often at the expense of accuracy.
  * @property {number} [timing.timestamp=0] - A `Number` that specifies the current simulation-time in milliseconds starting from `0`. It is incremented on every `Engine.update` by the given `delta` argument.
  * @property {number} [timing.timeScale=1] - A `Number` that specifies the global scaling factor of time for all bodies. A value of `0` freezes the simulation. A value of `0.1` gives a slow-motion effect. A value of `1.2` gives a speed-up effect.
+ * @property {boolean} [plugins.attractors=false] - Should the Matter Attractor Plugin be enabled? An attractors plugin that makes it easy to apply continual forces on bodies. It's possible to simulate effects such as wind, gravity and magnetism.
+ * @property {boolean} [plugins.wrap=false] - Should the Matter Wrap Plugin be enabled? A coordinate wrapping plugin that automatically wraps the position of bodies such that they always stay within the given bounds. Upon crossing a boundary the body will appear on the opposite side of the bounds, while maintaining its velocity.
+ * @property {boolean} [plugins.collisionevents=true] - Should the Matter Collision Events Plugin be enabled?
  * @property {boolean} [enabled=true] - Toggles if the world is enabled or not.
  * @property {number} [correction=1] - An optional Number that specifies the time correction factor to apply to the update.
  * @property {function} [getDelta] - This function is called every time the core game loop steps, which is bound to the Request Animation Frame frequency unless otherwise modified.
  * @property {boolean} [autoUpdate=true] - Automatically call Engine.update every time the game steps.
- * @property {boolean} [debug=false] - Sets if Matter will render to the debug Graphic overlay. Do not enable this in production.
- * @property {boolean} [debugShowBody=true] - Should dynamic bodies be drawn to the debug graphic?
- * @property {boolean} [debugShowStaticBody=true] - Should static bodies be drawn to the debug graphic?
- * @property {boolean} [debugShowVelocity=true] - Should the velocity vector be drawn to the debug graphic?
- * @property {number} [debugBodyColor=0xff00ff] - The color that dynamic body debug outlines are drawn in.
- * @property {number} [debugBodyFillColor=0xe3a7e3] - The color that dynamic body debug fills are drawn in.
- * @property {number} [debugStaticBodyColor=0x0000ff] - The color that static body debug outlines are drawn in.
- * @property {number} [debugVelocityColor=0x00ff00] - The color that the debug velocity vector lines are drawn in.
- * @property {boolean} [debugShowJoint=true] - Render joints to the debug graphic.
- * @property {number} [debugJointColor=0x000000] - The color that the debug joints are drawn in.
- * @property {boolean} [debugWireframes=true] - Render the debug output as wireframes.
- * @property {boolean} [debugShowInternalEdges=false] - Render internal edges to the debug.
- * @property {boolean} [debugShowConvexHulls=false] - Render convex hulls to the debug.
- * @property {number} [debugConvexHullColor=0xaaaaaa] - The color that the debug convex hulls are drawn in, if enabled.
- * @property {boolean} [debugShowSleeping=false] - Render sleeping bodies the debug.
+ * @property {number} [restingThresh=4] - Sets the Resolver resting threshold property.
+ * @property {number} [restingThreshTangent=6] - Sets the Resolver resting threshold tangent property.
+ * @property {number} [positionDampen=0.9] - Sets the Resolver position dampen property.
+ * @property {number} [positionWarming=0.8] - Sets the Resolver position warming property.
+ * @property {number} [frictionNormalMultiplier=5] - Sets the Resolver friction normal multiplier property.
+ * @property {(boolean|Phaser.Types.Physics.Matter.MatterDebugConfig)} [debug=false] - Controls the Matter Debug Rendering options. If a boolean it will use the default values, otherwise, specify a Debug Config object.
+ * @property {Phaser.Types.Physics.Matter.MatterRunnerConfig} [runner] - Sets the Matter Runner options.
  */
 typedef MatterWorldConfig = {
-    @:optional var gravity:phaser.types.math.Vector2Like;
+    @:optional var gravity:Dynamic;
     @:optional var setBounds:Dynamic;
     @:optional var positionIterations:Float;
     @:optional var velocityIterations:Float;
@@ -52,19 +47,11 @@ typedef MatterWorldConfig = {
     @:optional var correction:Float;
     @:optional var getDelta:Dynamic;
     @:optional var autoUpdate:Bool;
-    @:optional var debug:Bool;
-    @:optional var debugShowBody:Bool;
-    @:optional var debugShowStaticBody:Bool;
-    @:optional var debugShowVelocity:Bool;
-    @:optional var debugBodyColor:Float;
-    @:optional var debugBodyFillColor:Float;
-    @:optional var debugStaticBodyColor:Float;
-    @:optional var debugVelocityColor:Float;
-    @:optional var debugShowJoint:Bool;
-    @:optional var debugJointColor:Float;
-    @:optional var debugWireframes:Bool;
-    @:optional var debugShowInternalEdges:Bool;
-    @:optional var debugShowConvexHulls:Bool;
-    @:optional var debugConvexHullColor:Float;
-    @:optional var debugShowSleeping:Bool;
+    @:optional var restingThresh:Float;
+    @:optional var restingThreshTangent:Float;
+    @:optional var positionDampen:Float;
+    @:optional var positionWarming:Float;
+    @:optional var frictionNormalMultiplier:Float;
+    @:optional var debug:Dynamic;
+    @:optional var runner:phaser.types.physics.matter.MatterRunnerConfig;
 };

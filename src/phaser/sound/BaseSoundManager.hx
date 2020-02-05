@@ -126,8 +126,9 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      */
     public function addAudioSprite(key:String, ?config:phaser.types.sound.SoundConfig):phaser.sound.HTML5AudioSound;
     /**
-     * Enables playing sound on the fly without the need to keep a reference to it.
-     * Sound will auto destroy once its playback ends.
+     * Adds a new sound to the sound manager and plays it.
+     * The sound will be automatically removed (destroyed) once playback ends.
+     * This lets you play a new sound on the fly without the need to keep a reference to it.
      *
      * @method Phaser.Sound.BaseSoundManager#play
      * @listens Phaser.Sound.Events#COMPLETE

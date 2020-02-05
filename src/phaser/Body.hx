@@ -6,7 +6,6 @@ package phaser;
  * Factories for commonly used body configurations (such as rectangles, circles and other polygons) can be found in the module `Matter.Bodies`.
  *
  * See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
- 
  * @class Body
  */
 @:native("Body")
@@ -22,6 +21,7 @@ extern class Body {
     static public function setInertia():Void;
     static public function setVertices():Void;
     static public function setParts():Void;
+    static public function setCentre():Void;
     static public function setPosition():Void;
     static public function setAngle():Void;
     static public function setVelocity():Void;

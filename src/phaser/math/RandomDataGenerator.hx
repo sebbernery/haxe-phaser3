@@ -139,11 +139,15 @@ extern class RandomDataGenerator {
      * @method Phaser.Math.RandomDataGenerator#pick
      * @since 3.0.0
      *
-     * @param {array} array - The array to pick a random element from.
+     * @generic T
+     * @genericUse {T[]} - [array]
+     * @genericUse {T} - [$return]
      *
-     * @return {*} A random member of the array.
+     * @param {T[]} array - The array to pick a random element from.
+     *
+     * @return {T} A random member of the array.
      */
-    public function pick(array:Array<Dynamic>):Dynamic;
+    public function pick(array:Array<T>):T;
     /**
      * Returns a sign to be used with multiplication operator.
      *
@@ -159,11 +163,15 @@ extern class RandomDataGenerator {
      * @method Phaser.Math.RandomDataGenerator#weightedPick
      * @since 3.0.0
      *
-     * @param {array} array - The array to pick a random element from.
+     * @generic T
+     * @genericUse {T[]} - [array]
+     * @genericUse {T} - [$return]
      *
-     * @return {*} A random member of the array.
+     * @param {T[]} array - The array to pick a random element from.
+     *
+     * @return {T} A random member of the array.
      */
-    public function weightedPick(array:Array<Dynamic>):Dynamic;
+    public function weightedPick(array:Array<T>):T;
     /**
      * Returns a random timestamp between min and max, or between the beginning of 2000 and the end of 2020 if min and max aren't specified.
      *
@@ -221,9 +229,12 @@ extern class RandomDataGenerator {
      * @method Phaser.Math.RandomDataGenerator#shuffle
      * @since 3.7.0
      *
-     * @param {array} [array] - The array to be shuffled.
+     * @generic T
+     * @genericUse {T[]} - [array,$return]
      *
-     * @return {array} The shuffled array.
+     * @param {T[]} [array] - The array to be shuffled.
+     *
+     * @return {T[]} The shuffled array.
      */
-    public function shuffle(?array:Array<Dynamic>):Array<Dynamic>;
+    public function shuffle(?array:Array<T>):Array<T>;
 }

@@ -4,7 +4,6 @@ package phaser.geom;
  * @classdesc
  * A Polygon object
  *
- 
  * The polygon is a closed shape consists of a series of connected straight lines defined by list of ordered points.
  * Several formats are supported to define the list of points, check the setTo method for details.
  * This is a geometry object allowing you to define and inspect the shape.
@@ -194,13 +193,15 @@ extern class Polygon {
      * @method Phaser.Geom.Polygon#getPoints
      * @since 3.12.0
      *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
      * @param {integer} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
      * @param {number} [stepRate] - Sets the quantity by getting the perimeter of the Polygon and dividing it by the stepRate.
-     * @param {array} [output] - An array to insert the points in to. If not provided a new array will be created.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
      *
-     * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
+     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the perimeter of the Polygon.
      */
-    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
+    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Reverses the order of the points of a Polygon.
      *

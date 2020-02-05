@@ -681,9 +681,9 @@ extern class Tilemap {
      * @method Phaser.Tilemaps.Tilemap#getTileLayerNames
      * @since 3.21.0
      *
-     * @return {[string]} Array of valid tilelayer names / IDs loaded into this Tilemap.
+     * @return {string[]} Array of valid tilelayer names / IDs loaded into this Tilemap.
      */
-    public function getTileLayerNames():Dynamic;
+    public function getTileLayerNames():Array<String>;
     /**
      * Gets the tiles in the given rectangular area (in tile coordinates) of the layer.
      * If no layer specified, the maps current layer is used.

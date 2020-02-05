@@ -113,12 +113,12 @@ extern class Path {
      * @method Phaser.Curves.Path#cubicBezierTo
      * @since 3.0.0
      *
-     * @param {(number|Phaser.Math.Vector2)} x - The x coordinate of the end point. Or, if a Vec2, the p1 value.
-     * @param {(number|Phaser.Math.Vector2)} y - The y coordinate of the end point. Or, if a Vec2, the p2 value.
-     * @param {(number|Phaser.Math.Vector2)} control1X - The x coordinate of the first control point. Or, if a Vec2, the p3 value.
-     * @param {number} [control1Y] - The y coordinate of the first control point. Not used if vec2s are provided as the first 3 arguments.
-     * @param {number} [control2X] - The x coordinate of the second control point. Not used if vec2s are provided as the first 3 arguments.
-     * @param {number} [control2Y] - The y coordinate of the second control point. Not used if vec2s are provided as the first 3 arguments.
+     * @param {(number|Phaser.Math.Vector2)} x - The x coordinate of the end point. Or, if a Vector2, the p1 value.
+     * @param {(number|Phaser.Math.Vector2)} y - The y coordinate of the end point. Or, if a Vector2, the p2 value.
+     * @param {(number|Phaser.Math.Vector2)} control1X - The x coordinate of the first control point. Or, if a Vector2, the p3 value.
+     * @param {number} [control1Y] - The y coordinate of the first control point. Not used if Vector2s are provided as the first 3 arguments.
+     * @param {number} [control2X] - The x coordinate of the second control point. Not used if Vector2s are provided as the first 3 arguments.
+     * @param {number} [control2Y] - The y coordinate of the second control point. Not used if Vector2s are provided as the first 3 arguments.
      *
      * @return {Phaser.Curves.Path} This Path object.
      */
@@ -248,14 +248,12 @@ extern class Path {
      */
     public function getPoint(t:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * Returns the defined starting point of the Path.
-     *
-     * This is not necessarily equal to the starting point of the first Curve if it differs from {@link startPoint}.
+     * Get a sequence of points on the path.
      *
      * @method Phaser.Curves.Path#getPoints
      * @since 3.0.0
      *
-     * @param {integer} [divisions=12] - The number of points to divide the path in to.
+     * @param {integer} [divisions=12] - The number of divisions per resolution per curve.
      *
      * @return {Phaser.Math.Vector2[]} An array of Vector2 objects that containing the points along the Path.
      */

@@ -27,7 +27,7 @@ package phaser.physics.matter;
  * @extends Phaser.Physics.Matter.Components.Sleep
  * @extends Phaser.Physics.Matter.Components.Static
  *
- * @param {Phaser.Physics.Matter.World} world - [description]
+ * @param {Phaser.Physics.Matter.World} world - The Matter world instance this body belongs to.
  * @param {Phaser.Tilemaps.Tile} tile - The target tile that should have a Matter body.
  * @param {Phaser.Types.Physics.Matter.MatterTileOptions} [options] - Options to be used when creating the Matter body.
  */
@@ -87,12 +87,12 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @method Phaser.Physics.Matter.TileBody#setBody
      * @since 3.0.0
      *
-     * @param {MatterJS.Body} body - The new Matter body to use.
+     * @param {MatterJS.BodyType} body - The new Matter body to use.
      * @param {boolean} [addToWorld=true] - Whether or not to add the body to the Matter world.
      *
      * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
      */
-    public function setBody(body:matterjs.Body, ?addToWorld:Bool):phaser.physics.matter.TileBody;
+    public function setBody(body:Dynamic, ?addToWorld:Bool):phaser.physics.matter.TileBody;
     /**
      * Removes the current body from the TileBody and from the Matter world
      *
@@ -112,7 +112,9 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function destroy():phaser.physics.matter.TileBody;
     /**
-     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31. Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision categories are included in their collision masks (see {@link #setCollidesWith}).
+     * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31.
+     * Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision
+     * categories are included in their collision masks (see {@link #setCollidesWith}).
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionCategory
      * @since 3.0.0
@@ -123,7 +125,10 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setCollisionCategory(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values, they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}). If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value, they will never collide.
+     * Sets the collision group of this Game Object's Matter Body. If this is zero or two Matter Bodies have different values,
+     * they will collide according to the usual rules (see {@link #setCollisionCategory} and {@link #setCollisionGroup}).
+     * If two Matter Bodies have the same positive value, they will always collide; if they have the same negative value,
+     * they will never collide.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollisionGroup
      * @since 3.0.0
@@ -134,7 +139,9 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setCollisionGroup(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0` and `(categoryB & maskA) !== 0` are both true.
+     * Sets the collision mask for this Game Object's Matter Body. Two Matter Bodies with different collision groups will only
+     * collide if each one includes the other's category in its mask based on a bitwise AND, i.e. `(categoryA & maskB) !== 0`
+     * and `(categoryB & maskA) !== 0` are both true.
      *
      * @method Phaser.Physics.Matter.Components.Collision#setCollidesWith
      * @since 3.0.0
@@ -144,6 +151,63 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setCollidesWith(categories:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollide
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke when this body starts colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollide(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideEnd
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke when this body stops colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideEnd(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideActive
+     * @since 3.22.0
+     *
+     * @param {function} callback - The callback to invoke for the duration of this body colliding with another.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideActive(callback:Dynamic):phaser.gameobjects.GameObject;
+    /**
+     * The callback is sent a reference to the other body, along with a `Phaser.Types.Physics.Matter.MatterCollisionData` object.
+     *
+     * This does not change the bodies collision category, group or filter. Those must be set in addition
+     * to the callback.
+     *
+     * @method Phaser.Physics.Matter.Components.Collision#setOnCollideWith
+     * @since 3.22.0
+     *
+     * @param {(MatterJS.Body|MatterJS.Body[])} body - The body, or an array of bodies, to test for collisions with.
+     * @param {function} callback - The callback to invoke when this body collides with the given body or bodies.
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     */
+    public function setOnCollideWith(body:Dynamic, callback:Dynamic):phaser.gameobjects.GameObject;
     /**
      * Sets new friction values for this Game Object's Matter Body.
      *
@@ -158,7 +222,9 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setFriction(value:Float, ?air:Float, ?fstatic:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets a new air resistance for this Game Object's Matter Body. A value of 0 means the Body will never slow as it moves through space. The higher the value, the faster a Body slows when moving through space.
+     * Sets a new air resistance for this Game Object's Matter Body.
+     * A value of 0 means the Body will never slow as it moves through space.
+     * The higher the value, the faster a Body slows when moving through space.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionAir
      * @since 3.0.0
@@ -169,7 +235,9 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setFrictionAir(value:Float):phaser.gameobjects.GameObject;
     /**
-     * Sets a new static friction for this Game Object's Matter Body. A value of 0 means the Body will never "stick" when it is nearly stationary. The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
+     * Sets a new static friction for this Game Object's Matter Body.
+     * A value of 0 means the Body will never "stick" when it is nearly stationary.
+     * The higher the value (e.g. 10), the more force it will take to initially get the Body moving when it is nearly stationary.
      *
      * @method Phaser.Physics.Matter.Components.Friction#setFrictionStatic
      * @since 3.0.0
@@ -192,6 +260,10 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
     public function setIgnoreGravity(value:Bool):phaser.gameobjects.GameObject;
     /**
      * The body's center of mass.
+     *
+     * Calling this creates a new `Vector2 each time to avoid mutation.
+     *
+     * If you only need to read the value and won't change it, you can get it from `GameObject.body.centerOfMass`.
      *
      * @name Phaser.Physics.Matter.Components.Mass#centerOfMass
      * @type {Phaser.Math.Vector2}
@@ -224,88 +296,112 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function setDensity(value:Float):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Set the body belonging to this Game Object to be a sensor.
+     * Sensors trigger collision events, but don't react with colliding body physically.
      *
      * @method Phaser.Physics.Matter.Components.Sensor#setSensor
      * @since 3.0.0
      *
-     * @param {boolean} value - [description]
+     * @param {boolean} value - `true` to set the body as a sensor, or `false` to disable it.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setSensor(value:Bool):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Is the body belonging to this Game Object a sensor or not?
      *
      * @method Phaser.Physics.Matter.Components.Sensor#isSensor
      * @since 3.0.0
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the body is a sensor, otherwise `false`.
      */
     public function isSensor():Bool;
     /**
-     * [description]
+     * Sets this Body to sleep.
+     *
+     * @method Phaser.Physics.Matter.Components.Sleep#setToSleep
+     * @since 3.22.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function setToSleep():Dynamic;
+    /**
+     * Wakes this Body if asleep.
+     *
+     * @method Phaser.Physics.Matter.Components.Sleep#setAwake
+     * @since 3.22.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function setAwake():Dynamic;
+    /**
+     * Sets the number of updates in which this body must have near-zero velocity before it is set as sleeping (if sleeping is enabled by the engine).
      *
      * @method Phaser.Physics.Matter.Components.Sleep#setSleepThreshold
      * @since 3.0.0
      *
-     * @param {number} [value=60] - [description]
+     * @param {number} [value=60] - A `Number` that defines the number of updates in which this body must have near-zero velocity before it is set as sleeping.
      *
-     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSleepThreshold(?value:Float):phaser.gameobjects.GameObject;
+    public function setSleepThreshold(?value:Float):Dynamic;
     /**
-     * [description]
+     * Enable sleep and wake events for this body.
+     *
+     * By default when a body goes to sleep, or wakes up, it will not emit any events.
+     *
+     * The events are emitted by the Matter World instance and can be listened to via
+     * the `SLEEP_START` and `SLEEP_END` events.
      *
      * @method Phaser.Physics.Matter.Components.Sleep#setSleepEvents
      * @since 3.0.0
      *
-     * @param {boolean} start - [description]
-     * @param {boolean} end - [description]
+     * @param {boolean} start - `true` if you want the sleep start event to be emitted for this body.
+     * @param {boolean} end - `true` if you want the sleep end event to be emitted for this body.
      *
-     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSleepEvents(start:Bool, end:Bool):phaser.gameobjects.GameObject;
+    public function setSleepEvents(start:Bool, end:Bool):Dynamic;
     /**
-     * [description]
+     * Enables or disables the Sleep Start event for this body.
      *
      * @method Phaser.Physics.Matter.Components.Sleep#setSleepStartEvent
      * @since 3.0.0
      *
-     * @param {boolean} value - [description]
+     * @param {boolean} value - `true` to enable the sleep event, or `false` to disable it.
      *
-     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSleepStartEvent(value:Bool):phaser.gameobjects.GameObject;
+    public function setSleepStartEvent(value:Bool):Dynamic;
     /**
-     * [description]
+     * Enables or disables the Sleep End event for this body.
      *
      * @method Phaser.Physics.Matter.Components.Sleep#setSleepEndEvent
      * @since 3.0.0
      *
-     * @param {boolean} value - [description]
+     * @param {boolean} value - `true` to enable the sleep event, or `false` to disable it.
      *
-     * @return {Phaser.GameObjects.GameObject} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSleepEndEvent(value:Bool):phaser.gameobjects.GameObject;
+    public function setSleepEndEvent(value:Bool):Dynamic;
     /**
-     * [description]
+     * Changes the physics body to be either static `true` or dynamic `false`.
      *
      * @method Phaser.Physics.Matter.Components.Static#setStatic
      * @since 3.0.0
      *
-     * @param {boolean} value - [description]
+     * @param {boolean} value - `true` to set the body as being static, or `false` to make it dynamic.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
     public function setStatic(value:Bool):phaser.gameobjects.GameObject;
     /**
-     * [description]
+     * Returns `true` if the body is static, otherwise `false` for a dynamic body.
      *
      * @method Phaser.Physics.Matter.Components.Static#isStatic
      * @since 3.0.0
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the body is static, otherwise `false`.
      */
     public function isStatic():Bool;
 }

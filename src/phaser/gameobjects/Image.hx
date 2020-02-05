@@ -1116,7 +1116,9 @@ extern class Image extends phaser.gameobjects.GameObject {
     public var y:Float;
     /**
      * The z position of this Game Object.
-     * Note: Do not use this value to set the z-index, instead see the `depth` property.
+     *
+     * Note: The z position does not control the rendering order of 2D Game Objects. Use
+     * {@link Phaser.GameObjects.Components.Depth#depth} instead.
      *
      * @name Phaser.GameObjects.Components.Transform#z
      * @type {number}
@@ -1284,6 +1286,9 @@ extern class Image extends phaser.gameobjects.GameObject {
     public function setY(?value:Float):Dynamic;
     /**
      * Sets the z position of this Game Object.
+     *
+     * Note: The z position does not control the rendering order of 2D Game Objects. Use
+     * {@link Phaser.GameObjects.Components.Depth#setDepth} instead.
      *
      * @method Phaser.GameObjects.Components.Transform#setZ
      * @since 3.0.0

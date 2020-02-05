@@ -112,11 +112,11 @@ extern class Line {
      *
      * @param {Phaser.Geom.Line} line - The line.
      * @param {integer} [stepRate=1] - The optional step rate for the points on the line.
-     * @param {array} [results] - An optional array to push the resulting coordinates into.
+     * @param {Phaser.Types.Math.Vector2Like[]} [results] - An optional array to push the resulting coordinates into.
      *
-     * @return {object[]} The array of coordinates on the line.
+     * @return {Phaser.Types.Math.Vector2Like[]} The array of coordinates on the line.
      */
-    static public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Int, ?results:Array<Dynamic>):Array<Dynamic>;
+    static public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Int, ?results:Array<phaser.types.math.Vector2Like>):Array<phaser.types.math.Vector2Like>;
     /**
      * Center a line on the given coordinates.
      *
@@ -329,7 +329,7 @@ extern class Line {
      * @method Phaser.Geom.Line#getPoints
      * @since 3.0.0
      *
-     * @generic {Phaser.Geom.Point} O - [output,$return]
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
      * @param {integer} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
      * @param {integer} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.

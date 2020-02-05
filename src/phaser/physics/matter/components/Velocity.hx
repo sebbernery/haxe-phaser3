@@ -1,7 +1,7 @@
 package phaser.physics.matter.components;
 
 /**
- * [description]
+ * Contains methods for changing the velocity of a Matter Body. Should be used as a mixin and not called directly.
  *
  * @namespace Phaser.Physics.Matter.Components.Velocity
  * @since 3.0.0
@@ -10,12 +10,13 @@ package phaser.physics.matter.components;
 extern class Velocity {
     public function new();
     /**
-     * [description]
+     * Sets the angular velocity of the body instantly.
+     * Position, angle, force etc. are unchanged.
      *
      * @method Phaser.Physics.Matter.Components.Velocity#setAngularVelocity
      * @since 3.0.0
      *
-     * @param {number} value - [description]
+     * @param {number} value - The angular velocity.
      *
      * @return {Phaser.GameObjects.GameObject} This Game Object.
      */

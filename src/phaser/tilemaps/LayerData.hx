@@ -164,10 +164,10 @@ extern class LayerData {
      * An array of the tile indexes
      *
      * @name Phaser.Tilemaps.LayerData#data
-     * @type {(number[])}
+     * @type {Phaser.Tilemaps.Tile[][]}
      * @since 3.0.0
      */
-    public var data:Array<Float>;
+    public var data:Array<Array<phaser.tilemaps.Tile>>;
     /**
      * [description]
      *

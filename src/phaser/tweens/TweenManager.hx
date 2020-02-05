@@ -143,11 +143,12 @@ extern class TweenManager {
      * @method Phaser.Tweens.TweenManager#stagger
      * @since 3.19.0
      *
+     * @param {(number|number[])} value - The amount to stagger by, or an array containing two elements representing the min and max values to stagger between.
      * @param {Phaser.Types.Tweens.StaggerConfig} config - The configuration object for the Stagger function.
      *
      * @return {function} The stagger function.
      */
-    public function stagger(config:phaser.types.tweens.StaggerConfig):Dynamic;
+    public function stagger(value:Dynamic, config:phaser.types.tweens.StaggerConfig):Dynamic;
     /**
      * Updates the Tween Manager's internal lists at the start of the frame.
      *

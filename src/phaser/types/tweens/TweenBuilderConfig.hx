@@ -5,7 +5,7 @@ package phaser.types.tweens;
  * @since 3.18.0
  *
  * @property {any} targets - The object, or an array of objects, to run the tween on.
- * @property {number} [delay=0] - The number of milliseconds to delay before the tween will start.
+ * @property {(number|function)} [delay=0] - The number of milliseconds to delay before the tween will start.
  * @property {number} [duration=1000] - The duration of the tween in milliseconds.
  * @property {(string|function)} [ease='Power0'] - The easing equation to use for the tween.
  * @property {array} [easeParams] - Optional easing parameters.
@@ -62,7 +62,7 @@ package phaser.types.tweens;
  */
 typedef TweenBuilderConfig = {
 var targets:Dynamic;
-    @:optional var delay:Float;
+    @:optional var delay:Dynamic;
     @:optional var duration:Float;
     @:optional var ease:Dynamic;
     @:optional var easeParams:Array<Dynamic>;

@@ -188,41 +188,6 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var ALIGN_RIGHT:Int;
     /**
-     * Parse an XML Bitmap Font from an Atlas.
-     *
-     * Adds the parsed Bitmap Font data to the cache with the `fontName` key.
-     *
-     * @name Phaser.GameObjects.BitmapText.ParseFromAtlas
-     * @type {function}
-     * @since 3.0.0
-     *
-     * @param {Phaser.Scene} scene - The Scene to parse the Bitmap Font for.
-     * @param {string} fontName - The key of the font to add to the Bitmap Font cache.
-     * @param {string} textureKey - The key of the BitmapFont's texture.
-     * @param {string} frameKey - The key of the BitmapFont texture's frame.
-     * @param {string} xmlKey - The key of the XML data of the font to parse.
-     * @param {integer} [xSpacing] - The x-axis spacing to add between each letter.
-     * @param {integer} [ySpacing] - The y-axis spacing to add to the line height.
-     *
-     * @return {boolean} Whether the parsing was successful or not.
-     */
-    public var ParseFromAtlas:Dynamic;
-    /**
-     * Parse an XML font to Bitmap Font data for the Bitmap Font cache.
-     *
-     * @name Phaser.GameObjects.BitmapText.ParseXMLBitmapFont
-     * @type {function}
-     * @since 3.17.0
-     *
-     * @param {XMLDocument} xml - The XML Document to parse the font from.
-     * @param {integer} [xSpacing=0] - The x-axis spacing to add between each letter.
-     * @param {integer} [ySpacing=0] - The y-axis spacing to add to the line height.
-     * @param {Phaser.Textures.Frame} [frame] - The texture frame to take into account while parsing.
-     *
-     * @return {Phaser.Types.GameObjects.BitmapText.BitmapFontData} The parsed Bitmap Font data.
-     */
-    public var ParseXMLBitmapFont:Dynamic;
-    /**
      * Set the lines of text in this BitmapText to be left-aligned.
      * This only has any effect if this BitmapText contains more than one line of text.
      *
@@ -346,6 +311,39 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @return {this} This BitmapText Object.
      */
     public function setMaxWidth(value:Float, ?wordWrapCharCode:Float):Dynamic;
+    /**
+     * Parse an XML Bitmap Font from an Atlas.
+     *
+     * Adds the parsed Bitmap Font data to the cache with the `fontName` key.
+     *
+     * @method Phaser.GameObjects.BitmapText.ParseFromAtlas
+     * @since 3.0.0
+     *
+     * @param {Phaser.Scene} scene - The Scene to parse the Bitmap Font for.
+     * @param {string} fontName - The key of the font to add to the Bitmap Font cache.
+     * @param {string} textureKey - The key of the BitmapFont's texture.
+     * @param {string} frameKey - The key of the BitmapFont texture's frame.
+     * @param {string} xmlKey - The key of the XML data of the font to parse.
+     * @param {integer} [xSpacing] - The x-axis spacing to add between each letter.
+     * @param {integer} [ySpacing] - The y-axis spacing to add to the line height.
+     *
+     * @return {boolean} Whether the parsing was successful or not.
+     */
+    static public function ParseFromAtlas(scene:phaser.Scene, fontName:String, textureKey:String, frameKey:String, xmlKey:String, ?xSpacing:Int, ?ySpacing:Int):Bool;
+    /**
+     * Parse an XML font to Bitmap Font data for the Bitmap Font cache.
+     *
+     * @method Phaser.GameObjects.BitmapText.ParseXMLBitmapFont
+     * @since 3.17.0
+     *
+     * @param {XMLDocument} xml - The XML Document to parse the font from.
+     * @param {integer} [xSpacing=0] - The x-axis spacing to add between each letter.
+     * @param {integer} [ySpacing=0] - The y-axis spacing to add to the line height.
+     * @param {Phaser.Textures.Frame} [frame] - The texture frame to take into account while parsing.
+     *
+     * @return {Phaser.Types.GameObjects.BitmapText.BitmapFontData} The parsed Bitmap Font data.
+     */
+    static public function ParseXMLBitmapFont(xml:js.html.XMLDocument, ?xSpacing:Int, ?ySpacing:Int, ?frame:phaser.textures.Frame):phaser.types.gameobjects.bitmaptext.BitmapFontData;
     /**
      * The alpha value of the Game Object.
      *
@@ -1031,7 +1029,9 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public var y:Float;
     /**
      * The z position of this Game Object.
-     * Note: Do not use this value to set the z-index, instead see the `depth` property.
+     *
+     * Note: The z position does not control the rendering order of 2D Game Objects. Use
+     * {@link Phaser.GameObjects.Components.Depth#depth} instead.
      *
      * @name Phaser.GameObjects.Components.Transform#z
      * @type {number}
@@ -1199,6 +1199,9 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     public function setY(?value:Float):Dynamic;
     /**
      * Sets the z position of this Game Object.
+     *
+     * Note: The z position does not control the rendering order of 2D Game Objects. Use
+     * {@link Phaser.GameObjects.Components.Depth#setDepth} instead.
      *
      * @method Phaser.GameObjects.Components.Transform#setZ
      * @since 3.0.0
