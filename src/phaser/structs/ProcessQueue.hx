@@ -14,6 +14,7 @@ package phaser.structs;
  * time, rather than at the time of the request from the API.
  *
  * @class ProcessQueue
+ * @extends Phaser.Events.EventEmitter
  * @memberof Phaser.Structs
  * @constructor
  * @since 3.0.0
@@ -21,10 +22,20 @@ package phaser.structs;
  * @generic T
  */
 @:native("Phaser.Structs.ProcessQueue")
-extern class ProcessQueue {
+extern class ProcessQueue extends phaser.events.EventEmitter {
     public function new();
     /**
+     * The number of entries in the active list.
+     *
+     * @name Phaser.Structs.ProcessQueue#length
+     * @type {integer}
+     * @readonly
+     * @since 3.20.0
+     */
+    public var length:Int;
+    /**
      * Adds a new item to the Process Queue.
+     *
      * The item is added to the pending list and made active in the next update.
      *
      * @method Phaser.Structs.ProcessQueue#add
@@ -35,11 +46,12 @@ extern class ProcessQueue {
      *
      * @param {*} item - The item to add to the queue.
      *
-     * @return {Phaser.Structs.ProcessQueue} This Process Queue object.
+     * @return {*} The item that was added.
      */
-    public function add(item:Dynamic):phaser.structs.ProcessQueue;
+    public function add(item:Dynamic):Dynamic;
     /**
      * Removes an item from the Process Queue.
+     *
      * The item is added to the pending destroy and fully removed in the next update.
      *
      * @method Phaser.Structs.ProcessQueue#remove
@@ -50,9 +62,20 @@ extern class ProcessQueue {
      *
      * @param {*} item - The item to be removed from the queue.
      *
-     * @return {Phaser.Structs.ProcessQueue} This Process Queue object.
+     * @return {*} The item that was removed.
      */
-    public function remove(item:Dynamic):phaser.structs.ProcessQueue;
+    public function remove(item:Dynamic):Dynamic;
+    /**
+     * Removes all active items from this Process Queue.
+     *
+     * All the items are marked as 'pending destroy' and fully removed in the next update.
+     *
+     * @method Phaser.Structs.ProcessQueue#removeAll
+     * @since 3.20.0
+     *
+     * @return {this} This Process Queue object.
+     */
+    public function removeAll():Dynamic;
     /**
      * Update this queue. First it will process any items awaiting destruction, and remove them.
      *
@@ -70,6 +93,9 @@ extern class ProcessQueue {
     /**
      * Returns the current list of active items.
      *
+     * This method returns a reference to the active list array, not a copy of it.
+     * Therefore, be careful to not modify this array outside of the ProcessQueue.
+     *
      * @method Phaser.Structs.ProcessQueue#getActive
      * @since 3.0.0
      *
@@ -78,11 +104,4 @@ extern class ProcessQueue {
      * @return {Array.<*>} A list of active items.
      */
     public function getActive():Array<Dynamic>;
-    /**
-     * Immediately destroys this process queue, clearing all of its internal arrays and resetting the process totals.
-     *
-     * @method Phaser.Structs.ProcessQueue#destroy
-     * @since 3.0.0
-     */
-    public function destroy():Void;
 }

@@ -269,7 +269,7 @@ extern class GameObjectFactory {
      *
      * @return {Phaser.GameObjects.Extern} The Game Object that was created.
      */
-    @:native('default') public function extern_():phaser.gameobjects.Extern;
+    @:native('extern') public function extern_():phaser.gameobjects.Extern;
     /**
      * Creates a new Graphics Game Object and adds it to the Scene.
      *
@@ -420,10 +420,11 @@ extern class GameObjectFactory {
      * @param {number} [width=128] - The width of the Game Object.
      * @param {number} [height=128] - The height of the Game Object.
      * @param {string[]} [textures] - Optional array of texture keys to bind to the iChannel0...3 uniforms. The textures must already exist in the Texture Manager.
+     * @param {object} [textureData] - Optional additional texture data.
      *
      * @return {Phaser.GameObjects.Shader} The Game Object that was created.
      */
-    public function shader(key:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?textures:Array<String>):phaser.gameobjects.Shader;
+    public function shader(key:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?textures:Array<String>, ?textureData:Dynamic):phaser.gameobjects.Shader;
     /**
      * Creates a new Arc Shape Game Object and adds it to the Scene.
      *
@@ -881,6 +882,22 @@ extern class GameObjectFactory {
      * @return {Phaser.GameObjects.TileSprite} The Game Object that was created.
      */
     public function tileSprite(x:Float, y:Float, width:Int, height:Int, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
+    /**
+     * Creates a new Image Game Object and adds it to the Scene.
+     *
+     * Note: This method will only be available if the Image Game Object has been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory#video
+     * @since 3.20.0
+     *
+     * @param {number} x - The horizontal position of this Game Object in the world.
+     * @param {number} y - The vertical position of this Game Object in the world.
+     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+     *
+     * @return {Phaser.GameObjects.Image} The Game Object that was created.
+     */
+    public function video(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Image;
     /**
      * Creates a new Zone Game Object and adds it to the Scene.
      *

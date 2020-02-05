@@ -240,10 +240,11 @@ extern class ScenePlugin {
      * @since 3.0.0
      *
      * @param {string} [key] - The Scene to stop.
+     * @param {any} [data] - Optional data object to pass to Scene.Systems.shutdown.
      *
      * @return {Phaser.Scenes.ScenePlugin} This ScenePlugin object.
      */
-    public function stop(?key:String):phaser.scenes.ScenePlugin;
+    public function stop(?key:String, ?data:Dynamic):phaser.scenes.ScenePlugin;
     /**
      * Sets the active state of the given Scene.
      *

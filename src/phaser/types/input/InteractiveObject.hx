@@ -6,6 +6,7 @@ package phaser.types.input;
  *
  * @property {Phaser.GameObjects.GameObject} gameObject - The Game Object to which this Interactive Object is bound.
  * @property {boolean} enabled - Is this Interactive Object currently enabled for input events?
+ * @property {boolean} alwaysEnabled - An Interactive Object that is 'always enabled' will receive input even if the parent object is invisible or won't render.
  * @property {boolean} draggable - Is this Interactive Object draggable? Enable with `InputPlugin.setDraggable`.
  * @property {boolean} dropZone - Is this Interactive Object a drag-targets drop zone? Set when the object is created.
  * @property {(boolean|string)} cursor - Should this Interactive Object change the cursor (via css) when over? (desktop only)
@@ -28,6 +29,7 @@ package phaser.types.input;
 typedef InteractiveObject = {
 var gameObject:phaser.gameobjects.GameObject;
 var enabled:Bool;
+var alwaysEnabled:Bool;
 var draggable:Bool;
 var dropZone:Bool;
 var cursor:Dynamic;

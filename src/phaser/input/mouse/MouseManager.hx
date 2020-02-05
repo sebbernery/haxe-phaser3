@@ -46,7 +46,7 @@ extern class MouseManager {
      */
     public var enabled:Bool;
     /**
-     * The Touch Event target, as defined in the Game Config.
+     * The Mouse target, as defined in the Game Config.
      * Typically the canvas to which the game is rendering, but can be any interactive DOM element.
      *
      * @name Phaser.Input.Mouse.MouseManager#target

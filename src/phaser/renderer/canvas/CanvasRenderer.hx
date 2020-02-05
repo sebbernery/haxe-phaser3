@@ -64,14 +64,6 @@ extern class CanvasRenderer {
      */
     public var config:Dynamic;
     /**
-     * The scale mode which should be used by the CanvasRenderer.
-     *
-     * @name Phaser.Renderer.Canvas.CanvasRenderer#scaleMode
-     * @type {integer}
-     * @since 3.0.0
-     */
-    public var scaleMode:Int;
-    /**
      * The canvas element which the Game uses.
      *
      * @name Phaser.Renderer.Canvas.CanvasRenderer#gameCanvas
@@ -96,6 +88,14 @@ extern class CanvasRenderer {
      */
     public var currentContext:js.html.CanvasRenderingContext2D;
     /**
+     * Should the Canvas use Image Smoothing or not when drawing Sprites?
+     *
+     * @name Phaser.Renderer.Canvas.CanvasRenderer#antialias
+     * @type {boolean}
+     * @since 3.20.0
+     */
+    public var antialias:Bool;
+    /**
      * The blend modes supported by the Canvas Renderer.
      *
      * This object maps the {@link Phaser.BlendModes} to canvas compositing operations.
@@ -105,15 +105,6 @@ extern class CanvasRenderer {
      * @since 3.0.0
      */
     public var blendModes:Array<Dynamic>;
-    /**
-     * The scale mode currently in use by the Canvas Renderer.
-     *
-     * @name Phaser.Renderer.Canvas.CanvasRenderer#currentScaleMode
-     * @type {number}
-     * @default 0
-     * @since 3.0.0
-     */
-    public var currentScaleMode:Float;
     /**
      * Details about the currently scheduled snapshot.
      *

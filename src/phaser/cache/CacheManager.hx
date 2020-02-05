@@ -77,6 +77,14 @@ extern class CacheManager {
      */
     public var audio:phaser.cache.BaseCache;
     /**
+     * A Cache storing all non-streaming video files, typically added via the Loader.
+     *
+     * @name Phaser.Cache.CacheManager#video
+     * @type {Phaser.Cache.BaseCache}
+     * @since 3.20.0
+     */
+    public var video:phaser.cache.BaseCache;
+    /**
      * A Cache storing all text files, typically added via the Loader.
      *
      * @name Phaser.Cache.CacheManager#text

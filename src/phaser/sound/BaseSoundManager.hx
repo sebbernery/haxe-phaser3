@@ -122,9 +122,9 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @param {string} key - Asset key for the sound.
      * @param {Phaser.Types.Sound.SoundConfig} [config] - An optional config object containing default sound settings.
      *
-     * @return {Phaser.Types.Sound.AudioSpriteSound} The new audio sprite sound instance.
+     * @return {(Phaser.Sound.HTML5AudioSound|Phaser.Sound.WebAudioSound)} The new audio sprite sound instance.
      */
-    public function addAudioSprite(key:String, ?config:phaser.types.sound.SoundConfig):phaser.types.sound.AudioSpriteSound;
+    public function addAudioSprite(key:String, ?config:phaser.types.sound.SoundConfig):phaser.sound.HTML5AudioSound;
     /**
      * Enables playing sound on the fly without the need to keep a reference to it.
      * Sound will auto destroy once its playback ends.

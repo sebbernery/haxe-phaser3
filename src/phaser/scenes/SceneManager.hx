@@ -117,11 +117,11 @@ extern class SceneManager {
      * @method Phaser.Scenes.SceneManager#remove
      * @since 3.2.0
      *
-     * @param {(string|Phaser.Scene)} scene - The Scene to be removed.
+     * @param {string} key - A unique key used to reference the Scene, i.e. `MainMenu` or `Level1`.
      *
      * @return {Phaser.Scenes.SceneManager} This SceneManager.
      */
-    public function remove(scene:Dynamic):phaser.scenes.SceneManager;
+    public function remove(key:String):phaser.scenes.SceneManager;
     /**
      * Updates the Scenes.
      *
@@ -260,7 +260,7 @@ extern class SceneManager {
      */
     public function wake(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     /**
-     * Runs the given Scene, but does not change the state of this Scene.
+     * Runs the given Scene.
      *
      * If the given Scene is paused, it will resume it. If sleeping, it will wake it.
      * If not running at all, it will be started.
@@ -296,10 +296,11 @@ extern class SceneManager {
      * @since 3.0.0
      *
      * @param {string} key - The Scene to stop.
+     * @param {object} [data] - Optional data object to pass to Scene.shutdown.
      *
      * @return {Phaser.Scenes.SceneManager} This SceneManager.
      */
-    public function stop(key:String):phaser.scenes.SceneManager;
+    public function stop(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
     /**
      * Sleeps one one Scene and starts the other.
      *

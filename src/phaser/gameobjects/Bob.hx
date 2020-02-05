@@ -74,6 +74,15 @@ extern class Bob {
      */
     public var data:Dynamic;
     /**
+     * The tint value of this Bob.
+     *
+     * @name Phaser.GameObjects.Bob#tint
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.20.0
+     */
+    public var tint:Float;
+    /**
      * The horizontally flipped state of the Bob.
      * A Bob that is flipped horizontally will render inversed on the horizontal axis.
      * Flipping always takes place from the middle of the texture.
@@ -153,6 +162,18 @@ extern class Bob {
      */
     public function reset(x:Float, y:Float, ?frame:Dynamic):phaser.gameobjects.Bob;
     /**
+     * Changes the position of this Bob to the values given.
+     *
+     * @method Phaser.GameObjects.Bob#setPosition
+     * @since 3.20.0
+     *
+     * @param {number} x - The x position of the Bob. Bob coordinate are relative to the position of the Blitter object.
+     * @param {number} y - The y position of the Bob. Bob coordinate are relative to the position of the Blitter object.
+     *
+     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     */
+    public function setPosition(x:Float, y:Float):phaser.gameobjects.Bob;
+    /**
      * Sets the horizontal flipped state of this Bob.
      *
      * @method Phaser.GameObjects.Bob#setFlipX
@@ -213,6 +234,17 @@ extern class Bob {
      * @return {Phaser.GameObjects.Bob} This Bob Game Object.
      */
     public function setAlpha(value:Float):phaser.gameobjects.Bob;
+    /**
+     * Sets the tint of this Bob.
+     *
+     * @method Phaser.GameObjects.Bob#setTint
+     * @since 3.20.0
+     *
+     * @param {number} value - The tint value used for this Bob. Between 0 and 0xffffff.
+     *
+     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     */
+    public function setTint(value:Float):phaser.gameobjects.Bob;
     /**
      * Destroys this Bob instance.
      * Removes itself from the Blitter and clears the parent, frame and data properties.

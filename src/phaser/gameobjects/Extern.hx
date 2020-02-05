@@ -596,12 +596,12 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Texture#setTexture
      * @since 3.0.0
      *
-     * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} key - The key of the texture to be used, as stored in the Texture Manager, or a Texture instance.
      * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTexture(key:String, ?frame:Dynamic):Dynamic;
+    public function setTexture(key:Dynamic, ?frame:Dynamic):Dynamic;
     /**
      * Sets the frame this Game Object will use to render with.
      *

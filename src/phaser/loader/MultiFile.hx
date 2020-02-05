@@ -87,6 +87,33 @@ extern class MultiFile {
      */
     public var config:Dynamic;
     /**
+     * A reference to the Loaders baseURL at the time this MultiFile was created.
+     * Used to populate child-files.
+     *
+     * @name Phaser.Loader.MultiFile#baseURL
+     * @type {string}
+     * @since 3.20.0
+     */
+    public var baseURL:String;
+    /**
+     * A reference to the Loaders path at the time this MultiFile was created.
+     * Used to populate child-files.
+     *
+     * @name Phaser.Loader.MultiFile#path
+     * @type {string}
+     * @since 3.20.0
+     */
+    public var path:String;
+    /**
+     * A reference to the Loaders prefix at the time this MultiFile was created.
+     * Used to populate child-files.
+     *
+     * @name Phaser.Loader.MultiFile#prefix
+     * @type {string}
+     * @since 3.20.0
+     */
+    public var prefix:String;
+    /**
      * Checks if this MultiFile is ready to process its children or not.
      *
      * @method Phaser.Loader.MultiFile#isReadyToProcess

@@ -3,7 +3,8 @@ package phaser.textures;
 /**
  * @classdesc
  * A Texture Source is the encapsulation of the actual source data for a Texture.
- * This is typically an Image Element, loaded from the file system or network, or a Canvas Element.
+ *
+ * This is typically an Image Element, loaded from the file system or network, a Canvas Element or a Video Element.
  *
  * A Texture can contain multiple Texture Sources, which only happens when a multi-atlas is loaded.
  *
@@ -13,13 +14,14 @@ package phaser.textures;
  * @since 3.0.0
  *
  * @param {Phaser.Textures.Texture} texture - The Texture this TextureSource belongs to.
- * @param {(HTMLImageElement|HTMLCanvasElement|Phaser.GameObjects.RenderTexture|WebGLTexture)} source - The source image data.
+ * @param {(HTMLImageElement|HTMLCanvasElement|HTMLVideoElement|Phaser.GameObjects.RenderTexture|WebGLTexture)} source - The source image data.
  * @param {integer} [width] - Optional width of the source image. If not given it's derived from the source itself.
  * @param {integer} [height] - Optional height of the source image. If not given it's derived from the source itself.
+ * @param {boolean} [flipY=false] - Sets the `UNPACK_FLIP_Y_WEBGL` flag the WebGL Texture uses during upload.
  */
 @:native("Phaser.Textures.TextureSource")
 extern class TextureSource {
-    public function new(texture:phaser.textures.Texture, source:Dynamic, ?width:Int, ?height:Int);
+    public function new(texture:phaser.textures.Texture, source:Dynamic, ?width:Int, ?height:Int, ?flipY:Bool);
     /**
      * The Texture this TextureSource belongs to.
      *
@@ -38,19 +40,21 @@ extern class TextureSource {
     public var texture:phaser.textures.Texture;
     /**
      * The source of the image data.
-     * This is either an Image Element, a Canvas Element, a RenderTexture or a WebGLTexture.
+     *
+     * This is either an Image Element, a Canvas Element, a Video Element, a RenderTexture or a WebGLTexture.
      *
      * @name Phaser.Textures.TextureSource#source
-     * @type {(HTMLImageElement|HTMLCanvasElement|Phaser.GameObjects.RenderTexture|WebGLTexture)}
+     * @type {(HTMLImageElement|HTMLCanvasElement|HTMLVideoElement|Phaser.GameObjects.RenderTexture|WebGLTexture)}
      * @since 3.12.0
      */
     public var source:Dynamic;
     /**
      * The image data.
-     * This is either an Image element or a Canvas element.
+     *
+     * This is either an Image element, Canvas element or a Video Element.
      *
      * @name Phaser.Textures.TextureSource#image
-     * @type {(HTMLImageElement|HTMLCanvasElement)}
+     * @type {(HTMLImageElement|HTMLCanvasElement|HTMLVideoElement)}
      * @since 3.0.0
      */
     public var image:Dynamic;
@@ -108,6 +112,14 @@ extern class TextureSource {
      */
     public var isCanvas:Bool;
     /**
+     * Is the source image a Video Element?
+     *
+     * @name Phaser.Textures.TextureSource#isVideo
+     * @type {boolean}
+     * @since 3.20.0
+     */
+    public var isVideo:Bool;
+    /**
      * Is the source image a Render Texture?
      *
      * @name Phaser.Textures.TextureSource#isRenderTexture
@@ -142,6 +154,14 @@ extern class TextureSource {
      */
     public var glTexture:js.html.webgl.Texture;
     /**
+     * Sets the `UNPACK_FLIP_Y_WEBGL` flag the WebGL Texture uses during upload.
+     *
+     * @name Phaser.Textures.TextureSource#flipY
+     * @type {boolean}
+     * @since 3.20.0
+     */
+    public var flipY:Bool;
+    /**
      * Creates a WebGL Texture, if required, and sets the Texture filter mode.
      *
      * @method Phaser.Textures.TextureSource#init
@@ -163,6 +183,15 @@ extern class TextureSource {
      * @param {Phaser.Textures.FilterMode} filterMode - The Filter Mode.
      */
     public function setFilter(filterMode:Dynamic):Void;
+    /**
+     * Sets the `UNPACK_FLIP_Y_WEBGL` flag for the WebGL Texture during texture upload.
+     *
+     * @method Phaser.Textures.TextureSource#setFlipY
+     * @since 3.20.0
+     *
+     * @param {boolean} [value=true] - Should the WebGL Texture be flipped on the Y axis on texture upload or not?
+     */
+    public function setFlipY(?value:Bool):Void;
     /**
      * If this TextureSource is backed by a Canvas and is running under WebGL,
      * it updates the WebGLTexture using the canvas data.

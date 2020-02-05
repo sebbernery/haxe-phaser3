@@ -136,6 +136,19 @@ extern class TouchManager {
      */
     public var onTouchOut:Dynamic;
     /**
+     * Attempts to disable the context menu from appearing if you touch-hold on the browser.
+     *
+     * Works by listening for the `contextmenu` event and prevent defaulting it.
+     *
+     * Use this if you need to disable the OS context menu on mobile.
+     *
+     * @method Phaser.Input.Touch.TouchManager#disableContextMenu
+     * @since 3.20.0
+     *
+     * @return {Phaser.Input.Touch.TouchManager} This Touch Manager instance.
+     */
+    public function disableContextMenu():phaser.input.touch.TouchManager;
+    /**
      * Starts the Touch Event listeners running as long as an input target is set.
      *
      * This method is called automatically if Touch Input is enabled in the game config,

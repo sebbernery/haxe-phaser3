@@ -121,6 +121,14 @@ extern class Body {
      */
     public var prev:phaser.math.Vector2;
     /**
+     * The position of this Body during the previous frame.
+     *
+     * @name Phaser.Physics.Arcade.Body#prevFrame
+     * @type {Phaser.Math.Vector2}
+     * @since 3.20.0
+     */
+    public var prevFrame:phaser.math.Vector2;
+    /**
      * Whether this Body's `rotation` is affected by its angular acceleration and angular velocity.
      *
      * @name Phaser.Physics.Arcade.Body#allowRotation
@@ -309,6 +317,19 @@ extern class Body {
      * @since 3.0.0
      */
     public var worldBounce:phaser.math.Vector2;
+    /**
+     * The rectangle used for world boundary collisions.
+     *
+     * By default it is set to the world boundary rectangle. Or, if this Body was
+     * created by a Physics Group, then whatever rectangle that Group defined.
+     *
+     * You can also change it by using the `Body.setBoundsRectangle` method.
+     *
+     * @name Phaser.Physics.Arcade.Body#customBoundsRectangle
+     * @type {?Phaser.Geom.Rectangle}
+     * @since 3.20
+     */
+    public var customBoundsRectangle:phaser.geom.Rectangle;
     /**
      * Whether the simulation emits a `worldbounds` event when this Body collides with the world boundary (and `collideWorldBounds` is also true).
      *
@@ -710,6 +731,18 @@ extern class Body {
      * @since 3.0.0
      */
     public function postUpdate():Void;
+    /**
+     * Sets a custom collision boundary rectangle. Use if you want to have a custom
+     * boundary instead of the world boundaries.
+     *
+     * @method Phaser.Physics.Arcade.Body#setBoundsRectangle
+     * @since 3.20
+     *
+     * @param {?Phaser.Geom.Rectangle} [bounds] - The new boundary rectangle. Pass `null` to use the World bounds.
+     *
+     * @return {this} This Body object.
+     */
+    public function setBoundsRectangle(?bounds:phaser.geom.Rectangle):Dynamic;
     /**
      * Checks for collisions between this Body and the world boundary and separates them.
      *

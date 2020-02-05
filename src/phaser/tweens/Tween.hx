@@ -279,15 +279,17 @@ extern class Tween extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public var callbackScope:Dynamic;
-    /**
-     * Returns the current value of the Tween.
+    /**	
+     * Returns the current value of the specified Tween Data.
      *
      * @method Phaser.Tweens.Tween#getValue
      * @since 3.0.0
      *
-     * @return {number} The value of the Tween.
+     * @param {integer} [index=0] - The Tween Data to return the value from.
+     *
+     * @return {number} The value of the requested Tween Data.
      */
-    public function getValue():Float;
+    public function getValue(?index:Int):Float;
     /**
      * Set the scale the time applied to this Tween. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
      *
@@ -338,8 +340,9 @@ extern class Tween extends phaser.events.EventEmitter {
      */
     public function hasTarget(target:Dynamic):Bool;
     /**
-     * Updates the value of a property of this Tween to a new value, without adjusting the
-     * Tween duration or current progress.
+     * Updates the 'end' value of the given property across all matching targets.
+     *
+     * Calling this does not adjust the duration of the tween, or the current progress.
      *
      * You can optionally tell it to set the 'start' value to be the current value (before the change).
      *

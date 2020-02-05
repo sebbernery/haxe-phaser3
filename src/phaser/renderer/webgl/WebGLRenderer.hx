@@ -704,14 +704,16 @@ extern class WebGLRenderer {
      * @param {integer} wrapT - Wrapping mode of the texture.
      * @param {integer} wrapS - Wrapping mode of the texture.
      * @param {integer} format - Which format does the texture use.
-     * @param {object} pixels - pixel data.
+     * @param {?object} pixels - pixel data.
      * @param {integer} width - Width of the texture in pixels.
      * @param {integer} height - Height of the texture in pixels.
-     * @param {boolean} pma - Does the texture have premultiplied alpha?
+     * @param {boolean} [pma=true] - Does the texture have premultiplied alpha?
+     * @param {boolean} [forceSize=false] - If `true` it will use the width and height passed to this method, regardless of the pixels dimension.
+     * @param {boolean} [flipY=false] - Sets the `UNPACK_FLIP_Y_WEBGL` flag the WebGL Texture uses during upload.
      *
      * @return {WebGLTexture} The WebGLTexture that was created.
      */
-    public function createTexture2D(mipLevel:Int, minFilter:Int, magFilter:Int, wrapT:Int, wrapS:Int, format:Int, pixels:Dynamic, width:Int, height:Int, pma:Bool):js.html.webgl.Texture;
+    public function createTexture2D(mipLevel:Int, minFilter:Int, magFilter:Int, wrapT:Int, wrapS:Int, format:Int, pixels:Dynamic, width:Int, height:Int, ?pma:Bool, ?forceSize:Bool, ?flipY:Bool):js.html.webgl.Texture;
     /**
      * Wrapper for creating WebGLFramebuffer.
      *
@@ -960,18 +962,73 @@ extern class WebGLRenderer {
      */
     public function snapshotFramebuffer(framebuffer:js.html.webgl.Framebuffer, bufferWidth:Int, bufferHeight:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?getPixel:Bool, ?x:Int, ?y:Int, ?width:Int, ?height:Int, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
-     * Creates a WebGL Texture based on the given canvas element.
+     * Creates a new WebGL Texture based on the given Canvas Element.
+     *
+     * If the `dstTexture` parameter is given, the WebGL Texture is updated, rather than created fresh.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#canvasToTexture
      * @since 3.0.0
      *
-     * @param {HTMLCanvasElement} srcCanvas - The Canvas element that will be used to populate the texture.
-     * @param {WebGLTexture} [dstTexture] - Is this going to replace an existing texture? If so, pass it here.
-     * @param {boolean} [noRepeat=false] - Should this canvas never be allowed to set REPEAT? (such as for Text objects)
+     * @param {HTMLCanvasElement} srcCanvas - The Canvas to create the WebGL Texture from
+     * @param {WebGLTexture} [dstTexture] - The destination WebGL Texture to set.
+     * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT` (such as for Text objects?)
+     * @param {boolean} [flipY=false] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     *
+     * @return {WebGLTexture} The newly created, or updated, WebGL Texture.
+     */
+    public function canvasToTexture(srcCanvas:js.html.CanvasElement, ?dstTexture:js.html.webgl.Texture, ?noRepeat:Bool, ?flipY:Bool):js.html.webgl.Texture;
+    /**
+     * Creates a new WebGL Texture based on the given Canvas Element.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#createCanvasTexture
+     * @since 3.20.0
+     *
+     * @param {HTMLCanvasElement} srcCanvas - The Canvas to create the WebGL Texture from
+     * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT` (such as for Text objects?)
+     * @param {boolean} [flipY=false] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
      *
      * @return {WebGLTexture} The newly created WebGL Texture.
      */
-    public function canvasToTexture(srcCanvas:js.html.CanvasElement, ?dstTexture:js.html.webgl.Texture, ?noRepeat:Bool):js.html.webgl.Texture;
+    public function createCanvasTexture(srcCanvas:js.html.CanvasElement, ?noRepeat:Bool, ?flipY:Bool):js.html.webgl.Texture;
+    /**
+     * Updates a WebGL Texture based on the given Canvas Element.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#updateCanvasTexture
+     * @since 3.20.0
+     *
+     * @param {HTMLCanvasElement} srcCanvas - The Canvas to update the WebGL Texture from.
+     * @param {WebGLTexture} dstTexture - The destination WebGL Texture to update.
+     * @param {boolean} [flipY=false] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     *
+     * @return {WebGLTexture} The updated WebGL Texture.
+     */
+    public function updateCanvasTexture(srcCanvas:js.html.CanvasElement, dstTexture:js.html.webgl.Texture, ?flipY:Bool):js.html.webgl.Texture;
+    /**
+     * Creates a new WebGL Texture based on the given HTML Video Element.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#createVideoTexture
+     * @since 3.20.0
+     *
+     * @param {HTMLVideoElement} srcVideo - The Video to create the WebGL Texture from
+     * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT`?
+     * @param {boolean} [flipY=false] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     *
+     * @return {WebGLTexture} The newly created WebGL Texture.
+     */
+    public function createVideoTexture(srcVideo:js.html.VideoElement, ?noRepeat:Bool, ?flipY:Bool):js.html.webgl.Texture;
+    /**
+     * Updates a WebGL Texture based on the given HTML Video Element.
+     *
+     * @method Phaser.Renderer.WebGL.WebGLRenderer#updateVideoTexture
+     * @since 3.20.0
+     *
+     * @param {HTMLVideoElement} srcVideo - The Video to update the WebGL Texture with.
+     * @param {WebGLTexture} dstTexture - The destination WebGL Texture to update.
+     * @param {boolean} [flipY=false] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     *
+     * @return {WebGLTexture} The updated WebGL Texture.
+     */
+    public function updateVideoTexture(srcVideo:js.html.VideoElement, dstTexture:js.html.webgl.Texture, ?flipY:Bool):js.html.webgl.Texture;
     /**
      * Sets the minification and magnification filter for a texture.
      *

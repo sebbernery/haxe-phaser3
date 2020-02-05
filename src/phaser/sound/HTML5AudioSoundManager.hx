@@ -3,6 +3,15 @@ package phaser.sound;
 /**
  * HTML5 Audio implementation of the Sound Manager.
  *
+ * Note: To play multiple instances of the same HTML5 Audio sound, you need to provide an `instances` value when
+ * loading the sound with the Loader:
+ *
+ * ```javascript
+ * this.load.audio('explosion', 'explosion.mp3', {
+ *     instances: 2
+ * });
+ * ```
+ *
  * @class HTML5AudioSoundManager
  * @extends Phaser.Sound.BaseSoundManager
  * @memberof Phaser.Sound
@@ -25,7 +34,7 @@ extern class HTML5AudioSoundManager extends phaser.sound.BaseSoundManager {
      * @default true
      * @since 3.0.0
      */
-    public var override:Bool;
+    @:native('override') public var override_:Bool;
     /**
      * Value representing time difference, in seconds, between calling
      * play method on an audio tag and when it actually starts playing.

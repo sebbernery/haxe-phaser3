@@ -5,6 +5,7 @@ package phaser.types.physics.arcade;
  * @since 3.0.0
  *
  * @property {boolean} setCollideWorldBounds - As {@link Phaser.Physics.Arcade.Body#setCollideWorldBounds}.
+ * @property {Phaser.Geom.Rectangle} setBoundsRectangle - As {@link Phaser.Physics.Arcade.Body#setBoundsRectangle}.
  * @property {number} setAccelerationX - As {@link Phaser.Physics.Arcade.Body#setAccelerationX}.
  * @property {number} setAccelerationY - As {@link Phaser.Physics.Arcade.Body#setAccelerationY}.
  * @property {boolean} setAllowDrag - As {@link Phaser.Physics.Arcade.Body#setAllowDrag}.
@@ -29,6 +30,7 @@ package phaser.types.physics.arcade;
  */
 typedef PhysicsGroupDefaults = {
 var setCollideWorldBounds:Bool;
+var setBoundsRectangle:phaser.geom.Rectangle;
 var setAccelerationX:Float;
 var setAccelerationY:Float;
 var setAllowDrag:Bool;

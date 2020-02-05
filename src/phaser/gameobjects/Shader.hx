@@ -64,10 +64,11 @@ package phaser.gameobjects;
  * @param {number} [width=128] - The width of the Game Object.
  * @param {number} [height=128] - The height of the Game Object.
  * @param {string[]} [textures] - Optional array of texture keys to bind to the iChannel0...3 uniforms. The textures must already exist in the Texture Manager.
+ * @param {any} [textureData] - Additional texture data if you want to create shader with none NPOT textures.
  */
 @:native("Phaser.GameObjects.Shader")
 extern class Shader extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, key:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?textures:Array<String>);
+    public function new(scene:phaser.Scene, key:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?textures:Array<String>, ?textureData:Dynamic);
     /**
      * The underlying shader object being used.
      * Empty by default and set during a call to the `setShader` method.
@@ -270,10 +271,11 @@ extern class Shader extends phaser.gameobjects.GameObject {
      *
      * @param {(string|Phaser.Display.BaseShader)} key - The key of the shader to use from the shader cache, or a BaseShader instance.
      * @param {string[]} [textures] - Optional array of texture keys to bind to the iChannel0...3 uniforms. The textures must already exist in the Texture Manager.
+     * @param {any} [textureData] - Additional texture data.
      *
      * @return {this} This Shader instance.
      */
-    public function setShader(key:Dynamic, ?textures:Array<String>):Dynamic;
+    public function setShader(key:Dynamic, ?textures:Array<String>, ?textureData:Dynamic):Dynamic;
     /**
      * Binds a Phaser Pointer object to this Shader.
      *
@@ -387,7 +389,7 @@ extern class Shader extends phaser.gameobjects.GameObject {
      *
      * @param {string} key - The key of the uniform to return the value for.
      *
-     * @return {this} This Shader instance.
+     * @return {any} A reference to the uniform object. This is not a copy, so modifying it will update the original object also.
      */
     public function getUniform(key:String):Dynamic;
     /**

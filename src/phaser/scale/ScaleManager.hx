@@ -35,7 +35,7 @@ package phaser.scale;
  *
  * #### Scale Modes
  *
- * The way the scaling is handled is determined by the `scaleMode` property. The default is `NO_SCALE`,
+ * The way the scaling is handled is determined by the `scaleMode` property. The default is `NONE`,
  * which prevents Phaser from scaling or touching the canvas, or its parent, at all. In this mode, you are
  * responsible for all scaling. The other scaling modes afford you automatic scaling.
  *
@@ -212,7 +212,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * The game zoom factor.
      *
      * This value allows you to multiply your games base size by the given zoom factor.
-     * This is then used when calculating the display size, even in `NO_SCALE` situations.
+     * This is then used when calculating the display size, even in `NONE` situations.
      * If you don't want Phaser to touch the canvas style at all, this value should be 1.
      *
      * Can also be set to `MAX_ZOOM` in which case the zoom value will be derived based
@@ -468,7 +468,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * This method will set a new size for your game.
      *
      * It should only be used if you're looking to change the base size of your game and are using
-     * one of the Scale Manager scaling modes, i.e. `FIT`. If you're using `NO_SCALE` and wish to
+     * one of the Scale Manager scaling modes, i.e. `FIT`. If you're using `NONE` and wish to
      * change the game and canvas size directly, then please use the `resize` method instead.
      *
      * @method Phaser.Scale.ScaleManager#setGameSize
@@ -483,13 +483,13 @@ extern class ScaleManager extends phaser.events.EventEmitter {
     public function setGameSize(width:Float, height:Float):Dynamic;
     /**
      * Call this to modify the size of the Phaser canvas element directly.
-     * You should only use this if you are using the `NO_SCALE` scale mode,
+     * You should only use this if you are using the `NONE` scale mode,
      * it will update all internal components completely.
      *
      * If all you want to do is change the size of the parent, see the `setParentSize` method.
      *
      * If all you want is to change the base size of the game, but still have the Scale Manager
-     * manage all the scaling (i.e. you're **not** using `NO_SCALE`), then see the `setGameSize` method.
+     * manage all the scaling (i.e. you're **not** using `NONE`), then see the `setGameSize` method.
      *
      * This method will set the `gameSize`, `baseSize` and `displaySize` components to the given
      * dimensions. It will then resize the canvas width and height to the values given, by
