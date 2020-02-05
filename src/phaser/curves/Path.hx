@@ -339,7 +339,7 @@ extern class Path {
      */
     public function moveTo(x:Dynamic, y:Float):phaser.curves.Path;
     /**
-     * Converts this Path to a JSON object containing the path information and its consitutent curves.
+     * Converts this Path to a JSON object containing the path information and its constituent curves.
      *
      * @method Phaser.Curves.Path#toJSON
      * @since 3.0.0

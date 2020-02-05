@@ -370,6 +370,31 @@ extern class WebGLRenderer {
      */
     public var nextTypeMatch:Bool;
     /**
+     * The mipmap magFilter to be used when creating textures.
+     *
+     * You can specify this as a string in the game config, i.e.:
+     *
+     * `renderer: { mipmapFilter: 'NEAREST_MIPMAP_LINEAR' }`
+     *
+     * The 6 options for WebGL1 are, in order from least to most computationally expensive:
+     *
+     * NEAREST (for pixel art)
+     * LINEAR (the default)
+     * NEAREST_MIPMAP_NEAREST
+     * LINEAR_MIPMAP_NEAREST
+     * NEAREST_MIPMAP_LINEAR
+     * LINEAR_MIPMAP_LINEAR
+     *
+     * Mipmaps only work with textures that are fully power-of-two in size.
+     *
+     * For more details see https://webglfundamentals.org/webgl/lessons/webgl-3d-textures.html
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#mipmapFilter
+     * @type {GLenum}
+     * @since 3.21.0
+     */
+    public var mipmapFilter:Dynamic;
+    /**
      * Creates a new WebGLRenderingContext and initializes all internal state.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#init

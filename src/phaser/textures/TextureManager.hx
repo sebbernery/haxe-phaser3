@@ -149,10 +149,12 @@ extern class TextureManager extends phaser.events.EventEmitter {
      *
      * @param {string} key - The unique string-based key of the Texture.
      * @param {WebGLTexture} glTexture - The source Render Texture.
+     * @param {number} width - The new width of the Texture.
+     * @param {number} height - The new height of the Texture.
      *
      * @return {?Phaser.Textures.Texture} The Texture that was created, or `null` if the key is already in use.
      */
-    public function addGLTexture(key:String, glTexture:js.html.webgl.Texture):phaser.textures.Texture;
+    public function addGLTexture(key:String, glTexture:js.html.webgl.Texture, width:Float, height:Float):phaser.textures.Texture;
     /**
      * Adds a Render Texture to the Texture Manager using the given key.
      * This allows you to then use the Render Texture as a normal texture for texture based Game Objects like Sprites.

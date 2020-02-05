@@ -18,6 +18,19 @@ package phaser.tilemaps;
  * StaticTilemapLayer or DynamicTilemapLayer may have its own unique tile size that overrides
  * it.
  *
+ * As of Phaser 3.21.0, if your tilemap includes layer groups (a feature of Tiled 1.2.0+) these
+ * will be traversed and the following properties will affect children:
+ * - opacity (blended with parent) and visibility (parent overrides child)
+ * - Vertical and horizontal offset
+ * The grouping hierarchy is not preserved and all layers will be flattened into a single array.
+ * Group layers are parsed during Tilemap construction but are discarded after parsing so dynamic
+ * layers will NOT continue to be affected by a parent.
+ *
+ * To avoid duplicate layer names, a layer that is a child of a group layer will have its parent
+ * group name prepended with a '/'.  For example, consider a group called 'ParentGroup' with a
+ * child called 'Layer 1'. In the Tilemap object, 'Layer 1' will have the name
+ * 'ParentGroup/Layer 1'.
+ *
  * @class Tilemap
  * @memberof Phaser.Tilemaps
  * @constructor
@@ -549,6 +562,15 @@ extern class Tilemap {
      */
     public function getImageIndex(name:String):Int;
     /**
+     * Return a list of all valid imagelayer names loaded in this Tilemap.
+     *
+     * @method Phaser.Tilemaps.Tilemap#getImageLayerNames
+     * @since 3.21.0
+     *
+     * @return {string[]} Array of valid imagelayer names / IDs loaded into this Tilemap.
+     */
+    public function getImageLayerNames():Array<String>;
+    /**
      * Internally used. Returns the index of the object in one of the Tilemaps arrays whose name
      * property matches the given `name`.
      *
@@ -587,6 +609,15 @@ extern class Tilemap {
      * @return {?Phaser.Tilemaps.ObjectLayer} The corresponding ObjectLayer within this.objects or null.
      */
     public function getObjectLayer(?name:String):phaser.tilemaps.ObjectLayer;
+    /**
+     * Return a list of all valid objectgroup names loaded in this Tilemap.
+     *
+     * @method Phaser.Tilemaps.Tilemap#getObjectLayerNames
+     * @since 3.21.0
+     *
+     * @return {string[]} Array of valid objectgroup names / IDs loaded into this Tilemap.
+     */
+    public function getObjectLayerNames():Array<String>;
     /**
      * Gets the LayerData index of the given `layer` within this.layers, or null if an invalid
      * `layer` is given.
@@ -644,6 +675,15 @@ extern class Tilemap {
      * @return {?Phaser.Tilemaps.Tile} Returns a Tile, or null if the layer given was invalid.
      */
     public function getTileAtWorldXY(worldX:Float, worldY:Float, ?nonNull:Bool, ?camera:phaser.cameras.scene2d.Camera, ?layer:Dynamic):phaser.tilemaps.Tile;
+    /**
+     * Return a list of all valid tilelayer names loaded in this Tilemap.
+     *
+     * @method Phaser.Tilemaps.Tilemap#getTileLayerNames
+     * @since 3.21.0
+     *
+     * @return {[string]} Array of valid tilelayer names / IDs loaded into this Tilemap.
+     */
+    public function getTileLayerNames():Dynamic;
     /**
      * Gets the tiles in the given rectangular area (in tile coordinates) of the layer.
      * If no layer specified, the maps current layer is used.
@@ -1141,7 +1181,7 @@ extern class Tilemap {
      */
     public function setTileIndexCallback(indexes:Dynamic, callback:Dynamic, callbackContext:Dynamic, ?layer:Dynamic):phaser.tilemaps.Tilemap;
     /**
-     * Sets a collision callback for the given rectangular area (in tile coordindates) within the layer.
+     * Sets a collision callback for the given rectangular area (in tile coordinates) within the layer.
      * If a callback is already set for the tile index it will be replaced. Set the callback to null to
      * remove it.
      *

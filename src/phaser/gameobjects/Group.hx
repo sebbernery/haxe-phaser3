@@ -48,6 +48,16 @@ extern class Group {
      */
     public var isParent:Bool;
     /**
+     * A textual representation of this Game Object.
+     * Used internally by Phaser but is available for your own custom classes to populate.
+     *
+     * @name Phaser.GameObjects.Group#type
+     * @type {string}
+     * @default 'Group'
+     * @since 3.21.0
+     */
+    public var type:String;
+    /**
      * The class to create new group members from.
      *
      * @name Phaser.GameObjects.Group#classType
@@ -477,17 +487,298 @@ extern class Group {
      */
     public function getTotalFree():Int;
     /**
+     * Sets the property as defined in `key` of each group member to the given value.
+     *
+     * @method Phaser.GameObjects.Group#propertyValueSet
+     * @since 3.21.0
+     *
+     * @param {string} key - The property to be updated.
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
+     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function propertyValueSet(key:String, value:Float, ?step:Float, ?index:Int, ?direction:Int):phaser.gameobjects.Group;
+    /**
+     * Adds the given value to the property as defined in `key` of each group member.
+     *
+     * @method Phaser.GameObjects.Group#propertyValueInc
+     * @since 3.21.0
+     *
+     * @param {string} key - The property to be updated.
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
+     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function propertyValueInc(key:String, value:Float, ?step:Float, ?index:Int, ?direction:Int):phaser.gameobjects.Group;
+    /**
+     * Sets the x of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setX
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setX(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the y of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setY
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setY(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the x, y of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setXY
+     * @since 3.21.0
+     *
+     * @param {number} x - The amount to set the `x` property to.
+     * @param {number} [y=x] - The amount to set the `y` property to. If `undefined` or `null` it uses the `x` value.
+     * @param {number} [stepX=0] - This is added to the `x` amount, multiplied by the iteration counter.
+     * @param {number} [stepY=0] - This is added to the `y` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setXY(x:Float, ?y:Float, ?stepX:Float, ?stepY:Float):phaser.gameobjects.Group;
+    /**
+     * Adds the given value to the x of each group member.
+     *
+     * @method Phaser.GameObjects.Group#incX
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to be added to the `x` property.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function incX(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Adds the given value to the y of each group member.
+     *
+     * @method Phaser.GameObjects.Group#incY
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to be added to the `y` property.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function incY(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Adds the given value to the x, y of each group member.
+     *
+     * @method Phaser.GameObjects.Group#incXY
+     * @since 3.21.0
+     *
+     * @param {number} x - The amount to be added to the `x` property.
+     * @param {number} [y=x] - The amount to be added to the `y` property. If `undefined` or `null` it uses the `x` value.
+     * @param {number} [stepX=0] - This is added to the `x` amount, multiplied by the iteration counter.
+     * @param {number} [stepY=0] - This is added to the `y` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function incXY(x:Float, ?y:Float, ?stepX:Float, ?stepY:Float):phaser.gameobjects.Group;
+    /**
+     * Iterate through the group members changing the position of each element to be that of the element that came before
+     * it in the array (or after it if direction = 1)
+     *
+     * The first group member position is set to x/y.
+     *
+     * @method Phaser.GameObjects.Group#shiftPosition
+     * @since 3.21.0
+     *
+     * @param {number} x - The x coordinate to place the first item in the array at.
+     * @param {number} y - The y coordinate to place the first item in the array at.
+     * @param {integer} [direction=0] - The iteration direction. 0 = first to last and 1 = last to first.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function shiftPosition(x:Float, y:Float, ?direction:Int):phaser.gameobjects.Group;
+    /**
+     * Sets the angle of each group member.
+     *
+     * @method Phaser.GameObjects.Group#angle
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the angle to, in degrees.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function angle(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the rotation of each group member.
+     *
+     * @method Phaser.GameObjects.Group#rotate
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the rotation to, in radians.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function rotate(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Rotates each group member around the given point by the given angle.
+     *
+     * @method Phaser.GameObjects.Group#rotateAround
+     * @since 3.21.0
+     *
+     * @param {Phaser.Types.Math.Vector2Like} point - Any object with public `x` and `y` properties.
+     * @param {number} angle - The angle to rotate by, in radians.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function rotateAround(point:phaser.types.math.Vector2Like, angle:Float):phaser.gameobjects.Group;
+    /**
+     * Rotates each group member around the given point by the given angle and distance.
+     *
+     * @method Phaser.GameObjects.Group#rotateAroundDistance
+     * @since 3.21.0
+     *
+     * @param {Phaser.Types.Math.Vector2Like} point - Any object with public `x` and `y` properties.
+     * @param {number} angle - The angle to rotate by, in radians.
+     * @param {number} distance - The distance from the point of rotation in pixels.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function rotateAroundDistance(point:phaser.types.math.Vector2Like, angle:Float, distance:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the alpha of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setAlpha
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the alpha to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setAlpha(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the tint of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setTint
+     * @since 3.21.0
+     *
+     * @param {number} topLeft - The tint being applied to top-left corner of item. If other parameters are given no value, this tint will be applied to whole item.
+     * @param {number} [topRight] - The tint to be applied to top-right corner of item.
+     * @param {number} [bottomLeft] - The tint to be applied to the bottom-left corner of item.
+     * @param {number} [bottomRight] - The tint to be applied to the bottom-right corner of item.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setTint(topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the originX, originY of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setOrigin
+     * @since 3.21.0
+     *
+     * @param {number} originX - The amount to set the `originX` property to.
+     * @param {number} [originY] - The amount to set the `originY` property to. If `undefined` or `null` it uses the `originX` value.
+     * @param {number} [stepX=0] - This is added to the `originX` amount, multiplied by the iteration counter.
+     * @param {number} [stepY=0] - This is added to the `originY` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setOrigin(originX:Float, ?originY:Float, ?stepX:Float, ?stepY:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the scaleX of each group member.
+     *
+     * @method Phaser.GameObjects.Group#scaleX
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function scaleX(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the scaleY of each group member.
+     *
+     * @method Phaser.GameObjects.Group#scaleY
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the property to.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function scaleY(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the scaleX, scaleY of each group member.
+     *
+     * @method Phaser.GameObjects.Group#scaleXY
+     * @since 3.21.0
+     *
+     * @param {number} scaleX - The amount to be added to the `scaleX` property.
+     * @param {number} [scaleY] - The amount to be added to the `scaleY` property. If `undefined` or `null` it uses the `scaleX` value.
+     * @param {number} [stepX=0] - This is added to the `scaleX` amount, multiplied by the iteration counter.
+     * @param {number} [stepY=0] - This is added to the `scaleY` amount, multiplied by the iteration counter.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function scaleXY(scaleX:Float, ?scaleY:Float, ?stepX:Float, ?stepY:Float):phaser.gameobjects.Group;
+    /**
      * Sets the depth of each group member.
      *
      * @method Phaser.GameObjects.Group#setDepth
      * @since 3.0.0
      *
      * @param {number} value - The amount to set the property to.
-     * @param {number} step - This is added to the `value` amount, multiplied by the iteration counter.
+     * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
      *
      * @return {Phaser.GameObjects.Group} This Group object.
      */
-    public function setDepth(value:Float, step:Float):phaser.gameobjects.Group;
+    public function setDepth(value:Float, ?step:Float):phaser.gameobjects.Group;
+    /**
+     * Sets the blendMode of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setBlendMode
+     * @since 3.21.0
+     *
+     * @param {number} value - The amount to set the property to.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setBlendMode(value:Float):phaser.gameobjects.Group;
+    /**
+     * Passes all group members to the Input Manager to enable them for input with identical areas and callbacks.
+     *
+     * @method Phaser.GameObjects.Group#setHitArea
+     * @since 3.21.0
+     *
+     * @param {*} hitArea - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} hitAreaCallback - A callback to be invoked when the Game Object is interacted with. If you provide a shape you must also provide a callback.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setHitArea(hitArea:Dynamic, hitAreaCallback:phaser.types.input.HitAreaCallback):phaser.gameobjects.Group;
+    /**
+     * Shuffles the group members in place.
+     *
+     * @method Phaser.GameObjects.Group#shuffle
+     * @since 3.21.0
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function shuffle():phaser.gameobjects.Group;
     /**
      * Deactivates a member of this group.
      *
@@ -506,6 +797,19 @@ extern class Group {
      * @param {Phaser.GameObjects.GameObject} gameObject - A member of this group.
      */
     public function killAndHide(gameObject:phaser.gameobjects.GameObject):Void;
+    /**
+     * Sets the visible of each group member.
+     *
+     * @method Phaser.GameObjects.Group#setVisible
+     * @since 3.21.0
+     *
+     * @param {boolean} value - The value to set the property to.
+     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
+     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     *
+     * @return {Phaser.GameObjects.Group} This Group object.
+     */
+    public function setVisible(value:Bool, ?index:Int, ?direction:Int):phaser.gameobjects.Group;
     /**
      * Toggles (flips) the visible state of each member of this group.
      *

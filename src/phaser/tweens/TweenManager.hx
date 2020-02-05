@@ -47,22 +47,22 @@ extern class TweenManager {
      * @method Phaser.Tweens.TweenManager#createTimeline
      * @since 3.0.0
      *
-     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} config - The configuration object for the Timeline and its Tweens.
+     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} [config] - The configuration object for the Timeline and its Tweens.
      *
      * @return {Phaser.Tweens.Timeline} The created Timeline object.
      */
-    public function createTimeline(config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
+    public function createTimeline(?config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
     /**
      * Create a Tween Timeline and add it to the active Tween list/
      *
      * @method Phaser.Tweens.TweenManager#timeline
      * @since 3.0.0
      *
-     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} config - The configuration object for the Timeline and its Tweens.
+     * @param {Phaser.Types.Tweens.TimelineBuilderConfig} [config] - The configuration object for the Timeline and its Tweens.
      *
      * @return {Phaser.Tweens.Timeline} The created Timeline object.
      */
-    public function timeline(config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
+    public function timeline(?config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
     /**
      * Create a Tween and return it, but do NOT add it to the active or pending Tween lists.
      *

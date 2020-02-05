@@ -235,33 +235,45 @@ extern class ArcadePhysics {
      */
     public function accelerateToObject(gameObject:phaser.gameobjects.GameObject, destination:phaser.gameobjects.GameObject, ?speed:Float, ?xSpeedMax:Float, ?ySpeedMax:Float):Float;
     /**
-     * Finds the Dynamic Body closest to a source point or object.
+     * Finds the Body or Game Object closest to a source point or object.
      *
-     * If two or more bodies are the exact same distance from the source point, only the first body
+     * If a `targets` argument is passed, this method finds the closest of those.
+     * The targets can be Arcade Physics Game Objects, Dynamic Bodies, or Static Bodies.
+     *
+     * If no `targets` argument is passed, this method finds the closest Dynamic Body.
+     *
+     * If two or more targets are the exact same distance from the source point, only the first target
      * is returned.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#closest
      * @since 3.0.0
      *
      * @param {any} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
+     * @param {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[]|Phaser.GameObjects.GameObject[])} [targets] - The targets.
      *
-     * @return {Phaser.Physics.Arcade.Body} The closest Dynamic Body to the given source point.
+     * @return {?(Phaser.Physics.Arcade.Body|Phaser.Physics.Arcade.StaticBody|Phaser.GameObjects.GameObject)} The target closest to the given source point.
      */
-    public function closest(source:Dynamic):phaser.physics.arcade.Body;
+    public function closest(source:Dynamic, ?targets:Dynamic):phaser.physics.arcade.Body;
     /**
-     * Finds the Dynamic Body farthest from a source point or object.
+     * Finds the Body or Game Object farthest from a source point or object.
      *
-     * If two or more bodies are the exact same distance from the source point, only the first body
+     * If a `targets` argument is passed, this method finds the farthest of those.
+     * The targets can be Arcade Physics Game Objects, Dynamic Bodies, or Static Bodies.
+     *
+     * If no `targets` argument is passed, this method finds the farthest Dynamic Body.
+     *
+     * If two or more targets are the exact same distance from the source point, only the first target
      * is returned.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#furthest
      * @since 3.0.0
      *
      * @param {any} source - Any object with public `x` and `y` properties, such as a Game Object or Geometry object.
+     * @param {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[]|Phaser.GameObjects.GameObject[])} [targets] - The targets.
      *
-     * @return {Phaser.Physics.Arcade.Body} The Dynamic Body furthest away from the given source point.
+     * @return {?(Phaser.Physics.Arcade.Body|Phaser.Physics.Arcade.StaticBody|Phaser.GameObjects.GameObject)} The target farthest from the given source point.
      */
-    public function furthest(source:Dynamic):phaser.physics.arcade.Body;
+    public function furthest(source:Dynamic, ?targets:Dynamic):phaser.physics.arcade.Body;
     /**
      * Move the given display object towards the x/y coordinates at a steady velocity.
      * If you specify a maxTime then it will adjust the speed (over-writing what you set) so it arrives at the destination in that number of seconds.
@@ -352,6 +364,28 @@ extern class ArcadePhysics {
      * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
      */
     public function overlapRect(x:Float, y:Float, width:Float, height:Float, ?includeDynamic:Bool, ?includeStatic:Bool):Array<phaser.physics.arcade.Body>;
+    /**
+     * This method will search the given circular area and return an array of all physics bodies that
+     * overlap with it. It can return either Dynamic, Static bodies or a mixture of both.
+     *
+     * A body only has to intersect with the search area to be considered, it doesn't have to be fully
+     * contained within it.
+     *
+     * If Arcade Physics is set to use the RTree (which it is by default) then the search is rather fast,
+     * otherwise the search is O(N) for Dynamic Bodies.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#overlapCirc
+     * @since 3.21.0
+     *
+     * @param {number} x - The x coordinate of the center of the area to search within.
+     * @param {number} y - The y coordinate of the center of the area to search within.
+     * @param {number} radius - The radius of the area to search within.
+     * @param {boolean} [includeDynamic=true] - Should the search include Dynamic Bodies?
+     * @param {boolean} [includeStatic=false] - Should the search include Static Bodies?
+     *
+     * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
+     */
+    public function overlapCirc(x:Float, y:Float, radius:Float, ?includeDynamic:Bool, ?includeStatic:Bool):Array<phaser.physics.arcade.Body>;
     /**
      * The Scene that owns this plugin is shutting down.
      * We need to kill and reset all internal properties as well as stop listening to Scene events.

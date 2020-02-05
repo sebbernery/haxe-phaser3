@@ -338,6 +338,22 @@ class KeyCodes {
      */
     static public var NUMPAD_NINE:Int;
     /**
+     * The Numpad Addition (+) key.
+     *
+     * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_ADD
+     * @type {integer}
+     * @since 3.21.0
+     */
+    static public var NUMPAD_ADD:Int;
+    /**
+     * The Numpad Subtraction (-) key.
+     *
+     * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_SUBTRACT
+     * @type {integer}
+     * @since 3.21.0
+     */
+    static public var NUMPAD_SUBTRACT:Int;
+    /**
      * The A key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.A

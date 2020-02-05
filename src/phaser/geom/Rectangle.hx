@@ -285,22 +285,22 @@ extern class Rectangle {
      * @generic {Phaser.Geom.Rectangle} O - [target,$return]
      *
      * @param {Phaser.Geom.Rectangle} target - The target rectangle to adjust.
-     * @param {Phaser.Geom.Rectangle} source - The source rectangle to envlope the target in.
+     * @param {Phaser.Geom.Rectangle} source - The source rectangle to envelope the target in.
      *
      * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
      */
     static public function FitOutside(target:phaser.geom.Rectangle, source:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
-     * Rounds down (floors) the top left X and Y co-ordinates of the given Rectangle to the largest integer less than or equal to them
+     * Rounds down (floors) the top left X and Y coordinates of the given Rectangle to the largest integer less than or equal to them
      *
      * @function Phaser.Geom.Rectangle.Floor
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
      *
-     * @param {Phaser.Geom.Rectangle} rect - The rectangle to floor the top left X and Y co-ordinates of
+     * @param {Phaser.Geom.Rectangle} rect - The rectangle to floor the top left X and Y coordinates of
      *
-     * @return {Phaser.Geom.Rectangle} The rectangle that was passed to this function with its co-ordinates floored.
+     * @return {Phaser.Geom.Rectangle} The rectangle that was passed to this function with its coordinates floored.
      */
     static public function Floor(rect:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
@@ -379,8 +379,8 @@ extern class Rectangle {
      * @generic {Phaser.Geom.Point[]} O - [out,$return]
      *
      * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle object to get the points from.
-     * @param {number} step - Step between points. Used to calculate the number of points to return when quantity is falsy. Ignored if quantity is positive.
-     * @param {integer} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsy, step param will be used to calculate the number of points.
+     * @param {number} step - Step between points. Used to calculate the number of points to return when quantity is falsey. Ignored if quantity is positive.
+     * @param {integer} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsey, step param will be used to calculate the number of points.
      * @param {(array|Phaser.Geom.Point[])} [out] - An optional array to store the points in.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.

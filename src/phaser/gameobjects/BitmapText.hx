@@ -71,6 +71,15 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var fontData:phaser.types.gameobjects.bitmaptext.BitmapFontData;
     /**
+     * The character code used to detect for word wrapping.
+     * Defaults to 32 (a space character).
+     *
+     * @name Phaser.GameObjects.BitmapText#wordWrapCharCode
+     * @type {number}
+     * @since 3.21.0
+     */
+    public var wordWrapCharCode:Float;
+    /**
      * Controls the alignment of each line of text in this BitmapText object.
      *
      * Only has any effect when this BitmapText contains multiple lines of text, split with carriage-returns.
@@ -121,6 +130,21 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      */
     public var letterSpacing:Float;
+    /**
+     * The maximum display width of this BitmapText in pixels.
+     *
+     * If BitmapText.text is longer than maxWidth then the lines will be automatically wrapped
+     * based on the last whitespace character found in the line.
+     *
+     * If no whitespace was found then no wrapping will take place and consequently the maxWidth value will not be honored.
+     *
+     * Disable maxWidth by setting the value to 0.
+     *
+     * @name Phaser.GameObjects.BitmapText#maxWidth
+     * @type {number}
+     * @since 3.21.0
+     */
+    public var maxWidth:Float;
     /**
      * The width of this Bitmap Text.
      *
@@ -301,6 +325,27 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @return {this} This BitmapText Object.
      */
     public function setFont(font:String, ?size:Float, ?align:Int):Dynamic;
+    /**
+     * Sets the maximum display width of this BitmapText in pixels.
+     *
+     * If `BitmapText.text` is longer than `maxWidth` then the lines will be automatically wrapped
+     * based on the previous whitespace character found in the line.
+     *
+     * If no whitespace was found then no wrapping will take place and consequently the `maxWidth` value will not be honored.
+     *
+     * Disable maxWidth by setting the value to 0.
+     *
+     * You can set the whitespace character to be searched for by setting the `wordWrapCharCode` parameter or property.
+     *
+     * @method Phaser.GameObjects.BitmapText#setMaxWidth
+     * @since 3.21.0
+     *
+     * @param {number} value - The maximum display width of this BitmapText in pixels. Set to zero to disable.
+     * @param {number} [wordWrapCharCode] - The character code to check for when word wrapping. Defaults to 32 (the space character).
+     *
+     * @return {this} This BitmapText Object.
+     */
+    public function setMaxWidth(value:Float, ?wordWrapCharCode:Float):Dynamic;
     /**
      * The alpha value of the Game Object.
      *

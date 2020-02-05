@@ -155,6 +155,12 @@ extern class InputPlugin extends phaser.events.EventEmitter {
     /**
      * The amount of time, in ms, a pointer has to be held down before it thinks it is dragging.
      *
+     * The default polling rate is to poll only on move so once the time threshold is reached the
+     * drag event will not start until you move the mouse. If you want it to start immediately
+     * when the time threshold is reached, you must increase the polling rate by calling
+     * [setPollAlways]{@linkcode Phaser.Input.InputPlugin#setPollAlways} or
+     * [setPollRate]{@linkcode Phaser.Input.InputPlugin#setPollRate}.
+     *
      * @name Phaser.Input.InputPlugin#dragTimeThreshold
      * @type {number}
      * @default 0

@@ -16,6 +16,7 @@ package phaser.types.core;
  * @property {string} [powerPreference='default'] - "high-performance", "low-power" or "default". A hint to the browser on how much device power the game might use.
  * @property {integer} [batchSize=2000] - The default WebGL batch size.
  * @property {integer} [maxLights=10] - The maximum number of lights allowed to be visible within range of a single Camera in the LightManager.
+ * @property {string} [mipmapFilter='LINEAR'] - The mipmap magFilter to be used when creating WebGL textures.
  */
 typedef RenderConfig = {
     @:optional var antialias:Bool;
@@ -30,4 +31,5 @@ typedef RenderConfig = {
     @:optional var powerPreference:String;
     @:optional var batchSize:Int;
     @:optional var maxLights:Int;
+    @:optional var mipmapFilter:String;
 };

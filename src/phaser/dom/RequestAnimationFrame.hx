@@ -67,6 +67,16 @@ extern class RequestAnimationFrame {
      */
     public var lastTime:Float;
     /**
+     * The target FPS rate in ms.
+     * Only used when setTimeout is used instead of RAF.
+     *
+     * @name Phaser.DOM.RequestAnimationFrame#target
+     * @type {number}
+     * @default 0
+     * @since 3.21.0
+     */
+    public var target:Float;
+    /**
      * The RAF step function.
      * Updates the local tick value, invokes the callback and schedules another call to requestAnimationFrame.
      *
@@ -92,8 +102,9 @@ extern class RequestAnimationFrame {
      *
      * @param {FrameRequestCallback} callback - The callback to invoke each step.
      * @param {boolean} forceSetTimeOut - Should it use SetTimeout, even if RAF is available?
+     * @param {number} targetFPS - The target fps rate (in ms). Only used when setTimeout is used.
      */
-    public function start(callback:Dynamic, forceSetTimeOut:Bool):Void;
+    public function start(callback:Dynamic, forceSetTimeOut:Bool, targetFPS:Float):Void;
     /**
      * Stops the requestAnimationFrame or setTimeout from running.
      *

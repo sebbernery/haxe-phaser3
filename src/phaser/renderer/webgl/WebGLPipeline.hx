@@ -2,7 +2,7 @@ package phaser.renderer.webgl;
 
 /**
  * @classdesc
- * WebGLPipeline is a class that describes the way elements will be rendererd
+ * WebGLPipeline is a class that describes the way elements will be renderered
  * in WebGL, specially focused on batching vertices (batching is not provided).
  * Pipelines are mostly used for describing 2D rendering passes but it's
  * flexible enough to be used for any type of rendering including 3D.

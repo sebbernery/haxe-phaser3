@@ -16,6 +16,21 @@ package phaser.sound;
 extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
     public function new(game:phaser.Game);
     /**
+     * This method takes a new AudioContext reference and then sets
+     * this Sound Manager to use that context for all playback.
+     *
+     * As part of this call it also disconnects the master mute and volume
+     * nodes and then re-creates them on the new given context.
+     *
+     * @method Phaser.Sound.WebAudioSoundManager#setAudioContext
+     * @since 3.21.0
+     *
+     * @param {AudioContext} context - Reference to an already created AudioContext instance.
+     *
+     * @return {this} The WebAudioSoundManager instance.
+     */
+    public function setAudioContext(context:js.html.audio.AudioContext):Dynamic;
+    /**
      * Decode audio data into a format ready for playback via Web Audio.
      *
      * The audio data can be a base64 encoded string, an audio media-type data uri, or an ArrayBuffer instance.
