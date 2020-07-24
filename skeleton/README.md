@@ -16,7 +16,7 @@ src/
 build.hxml
 ```
 
-|               |               |
+|     Filename          |   Description            |
 | ------------- | ------------- |
 | /assets/  | You can put all your images, sounds, music, sprites in this directory  |
 | /dist/assets/  | Symbolically linked to ../assets/ in order to let Javascript accesses the assets  |
