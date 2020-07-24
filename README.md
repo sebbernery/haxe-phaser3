@@ -33,3 +33,8 @@ var game = new phaser.Game({
 
 To use an attribute called "switch", "default", "override" or "extern", add an underscore after the attribute name. (those are reserved words in Phaser)
 
+# Organize your project
+
+You can see an example on how to organize your project at [skeleton/](/skeleton)
+
+[Organize your project](/skeleton/README.md)
