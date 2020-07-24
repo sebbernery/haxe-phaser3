@@ -14,7 +14,7 @@ src/
 build.hxml
 ```
 
-|               |               |
+|     Filename          |   Description            |
 | ------------- | ------------- |
 | /assets/  | You can put all your images, sounds, music, sprites in this directory  |
 | /dist/ | Your compiled code will go here |
