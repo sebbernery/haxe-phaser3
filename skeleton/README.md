@@ -4,8 +4,6 @@
 assets/
 dist/
     assets/ --> ../assets/
-    deps/
-        phaser.js
     index.html
     main.js
 src/
@@ -19,9 +17,8 @@ build.hxml
 |     Filename          |   Description            |
 | ------------- | ------------- |
 | /assets/  | You can put all your images, sounds, music, sprites in this directory  |
+| /dist/ | Your compiled code will go here |
 | /dist/assets/  | Symbolically linked to ../assets/ in order to let Javascript accesses the assets  |
-| /dist/deps/phaser | Phaser library |
-| /dist/main.js | The compiled code |
 | /dist/index.html | The html page where you execute your compiled code |
 | /src/ | Where you put all your Haxe files to make your game |
 | /src/Game.hx | Where you create the Game instance |
