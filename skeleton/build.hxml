@@ -1,0 +1,15 @@
+# Compilation configuration #
+
+# Compile where main() is called
+-main Main
+
+# Libraries you need
+-lib haxe-phaser3
+
+# Compiled code will go there
+-cp src
+
+# Compile into a main.js file into dist/ directory
+-js dist/main.js
+
+# To see more information: https://haxe.org/manual/compiler-usage.html
