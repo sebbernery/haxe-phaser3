@@ -2,12 +2,7 @@ package phaser.sound;
 
 /**
  * @classdesc
- * The sound manager is responsible for playing back audio via Web Audio API or HTML Audio tag as fallback.
- * The audio file type and the encoding of those files are extremely important.
- *
- * Not all browsers can play all audio formats.
- *
- * There is a good guide to what's supported [here](https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/Cross-browser_audio_basics#Audio_Codec_Support).
+ * Base class for other Sound Manager classes.
  *
  * @class BaseSoundManager
  * @extends Phaser.Events.EventEmitter
@@ -16,6 +11,10 @@ package phaser.sound;
  * @since 3.0.0
  *
  * @param {Phaser.Game} game - Reference to the current game instance.
+ *
+ * @see Phaser.Sound.HTML5AudioSoundManager
+ * @see Phaser.Sound.NoAudioSoundManager
+ * @see Phaser.Sound.WebAudioSoundManager
  */
 @:native("Phaser.Sound.BaseSoundManager")
 extern class BaseSoundManager extends phaser.events.EventEmitter {
@@ -126,6 +125,28 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      */
     public function addAudioSprite(key:String, ?config:phaser.types.sound.SoundConfig):phaser.sound.HTML5AudioSound;
     /**
+     * Gets the first sound in the manager matching the given key, if any.
+     *
+     * @method Phaser.Sound.BaseSoundManager#get
+     * @since 3.23.0
+     *
+     * @param {string} key - Sound asset key.
+     *
+     * @return {?Phaser.Sound.BaseSound} - The sound, or null.
+     */
+    public function get(key:String):phaser.sound.BaseSound;
+    /**
+     * Gets any sounds in the manager matching the given key.
+     *
+     * @method Phaser.Sound.BaseSoundManager#getAll
+     * @since 3.23.0
+     *
+     * @param {string} key - Sound asset key.
+     *
+     * @return {Phaser.Sound.BaseSound[]} - The sounds, or an empty array.
+     */
+    public function getAll(key:String):Array<phaser.sound.BaseSound>;
+    /**
      * Adds a new sound to the sound manager and plays it.
      * The sound will be automatically removed (destroyed) once playback ends.
      * This lets you play a new sound on the fly without the need to keep a reference to it.
@@ -141,8 +162,9 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      */
     public function play(key:String, ?extra:Dynamic):Bool;
     /**
-     * Enables playing audio sprite sound on the fly without the need to keep a reference to it.
-     * Sound will auto destroy once its playback ends.
+     * Adds a new audio sprite sound to the sound manager and plays it.
+     * The sprite will be automatically removed (destroyed) once playback ends.
+     * This lets you play a new sound on the fly without the need to keep a reference to it.
      *
      * @method Phaser.Sound.BaseSoundManager#playAudioSprite
      * @listens Phaser.Sound.Events#COMPLETE
@@ -167,6 +189,13 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @return {boolean} True if the sound was removed successfully, otherwise false.
      */
     public function remove(sound:phaser.sound.BaseSound):Bool;
+    /**
+     * Removes all sounds from the manager, destroying the sounds.
+     *
+     * @method Phaser.Sound.BaseSoundManager#removeAll
+     * @since 3.23.0
+     */
+    public function removeAll():Void;
     /**
      * Removes all sounds from the sound manager that have an asset key matching the given value.
      * The removed sounds are destroyed before removal.
@@ -203,6 +232,17 @@ extern class BaseSoundManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public function stopAll():Void;
+    /**
+     * Stops any sounds matching the given key.
+     *
+     * @method Phaser.Sound.BaseSoundManager#stopByKey
+     * @since 3.23.0
+     *
+     * @param {string} key - Sound asset key.
+     *
+     * @return {number} - How many sounds were stopped.
+     */
+    public function stopByKey(key:String):Float;
     /**
      * Method used internally for unlocking audio playback on devices that
      * require user interaction before any sound can be played on a web page.

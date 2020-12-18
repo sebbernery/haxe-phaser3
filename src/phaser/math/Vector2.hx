@@ -116,6 +116,18 @@ extern class Vector2 {
      */
     public function equals(v:phaser.math.Vector2):Bool;
     /**
+     * Check whether this Vector is approximately equal to a given Vector.
+     *
+     * @method Phaser.Math.Vector2#fuzzyEquals
+     * @since 3.23.0
+     *
+     * @param {Phaser.Math.Vector2} v - The vector to compare with this Vector.
+     * @param {number} [epsilon=0.0001] - The tolerance value.
+     *
+     * @return {boolean} Whether both absolute differences of the x and y components are smaller than `epsilon`.
+     */
+    public function fuzzyEquals(v:phaser.math.Vector2, ?epsilon:Float):Bool;
+    /**
      * Calculate the angle between this Vector and the positive x-axis, in radians.
      *
      * @method Phaser.Math.Vector2#angle
@@ -124,6 +136,17 @@ extern class Vector2 {
      * @return {number} The angle between this Vector, and the positive x-axis, given in radians.
      */
     public function angle():Float;
+    /**
+     * Set the angle of this Vector.
+     *
+     * @method Phaser.Math.Vector2#setAngle
+     * @since 3.23.0
+     *
+     * @param {number} angle - The angle, in radians.
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function setAngle(angle:Float):phaser.math.Vector2;
     /**
      * Add a given Vector to this Vector. Addition is component-wise.
      *
@@ -224,6 +247,17 @@ extern class Vector2 {
      */
     public function length():Float;
     /**
+     * Set the length (or magnitude) of this Vector.
+     *
+     * @method Phaser.Math.Vector2#setLength
+     * @since 3.23.0
+     *
+     * @param {number} length
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function setLength(length:Float):phaser.math.Vector2;
+    /**
      * Calculate the length of this Vector squared.
      *
      * @method Phaser.Math.Vector2#lengthSq
@@ -244,7 +278,7 @@ extern class Vector2 {
      */
     public function normalize():phaser.math.Vector2;
     /**
-     * Right-hand normalize (make unit length) this Vector.
+     * Rotate this Vector to its perpendicular, in the positive direction.
      *
      * @method Phaser.Math.Vector2#normalizeRightHand
      * @since 3.0.0
@@ -252,6 +286,15 @@ extern class Vector2 {
      * @return {Phaser.Math.Vector2} This Vector2.
      */
     public function normalizeRightHand():phaser.math.Vector2;
+    /**
+     * Rotate this Vector to its perpendicular, in the negative direction.
+     *
+     * @method Phaser.Math.Vector2#normalizeLeftHand
+     * @since 3.23.0
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function normalizeLeftHand():phaser.math.Vector2;
     /**
      * Calculate the dot product of this Vector and the given Vector.
      *
@@ -319,4 +362,48 @@ extern class Vector2 {
      * @return {Phaser.Math.Vector2} This Vector2.
      */
     public function reset():phaser.math.Vector2;
+    /**
+     * Limit the length (or magnitude) of this Vector.
+     *
+     * @method Phaser.Math.Vector2#limit
+     * @since 3.23.0
+     *
+     * @param {number} max - The maximum length.
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function limit(max:Float):phaser.math.Vector2;
+    /**
+     * Reflect this Vector off a line defined by a normal.
+     *
+     * @method Phaser.Math.Vector2#reflect
+     * @since 3.23.0
+     *
+     * @param {Phaser.Math.Vector2} normal - A vector perpendicular to the line.
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function reflect(normal:phaser.math.Vector2):phaser.math.Vector2;
+    /**
+     * Reflect this Vector across another.
+     *
+     * @method Phaser.Math.Vector2#mirror
+     * @since 3.23.0
+     *
+     * @param {Phaser.Math.Vector2} axis - A vector to reflect across.
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function mirror(axis:phaser.math.Vector2):phaser.math.Vector2;
+    /**
+     * Rotate this Vector by an angle amount.
+     *
+     * @method Phaser.Math.Vector2#rotate
+     * @since 3.23.0
+     *
+     * @param {number} delta - The angle to rotate by, in radians.
+     *
+     * @return {Phaser.Math.Vector2} This Vector2.
+     */
+    public function rotate(delta:Float):phaser.math.Vector2;
 }

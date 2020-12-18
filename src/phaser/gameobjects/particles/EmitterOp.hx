@@ -147,9 +147,9 @@ extern class EmitterOp {
      *
      * @param {number} value - The value of the property.
      *
-     * @return {Phaser.GameObjects.Particles.EmitterOp} This Emitter Op object.
+     * @return {this} This Emitter Op object.
      */
-    public function onChange(value:Float):phaser.gameobjects.particles.EmitterOp;
+    public function onChange(value:Float):Dynamic;
     /**
      * Update the {@link Phaser.GameObjects.Particles.EmitterOp#onEmit} and
      * {@link Phaser.GameObjects.Particles.EmitterOp#onUpdate} callbacks based on the type of the current
@@ -158,9 +158,9 @@ extern class EmitterOp {
      * @method Phaser.GameObjects.Particles.EmitterOp#setMethods
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Particles.EmitterOp} This Emitter Op object.
+     * @return {this} This Emitter Op object.
      */
-    public function setMethods():phaser.gameobjects.particles.EmitterOp;
+    public function setMethods():Dynamic;
     /**
      * Check whether an object has the given property.
      *

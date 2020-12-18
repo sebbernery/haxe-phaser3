@@ -432,6 +432,27 @@ extern class GameObjectFactory {
      */
     public function renderTexture(x:Float, y:Float, ?width:Int, ?height:Int):phaser.gameobjects.RenderTexture;
     /**
+     * Creates a new Rope Game Object and adds it to the Scene.
+     *
+     * Note: This method will only be available if the Rope Game Object and WebGL support have been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectFactory#rope
+     * @webglOnly
+     * @since 3.23.0
+     *
+     * @param {number} x - The horizontal position of this Game Object in the world.
+     * @param {number} y - The vertical position of this Game Object in the world.
+     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+     * @param {Phaser.Types.Math.Vector2Like[]} [points] - An array containing the vertices data for this Rope. If none is provided a simple quad is created. See `setPoints` to set this post-creation.
+     * @param {boolean} [horizontal=true] - Should the vertices of this Rope be aligned horizontally (`true`), or vertically (`false`)?
+     * @param {number[]} [colors] - An optional array containing the color data for this Rope. You should provide one color value per pair of vertices.
+     * @param {number[]} [alphas] - An optional array containing the alpha data for this Rope. You should provide one alpha value per pair of vertices.
+     *
+     * @return {Phaser.GameObjects.Rope} The Game Object that was created.
+     */
+    public function rope(x:Float, y:Float, texture:String, ?frame:Dynamic, ?points:Array<phaser.types.math.Vector2Like>, ?horizontal:Bool, ?colors:Array<Float>, ?alphas:Array<Float>):phaser.gameobjects.Rope;
+    /**
      * Creates a new Shader Game Object and adds it to the Scene.
      *
      * Note: This method will only be available if the Shader Game Object and WebGL support have been built into Phaser.
@@ -909,21 +930,20 @@ extern class GameObjectFactory {
      */
     public function tileSprite(x:Float, y:Float, width:Int, height:Int, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
     /**
-     * Creates a new Image Game Object and adds it to the Scene.
+     * Creates a new Video Game Object and adds it to the Scene.
      *
-     * Note: This method will only be available if the Image Game Object has been built into Phaser.
+     * Note: This method will only be available if the Video Game Object has been built into Phaser.
      *
      * @method Phaser.GameObjects.GameObjectFactory#video
      * @since 3.20.0
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
-     * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+     * @param {string} [key] - Optional key of the Video this Game Object will play, as stored in the Video Cache.
      *
-     * @return {Phaser.GameObjects.Image} The Game Object that was created.
+     * @return {Phaser.GameObjects.Video} The Game Object that was created.
      */
-    public function video(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Image;
+    public function video(x:Float, y:Float, ?key:String):phaser.gameobjects.Video;
     /**
      * Creates a new Zone Game Object and adds it to the Scene.
      *

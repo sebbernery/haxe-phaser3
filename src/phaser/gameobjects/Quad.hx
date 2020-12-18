@@ -163,9 +163,9 @@ extern class Quad extends phaser.gameobjects.Mesh {
      * @param {number} x - The horizontal coordinate of the vertex.
      * @param {number} y - The vertical coordinate of the vertex.
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setTopLeft(x:Float, y:Float):phaser.gameobjects.Quad;
+    public function setTopLeft(x:Float, y:Float):Dynamic;
     /**
      * Sets the top-right vertex position of this Quad.
      *
@@ -175,9 +175,9 @@ extern class Quad extends phaser.gameobjects.Mesh {
      * @param {number} x - The horizontal coordinate of the vertex.
      * @param {number} y - The vertical coordinate of the vertex.
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setTopRight(x:Float, y:Float):phaser.gameobjects.Quad;
+    public function setTopRight(x:Float, y:Float):Dynamic;
     /**
      * Sets the bottom-left vertex position of this Quad.
      *
@@ -187,9 +187,9 @@ extern class Quad extends phaser.gameobjects.Mesh {
      * @param {number} x - The horizontal coordinate of the vertex.
      * @param {number} y - The vertical coordinate of the vertex.
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setBottomLeft(x:Float, y:Float):phaser.gameobjects.Quad;
+    public function setBottomLeft(x:Float, y:Float):Dynamic;
     /**
      * Sets the bottom-right vertex position of this Quad.
      *
@@ -199,43 +199,43 @@ extern class Quad extends phaser.gameobjects.Mesh {
      * @param {number} x - The horizontal coordinate of the vertex.
      * @param {number} y - The vertical coordinate of the vertex.
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setBottomRight(x:Float, y:Float):phaser.gameobjects.Quad;
+    public function setBottomRight(x:Float, y:Float):Dynamic;
     /**
      * Resets the positions of the four corner vertices of this Quad.
      *
      * @method Phaser.GameObjects.Quad#resetPosition
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function resetPosition():phaser.gameobjects.Quad;
+    public function resetPosition():Dynamic;
     /**
      * Resets the alpha values used by this Quad back to 1.
      *
      * @method Phaser.GameObjects.Quad#resetAlpha
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function resetAlpha():phaser.gameobjects.Quad;
+    public function resetAlpha():Dynamic;
     /**
      * Resets the color values used by this Quad back to 0xffffff.
      *
      * @method Phaser.GameObjects.Quad#resetColors
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function resetColors():phaser.gameobjects.Quad;
+    public function resetColors():Dynamic;
     /**
      * Resets the position, alpha and color values used by this Quad.
      *
      * @method Phaser.GameObjects.Quad#reset
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Quad} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function reset():phaser.gameobjects.Quad;
+    public function reset():Dynamic;
 }

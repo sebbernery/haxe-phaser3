@@ -2,7 +2,11 @@ package phaser.sound;
 
 /**
  * @classdesc
- * Web Audio API implementation of the sound manager.
+ * Web Audio API implementation of the Sound Manager.
+ *
+ * Not all browsers can play all audio formats.
+ *
+ * There is a good guide to what's supported: [Cross-browser audio basics: Audio codec support](https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/Cross-browser_audio_basics#Audio_Codec_Support).
  *
  * @class WebAudioSoundManager
  * @extends Phaser.Sound.BaseSoundManager

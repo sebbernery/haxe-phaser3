@@ -115,9 +115,9 @@ extern class Light {
      * @param {number} b - The blue color. A value between 0 and 1.
      * @param {number} intensity - The intensity of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function set(x:Float, y:Float, radius:Float, r:Float, g:Float, b:Float, intensity:Float):phaser.gameobjects.Light;
+    public function set(x:Float, y:Float, radius:Float, r:Float, g:Float, b:Float, intensity:Float):Dynamic;
     /**
      * Set the scroll factor of the light.
      *
@@ -127,9 +127,9 @@ extern class Light {
      * @param {number} x - The horizontal scroll factor of the light.
      * @param {number} y - The vertical scroll factor of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function setScrollFactor(x:Float, y:Float):phaser.gameobjects.Light;
+    public function setScrollFactor(x:Float, y:Float):Dynamic;
     /**
      * Set the color of the light from a single integer RGB value.
      *
@@ -138,9 +138,9 @@ extern class Light {
      *
      * @param {number} rgb - The integer RGB color of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function setColor(rgb:Float):phaser.gameobjects.Light;
+    public function setColor(rgb:Float):Dynamic;
     /**
      * Set the intensity of the light.
      *
@@ -149,9 +149,9 @@ extern class Light {
      *
      * @param {number} intensity - The intensity of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function setIntensity(intensity:Float):phaser.gameobjects.Light;
+    public function setIntensity(intensity:Float):Dynamic;
     /**
      * Set the position of the light.
      *
@@ -161,9 +161,9 @@ extern class Light {
      * @param {number} x - The horizontal position of the light.
      * @param {number} y - The vertical position of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function setPosition(x:Float, y:Float):phaser.gameobjects.Light;
+    public function setPosition(x:Float, y:Float):Dynamic;
     /**
      * Set the radius of the light.
      *
@@ -172,7 +172,7 @@ extern class Light {
      *
      * @param {number} radius - The radius of the light.
      *
-     * @return {Phaser.GameObjects.Light} This Light object.
+     * @return {this} This Light object.
      */
-    public function setRadius(radius:Float):phaser.gameobjects.Light;
+    public function setRadius(radius:Float):Dynamic;
 }

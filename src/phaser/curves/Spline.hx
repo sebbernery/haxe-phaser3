@@ -32,9 +32,9 @@ extern class Spline extends phaser.curves.Curve {
      *
      * @param {(Phaser.Math.Vector2[]|number[]|number[][])} points - The points that configure the curve.
      *
-     * @return {Phaser.Curves.Spline} This curve object.
+     * @return {this} This curve object.
      */
-    public function addPoints(points:Dynamic):phaser.curves.Spline;
+    public function addPoints(points:Dynamic):Dynamic;
     /**
      * Add a point to the current list of Vector2 points of the curve.
      *
@@ -48,14 +48,14 @@ extern class Spline extends phaser.curves.Curve {
      */
     public function addPoint(x:Float, y:Float):phaser.math.Vector2;
     /**
-     * [description]
+     * Get the resolution of the curve.
      *
      * @method Phaser.Curves.Spline#getResolution
      * @since 3.0.0
      *
-     * @param {number} divisions - [description]
+     * @param {number} divisions - Optional divisions value.
      *
-     * @return {number} [description]
+     * @return {number} The curve resolution.
      */
     public function getResolution(divisions:Float):Float;
     /**

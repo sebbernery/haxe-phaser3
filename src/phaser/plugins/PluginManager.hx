@@ -233,9 +233,9 @@ extern class PluginManager {
      *
      * @param {string} key - The key of the plugin to stop.
      *
-     * @return {Phaser.Plugins.PluginManager} The Plugin Manager.
+     * @return {this} The Plugin Manager.
      */
-    public function stop(key:String):phaser.plugins.PluginManager;
+    public function stop(key:String):Dynamic;
     /**
      * Gets a global plugin from the Plugin Manager based on the given key and returns it.
      *

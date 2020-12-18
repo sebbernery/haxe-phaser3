@@ -23,6 +23,7 @@ package phaser.types.tilemaps;
  * @property {any} [text] - Only set if a text object. Contains the text objects properties.
  * @property {boolean} [rectangle] - Only set, and set to `true`, if a rectangle object.
  * @property {boolean} [ellipse] - Only set, and set to `true`, if a ellipse object.
+ * @property {boolean} [point] - Only set, and set to `true`, if a point object.
  */
 typedef TiledObject = {
 var id:Int;
@@ -44,4 +45,5 @@ var type:String;
     @:optional var text:Dynamic;
     @:optional var rectangle:Bool;
     @:optional var ellipse:Bool;
+    @:optional var point:Bool;
 };

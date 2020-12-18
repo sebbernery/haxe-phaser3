@@ -15,6 +15,7 @@ package phaser.physics.matter;
  *
  * @class TileBody
  * @memberof Phaser.Physics.Matter
+ * @extends Phaser.Events.EventEmitter
  * @constructor
  * @since 3.0.0
  *
@@ -32,7 +33,7 @@ package phaser.physics.matter;
  * @param {Phaser.Types.Physics.Matter.MatterTileOptions} [options] - Options to be used when creating the Matter body.
  */
 @:native("Phaser.Physics.Matter.TileBody")
-extern class TileBody extends phaser.physics.matter.components.Bounce {
+extern class TileBody extends phaser.events.EventEmitter {
     public function new(world:phaser.physics.matter.World, tile:phaser.tilemaps.Tile, ?options:phaser.types.physics.matter.MatterTileOptions);
     /**
      * The tile object the body is associated with.
@@ -103,14 +104,16 @@ extern class TileBody extends phaser.physics.matter.components.Bounce {
      */
     public function removeBody():phaser.physics.matter.TileBody;
     /**
-     * Removes the current body from the tile and the world.
+     * Sets the restitution on the physics object.
      *
-     * @method Phaser.Physics.Matter.TileBody#destroy
+     * @method Phaser.Physics.Matter.Components.Bounce#setBounce
      * @since 3.0.0
      *
-     * @return {Phaser.Physics.Matter.TileBody} This TileBody object.
+     * @param {number} value - A Number that defines the restitution (elasticity) of the body. The value is always positive and is in the range (0, 1). A value of 0 means collisions may be perfectly inelastic and no bouncing may occur. A value of 0.8 means the body may bounce back with approximately 80% of its kinetic energy. Note that collision response is based on pairs of bodies, and that restitution values are combined with the following formula: `Math.max(bodyA.restitution, bodyB.restitution)`
+     *
+     * @return {Phaser.GameObjects.GameObject} This Game Object.
      */
-    public function destroy():phaser.physics.matter.TileBody;
+    public function setBounce(value:Float):phaser.gameobjects.GameObject;
     /**
      * Sets the collision category of this Game Object's Matter Body. This number must be a power of two between 2^0 (= 1) and 2^31.
      * Two bodies with different collision groups (see {@link #setCollisionGroup}) will only collide if their collision

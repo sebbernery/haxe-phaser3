@@ -3,7 +3,7 @@ package phaser.sound;
 /**
  * HTML5 Audio implementation of the Sound Manager.
  *
- * Note: To play multiple instances of the same HTML5 Audio sound, you need to provide an `instances` value when
+ * To play multiple instances of the same HTML5 Audio sound, you need to provide an `instances` value when
  * loading the sound with the Loader:
  *
  * ```javascript
@@ -11,6 +11,10 @@ package phaser.sound;
  *     instances: 2
  * });
  * ```
+ *
+ * Not all browsers can play all audio formats.
+ *
+ * There is a good guide to what's supported: [Cross-browser audio basics: Audio codec support](https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/Cross-browser_audio_basics#Audio_Codec_Support).
  *
  * @class HTML5AudioSoundManager
  * @extends Phaser.Sound.BaseSoundManager

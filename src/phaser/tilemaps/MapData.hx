@@ -81,7 +81,7 @@ extern class MapData {
      */
     public var heightInPixels:Float;
     /**
-     * [description]
+     * The format of the map data.
      *
      * @name Phaser.Tilemaps.MapData#format
      * @type {integer}
@@ -174,7 +174,7 @@ extern class MapData {
      */
     public var imageCollections:Array<Dynamic>;
     /**
-     * [description]
+     * An array of tile instances.
      *
      * @name Phaser.Tilemaps.MapData#tiles
      * @type {array}

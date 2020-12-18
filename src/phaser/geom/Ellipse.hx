@@ -267,9 +267,9 @@ extern class Ellipse {
      * @param {number} width - The width of the ellipse.
      * @param {number} height - The height of the ellipse.
      *
-     * @return {Phaser.Geom.Ellipse} This Ellipse object.
+     * @return {this} This Ellipse object.
      */
-    public function setTo(x:Float, y:Float, width:Float, height:Float):phaser.geom.Ellipse;
+    public function setTo(x:Float, y:Float, width:Float, height:Float):Dynamic;
     /**
      * Sets this Ellipse to be empty with a width and height of zero.
      * Does not change its position.
@@ -277,9 +277,9 @@ extern class Ellipse {
      * @method Phaser.Geom.Ellipse#setEmpty
      * @since 3.0.0
      *
-     * @return {Phaser.Geom.Ellipse} This Ellipse object.
+     * @return {this} This Ellipse object.
      */
-    public function setEmpty():phaser.geom.Ellipse;
+    public function setEmpty():Dynamic;
     /**
      * Sets the position of this Ellipse.
      *
@@ -289,9 +289,9 @@ extern class Ellipse {
      * @param {number} x - The x position of the center of the ellipse.
      * @param {number} y - The y position of the center of the ellipse.
      *
-     * @return {Phaser.Geom.Ellipse} This Ellipse object.
+     * @return {this} This Ellipse object.
      */
-    public function setPosition(x:Float, y:Float):phaser.geom.Ellipse;
+    public function setPosition(x:Float, y:Float):Dynamic;
     /**
      * Sets the size of this Ellipse.
      * Does not change its position.
@@ -302,9 +302,9 @@ extern class Ellipse {
      * @param {number} width - The width of the ellipse.
      * @param {number} [height=width] - The height of the ellipse.
      *
-     * @return {Phaser.Geom.Ellipse} This Ellipse object.
+     * @return {this} This Ellipse object.
      */
-    public function setSize(width:Float, ?height:Float):phaser.geom.Ellipse;
+    public function setSize(width:Float, ?height:Float):Dynamic;
     /**
      * Checks to see if the Ellipse is empty: has a width or height equal to zero.
      *

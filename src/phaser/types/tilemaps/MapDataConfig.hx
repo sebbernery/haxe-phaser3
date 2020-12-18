@@ -22,7 +22,7 @@ package phaser.types.tilemaps;
  * @property {object} [collision] - An object of Tiled Object Layers.
  * @property {Phaser.Tilemaps.Tileset[]} [tilesets] - The tilesets the map uses.
  * @property {array} [imageCollections] - The collection of images the map uses(specified in Tiled).
- * @property {array} [tiles] - [description]
+ * @property {array} [tiles] - Array of Tile instances.
  */
 typedef MapDataConfig = {
     @:optional var name:String;

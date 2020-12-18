@@ -2,7 +2,7 @@ package phaser.curves;
 
 /**
  * @classdesc
- * [description]
+ * A quadratic Bézier curve constructed from two control points.
  *
  * @class QuadraticBezier
  * @extends Phaser.Curves.Curve
@@ -18,7 +18,7 @@ package phaser.curves;
 extern class QuadraticBezier extends phaser.curves.Curve {
     public function new(p0:Dynamic, p1:phaser.math.Vector2, p2:phaser.math.Vector2);
     /**
-     * [description]
+     * The start point.
      *
      * @name Phaser.Curves.QuadraticBezier#p0
      * @type {Phaser.Math.Vector2}
@@ -26,7 +26,7 @@ extern class QuadraticBezier extends phaser.curves.Curve {
      */
     public var p0:phaser.math.Vector2;
     /**
-     * [description]
+     * The first control point.
      *
      * @name Phaser.Curves.QuadraticBezier#p1
      * @type {Phaser.Math.Vector2}
@@ -34,7 +34,7 @@ extern class QuadraticBezier extends phaser.curves.Curve {
      */
     public var p1:phaser.math.Vector2;
     /**
-     * [description]
+     * The second control point.
      *
      * @name Phaser.Curves.QuadraticBezier#p2
      * @type {Phaser.Math.Vector2}
@@ -42,14 +42,14 @@ extern class QuadraticBezier extends phaser.curves.Curve {
      */
     public var p2:phaser.math.Vector2;
     /**
-     * [description]
+     * Get the resolution of the curve.
      *
      * @method Phaser.Curves.QuadraticBezier#getResolution
      * @since 3.2.0
      *
-     * @param {number} divisions - [description]
+     * @param {number} divisions - Optional divisions value.
      *
-     * @return {number} [description]
+     * @return {number} The curve resolution.
      */
     public function getResolution(divisions:Float):Float;
     /**

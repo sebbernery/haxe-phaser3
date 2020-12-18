@@ -160,9 +160,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      *
      * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to enable event capture for.
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function addCapture(keycode:Dynamic):phaser.input.keyboard.KeyboardPlugin;
+    public function addCapture(keycode:Dynamic):Dynamic;
     /**
      * Removes an existing key capture.
      *
@@ -196,9 +196,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      *
      * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to disable event capture for.
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function removeCapture(keycode:Dynamic):phaser.input.keyboard.KeyboardPlugin;
+    public function removeCapture(keycode:Dynamic):Dynamic;
     /**
      * Returns an array that contains all of the keyboard captures currently enabled.
      *
@@ -215,9 +215,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.KeyboardPlugin#enableGlobalCapture
      * @since 3.16.0
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function enableGlobalCapture():phaser.input.keyboard.KeyboardPlugin;
+    public function enableGlobalCapture():Dynamic;
     /**
      * Disables Phaser from preventing any key captures you may have defined, without actually removing them.
      * You can use this to temporarily disable event capturing if, for example, you swap to a DOM element.
@@ -225,9 +225,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.KeyboardPlugin#disableGlobalCapture
      * @since 3.16.0
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function disableGlobalCapture():phaser.input.keyboard.KeyboardPlugin;
+    public function disableGlobalCapture():Dynamic;
     /**
      * Removes all keyboard captures.
      *
@@ -236,9 +236,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.KeyboardPlugin#clearCaptures
      * @since 3.16.0
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function clearCaptures():phaser.input.keyboard.KeyboardPlugin;
+    public function clearCaptures():Dynamic;
     /**
      * Creates and returns an object containing 4 hotkeys for Up, Down, Left and Right, and also Space Bar and shift.
      *
@@ -307,9 +307,9 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @param {(Phaser.Input.Keyboard.Key|string|integer)} key - Either a Key object, a string, such as `A` or `SPACE`, or a key code value.
      * @param {boolean} [destroy=false] - Call `Key.destroy` on the removed Key object?
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function removeKey(key:Dynamic, ?destroy:Bool):phaser.input.keyboard.KeyboardPlugin;
+    public function removeKey(key:Dynamic, ?destroy:Bool):Dynamic;
     /**
      * Creates a new KeyCombo.
      *
@@ -378,7 +378,7 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.KeyboardPlugin#resetKeys
      * @since 3.15.0
      *
-     * @return {Phaser.Input.Keyboard.KeyboardPlugin} This KeyboardPlugin object.
+     * @return {this} This KeyboardPlugin object.
      */
-    public function resetKeys():phaser.input.keyboard.KeyboardPlugin;
+    public function resetKeys():Dynamic;
 }

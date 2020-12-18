@@ -174,9 +174,9 @@ extern class Circle {
      * @param {number} [y=0] - The y position of the center of the circle.
      * @param {number} [radius=0] - The radius of the circle.
      *
-     * @return {Phaser.Geom.Circle} This Circle object.
+     * @return {this} This Circle object.
      */
-    public function setTo(?x:Float, ?y:Float, ?radius:Float):phaser.geom.Circle;
+    public function setTo(?x:Float, ?y:Float, ?radius:Float):Dynamic;
     /**
      * Sets this Circle to be empty with a radius of zero.
      * Does not change its position.
@@ -184,9 +184,9 @@ extern class Circle {
      * @method Phaser.Geom.Circle#setEmpty
      * @since 3.0.0
      *
-     * @return {Phaser.Geom.Circle} This Circle object.
+     * @return {this} This Circle object.
      */
-    public function setEmpty():phaser.geom.Circle;
+    public function setEmpty():Dynamic;
     /**
      * Sets the position of this Circle.
      *
@@ -196,9 +196,9 @@ extern class Circle {
      * @param {number} [x=0] - The x position of the center of the circle.
      * @param {number} [y=0] - The y position of the center of the circle.
      *
-     * @return {Phaser.Geom.Circle} This Circle object.
+     * @return {this} This Circle object.
      */
-    public function setPosition(?x:Float, ?y:Float):phaser.geom.Circle;
+    public function setPosition(?x:Float, ?y:Float):Dynamic;
     /**
      * Checks to see if the Circle is empty: has a radius of zero.
      *

@@ -96,9 +96,9 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @param {string} key - The key under which the Animation should be added. The Animation will be updated with it. Must be unique.
      * @param {Phaser.Animations.Animation} animation - The Animation which should be added to the Animation Manager.
      *
-     * @return {Phaser.Animations.AnimationManager} This Animation Manager.
+     * @return {this} This Animation Manager.
      */
-    public function add(key:String, animation:phaser.animations.Animation):phaser.animations.AnimationManager;
+    public function add(key:String, animation:phaser.animations.Animation):Dynamic;
     /**
      * Checks to see if the given key is already in use within the Animation Manager or not.
      *
@@ -147,7 +147,34 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      */
     public function fromJSON(data:Dynamic, ?clearCurrentAnimations:Bool):Array<phaser.animations.Animation>;
     /**
-     * [description]
+     * Generate an array of {@link Phaser.Types.Animations.AnimationFrame} objects from a texture key and configuration object.
+     *
+     * Generates objects with string based frame names, as configured by the given {@link Phaser.Types.Animations.GenerateFrameNames}.
+     *
+     * It's a helper method, designed to make it easier for you to extract all of the frame names from texture atlases.
+     * If you're working with a sprite sheet, see the `generateFrameNumbers` method instead.
+     *
+     * Example:
+     *
+     * If you have a texture atlases loaded called `gems` and it contains 6 frames called `ruby_0001`, `ruby_0002`, and so on,
+     * then you can call this method using: `this.anims.generateFrameNames('gems', { prefix: 'ruby_', end: 6, zeroPad: 4 })`.
+     *
+     * The `end` value tells it to look for 6 frames, incrementally numbered, all starting with the prefix `ruby_`. The `zeroPad`
+     * value tells it how many zeroes pad out the numbers. To create an animation using this method, you can do:
+     *
+     * ```javascript
+     * this.anims.create({
+     *   key: 'ruby',
+     *   repeat: -1,
+     *   frames: this.anims.generateFrameNames('gems', {
+     *     prefix: 'ruby_',
+     *     end: 6,
+     *     zeroPad: 4
+     *   })
+     * });
+     * ```
+     *
+     * Please see the animation examples for further details.
      *
      * @method Phaser.Animations.AnimationManager#generateFrameNames
      * @since 3.0.0
@@ -162,6 +189,8 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * Generate an array of {@link Phaser.Types.Animations.AnimationFrame} objects from a texture key and configuration object.
      *
      * Generates objects with numbered frame names, as configured by the given {@link Phaser.Types.Animations.GenerateFrameNumbers}.
+     *
+     * If you're working with a texture atlas, see the `generateFrameNames` method instead.
      *
      * @method Phaser.Animations.AnimationManager#generateFrameNumbers
      * @since 3.0.0
@@ -203,9 +232,9 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @fires Phaser.Animations.Events#PAUSE_ALL
      * @since 3.0.0
      *
-     * @return {Phaser.Animations.AnimationManager} This Animation Manager.
+     * @return {this} This Animation Manager.
      */
-    public function pauseAll():phaser.animations.AnimationManager;
+    public function pauseAll():Dynamic;
     /**
      * Play an animation on the given Game Objects that have an Animation Component.
      *
@@ -215,11 +244,14 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @param {string} key - The key of the animation to play on the Game Object.
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Objects to play the animation on.
      *
-     * @return {Phaser.Animations.AnimationManager} This Animation Manager.
+     * @return {this} This Animation Manager.
      */
-    public function play(key:String, child:Dynamic):phaser.animations.AnimationManager;
+    public function play(key:String, child:Dynamic):Dynamic;
     /**
-     * Remove an animation.
+     * Removes an Animation from this Animation Manager, based on the given key.
+     *
+     * This is a global action. Once an Animation has been removed, no Game Objects
+     * can carry on using it.
      *
      * @method Phaser.Animations.AnimationManager#remove
      * @fires Phaser.Animations.Events#REMOVE_ANIMATION
@@ -227,7 +259,7 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      *
      * @param {string} key - The key of the animation to remove.
      *
-     * @return {Phaser.Animations.Animation} [description]
+     * @return {Phaser.Animations.Animation} The Animation instance that was removed from the Animation Manager.
      */
     public function remove(key:String):phaser.animations.Animation;
     /**
@@ -237,9 +269,9 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @fires Phaser.Animations.Events#RESUME_ALL
      * @since 3.0.0
      *
-     * @return {Phaser.Animations.AnimationManager} This Animation Manager.
+     * @return {this} This Animation Manager.
      */
-    public function resumeAll():phaser.animations.AnimationManager;
+    public function resumeAll():Dynamic;
     /**
      * Takes an array of Game Objects that have an Animation Component and then
      * starts the given animation playing on them, each one offset by the
@@ -254,18 +286,19 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} children - An array of Game Objects to play the animation on. They must have an Animation Component.
      * @param {number} [stagger=0] - The amount of time, in milliseconds, to offset each play time by.
      *
-     * @return {Phaser.Animations.AnimationManager} This Animation Manager.
+     * @return {this} This Animation Manager.
      */
-    public function staggerPlay(key:String, children:Dynamic, ?stagger:Float):phaser.animations.AnimationManager;
+    public function staggerPlay(key:String, children:Dynamic, ?stagger:Float):Dynamic;
     /**
-     * Get the animation data as javascript object by giving key, or get the data of all animations as array of objects, if key wasn't provided.
+     * Returns the Animation data as JavaScript object based on the given key.
+     * Or, if not key is defined, it will return the data of all animations as array of objects.
      *
      * @method Phaser.Animations.AnimationManager#toJSON
      * @since 3.0.0
      *
-     * @param {string} key - [description]
+     * @param {string} [key] - The animation to get the JSONAnimation data from. If not provided, all animations are returned as an array.
      *
-     * @return {Phaser.Types.Animations.JSONAnimations} [description]
+     * @return {Phaser.Types.Animations.JSONAnimations} The resulting JSONAnimations formatted object.
      */
-    public function toJSON(key:String):phaser.types.animations.JSONAnimations;
+    public function toJSON(?key:String):phaser.types.animations.JSONAnimations;
 }

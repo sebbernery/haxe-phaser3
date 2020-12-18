@@ -22,16 +22,16 @@ package phaser.types.create;
  * @property {string} F - Color value 16.
  */
 typedef Palette = {
-var 0:String;
-var 1:String;
-var 2:String;
-var 3:String;
-var 4:String;
-var 5:String;
-var 6:String;
-var 7:String;
-var 8:String;
-var 9:String;
+var _0:String;
+var _1:String;
+var _2:String;
+var _3:String;
+var _4:String;
+var _5:String;
+var _6:String;
+var _7:String;
+var _8:String;
+var _9:String;
 var A:String;
 var B:String;
 var C:String;

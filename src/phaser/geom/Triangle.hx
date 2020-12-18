@@ -143,7 +143,8 @@ extern class Triangle {
      */
     static public function BuildEquilateral(x:Float, y:Float, length:Float):phaser.geom.Triangle;
     /**
-     * [description]
+     * Takes an array of vertex coordinates, and optionally an array of hole indices, then returns an array
+     * of Triangle instances, where the given vertices have been decomposed into a series of triangles.
      *
      * @function Phaser.Geom.Triangle.BuildFromPolygon
      * @since 3.0.0
@@ -152,11 +153,11 @@ extern class Triangle {
      *
      * @param {array} data - A flat array of vertex coordinates like [x0,y0, x1,y1, x2,y2, ...]
      * @param {array} [holes=null] - An array of hole indices if any (e.g. [5, 8] for a 12-vertex input would mean one hole with vertices 5–7 and another with 8–11).
-     * @param {number} [scaleX=1] - [description]
-     * @param {number} [scaleY=1] - [description]
-     * @param {(array|Phaser.Geom.Triangle[])} [out] - [description]
+     * @param {number} [scaleX=1] - Horizontal scale factor to multiply the resulting points by.
+     * @param {number} [scaleY=1] - Vertical scale factor to multiply the resulting points by.
+     * @param {(array|Phaser.Geom.Triangle[])} [out] - An array to store the resulting Triangle instances in. If not provided, a new array is created.
      *
-     * @return {(array|Phaser.Geom.Triangle[])} [description]
+     * @return {(array|Phaser.Geom.Triangle[])} An array of Triangle instances, where each triangle is based on the decomposed vertices data.
      */
     static public function BuildFromPolygon(data:Array<Dynamic>, ?holes:Array<Dynamic>, ?scaleX:Float, ?scaleY:Float, ?out:Dynamic):Array<Dynamic>;
     /**
@@ -217,10 +218,10 @@ extern class Triangle {
      *
      * @generic {Phaser.Math.Vector2} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Math.Vector2} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the circumcenter of.
+     * @param {Phaser.Math.Vector2} [out] - The Vector2 object to store the position in. If not given, a new Vector2 instance is created.
      *
-     * @return {Phaser.Math.Vector2} [description]
+     * @return {Phaser.Math.Vector2} A Vector2 object holding the coordinates of the circumcenter of the Triangle.
      */
     static public function CircumCenter(triangle:phaser.geom.Triangle, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
@@ -388,27 +389,28 @@ extern class Triangle {
     static public function Offset(triangle:phaser.geom.Triangle, x:Float, y:Float):phaser.geom.Triangle;
     /**
      * Gets the length of the perimeter of the given triangle.
+     * Calculated by adding together the length of each of the three sides.
      *
      * @function Phaser.Geom.Triangle.Perimeter
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the length from.
      *
-     * @return {number} [description]
+     * @return {number} The length of the Triangle.
      */
     static public function Perimeter(triangle:phaser.geom.Triangle):Float;
     /**
-     * [description]
+     * Returns a random Point from within the area of the given Triangle.
      *
      * @function Phaser.Geom.Triangle.Random
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Triangle} triangle - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Triangle} triangle - The Triangle to get a random point from.
+     * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} A Point object holding the coordinates of a random position within the Triangle.
      */
     static public function Random(triangle:phaser.geom.Triangle, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
@@ -523,9 +525,9 @@ extern class Triangle {
      * @param {number} [x3=0] - `x` coordinate of the third point.
      * @param {number} [y3=0] - `y` coordinate of the third point.
      *
-     * @return {Phaser.Geom.Triangle} This Triangle object.
+     * @return {this} This Triangle object.
      */
-    public function setTo(?x1:Float, ?y1:Float, ?x2:Float, ?y2:Float, ?x3:Float, ?y3:Float):phaser.geom.Triangle;
+    public function setTo(?x1:Float, ?y1:Float, ?x2:Float, ?y2:Float, ?x3:Float, ?y3:Float):Dynamic;
     /**
      * Returns a Line object that corresponds to Line A of this Triangle.
      *

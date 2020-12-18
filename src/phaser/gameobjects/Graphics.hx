@@ -150,9 +150,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Types.GameObjects.Graphics.Styles} options - The styles to set as defaults.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setDefaultStyles(options:phaser.types.gameobjects.graphics.Styles):phaser.gameobjects.Graphics;
+    public function setDefaultStyles(options:phaser.types.gameobjects.graphics.Styles):Dynamic;
     /**
      * Set the current line style.
      *
@@ -163,9 +163,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} color - The stroke color.
      * @param {number} [alpha=1] - The stroke alpha.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function lineStyle(lineWidth:Float, color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function lineStyle(lineWidth:Float, color:Float, ?alpha:Float):Dynamic;
     /**
      * Set the current fill style.
      *
@@ -175,9 +175,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} color - The fill color.
      * @param {number} [alpha=1] - The fill alpha.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillStyle(color:Float, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function fillStyle(color:Float, ?alpha:Float):Dynamic;
     /**
      * Sets a gradient fill style. This is a WebGL only feature.
      *
@@ -203,9 +203,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {integer} bottomRight - The tint being applied to the bottom-right of the Game Object.
      * @param {number} [alpha=1] - The fill alpha.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillGradientStyle(topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function fillGradientStyle(topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):Dynamic;
     /**
      * Sets a gradient line style. This is a WebGL only feature.
      *
@@ -230,9 +230,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {integer} bottomRight - The tint being applied to the bottom-right of the Game Object.
      * @param {number} [alpha=1] - The fill alpha.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function lineGradientStyle(lineWidth:Float, topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):phaser.gameobjects.Graphics;
+    public function lineGradientStyle(lineWidth:Float, topLeft:Int, topRight:Int, bottomLeft:Int, bottomRight:Int, ?alpha:Float):Dynamic;
     /**
      * Sets the texture frame this Graphics Object will use when drawing all shapes defined after calling this.
      *
@@ -264,27 +264,27 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#beginPath
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function beginPath():phaser.gameobjects.Graphics;
+    public function beginPath():Dynamic;
     /**
      * Close the current path.
      *
      * @method Phaser.GameObjects.Graphics#closePath
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function closePath():phaser.gameobjects.Graphics;
+    public function closePath():Dynamic;
     /**
      * Fill the current path.
      *
      * @method Phaser.GameObjects.Graphics#fillPath
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillPath():phaser.gameobjects.Graphics;
+    public function fillPath():Dynamic;
     /**
      * Fill the current path.
      *
@@ -294,18 +294,18 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#fill
      * @since 3.16.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fill():phaser.gameobjects.Graphics;
+    public function fill():Dynamic;
     /**
      * Stroke the current path.
      *
      * @method Phaser.GameObjects.Graphics#strokePath
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokePath():phaser.gameobjects.Graphics;
+    public function strokePath():Dynamic;
     /**
      * Stroke the current path.
      *
@@ -315,9 +315,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#stroke
      * @since 3.16.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function stroke():phaser.gameobjects.Graphics;
+    public function stroke():Dynamic;
     /**
      * Fill the given circle.
      *
@@ -326,9 +326,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Circle} circle - The circle to fill.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillCircleShape(circle:phaser.geom.Circle):phaser.gameobjects.Graphics;
+    public function fillCircleShape(circle:phaser.geom.Circle):Dynamic;
     /**
      * Stroke the given circle.
      *
@@ -337,9 +337,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Circle} circle - The circle to stroke.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeCircleShape(circle:phaser.geom.Circle):phaser.gameobjects.Graphics;
+    public function strokeCircleShape(circle:phaser.geom.Circle):Dynamic;
     /**
      * Fill a circle with the given position and radius.
      *
@@ -350,9 +350,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the center of the circle.
      * @param {number} radius - The radius of the circle.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillCircle(x:Float, y:Float, radius:Float):phaser.gameobjects.Graphics;
+    public function fillCircle(x:Float, y:Float, radius:Float):Dynamic;
     /**
      * Stroke a circle with the given position and radius.
      *
@@ -363,9 +363,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the center of the circle.
      * @param {number} radius - The radius of the circle.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeCircle(x:Float, y:Float, radius:Float):phaser.gameobjects.Graphics;
+    public function strokeCircle(x:Float, y:Float, radius:Float):Dynamic;
     /**
      * Fill the given rectangle.
      *
@@ -374,9 +374,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Rectangle} rect - The rectangle to fill.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillRectShape(rect:phaser.geom.Rectangle):phaser.gameobjects.Graphics;
+    public function fillRectShape(rect:phaser.geom.Rectangle):Dynamic;
     /**
      * Stroke the given rectangle.
      *
@@ -385,9 +385,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Rectangle} rect - The rectangle to stroke.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeRectShape(rect:phaser.geom.Rectangle):phaser.gameobjects.Graphics;
+    public function strokeRectShape(rect:phaser.geom.Rectangle):Dynamic;
     /**
      * Fill a rectangle with the given position and size.
      *
@@ -399,9 +399,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillRect(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Graphics;
+    public function fillRect(x:Float, y:Float, width:Float, height:Float):Dynamic;
     /**
      * Stroke a rectangle with the given position and size.
      *
@@ -413,9 +413,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} width - The width of the rectangle.
      * @param {number} height - The height of the rectangle.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeRect(x:Float, y:Float, width:Float, height:Float):phaser.gameobjects.Graphics;
+    public function strokeRect(x:Float, y:Float, width:Float, height:Float):Dynamic;
     /**
      * Fill a rounded rectangle with the given position, size and radius.
      *
@@ -428,9 +428,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} height - The height of the rectangle.
      * @param {(Phaser.Types.GameObjects.Graphics.RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):phaser.gameobjects.Graphics;
+    public function fillRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):Dynamic;
     /**
      * Stroke a rounded rectangle with the given position, size and radius.
      *
@@ -443,9 +443,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} height - The height of the rectangle.
      * @param {(Phaser.Types.GameObjects.Graphics.RoundedRectRadius|number)} [radius=20] - The corner radius; It can also be an object to specify different radii for corners.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):phaser.gameobjects.Graphics;
+    public function strokeRoundedRect(x:Float, y:Float, width:Float, height:Float, ?radius:Dynamic):Dynamic;
     /**
      * Fill the given point.
      *
@@ -457,9 +457,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {(Phaser.Geom.Point|Phaser.Math.Vector2|object)} point - The point to fill.
      * @param {number} [size=1] - The size of the square to draw.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillPointShape(point:Dynamic, ?size:Float):phaser.gameobjects.Graphics;
+    public function fillPointShape(point:Dynamic, ?size:Float):Dynamic;
     /**
      * Fill a point at the given position.
      *
@@ -472,9 +472,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} y - The y coordinate of the point.
      * @param {number} [size=1] - The size of the square to draw.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillPoint(x:Float, y:Float, ?size:Float):phaser.gameobjects.Graphics;
+    public function fillPoint(x:Float, y:Float, ?size:Float):Dynamic;
     /**
      * Fill the given triangle.
      *
@@ -483,9 +483,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Triangle} triangle - The triangle to fill.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillTriangleShape(triangle:phaser.geom.Triangle):phaser.gameobjects.Graphics;
+    public function fillTriangleShape(triangle:phaser.geom.Triangle):Dynamic;
     /**
      * Stroke the given triangle.
      *
@@ -494,9 +494,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Triangle} triangle - The triangle to stroke.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeTriangleShape(triangle:phaser.geom.Triangle):phaser.gameobjects.Graphics;
+    public function strokeTriangleShape(triangle:phaser.geom.Triangle):Dynamic;
     /**
      * Fill a triangle with the given points.
      *
@@ -510,9 +510,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x2 - The x coordinate of the third point.
      * @param {number} y2 - The y coordinate of the third point.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillTriangle(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float):phaser.gameobjects.Graphics;
+    public function fillTriangle(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float):Dynamic;
     /**
      * Stroke a triangle with the given points.
      *
@@ -526,9 +526,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x2 - The x coordinate of the third point.
      * @param {number} y2 - The y coordinate of the third point.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeTriangle(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float):phaser.gameobjects.Graphics;
+    public function strokeTriangle(x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float):Dynamic;
     /**
      * Draw the given line.
      *
@@ -537,9 +537,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.Geom.Line} line - The line to stroke.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeLineShape(line:phaser.geom.Line):phaser.gameobjects.Graphics;
+    public function strokeLineShape(line:phaser.geom.Line):Dynamic;
     /**
      * Draw a line between the given points.
      *
@@ -551,9 +551,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x2 - The x coordinate of the end point of the line.
      * @param {number} y2 - The y coordinate of the end point of the line.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function lineBetween(x1:Float, y1:Float, x2:Float, y2:Float):phaser.gameobjects.Graphics;
+    public function lineBetween(x1:Float, y1:Float, x2:Float, y2:Float):Dynamic;
     /**
      * Draw a line from the current drawing position to the given position.
      *
@@ -565,9 +565,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x - The x coordinate to draw the line to.
      * @param {number} y - The y coordinate to draw the line to.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function lineTo(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function lineTo(x:Float, y:Float):Dynamic;
     /**
      * Move the current drawing position to the given position.
      *
@@ -577,9 +577,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x - The x coordinate to move to.
      * @param {number} y - The y coordinate to move to.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function moveTo(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function moveTo(x:Float, y:Float):Dynamic;
     /**
      * Stroke the shape represented by the given array of points.
      *
@@ -595,9 +595,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {boolean} [closePath=false] - When `true`, the path is closed before being stroked.
      * @param {integer} [endIndex] - The index of `points` to stop drawing at. Defaults to `points.length`.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokePoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
+    public function strokePoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):Dynamic;
     /**
      * Fill the shape represented by the given array of points.
      *
@@ -613,9 +613,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {boolean} [closePath=false] - When `true`, the path is closed before being stroked.
      * @param {integer} [endIndex] - The index of `points` to stop at. Defaults to `points.length`.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillPoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):phaser.gameobjects.Graphics;
+    public function fillPoints(points:Dynamic, ?closeShape:Bool, ?closePath:Bool, ?endIndex:Int):Dynamic;
     /**
      * Stroke the given ellipse.
      *
@@ -625,9 +625,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {Phaser.Geom.Ellipse} ellipse - The ellipse to stroke.
      * @param {integer} [smoothness=32] - The number of points to draw the ellipse with.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):phaser.gameobjects.Graphics;
+    public function strokeEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):Dynamic;
     /**
      * Stroke an ellipse with the given position and size.
      *
@@ -640,9 +640,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} height - The height of the ellipse.
      * @param {integer} [smoothness=32] - The number of points to draw the ellipse with.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function strokeEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
+    public function strokeEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):Dynamic;
     /**
      * Fill the given ellipse.
      *
@@ -652,9 +652,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {Phaser.Geom.Ellipse} ellipse - The ellipse to fill.
      * @param {integer} [smoothness=32] - The number of points to draw the ellipse with.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):phaser.gameobjects.Graphics;
+    public function fillEllipseShape(ellipse:phaser.geom.Ellipse, ?smoothness:Int):Dynamic;
     /**
      * Fill an ellipse with the given position and size.
      *
@@ -667,9 +667,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} height - The height of the ellipse.
      * @param {integer} [smoothness=32] - The number of points to draw the ellipse with.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function fillEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):phaser.gameobjects.Graphics;
+    public function fillEllipse(x:Float, y:Float, width:Float, height:Float, ?smoothness:Int):Dynamic;
     /**
      * Draw an arc.
      *
@@ -696,9 +696,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {boolean} [anticlockwise=false] - Whether the drawing should be anticlockwise or clockwise.
      * @param {number} [overshoot=0] - This value allows you to increase the segment iterations in WebGL rendering. Useful if the arc has a thick stroke and needs to overshoot to join-up cleanly. Use small numbers such as 0.01 to start with and increase as needed.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):phaser.gameobjects.Graphics;
+    public function arc(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):Dynamic;
     /**
      * Creates a pie-chart slice shape centered at `x`, `y` with the given radius.
      * You must define the start and end angle of the slice.
@@ -720,9 +720,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {boolean} [anticlockwise=false] - Whether the drawing should be anticlockwise or clockwise.
      * @param {number} [overshoot=0] - This value allows you to overshoot the endAngle by this amount. Useful if the arc has a thick stroke and needs to overshoot to join-up cleanly.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function slice(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):phaser.gameobjects.Graphics;
+    public function slice(x:Float, y:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?overshoot:Float):Dynamic;
     /**
      * Saves the state of the Graphics by pushing the current state onto a stack.
      *
@@ -731,9 +731,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#save
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function save():phaser.gameobjects.Graphics;
+    public function save():Dynamic;
     /**
      * Restores the most recently saved state of the Graphics by popping from the state stack.
      *
@@ -744,9 +744,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Graphics#restore
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function restore():phaser.gameobjects.Graphics;
+    public function restore():Dynamic;
     /**
      * Inserts a translation command into this Graphics objects command buffer.
      *
@@ -762,9 +762,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x - The horizontal translation to apply.
      * @param {number} y - The vertical translation to apply.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function translateCanvas(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function translateCanvas(x:Float, y:Float):Dynamic;
     /**
      * Inserts a scale command into this Graphics objects command buffer.
      *
@@ -780,9 +780,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {number} x - The horizontal scale to apply.
      * @param {number} y - The vertical scale to apply.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function scaleCanvas(x:Float, y:Float):phaser.gameobjects.Graphics;
+    public function scaleCanvas(x:Float, y:Float):Dynamic;
     /**
      * Inserts a rotation command into this Graphics objects command buffer.
      *
@@ -797,18 +797,18 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      *
      * @param {number} radians - The rotation angle, in radians.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function rotateCanvas(radians:Float):phaser.gameobjects.Graphics;
+    public function rotateCanvas(radians:Float):Dynamic;
     /**
      * Clear the command buffer and reset the fill style and line style to their defaults.
      *
      * @method Phaser.GameObjects.Graphics#clear
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function clear():phaser.gameobjects.Graphics;
+    public function clear():Dynamic;
     /**
      * Generate a texture from this Graphics object.
      *
@@ -825,9 +825,9 @@ extern class Graphics extends phaser.gameobjects.GameObject {
      * @param {integer} [width] - The width of the graphics to generate.
      * @param {integer} [height] - The height of the graphics to generate.
      *
-     * @return {Phaser.GameObjects.Graphics} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function generateTexture(key:Dynamic, ?width:Int, ?height:Int):phaser.gameobjects.Graphics;
+    public function generateTexture(key:Dynamic, ?width:Int, ?height:Int):Dynamic;
     /**
      * Internal destroy handler, called as part of the destroy process.
      *
@@ -1191,8 +1191,8 @@ extern class Graphics extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object in radians.
      *
-     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
-     * and -90 is up.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, PI/2 is down, +-PI is left
+     * and -PI/2 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *

@@ -115,12 +115,12 @@ extern class Point {
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point[]} points - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Types.Math.Vector2Like[]} points - An array of Vector2Like objects to get the geometric center of.
+     * @param {Phaser.Geom.Point} [out] - A Point object to store the output coordinates in. If not given, a new Point instance is created.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} A Point object representing the geometric center of the given points.
      */
-    static public function GetCentroid(points:Array<phaser.geom.Point>, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function GetCentroid(points:Array<phaser.types.math.Vector2Like>, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Calculate the magnitude of the point, which equivalent to the length of the line from the origin to this point.
      *
@@ -151,14 +151,14 @@ extern class Point {
      *
      * @generic {Phaser.Geom.Rectangle} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point[]} points - [description]
-     * @param {Phaser.Geom.Rectangle} [out] - [description]
+     * @param {Phaser.Types.Math.Vector2Like[]} points - An array of Vector2Like objects to get the AABB from.
+     * @param {Phaser.Geom.Rectangle} [out] - A Rectangle object to store the results in. If not given, a new Rectangle instance is created.
      *
-     * @return {Phaser.Geom.Rectangle} [description]
+     * @return {Phaser.Geom.Rectangle} A Rectangle object holding the AABB values for the given points.
      */
-    static public function GetRectangleFromPoints(points:Array<phaser.geom.Point>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    static public function GetRectangleFromPoints(points:Array<phaser.types.math.Vector2Like>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
-     * [description]
+     * Returns the linear interpolation point between the two given points, based on `t`.
      *
      * @function Phaser.Geom.Point.Interpolate
      * @since 3.0.0
@@ -209,37 +209,39 @@ extern class Point {
      * @param {number} [x=0] - The x coordinate of this Point.
      * @param {number} [y=x] - The y coordinate of this Point.
      *
-     * @return {Phaser.Geom.Point} This Point object.
+     * @return {this} This Point object.
      */
-    public function setTo(?x:Float, ?y:Float):phaser.geom.Point;
+    public function setTo(?x:Float, ?y:Float):Dynamic;
     /**
-     * [description]
+     * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
+     * orthogonal projection of `pointA` onto a straight line paralle to `pointB`.
      *
      * @function Phaser.Geom.Point.Project
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point} pointA - [description]
-     * @param {Phaser.Geom.Point} pointB - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Point} pointA - Point A, to be projected onto Point B.
+     * @param {Phaser.Geom.Point} pointB - Point B, to have Point A projected upon it.
+     * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} A Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
      */
     static public function Project(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
-     * [description]
+     * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
+     * orthogonal projection of `pointA` onto a straight line paralle to `pointB`.
      *
      * @function Phaser.Geom.Point.ProjectUnit
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Point} pointA - [description]
-     * @param {Phaser.Geom.Point} pointB - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Point} pointA - Point A, to be projected onto Point B. Must be a normalized point with a magnitude of 1.
+     * @param {Phaser.Geom.Point} pointB - Point B, to have Point A projected upon it.
+     * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} A unit Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
      */
     static public function ProjectUnit(pointA:phaser.geom.Point, pointB:phaser.geom.Point, ?out:phaser.geom.Point):phaser.geom.Point;
     /**

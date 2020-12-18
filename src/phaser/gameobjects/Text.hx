@@ -12,19 +12,16 @@ package phaser.gameobjects;
  * applying gradient fills to the text, or strokes, shadows and more. You can also use custom fonts
  * loaded externally, such as Google or TypeKit Web fonts.
  *
- * **Important:** If the font you wish to use has a space or digit in its name, such as
- * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes, either
- * when creating the Text object, or when setting the font via `setFont` or `setFontFamily`. I.e.:
+ * **Important:** The font name must be quoted if it contains certain combinations of digits or
+ * special characters, either when creating the Text object, or when setting the font via `setFont`
+ * or `setFontFamily`, e.g.:
  *
  * ```javascript
- * this.add.text(0, 0, 'Hello World', { fontFamily: '"Roboto Condensed"' });
+ * this.add.text(0, 0, 'Hello World', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif' });
  * ```
  *
- * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
- * quoted properly, too:
- *
  * ```javascript
- * this.add.text(0, 0, 'Hello World', { fontFamily: 'Verdana, "Times New Roman", Tahoma, serif' });
+ * this.add.text(0, 0, 'Hello World', { font: '"Press Start 2P"' });
  * ```
  *
  * You can only display fonts that are currently loaded and available to the browser: therefore fonts must
@@ -66,6 +63,8 @@ package phaser.gameobjects;
  * @param {number} y - The vertical position of this Game Object in the world.
  * @param {(string|string[])} text - The text this Text object will display.
  * @param {Phaser.Types.GameObjects.Text.TextStyle} style - The text style configuration object.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-family#Valid_family_names
  */
 @:native("Phaser.GameObjects.Text")
 extern class Text extends phaser.gameobjects.GameObject {
@@ -257,9 +256,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {(string|string[])} value - The string, or array of strings, to be set as the content of this Text object.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setText(value:Dynamic):phaser.gameobjects.Text;
+    public function setText(value:Dynamic):Dynamic;
     /**
      * Set the text style.
      *
@@ -277,9 +276,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {object} style - The style settings to set.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setStyle(style:Dynamic):phaser.gameobjects.Text;
+    public function setStyle(style:Dynamic):Dynamic;
     /**
      * Set the font.
      *
@@ -288,18 +287,18 @@ extern class Text extends phaser.gameobjects.GameObject {
      * If an object is given, the `fontFamily`, `fontSize` and `fontStyle`
      * properties of that object are set.
      *
-     * **Important:** If the font you wish to use has a space or digit in its name, such as
-     * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes:
+     * **Important:** The font name must be quoted if it contains certain combinations of digits or
+     * special characters:
      *
      * ```javascript
-     * Text.setFont('"Roboto Condensed"');
+     * Text.setFont('"Press Start 2P"');
      * ```
      *
      * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
      * quoted properly, too:
      *
      * ```javascript
-     * Text.setFont('Verdana, "Times New Roman", Tahoma, serif');
+     * Text.setFont('Georgia, "Goudy Bookletter 1911", Times, serif');
      * ```
      *
      * @method Phaser.GameObjects.Text#setFont
@@ -307,24 +306,26 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} font - The font family or font settings to set.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-family#Valid_family_names
      */
-    public function setFont(font:String):phaser.gameobjects.Text;
+    public function setFont(font:String):Dynamic;
     /**
      * Set the font family.
      *
-     * **Important:** If the font you wish to use has a space or digit in its name, such as
-     * 'Press Start 2P' or 'Roboto Condensed', then you _must_ put the font name in quotes:
+     * **Important:** The font name must be quoted if it contains certain combinations of digits or
+     * special characters:
      *
      * ```javascript
-     * Text.setFont('"Roboto Condensed"');
+     * Text.setFont('"Press Start 2P"');
      * ```
      *
      * Equally, if you wish to provide a list of fallback fonts, then you should ensure they are all
      * quoted properly, too:
      *
      * ```javascript
-     * Text.setFont('Verdana, "Times New Roman", Tahoma, serif');
+     * Text.setFont('Georgia, "Goudy Bookletter 1911", Times, serif');
      * ```
      *
      * @method Phaser.GameObjects.Text#setFontFamily
@@ -332,9 +333,11 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} family - The font family.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-family#Valid_family_names
      */
-    public function setFontFamily(family:String):phaser.gameobjects.Text;
+    public function setFontFamily(family:String):Dynamic;
     /**
      * Set the font size.
      *
@@ -343,9 +346,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {number} size - The font size.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setFontSize(size:Float):phaser.gameobjects.Text;
+    public function setFontSize(size:Float):Dynamic;
     /**
      * Set the font style.
      *
@@ -354,9 +357,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} style - The font style.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setFontStyle(style:String):phaser.gameobjects.Text;
+    public function setFontStyle(style:String):Dynamic;
     /**
      * Set a fixed width and height for the text.
      *
@@ -368,9 +371,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @param {number} width - The fixed width to set. `0` disables fixed width.
      * @param {number} height - The fixed height to set. `0` disables fixed height.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setFixedSize(width:Float, height:Float):phaser.gameobjects.Text;
+    public function setFixedSize(width:Float, height:Float):Dynamic;
     /**
      * Set the background color.
      *
@@ -379,9 +382,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} color - The background color.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setBackgroundColor(color:String):phaser.gameobjects.Text;
+    public function setBackgroundColor(color:String):Dynamic;
     /**
      * Set the fill style to be used by the Text object.
      *
@@ -395,9 +398,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {(string|any)} color - The text fill style. Can be any valid CanvasRenderingContext `fillStyle` value.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setFill(color:Dynamic):phaser.gameobjects.Text;
+    public function setFill(color:Dynamic):Dynamic;
     /**
      * Set the text fill color.
      *
@@ -406,9 +409,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} color - The text fill color.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setColor(color:String):phaser.gameobjects.Text;
+    public function setColor(color:String):Dynamic;
     /**
      * Set the stroke settings.
      *
@@ -418,9 +421,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @param {string} color - The stroke color.
      * @param {number} thickness - The stroke thickness.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setStroke(color:String, thickness:Float):phaser.gameobjects.Text;
+    public function setStroke(color:String, thickness:Float):Dynamic;
     /**
      * Set the shadow settings.
      *
@@ -434,9 +437,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @param {boolean} [shadowStroke=false] - Whether to stroke the shadow.
      * @param {boolean} [shadowFill=true] - Whether to fill the shadow.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadow(?x:Float, ?y:Float, ?color:String, ?blur:Float, ?shadowStroke:Bool, ?shadowFill:Bool):phaser.gameobjects.Text;
+    public function setShadow(?x:Float, ?y:Float, ?color:String, ?blur:Float, ?shadowStroke:Bool, ?shadowFill:Bool):Dynamic;
     /**
      * Set the shadow offset.
      *
@@ -446,9 +449,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @param {number} x - The horizontal shadow offset.
      * @param {number} y - The vertical shadow offset.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadowOffset(x:Float, y:Float):phaser.gameobjects.Text;
+    public function setShadowOffset(x:Float, y:Float):Dynamic;
     /**
      * Set the shadow color.
      *
@@ -457,9 +460,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} color - The shadow color.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadowColor(color:String):phaser.gameobjects.Text;
+    public function setShadowColor(color:String):Dynamic;
     /**
      * Set the shadow blur radius.
      *
@@ -468,9 +471,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {number} blur - The shadow blur radius.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadowBlur(blur:Float):phaser.gameobjects.Text;
+    public function setShadowBlur(blur:Float):Dynamic;
     /**
      * Enable or disable shadow stroke.
      *
@@ -479,9 +482,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {boolean} enabled - Whether shadow stroke is enabled or not.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadowStroke(enabled:Bool):phaser.gameobjects.Text;
+    public function setShadowStroke(enabled:Bool):Dynamic;
     /**
      * Enable or disable shadow fill.
      *
@@ -490,9 +493,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {boolean} enabled - Whether shadow fill is enabled or not.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setShadowFill(enabled:Bool):phaser.gameobjects.Text;
+    public function setShadowFill(enabled:Bool):Dynamic;
     /**
      * Set the width (in pixels) to use for wrapping lines. Pass in null to remove wrapping by width.
      *
@@ -504,9 +507,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * algorithm. If true, spaces are collapsed and whitespace is trimmed from lines. If false,
      * spaces and whitespace are left as is.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setWordWrapWidth(width:Float, ?useAdvancedWrap:Bool):phaser.gameobjects.Text;
+    public function setWordWrapWidth(width:Float, ?useAdvancedWrap:Bool):Dynamic;
     /**
      * Set a custom callback for wrapping lines. Pass in null to remove wrapping by callback.
      *
@@ -519,9 +522,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * newline characters in place to indicate where breaks should happen.
      * @param {object} [scope=null] - The scope that will be applied when the callback is invoked.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):phaser.gameobjects.Text;
+    public function setWordWrapCallback(callback:TextStyleWordWrapCallback, ?scope:Dynamic):Dynamic;
     /**
      * Set the alignment of the text in this Text object.
      *
@@ -534,9 +537,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {string} [align='left'] - The text alignment for multi-line text.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setAlign(?align:String):phaser.gameobjects.Text;
+    public function setAlign(?align:String):Dynamic;
     /**
      * Set the resolution used by this Text object.
      *
@@ -553,9 +556,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {number} value - The resolution for this Text object to use.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setResolution(value:Float):phaser.gameobjects.Text;
+    public function setResolution(value:Float):Dynamic;
     /**
      * Sets the line spacing value.
      *
@@ -567,9 +570,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {number} value - The amount to add to the font height to achieve the overall line height.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setLineSpacing(value:Float):phaser.gameobjects.Text;
+    public function setLineSpacing(value:Float):Dynamic;
     /**
      * Set the text padding.
      *
@@ -585,9 +588,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @param {number} right - The right padding value.
      * @param {number} bottom - The bottom padding value.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setPadding(left:Dynamic, top:Float, right:Float, bottom:Float):phaser.gameobjects.Text;
+    public function setPadding(left:Dynamic, top:Float, right:Float, bottom:Float):Dynamic;
     /**
      * Set the maximum number of lines to draw.
      *
@@ -596,18 +599,18 @@ extern class Text extends phaser.gameobjects.GameObject {
      *
      * @param {integer} [max=0] - The maximum number of lines to draw.
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function setMaxLines(?max:Int):phaser.gameobjects.Text;
+    public function setMaxLines(?max:Int):Dynamic;
     /**
      * Update the displayed text.
      *
      * @method Phaser.GameObjects.Text#updateText
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Text} This Text object.
+     * @return {this} This Text object.
      */
-    public function updateText():phaser.gameobjects.Text;
+    public function updateText():Dynamic;
     /**
      * Get the current text metrics.
      *
@@ -1716,8 +1719,8 @@ extern class Text extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object in radians.
      *
-     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
-     * and -90 is up.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, PI/2 is down, +-PI is left
+     * and -PI/2 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *

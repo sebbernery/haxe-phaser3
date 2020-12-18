@@ -395,11 +395,11 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
      * @since 3.0.0
      *
      * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera to use to perform the check.
-     * @param {object} [output] - [description]
+     * @param {Phaser.Geom.Rectangle} [output] - Optional Rectangle object to store the results in.
      *
      * @return {(Phaser.Geom.Rectangle|object)}
      */
-    public function getBounds(?camera:phaser.cameras.scene2d.Camera, ?output:Dynamic):phaser.geom.Rectangle;
+    public function getBounds(?camera:phaser.cameras.scene2d.Camera, ?output:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
      * Gets the world X position of the center of the tile, factoring in the layer's position,
      * scale and scroll.

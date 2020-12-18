@@ -86,6 +86,15 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public var panEffect:phaser.cameras.scene2d.effects.Pan;
     /**
+     * The Camera Rotate To effect handler.
+     * To rotate this camera see the `Camera.rotateTo` method.
+     *
+     * @name Phaser.Cameras.Scene2D.Camera#rotateToEffect
+     * @type {Phaser.Cameras.Scene2D.Effects.RotateTo}
+     * @since 3.23.0
+     */
+    public var rotateToEffect:phaser.cameras.scene2d.effects.RotateTo;
+    /**
      * The Camera Zoom effect handler.
      * To zoom this camera see the `Camera.zoom` method.
      *
@@ -160,6 +169,23 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @since 3.13.0
      */
     public var renderToTexture:Bool;
+    /**
+     * If this Camera is rendering to a texture (via `setRenderToTexture`) then you
+     * have the option to control if it should also render to the Game canvas as well.
+     *
+     * By default, a Camera will render both to its texture and to the Game canvas.
+     *
+     * However, if you set ths property to `false` it will only render to the texture
+     * and skip rendering to the Game canvas.
+     *
+     * Setting this property if the Camera isn't rendering to a texture has no effect.
+     *
+     * @name Phaser.Cameras.Scene2D.Camera#renderToGame
+     * @type {boolean}
+     * @default true
+     * @since 3.23.0
+     */
+    public var renderToGame:Bool;
     /**
      * If this Camera has been set to render to a texture then this holds a reference
      * to the HTML Canvas Element that the Camera is drawing to.
@@ -251,6 +277,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * You should not enable this unless you plan on actually using the texture it creates
      * somehow, otherwise you're just doubling the work required to render your game.
      *
+     * If you only require the Camera to render to a texture, and not also to the Game,
+     * them set the `renderToGame` parameter to `false`.
+     *
      * To temporarily disable rendering to a texture, toggle the `renderToTexture` boolean.
      *
      * If you no longer require the Camera to render to a texture, call the `clearRenderToTexture` method,
@@ -260,10 +289,11 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @since 3.13.0
      *
      * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} [pipeline] - An optional WebGL Pipeline to render with, can be either a string which is the name of the pipeline, or a pipeline reference.
+     * @param {boolean} [renderToGame=true] - If you do not need the Camera to still render to the Game, set this parameter to `false`.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setRenderToTexture(?pipeline:Dynamic):phaser.cameras.scene2d.Camera;
+    public function setRenderToTexture(?pipeline:Dynamic, ?renderToGame:Bool):Dynamic;
     /**
      * Sets the WebGL pipeline this Camera is using when rendering to a texture.
      *
@@ -276,9 +306,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} [pipeline] - The WebGL Pipeline to render with, can be either a string which is the name of the pipeline, or a pipeline reference. Or if left empty it will clear the pipeline.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setPipeline(?pipeline:Dynamic):phaser.cameras.scene2d.Camera;
+    public function setPipeline(?pipeline:Dynamic):Dynamic;
     /**
      * If this Camera was set to render to a texture, this will clear the resources it was using and
      * redirect it to render back to the primary Canvas again.
@@ -289,9 +319,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @method Phaser.Cameras.Scene2D.Camera#clearRenderToTexture
      * @since 3.13.0
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function clearRenderToTexture():phaser.cameras.scene2d.Camera;
+    public function clearRenderToTexture():Dynamic;
     /**
      * Sets the Camera dead zone.
      *
@@ -314,9 +344,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @param {number} [width] - The width of the deadzone rectangle in pixels. If not specified the deadzone is removed.
      * @param {number} [height] - The height of the deadzone rectangle in pixels.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setDeadzone(?width:Float, ?height:Float):phaser.cameras.scene2d.Camera;
+    public function setDeadzone(?width:Float, ?height:Float):Dynamic;
     /**
      * Fades the Camera in from the given color over the duration specified.
      *
@@ -333,9 +363,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function fadeIn(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function fadeIn(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera out to the given color over the duration specified.
      * This is an alias for Camera.fade that forces the fade to start, regardless of existing fades.
@@ -353,9 +383,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function fadeOut(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function fadeOut(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera from the given color to transparent over the duration specified.
      *
@@ -373,9 +403,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function fadeFrom(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function fadeFrom(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera from transparent to the given color over the duration specified.
      *
@@ -393,9 +423,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function fade(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function fade(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Flashes the Camera by setting it to the given color immediately and then fading it away again quickly over the duration specified.
      *
@@ -413,9 +443,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function flash(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function flash(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Shakes the Camera by the given intensity over the duration specified.
      *
@@ -431,9 +461,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function shake(?duration:Int, ?intensity:Dynamic, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function shake(?duration:Int, ?intensity:Dynamic, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * This effect will scroll the Camera so that the center of its viewport finishes at the given destination,
      * over the duration and with the ease specified.
@@ -453,9 +483,29 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
+     * @return {this} This Camera instance.
+     */
+    public function pan(x:Float, y:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
+    /**
+     * This effect will rotate the Camera so that the viewport finishes at the given angle in radians,
+     * over the duration and with the ease specified.
+     *
+     * @method Phaser.Cameras.Scene2D.Camera#rotateTo
+     * @since 3.23.0
+     *
+     * @param {number} radians - The destination angle in radians to rotate the Camera viewport to. If the angle is positive then the rotation is clockwise else anticlockwise
+     * @param {boolean} [shortestPath=false] - If shortest path is set to true the camera will rotate in the quickest direction clockwise or anti-clockwise.
+     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {(string|function)} [ease='Linear'] - The ease to use for the rotation. Can be any of the Phaser Easing constants or a custom function.
+     * @param {boolean} [force=false] - Force the rotation effect to start immediately, even if already running.
+     * @param {CameraRotateCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
+     * It is sent four arguments: A reference to the camera, a progress amount between 0 and 1 indicating how complete the effect is,
+     * the current camera rotation angle in radians.
+     * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
+     *
      * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
      */
-    public function pan(x:Float, y:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function rotateTo(radians:Float, ?shortestPath:Bool, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:CameraRotateCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * This effect will zoom the Camera to the given scale, over the duration and with the ease specified.
      *
@@ -473,9 +523,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * the current camera scroll x coordinate and the current camera scroll y coordinate.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function zoomTo(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function zoomTo(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
     /**
      * Sets the linear interpolation value to use when following a target.
      *
@@ -541,9 +591,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @method Phaser.Cameras.Scene2D.Camera#stopFollow
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function stopFollow():phaser.cameras.scene2d.Camera;
+    public function stopFollow():Dynamic;
     /**
      * Resets any active FX, such as a fade, flash or shake. Useful to call after a fade in order to
      * remove the fade.
@@ -551,9 +601,9 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @method Phaser.Cameras.Scene2D.Camera#resetFX
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function resetFX():phaser.cameras.scene2d.Camera;
+    public function resetFX():Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *

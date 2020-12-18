@@ -138,10 +138,10 @@ extern class GameObject extends phaser.events.EventEmitter {
      */
     public var input:phaser.types.input.InteractiveObject;
     /**
-     * If this Game Object is enabled for physics then this property will contain a reference to a Physics Body.
+     * If this Game Object is enabled for Arcade or Matter Physics then this property will contain a reference to a Physics Body.
      *
      * @name Phaser.GameObjects.GameObject#body
-     * @type {?(object|Phaser.Physics.Arcade.Body|Phaser.Physics.Impact.Body)}
+     * @type {?(object|Phaser.Physics.Arcade.Body|MatterJS.BodyType)}
      * @default null
      * @since 3.0.0
      */
@@ -258,6 +258,43 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @return {this} This GameObject.
      */
     public function setData(key:Dynamic, ?data:Dynamic):Dynamic;
+    /**
+     * Increase a value for the given key within this Game Objects Data Manager. If the key doesn't already exist in the Data Manager then it is increased from 0.
+     *
+     * If the Game Object has not been enabled for data (via `setDataEnabled`) then it will be enabled
+     * before setting the value.
+     *
+     * If the key doesn't already exist in the Data Manager then it is created.
+     *
+     * When the value is first set, a `setdata` event is emitted from this Game Object.
+     *
+     * @method Phaser.GameObjects.GameObject#incData
+     * @since 3.23.0
+     *
+     * @param {(string|object)} key - The key to increase the value for.
+     * @param {*} [data] - The value to increase for the given key.
+     *
+     * @return {this} This GameObject.
+     */
+    public function incData(key:Dynamic, ?data:Dynamic):Dynamic;
+    /**
+     * Toggle a boolean value for the given key within this Game Objects Data Manager. If the key doesn't already exist in the Data Manager then it is toggled from false.
+     *
+     * If the Game Object has not been enabled for data (via `setDataEnabled`) then it will be enabled
+     * before setting the value.
+     *
+     * If the key doesn't already exist in the Data Manager then it is created.
+     *
+     * When the value is first set, a `setdata` event is emitted from this Game Object.
+     *
+     * @method Phaser.GameObjects.GameObject#toggleData
+     * @since 3.23.0
+     *
+     * @param {(string|object)} key - The key to toggle the value for.
+     *
+     * @return {this} This GameObject.
+     */
+    public function toggleData(key:Dynamic):Dynamic;
     /**
      * Retrieves the value for the given key in this Game Objects Data Manager, or undefined if it doesn't exist.
      *

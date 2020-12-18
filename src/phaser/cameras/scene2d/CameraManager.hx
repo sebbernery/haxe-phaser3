@@ -181,9 +181,9 @@ extern class CameraManager {
      *
      * @param {(Phaser.Types.Cameras.Scene2D.CameraConfig|Phaser.Types.Cameras.Scene2D.CameraConfig[])} config - A Camera configuration object, or an array of them, to be added to this Camera Manager.
      *
-     * @return {Phaser.Cameras.Scene2D.CameraManager} This Camera Manager instance.
+     * @return {this} This Camera Manager instance.
      */
-    public function fromJSON(config:Dynamic):phaser.cameras.scene2d.CameraManager;
+    public function fromJSON(config:Dynamic):Dynamic;
     /**
      * Gets a Camera based on its name.
      *

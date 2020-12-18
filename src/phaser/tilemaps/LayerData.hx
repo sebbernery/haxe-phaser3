@@ -11,11 +11,11 @@ package phaser.tilemaps;
  * @constructor
  * @since 3.0.0
  *
- * @param {object} [config] - [description]
+ * @param {Phaser.Types.Tilemaps.LayerDataConfig} [config] - The Layer Data configuration object.
  */
 @:native("Phaser.Tilemaps.LayerData")
 extern class LayerData {
-    public function new(?config:Dynamic);
+    public function new(?config:phaser.types.tilemaps.LayerDataConfig);
     /**
      * The name of the layer, if specified in Tiled.
      *
@@ -25,7 +25,7 @@ extern class LayerData {
      */
     public var name:String;
     /**
-     * The x offset of where to draw from the top left
+     * The x offset of where to draw from the top left.
      *
      * @name Phaser.Tilemaps.LayerData#x
      * @type {number}
@@ -33,7 +33,7 @@ extern class LayerData {
      */
     public var x:Float;
     /**
-     * The y offset of where to draw from the top left
+     * The y offset of where to draw from the top left.
      *
      * @name Phaser.Tilemaps.LayerData#y
      * @type {number}
@@ -41,7 +41,7 @@ extern class LayerData {
      */
     public var y:Float;
     /**
-     * The width in tile of the layer.
+     * The width of the layer in tiles.
      *
      * @name Phaser.Tilemaps.LayerData#width
      * @type {number}
@@ -49,7 +49,7 @@ extern class LayerData {
      */
     public var width:Float;
     /**
-     * The height in tiles of the layer.
+     * The height of the layer in tiles.
      *
      * @name Phaser.Tilemaps.LayerData#height
      * @type {number}
@@ -73,7 +73,7 @@ extern class LayerData {
      */
     public var tileHeight:Float;
     /**
-     * [description]
+     * The base tile width.
      *
      * @name Phaser.Tilemaps.LayerData#baseTileWidth
      * @type {number}
@@ -81,7 +81,7 @@ extern class LayerData {
      */
     public var baseTileWidth:Float;
     /**
-     * [description]
+     * The base tile height.
      *
      * @name Phaser.Tilemaps.LayerData#baseTileHeight
      * @type {number}
@@ -105,7 +105,7 @@ extern class LayerData {
      */
     public var heightInPixels:Float;
     /**
-     * [description]
+     * The alpha value of the layer.
      *
      * @name Phaser.Tilemaps.LayerData#alpha
      * @type {number}
@@ -113,7 +113,7 @@ extern class LayerData {
      */
     public var alpha:Float;
     /**
-     * [description]
+     * Is the layer visible or not?
      *
      * @name Phaser.Tilemaps.LayerData#visible
      * @type {boolean}
@@ -124,12 +124,12 @@ extern class LayerData {
      * Layer specific properties (can be specified in Tiled)
      *
      * @name Phaser.Tilemaps.LayerData#properties
-     * @type {object}
+     * @type {object[]}
      * @since 3.0.0
      */
-    public var properties:Dynamic;
+    public var properties:Array<Dynamic>;
     /**
-     * [description]
+     * Tile ID index map.
      *
      * @name Phaser.Tilemaps.LayerData#indexes
      * @type {array}
@@ -137,7 +137,7 @@ extern class LayerData {
      */
     public var indexes:Array<Dynamic>;
     /**
-     * [description]
+     * Tile Collision ID index map.
      *
      * @name Phaser.Tilemaps.LayerData#collideIndexes
      * @type {array}
@@ -145,7 +145,7 @@ extern class LayerData {
      */
     public var collideIndexes:Array<Dynamic>;
     /**
-     * [description]
+     * An array of callbacks.
      *
      * @name Phaser.Tilemaps.LayerData#callbacks
      * @type {array}
@@ -153,7 +153,7 @@ extern class LayerData {
      */
     public var callbacks:Array<Dynamic>;
     /**
-     * [description]
+     * An array of physics bodies.
      *
      * @name Phaser.Tilemaps.LayerData#bodies
      * @type {array}
@@ -161,7 +161,7 @@ extern class LayerData {
      */
     public var bodies:Array<Dynamic>;
     /**
-     * An array of the tile indexes
+     * An array of the tile data indexes.
      *
      * @name Phaser.Tilemaps.LayerData#data
      * @type {Phaser.Tilemaps.Tile[][]}
@@ -169,7 +169,7 @@ extern class LayerData {
      */
     public var data:Array<Array<phaser.tilemaps.Tile>>;
     /**
-     * [description]
+     * A reference to the Tilemap layer that owns this data.
      *
      * @name Phaser.Tilemaps.LayerData#tilemapLayer
      * @type {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)}

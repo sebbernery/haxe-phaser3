@@ -133,18 +133,18 @@ extern class FixedKeyControl {
      * @method Phaser.Cameras.Controls.FixedKeyControl#start
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Controls.FixedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function start():phaser.cameras.controls.FixedKeyControl;
+    public function start():Dynamic;
     /**
      * Stops this Key Control from running. Call `start` to start it again.
      *
      * @method Phaser.Cameras.Controls.FixedKeyControl#stop
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Controls.FixedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function stop():phaser.cameras.controls.FixedKeyControl;
+    public function stop():Dynamic;
     /**
      * Binds this Key Control to a camera.
      *
@@ -153,9 +153,9 @@ extern class FixedKeyControl {
      *
      * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera to bind this Key Control to.
      *
-     * @return {Phaser.Cameras.Controls.FixedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function setCamera(camera:phaser.cameras.scene2d.Camera):phaser.cameras.controls.FixedKeyControl;
+    public function setCamera(camera:phaser.cameras.scene2d.Camera):Dynamic;
     /**
      * Applies the results of pressing the control keys to the Camera.
      *

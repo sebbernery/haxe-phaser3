@@ -60,6 +60,14 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      */
     public var pathVector:phaser.math.Vector2;
     /**
+     * The distance the follower has traveled from the previous point to the current one, at the last update.
+     *
+     * @name Phaser.GameObjects.PathFollower#pathDelta
+     * @type {Phaser.Math.Vector2}
+     * @since 3.23.0
+     */
+    public var pathDelta:phaser.math.Vector2;
+    /**
      * The Tween used for following the Path.
      *
      * @name Phaser.GameObjects.PathFollower#pathTween
@@ -104,9 +112,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @param {Phaser.Curves.Path} path - The Path this PathFollower is following. It can only follow one Path at a time.
      * @param {(number|Phaser.Types.GameObjects.PathFollower.PathConfig|Phaser.Types.Tweens.NumberTweenBuilderConfig)} [config] - Settings for the PathFollower.
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setPath(path:phaser.curves.Path, ?config:Dynamic):phaser.gameobjects.PathFollower;
+    public function setPath(path:phaser.curves.Path, ?config:Dynamic):Dynamic;
     /**
      * Set whether the PathFollower should automatically rotate to point in the direction of the Path.
      *
@@ -116,9 +124,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @param {boolean} value - Whether the PathFollower should automatically rotate to point in the direction of the Path.
      * @param {number} [offset=0] - Rotation offset in degrees.
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setRotateToPath(value:Bool, ?offset:Float):phaser.gameobjects.PathFollower;
+    public function setRotateToPath(value:Bool, ?offset:Float):Dynamic;
     /**
      * Is this PathFollower actively following a Path or not?
      *
@@ -139,9 +147,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @param {(number|Phaser.Types.GameObjects.PathFollower.PathConfig|Phaser.Types.Tweens.NumberTweenBuilderConfig)} [config={}] - The duration of the follow, or a PathFollower config object.
      * @param {number} [startAt=0] - Optional start position of the follow, between 0 and 1.
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function startFollow(?config:Dynamic, ?startAt:Float):phaser.gameobjects.PathFollower;
+    public function startFollow(?config:Dynamic, ?startAt:Float):Dynamic;
     /**
      * Pauses this PathFollower. It will still continue to render, but it will remain motionless at the
      * point on the Path at which you paused it.
@@ -149,9 +157,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @method Phaser.GameObjects.Components.PathFollower#pauseFollow
      * @since 3.3.0
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function pauseFollow():phaser.gameobjects.PathFollower;
+    public function pauseFollow():Dynamic;
     /**
      * Resumes a previously paused PathFollower.
      *
@@ -160,9 +168,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @method Phaser.GameObjects.Components.PathFollower#resumeFollow
      * @since 3.3.0
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function resumeFollow():phaser.gameobjects.PathFollower;
+    public function resumeFollow():Dynamic;
     /**
      * Stops this PathFollower from following the path any longer.
      *
@@ -171,9 +179,9 @@ extern class PathFollower extends phaser.gameobjects.Sprite {
      * @method Phaser.GameObjects.Components.PathFollower#stopFollow
      * @since 3.3.0
      *
-     * @return {Phaser.GameObjects.PathFollower} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function stopFollow():phaser.gameobjects.PathFollower;
+    public function stopFollow():Dynamic;
     /**
      * Internal update handler that advances this PathFollower along the path.
      *

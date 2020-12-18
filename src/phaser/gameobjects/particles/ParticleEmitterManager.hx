@@ -88,9 +88,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function setTexture(key:String, ?frame:Dynamic):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function setTexture(key:String, ?frame:Dynamic):Dynamic;
     /**
      * Sets the frame this Emitter Manager will use to render with.
      *
@@ -103,9 +103,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      *
      * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function setFrame(?frame:Dynamic):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function setFrame(?frame:Dynamic):Dynamic;
     /**
      * Assigns texture frames to an emitter.
      *
@@ -115,9 +115,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @param {(Phaser.Textures.Frame|Phaser.Textures.Frame[])} frames - The texture frames.
      * @param {Phaser.GameObjects.Particles.ParticleEmitter} emitter - The particle emitter to modify.
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function setEmitterFrames(frames:Dynamic, emitter:phaser.gameobjects.particles.ParticleEmitter):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function setEmitterFrames(frames:Dynamic, emitter:phaser.gameobjects.particles.ParticleEmitter):Dynamic;
     /**
      * Adds an existing Particle Emitter to this Emitter Manager.
      *
@@ -183,9 +183,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @param {number} [x] - The x-coordinate to to emit particles from. The default is the x-coordinate of the emitter's current location.
      * @param {number} [y] - The y-coordinate to to emit particles from. The default is the y-coordinate of the emitter's current location.
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function emitParticle(?count:Int, ?x:Float, ?y:Float):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function emitParticle(?count:Int, ?x:Float, ?y:Float):Dynamic;
     /**
      * Emits particles from each active emitter.
      *
@@ -196,9 +196,9 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @param {number} [y] - The y-coordinate to to emit particles from. The default is the y-coordinate of the emitter's current location.
      * @param {integer} [count] - The number of particles to release from each emitter. The default is the emitter's own {@link Phaser.GameObjects.Particles.ParticleEmitter#quantity}.
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function emitParticleAt(?x:Float, ?y:Float, ?count:Int):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function emitParticleAt(?x:Float, ?y:Float, ?count:Int):Dynamic;
     /**
      * Pauses this Emitter Manager.
      *
@@ -209,18 +209,18 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Particles.ParticleEmitterManager#pause
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function pause():phaser.gameobjects.particles.ParticleEmitterManager;
+    public function pause():Dynamic;
     /**
      * Resumes this Emitter Manager, should it have been previously paused.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitterManager#resume
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} This Emitter Manager.
+     * @return {this} This Emitter Manager.
      */
-    public function resume():phaser.gameobjects.particles.ParticleEmitterManager;
+    public function resume():Dynamic;
     /**
      * Gets all active particle processors (gravity wells).
      *
@@ -507,8 +507,8 @@ extern class ParticleEmitterManager extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object in radians.
      *
-     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
-     * and -90 is up.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, PI/2 is down, +-PI is left
+     * and -PI/2 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *

@@ -45,9 +45,9 @@ extern class BaseCache {
      * @param {string} key - The unique key by which the data added to the cache will be referenced.
      * @param {*} data - The data to be stored in the cache.
      *
-     * @return {Phaser.Cache.BaseCache} This BaseCache object.
+     * @return {this} This BaseCache object.
      */
-    public function add(key:String, data:Dynamic):phaser.cache.BaseCache;
+    public function add(key:String, data:Dynamic):Dynamic;
     /**
      * Checks if this cache contains an item matching the given key.
      * This performs the same action as `BaseCache.exists`.
@@ -96,9 +96,9 @@ extern class BaseCache {
      *
      * @param {string} key - The unique key of the item to remove from the cache.
      *
-     * @return {Phaser.Cache.BaseCache} This BaseCache object.
+     * @return {this} This BaseCache object.
      */
-    public function remove(key:String):phaser.cache.BaseCache;
+    public function remove(key:String):Dynamic;
     /**
      * Returns all keys in use in this cache.
      *

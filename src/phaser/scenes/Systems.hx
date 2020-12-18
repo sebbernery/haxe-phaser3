@@ -264,7 +264,7 @@ extern class Systems {
      *
      * @method Phaser.Scenes.Systems#step
      * @fires Phaser.Scenes.Events#PRE_UPDATE
-     * @fires Phaser.Scenes.Events#_UPDATE
+     * @fires Phaser.Scenes.Events#UPDATE
      * @fires Phaser.Scenes.Events#POST_UPDATE
      * @since 3.0.0
      *

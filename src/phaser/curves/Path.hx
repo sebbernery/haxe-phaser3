@@ -78,9 +78,9 @@ extern class Path {
      *
      * @param {Phaser.Curves.Curve} curve - The Curve to append.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function add(curve:phaser.curves.Curve):phaser.curves.Path;
+    public function add(curve:phaser.curves.Curve):Dynamic;
     /**
      * Creates a circular Ellipse Curve positioned at the end of the Path.
      *
@@ -91,9 +91,9 @@ extern class Path {
      * @param {boolean} [clockwise=false] - `true` to create a clockwise circle as opposed to a counter-clockwise circle.
      * @param {number} [rotation=0] - The rotation of the circle in degrees.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function circleTo(radius:Float, ?clockwise:Bool, ?rotation:Float):phaser.curves.Path;
+    public function circleTo(radius:Float, ?clockwise:Bool, ?rotation:Float):Dynamic;
     /**
      * Ensures that the Path is closed.
      *
@@ -104,9 +104,9 @@ extern class Path {
      * @method Phaser.Curves.Path#closePath
      * @since 3.0.0
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function closePath():phaser.curves.Path;
+    public function closePath():Dynamic;
     /**
      * Creates a cubic bezier curve starting at the previous end point and ending at p3, using p1 and p2 as control points.
      *
@@ -120,9 +120,9 @@ extern class Path {
      * @param {number} [control2X] - The x coordinate of the second control point. Not used if Vector2s are provided as the first 3 arguments.
      * @param {number} [control2Y] - The y coordinate of the second control point. Not used if Vector2s are provided as the first 3 arguments.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function cubicBezierTo(x:Dynamic, y:Dynamic, control1X:Dynamic, ?control1Y:Float, ?control2X:Float, ?control2Y:Float):phaser.curves.Path;
+    public function cubicBezierTo(x:Dynamic, y:Dynamic, control1X:Dynamic, ?control1Y:Float, ?control2X:Float, ?control2Y:Float):Dynamic;
     /**
      * Creates a Quadratic Bezier Curve starting at the ending point of the Path.
      *
@@ -134,9 +134,9 @@ extern class Path {
      * @param {number} [controlX] - If `x` is not a `Vector2`, the X coordinate of the first control point.
      * @param {number} [controlY] - If `x` is not a `Vector2`, the Y coordinate of the first control point.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function quadraticBezierTo(x:Dynamic, ?y:Float, ?controlX:Float, ?controlY:Float):phaser.curves.Path;
+    public function quadraticBezierTo(x:Dynamic, ?y:Float, ?controlX:Float, ?controlY:Float):Dynamic;
     /**
      * Draws all Curves in the Path to a Graphics Game Object.
      *
@@ -164,9 +164,9 @@ extern class Path {
      * @param {boolean} [clockwise=false] - Whether the ellipse angles are given as clockwise (`true`) or counter-clockwise (`false`).
      * @param {number} [rotation=0] - The rotation of the ellipse, in degrees.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function ellipseTo(?xRadius:Float, ?yRadius:Float, ?startAngle:Int, ?endAngle:Int, ?clockwise:Bool, ?rotation:Float):phaser.curves.Path;
+    public function ellipseTo(?xRadius:Float, ?yRadius:Float, ?startAngle:Int, ?endAngle:Int, ?clockwise:Bool, ?rotation:Float):Dynamic;
     /**
      * Creates a Path from a Path Configuration object.
      *
@@ -177,9 +177,9 @@ extern class Path {
      *
      * @param {Phaser.Types.Curves.JSONPath} data - The JSON object containing the Path data.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function fromJSON(data:phaser.types.curves.JSONPath):phaser.curves.Path;
+    public function fromJSON(data:phaser.types.curves.JSONPath):Dynamic;
     /**
      * Returns a Rectangle with a position and size matching the bounds of this Path.
      *
@@ -300,6 +300,20 @@ extern class Path {
      */
     public function getStartPoint(?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
+     * Gets a unit vector tangent at a relative position on the path.
+     *
+     * @method Phaser.Curves.Path#getTangent
+     * @since 3.23.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [out,$return]
+     *
+     * @param {number} t - The relative position on the path, [0..1].
+     * @param {Phaser.Math.Vector2} [out] - A vector to store the result in.
+     *
+     * @return {Phaser.Math.Vector2} Vector approximating the tangent line at the point t (delta +/- 0.0001)
+     */
+    public function getTangent(t:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
+    /**
      * Creates a line curve from the previous end point to x/y.
      *
      * @method Phaser.Curves.Path#lineTo
@@ -308,9 +322,9 @@ extern class Path {
      * @param {(number|Phaser.Math.Vector2)} x - The X coordinate of the line's end point, or a `Vector2` containing the entire end point.
      * @param {number} [y] - The Y coordinate of the line's end point, if a number was passed as the X parameter.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function lineTo(x:Dynamic, ?y:Float):phaser.curves.Path;
+    public function lineTo(x:Dynamic, ?y:Float):Dynamic;
     /**
      * Creates a spline curve starting at the previous end point, using the given points on the curve.
      *
@@ -319,9 +333,9 @@ extern class Path {
      *
      * @param {Phaser.Math.Vector2[]} points - The points the newly created spline curve should consist of.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function splineTo(points:Array<phaser.math.Vector2>):phaser.curves.Path;
+    public function splineTo(points:Array<phaser.math.Vector2>):Dynamic;
     /**
      * Creates a "gap" in this path from the path's current end point to the given coordinates.
      *
@@ -333,9 +347,9 @@ extern class Path {
      * @param {(number|Phaser.Math.Vector2)} x - The X coordinate of the position to move the path's end point to, or a `Vector2` containing the entire new end point.
      * @param {number} y - The Y coordinate of the position to move the path's end point to, if a number was passed as the X coordinate.
      *
-     * @return {Phaser.Curves.Path} This Path object.
+     * @return {this} This Path object.
      */
-    public function moveTo(x:Dynamic, y:Float):phaser.curves.Path;
+    public function moveTo(x:Dynamic, y:Float):Dynamic;
     /**
      * Converts this Path to a JSON object containing the path information and its constituent curves.
      *

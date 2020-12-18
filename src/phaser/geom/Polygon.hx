@@ -77,15 +77,15 @@ extern class Polygon {
      */
     static public function Contains(polygon:phaser.geom.Polygon, x:Float, y:Float):Bool;
     /**
-     * [description]
+     * Checks the given Point again the Polygon to see if the Point lays within its vertices.
      *
      * @function Phaser.Geom.Polygon.ContainsPoint
      * @since 3.0.0
      *
-     * @param {Phaser.Geom.Polygon} polygon - [description]
-     * @param {Phaser.Geom.Point} point - [description]
+     * @param {Phaser.Geom.Polygon} polygon - The Polygon to check.
+     * @param {Phaser.Geom.Point} point - The Point to check if it's within the Polygon.
      *
-     * @return {boolean} [description]
+     * @return {boolean} `true` if the Point is within the Polygon, otherwise `false`.
      */
     static public function ContainsPoint(polygon:phaser.geom.Polygon, point:phaser.geom.Point):Bool;
     /**
@@ -174,9 +174,9 @@ extern class Polygon {
      *
      * @param {array} points - Points defining the perimeter of this polygon. Please check function description above for the different supported formats.
      *
-     * @return {Phaser.Geom.Polygon} This Polygon object.
+     * @return {this} This Polygon object.
      */
-    public function setTo(points:Array<Dynamic>):phaser.geom.Polygon;
+    public function setTo(points:Array<Dynamic>):Dynamic;
     /**
      * Calculates the area of the Polygon. This is available in the property Polygon.area
      *

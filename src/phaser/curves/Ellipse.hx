@@ -105,14 +105,14 @@ extern class Ellipse extends phaser.curves.Curve {
      */
     public var rotation:Float;
     /**
-     * [description]
+     * Get the resolution of the curve.
      *
      * @method Phaser.Curves.Ellipse#getResolution
      * @since 3.0.0
      *
-     * @param {number} divisions - [description]
+     * @param {number} divisions - Optional divisions value.
      *
-     * @return {number} [description]
+     * @return {number} The curve resolution.
      */
     public function getResolution(divisions:Float):Float;
     /**
@@ -137,9 +137,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The horizontal radius of this curve.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setXRadius(value:Float):phaser.curves.Ellipse;
+    public function setXRadius(value:Float):Dynamic;
     /**
      * Sets the vertical radius of this curve.
      *
@@ -148,9 +148,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The vertical radius of this curve.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setYRadius(value:Float):phaser.curves.Ellipse;
+    public function setYRadius(value:Float):Dynamic;
     /**
      * Sets the width of this curve.
      *
@@ -159,9 +159,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The width of this curve.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setWidth(value:Float):phaser.curves.Ellipse;
+    public function setWidth(value:Float):Dynamic;
     /**
      * Sets the height of this curve.
      *
@@ -170,9 +170,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The height of this curve.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setHeight(value:Float):phaser.curves.Ellipse;
+    public function setHeight(value:Float):Dynamic;
     /**
      * Sets the start angle of this curve.
      *
@@ -181,9 +181,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The start angle of this curve, in radians.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setStartAngle(value:Float):phaser.curves.Ellipse;
+    public function setStartAngle(value:Float):Dynamic;
     /**
      * Sets the end angle of this curve.
      *
@@ -192,9 +192,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The end angle of this curve, in radians.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setEndAngle(value:Float):phaser.curves.Ellipse;
+    public function setEndAngle(value:Float):Dynamic;
     /**
      * Sets if this curve extends clockwise or anti-clockwise.
      *
@@ -203,9 +203,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {boolean} value - The clockwise state of this curve.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setClockwise(value:Bool):phaser.curves.Ellipse;
+    public function setClockwise(value:Bool):Dynamic;
     /**
      * Sets the rotation of this curve.
      *
@@ -214,9 +214,9 @@ extern class Ellipse extends phaser.curves.Curve {
      *
      * @param {number} value - The rotation of this curve, in radians.
      *
-     * @return {Phaser.Curves.Ellipse} This curve object.
+     * @return {this} This curve object.
      */
-    public function setRotation(value:Float):phaser.curves.Ellipse;
+    public function setRotation(value:Float):Dynamic;
     /**
      * JSON serialization of the curve.
      *

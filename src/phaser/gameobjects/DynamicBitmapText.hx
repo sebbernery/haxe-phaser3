@@ -111,9 +111,9 @@ extern class DynamicBitmapText extends phaser.gameobjects.BitmapText {
      * @param {number} width - The width of the crop.
      * @param {number} height - The height of the crop.
      *
-     * @return {Phaser.GameObjects.DynamicBitmapText} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSize(width:Float, height:Float):phaser.gameobjects.DynamicBitmapText;
+    public function setSize(width:Float, height:Float):Dynamic;
     /**
      * Set a callback that alters how each character of the Bitmap Text is rendered.
      *
@@ -128,9 +128,9 @@ extern class DynamicBitmapText extends phaser.gameobjects.BitmapText {
      *
      * @param {Phaser.Types.GameObjects.BitmapText.DisplayCallback} callback - The display callback to set.
      *
-     * @return {Phaser.GameObjects.DynamicBitmapText} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setDisplayCallback(callback:phaser.types.gameobjects.bitmaptext.DisplayCallback):phaser.gameobjects.DynamicBitmapText;
+    public function setDisplayCallback(callback:phaser.types.gameobjects.bitmaptext.DisplayCallback):Dynamic;
     /**
      * Set the horizontal scroll position of this Bitmap Text.
      *
@@ -139,9 +139,9 @@ extern class DynamicBitmapText extends phaser.gameobjects.BitmapText {
      *
      * @param {number} value - The horizontal scroll position to set.
      *
-     * @return {Phaser.GameObjects.DynamicBitmapText} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setScrollX(value:Float):phaser.gameobjects.DynamicBitmapText;
+    public function setScrollX(value:Float):Dynamic;
     /**
      * Set the vertical scroll position of this Bitmap Text.
      *
@@ -150,7 +150,7 @@ extern class DynamicBitmapText extends phaser.gameobjects.BitmapText {
      *
      * @param {number} value - The vertical scroll position to set.
      *
-     * @return {Phaser.GameObjects.DynamicBitmapText} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setScrollY(value:Float):phaser.gameobjects.DynamicBitmapText;
+    public function setScrollY(value:Float):Dynamic;
 }

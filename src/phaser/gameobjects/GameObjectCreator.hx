@@ -209,6 +209,20 @@ extern class GameObjectCreator {
      */
     public function renderTexture(config:phaser.types.gameobjects.rendertexture.RenderTextureConfig, ?addToScene:Bool):phaser.gameobjects.RenderTexture;
     /**
+     * Creates a new Rope Game Object and returns it.
+     *
+     * Note: This method will only be available if the Rope Game Object and WebGL support have been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectCreator#rope
+     * @since 3.23.0
+     *
+     * @param {object} config - The configuration object this Game Object will use to create itself.
+     * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
+     *
+     * @return {Phaser.GameObjects.Rope} The Game Object that was created.
+     */
+    public function rope(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Rope;
+    /**
      * Creates a new Shader Game Object and returns it.
      *
      * Note: This method will only be available if the Shader Game Object and WebGL support have been built into Phaser.

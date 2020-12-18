@@ -196,15 +196,6 @@ extern class Scene {
      */
     public var physics:phaser.physics.arcade.ArcadePhysics;
     /**
-     * A scene level Impact Physics Plugin.
-     * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
-     *
-     * @name Phaser.Scene#impact
-     * @type {Phaser.Physics.Impact.ImpactPhysics}
-     * @since 3.0.0
-     */
-    public var impact:phaser.physics.impact.ImpactPhysics;
-    /**
      * A scene level Matter Physics Plugin.
      * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
      *

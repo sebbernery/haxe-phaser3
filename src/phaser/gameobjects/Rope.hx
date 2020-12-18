@@ -2,17 +2,28 @@ package phaser.gameobjects;
 
 /**
  * @classdesc
- * A Mesh Game Object.
+ * A Rope Game Object.
  *
- * @class Mesh
+ * The Rope object is WebGL only and does not have a Canvas counterpart.
+ *
+ * A Rope is a special kind of Game Object that has a texture that repeats along its entire length.
+ * Unlike a Sprite, it isn't restricted to using just a quad and can have as many vertices as you define
+ * when creating it. The vertices can be arranged in a horizontal or vertical strip and have their own
+ * color and alpha values as well.
+ *
+ * A Ropes origin is always 0.5 x 0.5 and cannot be changed.
+ *
+ * @class Rope
  * @extends Phaser.GameObjects.GameObject
  * @memberof Phaser.GameObjects
  * @constructor
  * @webglOnly
- * @since 3.0.0
+ * @since 3.23.0
  *
+ * @extends Phaser.GameObjects.Components.AlphaSingle
  * @extends Phaser.GameObjects.Components.BlendMode
  * @extends Phaser.GameObjects.Components.Depth
+ * @extends Phaser.GameObjects.Components.Flip
  * @extends Phaser.GameObjects.Components.Mask
  * @extends Phaser.GameObjects.Components.Pipeline
  * @extends Phaser.GameObjects.Components.Size
@@ -22,67 +33,452 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.ScrollFactor
  *
  * @param {Phaser.Scene} scene - The Scene to which this Game Object belongs. A Game Object can only belong to one Scene at a time.
- * @param {number} x - The horizontal position of this Game Object in the world.
- * @param {number} y - The vertical position of this Game Object in the world.
- * @param {number[]} vertices - An array containing the vertices data for this Mesh.
- * @param {number[]} uv - An array containing the uv data for this Mesh.
- * @param {number[]} colors - An array containing the color data for this Mesh.
- * @param {number[]} alphas - An array containing the alpha data for this Mesh.
- * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
- * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+ * @param {number} [x=0] - The horizontal position of this Game Object in the world.
+ * @param {number} [y=0] - The vertical position of this Game Object in the world.
+ * @param {string} [texture] - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager. If not given, `__DEFAULT` is used.
+ * @param {(string|integer|null)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+ * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created. See `setPoints` to set this post-creation.
+ * @param {boolean} [horizontal=true] - Should the vertices of this Rope be aligned horizontally (`true`), or vertically (`false`)?
+ * @param {number[]} [colors] - An optional array containing the color data for this Rope. You should provide one color value per pair of vertices.
+ * @param {number[]} [alphas] - An optional array containing the alpha data for this Rope. You should provide one alpha value per pair of vertices.
  */
-@:native("Phaser.GameObjects.Mesh")
-extern class Mesh extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:String, ?frame:Dynamic);
+@:native("Phaser.GameObjects.Rope")
+extern class Rope extends phaser.gameobjects.GameObject {
+    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?texture:String, ?frame:Dynamic, ?points:Dynamic, ?horizontal:Bool, ?colors:Array<Float>, ?alphas:Array<Float>);
     /**
-     * An array containing the vertices data for this Mesh.
+     * The Animation Controller of this Rope.
      *
-     * @name Phaser.GameObjects.Mesh#vertices
+     * @name Phaser.GameObjects.Rope#anims
+     * @type {Phaser.GameObjects.Components.Animation}
+     * @since 3.23.0
+     */
+    public var anims:phaser.gameobjects.components.Animation;
+    /**
+     * An array containing the points data for this Rope.
+     *
+     * Each point should be given as a Vector2Like object (i.e. a Vector2, Geom.Point or object with public x/y properties).
+     *
+     * The point coordinates are given in local space, where 0 x 0 is the start of the Rope strip.
+     *
+     * You can modify the contents of this array directly in real-time to create interesting effects.
+     * If you do so, be sure to call `setDirty` _after_ modifying this array, so that the vertices data is
+     * updated before the next render. Alternatively, you can use the `setPoints` method instead.
+     *
+     * Should you need to change the _size_ of this array, then you should always use the `setPoints` method.
+     *
+     * @name Phaser.GameObjects.Rope#points
+     * @type {Phaser.Types.Math.Vector2Like[]}
+     * @since 3.23.0
+     */
+    public var points:Array<phaser.types.math.Vector2Like>;
+    /**
+     * An array containing the vertices data for this Rope.
+     *
+     * This data is calculated automatically in the `updateVertices` method, based on the points provided.
+     *
+     * @name Phaser.GameObjects.Rope#vertices
      * @type {Float32Array}
-     * @since 3.0.0
+     * @since 3.23.0
      */
     public var vertices:js.lib.Float32Array;
     /**
-     * An array containing the uv data for this Mesh.
+     * An array containing the uv data for this Rope.
      *
-     * @name Phaser.GameObjects.Mesh#uv
+     * This data is calculated automatically in the `setPoints` method, based on the points provided.
+     *
+     * @name Phaser.GameObjects.Rope#uv
      * @type {Float32Array}
-     * @since 3.0.0
+     * @since 3.23.0
      */
     public var uv:js.lib.Float32Array;
     /**
-     * An array containing the color data for this Mesh.
+     * An array containing the color data for this Rope.
      *
-     * @name Phaser.GameObjects.Mesh#colors
+     * Colors should be given as numeric RGB values, such as 0xff0000.
+     * You should provide _two_ color values for every point in the Rope, one for the top and one for the bottom of each quad.
+     *
+     * You can modify the contents of this array directly in real-time, however, should you need to change the _size_
+     * of the array, then you should use the `setColors` method instead.
+     *
+     * @name Phaser.GameObjects.Rope#colors
      * @type {Uint32Array}
-     * @since 3.0.0
+     * @since 3.23.0
      */
     public var colors:js.lib.Uint32Array;
     /**
-     * An array containing the alpha data for this Mesh.
+     * An array containing the alpha data for this Rope.
      *
-     * @name Phaser.GameObjects.Mesh#alphas
+     * Alphas should be given as float values, such as 0.5.
+     * You should provide _two_ alpha values for every point in the Rope, one for the top and one for the bottom of each quad.
+     *
+     * You can modify the contents of this array directly in real-time, however, should you need to change the _size_
+     * of the array, then you should use the `setAlphas` method instead.
+     *
+     * @name Phaser.GameObjects.Rope#alphas
      * @type {Float32Array}
-     * @since 3.0.0
+     * @since 3.23.0
      */
     public var alphas:js.lib.Float32Array;
     /**
-     * Fill or additive mode used when blending the color values?
+     * The tint fill mode.
      *
-     * @name Phaser.GameObjects.Mesh#tintFill
-     * @type {boolean}
-     * @default false
-     * @since 3.11.0
+     * 0 = An additive tint (the default), where vertices colors are blended with the texture.
+     * 1 = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
+     * 2 = A complete tint, where the vertices colors replace the texture, including alpha, entirely.
+     *
+     * @name Phaser.GameObjects.Rope#tintFill
+     * @type {integer}
+     * @since 3.23.0
      */
-    public var tintFill:Bool;
+    public var tintFill:Int;
     /**
-     * This method is left intentionally empty and does not do anything.
-     * It is retained to allow a Mesh or Quad to be added to a Container.
+     * If the Rope is marked as `dirty` it will automatically recalculate its vertices
+     * the next time it renders. You can also force this by calling `updateVertices`.
      *
-     * @method Phaser.GameObjects.Mesh#setAlpha
-     * @since 3.17.0
+     * @name Phaser.GameObjects.Rope#dirty
+     * @type {boolean}
+     * @since 3.23.0
      */
-    public function setAlpha():Void;
+    public var dirty:Bool;
+    /**
+     * Are the Rope vertices aligned horizontally, in a strip, or vertically, in a column?
+     *
+     * This property is set during instantiation and cannot be changed directly.
+     * See the `setVertical` and `setHorizontal` methods.
+     *
+     * @name Phaser.GameObjects.Rope#horizontal
+     * @type {boolean}
+     * @readonly
+     * @since 3.23.0
+     */
+    public var horizontal:Bool;
+    /**
+     * You can optionally choose to render the vertices of this Rope to a Graphics instance.
+     *
+     * Achieve this by setting the `debugCallback` and the `debugGraphic` properties.
+     *
+     * You can do this in a single call via the `Rope.setDebug` method, which will use the
+     * built-in debug function. You can also set it to your own callback. The callback
+     * will be invoked _once per render_ and sent the following parameters:
+     *
+     * `debugCallback(src, meshLength, verts)`
+     *
+     * `src` is the Rope instance being debugged.
+     * `meshLength` is the number of mesh vertices in total.
+     * `verts` is an array of the translated vertex coordinates.
+     *
+     * To disable rendering, set this property back to `null`.
+     *
+     * @name Phaser.GameObjects.Rope#debugCallback
+     * @type {function}
+     * @since 3.23.0
+     */
+    public var debugCallback:Dynamic;
+    /**
+     * The Graphics instance that the debug vertices will be drawn to, if `setDebug` has
+     * been called.
+     *
+     * @name Phaser.GameObjects.Rope#debugGraphic
+     * @type {Phaser.GameObjects.Graphics}
+     * @since 3.23.0
+     */
+    public var debugGraphic:phaser.gameobjects.Graphics;
+    /**
+     * The Rope update loop.
+     *
+     * @method Phaser.GameObjects.Rope#preUpdate
+     * @protected
+     * @since 3.23.0
+     *
+     * @param {number} time - The current timestamp.
+     * @param {number} delta - The delta time, in ms, elapsed since the last frame.
+     */
+    public function preUpdate(time:Float, delta:Float):Void;
+    /**
+     * Start playing the given animation.
+     *
+     * @method Phaser.GameObjects.Rope#play
+     * @since 3.23.0
+     *
+     * @param {string} key - The string-based key of the animation to play.
+     * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
+     * @param {integer} [startFrame=0] - Optionally start the animation playing from this frame index.
+     *
+     * @return {this} This Game Object.
+     */
+    public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):Dynamic;
+    /**
+     * Flags this Rope as being dirty. A dirty rope will recalculate all of its vertices data
+     * the _next_ time it renders. You should set this rope as dirty if you update the points
+     * array directly.
+     *
+     * @method Phaser.GameObjects.Rope#setDirty
+     * @since 3.23.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setDirty():Dynamic;
+    /**
+     * Sets the alignment of the points in this Rope to be horizontal, in a strip format.
+     *
+     * Calling this method will reset this Rope. The current points, vertices, colors and alpha
+     * values will be reset to thoes values given as parameters.
+     *
+     * @method Phaser.GameObjects.Rope#setHorizontal
+     * @since 3.23.0
+     *
+     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
+     * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
+     * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setHorizontal(?points:Dynamic, ?colors:Dynamic, ?alphas:Dynamic):Dynamic;
+    /**
+     * Sets the alignment of the points in this Rope to be vertical, in a column format.
+     *
+     * Calling this method will reset this Rope. The current points, vertices, colors and alpha
+     * values will be reset to thoes values given as parameters.
+     *
+     * @method Phaser.GameObjects.Rope#setVertical
+     * @since 3.23.0
+     *
+     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
+     * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
+     * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setVertical(?points:Dynamic, ?colors:Dynamic, ?alphas:Dynamic):Dynamic;
+    /**
+     * Sets the tint fill mode.
+     *
+     * Mode 0 is an additive tint, the default, which blends the vertices colors with the texture.
+     * This mode respects the texture alpha.
+     *
+     * Mode 1 is a fill tint. Unlike an additive tint, a fill-tint literally replaces the pixel colors
+     * from the texture with those in the tint. You can use this for effects such as making a player flash 'white'
+     * if hit by something. This mode respects the texture alpha.
+     *
+     * Mode 2 is a complete tint. The texture colors and alpha are replaced entirely by the vertices colors.
+     *
+     * See the `setColors` method for details of how to color each of the vertices.
+     *
+     * @method Phaser.GameObjects.Rope#setTintFill
+     * @webglOnly
+     * @since 3.23.0
+     *
+     * @param {integer} [value=0] - Set to 0 for an Additive tint, 1 for a fill tint with alpha, or 2 for a fill tint without alpha.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setTintFill(?value:Int):Dynamic;
+    /**
+     * Set the alpha values used by the Rope during rendering.
+     *
+     * You can provide the values in a number of ways:
+     *
+     * 1) One single numeric value: `setAlphas(0.5)` - This will set a single alpha for the whole Rope.
+     * 2) Two numeric value: `setAlphas(1, 0.5)` - This will set a 'top' and 'bottom' alpha value across the whole Rope.
+     * 3) An array of values: `setAlphas([ 1, 0.5, 0.2 ])`
+     *
+     * If you provide an array of values and the array has exactly the same number of values as `points` in the Rope, it
+     * will use each alpha value per rope segment.
+     *
+     * If the provided array has a different number of values than `points` then it will use the values in order, from
+     * the first Rope segment and on, until it runs out of values. This allows you to control the alpha values at all
+     * vertices in the Rope.
+     *
+     * Note this method is called `setAlphas` (plural) and not `setAlpha`.
+     *
+     * @method Phaser.GameObjects.Rope#setAlphas
+     * @since 3.23.0
+     *
+     * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values. If nothing is provided alpha is reset to 1.
+     * @param {number} [bottomAlpha] - An optional bottom alpha value. See the method description for details.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setAlphas(?alphas:Dynamic, ?bottomAlpha:Float):Dynamic;
+    /**
+     * Set the color values used by the Rope during rendering.
+     *
+     * Colors are used to control the level of tint applied across the Rope texture.
+     *
+     * You can provide the values in a number of ways:
+     *
+     * * One single numeric value: `setColors(0xff0000)` - This will set a single color tint for the whole Rope.
+     * * An array of values: `setColors([ 0xff0000, 0x00ff00, 0x0000ff ])`
+     *
+     * If you provide an array of values and the array has exactly the same number of values as `points` in the Rope, it
+     * will use each color per rope segment.
+     *
+     * If the provided array has a different number of values than `points` then it will use the values in order, from
+     * the first Rope segment and on, until it runs out of values. This allows you to control the color values at all
+     * vertices in the Rope.
+     *
+     * @method Phaser.GameObjects.Rope#setColors
+     * @since 3.23.0
+     *
+     * @param {(number|number[])} [colors] - Either a single color value, or an array of values. If nothing is provided color is reset to 0xffffff.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setColors(?colors:Dynamic):Dynamic;
+    /**
+     * Sets the points used by this Rope.
+     *
+     * The points should be provided as an array of Vector2, or vector2-like objects (i.e. those with public x/y properties).
+     *
+     * Each point corresponds to one segment of the Rope. The more points in the array, the more segments the rope has.
+     *
+     * Point coordinates are given in local-space, not world-space, and are directly related to the size of the texture
+     * this Rope object is using.
+     *
+     * For example, a Rope using a 512 px wide texture, split into 4 segments (128px each) would use the following points:
+     *
+     * ```javascript
+     * rope.setPoints([
+     *   { x: 0, y: 0 },
+     *   { x: 128, y: 0 },
+     *   { x: 256, y: 0 },
+     *   { x: 384, y: 0 }
+     * ]);
+     * ```
+     *
+     * Or, you can provide an integer to do the same thing:
+     *
+     * ```javascript
+     * rope.setPoints(4);
+     * ```
+     *
+     * Which will divide the Rope into 4 equally sized segments based on the frame width.
+     *
+     * Note that calling this method with a different number of points than the Rope has currently will
+     * _reset_ the color and alpha values, unless you provide them as arguments to this method.
+     *
+     * @method Phaser.GameObjects.Rope#setPoints
+     * @since 3.23.0
+     *
+     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created.
+     * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
+     * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPoints(?points:Dynamic, ?colors:Dynamic, ?alphas:Dynamic):Dynamic;
+    /**
+     * Updates all of the UVs based on the Rope.points and `flipX` and `flipY` settings.
+     *
+     * @method Phaser.GameObjects.Rope#updateUVs
+     * @since 3.23.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function updateUVs():Dynamic;
+    /**
+     * Resizes all of the internal arrays: `vertices`, `uv`, `colors` and `alphas` to the new
+     * given Rope segment total.
+     *
+     * @method Phaser.GameObjects.Rope#resizeArrays
+     * @since 3.23.0
+     *
+     * @param {integer} newSize - The amount of segments to split the Rope in to.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function resizeArrays(newSize:Int):Dynamic;
+    /**
+     * Updates the vertices based on the Rope points.
+     *
+     * This method is called automatically during rendering if `Rope.dirty` is `true`, which is set
+     * by the `setPoints` and `setDirty` methods. You should flag the Rope as being dirty if you modify
+     * the Rope points directly.
+     *
+     * @method Phaser.GameObjects.Rope#updateVertices
+     * @since 3.23.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function updateVertices():Dynamic;
+    /**
+     * This method enables rendering of the Rope vertices to the given Graphics instance.
+     *
+     * If you enable this feature, you must call `Graphics.clear()` in your Scene `update`,
+     * otherwise the Graphics instance will fill-in with draw calls. This is not done automatically
+     * to allow for you to debug render multiple Rope objects to a single Graphics instance.
+     *
+     * The Rope class has a built-in debug rendering callback `Rope.renderDebugVerts`, however
+     * you can also provide your own callback to be used instead. Do this by setting the `callback` parameter.
+     *
+     * The callback is invoked _once per render_ and sent the following parameters:
+     *
+     * `callback(src, meshLength, verts)`
+     *
+     * `src` is the Rope instance being debugged.
+     * `meshLength` is the number of mesh vertices in total.
+     * `verts` is an array of the translated vertex coordinates.
+     *
+     * If using your own callback you do not have to provide a Graphics instance to this method.
+     *
+     * To disable debug rendering, to either your own callback or the built-in one, call this method
+     * with no arguments.
+     *
+     * @method Phaser.GameObjects.Rope#setDebug
+     * @since 3.23.0
+     *
+     * @param {Phaser.GameObjects.Graphics} [graphic] - The Graphic instance to render to if using the built-in callback.
+     * @param {function} [callback] - The callback to invoke during debug render. Leave as undefined to use the built-in callback.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setDebug(?graphic:phaser.gameobjects.Graphics, ?callback:Dynamic):Dynamic;
+    /**
+     * The built-in Rope vertices debug rendering method.
+     *
+     * See `Rope.setDebug` for more details.
+     *
+     * @method Phaser.GameObjects.Rope#renderDebugVerts
+     * @since 3.23.0
+     *
+     * @param {Phaser.GameObjects.Rope} src - The Rope object being rendered.
+     * @param {integer} meshLength - The number of vertices in the mesh.
+     * @param {number[]} verts - An array of translated vertex coordinates.
+     */
+    public function renderDebugVerts(src:phaser.gameobjects.Rope, meshLength:Int, verts:Array<Float>):Void;
+    /**
+     * The alpha value of the Game Object.
+     *
+     * This is a global value, impacting the entire Game Object, not just a region of it.
+     *
+     * @name Phaser.GameObjects.Components.AlphaSingle#alpha
+     * @type {number}
+     * @since 3.0.0
+     */
+    public var alpha:Float;
+    /**
+     * Clears all alpha values associated with this Game Object.
+     *
+     * Immediately sets the alpha levels back to 1 (fully opaque).
+     *
+     * @method Phaser.GameObjects.Components.AlphaSingle#clearAlpha
+     * @since 3.0.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function clearAlpha():Dynamic;
+    /**
+     * Set the Alpha level of this Game Object. The alpha controls the opacity of the Game Object as it renders.
+     * Alpha values are provided as a float between 0, fully transparent, and 1, fully opaque.
+     *
+     * @method Phaser.GameObjects.Components.AlphaSingle#setAlpha
+     * @since 3.0.0
+     *
+     * @param {number} [value=1] - The alpha value applied across the whole Game Object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setAlpha(?value:Float):Dynamic;
     /**
      * Sets the Blend Mode being used by this Game Object.
      *
@@ -173,6 +569,105 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setDepth(value:Int):Dynamic;
+    /**
+     * The horizontally flipped state of the Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
+     *
+     * @name Phaser.GameObjects.Components.Flip#flipX
+     * @type {boolean}
+     * @default false
+     * @since 3.0.0
+     */
+    public var flipX:Bool;
+    /**
+     * The vertically flipped state of the Game Object.
+     *
+     * A Game Object that is flipped vertically will render inversed on the vertical axis (i.e. upside down)
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
+     *
+     * @name Phaser.GameObjects.Components.Flip#flipY
+     * @type {boolean}
+     * @default false
+     * @since 3.0.0
+     */
+    public var flipY:Bool;
+    /**
+     * Toggles the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
+     *
+     * @method Phaser.GameObjects.Components.Flip#toggleFlipX
+     * @since 3.0.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function toggleFlipX():Dynamic;
+    /**
+     * Toggles the vertical flipped state of this Game Object.
+     *
+     * @method Phaser.GameObjects.Components.Flip#toggleFlipY
+     * @since 3.0.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function toggleFlipY():Dynamic;
+    /**
+     * Sets the horizontal flipped state of this Game Object.
+     *
+     * A Game Object that is flipped horizontally will render inversed on the horizontal axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
+     *
+     * @method Phaser.GameObjects.Components.Flip#setFlipX
+     * @since 3.0.0
+     *
+     * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setFlipX(value:Bool):Dynamic;
+    /**
+     * Sets the vertical flipped state of this Game Object.
+     *
+     * @method Phaser.GameObjects.Components.Flip#setFlipY
+     * @since 3.0.0
+     *
+     * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setFlipY(value:Bool):Dynamic;
+    /**
+     * Sets the horizontal and vertical flipped state of this Game Object.
+     *
+     * A Game Object that is flipped will render inversed on the flipped axis.
+     * Flipping always takes place from the middle of the texture and does not impact the scale value.
+     * If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.
+     *
+     * @method Phaser.GameObjects.Components.Flip#setFlip
+     * @since 3.0.0
+     *
+     * @param {boolean} x - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
+     * @param {boolean} y - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setFlip(x:Bool, y:Bool):Dynamic;
+    /**
+     * Resets the horizontal and vertical flipped state of this Game Object back to their default un-flipped state.
+     *
+     * @method Phaser.GameObjects.Components.Flip#resetFlip
+     * @since 3.0.0
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function resetFlip():Dynamic;
     /**
      * The Mask this Game Object is using during render.
      *

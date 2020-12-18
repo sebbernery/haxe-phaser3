@@ -90,9 +90,9 @@ extern class Zone extends phaser.gameobjects.GameObject {
      * @param {number} height - The height of this Game Object.
      * @param {boolean} [resizeInput=true] - If this Zone has a Rectangle for a hit area this argument will resize the hit area as well.
      *
-     * @return {Phaser.GameObjects.Zone} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setSize(width:Float, height:Float, ?resizeInput:Bool):phaser.gameobjects.Zone;
+    public function setSize(width:Float, height:Float, ?resizeInput:Bool):Dynamic;
     /**
      * Sets the display size of this Game Object.
      * Calling this will adjust the scale.
@@ -103,9 +103,9 @@ extern class Zone extends phaser.gameobjects.GameObject {
      * @param {number} width - The width of this Game Object.
      * @param {number} height - The height of this Game Object.
      *
-     * @return {Phaser.GameObjects.Zone} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setDisplaySize(width:Float, height:Float):phaser.gameobjects.Zone;
+    public function setDisplaySize(width:Float, height:Float):Dynamic;
     /**
      * Sets this Zone to be a Circular Drop Zone.
      * The circle is centered on this Zones `x` and `y` coordinates.
@@ -115,9 +115,9 @@ extern class Zone extends phaser.gameobjects.GameObject {
      *
      * @param {number} radius - The radius of the Circle that will form the Drop Zone.
      *
-     * @return {Phaser.GameObjects.Zone} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setCircleDropZone(radius:Float):phaser.gameobjects.Zone;
+    public function setCircleDropZone(radius:Float):Dynamic;
     /**
      * Sets this Zone to be a Rectangle Drop Zone.
      * The rectangle is centered on this Zones `x` and `y` coordinates.
@@ -128,9 +128,9 @@ extern class Zone extends phaser.gameobjects.GameObject {
      * @param {number} width - The width of the rectangle drop zone.
      * @param {number} height - The height of the rectangle drop zone.
      *
-     * @return {Phaser.GameObjects.Zone} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setRectangleDropZone(width:Float, height:Float):phaser.gameobjects.Zone;
+    public function setRectangleDropZone(width:Float, height:Float):Dynamic;
     /**
      * Allows you to define your own Geometry shape to be used as a Drop Zone.
      *
@@ -140,9 +140,9 @@ extern class Zone extends phaser.gameobjects.GameObject {
      * @param {object} shape - A Geometry shape instance, such as Phaser.Geom.Ellipse, or your own custom shape.
      * @param {Phaser.Types.Input.HitAreaCallback} callback - A function that will return `true` if the given x/y coords it is sent are within the shape.
      *
-     * @return {Phaser.GameObjects.Zone} This Game Object.
+     * @return {this} This Game Object.
      */
-    public function setDropZone(shape:Dynamic, callback:phaser.types.input.HitAreaCallback):phaser.gameobjects.Zone;
+    public function setDropZone(shape:Dynamic, callback:phaser.types.input.HitAreaCallback):Dynamic;
     /**
      * The depth of this Game Object within the Scene.
      *
@@ -503,8 +503,8 @@ extern class Zone extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object in radians.
      *
-     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
-     * and -90 is up.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, PI/2 is down, +-PI is left
+     * and -PI/2 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *

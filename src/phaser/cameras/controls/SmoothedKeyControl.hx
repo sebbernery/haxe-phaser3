@@ -175,18 +175,18 @@ extern class SmoothedKeyControl {
      * @method Phaser.Cameras.Controls.SmoothedKeyControl#start
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Controls.SmoothedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function start():phaser.cameras.controls.SmoothedKeyControl;
+    public function start():Dynamic;
     /**
      * Stops this Key Control from running. Call `start` to start it again.
      *
      * @method Phaser.Cameras.Controls.SmoothedKeyControl#stop
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Controls.SmoothedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function stop():phaser.cameras.controls.SmoothedKeyControl;
+    public function stop():Dynamic;
     /**
      * Binds this Key Control to a camera.
      *
@@ -195,9 +195,9 @@ extern class SmoothedKeyControl {
      *
      * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera to bind this Key Control to.
      *
-     * @return {Phaser.Cameras.Controls.SmoothedKeyControl} This Key Control instance.
+     * @return {this} This Key Control instance.
      */
-    public function setCamera(camera:phaser.cameras.scene2d.Camera):phaser.cameras.controls.SmoothedKeyControl;
+    public function setCamera(camera:phaser.cameras.scene2d.Camera):Dynamic;
     /**
      * Applies the results of pressing the control keys to the Camera.
      *

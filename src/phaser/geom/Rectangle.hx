@@ -331,6 +331,23 @@ extern class Rectangle {
      */
     static public function FromPoints(points:Array<Dynamic>, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
+     * Create the smallest Rectangle containing two coordinate pairs.
+     *
+     * @function Phaser.Geom.Rectangle.FromXY
+     * @since 3.23.0
+     *
+     * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+     *
+     * @param {number} x1 - The X coordinate of the first point.
+     * @param {number} y1 - The Y coordinate of the first point.
+     * @param {number} x2 - The X coordinate of the second point.
+     * @param {number} y2 - The Y coordinate of the second point.
+     * @param {Phaser.Geom.Rectangle} [out] - Optional Rectangle to adjust.
+     *
+     * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
+     */
+    static public function FromXY(x1:Float, y1:Float, x2:Float, y2:Float, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
+    /**
      * Calculates the width/height ratio of a rectangle.
      *
      * @function Phaser.Geom.Rectangle.GetAspectRatio
@@ -356,18 +373,22 @@ extern class Rectangle {
      */
     static public function GetCenter(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
     /**
-     * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.
+     * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
+     *
+     * The `position` is a fraction between 0 and 1 which defines how far into the perimeter the point is.
+     *
+     * A value of 0 or 1 returns the point at the top left corner of the rectangle, while a value of 0.5 returns the point at the bottom right corner of the rectangle. Values between 0 and 0.5 are on the top or the right side and values between 0.5 and 1 are on the bottom or the left side.
      *
      * @function Phaser.Geom.Rectangle.GetPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Rectangle} rectangle - [description]
-     * @param {number} position - [description]
-     * @param {(Phaser.Geom.Point|object)} [out] - [description]
+     * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
+     * @param {number} position - The normalized distance into the Rectangle's perimeter to return.
+     * @param {(Phaser.Geom.Point|object)} [out] - An object to update with the `x` and `y` coordinates of the point.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} The updated `output` object, or a new Point if no `output` object was given.
      */
     static public function GetPoint(rectangle:phaser.geom.Rectangle, position:Float, ?out:Dynamic):phaser.geom.Point;
     /**
@@ -387,18 +408,18 @@ extern class Rectangle {
      */
     static public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
     /**
-     *  The size of the Rectangle object, expressed as a Point object
-     *  with the values of the width and height properties.
+     * Returns the size of the Rectangle, expressed as a Point object.
+     * With the value of the `width` as the `x` property and the `height` as the `y` property.
      *
      * @function Phaser.Geom.Rectangle.GetSize
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Rectangle} rect - [description]
-     * @param {(Phaser.Geom.Point|object)} [out] - [description]
+     * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the size from.
+     * @param {(Phaser.Geom.Point|object)} [out] - The Point object to store the size in. If not given, a new Point instance is created.
      *
-     * @return {(Phaser.Geom.Point|object)} [description]
+     * @return {(Phaser.Geom.Point|object)} A Point object where `x` holds the width and `y` holds the height of the Rectangle.
      */
     static public function GetSize(rect:phaser.geom.Rectangle, ?out:Dynamic):phaser.geom.Point;
     /**
@@ -436,22 +457,22 @@ extern class Rectangle {
      */
     static public function Intersection(rectA:phaser.geom.Rectangle, rectB:phaser.geom.Rectangle, ?out:phaser.geom.Rectangle):phaser.geom.Rectangle;
     /**
-     *  Return an array of points from the perimeter of the rectangle
-     *  each spaced out based on the quantity or step required
+     * Returns an array of points from the perimeter of the Rectangle, where each point is spaced out based
+     * on either the `step` value, or the `quantity`.
      *
      * @function Phaser.Geom.Rectangle.MarchingAnts
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point[]} O - [out,$return]
      *
-     * @param {Phaser.Geom.Rectangle} rect - [description]
-     * @param {number} step - [description]
-     * @param {integer} quantity - [description]
-     * @param {(array|Phaser.Geom.Point[])} [out] - [description]
+     * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the perimeter points from.
+     * @param {number} [step] - The distance between each point of the perimeter. Set to `null` if you wish to use the `quantity` parameter instead.
+     * @param {integer} [quantity] - The total number of points to return. The step is then calculated based on the length of the Rectangle, divided by this value.
+     * @param {(array|Phaser.Geom.Point[])} [out] - An array in which the perimeter points will be stored. If not given, a new array instance is created.
      *
-     * @return {(array|Phaser.Geom.Point[])} [description]
+     * @return {(array|Phaser.Geom.Point[])} An array containing the perimeter points from the Rectangle.
      */
-    static public function MarchingAnts(rect:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
+    static public function MarchingAnts(rect:phaser.geom.Rectangle, ?step:Float, ?quantity:Int, ?out:Dynamic):Array<Dynamic>;
     /**
      * Merges a Rectangle with a list of points by repositioning and/or resizing it such that all points are located on or within its bounds.
      *
@@ -549,18 +570,18 @@ extern class Rectangle {
      */
     static public function Perimeter(rect:phaser.geom.Rectangle):Float;
     /**
-     * [description]
+     * Returns a Point from the perimeter of a Rectangle based on the given angle.
      *
      * @function Phaser.Geom.Rectangle.PerimeterPoint
      * @since 3.0.0
      *
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
-     * @param {Phaser.Geom.Rectangle} rectangle - [description]
-     * @param {integer} angle - [description]
-     * @param {Phaser.Geom.Point} [out] - [description]
+     * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
+     * @param {integer} angle - The angle of the point, in degrees.
+     * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
      *
-     * @return {Phaser.Geom.Point} [description]
+     * @return {Phaser.Geom.Point} A Point object holding the coordinates of the Rectangle perimeter.
      */
     static public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
@@ -662,18 +683,18 @@ extern class Rectangle {
      * @param {number} width - The width of the Rectangle.
      * @param {number} height - The height of the Rectangle.
      *
-     * @return {Phaser.Geom.Rectangle} This Rectangle object.
+     * @return {this} This Rectangle object.
      */
-    public function setTo(x:Float, y:Float, width:Float, height:Float):phaser.geom.Rectangle;
+    public function setTo(x:Float, y:Float, width:Float, height:Float):Dynamic;
     /**
      * Resets the position, width, and height of the Rectangle to 0.
      *
      * @method Phaser.Geom.Rectangle#setEmpty
      * @since 3.0.0
      *
-     * @return {Phaser.Geom.Rectangle} This Rectangle object.
+     * @return {this} This Rectangle object.
      */
-    public function setEmpty():phaser.geom.Rectangle;
+    public function setEmpty():Dynamic;
     /**
      * Sets the position of the Rectangle.
      *
@@ -683,9 +704,9 @@ extern class Rectangle {
      * @param {number} x - The X coordinate of the top left corner of the Rectangle.
      * @param {number} [y=x] - The Y coordinate of the top left corner of the Rectangle.
      *
-     * @return {Phaser.Geom.Rectangle} This Rectangle object.
+     * @return {this} This Rectangle object.
      */
-    public function setPosition(x:Float, ?y:Float):phaser.geom.Rectangle;
+    public function setPosition(x:Float, ?y:Float):Dynamic;
     /**
      * Sets the width and height of the Rectangle.
      *
@@ -695,9 +716,9 @@ extern class Rectangle {
      * @param {number} width - The width to set the Rectangle to.
      * @param {number} [height=width] - The height to set the Rectangle to.
      *
-     * @return {Phaser.Geom.Rectangle} This Rectangle object.
+     * @return {this} This Rectangle object.
      */
-    public function setSize(width:Float, ?height:Float):phaser.geom.Rectangle;
+    public function setSize(width:Float, ?height:Float):Dynamic;
     /**
      * Determines if the Rectangle is empty. A Rectangle is empty if its width or height is less than or equal to 0.
      *

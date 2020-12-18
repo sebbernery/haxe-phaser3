@@ -264,28 +264,28 @@ extern class Curve {
      */
     public function getTangentAt(u:Float, ?out:phaser.math.Vector2):phaser.math.Vector2;
     /**
-     * [description]
+     * Given a distance in pixels, get a t to find p.
      *
      * @method Phaser.Curves.Curve#getTFromDistance
      * @since 3.0.0
      *
-     * @param {integer} distance - [description]
-     * @param {integer} [divisions] - [description]
+     * @param {integer} distance - The distance, in pixels.
+     * @param {integer} [divisions] - Optional amount of divisions.
      *
-     * @return {number} [description]
+     * @return {number} The distance.
      */
     public function getTFromDistance(distance:Int, ?divisions:Int):Float;
     /**
-     * [description]
+     * Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equidistant.
      *
      * @method Phaser.Curves.Curve#getUtoTmapping
      * @since 3.0.0
      *
-     * @param {number} u - [description]
-     * @param {integer} distance - [description]
-     * @param {integer} [divisions] - [description]
+     * @param {number} u - A float between 0 and 1.
+     * @param {integer} distance - The distance, in pixels.
+     * @param {integer} [divisions] - Optional amount of divisions.
      *
-     * @return {number} [description]
+     * @return {number} The equidistant value.
      */
     public function getUtoTmapping(u:Float, distance:Int, ?divisions:Int):Float;
     /**

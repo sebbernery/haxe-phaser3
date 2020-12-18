@@ -145,9 +145,9 @@ extern class TouchManager {
      * @method Phaser.Input.Touch.TouchManager#disableContextMenu
      * @since 3.20.0
      *
-     * @return {Phaser.Input.Touch.TouchManager} This Touch Manager instance.
+     * @return {this} This Touch Manager instance.
      */
-    public function disableContextMenu():phaser.input.touch.TouchManager;
+    public function disableContextMenu():Dynamic;
     /**
      * Starts the Touch Event listeners running as long as an input target is set.
      *

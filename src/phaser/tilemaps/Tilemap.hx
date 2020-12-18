@@ -1037,11 +1037,10 @@ extern class Tilemap {
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The target Graphics object to draw upon.
      * @param {Phaser.Types.Tilemaps.StyleConfig} styleConfig - An object specifying the colors to use for the debug drawing.
-     * @param {(string|integer|Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} [layer] - The tile layer to use. If not given the current layer is used.
      *
      * @return {?Phaser.Tilemaps.Tilemap} Return this Tilemap object, or null if the layer given was invalid.
      */
-    public function renderDebugFull(graphics:phaser.gameobjects.Graphics, styleConfig:phaser.types.tilemaps.StyleConfig, ?layer:Dynamic):phaser.tilemaps.Tilemap;
+    public function renderDebugFull(graphics:phaser.gameobjects.Graphics, styleConfig:phaser.types.tilemaps.StyleConfig):phaser.tilemaps.Tilemap;
     /**
      * Scans the given rectangular area (given in tile coordinates) for tiles with an index matching
      * `findIndex` and updates their index to match `newIndex`. This only modifies the index and does

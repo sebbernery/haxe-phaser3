@@ -269,10 +269,10 @@ extern class Body {
      */
     public var allowDrag:Bool;
     /**
-     * Absolute loss of velocity due to movement, in pixels per second squared.
+     * When `useDamping` is false (the default), this is absolute loss of velocity due to movement, in pixels per second squared (a vector).
      * The x and y components are applied separately.
      *
-     * When `useDamping` is true, this is 1 minus the damping factor.
+     * When `useDamping` is true, this is 1 minus the damping factor (a number).
      * A value of 1 means the Body loses no velocity.
      * A value of 0.95 means the Body loses 5% of its velocity per step.
      * A value of 0.5 means the Body loses 50% of its velocity per step.
@@ -343,7 +343,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#worldboundsEvent
+     * @see Phaser.Physics.Arcade.World#WORLD_BOUNDS
      */
     public var onWorldBounds:Bool;
     /**
@@ -353,7 +353,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#collideEvent
+     * @see Phaser.Physics.Arcade.World#COLLIDE
      */
     public var onCollide:Bool;
     /**
@@ -363,7 +363,7 @@ extern class Body {
      * @type {boolean}
      * @default false
      * @since 3.0.0
-     * @see Phaser.Physics.Arcade.World#overlapEvent
+     * @see Phaser.Physics.Arcade.World#OVERLAP
      */
     public var onOverlap:Bool;
     /**

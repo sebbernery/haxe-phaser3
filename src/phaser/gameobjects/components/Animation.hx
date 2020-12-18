@@ -294,9 +294,9 @@ extern class Animation {
      * Load an Animation and fires 'onStartEvent' event, extracted from 'play' method.
      *
      * @method Phaser.GameObjects.Components.Animation#_startAnimation
-     * @fires Phaser.Animations.Events#START_ANIMATION_EVENT
-     * @fires Phaser.Animations.Events#SPRITE_START_ANIMATION_EVENT
-     * @fires Phaser.Animations.Events#SPRITE_START_KEY_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#ANIMATION_START
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_START
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_KEY_START
      * @since 3.12.0
      *
      * @param {string} key - The string-based key of the animation to play, as defined previously in the Animation Manager.
@@ -400,9 +400,9 @@ extern class Animation {
      * Restarts the current animation from its beginning, optionally including its delay value.
      *
      * @method Phaser.GameObjects.Components.Animation#restart
-     * @fires Phaser.Animations.Events#RESTART_ANIMATION_EVENT
-     * @fires Phaser.Animations.Events#SPRITE_RESTART_ANIMATION_EVENT
-     * @fires Phaser.Animations.Events#SPRITE_RESTART_KEY_ANIMATION_EVENT
+     * @fires Phaser.Animations.Events#ANIMATION_RESTART
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_RESTART
+     * @fires Phaser.Animations.Events#SPRITE_ANIMATION_KEY_RESTART
      * @since 3.0.0
      *
      * @param {boolean} [includeDelay=false] - Whether to include the delay value of the animation when restarting.

@@ -85,9 +85,9 @@ extern class EdgeZone {
      * @method Phaser.GameObjects.Particles.Zones.EdgeZone#updateSource
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Particles.Zones.EdgeZone} This Edge Zone.
+     * @return {this} This Edge Zone.
      */
-    public function updateSource():phaser.gameobjects.particles.zones.EdgeZone;
+    public function updateSource():Dynamic;
     /**
      * Change the source of the EdgeZone.
      *
@@ -96,9 +96,9 @@ extern class EdgeZone {
      *
      * @param {Phaser.Types.GameObjects.Particles.EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
      *
-     * @return {Phaser.GameObjects.Particles.Zones.EdgeZone} This Edge Zone.
+     * @return {this} This Edge Zone.
      */
-    public function changeSource(source:phaser.types.gameobjects.particles.EdgeZoneSource):phaser.gameobjects.particles.zones.EdgeZone;
+    public function changeSource(source:phaser.types.gameobjects.particles.EdgeZoneSource):Dynamic;
     /**
      * Get the next point in the Zone and set its coordinates on the given Particle.
      *

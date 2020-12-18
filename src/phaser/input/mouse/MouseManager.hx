@@ -164,9 +164,9 @@ extern class MouseManager {
      * @method Phaser.Input.Mouse.MouseManager#disableContextMenu
      * @since 3.0.0
      *
-     * @return {Phaser.Input.Mouse.MouseManager} This Mouse Manager instance.
+     * @return {this} This Mouse Manager instance.
      */
-    public function disableContextMenu():phaser.input.mouse.MouseManager;
+    public function disableContextMenu():Dynamic;
     /**
      * If the browser supports it, you can request that the pointer be locked to the browser window.
      *

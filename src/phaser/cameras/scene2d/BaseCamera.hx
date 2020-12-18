@@ -417,9 +417,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} x - The horizontal coordinate to center on.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function centerOnX(x:Float):phaser.cameras.scene2d.BaseCamera;
+    public function centerOnX(x:Float):Dynamic;
     /**
      * Moves the Camera vertically so that it is centered on the given y coordinate, bounds allowing.
      * Calling this does not change the scrollX value.
@@ -429,9 +429,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} y - The vertical coordinate to center on.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function centerOnY(y:Float):phaser.cameras.scene2d.BaseCamera;
+    public function centerOnY(y:Float):Dynamic;
     /**
      * Moves the Camera so that it is centered on the given coordinates, bounds allowing.
      *
@@ -441,27 +441,27 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {number} x - The horizontal coordinate to center on.
      * @param {number} y - The vertical coordinate to center on.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function centerOn(x:Float, y:Float):phaser.cameras.scene2d.BaseCamera;
+    public function centerOn(x:Float, y:Float):Dynamic;
     /**
      * Moves the Camera so that it is looking at the center of the Camera Bounds, if enabled.
      *
      * @method Phaser.Cameras.Scene2D.BaseCamera#centerToBounds
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function centerToBounds():phaser.cameras.scene2d.BaseCamera;
+    public function centerToBounds():Dynamic;
     /**
      * Moves the Camera so that it is re-centered based on its viewport size.
      *
      * @method Phaser.Cameras.Scene2D.BaseCamera#centerToSize
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function centerToSize():phaser.cameras.scene2d.BaseCamera;
+    public function centerToSize():Dynamic;
     /**
      * Takes an array of Game Objects and returns a new array featuring only those objects
      * visible by this camera.
@@ -501,9 +501,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]|Phaser.GameObjects.Group)} entries - The Game Object, or array of Game Objects, to be ignored by this Camera.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function ignore(entries:Dynamic):phaser.cameras.scene2d.BaseCamera;
+    public function ignore(entries:Dynamic):Dynamic;
     /**
      * Internal preRender step.
      *
@@ -544,9 +544,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @method Phaser.Cameras.Scene2D.BaseCamera#removeBounds
      * @since 3.0.0
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function removeBounds():phaser.cameras.scene2d.BaseCamera;
+    public function removeBounds():Dynamic;
     /**
      * Set the rotation of this Camera. This causes everything it renders to appear rotated.
      *
@@ -557,9 +557,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} [value=0] - The cameras angle of rotation, given in degrees.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setAngle(?value:Float):phaser.cameras.scene2d.BaseCamera;
+    public function setAngle(?value:Float):Dynamic;
     /**
      * Sets the background color for this Camera.
      *
@@ -573,9 +573,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {(string|number|Phaser.Types.Display.InputColorObject)} [color='rgba(0,0,0,0)'] - The color value. In CSS, hex or numeric color notation.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setBackgroundColor(?color:Dynamic):phaser.cameras.scene2d.BaseCamera;
+    public function setBackgroundColor(?color:Dynamic):Dynamic;
     /**
      * Set the bounds of the Camera. The bounds are an axis-aligned rectangle.
      *
@@ -604,9 +604,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {integer} height - The height of the bounds, in pixels.
      * @param {boolean} [centerOn=false] - If `true` the Camera will automatically be centered on the new bounds.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setBounds(x:Int, y:Int, width:Int, height:Int, ?centerOn:Bool):phaser.cameras.scene2d.BaseCamera;
+    public function setBounds(x:Int, y:Int, width:Int, height:Int, ?centerOn:Bool):Dynamic;
     /**
      * Returns a rectangle containing the bounds of the Camera.
      *
@@ -631,9 +631,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {string} [value=''] - The name of the Camera.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setName(?value:String):phaser.cameras.scene2d.BaseCamera;
+    public function setName(?value:String):Dynamic;
     /**
      * Set the position of the Camera viewport within the game.
      *
@@ -645,9 +645,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {number} x - The top-left x coordinate of the Camera viewport.
      * @param {number} [y=x] - The top-left y coordinate of the Camera viewport.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setPosition(x:Float, ?y:Float):phaser.cameras.scene2d.BaseCamera;
+    public function setPosition(x:Float, ?y:Float):Dynamic;
     /**
      * Set the rotation of this Camera. This causes everything it renders to appear rotated.
      *
@@ -658,9 +658,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} [value=0] - The rotation of the Camera, in radians.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setRotation(?value:Float):phaser.cameras.scene2d.BaseCamera;
+    public function setRotation(?value:Float):Dynamic;
     /**
      * Should the Camera round pixel values to whole integers when rendering Game Objects?
      *
@@ -671,9 +671,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {boolean} value - `true` to round Camera pixels, `false` to not.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setRoundPixels(value:Bool):phaser.cameras.scene2d.BaseCamera;
+    public function setRoundPixels(value:Bool):Dynamic;
     /**
      * Sets the Scene the Camera is bound to.
      *
@@ -684,9 +684,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {Phaser.Scene} scene - The Scene the camera is bound to.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setScene(scene:phaser.Scene):phaser.cameras.scene2d.BaseCamera;
+    public function setScene(scene:phaser.Scene):Dynamic;
     /**
      * Set the position of where the Camera is looking within the game.
      * You can also modify the properties `Camera.scrollX` and `Camera.scrollY` directly.
@@ -700,9 +700,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {number} x - The x coordinate of the Camera in the game world.
      * @param {number} [y=x] - The y coordinate of the Camera in the game world.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setScroll(x:Float, ?y:Float):phaser.cameras.scene2d.BaseCamera;
+    public function setScroll(x:Float, ?y:Float):Dynamic;
     /**
      * Set the size of the Camera viewport.
      *
@@ -716,9 +716,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {integer} width - The width of the Camera viewport.
      * @param {integer} [height=width] - The height of the Camera viewport.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setSize(width:Int, ?height:Int):phaser.cameras.scene2d.BaseCamera;
+    public function setSize(width:Int, ?height:Int):Dynamic;
     /**
      * This method sets the position and size of the Camera viewport in a single call.
      *
@@ -738,9 +738,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @param {integer} width - The width of the Camera viewport.
      * @param {integer} [height=width] - The height of the Camera viewport.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setViewport(x:Float, y:Float, width:Int, ?height:Int):phaser.cameras.scene2d.BaseCamera;
+    public function setViewport(x:Float, y:Float, width:Int, ?height:Int):Dynamic;
     /**
      * Set the zoom value of the Camera.
      *
@@ -756,9 +756,9 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} [value=1] - The zoom value of the Camera. The minimum it can be is 0.001.
      *
-     * @return {Phaser.Cameras.Scene2D.BaseCamera} This Camera instance.
+     * @return {this} This Camera instance.
      */
-    public function setZoom(?value:Float):phaser.cameras.scene2d.BaseCamera;
+    public function setZoom(?value:Float):Dynamic;
     /**
      * Sets the mask to be applied to this Camera during rendering.
      *

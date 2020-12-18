@@ -61,7 +61,7 @@ extern class BitmapMaskPipeline extends phaser.renderer.webgl.WebGLPipeline {
      *
      * @param {Phaser.GameObjects.GameObject} mask - GameObject used as mask.
      * @param {Phaser.GameObjects.GameObject} maskedObject - GameObject masked by the mask GameObject.
-     * @param {Phaser.Cameras.Scene2D.Camera} camera - [description]
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera rendering the current mask.
      */
     public function beginMask(mask:phaser.gameobjects.GameObject, maskedObject:phaser.gameobjects.GameObject, camera:phaser.cameras.scene2d.Camera):Void;
     /**

@@ -10,6 +10,10 @@ package phaser.gameobjects;
  *
  * The position of the Game Object automatically becomes relative to the position of the Container.
  *
+ * The origin of a Container is 0x0 (in local space) and that cannot be changed. The children you add to the
+ * Container should be positioned with this value in mind. I.e. you should treat 0x0 as being the center of
+ * the Container, and position children positively and negative around it as required.
+ *
  * When the Container is rendered, all of its children are rendered as well, in the order in which they exist
  * within the Container. Container children can be repositioned using methods such as `MoveUp`, `MoveDown` and `SendToBack`.
  *
@@ -275,9 +279,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {boolean} [value=true] - The exclusive state of this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container.
+     * @return {this} This Container.
      */
-    public function setExclusive(?value:Bool):phaser.gameobjects.Container;
+    public function setExclusive(?value:Bool):Dynamic;
     /**
      * Gets the bounds of this Container. It works by iterating all children of the Container,
      * getting their respective bounds, and then working out a min-max rectangle from that.
@@ -333,9 +337,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Object, or array of Game Objects, to add to the Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function add(child:Dynamic):phaser.gameobjects.Container;
+    public function add(child:Dynamic):Dynamic;
     /**
      * Adds the given Game Object, or array of Game Objects, to this Container at the specified position.
      *
@@ -349,9 +353,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Object, or array of Game Objects, to add to the Container.
      * @param {integer} [index=0] - The position to insert the Game Object/s at.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function addAt(child:Dynamic, ?index:Int):phaser.gameobjects.Container;
+    public function addAt(child:Dynamic, ?index:Int):Dynamic;
     /**
      * Returns the Game Object at the given position in this Container.
      *
@@ -384,9 +388,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {string} property - The property to lexically sort by.
      * @param {function} [handler] - Provide your own custom handler function. Will receive 2 children which it should compare and return a boolean.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function sort(property:String, ?handler:Dynamic):phaser.gameobjects.Container;
+    public function sort(property:String, ?handler:Dynamic):Dynamic;
     /**
      * Searches for the first instance of a child with its `name` property matching the given argument.
      * Should more than one child have the same name only the first is returned.
@@ -487,9 +491,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {Phaser.GameObjects.GameObject} child1 - The first Game Object to swap.
      * @param {Phaser.GameObjects.GameObject} child2 - The second Game Object to swap.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function swap(child1:phaser.gameobjects.GameObject, child2:phaser.gameobjects.GameObject):phaser.gameobjects.Container;
+    public function swap(child1:phaser.gameobjects.GameObject, child2:phaser.gameobjects.GameObject):Dynamic;
     /**
      * Moves a Game Object to a new position within this Container.
      *
@@ -504,9 +508,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to move.
      * @param {integer} index - The new position of the Game Object in this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function moveTo(child:phaser.gameobjects.GameObject, index:Int):phaser.gameobjects.Container;
+    public function moveTo(child:phaser.gameobjects.GameObject, index:Int):Dynamic;
     /**
      * Removes the given Game Object, or array of Game Objects, from this Container.
      *
@@ -520,9 +524,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Object, or array of Game Objects, to be removed from the Container.
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on each child successfully removed from this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function remove(child:Dynamic, ?destroyChild:Bool):phaser.gameobjects.Container;
+    public function remove(child:Dynamic, ?destroyChild:Bool):Dynamic;
     /**
      * Removes the Game Object at the given position in this Container.
      *
@@ -534,9 +538,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {integer} index - The index of the Game Object to be removed.
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on the Game Object if successfully removed from this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function removeAt(index:Int, ?destroyChild:Bool):phaser.gameobjects.Container;
+    public function removeAt(index:Int, ?destroyChild:Bool):Dynamic;
     /**
      * Removes the Game Objects between the given positions in this Container.
      *
@@ -549,9 +553,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on each Game Object successfully removed from this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function removeBetween(?startIndex:Int, ?endIndex:Int, ?destroyChild:Bool):phaser.gameobjects.Container;
+    public function removeBetween(?startIndex:Int, ?endIndex:Int, ?destroyChild:Bool):Dynamic;
     /**
      * Removes all Game Objects from this Container.
      *
@@ -562,9 +566,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on each Game Object successfully removed from this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function removeAll(?destroyChild:Bool):phaser.gameobjects.Container;
+    public function removeAll(?destroyChild:Bool):Dynamic;
     /**
      * Brings the given Game Object to the top of this Container.
      * This will cause it to render on-top of any other objects in the Container.
@@ -574,9 +578,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to bring to the top of the Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function bringToTop(child:phaser.gameobjects.GameObject):phaser.gameobjects.Container;
+    public function bringToTop(child:phaser.gameobjects.GameObject):Dynamic;
     /**
      * Sends the given Game Object to the bottom of this Container.
      * This will cause it to render below any other objects in the Container.
@@ -586,9 +590,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to send to the bottom of the Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function sendToBack(child:phaser.gameobjects.GameObject):phaser.gameobjects.Container;
+    public function sendToBack(child:phaser.gameobjects.GameObject):Dynamic;
     /**
      * Moves the given Game Object up one place in this Container, unless it's already at the top.
      *
@@ -597,9 +601,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to be moved in the Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function moveUp(child:phaser.gameobjects.GameObject):phaser.gameobjects.Container;
+    public function moveUp(child:phaser.gameobjects.GameObject):Dynamic;
     /**
      * Moves the given Game Object down one place in this Container, unless it's already at the bottom.
      *
@@ -608,27 +612,27 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to be moved in the Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function moveDown(child:phaser.gameobjects.GameObject):phaser.gameobjects.Container;
+    public function moveDown(child:phaser.gameobjects.GameObject):Dynamic;
     /**
      * Reverses the order of all Game Objects in this Container.
      *
      * @method Phaser.GameObjects.Container#reverse
      * @since 3.4.0
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function reverse():phaser.gameobjects.Container;
+    public function reverse():Dynamic;
     /**
      * Shuffles the all Game Objects in this Container using the Fisher-Yates implementation.
      *
      * @method Phaser.GameObjects.Container#shuffle
      * @since 3.4.0
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function shuffle():phaser.gameobjects.Container;
+    public function shuffle():Dynamic;
     /**
      * Replaces a Game Object in this Container with the new Game Object.
      * The new Game Object cannot already be a child of this Container.
@@ -640,9 +644,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {Phaser.GameObjects.GameObject} newChild - The Game Object to be added to this Container.
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on the Game Object if successfully removed from this Container.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function replace(oldChild:phaser.gameobjects.GameObject, newChild:phaser.gameobjects.GameObject, ?destroyChild:Bool):phaser.gameobjects.Container;
+    public function replace(oldChild:phaser.gameobjects.GameObject, newChild:phaser.gameobjects.GameObject, ?destroyChild:Bool):Dynamic;
     /**
      * Returns `true` if the given Game Object is a direct child of this Container.
      *
@@ -671,9 +675,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {integer} [startIndex=0] - An optional start index to search from.
      * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function setAll(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):phaser.gameobjects.Container;
+    public function setAll(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):Dynamic;
     /**
      * Passes all Game Objects in this Container to the given callback.
      *
@@ -690,9 +694,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {object} [context] - Value to use as `this` when executing callback.
      * @param {...*} [args] - Additional arguments that will be passed to the callback, after the child.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function each(callback:Dynamic, ?context:Dynamic, ?args:Dynamic):phaser.gameobjects.Container;
+    public function each(callback:Dynamic, ?context:Dynamic, ?args:Dynamic):Dynamic;
     /**
      * Passes all Game Objects in this Container to the given callback.
      *
@@ -706,9 +710,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @param {object} [context] - Value to use as `this` when executing callback.
      * @param {...*} [args] - Additional arguments that will be passed to the callback, after the child.
      *
-     * @return {Phaser.GameObjects.Container} This Container instance.
+     * @return {this} This Container instance.
      */
-    public function iterate(callback:Dynamic, ?context:Dynamic, ?args:Dynamic):phaser.gameobjects.Container;
+    public function iterate(callback:Dynamic, ?context:Dynamic, ?args:Dynamic):Dynamic;
     /**
      * Sets the scroll factor of this Container and optionally all of its children.
      *
@@ -1116,8 +1120,8 @@ extern class Container extends phaser.gameobjects.GameObject {
     /**
      * The angle of this Game Object in radians.
      *
-     * Phaser uses a right-hand clockwise rotation system, where 0 is right, 90 is down, 180/-180 is left
-     * and -90 is up.
+     * Phaser uses a right-hand clockwise rotation system, where 0 is right, PI/2 is down, +-PI is left
+     * and -PI/2 is up.
      *
      * If you prefer to work in degrees, see the `angle` property instead.
      *

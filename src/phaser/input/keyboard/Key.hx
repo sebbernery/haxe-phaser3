@@ -173,9 +173,9 @@ extern class Key extends phaser.events.EventEmitter {
      *
      * @param {boolean} value - Emit `down` events on repeated key down actions, or just once?
      *
-     * @return {Phaser.Input.Keyboard.Key} This Key instance.
+     * @return {this} This Key instance.
      */
-    public function setEmitOnRepeat(value:Bool):phaser.input.keyboard.Key;
+    public function setEmitOnRepeat(value:Bool):Dynamic;
     /**
      * Processes the Key Down action for this Key.
      * Called automatically by the Keyboard Plugin.
@@ -204,9 +204,9 @@ extern class Key extends phaser.events.EventEmitter {
      * @method Phaser.Input.Keyboard.Key#reset
      * @since 3.6.0
      *
-     * @return {Phaser.Input.Keyboard.Key} This Key instance.
+     * @return {this} This Key instance.
      */
-    public function reset():phaser.input.keyboard.Key;
+    public function reset():Dynamic;
     /**
      * Returns the duration, in ms, that the Key has been held down for.
      *

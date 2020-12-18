@@ -201,9 +201,9 @@ extern class TransformMatrix {
      * @param {Phaser.GameObjects.Components.TransformMatrix} rhs - The Matrix to multiply by.
      * @param {Phaser.GameObjects.Components.TransformMatrix} [out] - An optional Matrix to store the results in.
      *
-     * @return {Phaser.GameObjects.Components.TransformMatrix} Either this TransformMatrix, or the `out` Matrix, if given in the arguments.
+     * @return {(this|Phaser.GameObjects.Components.TransformMatrix)} Either this TransformMatrix, or the `out` Matrix, if given in the arguments.
      */
-    public function multiply(rhs:phaser.gameobjects.components.TransformMatrix, ?out:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    public function multiply(rhs:phaser.gameobjects.components.TransformMatrix, ?out:phaser.gameobjects.components.TransformMatrix):Dynamic;
     /**
      * Multiply this Matrix by the matrix given, including the offset.
      *

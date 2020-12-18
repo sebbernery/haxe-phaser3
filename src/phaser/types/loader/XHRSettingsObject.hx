@@ -9,10 +9,12 @@ package phaser.types.loader;
  * @property {string} [user=''] - Optional username for the XHR request.
  * @property {string} [password=''] - Optional password for the XHR request.
  * @property {integer} [timeout=0] - Optional XHR timeout value.
+ * @property {(object|undefined)} [headers] - This value is used to populate the XHR `setRequestHeader` and is undefined by default.
  * @property {(string|undefined)} [header] - This value is used to populate the XHR `setRequestHeader` and is undefined by default.
  * @property {(string|undefined)} [headerValue] - This value is used to populate the XHR `setRequestHeader` and is undefined by default.
  * @property {(string|undefined)} [requestedWith] - This value is used to populate the XHR `setRequestHeader` and is undefined by default.
  * @property {(string|undefined)} [overrideMimeType] - Provide a custom mime-type to use instead of the default.
+ * @property {boolean} [withCredentials=false] - The withCredentials property indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates. Setting withCredentials has no effect on same-site requests.
  */
 typedef XHRSettingsObject = {
 var responseType:js.html.XMLHttpRequestResponseType;
@@ -20,8 +22,10 @@ var responseType:js.html.XMLHttpRequestResponseType;
     @:optional var user:String;
     @:optional var password:String;
     @:optional var timeout:Int;
+    @:optional var headers:Dynamic;
     @:optional var header:Dynamic;
     @:optional var headerValue:Dynamic;
     @:optional var requestedWith:Dynamic;
     @:optional var overrideMimeType:Dynamic;
+    @:optional var withCredentials:Bool;
 };

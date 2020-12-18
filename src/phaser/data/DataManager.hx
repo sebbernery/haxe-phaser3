@@ -12,11 +12,11 @@ package phaser.data;
  * @since 3.0.0
  *
  * @param {object} parent - The object that this DataManager belongs to.
- * @param {Phaser.Events.EventEmitter} eventEmitter - The DataManager's event emitter.
+ * @param {Phaser.Events.EventEmitter} [eventEmitter] - The DataManager's event emitter.
  */
 @:native("Phaser.Data.DataManager")
 extern class DataManager {
-    public function new(parent:Dynamic, eventEmitter:phaser.events.EventEmitter);
+    public function new(parent:Dynamic, ?eventEmitter:phaser.events.EventEmitter);
     /**
      * The object that this DataManager belongs to.
      *
@@ -179,9 +179,42 @@ extern class DataManager {
      * @param {(string|object)} key - The key to set the value for. Or an object or key value pairs. If an object the `data` argument is ignored.
      * @param {*} data - The value to set for the given key. If an object is provided as the key this argument is ignored.
      *
+     * @return {this} This DataManager object.
+     */
+    public function set(key:Dynamic, data:Dynamic):Dynamic;
+    /**
+     * Increase a value for the given key. If the key doesn't already exist in the Data Manager then it is increased from 0.
+     *
+     * When the value is first set, a `setdata` event is emitted.
+     *
+     * @method Phaser.Data.DataManager#inc
+     * @fires Phaser.Data.Events#SET_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA_KEY
+     * @since 3.23.0
+     *
+     * @param {(string|object)} key - The key to increase the value for.
+     * @param {*} [data] - The value to increase for the given key.
+     *
      * @return {Phaser.Data.DataManager} This DataManager object.
      */
-    public function set(key:Dynamic, data:Dynamic):phaser.data.DataManager;
+    public function inc(key:Dynamic, ?data:Dynamic):phaser.data.DataManager;
+    /**
+     * Toggle a boolean value for the given key. If the key doesn't already exist in the Data Manager then it is toggled from false.
+     *
+     * When the value is first set, a `setdata` event is emitted.
+     *
+     * @method Phaser.Data.DataManager#toggle
+     * @fires Phaser.Data.Events#SET_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA
+     * @fires Phaser.Data.Events#CHANGE_DATA_KEY
+     * @since 3.23.0
+     *
+     * @param {(string|object)} key - The key to toggle the value for.
+     *
+     * @return {Phaser.Data.DataManager} This DataManager object.
+     */
+    public function toggle(key:Dynamic):phaser.data.DataManager;
     /**
      * Passes all data entries to the given callback.
      *
@@ -192,9 +225,9 @@ extern class DataManager {
      * @param {*} [context] - Value to use as `this` when executing callback.
      * @param {...*} [args] - Additional arguments that will be passed to the callback, after the game object, key, and data.
      *
-     * @return {Phaser.Data.DataManager} This DataManager object.
+     * @return {this} This DataManager object.
      */
-    public function each(callback:DataEachCallback, ?context:Dynamic, ?args:Dynamic):phaser.data.DataManager;
+    public function each(callback:DataEachCallback, ?context:Dynamic, ?args:Dynamic):Dynamic;
     /**
      * Merge the given object of key value pairs into this DataManager.
      *
@@ -210,9 +243,9 @@ extern class DataManager {
      * @param {Object.<string, *>} data - The data to merge.
      * @param {boolean} [overwrite=true] - Whether to overwrite existing data. Defaults to true.
      *
-     * @return {Phaser.Data.DataManager} This DataManager object.
+     * @return {this} This DataManager object.
      */
-    public function merge(data:Dynamic, ?overwrite:Bool):phaser.data.DataManager;
+    public function merge(data:Dynamic, ?overwrite:Bool):Dynamic;
     /**
      * Remove the value for the given key.
      *
@@ -231,9 +264,9 @@ extern class DataManager {
      *
      * @param {(string|string[])} key - The key to remove, or an array of keys to remove.
      *
-     * @return {Phaser.Data.DataManager} This DataManager object.
+     * @return {this} This DataManager object.
      */
-    public function remove(key:Dynamic):phaser.data.DataManager;
+    public function remove(key:Dynamic):Dynamic;
     /**
      * Retrieves the data associated with the given 'key', deletes it from this Data Manager, then returns it.
      *
@@ -269,18 +302,18 @@ extern class DataManager {
      *
      * @param {boolean} value - Whether to freeze or unfreeze the Data Manager.
      *
-     * @return {Phaser.Data.DataManager} This DataManager object.
+     * @return {this} This DataManager object.
      */
-    public function setFreeze(value:Bool):phaser.data.DataManager;
+    public function setFreeze(value:Bool):Dynamic;
     /**
      * Delete all data in this Data Manager and unfreeze it.
      *
      * @method Phaser.Data.DataManager#reset
      * @since 3.0.0
      *
-     * @return {Phaser.Data.DataManager} This DataManager object.
+     * @return {this} This DataManager object.
      */
-    public function reset():phaser.data.DataManager;
+    public function reset():Dynamic;
     /**
      * Destroy this data manager.
      *

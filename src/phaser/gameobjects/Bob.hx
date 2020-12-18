@@ -132,18 +132,18 @@ extern class Bob {
      *
      * @param {(string|integer|Phaser.Textures.Frame)} [frame] - The frame to be used during rendering.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setFrame(?frame:Dynamic):phaser.gameobjects.Bob;
+    public function setFrame(?frame:Dynamic):Dynamic;
     /**
      * Resets the horizontal and vertical flipped state of this Bob back to their default un-flipped state.
      *
      * @method Phaser.GameObjects.Bob#resetFlip
      * @since 3.0.0
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function resetFlip():phaser.gameobjects.Bob;
+    public function resetFlip():Dynamic;
     /**
      * Resets this Bob.
      *
@@ -158,9 +158,9 @@ extern class Bob {
      * @param {number} y - The y position of the Bob. Bob coordinate are relative to the position of the Blitter object.
      * @param {(string|integer|Phaser.Textures.Frame)} [frame] - The Frame the Bob will use. It _must_ be part of the Texture the parent Blitter object is using.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function reset(x:Float, y:Float, ?frame:Dynamic):phaser.gameobjects.Bob;
+    public function reset(x:Float, y:Float, ?frame:Dynamic):Dynamic;
     /**
      * Changes the position of this Bob to the values given.
      *
@@ -170,9 +170,9 @@ extern class Bob {
      * @param {number} x - The x position of the Bob. Bob coordinate are relative to the position of the Blitter object.
      * @param {number} y - The y position of the Bob. Bob coordinate are relative to the position of the Blitter object.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setPosition(x:Float, y:Float):phaser.gameobjects.Bob;
+    public function setPosition(x:Float, y:Float):Dynamic;
     /**
      * Sets the horizontal flipped state of this Bob.
      *
@@ -181,9 +181,9 @@ extern class Bob {
      *
      * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setFlipX(value:Bool):phaser.gameobjects.Bob;
+    public function setFlipX(value:Bool):Dynamic;
     /**
      * Sets the vertical flipped state of this Bob.
      *
@@ -192,9 +192,9 @@ extern class Bob {
      *
      * @param {boolean} value - The flipped state. `false` for no flip, or `true` to be flipped.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setFlipY(value:Bool):phaser.gameobjects.Bob;
+    public function setFlipY(value:Bool):Dynamic;
     /**
      * Sets the horizontal and vertical flipped state of this Bob.
      *
@@ -204,9 +204,9 @@ extern class Bob {
      * @param {boolean} x - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
      * @param {boolean} y - The horizontal flipped state. `false` for no flip, or `true` to be flipped.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setFlip(x:Bool, y:Bool):phaser.gameobjects.Bob;
+    public function setFlip(x:Bool, y:Bool):Dynamic;
     /**
      * Sets the visibility of this Bob.
      *
@@ -217,9 +217,9 @@ extern class Bob {
      *
      * @param {boolean} value - The visible state of the Game Object.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setVisible(value:Bool):phaser.gameobjects.Bob;
+    public function setVisible(value:Bool):Dynamic;
     /**
      * Set the Alpha level of this Bob. The alpha controls the opacity of the Game Object as it renders.
      * Alpha values are provided as a float between 0, fully transparent, and 1, fully opaque.
@@ -231,9 +231,9 @@ extern class Bob {
      *
      * @param {number} value - The alpha value used for this Bob. Between 0 and 1.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setAlpha(value:Float):phaser.gameobjects.Bob;
+    public function setAlpha(value:Float):Dynamic;
     /**
      * Sets the tint of this Bob.
      *
@@ -242,9 +242,9 @@ extern class Bob {
      *
      * @param {number} value - The tint value used for this Bob. Between 0 and 0xffffff.
      *
-     * @return {Phaser.GameObjects.Bob} This Bob Game Object.
+     * @return {this} This Bob Game Object.
      */
-    public function setTint(value:Float):phaser.gameobjects.Bob;
+    public function setTint(value:Float):Dynamic;
     /**
      * Destroys this Bob instance.
      * Removes itself from the Blitter and clears the parent, frame and data properties.
