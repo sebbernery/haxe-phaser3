@@ -42,12 +42,12 @@ package phaser.physics.arcade;
  * @param {Phaser.Scene} scene - The Scene to which this Game Object belongs. A Game Object can only belong to one Scene at a time.
  * @param {number} x - The horizontal position of this Game Object in the world.
  * @param {number} y - The vertical position of this Game Object in the world.
- * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+ * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
  * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
  */
 @:native("Phaser.Physics.Arcade.Image")
 extern class Image extends phaser.gameobjects.Image {
-    public function new(scene:phaser.Scene, x:Float, y:Float, texture:String, ?frame:Dynamic);
+    public function new(scene:phaser.Scene, x:Float, y:Float, texture:Dynamic, ?frame:Dynamic);
     /**
      * Sets the body's horizontal and vertical acceleration. If the vertical acceleration value is not provided, the vertical acceleration is set to the same value as the horizontal acceleration.
      *
@@ -479,6 +479,19 @@ extern class Image extends phaser.gameobjects.Image {
      * @return {this} This Game Object.
      */
     public function setOffset(x:Float, ?y:Float):Dynamic;
+    /**
+     * Sets the size of this physics body. Setting the size does not adjust the dimensions of the parent Game Object.
+     *
+     * @method Phaser.Physics.Arcade.Components.Size#setBodySize
+     * @since 3.24.0
+     *
+     * @param {number} width - The new width of the physics body, in pixels.
+     * @param {number} height - The new height of the physics body, in pixels.
+     * @param {boolean} [center=true] - Should the body be re-positioned so its center aligns with the parent Game Object?
+     *
+     * @return {this} This Game Object.
+     */
+    public function setBodySize(width:Float, height:Float, ?center:Bool):Dynamic;
     /**
      * Sets this physics body to use a circle for collision instead of a rectangle.
      *

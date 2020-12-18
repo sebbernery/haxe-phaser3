@@ -229,6 +229,54 @@ extern class TextStyle {
      */
     public var baselineY:Float;
     /**
+     * The maximum width of a line of text in pixels. Null means no line wrapping. Setting this
+     * property directly will not re-run the word wrapping algorithm. To change the width and
+     * re-wrap, use {@link Phaser.GameObjects.TextStyle#setWordWrapWidth}.
+     *
+     * @name Phaser.GameObjects.TextStyle#wordWrapWidth
+     * @type {number | null}
+     * @default null
+     * @since 3.24.0
+     */
+    public var wordWrapWidth:Dynamic;
+    /**
+     * A custom function that will be responsible for wrapping the text. It will receive two
+     * arguments: text (the string to wrap), textObject (this Text instance). It should return
+     * the wrapped lines either as an array of lines or as a string with newline characters in
+     * place to indicate where breaks should happen. Setting this directly will not re-run the
+     * word wrapping algorithm. To change the callback and re-wrap, use
+     * {@link Phaser.GameObjects.TextStyle#setWordWrapCallback}.
+     *
+     * @name Phaser.GameObjects.TextStyle#wordWrapCallback
+     * @type {TextStyleWordWrapCallback | null}
+     * @default null
+     * @since 3.24.0
+     */
+    public var wordWrapCallback:Dynamic;
+    /**
+     * The scope that will be applied when the wordWrapCallback is invoked. Setting this directly will not re-run the
+     * word wrapping algorithm. To change the callback and re-wrap, use
+     * {@link Phaser.GameObjects.TextStyle#setWordWrapCallback}.
+     *
+     * @name Phaser.GameObjects.TextStyle#wordWrapCallbackScope
+     * @type {object | null}
+     * @default null
+     * @since 3.24.0
+     */
+    public var wordWrapCallbackScope:Dynamic;
+    /**
+     * Whether or not to use the advanced wrapping algorithm. If true, spaces are collapsed and
+     * whitespace is trimmed from lines. If false, spaces and whitespace are left as is. Setting
+     * this property directly will not re-run the word wrapping algorithm. To change the
+     * advanced setting and re-wrap, use {@link Phaser.GameObjects.TextStyle#setWordWrapWidth}.
+     *
+     * @name Phaser.GameObjects.TextStyle#wordWrapUseAdvanced
+     * @type {boolean}
+     * @default false
+     * @since 3.24.0
+     */
+    public var wordWrapUseAdvanced:Bool;
+    /**
      * Set the text style.
      *
      * @example

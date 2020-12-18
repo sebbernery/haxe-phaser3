@@ -209,7 +209,7 @@ extern class World extends phaser.events.EventEmitter {
      */
     public var maxEntries:Int;
     /**
-     * Should this Arcade Physics World use an RTree for Dynamic and Static Physics bodies?
+     * Should this Arcade Physics World use an RTree for Dynamic bodies?
      *
      * An RTree is a fast way of spatially sorting of all the bodies in the world.
      * However, at certain limits, the cost of clearing and inserting the bodies into the
@@ -611,10 +611,11 @@ extern class World extends phaser.events.EventEmitter {
      * @param {ArcadePhysicsCallback} [processCallback] - The process callback.
      * @param {*} [callbackContext] - The context in which to invoke the callback.
      * @param {boolean} [overlapOnly] - If this a collide or overlap check?
+     * @param {boolean} [intersects] - Assert that the bodies intersect and should not be tested before separation.
      *
      * @return {boolean} True if separation occurred, otherwise false.
      */
-    public function separate(body1:phaser.physics.arcade.Body, body2:phaser.physics.arcade.Body, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic, ?overlapOnly:Bool):Bool;
+    public function separate(body1:phaser.physics.arcade.Body, body2:phaser.physics.arcade.Body, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic, ?overlapOnly:Bool, ?intersects:Bool):Bool;
     /**
      * Separates two Bodies, when both are circular.
      *

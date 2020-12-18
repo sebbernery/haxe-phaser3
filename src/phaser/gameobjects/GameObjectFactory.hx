@@ -211,13 +211,13 @@ extern class GameObjectFactory {
      * @method Phaser.GameObjects.GameObjectFactory#container
      * @since 3.4.0
      *
-     * @param {number} x - The horizontal position of this Game Object in the world.
-     * @param {number} y - The vertical position of this Game Object in the world.
+     * @param {number} [x=0] - The horizontal position of this Game Object in the world.
+     * @param {number} [y=0] - The vertical position of this Game Object in the world.
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} [children] - An optional array of Game Objects to add to this Container.
      *
      * @return {Phaser.GameObjects.Container} The Game Object that was created.
      */
-    public function container(x:Float, y:Float, ?children:Dynamic):phaser.gameobjects.Container;
+    public function container(?x:Float, ?y:Float, ?children:Dynamic):phaser.gameobjects.Container;
     /**
      * DOM Element Game Objects are a way to control and manipulate HTML Elements over the top of your game.
      *
@@ -333,12 +333,12 @@ extern class GameObjectFactory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.Image} The Game Object that was created.
      */
-    public function image(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Image;
+    public function image(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.Image;
     /**
      * Creates a new Mesh Game Object and adds it to the Scene.
      *
@@ -354,12 +354,12 @@ extern class GameObjectFactory {
      * @param {number[]} uv - An array containing the uv data for this Mesh.
      * @param {number[]} colors - An array containing the color data for this Mesh.
      * @param {number[]} alphas - An array containing the alpha data for this Mesh.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.Mesh} The Game Object that was created.
      */
-    public function mesh(x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:String, ?frame:Dynamic):phaser.gameobjects.Mesh;
+    public function mesh(x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.Mesh;
     /**
      * Creates a new Particle Emitter Manager Game Object and adds it to the Scene.
      *
@@ -368,13 +368,13 @@ extern class GameObjectFactory {
      * @method Phaser.GameObjects.GameObjectFactory#particles
      * @since 3.0.0
      *
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer|object)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
      *
      * @return {Phaser.GameObjects.Particles.ParticleEmitterManager} The Game Object that was created.
      */
-    public function particles(texture:String, ?frame:Dynamic, ?emitters:Dynamic):phaser.gameobjects.particles.ParticleEmitterManager;
+    public function particles(texture:Dynamic, ?frame:Dynamic, ?emitters:Dynamic):phaser.gameobjects.particles.ParticleEmitterManager;
     /**
      * Creates a new PathFollower Game Object and adds it to the Scene.
      *
@@ -386,12 +386,12 @@ extern class GameObjectFactory {
      * @param {Phaser.Curves.Path} path - The Path this PathFollower is connected to.
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.PathFollower} The Game Object that was created.
      */
-    public function follower(path:phaser.curves.Path, x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.PathFollower;
+    public function follower(path:phaser.curves.Path, x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.PathFollower;
     /**
      * Creates a new Quad Game Object and adds it to the Scene.
      *
@@ -403,12 +403,12 @@ extern class GameObjectFactory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.Quad} The Game Object that was created.
      */
-    public function quad(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Quad;
+    public function quad(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.Quad;
     /**
      * Creates a new Render Texture Game Object and adds it to the Scene.
      *
@@ -442,7 +442,7 @@ extern class GameObjectFactory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      * @param {Phaser.Types.Math.Vector2Like[]} [points] - An array containing the vertices data for this Rope. If none is provided a simple quad is created. See `setPoints` to set this post-creation.
      * @param {boolean} [horizontal=true] - Should the vertices of this Rope be aligned horizontally (`true`), or vertically (`false`)?
@@ -451,7 +451,7 @@ extern class GameObjectFactory {
      *
      * @return {Phaser.GameObjects.Rope} The Game Object that was created.
      */
-    public function rope(x:Float, y:Float, texture:String, ?frame:Dynamic, ?points:Array<phaser.types.math.Vector2Like>, ?horizontal:Bool, ?colors:Array<Float>, ?alphas:Array<Float>):phaser.gameobjects.Rope;
+    public function rope(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic, ?points:Array<phaser.types.math.Vector2Like>, ?horizontal:Bool, ?colors:Array<Float>, ?alphas:Array<Float>):phaser.gameobjects.Rope;
     /**
      * Creates a new Shader Game Object and adds it to the Scene.
      *
@@ -866,12 +866,12 @@ extern class GameObjectFactory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.Sprite} The Game Object that was created.
      */
-    public function sprite(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.gameobjects.Sprite;
+    public function sprite(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.Sprite;
     /**
      * Creates a new Text Game Object and adds it to the Scene.
      *
@@ -923,12 +923,12 @@ extern class GameObjectFactory {
      * @param {number} y - The vertical position of this Game Object in the world.
      * @param {integer} width - The width of the Game Object. If zero it will use the size of the texture frame.
      * @param {integer} height - The height of the Game Object. If zero it will use the size of the texture frame.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
      * @return {Phaser.GameObjects.TileSprite} The Game Object that was created.
      */
-    public function tileSprite(x:Float, y:Float, width:Int, height:Int, texture:String, ?frame:Dynamic):phaser.gameobjects.TileSprite;
+    public function tileSprite(x:Float, y:Float, width:Int, height:Int, texture:Dynamic, ?frame:Dynamic):phaser.gameobjects.TileSprite;
     /**
      * Creates a new Video Game Object and adds it to the Scene.
      *

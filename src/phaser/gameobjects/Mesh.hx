@@ -28,12 +28,12 @@ package phaser.gameobjects;
  * @param {number[]} uv - An array containing the uv data for this Mesh.
  * @param {number[]} colors - An array containing the color data for this Mesh.
  * @param {number[]} alphas - An array containing the alpha data for this Mesh.
- * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+ * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
  * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
  */
 @:native("Phaser.GameObjects.Mesh")
 extern class Mesh extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:String, ?frame:Dynamic);
+    public function new(scene:phaser.Scene, x:Float, y:Float, vertices:Array<Float>, uv:Array<Float>, colors:Array<Float>, alphas:Array<Float>, texture:Dynamic, ?frame:Dynamic);
     /**
      * An array containing the vertices data for this Mesh.
      *
@@ -144,7 +144,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.
@@ -160,7 +160,7 @@ extern class Mesh extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.

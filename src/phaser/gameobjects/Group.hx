@@ -77,8 +77,7 @@ extern class Group {
      */
     public var name:String;
     /**
-     * Whether this group runs its {@link Phaser.GameObjects.Group#preUpdate} method
-     * (which may update any members).
+     * Whether this group runs its {@link Phaser.GameObjects.Group#preUpdate} method (which may update any members).
      *
      * @name Phaser.GameObjects.Group#active
      * @type {boolean}
@@ -486,6 +485,30 @@ extern class Group {
      * @return {integer} maxSize minus the number of active group numbers; or a large number (if maxSize is -1).
      */
     public function getTotalFree():Int;
+    /**
+     * Sets the `active` property of this Group.
+     * When active, this Group runs its `preUpdate` method.
+     *
+     * @method Phaser.GameObjects.Group#setActive
+     * @since 3.24.0
+     *
+     * @param {boolean} value - True if this Group should be set as active, false if not.
+     *
+     * @return {this} This Group object.
+     */
+    public function setActive(value:Bool):Dynamic;
+    /**
+     * Sets the `name` property of this Group.
+     * The `name` property is not populated by Phaser and is presented for your own use.
+     *
+     * @method Phaser.GameObjects.Group#setName
+     * @since 3.24.0
+     *
+     * @param {string} value - The name to be given to this Group.
+     *
+     * @return {this} This Group object.
+     */
+    public function setName(value:String):Dynamic;
     /**
      * Sets the property as defined in `key` of each group member to the given value.
      *

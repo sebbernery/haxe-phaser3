@@ -53,7 +53,7 @@ extern class TweenManager {
      */
     public function createTimeline(?config:phaser.types.tweens.TimelineBuilderConfig):phaser.tweens.Timeline;
     /**
-     * Create a Tween Timeline and add it to the active Tween list/
+     * Create a Tween Timeline and add it to the active Tween list.
      *
      * @method Phaser.Tweens.TweenManager#timeline
      * @since 3.0.0

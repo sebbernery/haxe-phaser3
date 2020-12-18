@@ -78,9 +78,9 @@ extern class Factory {
      * @param {Phaser.GameObjects.GameObject} gameObject - A Game Object.
      * @param {boolean} [isStatic=false] - Create a Static body (true) or Dynamic body (false).
      *
-     * @return {Phaser.GameObjects.GameObject} The Game Object.
+     * @return {Phaser.Types.Physics.Arcade.GameObjectWithBody} The Game Object.
      */
-    public function existing(gameObject:phaser.gameobjects.GameObject, ?isStatic:Bool):phaser.gameobjects.GameObject;
+    public function existing(gameObject:phaser.gameobjects.GameObject, ?isStatic:Bool):phaser.types.physics.arcade.GameObjectWithBody;
     /**
      * Creates a new Arcade Image object with a Static body.
      *
@@ -89,12 +89,12 @@ extern class Factory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
-     * @return {Phaser.Physics.Arcade.Image} The Image object that was created.
+     * @return {Phaser.Types.Physics.Arcade.ImageWithStaticBody} The Image object that was created.
      */
-    public function staticImage(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.physics.arcade.Image;
+    public function staticImage(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.types.physics.arcade.ImageWithStaticBody;
     /**
      * Creates a new Arcade Image object with a Dynamic body.
      *
@@ -103,12 +103,12 @@ extern class Factory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
-     * @return {Phaser.Physics.Arcade.Image} The Image object that was created.
+     * @return {Phaser.Types.Physics.Arcade.ImageWithDynamicBody} The Image object that was created.
      */
-    public function image(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.physics.arcade.Image;
+    public function image(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.types.physics.arcade.ImageWithDynamicBody;
     /**
      * Creates a new Arcade Sprite object with a Static body.
      *
@@ -117,12 +117,12 @@ extern class Factory {
      *
      * @param {number} x - The horizontal position of this Game Object in the world.
      * @param {number} y - The vertical position of this Game Object in the world.
-     * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+     * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
-     * @return {Phaser.Physics.Arcade.Sprite} The Sprite object that was created.
+     * @return {Phaser.Types.Physics.Arcade.SpriteWithStaticBody} The Sprite object that was created.
      */
-    public function staticSprite(x:Float, y:Float, texture:String, ?frame:Dynamic):phaser.physics.arcade.Sprite;
+    public function staticSprite(x:Float, y:Float, texture:Dynamic, ?frame:Dynamic):phaser.types.physics.arcade.SpriteWithStaticBody;
     /**
      * Creates a new Arcade Sprite object with a Dynamic body.
      *
@@ -134,9 +134,9 @@ extern class Factory {
      * @param {string} key - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
      *
-     * @return {Phaser.Physics.Arcade.Sprite} The Sprite object that was created.
+     * @return {Phaser.Types.Physics.Arcade.SpriteWithDynamicBody} The Sprite object that was created.
      */
-    public function sprite(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.physics.arcade.Sprite;
+    public function sprite(x:Float, y:Float, key:String, ?frame:Dynamic):phaser.types.physics.arcade.SpriteWithDynamicBody;
     /**
      * Creates a Static Physics Group object.
      * All Game Objects created by this Group will automatically be static Arcade Physics objects.

@@ -31,6 +31,16 @@ package phaser.gameobjects;
 extern class Shape extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, ?type:String, ?data:Dynamic);
     /**
+     * The source Shape data. Typically a geometry object.
+     * You should not manipulate this directly.
+     *
+     * @name Phaser.GameObjects.Shape#geom
+     * @type {any}
+     * @readonly
+     * @since 3.13.0
+     */
+    public var geom:Dynamic;
+    /**
      * Holds the polygon path data for filled rendering.
      *
      * @name Phaser.GameObjects.Shape#pathData
@@ -350,7 +360,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.
@@ -366,7 +376,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.

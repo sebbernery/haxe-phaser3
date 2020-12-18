@@ -33,6 +33,9 @@ package phaser.types.tweens;
  * @property {Phaser.Types.Tweens.TweenOnStartCallback} [onStart] - A function to call when the tween starts.
  * @property {array} [onStartParams] - Additional parameters to pass to `onStart`.
  * @property {any} [onStartScope] - Scope (this) for `onStart`.
+ * @property {Phaser.Types.Tweens.TweenOnStopCallback} [onStop] - A function to call when the tween is stopped.
+ * @property {array} [onStopParams] - Additional parameters to pass to `onStop`.
+ * @property {any} [onStopScope] - Scope (this) for `onStop`.
  * @property {Phaser.Types.Tweens.TweenOnUpdateCallback} [onUpdate] - A function to call each time the tween steps. Called once per property per target.
  * @property {array} [onUpdateParams] - Additional parameters to pass to `onUpdate`.
  * @property {any} [onUpdateScope] - Scope (this) for `onUpdate`.
@@ -70,6 +73,9 @@ typedef NumberTweenBuilderConfig = {
     @:optional var onStart:phaser.types.tweens.TweenOnStartCallback;
     @:optional var onStartParams:Array<Dynamic>;
     @:optional var onStartScope:Dynamic;
+    @:optional var onStop:phaser.types.tweens.TweenOnStopCallback;
+    @:optional var onStopParams:Array<Dynamic>;
+    @:optional var onStopScope:Dynamic;
     @:optional var onUpdate:phaser.types.tweens.TweenOnUpdateCallback;
     @:optional var onUpdateParams:Array<Dynamic>;
     @:optional var onUpdateScope:Dynamic;

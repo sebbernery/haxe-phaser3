@@ -16,10 +16,10 @@ package phaser.loader.filetypes;
  *
  * @param {Phaser.Loader.LoaderPlugin} loader - A reference to the Loader that is responsible for this file.
  * @param {(string|Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig)} key - The key to use for this file, or a file configuration object.
- * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
+ * @param {object|string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json". Or, a well formed JSON object.
  * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
  */
 @:native("Phaser.Loader.FileTypes.TilemapJSONFile")
 extern class TilemapJSONFile extends phaser.loader.File {
-    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject);
+    public function new(loader:phaser.loader.LoaderPlugin, key:Dynamic, ?url:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject);
 }

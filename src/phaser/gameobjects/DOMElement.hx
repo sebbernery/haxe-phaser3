@@ -48,6 +48,9 @@ package phaser.gameobjects;
  *
  * Also, all DOM Elements are inserted into the same DOM Container, regardless of which Scene they are created in.
  *
+ * Note that you should only have DOM Elements in a Scene with a _single_ Camera. If you require multiple cameras,
+ * use parallel scenes to achieve this.
+ *
  * DOM Elements are a powerful way to align native HTML with your Phaser Game Objects. For example, you can insert
  * a login form for a multiplayer game directly into your title screen. Or a text input box for a highscore table.
  * Or a banner ad from a 3rd party service. Or perhaps you'd like to use them for high resolution text display and
@@ -617,7 +620,7 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.
@@ -633,7 +636,7 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.

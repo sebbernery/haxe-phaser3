@@ -706,13 +706,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      *
      * @param {(string|Phaser.Types.Loader.FileTypes.AtlasJSONFileConfig|Phaser.Types.Loader.FileTypes.AtlasJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
      * @param {string|string[]} [textureURL] - The absolute or relative URL to load the texture image file from. If undefined or `null` it will be set to `<key>.png`, i.e. if `key` was "alien" then the URL will be "alien.png".
-     * @param {string} [atlasURL] - The absolute or relative URL to load the texture atlas json data file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
+     * @param {object|string} [atlasURL] - The absolute or relative URL to load the texture atlas json data file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json". Or, a well formed JSON object.
      * @param {Phaser.Types.Loader.XHRSettingsObject} [textureXhrSettings] - An XHR Settings configuration object for the atlas image file. Used in replacement of the Loaders default XHR Settings.
      * @param {Phaser.Types.Loader.XHRSettingsObject} [atlasXhrSettings] - An XHR Settings configuration object for the atlas json file. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {this} The Loader instance.
      */
-    public function atlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:String, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
+    public function atlas(key:Dynamic, ?textureURL:Dynamic, ?atlasURL:Dynamic, ?textureXhrSettings:phaser.types.loader.XHRSettingsObject, ?atlasXhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
     /**
      * Adds an XML based Texture Atlas, or array of atlases, to the current load queue.
      *
@@ -1596,13 +1596,13 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Types.Loader.FileTypes.JSONFileConfig|Phaser.Types.Loader.FileTypes.JSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
-     * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
+     * @param {(object|string)} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json". Or, can be a fully formed JSON Object.
      * @param {string} [dataKey] - When the JSON file loads only this property will be stored in the Cache.
      * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {this} The Loader instance.
      */
-    public function json(key:Dynamic, ?url:String, ?dataKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
+    public function json(key:Dynamic, ?url:Dynamic, ?dataKey:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
     /**
      * Adds a Multi Texture Atlas, or array of multi atlases, to the current load queue.
      *
@@ -2656,12 +2656,12 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig|Phaser.Types.Loader.FileTypes.TilemapJSONFileConfig[])} key - The key to use for this file, or a file configuration object, or array of them.
-     * @param {string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json".
+     * @param {object|string} [url] - The absolute or relative URL to load this file from. If undefined or `null` it will be set to `<key>.json`, i.e. if `key` was "alien" then the URL will be "alien.json". Or, a well formed JSON object.
      * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - An XHR Settings configuration object. Used in replacement of the Loaders default XHR Settings.
      *
      * @return {this} The Loader instance.
      */
-    public function tilemapTiledJSON(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
+    public function tilemapTiledJSON(key:Dynamic, ?url:Dynamic, ?xhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
     /**
      * Adds a Unity YAML based Texture Atlas, or array of atlases, to the current load queue.
      *

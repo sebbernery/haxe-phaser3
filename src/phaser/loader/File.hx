@@ -50,13 +50,16 @@ extern class File {
     public var key:String;
     /**
      * The URL of the file, not including baseURL.
-     * Automatically has Loader.path prepended to it.
+     *
+     * Automatically has Loader.path prepended to it if a string.
+     *
+     * Can also be a JavaScript Object, such as the results of parsing JSON data.
      *
      * @name Phaser.Loader.File#url
-     * @type {string}
+     * @type {object|string}
      * @since 3.0.0
      */
-    public var url:String;
+    public var url:Dynamic;
     /**
      * The final URL this file will load from, including baseURL and path.
      * Set automatically when the Loader calls 'load' on this file.

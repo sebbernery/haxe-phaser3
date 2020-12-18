@@ -576,7 +576,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
     /**
      * Sets collision on all tiles in the given layer, except for tiles that have an index specified in
      * the given array. The `collides` parameter controls if collision will be enabled (true) or
-     * disabled (false).
+     * disabled (false). Tile indexes not currently in the layer are not affected.
      *
      * @method Phaser.Tilemaps.StaticTilemapLayer#setCollisionByExclusion
      * @since 3.0.0
@@ -954,7 +954,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.
@@ -970,7 +970,7 @@ extern class StaticTilemapLayer extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.

@@ -617,9 +617,9 @@ extern class Text extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Text#getTextMetrics
      * @since 3.0.0
      *
-     * @return {object} The text metrics.
+     * @return {Phaser.Types.GameObjects.Text.TextMetrics} The text metrics.
      */
-    public function getTextMetrics():Dynamic;
+    public function getTextMetrics():phaser.types.gameobjects.text.TextMetrics;
     /**
      * Internal destroy handler, called as part of the destroy process.
      *
@@ -910,7 +910,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.
@@ -926,7 +926,7 @@ extern class Text extends phaser.gameobjects.GameObject {
      * The depth is also known as the 'z-index' in some environments, and allows you to change the rendering order
      * of Game Objects, without actually moving their position in the display list.
      *
-     * The depth starts from zero (the default value) and increases from that point. A Game Object with a higher depth
+     * The default depth is zero. A Game Object with a higher depth
      * value will always render in front of one with a lower value.
      *
      * Setting the depth will queue a depth sort event within the Scene.

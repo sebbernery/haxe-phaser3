@@ -20,12 +20,12 @@ package phaser.gameobjects;
  * @param {Phaser.Scene} scene - The Scene to which this Quad belongs.
  * @param {number} x - The horizontal position of this Game Object in the world.
  * @param {number} y - The vertical position of this Game Object in the world.
- * @param {string} texture - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager.
+ * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
  * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
  */
 @:native("Phaser.GameObjects.Quad")
 extern class Quad extends phaser.gameobjects.Mesh {
-    public function new(scene:phaser.Scene, x:Float, y:Float, texture:String, ?frame:Dynamic);
+    public function new(scene:phaser.Scene, x:Float, y:Float, texture:Dynamic, ?frame:Dynamic);
     /**
      * The top-left x vertex of this Quad.
      *

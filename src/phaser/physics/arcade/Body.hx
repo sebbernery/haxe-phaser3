@@ -42,7 +42,7 @@ extern class Body {
      */
     public var transform:Dynamic;
     /**
-     * Whether the Body's boundary is drawn to the debug display.
+     * Whether the Body is drawn to the debug display.
      *
      * @name Phaser.Physics.Arcade.Body#debugShowBody
      * @type {boolean}
@@ -75,7 +75,7 @@ extern class Body {
      */
     public var enable:Bool;
     /**
-     * Whether this Body's boundary is circular (true) or rectangular (false).
+     * Whether this Body is circular (true) or rectangular (false).
      *
      * @name Phaser.Physics.Arcade.Body#isCircle
      * @type {boolean}
@@ -85,7 +85,7 @@ extern class Body {
      */
     public var isCircle:Bool;
     /**
-     * If this Body is circular, this is the unscaled radius of the Body's boundary, as set by setCircle(), in source pixels.
+     * If this Body is circular, this is the unscaled radius of the Body, as set by setCircle(), in source pixels.
      * The true radius is equal to `halfWidth`.
      *
      * @name Phaser.Physics.Arcade.Body#radius
@@ -140,7 +140,7 @@ extern class Body {
     /**
      * This body's rotation, in degrees, based on its angular acceleration and angular velocity.
      * The Body's rotation controls the `angle` of its Game Object.
-     * It doesn't rotate the Body's boundary, which is always an axis-aligned rectangle or a circle.
+     * It doesn't rotate the Body's own geometry, which is always an axis-aligned rectangle or a circle.
      *
      * @name Phaser.Physics.Arcade.Body#rotation
      * @type {number}
@@ -156,7 +156,7 @@ extern class Body {
      */
     public var preRotation:Float;
     /**
-     * The width of the Body boundary, in pixels.
+     * The width of the Body, in pixels.
      * If the Body is circular, this is also the diameter.
      * If you wish to change the width use the `Body.setSize` method.
      *
@@ -168,7 +168,7 @@ extern class Body {
      */
     public var width:Float;
     /**
-     * The height of the Body boundary, in pixels.
+     * The height of the Body, in pixels.
      * If the Body is circular, this is also the diameter.
      * If you wish to change the height use the `Body.setSize` method.
      *
@@ -216,7 +216,7 @@ extern class Body {
      */
     public var halfHeight:Float;
     /**
-     * The center of the Body's boundary.
+     * The center of the Body.
      * The midpoint of its `position` (top-left corner) and its bottom-right corner.
      *
      * @name Phaser.Physics.Arcade.Body#center
@@ -269,21 +269,22 @@ extern class Body {
      */
     public var allowDrag:Bool;
     /**
-     * When `useDamping` is false (the default), this is absolute loss of velocity due to movement, in pixels per second squared (a vector).
-     * The x and y components are applied separately.
+     * When `useDamping` is false (the default), this is absolute loss of velocity due to movement, in pixels per second squared.
      *
-     * When `useDamping` is true, this is 1 minus the damping factor (a number).
+     * When `useDamping` is true, this is 1 minus the damping factor.
      * A value of 1 means the Body loses no velocity.
      * A value of 0.95 means the Body loses 5% of its velocity per step.
      * A value of 0.5 means the Body loses 50% of its velocity per step.
      *
+     * The x and y components are applied separately.
+     *
      * Drag is applied only when `acceleration` is zero.
      *
      * @name Phaser.Physics.Arcade.Body#drag
-     * @type {(Phaser.Math.Vector2|number)}
+     * @type {Phaser.Math.Vector2}
      * @since 3.0.0
      */
-    public var drag:Dynamic;
+    public var drag:phaser.math.Vector2;
     /**
      * Whether this Body's position is affected by gravity (local or world).
      *
@@ -484,11 +485,17 @@ extern class Body {
     public var speed:Float;
     /**
      * The direction of the Body's velocity, as calculated during the last step.
-     * If the Body is moving on both axes (diagonally), this describes motion on the vertical axis only.
+     * This is a numeric constant value (FACING_UP, FACING_DOWN, FACING_LEFT, FACING_RIGHT).
+     * If the Body is moving on both axes, this describes motion on the vertical axis only.
      *
      * @name Phaser.Physics.Arcade.Body#facing
      * @type {integer}
      * @since 3.0.0
+     *
+     * @see Phaser.Physics.Arcade.FACING_UP
+     * @see Phaser.Physics.Arcade.FACING_DOWN
+     * @see Phaser.Physics.Arcade.FACING_LEFT
+     * @see Phaser.Physics.Arcade.FACING_RIGHT
      */
     public var facing:Int;
     /**
@@ -654,7 +661,7 @@ extern class Body {
      */
     public var y:Float;
     /**
-     * The left edge of the Body's boundary. Identical to x.
+     * The left edge of the Body. Identical to x.
      *
      * @name Phaser.Physics.Arcade.Body#left
      * @type {number}
@@ -663,7 +670,7 @@ extern class Body {
      */
     public var left:Float;
     /**
-     * The right edge of the Body's boundary.
+     * The right edge of the Body.
      *
      * @name Phaser.Physics.Arcade.Body#right
      * @type {number}
@@ -672,7 +679,7 @@ extern class Body {
      */
     public var right:Float;
     /**
-     * The top edge of the Body's boundary. Identical to y.
+     * The top edge of the Body. Identical to y.
      *
      * @name Phaser.Physics.Arcade.Body#top
      * @type {number}
@@ -681,7 +688,7 @@ extern class Body {
      */
     public var top:Float;
     /**
-     * The bottom edge of this Body's boundary.
+     * The bottom edge of this Body.
      *
      * @name Phaser.Physics.Arcade.Body#bottom
      * @type {number}
@@ -704,6 +711,19 @@ extern class Body {
      * @since 3.0.0
      */
     public function updateCenter():Void;
+    /**
+     * Updates the Body's `position`, `width`, `height`, and `center` from its Game Object and `offset`.
+     *
+     * You don't need to call this for Dynamic Bodies, as it happens automatically during the physics step.
+     * But you could use it if you have modified the Body offset or Game Object transform and need to immediately
+     * read the Body's new `position` or `center`.
+     *
+     * To resynchronize the Body with its Game Object, use `reset()` instead.
+     *
+     * @method Phaser.Physics.Arcade.Body#updateFromGameObject
+     * @since 3.24.0
+     */
+    public function updateFromGameObject():Void;
     /**
      * Prepares the Body for a physics step by resetting the `wasTouching`, `touching` and `blocked` states.
      *
@@ -782,7 +802,7 @@ extern class Body {
      */
     public function setOffset(x:Float, ?y:Float):phaser.physics.arcade.Body;
     /**
-     * Sizes and positions this Body's boundary, as a rectangle.
+     * Sizes and positions this Body, as a rectangle.
      * Modifies the Body `offset` if `center` is true (the default).
      * Resets the width and height to match current frame, if no width and height provided and a frame is found.
      *
@@ -797,7 +817,7 @@ extern class Body {
      */
     public function setSize(?width:Int, ?height:Int, ?center:Bool):phaser.physics.arcade.Body;
     /**
-     * Sizes and positions this Body's boundary, as a circle.
+     * Sizes and positions this Body, as a circle.
      *
      * @method Phaser.Physics.Arcade.Body#setCircle
      * @since 3.0.0
@@ -841,7 +861,7 @@ extern class Body {
      */
     public function getBounds(obj:phaser.types.physics.arcade.ArcadeBodyBounds):phaser.types.physics.arcade.ArcadeBodyBounds;
     /**
-     * Tests if the coordinates are within this Body's boundary.
+     * Tests if the coordinates are within this Body.
      *
      * @method Phaser.Physics.Arcade.Body#hitTest
      * @since 3.0.0
@@ -977,7 +997,7 @@ extern class Body {
      */
     public function destroy():Void;
     /**
-     * Draws this Body's boundary and velocity, if enabled.
+     * Draws this Body and its velocity, if enabled.
      *
      * @method Phaser.Physics.Arcade.Body#drawDebug
      * @since 3.0.0

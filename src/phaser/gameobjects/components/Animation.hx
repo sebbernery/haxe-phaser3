@@ -69,6 +69,14 @@ extern class Animation {
      */
     public var nextAnim:String;
     /**
+     * A queue of keys of the next Animations to be loaded into this Animation Controller when the current animation completes.
+     *
+     * @name Phaser.GameObjects.Components.Animation#nextAnimsQueue
+     * @type {string[]}
+     * @since 3.24.0
+     */
+    public var nextAnimsQueue:Array<String>;
+    /**
      * The frame rate of playback in frames per second.
      * The default is 24 if the `duration` property is `null`.
      *

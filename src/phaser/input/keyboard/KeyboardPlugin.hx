@@ -311,6 +311,17 @@ extern class KeyboardPlugin extends phaser.events.EventEmitter {
      */
     public function removeKey(key:Dynamic, ?destroy:Bool):Dynamic;
     /**
+     * Removes all Key objects created by _this_ Keyboard Plugin.
+     *
+     * @method Phaser.Input.Keyboard.KeyboardPlugin#removeAllKeys
+     * @since 3.24.0
+     *
+     * @param {boolean} [destroy=false] - Call `Key.destroy` on each removed Key object?
+     *
+     * @return {this} This KeyboardPlugin object.
+     */
+    public function removeAllKeys(?destroy:Bool):Dynamic;
+    /**
      * Creates a new KeyCombo.
      *
      * A KeyCombo will listen for a specific string of keys from the Keyboard, and when it receives them

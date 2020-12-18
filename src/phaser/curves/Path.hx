@@ -345,11 +345,11 @@ extern class Path {
      * @since 3.0.0
      *
      * @param {(number|Phaser.Math.Vector2)} x - The X coordinate of the position to move the path's end point to, or a `Vector2` containing the entire new end point.
-     * @param {number} y - The Y coordinate of the position to move the path's end point to, if a number was passed as the X coordinate.
+     * @param {number} [y] - The Y coordinate of the position to move the path's end point to, if a number was passed as the X coordinate.
      *
      * @return {this} This Path object.
      */
-    public function moveTo(x:Dynamic, y:Float):Dynamic;
+    public function moveTo(x:Dynamic, ?y:Float):Dynamic;
     /**
      * Converts this Path to a JSON object containing the path information and its constituent curves.
      *
