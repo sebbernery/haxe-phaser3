@@ -828,7 +828,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
      *
-     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     * @return {(Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} The Post Pipeline/s matching the name, or undefined if no match. If more than one match they are returned in an array.
      */
     public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
@@ -856,7 +856,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public function resetPostPipeline(?resetData:Bool):Void;
     /**
-     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     * Removes a type of Post Pipeline instances from this Game Object, based on the given name, and destroys them.
      *
      * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
      *

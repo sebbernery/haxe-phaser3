@@ -15,6 +15,8 @@ package phaser.types.cameras.controls;
  * @property {(number|{x:number,y:number})} [acceleration=0] - The horizontal and vertical acceleration the camera will move.
  * @property {(number|{x:number,y:number})} [drag=0] - The horizontal and vertical drag applied to the camera when it is moving.
  * @property {(number|{x:number,y:number})} [maxSpeed=0] - The maximum horizontal and vertical speed the camera will move.
+ * @property {number} [minZoom=0.001] - The smallest zoom value the camera will reach when zoomed out.
+ * @property {number} [maxZoom=1000] - The largest zoom value the camera will reach when zoomed in.
  */
 typedef SmoothedKeyControlConfig = {
     @:optional var camera:phaser.cameras.scene2d.Camera;
@@ -28,4 +30,6 @@ typedef SmoothedKeyControlConfig = {
     @:optional var acceleration:Dynamic;
     @:optional var drag:Dynamic;
     @:optional var maxSpeed:Dynamic;
+    @:optional var minZoom:Float;
+    @:optional var maxZoom:Float;
 };

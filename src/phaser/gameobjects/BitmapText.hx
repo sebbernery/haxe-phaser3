@@ -120,6 +120,15 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var dropShadowAlpha:Float;
     /**
+     * Indicates whether the font texture is from an atlas or not.
+     *
+     * @name Phaser.GameObjects.BitmapText#fromAtlas
+     * @type {boolean}
+     * @since 3.54.0
+     * @readonly
+     */
+    public var fromAtlas:Bool;
+    /**
      * Controls the alignment of each line of text in this BitmapText object.
      *
      * Only has any effect when this BitmapText contains multiple lines of text, split with carriage-returns.
@@ -1009,7 +1018,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      *
      * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
      *
-     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     * @return {(Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} The Post Pipeline/s matching the name, or undefined if no match. If more than one match they are returned in an array.
      */
     public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
@@ -1037,7 +1046,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public function resetPostPipeline(?resetData:Bool):Void;
     /**
-     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     * Removes a type of Post Pipeline instances from this Game Object, based on the given name, and destroys them.
      *
      * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
      *

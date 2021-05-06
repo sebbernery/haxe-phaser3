@@ -39,12 +39,12 @@ package phaser.gameobjects;
  * @param {number} [y=0] - The vertical position of this Game Object in the world.
  * @param {number} [width=32] - The width of the Render Texture.
  * @param {number} [height=32] - The height of the Render Texture.
- * @property {string} [key] - The texture key to make the RenderTexture from.
- * @property {string} [frame] - the frame to make the RenderTexture from.
+ * @param {string} [key] - The texture key to make the RenderTexture from.
+ * @param {string} [frame] - The frame to make the RenderTexture from.
  */
 @:native("Phaser.GameObjects.RenderTexture")
 extern class RenderTexture extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?width:Float, ?height:Float);
+    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?width:Float, ?height:Float, ?key:String, ?frame:String);
     /**
      * A reference to either the Canvas or WebGL Renderer that the Game instance is using.
      *
@@ -1519,7 +1519,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      *
      * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
      *
-     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     * @return {(Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} The Post Pipeline/s matching the name, or undefined if no match. If more than one match they are returned in an array.
      */
     public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
@@ -1547,7 +1547,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public function resetPostPipeline(?resetData:Bool):Void;
     /**
-     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     * Removes a type of Post Pipeline instances from this Game Object, based on the given name, and destroys them.
      *
      * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
      *

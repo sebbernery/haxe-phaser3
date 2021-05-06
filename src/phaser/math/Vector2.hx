@@ -50,11 +50,11 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#copy
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to copy the components from.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to copy the components from.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function copy(src:phaser.math.Vector2):phaser.math.Vector2;
+    public function copy(src:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Set the component values of this Vector from a given Vector2Like object.
      *
@@ -110,23 +110,23 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#equals
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} v - The vector to compare with this Vector.
+     * @param {Phaser.Types.Math.Vector2Like} v - The vector to compare with this Vector.
      *
      * @return {boolean} Whether the given Vector is equal to this Vector.
      */
-    public function equals(v:phaser.math.Vector2):Bool;
+    public function equals(v:phaser.types.math.Vector2Like):Bool;
     /**
      * Check whether this Vector is approximately equal to a given Vector.
      *
      * @method Phaser.Math.Vector2#fuzzyEquals
      * @since 3.23.0
      *
-     * @param {Phaser.Math.Vector2} v - The vector to compare with this Vector.
+     * @param {Phaser.Types.Math.Vector2Like} v - The vector to compare with this Vector.
      * @param {number} [epsilon=0.0001] - The tolerance value.
      *
      * @return {boolean} Whether both absolute differences of the x and y components are smaller than `epsilon`.
      */
-    public function fuzzyEquals(v:phaser.math.Vector2, ?epsilon:Float):Bool;
+    public function fuzzyEquals(v:phaser.types.math.Vector2Like, ?epsilon:Float):Bool;
     /**
      * Calculate the angle between this Vector and the positive x-axis, in radians.
      *
@@ -153,22 +153,22 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#add
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to add to this Vector.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to add to this Vector.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function add(src:phaser.math.Vector2):phaser.math.Vector2;
+    public function add(src:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Subtract the given Vector from this Vector. Subtraction is component-wise.
      *
      * @method Phaser.Math.Vector2#subtract
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to subtract from this Vector.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to subtract from this Vector.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function subtract(src:phaser.math.Vector2):phaser.math.Vector2;
+    public function subtract(src:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Perform a component-wise multiplication between this Vector and the given Vector.
      *
@@ -177,11 +177,11 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#multiply
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to multiply this Vector by.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to multiply this Vector by.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function multiply(src:phaser.math.Vector2):phaser.math.Vector2;
+    public function multiply(src:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Scale this Vector by the given value.
      *
@@ -201,11 +201,11 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#divide
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to divide this Vector by.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to divide this Vector by.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function divide(src:phaser.math.Vector2):phaser.math.Vector2;
+    public function divide(src:phaser.types.math.Vector2Like):phaser.math.Vector2;
     /**
      * Negate the `x` and `y` components of this Vector.
      *
@@ -221,22 +221,22 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#distance
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to calculate the distance to.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to calculate the distance to.
      *
      * @return {number} The distance from this Vector to the given Vector.
      */
-    public function distance(src:phaser.math.Vector2):Float;
+    public function distance(src:phaser.types.math.Vector2Like):Float;
     /**
      * Calculate the distance between this Vector and the given Vector, squared.
      *
      * @method Phaser.Math.Vector2#distanceSq
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector to calculate the distance to.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector to calculate the distance to.
      *
      * @return {number} The distance from this Vector to the given Vector, squared.
      */
-    public function distanceSq(src:phaser.math.Vector2):Float;
+    public function distanceSq(src:phaser.types.math.Vector2Like):Float;
     /**
      * Calculate the length (or magnitude) of this Vector.
      *
@@ -301,22 +301,22 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#dot
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector2 to dot product with this Vector2.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector2 to dot product with this Vector2.
      *
      * @return {number} The dot product of this Vector and the given Vector.
      */
-    public function dot(src:phaser.math.Vector2):Float;
+    public function dot(src:phaser.types.math.Vector2Like):Float;
     /**
      * Calculate the cross product of this Vector and the given Vector.
      *
      * @method Phaser.Math.Vector2#cross
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector2 to cross with this Vector2.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector2 to cross with this Vector2.
      *
      * @return {number} The cross product of this Vector and the given Vector.
      */
-    public function cross(src:phaser.math.Vector2):Float;
+    public function cross(src:phaser.types.math.Vector2Like):Float;
     /**
      * Linearly interpolate between this Vector and the given Vector.
      *
@@ -325,12 +325,12 @@ extern class Vector2 {
      * @method Phaser.Math.Vector2#lerp
      * @since 3.0.0
      *
-     * @param {Phaser.Math.Vector2} src - The Vector2 to interpolate towards.
+     * @param {Phaser.Types.Math.Vector2Like} src - The Vector2 to interpolate towards.
      * @param {number} [t=0] - The interpolation percentage, between 0 and 1.
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    public function lerp(src:phaser.math.Vector2, ?t:Float):phaser.math.Vector2;
+    public function lerp(src:phaser.types.math.Vector2Like, ?t:Float):phaser.math.Vector2;
     /**
      * Transform this Vector with the given Matrix.
      *

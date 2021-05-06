@@ -20,6 +20,53 @@ package phaser.sound;
 extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
     public function new(game:phaser.Game);
     /**
+     * The AudioContext being used for playback.
+     *
+     * @name Phaser.Sound.WebAudioSoundManager#context
+     * @type {AudioContext}
+     * @since 3.0.0
+     */
+    public var context:js.html.audio.AudioContext;
+    /**
+     * Gain node responsible for controlling global muting.
+     *
+     * @name Phaser.Sound.WebAudioSoundManager#masterMuteNode
+     * @type {GainNode}
+     * @since 3.0.0
+     */
+    public var masterMuteNode:GainNode;
+    /**
+     * Gain node responsible for controlling global volume.
+     *
+     * @name Phaser.Sound.WebAudioSoundManager#masterVolumeNode
+     * @type {GainNode}
+     * @since 3.0.0
+     */
+    public var masterVolumeNode:GainNode;
+    /**
+     * Destination node for connecting individual sounds to.
+     *
+     * @name Phaser.Sound.WebAudioSoundManager#destination
+     * @type {AudioNode}
+     * @since 3.0.0
+     */
+    public var destination:AudioNode;
+    /**
+     * Method responsible for instantiating and returning AudioContext instance.
+     * If an instance of an AudioContext class was provided through the game config,
+     * that instance will be returned instead. This can come in handy if you are reloading
+     * a Phaser game on a page that never properly refreshes (such as in an SPA project)
+     * and you want to reuse already instantiated AudioContext.
+     *
+     * @method Phaser.Sound.WebAudioSoundManager#createAudioContext
+     * @since 3.0.0
+     *
+     * @param {Phaser.Game} game - Reference to the current game instance.
+     *
+     * @return {AudioContext} The AudioContext instance to be used for playback.
+     */
+    public function createAudioContext(game:phaser.Game):js.html.audio.AudioContext;
+    /**
      * This method takes a new AudioContext reference and then sets
      * this Sound Manager to use that context for all playback.
      *

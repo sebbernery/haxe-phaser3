@@ -458,6 +458,83 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @return {number[]} An array of display list position indexes.
      */
     public function getIndexList():Array<Float>;
+    /**
+     * Adds this Game Object to the given Display List.
+     *
+     * If no Display List is specified, it will default to the Display List owned by the Scene to which
+     * this Game Object belongs.
+     *
+     * A Game Object can only exist on one Display List at any given time, but may move freely between them.
+     *
+     * If this Game Object is already on another Display List when this method is called, it will first
+     * be removed from it, before being added to the new list.
+     *
+     * You can query which list it is on by looking at the `Phaser.GameObjects.GameObject#displayList` property.
+     *
+     * If a Game Object isn't on any display list, it will not be rendered. If you just wish to temporarly
+     * disable it from rendering, consider using the `setVisible` method, instead.
+     *
+     * @method Phaser.GameObjects.GameObject#addToDisplayList
+     * @fires Phaser.Scenes.Events#ADDED_TO_SCENE
+     * @fires Phaser.GameObjects.Events#ADDED_TO_SCENE
+     * @since 3.53.0
+     *
+     * @param {(Phaser.GameObjects.DisplayList|Phaser.GameObjects.Layer)} [displayList] - The Display List to add to. Defaults to the Scene Display List.
+     *
+     * @return {this} This Game Object.
+     */
+    public function addToDisplayList(?displayList:Dynamic):Dynamic;
+    /**
+     * Adds this Game Object to the Update List belonging to the Scene.
+     *
+     * When a Game Object is added to the Update List it will have its `preUpdate` method called
+     * every game frame. This method is passed two parameters: `delta` and `time`.
+     *
+     * If you wish to run your own logic within `preUpdate` then you should always call
+     * `preUpdate.super(delta, time)` within it, or it may fail to process required operations,
+     * such as Sprite animations.
+     *
+     * @method Phaser.GameObjects.GameObject#addToUpdateList
+     * @since 3.53.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function addToUpdateList():Dynamic;
+    /**
+     * Removes this Game Object from the Display List it is currently on.
+     *
+     * A Game Object can only exist on one Display List at any given time, but may move freely removed
+     * and added back at a later stage.
+     *
+     * You can query which list it is on by looking at the `Phaser.GameObjects.GameObject#displayList` property.
+     *
+     * If a Game Object isn't on any Display List, it will not be rendered. If you just wish to temporarly
+     * disable it from rendering, consider using the `setVisible` method, instead.
+     *
+     * @method Phaser.GameObjects.GameObject#removeFromDisplayList
+     * @fires Phaser.Scenes.Events#REMOVED_FROM_SCENE
+     * @fires Phaser.GameObjects.Events#REMOVED_FROM_SCENE
+     * @since 3.53.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function removeFromDisplayList():Dynamic;
+    /**
+     * Removes this Game Object from the Scene's Update List.
+     *
+     * When a Game Object is on the Update List, it will have its `preUpdate` method called
+     * every game frame. Calling this method will remove it from the list, preventing this.
+     *
+     * Removing a Game Object from the Update List will stop most internal functions working.
+     * For example, removing a Sprite from the Update List will prevent it from being able to
+     * run animations.
+     *
+     * @method Phaser.GameObjects.GameObject#removeFromUpdateList
+     * @since 3.53.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function removeFromUpdateList():Dynamic;
     public function renderFlags():Void;
     public function cameraFilter():Void;
 }

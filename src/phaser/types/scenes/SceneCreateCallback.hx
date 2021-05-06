@@ -8,6 +8,7 @@ package phaser.types.scenes;
  * @callback Phaser.Types.Scenes.SceneCreateCallback
  * @since 3.0.0
  *
+ * @this Phaser.Scene
  * @param {object} data - Any data passed via `ScenePlugin.add()` or `ScenePlugin.start()`. Same as Scene.settings.data.
  */
 typedef SceneCreateCallback = Dynamic;

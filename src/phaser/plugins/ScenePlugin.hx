@@ -14,10 +14,11 @@ package phaser.plugins;
  *
  * @param {Phaser.Scene} scene - A reference to the Scene that has installed this plugin.
  * @param {Phaser.Plugins.PluginManager} pluginManager - A reference to the Plugin Manager.
+ * @param {string} pluginKey - The key under which this plugin has been installed into the Scene Systems.
  */
 @:native("Phaser.Plugins.ScenePlugin")
 extern class ScenePlugin extends phaser.plugins.BasePlugin {
-    public function new(scene:phaser.Scene, pluginManager:phaser.plugins.PluginManager);
+    public function new(scene:phaser.Scene, pluginManager:phaser.plugins.PluginManager, pluginKey:String);
     /**
      * A reference to the Scene that has installed this plugin.
      * Only set if it's a Scene Plugin, otherwise `null`.
@@ -42,6 +43,18 @@ extern class ScenePlugin extends phaser.plugins.BasePlugin {
      * @since 3.8.0
      */
     public var systems:phaser.scenes.Systems;
+    /**
+     * The key under which this plugin was installed into the Scene Systems.
+     *
+     * This property is only set when the plugin is instantiated and added to the Scene, not before.
+     * You can use it during the `boot` method.
+     *
+     * @name Phaser.Plugins.ScenePlugin#pluginKey
+     * @type {string}
+     * @readonly
+     * @since 3.54.0
+     */
+    public var pluginKey:String;
     /**
      * This method is called when the Scene boots. It is only ever called once.
      *

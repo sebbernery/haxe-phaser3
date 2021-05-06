@@ -241,9 +241,9 @@ extern class CameraManager {
      * @since 3.0.0
      *
      * @param {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)} renderer - The Renderer that will render the children to this camera.
-     * @param {Phaser.GameObjects.DisplayList} children - The Display List for the Scene.
+     * @param {Phaser.GameObjects.DisplayList} displayList - The Display List for the Scene.
      */
-    public function render(renderer:Dynamic, children:phaser.gameobjects.DisplayList):Void;
+    public function render(renderer:Dynamic, displayList:phaser.gameobjects.DisplayList):Void;
     /**
      * Takes an array of Game Objects and a Camera and returns a new array
      * containing only those Game Objects that pass the `willRender` test

@@ -6,7 +6,13 @@ package phaser.scenes;
  *
  * The Scene Manager is a Game level system, responsible for creating, processing and updating all of the
  * Scenes in a Game instance.
- ó *
+ *
+ * You should not usually interact directly with the Scene Manager at all. Instead, you should use
+ * the Scene Plugin, which is available from every Scene in your game via the `this.scene` property.
+ *
+ * Using methods in this Scene Manager directly will break queued operations and can cause runtime
+ * errors. Instead, go via the Scene Plugin. Every feature this Scene Manager provides is also
+ * available via the Scene Plugin.
  *
  * @class SceneManager
  * @memberof Phaser.Scenes
@@ -31,7 +37,7 @@ extern class SceneManager {
      * An object that maps the keys to the scene so we can quickly get a scene from a key without iteration.
      *
      * @name Phaser.Scenes.SceneManager#keys
-     * @type {object}
+     * @type {Record<string, Phaser.Scene>}
      * @since 3.0.0
      */
     public var keys:Dynamic;
@@ -39,10 +45,10 @@ extern class SceneManager {
      * The array in which all of the scenes are kept.
      *
      * @name Phaser.Scenes.SceneManager#scenes
-     * @type {array}
+     * @type {Phaser.Scene[]}
      * @since 3.0.0
      */
-    public var scenes:Array<Dynamic>;
+    public var scenes:Array<phaser.Scene>;
     /**
      * Is the Scene Manager actively processing the Scenes list?
      *
@@ -119,9 +125,9 @@ extern class SceneManager {
      *
      * @param {string} key - A unique key used to reference the Scene, i.e. `MainMenu` or `Level1`.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function remove(key:String):phaser.scenes.SceneManager;
+    public function remove(key:String):Dynamic;
     /**
      * Updates the Scenes.
      *
@@ -162,7 +168,7 @@ extern class SceneManager {
      * @method Phaser.Scenes.SceneManager#getScene
      * @since 3.0.0
      *
-     * @param {string|Phaser.Scene} key - The Scene to retrieve.
+     * @param {(string|Phaser.Scene)} key - The Scene to retrieve.
      *
      * @return {?Phaser.Scene} The Scene.
      */
@@ -173,92 +179,92 @@ extern class SceneManager {
      * @method Phaser.Scenes.SceneManager#isActive
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {(string|Phaser.Scene)} key - The Scene to check.
      *
-     * @return {boolean} Whether the Scene is running.
+     * @return {boolean} Whether the Scene is running, or `null` if no matching Scene was found.
      */
-    public function isActive(key:String):Bool;
+    public function isActive(key:Dynamic):Bool;
     /**
      * Determines whether a Scene is paused.
      *
      * @method Phaser.Scenes.SceneManager#isPaused
      * @since 3.17.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {(string|Phaser.Scene)} key - The Scene to check.
      *
-     * @return {boolean} Whether the Scene is paused.
+     * @return {boolean} Whether the Scene is paused, or `null` if no matching Scene was found.
      */
-    public function isPaused(key:String):Bool;
+    public function isPaused(key:Dynamic):Bool;
     /**
      * Determines whether a Scene is visible.
      *
      * @method Phaser.Scenes.SceneManager#isVisible
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {(string|Phaser.Scene)} key - The Scene to check.
      *
-     * @return {boolean} Whether the Scene is visible.
+     * @return {boolean} Whether the Scene is visible, or `null` if no matching Scene was found.
      */
-    public function isVisible(key:String):Bool;
+    public function isVisible(key:Dynamic):Bool;
     /**
      * Determines whether a Scene is sleeping.
      *
      * @method Phaser.Scenes.SceneManager#isSleeping
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to check.
+     * @param {(string|Phaser.Scene)} key - The Scene to check.
      *
-     * @return {boolean} Whether the Scene is sleeping.
+     * @return {boolean} Whether the Scene is sleeping, or `null` if no matching Scene was found.
      */
-    public function isSleeping(key:String):Bool;
+    public function isSleeping(key:Dynamic):Bool;
     /**
      * Pauses the given Scene.
      *
      * @method Phaser.Scenes.SceneManager#pause
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to pause.
+     * @param {(string|Phaser.Scene)} key - The Scene to pause.
      * @param {object} [data] - An optional data object that will be passed to the Scene and emitted by its pause event.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function pause(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function pause(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Resumes the given Scene.
      *
      * @method Phaser.Scenes.SceneManager#resume
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to resume.
+     * @param {(string|Phaser.Scene)} key - The Scene to resume.
      * @param {object} [data] - An optional data object that will be passed to the Scene and emitted by its resume event.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function resume(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function resume(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Puts the given Scene to sleep.
      *
      * @method Phaser.Scenes.SceneManager#sleep
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to put to sleep.
+     * @param {(string|Phaser.Scene)} key - The Scene to put to sleep.
      * @param {object} [data] - An optional data object that will be passed to the Scene and emitted by its sleep event.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function sleep(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function sleep(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Awakens the given Scene.
      *
      * @method Phaser.Scenes.SceneManager#wake
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to wake up.
+     * @param {(string|Phaser.Scene)} key - The Scene to wake up.
      * @param {object} [data] - An optional data object that will be passed to the Scene and emitted by its wake event.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function wake(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function wake(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Runs the given Scene.
      *
@@ -271,48 +277,48 @@ extern class SceneManager {
      * @method Phaser.Scenes.SceneManager#run
      * @since 3.10.0
      *
-     * @param {string} key - The Scene to run.
+     * @param {(string|Phaser.Scene)} key - The Scene to run.
      * @param {object} [data] - A data object that will be passed to the Scene on start, wake, or resume.
      *
-     * @return {Phaser.Scenes.SceneManager} This Scene Manager.
+     * @return {this} This Scene Manager instance.
      */
-    public function run(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function run(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Starts the given Scene.
      *
      * @method Phaser.Scenes.SceneManager#start
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to start.
+     * @param {(string|Phaser.Scene)} key - The Scene to start.
      * @param {object} [data] - Optional data object to pass to `Scene.Settings` and `Scene.init`, and `Scene.create`.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function start(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function start(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Stops the given Scene.
      *
      * @method Phaser.Scenes.SceneManager#stop
      * @since 3.0.0
      *
-     * @param {string} key - The Scene to stop.
+     * @param {(string|Phaser.Scene)} key - The Scene to stop.
      * @param {object} [data] - Optional data object to pass to Scene.shutdown.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function stop(key:String, ?data:Dynamic):phaser.scenes.SceneManager;
+    public function stop(key:Dynamic, ?data:Dynamic):Dynamic;
     /**
      * Sleeps one one Scene and starts the other.
      *
      * @method Phaser.Scenes.SceneManager#switch
      * @since 3.0.0
      *
-     * @param {string} from - The Scene to sleep.
-     * @param {string} to - The Scene to start.
+     * @param {(string|Phaser.Scene)} from - The Scene to sleep.
+     * @param {(string|Phaser.Scene)} to - The Scene to start.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    @:native('switch') public function switch_(from:String, to:String):phaser.scenes.SceneManager;
+    @:native('switch') public function switch_(from:Dynamic, to:Dynamic):Dynamic;
     /**
      * Retrieves a Scene by numeric index.
      *
@@ -345,9 +351,9 @@ extern class SceneManager {
      *
      * @param {(string|Phaser.Scene)} key - The Scene to move.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function bringToTop(key:Dynamic):phaser.scenes.SceneManager;
+    public function bringToTop(key:Dynamic):Dynamic;
     /**
      * Sends a Scene to the back of the Scenes list.
      *
@@ -358,9 +364,9 @@ extern class SceneManager {
      *
      * @param {(string|Phaser.Scene)} key - The Scene to move.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function sendToBack(key:Dynamic):phaser.scenes.SceneManager;
+    public function sendToBack(key:Dynamic):Dynamic;
     /**
      * Moves a Scene down one position in the Scenes list.
      *
@@ -369,9 +375,9 @@ extern class SceneManager {
      *
      * @param {(string|Phaser.Scene)} key - The Scene to move.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function moveDown(key:Dynamic):phaser.scenes.SceneManager;
+    public function moveDown(key:Dynamic):Dynamic;
     /**
      * Moves a Scene up one position in the Scenes list.
      *
@@ -380,9 +386,9 @@ extern class SceneManager {
      *
      * @param {(string|Phaser.Scene)} key - The Scene to move.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function moveUp(key:Dynamic):phaser.scenes.SceneManager;
+    public function moveUp(key:Dynamic):Dynamic;
     /**
      * Moves a Scene so it is immediately above another Scene in the Scenes list.
      *
@@ -394,9 +400,9 @@ extern class SceneManager {
      * @param {(string|Phaser.Scene)} keyA - The Scene that Scene B will be moved above.
      * @param {(string|Phaser.Scene)} keyB - The Scene to be moved.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function moveAbove(keyA:Dynamic, keyB:Dynamic):phaser.scenes.SceneManager;
+    public function moveAbove(keyA:Dynamic, keyB:Dynamic):Dynamic;
     /**
      * Moves a Scene so it is immediately below another Scene in the Scenes list.
      *
@@ -408,9 +414,9 @@ extern class SceneManager {
      * @param {(string|Phaser.Scene)} keyA - The Scene that Scene B will be moved above.
      * @param {(string|Phaser.Scene)} keyB - The Scene to be moved.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function moveBelow(keyA:Dynamic, keyB:Dynamic):phaser.scenes.SceneManager;
+    public function moveBelow(keyA:Dynamic, keyB:Dynamic):Dynamic;
     /**
      * Swaps the positions of two Scenes in the Scenes list.
      *
@@ -420,9 +426,9 @@ extern class SceneManager {
      * @param {(string|Phaser.Scene)} keyA - The first Scene to swap.
      * @param {(string|Phaser.Scene)} keyB - The second Scene to swap.
      *
-     * @return {Phaser.Scenes.SceneManager} This SceneManager.
+     * @return {this} This Scene Manager instance.
      */
-    public function swapPosition(keyA:Dynamic, keyB:Dynamic):phaser.scenes.SceneManager;
+    public function swapPosition(keyA:Dynamic, keyB:Dynamic):Dynamic;
     /**
      * Dumps debug information about each Scene to the developer console.
      *
@@ -431,7 +437,11 @@ extern class SceneManager {
      */
     public function dump():Void;
     /**
-     * Destroy the SceneManager and all of its Scene's systems.
+     * Destroy this Scene Manager and all of its systems.
+     *
+     * This process cannot be reversed.
+     *
+     * This method is called automatically when a Phaser Game instance is destroyed.
      *
      * @method Phaser.Scenes.SceneManager#destroy
      * @since 3.0.0

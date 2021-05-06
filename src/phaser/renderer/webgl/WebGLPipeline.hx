@@ -309,6 +309,18 @@ extern class WebGLPipeline extends phaser.events.EventEmitter {
      */
     public var config:phaser.types.renderer.webgl.WebGLPipelineConfig;
     /**
+     * Has the GL Context been reset to the Phaser defaults since the last time
+     * this pipeline was bound? This is set automatically when the Pipeline Manager
+     * resets itself, usually after handing off to a 3rd party renderer like Spine.
+     *
+     * You should treat this property as read-only.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLPipeline#glReset
+     * @type {boolean}
+     * @since 3.53.0
+     */
+    public var glReset:Bool;
+    /**
      * Called when the Game has fully booted and the Renderer has finished setting up.
      *
      * By this stage all Game level systems are now in place. You can perform any final tasks that the
@@ -472,9 +484,11 @@ extern class WebGLPipeline extends phaser.events.EventEmitter {
      * @fires Phaser.Renderer.WebGL.Pipelines.Events#REBIND
      * @since 3.0.0
      *
+     * @param {Phaser.Renderer.WebGL.WebGLShader} [currentShader] - The shader to set as being current.
+     *
      * @return {this} This WebGLPipeline instance.
      */
-    public function rebind():Dynamic;
+    public function rebind(?currentShader:phaser.renderer.webgl.WebGLShader):Dynamic;
     /**
      * Binds the vertex buffer to be the active ARRAY_BUFFER on the WebGL context.
      *

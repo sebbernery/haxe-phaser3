@@ -26,6 +26,7 @@ extern class Scene {
     public var sys:phaser.scenes.Systems;
     /**
      * A reference to the Phaser.Game instance.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#game
@@ -35,6 +36,7 @@ extern class Scene {
     public var game:phaser.Game;
     /**
      * A reference to the global Animation Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#anims
@@ -44,6 +46,7 @@ extern class Scene {
     public var anims:phaser.animations.AnimationManager;
     /**
      * A reference to the global Cache.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#cache
@@ -52,7 +55,8 @@ extern class Scene {
      */
     public var cache:phaser.cache.CacheManager;
     /**
-     * A reference to the game level Data Manager.
+     * A reference to the global Data Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#registry
@@ -62,15 +66,17 @@ extern class Scene {
     public var registry:phaser.data.DataManager;
     /**
      * A reference to the Sound Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#sound
-     * @type {Phaser.Sound.BaseSoundManager}
+     * @type {(Phaser.Sound.NoAudioSoundManager|Phaser.Sound.HTML5AudioSoundManager|Phaser.Sound.WebAudioSoundManager)}
      * @since 3.0.0
      */
-    public var sound:phaser.sound.BaseSoundManager;
+    public var sound:Dynamic;
     /**
      * A reference to the Texture Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#textures
@@ -79,7 +85,8 @@ extern class Scene {
      */
     public var textures:phaser.textures.TextureManager;
     /**
-     * A scene level Event Emitter.
+     * A Scene specific Event Emitter.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#events
@@ -88,7 +95,8 @@ extern class Scene {
      */
     public var events:phaser.events.EventEmitter;
     /**
-     * A scene level Camera System.
+     * The Scene Camera Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#cameras
@@ -97,7 +105,8 @@ extern class Scene {
      */
     public var cameras:phaser.cameras.scene2d.CameraManager;
     /**
-     * A scene level Game Object Factory.
+     * The Scene Game Object Factory.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#add
@@ -106,7 +115,8 @@ extern class Scene {
      */
     public var add:phaser.gameobjects.GameObjectFactory;
     /**
-     * A scene level Game Object Creator.
+     * The Scene Game Object Creator.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#make
@@ -116,6 +126,7 @@ extern class Scene {
     public var make:phaser.gameobjects.GameObjectCreator;
     /**
      * A reference to the Scene Manager Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#scene
@@ -124,7 +135,8 @@ extern class Scene {
      */
     public var scene:phaser.scenes.ScenePlugin;
     /**
-     * A scene level Game Object Display List.
+     * The Game Object Display List belonging to this Scene.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#children
@@ -133,7 +145,8 @@ extern class Scene {
      */
     public var children:phaser.gameobjects.DisplayList;
     /**
-     * A scene level Lights Manager Plugin.
+     * The Scene Lights Manager Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#lights
@@ -142,7 +155,10 @@ extern class Scene {
      */
     public var lights:phaser.gameobjects.LightsManager;
     /**
-     * A scene level Data Manager Plugin.
+     * A Scene specific Data Manager Plugin.
+     *
+     * See the `registry` property for the global Data Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#data
@@ -151,7 +167,8 @@ extern class Scene {
      */
     public var data:phaser.data.DataManager;
     /**
-     * A scene level Input Manager Plugin.
+     * The Scene Input Manager Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#input
@@ -160,7 +177,8 @@ extern class Scene {
      */
     public var input:phaser.input.InputPlugin;
     /**
-     * A scene level Loader Plugin.
+     * The Scene Loader Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#load
@@ -169,7 +187,8 @@ extern class Scene {
      */
     public var load:phaser.loader.LoaderPlugin;
     /**
-     * A scene level Time and Clock Plugin.
+     * The Scene Time and Clock Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#time
@@ -178,7 +197,8 @@ extern class Scene {
      */
     public var time:phaser.time.Clock;
     /**
-     * A scene level Tween Manager Plugin.
+     * The Scene Tween Manager Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map and the plugin is installed.
      *
      * @name Phaser.Scene#tweens
@@ -187,7 +207,8 @@ extern class Scene {
      */
     public var tweens:phaser.tweens.TweenManager;
     /**
-     * A scene level Arcade Physics Plugin.
+     * The Scene Arcade Physics Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
      *
      * @name Phaser.Scene#physics
@@ -196,7 +217,8 @@ extern class Scene {
      */
     public var physics:phaser.physics.arcade.ArcadePhysics;
     /**
-     * A scene level Matter Physics Plugin.
+     * The Scene Matter Physics Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
      *
      * @name Phaser.Scene#matter
@@ -205,7 +227,8 @@ extern class Scene {
      */
     public var matter:phaser.physics.matter.MatterPhysics;
     /**
-     * A scene level Facebook Instant Games Plugin.
+     * The Facebook Instant Games Plugin.
+     *
      * This property will only be available if defined in the Scene Injection Map, the plugin is installed and configured.
      *
      * @name Phaser.Scene#facebook
@@ -215,6 +238,7 @@ extern class Scene {
     public var facebook:Dynamic;
     /**
      * A reference to the global Scale Manager.
+     *
      * This property will only be available if defined in the Scene Injection Map.
      *
      * @name Phaser.Scene#scale
@@ -223,7 +247,7 @@ extern class Scene {
      */
     public var scale:phaser.scale.ScaleManager;
     /**
-     * A reference to the Plugin Manager.
+     * A reference to the global Plugin Manager.
      *
      * The Plugin Manager is a global system that allows plugins to register themselves with it, and can then install
      * those plugins into Scenes as required.
@@ -234,7 +258,7 @@ extern class Scene {
      */
     public var plugins:phaser.plugins.PluginManager;
     /**
-     * A reference to the renderer instance Phaser is using, either Canvas or WebGL.
+     * A reference to the renderer instance Phaser is using, either Canvas Renderer or WebGL Renderer.
      *
      * @name Phaser.Scene#renderer
      * @type {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)}
@@ -242,7 +266,8 @@ extern class Scene {
      */
     public var renderer:Dynamic;
     /**
-     * Should be overridden by your own Scenes.
+     * This method should be overridden by your own Scenes.
+     *
      * This method is called once per game step while the scene is running.
      *
      * @method Phaser.Scene#update

@@ -18,6 +18,81 @@ package phaser.sound;
 extern class WebAudioSound extends phaser.sound.BaseSound {
     public function new(manager:phaser.sound.WebAudioSoundManager, key:String, ?config:phaser.types.sound.SoundConfig);
     /**
+     * Audio buffer containing decoded data of the audio asset to be played.
+     *
+     * @name Phaser.Sound.WebAudioSound#audioBuffer
+     * @type {AudioBuffer}
+     * @since 3.0.0
+     */
+    public var audioBuffer:AudioBuffer;
+    /**
+     * A reference to an audio source node used for playing back audio from
+     * audio data stored in Phaser.Sound.WebAudioSound#audioBuffer.
+     *
+     * @name Phaser.Sound.WebAudioSound#source
+     * @type {AudioBufferSourceNode}
+     * @default null
+     * @since 3.0.0
+     */
+    public var source:AudioBufferSourceNode;
+    /**
+     * A reference to a second audio source used for gapless looped playback.
+     *
+     * @name Phaser.Sound.WebAudioSound#loopSource
+     * @type {AudioBufferSourceNode}
+     * @default null
+     * @since 3.0.0
+     */
+    public var loopSource:AudioBufferSourceNode;
+    /**
+     * Gain node responsible for controlling this sound's muting.
+     *
+     * @name Phaser.Sound.WebAudioSound#muteNode
+     * @type {GainNode}
+     * @since 3.0.0
+     */
+    public var muteNode:GainNode;
+    /**
+     * Gain node responsible for controlling this sound's volume.
+     *
+     * @name Phaser.Sound.WebAudioSound#volumeNode
+     * @type {GainNode}
+     * @since 3.0.0
+     */
+    public var volumeNode:GainNode;
+    /**
+     * Panner node responsible for controlling this sound's pan.
+     *
+     * Doesn't work on iOS / Safari.
+     *
+     * @name Phaser.Sound.WebAudioSound#pannerNode
+     * @type {StereoPannerNode}
+     * @since 3.50.0
+     */
+    public var pannerNode:StereoPannerNode;
+    /**
+     * Used for keeping track when sound source playback has ended
+     * so its state can be updated accordingly.
+     *
+     * @name Phaser.Sound.WebAudioSound#hasEnded
+     * @type {boolean}
+     * @readonly
+     * @default false
+     * @since 3.0.0
+     */
+    public var hasEnded:Bool;
+    /**
+     * Used for keeping track when sound source has looped
+     * so its state can be updated accordingly.
+     *
+     * @name Phaser.Sound.WebAudioSound#hasLooped
+     * @type {boolean}
+     * @readonly
+     * @default false
+     * @since 3.0.0
+     */
+    public var hasLooped:Bool;
+    /**
      * Rate at which this Sound will be played.
      * Value of 1.0 plays the audio at full speed, 0.5 plays the audio at half speed
      * and 2.0 doubles the audios playback speed.
@@ -85,6 +160,8 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
     public var loop:Bool;
     /**
      * Gets or sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * Always returns zero on iOS / Safari as it doesn't support the stereo panner node.
      *
      * @name Phaser.Sound.WebAudioSound#pan
      * @type {number}
@@ -171,6 +248,8 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
     public function setLoop(value:Bool):Dynamic;
     /**
      * Sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * Note: iOS / Safari doesn't support the stereo panner node.
      *
      * @method Phaser.Sound.WebAudioSound#setPan
      * @fires Phaser.Sound.Events#PAN

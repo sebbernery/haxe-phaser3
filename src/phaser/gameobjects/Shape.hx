@@ -224,6 +224,20 @@ extern class Shape extends phaser.gameobjects.GameObject {
      */
     public function setClosePath(value:Bool):Dynamic;
     /**
+     * Sets the display size of this Shape.
+     *
+     * Calling this will adjust the scale.
+     *
+     * @method Phaser.GameObjects.Shape#setDisplaySize
+     * @since 3.53.0
+     *
+     * @param {number} width - The display width of this Shape.
+     * @param {number} height - The display height of this Shape.
+     *
+     * @return {this} This Shape instance.
+     */
+    public function setDisplaySize(width:Float, height:Float):Dynamic;
+    /**
      * Internal destroy handler, called as part of the destroy process.
      *
      * @method Phaser.GameObjects.Shape#preDestroy
@@ -817,7 +831,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      *
      * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
      *
-     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     * @return {(Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} The Post Pipeline/s matching the name, or undefined if no match. If more than one match they are returned in an array.
      */
     public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
@@ -845,7 +859,7 @@ extern class Shape extends phaser.gameobjects.GameObject {
      */
     public function resetPostPipeline(?resetData:Bool):Void;
     /**
-     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     * Removes a type of Post Pipeline instances from this Game Object, based on the given name, and destroys them.
      *
      * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
      *

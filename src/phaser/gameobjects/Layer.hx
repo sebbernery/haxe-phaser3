@@ -114,6 +114,17 @@ extern class Layer {
      */
     public var state:Dynamic;
     /**
+     * A Layer cannot be placed inside a Container.
+     *
+     * This property is kept purely so a Layer has the same
+     * shape as a Game Object.
+     *
+     * @name Phaser.GameObjects.Layer#parentContainer
+     * @type {Phaser.GameObjects.Container}
+     * @since 3.51.0
+     */
+    public var parentContainer:phaser.gameobjects.Container;
+    /**
      * The name of this Game Object.
      * Empty by default and never populated by Phaser, this is left for developers to use.
      *
@@ -134,6 +145,16 @@ extern class Layer {
      * @since 3.50.0
      */
     public var active:Bool;
+    /**
+     * The Tab Index of the Game Object.
+     * Reserved for future use by plugins and the Input Manager.
+     *
+     * @name Phaser.GameObjects.Layer#tabIndex
+     * @type {number}
+     * @default -1
+     * @since 3.51.0
+     */
+    public var tabIndex:Float;
     /**
      * A Data Manager.
      * It allows you to store, query and get key/value paired information specific to this Game Object.
@@ -170,6 +191,26 @@ extern class Layer {
      * @since 3.50.0
      */
     public var cameraFilter:Float;
+    /**
+     * This property is kept purely so a Layer has the same
+     * shape as a Game Object. You cannot input enable a Layer.
+     *
+     * @name Phaser.GameObjects.Layer#input
+     * @type {?Phaser.Types.Input.InteractiveObject}
+     * @default null
+     * @since 3.51.0
+     */
+    public var input:phaser.types.input.InteractiveObject;
+    /**
+     * This property is kept purely so a Layer has the same
+     * shape as a Game Object. You cannot give a Layer a physics body.
+     *
+     * @name Phaser.GameObjects.Layer#body
+     * @type {?(Phaser.Physics.Arcade.Body|Phaser.Physics.Arcade.StaticBody|MatterJS.BodyType)}
+     * @default null
+     * @since 3.51.0
+     */
+    public var body:Dynamic;
     /**
      * This Game Object will ignore all calls made to its destroy method if this flag is set to `true`.
      * This includes calls that may come from a Group, Container or the Scene itself.
@@ -376,6 +417,42 @@ extern class Layer {
      */
     public function getData(key:Dynamic):Dynamic;
     /**
+     * A Layer cannot be enabled for input.
+     *
+     * This method does nothing and is kept to ensure
+     * the Layer has the same shape as a Game Object.
+     *
+     * @method Phaser.GameObjects.Layer#setInteractive
+     * @since 3.51.0
+     *
+     * @return {this} This GameObject.
+     */
+    public function setInteractive():Dynamic;
+    /**
+     * A Layer cannot be enabled for input.
+     *
+     * This method does nothing and is kept to ensure
+     * the Layer has the same shape as a Game Object.
+     *
+     * @method Phaser.GameObjects.Layer#disableInteractive
+     * @since 3.51.0
+     *
+     * @return {this} This GameObject.
+     */
+    public function disableInteractive():Dynamic;
+    /**
+     * A Layer cannot be enabled for input.
+     *
+     * This method does nothing and is kept to ensure
+     * the Layer has the same shape as a Game Object.
+     *
+     * @method Phaser.GameObjects.Layer#removeInteractive
+     * @since 3.51.0
+     *
+     * @return {this} This GameObject.
+     */
+    public function removeInteractive():Dynamic;
+    /**
      * This callback is invoked when this Game Object is added to a Scene.
      *
      * Can be overriden by custom Game Objects, but be aware of some Game Objects that
@@ -430,6 +507,20 @@ extern class Layer {
      */
     public function willRender(camera:phaser.cameras.scene2d.Camera):Bool;
     /**
+     * Returns an array containing the display list index of either this Game Object, or if it has one,
+     * its parent Container. It then iterates up through all of the parent containers until it hits the
+     * root of the display list (which is index 0 in the returned array).
+     *
+     * Used internally by the InputPlugin but also useful if you wish to find out the display depth of
+     * this Game Object and all of its ancestors.
+     *
+     * @method Phaser.GameObjects.Layer#getIndexList
+     * @since 3.51.0
+     *
+     * @return {number[]} An array of display list position indexes.
+     */
+    public function getIndexList():Array<Float>;
+    /**
      * Force a sort of the display list on the next call to depthSort.
      *
      * @method Phaser.GameObjects.Layer#queueDepthSort
@@ -467,10 +558,13 @@ extern class Layer {
      */
     public function getChildren():Array<phaser.gameobjects.GameObject>;
     /**
-     * Destroys this Game Object removing it from the Display List and Update List and
+     * Destroys this Layer removing it from the Display List and Update List and
      * severing all ties to parent resources.
      *
-     * Use this to remove a Game Object from your game if you don't ever plan to use it again.
+     * Also destroys all children of this Layer. If you do not wish for the
+     * children to be destroyed, you should move them from this Layer first.
+     *
+     * Use this to remove this Layer from your game if you don't ever plan to use it again.
      * As long as no reference to it exists within your own code it should become free for
      * garbage collection by the browser.
      *
@@ -830,7 +924,7 @@ extern class Layer {
      *
      * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
      *
-     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     * @return {(Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} The Post Pipeline/s matching the name, or undefined if no match. If more than one match they are returned in an array.
      */
     public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
@@ -858,7 +952,7 @@ extern class Layer {
      */
     public function resetPostPipeline(?resetData:Bool):Void;
     /**
-     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     * Removes a type of Post Pipeline instances from this Game Object, based on the given name, and destroys them.
      *
      * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
      *

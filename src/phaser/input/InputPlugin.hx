@@ -740,17 +740,30 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      */
     public function setTopOnly(value:Bool):Dynamic;
     /**
-     * Given an array of Game Objects, sort the array and return it, so that the objects are in depth index order
-     * with the lowest at the bottom.
+     * Given an array of Game Objects and a Pointer, sort the array and return it,
+     * so that the objects are in render order with the lowest at the bottom.
      *
      * @method Phaser.Input.InputPlugin#sortGameObjects
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject[]} gameObjects - An array of Game Objects to be sorted.
+     * @param {Phaser.Input.Pointer} pointer - The Pointer to check against the Game Objects.
      *
      * @return {Phaser.GameObjects.GameObject[]} The sorted array of Game Objects.
      */
-    public function sortGameObjects(gameObjects:Array<phaser.gameobjects.GameObject>):Array<phaser.gameobjects.GameObject>;
+    public function sortGameObjects(gameObjects:Array<phaser.gameobjects.GameObject>, pointer:phaser.input.Pointer):Array<phaser.gameobjects.GameObject>;
+    /**
+     * Given an array of Drop Zone Game Objects, sort the array and return it,
+     * so that the objects are in depth index order with the lowest at the bottom.
+     *
+     * @method Phaser.Input.InputPlugin#sortDropZones
+     * @since 3.52.0
+     *
+     * @param {Phaser.GameObjects.GameObject[]} gameObjects - An array of Game Objects to be sorted.
+     *
+     * @return {Phaser.GameObjects.GameObject[]} The sorted array of Game Objects.
+     */
+    public function sortDropZones(gameObjects:Array<phaser.gameobjects.GameObject>):Array<phaser.gameobjects.GameObject>;
     /**
      * This method should be called from within an input event handler, such as `pointerdown`.
      *

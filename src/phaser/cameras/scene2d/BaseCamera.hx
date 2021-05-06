@@ -224,6 +224,21 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var mask:Dynamic;
     /**
+     * This array is populated with all of the Game Objects that this Camera has rendered
+     * in the previous (or current, depending on when you inspect it) frame.
+     *
+     * It is cleared at the start of `Camera.preUpdate`, or if the Camera is destroyed.
+     *
+     * You should not modify this array as it is used internally by the input system,
+     * however you can read it as required. Note that Game Objects may appear in this
+     * list multiple times if they belong to multiple non-exclusive Containers.
+     *
+     * @name Phaser.Cameras.Scene2D.BaseCamera#renderList
+     * @type {Phaser.GameObjects.GameObject[]}
+     * @since 3.52.0
+     */
+    public var renderList:Array<phaser.gameobjects.GameObject>;
+    /**
      * The x position of the Camera viewport, relative to the top-left of the game canvas.
      * The viewport is the area into which the camera renders.
      * To adjust the position the camera is looking at in the game world, see the `scrollX` value.
@@ -396,6 +411,18 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @since 3.11.0
      */
     public var displayHeight:Float;
+    /**
+     * Adds the given Game Object to this cameras render list.
+     *
+     * This is invoked during the rendering stage. Only objects that are actually rendered
+     * will appear in the render list.
+     *
+     * @method Phaser.Cameras.Scene2D.BaseCamera#addToRenderList
+     * @since 3.52.0
+     *
+     * @param {Phaser.GameObjects.GameObject} child - The Game Object to add to the render list.
+     */
+    public function addToRenderList(child:phaser.gameobjects.GameObject):Void;
     /**
      * Sets the rotation origin of this Camera.
      *

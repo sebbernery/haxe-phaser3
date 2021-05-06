@@ -11,6 +11,7 @@ package phaser.types.core;
  * @property {boolean} [roundPixels=false] - Draw texture-based Game Objects at only whole-integer positions. Game Objects without textures, like Graphics, ignore this property.
  * @property {boolean} [transparent=false] - Whether the game canvas will be transparent. Boolean that indicates if the canvas contains an alpha channel. If set to false, the browser now knows that the backdrop is always opaque, which can speed up drawing of transparent content and images.
  * @property {boolean} [clearBeforeRender=true] - Whether the game canvas will be cleared between each rendering frame.
+ * @property {boolean} [preserveDrawingBuffer=false] - If the value is true the WebGL buffers will not be cleared and will preserve their values until cleared or overwritten by the author.
  * @property {boolean} [premultipliedAlpha=true] - In WebGL mode, the drawing buffer contains colors with pre-multiplied alpha.
  * @property {boolean} [failIfMajorPerformanceCaveat=false] - Let the browser abort creating a WebGL context if it judges performance would be unacceptable.
  * @property {string} [powerPreference='default'] - "high-performance", "low-power" or "default". A hint to the browser on how much device power the game might use.
@@ -18,7 +19,7 @@ package phaser.types.core;
  * @property {number} [maxLights=10] - The maximum number of lights allowed to be visible within range of a single Camera in the LightManager.
  * @property {number} [maxTextures=-1] - When in WebGL mode, this sets the maximum number of GPU Textures to use. The default, -1, will use all available units. The WebGL1 spec says all browsers should provide a minimum of 8.
  * @property {string} [mipmapFilter='LINEAR'] - The mipmap magFilter to be used when creating WebGL textures.
- * @property {Phaser.Types.Core.PipelineConfig} [pipline] - The WebGL Pipeline configuration object.
+ * @property {Phaser.Types.Core.PipelineConfig} [pipeline] - The WebGL Pipeline configuration object.
  */
 typedef RenderConfig = {
     @:optional var antialias:Bool;
@@ -28,6 +29,7 @@ typedef RenderConfig = {
     @:optional var roundPixels:Bool;
     @:optional var transparent:Bool;
     @:optional var clearBeforeRender:Bool;
+    @:optional var preserveDrawingBuffer:Bool;
     @:optional var premultipliedAlpha:Bool;
     @:optional var failIfMajorPerformanceCaveat:Bool;
     @:optional var powerPreference:String;
@@ -35,5 +37,5 @@ typedef RenderConfig = {
     @:optional var maxLights:Float;
     @:optional var maxTextures:Float;
     @:optional var mipmapFilter:String;
-    @:optional var pipline:phaser.types.core.PipelineConfig;
+    @:optional var pipeline:phaser.types.core.PipelineConfig;
 };

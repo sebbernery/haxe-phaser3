@@ -57,6 +57,16 @@ extern class LightPipeline extends phaser.renderer.webgl.pipelines.MultiPipeline
      */
     public var defaultNormalMap:Dynamic;
     /**
+     * A boolean that is set automatically during `onRender` that determines
+     * if the Scene LightManager is active, or not.
+     *
+     * @name Phaser.Renderer.WebGL.Pipelines.LightPipeline#lightsActive
+     * @type {boolean}
+     * @readonly
+     * @since 3.53.0
+     */
+    public var lightsActive:Bool;
+    /**
      * Rotates the normal map vectors inversely by the given angle.
      * Only works in 2D space.
      *

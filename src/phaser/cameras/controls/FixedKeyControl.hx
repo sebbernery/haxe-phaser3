@@ -102,6 +102,24 @@ extern class FixedKeyControl {
      */
     public var zoomSpeed:Float;
     /**
+     * The smallest zoom value the camera will reach when zoomed out.
+     *
+     * @name Phaser.Cameras.Controls.FixedKeyControl#minZoom
+     * @type {number}
+     * @default 0.001
+     * @since 3.53.0
+     */
+    public var minZoom:Float;
+    /**
+     * The largest zoom value the camera will reach when zoomed in.
+     *
+     * @name Phaser.Cameras.Controls.FixedKeyControl#maxZoom
+     * @type {number}
+     * @default 1000
+     * @since 3.53.0
+     */
+    public var maxZoom:Float;
+    /**
      * The horizontal speed the camera will move.
      *
      * @name Phaser.Cameras.Controls.FixedKeyControl#speedX

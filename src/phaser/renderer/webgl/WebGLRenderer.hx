@@ -460,6 +460,16 @@ extern class WebGLRenderer extends phaser.events.EventEmitter {
      */
     public var textureFlush:Float;
     /**
+     * Are the WebGL Textures in their default state?
+     *
+     * Used to avoid constant gl binds.
+     *
+     * @name Phaser.Renderer.WebGL.WebGLRenderer#isTextureClean
+     * @type {boolean}
+     * @since 3.51.0
+     */
+    public var isTextureClean:Bool;
+    /**
      * Has this renderer fully booted yet?
      *
      * @name Phaser.Renderer.WebGL.WebGLRenderer#isBooted

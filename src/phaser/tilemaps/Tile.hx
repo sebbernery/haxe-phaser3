@@ -157,6 +157,9 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     /**
      * Whether the tile should collide with any object on the left side.
      *
+     * This property is used by Arcade Physics only, however, you can also use it
+     * in your own checks.
+     *
      * @name Phaser.Tilemaps.Tile#collideLeft
      * @type {boolean}
      * @since 3.0.0
@@ -164,6 +167,9 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public var collideLeft:Bool;
     /**
      * Whether the tile should collide with any object on the right side.
+     *
+     * This property is used by Arcade Physics only, however, you can also use it
+     * in your own checks.
      *
      * @name Phaser.Tilemaps.Tile#collideRight
      * @type {boolean}
@@ -173,6 +179,9 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     /**
      * Whether the tile should collide with any object on the top side.
      *
+     * This property is used by Arcade Physics only, however, you can also use it
+     * in your own checks.
+     *
      * @name Phaser.Tilemaps.Tile#collideUp
      * @type {boolean}
      * @since 3.0.0
@@ -180,6 +189,9 @@ extern class Tile extends phaser.gameobjects.components.Alpha {
     public var collideUp:Bool;
     /**
      * Whether the tile should collide with any object on the bottom side.
+     *
+     * This property is used by Arcade Physics only, however, you can also use it
+     * in your own checks.
      *
      * @name Phaser.Tilemaps.Tile#collideDown
      * @type {boolean}
