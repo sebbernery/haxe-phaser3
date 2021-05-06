@@ -11,7 +11,7 @@ package phaser.types.tilemaps;
  * @property {number} [tileHeight=0] - The height of the tiles.
  * @property {number} [widthInPixels] - The width in pixels of the entire tilemap.
  * @property {number} [heightInPixels] - The height in pixels of the entire tilemap.
- * @property {integer} [format] - The format of the Tilemap, as defined in Tiled.
+ * @property {number} [format] - The format of the Tilemap, as defined in Tiled.
  * @property {string} [orientation] - The orientation of the map data (i.e. orthogonal, isometric, hexagonal), default 'orthogonal'.
  * @property {string} [renderOrder] - Determines the draw order of tilemap. Default is right-down.
  * @property {number} [version] - The version of Tiled the map uses.
@@ -32,7 +32,7 @@ typedef MapDataConfig = {
     @:optional var tileHeight:Float;
     @:optional var widthInPixels:Float;
     @:optional var heightInPixels:Float;
-    @:optional var format:Int;
+    @:optional var format:Float;
     @:optional var orientation:String;
     @:optional var renderOrder:String;
     @:optional var version:Float;

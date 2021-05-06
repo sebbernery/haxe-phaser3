@@ -24,7 +24,7 @@ package phaser.gameobjects;
  * @param {Phaser.GameObjects.Blitter} blitter - The parent Blitter object is responsible for updating this Bob.
  * @param {number} x - The horizontal position of this Game Object in the world, relative to the parent Blitter position.
  * @param {number} y - The vertical position of this Game Object in the world, relative to the parent Blitter position.
- * @param {(string|integer)} frame - The Frame this Bob will render with, as defined in the Texture the parent Blitter is using.
+ * @param {(string|number)} frame - The Frame this Bob will render with, as defined in the Texture the parent Blitter is using.
  * @param {boolean} visible - Should the Bob render visible or not to start with?
  */
 @:native("Phaser.GameObjects.Bob")
@@ -130,7 +130,7 @@ extern class Bob {
      * @method Phaser.GameObjects.Bob#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer|Phaser.Textures.Frame)} [frame] - The frame to be used during rendering.
+     * @param {(string|number|Phaser.Textures.Frame)} [frame] - The frame to be used during rendering.
      *
      * @return {this} This Bob Game Object.
      */
@@ -156,7 +156,7 @@ extern class Bob {
      *
      * @param {number} x - The x position of the Bob. Bob coordinate are relative to the position of the Blitter object.
      * @param {number} y - The y position of the Bob. Bob coordinate are relative to the position of the Blitter object.
-     * @param {(string|integer|Phaser.Textures.Frame)} [frame] - The Frame the Bob will use. It _must_ be part of the Texture the parent Blitter object is using.
+     * @param {(string|number|Phaser.Textures.Frame)} [frame] - The Frame the Bob will use. It _must_ be part of the Texture the parent Blitter object is using.
      *
      * @return {this} This Bob Game Object.
      */

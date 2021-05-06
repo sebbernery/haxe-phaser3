@@ -19,15 +19,31 @@ package phaser.gameobjects;
 extern class GameObject extends phaser.events.EventEmitter {
     public function new(scene:phaser.Scene, type:String);
     /**
-     * The Scene to which this Game Object belongs.
+     * A reference to the Scene to which this Game Object belongs.
+     *
      * Game Objects can only belong to one Scene.
+     *
+     * You should consider this property as being read-only. You cannot move a
+     * Game Object to another Scene by simply changing it.
      *
      * @name Phaser.GameObjects.GameObject#scene
      * @type {Phaser.Scene}
-     * @protected
      * @since 3.0.0
      */
     public var scene:phaser.Scene;
+    /**
+     * Holds a reference to the Display List that contains this Game Object.
+     *
+     * This is set automatically when this Game Object is added to a Scene or Layer.
+     *
+     * You should treat this property as being read-only.
+     *
+     * @name Phaser.GameObjects.GameObject#displayList
+     * @type {(Phaser.GameObjects.DisplayList|Phaser.GameObjects.Layer)}
+     * @default null
+     * @since 3.50.0
+     */
+    public var displayList:Dynamic;
     /**
      * A textual representation of this Game Object, i.e. `sprite`.
      * Used internally by Phaser but is available for your own custom classes to populate.
@@ -48,7 +64,7 @@ extern class GameObject extends phaser.events.EventEmitter {
      * If you need to store complex data about your Game Object, look at using the Data Component instead.
      *
      * @name Phaser.GameObjects.GameObject#state
-     * @type {(integer|string)}
+     * @type {(number|string)}
      * @since 3.16.0
      */
     public var state:Dynamic;
@@ -86,11 +102,11 @@ extern class GameObject extends phaser.events.EventEmitter {
      * Reserved for future use by plugins and the Input Manager.
      *
      * @name Phaser.GameObjects.GameObject#tabIndex
-     * @type {integer}
+     * @type {number}
      * @default -1
      * @since 3.0.0
      */
-    public var tabIndex:Int;
+    public var tabIndex:Float;
     /**
      * A Data Manager.
      * It allows you to store, query and get key/value paired information specific to this Game Object.
@@ -102,31 +118,6 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public var data:phaser.data.DataManager;
-    /**
-     * The flags that are compared against `RENDER_MASK` to determine if this Game Object will render or not.
-     * The bits are 0001 | 0010 | 0100 | 1000 set by the components Visible, Alpha, Transform and Texture respectively.
-     * If those components are not used by your custom class then you can use this bitmask as you wish.
-     *
-     * @name Phaser.GameObjects.GameObject#renderFlags
-     * @type {integer}
-     * @default 15
-     * @since 3.0.0
-     */
-    public var renderFlags:Int;
-    /**
-     * A bitmask that controls if this Game Object is drawn by a Camera or not.
-     * Not usually set directly, instead call `Camera.ignore`, however you can
-     * set this property directly using the Camera.id property:
-     *
-     * @example
-     * this.cameraFilter |= camera.id
-     *
-     * @name Phaser.GameObjects.GameObject#cameraFilter
-     * @type {number}
-     * @default 0
-     * @since 3.0.0
-     */
-    public var cameraFilter:Float;
     /**
      * If this Game Object is enabled for input then this property will contain an InteractiveObject instance.
      * Not usually set directly. Instead call `GameObject.setInteractive()`.
@@ -195,7 +186,7 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @method Phaser.GameObjects.GameObject#setState
      * @since 3.16.0
      *
-     * @param {(integer|string)} value - The state of the Game Object.
+     * @param {(number|string)} value - The state of the Game Object.
      *
      * @return {this} This GameObject.
      */
@@ -339,16 +330,25 @@ extern class GameObject extends phaser.events.EventEmitter {
      *
      * You can also provide an Input Configuration Object as the only argument to this method.
      *
+     * @example
+     * sprite.setInteractive();
+     *
+     * @example
+     * sprite.setInteractive(new Phaser.Geom.Circle(45, 46, 45), Phaser.Geom.Circle.Contains);
+     *
+     * @example
+     * graphics.setInteractive(new Phaser.Geom.Rectangle(0, 0, 128, 128), Phaser.Geom.Rectangle.Contains);
+     *
      * @method Phaser.GameObjects.GameObject#setInteractive
      * @since 3.0.0
      *
-     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - A callback to be invoked when the Game Object is interacted with. If you provide a shape you must also provide a callback.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [hitArea] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not given it will try to create a Rectangle based on the texture frame.
+     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The callback that determines if the pointer is within the Hit Area shape or not. If you provide a shape you must also provide a callback.
      * @param {boolean} [dropZone=false] - Should this Game Object be treated as a drop zone target?
      *
      * @return {this} This GameObject.
      */
-    public function setInteractive(?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):Dynamic;
+    public function setInteractive(?hitArea:Dynamic, ?callback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):Dynamic;
     /**
      * If this Game Object has previously been enabled for input, this will disable it.
      *
@@ -391,6 +391,30 @@ extern class GameObject extends phaser.events.EventEmitter {
      */
     public function removeInteractive():Dynamic;
     /**
+     * This callback is invoked when this Game Object is added to a Scene.
+     *
+     * Can be overriden by custom Game Objects, but be aware of some Game Objects that
+     * will use this, such as Sprites, to add themselves into the Update List.
+     *
+     * You can also listen for the `ADDED_TO_SCENE` event from this Game Object.
+     *
+     * @method Phaser.GameObjects.GameObject#addedToScene
+     * @since 3.50.0
+     */
+    public function addedToScene():Void;
+    /**
+     * This callback is invoked when this Game Object is removed from a Scene.
+     *
+     * Can be overriden by custom Game Objects, but be aware of some Game Objects that
+     * will use this, such as Sprites, to removed themselves from the Update List.
+     *
+     * You can also listen for the `REMOVED_FROM_SCENE` event from this Game Object.
+     *
+     * @method Phaser.GameObjects.GameObject#removedFromScene
+     * @since 3.50.0
+     */
+    public function removedFromScene():Void;
+    /**
      * To be overridden by custom GameObjects. Allows base objects to be used in a Pool.
      *
      * @method Phaser.GameObjects.GameObject#update
@@ -431,7 +455,9 @@ extern class GameObject extends phaser.events.EventEmitter {
      * @method Phaser.GameObjects.GameObject#getIndexList
      * @since 3.4.0
      *
-     * @return {integer[]} An array of display list position indexes.
+     * @return {number[]} An array of display list position indexes.
      */
-    public function getIndexList():Array<Int>;
+    public function getIndexList():Array<Float>;
+    public function renderFlags():Void;
+    public function cameraFilter():Void;
 }

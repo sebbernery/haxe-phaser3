@@ -71,11 +71,11 @@ extern class TimeStep {
      * The minimum fps rate you want the Time Step to run at.
      *
      * @name Phaser.Core.TimeStep#minFps
-     * @type {integer}
+     * @type {number}
      * @default 5
      * @since 3.0.0
      */
-    public var minFps:Int;
+    public var minFps:Float;
     /**
      * The target fps rate for the Time Step to run at.
      *
@@ -84,42 +84,42 @@ extern class TimeStep {
      * is spiraling out of control.
      *
      * @name Phaser.Core.TimeStep#targetFps
-     * @type {integer}
+     * @type {number}
      * @default 60
      * @since 3.0.0
      */
-    public var targetFps:Int;
+    public var targetFps:Float;
     /**
      * An exponential moving average of the frames per second.
      *
      * @name Phaser.Core.TimeStep#actualFps
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default 60
      * @since 3.0.0
      */
-    public var actualFps:Int;
+    public var actualFps:Float;
     /**
      * The time at which the next fps rate update will take place.
      * When an fps update happens, the `framesThisSecond` value is reset.
      *
      * @name Phaser.Core.TimeStep#nextFpsUpdate
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default 0
      * @since 3.0.0
      */
-    public var nextFpsUpdate:Int;
+    public var nextFpsUpdate:Float;
     /**
      * The number of frames processed this second.
      *
      * @name Phaser.Core.TimeStep#framesThisSecond
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default 0
      * @since 3.0.0
      */
-    public var framesThisSecond:Int;
+    public var framesThisSecond:Float;
     /**
      * A callback to be invoked each time the Time Step steps.
      *
@@ -173,12 +173,12 @@ extern class TimeStep {
      * time has passed and is unaffected by delta smoothing.
      *
      * @name Phaser.Core.TimeStep#frame
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default 0
      * @since 3.0.0
      */
-    public var frame:Int;
+    public var frame:Float;
     /**
      * Is the browser currently considered in focus by the Page Visibility API?
      * This value is set in the `blur` method, which is called automatically by the Game instance.
@@ -194,39 +194,39 @@ extern class TimeStep {
      * The delta time, in ms, since the last game step. This is a clamped and smoothed average value.
      *
      * @name Phaser.Core.TimeStep#delta
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var delta:Int;
+    public var delta:Float;
     /**
      * Internal index of the delta history position.
      *
      * @name Phaser.Core.TimeStep#deltaIndex
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var deltaIndex:Int;
+    public var deltaIndex:Float;
     /**
      * Internal array holding the previous delta values, used for delta smoothing.
      *
      * @name Phaser.Core.TimeStep#deltaHistory
-     * @type {integer[]}
+     * @type {number[]}
      * @since 3.0.0
      */
-    public var deltaHistory:Array<Int>;
+    public var deltaHistory:Array<Float>;
     /**
      * The maximum number of delta values that are retained in order to calculate a smoothed moving average.
      *
      * This can be changed in the Game Config via the `fps.deltaHistory` property. The default is 10.
      *
      * @name Phaser.Core.TimeStep#deltaSmoothingMax
-     * @type {integer}
+     * @type {number}
      * @default 10
      * @since 3.0.0
      */
-    public var deltaSmoothingMax:Int;
+    public var deltaSmoothingMax:Float;
     /**
      * The number of frames that the cooldown is set to after the browser panics over the FPS rate, usually
      * as a result of switching tabs and regaining focus.
@@ -234,11 +234,11 @@ extern class TimeStep {
      * This can be changed in the Game Config via the `fps.panicMax` property. The default is 120.
      *
      * @name Phaser.Core.TimeStep#panicMax
-     * @type {integer}
+     * @type {number}
      * @default 120
      * @since 3.0.0
      */
-    public var panicMax:Int;
+    public var panicMax:Float;
     /**
      * The actual elapsed time in ms between one update and the next.
      *

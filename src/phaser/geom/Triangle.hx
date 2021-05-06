@@ -26,11 +26,11 @@ extern class Triangle {
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Triangle#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * `x` coordinate of the first point.
      *
@@ -351,13 +351,13 @@ extern class Triangle {
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
      * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the points from.
-     * @param {integer} quantity - The number of evenly spaced points to return. Set to 0 to return an arbitrary number of points based on the `stepRate`.
+     * @param {number} quantity - The number of evenly spaced points to return. Set to 0 to return an arbitrary number of points based on the `stepRate`.
      * @param {number} stepRate - If `quantity` is 0, the distance between each returned point.
      * @param {(array|Phaser.Geom.Point[])} [out] - An array to which the points should be appended.
      *
      * @return {(array|Phaser.Geom.Point[])} The modified `out` array, or a new array if none was provided.
      */
-    static public function GetPoints(triangle:phaser.geom.Triangle, quantity:Int, stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(triangle:phaser.geom.Triangle, quantity:Float, stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Calculates the position of the incenter of a Triangle object. This is the point where its three angle bisectors meet and it's also the center of the incircle, which is the circle inscribed in the triangle.
      *
@@ -492,13 +492,13 @@ extern class Triangle {
      *
      * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
-     * @param {integer} quantity - Number of points to be generated. Can be falsey when `stepRate` should be used. All points have the same distance along the triangle.
+     * @param {number} quantity - Number of points to be generated. Can be falsey when `stepRate` should be used. All points have the same distance along the triangle.
      * @param {number} [stepRate] - Distance between two points. Will only be used when `quantity` is falsey.
      * @param {(array|Phaser.Geom.Point[])} [output] - Optional Array for writing the calculated points into. Otherwise a new array will be created.
      *
      * @return {(array|Phaser.Geom.Point[])} Returns a list of calculated `Point` instances or the filled array passed as parameter `output`.
      */
-    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
+    public function getPoints(quantity:Float, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Returns a random point along the triangle.
      *

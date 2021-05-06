@@ -155,11 +155,11 @@ extern class TextStyle {
      * The maximum number of lines to draw.
      *
      * @name Phaser.GameObjects.TextStyle#maxLines
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var maxLines:Int;
+    public var maxLines:Float;
     /**
      * The fixed width of the text.
      *
@@ -605,11 +605,11 @@ extern class TextStyle {
      * @method Phaser.GameObjects.TextStyle#setMaxLines
      * @since 3.0.0
      *
-     * @param {integer} [max=0] - The maximum number of lines to draw.
+     * @param {number} [max=0] - The maximum number of lines to draw.
      *
      * @return {Phaser.GameObjects.Text} The parent Text object.
      */
-    public function setMaxLines(?max:Int):phaser.gameobjects.Text;
+    public function setMaxLines(?max:Float):phaser.gameobjects.Text;
     /**
      * Get the current text metrics.
      *

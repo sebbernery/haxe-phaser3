@@ -28,6 +28,9 @@ package phaser.input.gamepad;
  * to the gamepads you can poll its buttons and axis sticks. See the properties and methods available on
  * the `Gamepad` class for more details.
  *
+ * As of September 2020 Chrome, and likely other browsers, will soon start to require that games requesting
+ * access to the Gamepad API are running under SSL. They will actively block API access if they are not.
+ *
  * For more information about Gamepad support in browsers see the following resources:
  *
  * https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API
@@ -102,10 +105,10 @@ extern class GamepadPlugin extends phaser.events.EventEmitter {
      * The total number of connected game pads.
      *
      * @name Phaser.Input.Gamepad.GamepadPlugin#total
-     * @type {integer}
+     * @type {number}
      * @since 3.10.0
      */
-    public var total:Int;
+    public var total:Float;
     /**
      * A reference to the first connected Gamepad.
      *

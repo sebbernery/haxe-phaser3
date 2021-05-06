@@ -66,10 +66,10 @@ extern class KeyboardManager {
      * can call the `addCapture` method. See also `removeCapture` and `clearCaptures`.
      *
      * @name Phaser.Input.Keyboard.KeyboardManager#captures
-     * @type {integer[]}
+     * @type {number[]}
      * @since 3.16.0
      */
-    public var captures:Array<Int>;
+    public var captures:Array<Float>;
     /**
      * A boolean that controls if the Keyboard Manager is enabled or not.
      * Can be toggled on the fly.
@@ -162,7 +162,7 @@ extern class KeyboardManager {
      * @method Phaser.Input.Keyboard.KeyboardManager#addCapture
      * @since 3.16.0
      *
-     * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to enable capture for, preventing them reaching the browser.
+     * @param {(string|number|number[]|any[])} keycode - The Key Codes to enable capture for, preventing them reaching the browser.
      */
     public function addCapture(keycode:Dynamic):Void;
     /**
@@ -198,7 +198,7 @@ extern class KeyboardManager {
      * @method Phaser.Input.Keyboard.KeyboardManager#removeCapture
      * @since 3.16.0
      *
-     * @param {(string|integer|integer[]|any[])} keycode - The Key Codes to disable capture for, allowing them reaching the browser again.
+     * @param {(string|number|number[]|any[])} keycode - The Key Codes to disable capture for, allowing them reaching the browser again.
      */
     public function removeCapture(keycode:Dynamic):Void;
     /**

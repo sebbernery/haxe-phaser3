@@ -140,11 +140,11 @@ extern class InputManager {
      * setting the `input.activePointers` property in the Game Config.
      *
      * @name Phaser.Input.InputManager#pointersTotal
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.10.0
      */
-    public var pointersTotal:Int;
+    public var pointersTotal:Float;
     /**
      * The mouse has its own unique Pointer object, which you can reference directly if making a _desktop specific game_.
      * If you are supporting both desktop and touch devices then do not use this property, instead use `activePointer`
@@ -240,11 +240,11 @@ extern class InputManager {
      * @method Phaser.Input.InputManager#addPointer
      * @since 3.10.0
      *
-     * @param {integer} [quantity=1] The number of new Pointers to create. A maximum of 10 is allowed in total.
+     * @param {number} [quantity=1] The number of new Pointers to create. A maximum of 10 is allowed in total.
      *
      * @return {Phaser.Input.Pointer[]} An array containing all of the new Pointer objects that were created.
      */
-    public function addPointer(?quantity:Int):Array<phaser.input.Pointer>;
+    public function addPointer(?quantity:Float):Array<phaser.input.Pointer>;
     /**
      * Internal method that gets a list of all the active Input Plugins in the game
      * and updates each of them in turn, in reverse order (top to bottom), to allow
@@ -253,10 +253,10 @@ extern class InputManager {
      * @method Phaser.Input.InputManager#updateInputPlugins
      * @since 3.16.0
      *
-     * @param {integer} type - The type of event to process.
+     * @param {number} type - The type of event to process.
      * @param {Phaser.Input.Pointer[]} pointers - An array of Pointers on which the event occurred.
      */
-    public function updateInputPlugins(type:Int, pointers:Array<phaser.input.Pointer>):Void;
+    public function updateInputPlugins(type:Float, pointers:Array<phaser.input.Pointer>):Void;
     /**
      * Performs a hit test using the given Pointer and camera, against an array of interactive Game Objects.
      *

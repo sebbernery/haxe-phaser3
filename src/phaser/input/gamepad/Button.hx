@@ -11,11 +11,11 @@ package phaser.input.gamepad;
  * @since 3.0.0
  *
  * @param {Phaser.Input.Gamepad.Gamepad} pad - A reference to the Gamepad that this Button belongs to.
- * @param {integer} index - The index of this Button.
+ * @param {number} index - The index of this Button.
  */
 @:native("Phaser.Input.Gamepad.Button")
 extern class Button {
-    public function new(pad:phaser.input.gamepad.Gamepad, index:Int);
+    public function new(pad:phaser.input.gamepad.Gamepad, index:Float);
     /**
      * A reference to the Gamepad that this Button belongs to.
      *
@@ -36,10 +36,10 @@ extern class Button {
      * The index of this Button.
      *
      * @name Phaser.Input.Gamepad.Button#index
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var index:Int;
+    public var index:Float;
     /**
      * Between 0 and 1.
      *

@@ -15,13 +15,13 @@ package phaser.textures;
  *
  * @param {Phaser.Textures.Texture} texture - The Texture this TextureSource belongs to.
  * @param {(HTMLImageElement|HTMLCanvasElement|HTMLVideoElement|Phaser.GameObjects.RenderTexture|WebGLTexture)} source - The source image data.
- * @param {integer} [width] - Optional width of the source image. If not given it's derived from the source itself.
- * @param {integer} [height] - Optional height of the source image. If not given it's derived from the source itself.
+ * @param {number} [width] - Optional width of the source image. If not given it's derived from the source itself.
+ * @param {number} [height] - Optional height of the source image. If not given it's derived from the source itself.
  * @param {boolean} [flipY=false] - Sets the `UNPACK_FLIP_Y_WEBGL` flag the WebGL Texture uses during upload.
  */
 @:native("Phaser.Textures.TextureSource")
 extern class TextureSource {
-    public function new(texture:phaser.textures.Texture, source:Dynamic, ?width:Int, ?height:Int, ?flipY:Bool);
+    public function new(texture:phaser.textures.Texture, source:Dynamic, ?width:Float, ?height:Float, ?flipY:Bool);
     /**
      * The Texture this TextureSource belongs to.
      *
@@ -62,11 +62,11 @@ extern class TextureSource {
      * Currently un-used.
      *
      * @name Phaser.Textures.TextureSource#compressionAlgorithm
-     * @type {integer}
+     * @type {number}
      * @default null
      * @since 3.0.0
      */
-    public var compressionAlgorithm:Int;
+    public var compressionAlgorithm:Float;
     /**
      * The resolution of the source image.
      *
@@ -81,19 +81,19 @@ extern class TextureSource {
      * the `naturalWidth` and then `width` properties of the source image.
      *
      * @name Phaser.Textures.TextureSource#width
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var width:Int;
+    public var width:Float;
     /**
      * The height of the source image. If not specified in the constructor it will check
      * the `naturalHeight` and then `height` properties of the source image.
      *
      * @name Phaser.Textures.TextureSource#height
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var height:Int;
+    public var height:Float;
     /**
      * The Scale Mode the image will use when rendering.
      * Either Linear or Nearest.
@@ -153,6 +153,26 @@ extern class TextureSource {
      * @since 3.0.0
      */
     public var glTexture:js.html.webgl.Texture;
+    /**
+     * The current texture unit index as assigned by the WebGL Renderer.
+     * Un-used in canvas. Should be treated as read-only.
+     *
+     * @name Phaser.Textures.TextureSource#glIndex
+     * @type {number}
+     * @default 0
+     * @since 3.50.0
+     */
+    public var glIndex:Float;
+    /**
+     * The counter value when this texture was last assigned an index by the WebGL Renderer.
+     * Un-used in canvas. Should be treated as read-only.
+     *
+     * @name Phaser.Textures.TextureSource#glIndexCounter
+     * @type {number}
+     * @default -1
+     * @since 3.50.0
+     */
+    public var glIndexCounter:Float;
     /**
      * Sets the `UNPACK_FLIP_Y_WEBGL` flag the WebGL Texture uses during upload.
      *

@@ -15,22 +15,22 @@ package phaser.structs;
  *
  * @param {number} [width=0] - The width of the Size component.
  * @param {number} [height=width] - The height of the Size component. If not given, it will use the `width`.
- * @param {integer} [aspectMode=0] - The aspect mode of the Size component. Defaults to 0, no mode.
+ * @param {number} [aspectMode=0] - The aspect mode of the Size component. Defaults to 0, no mode.
  * @param {any} [parent=null] - The parent of this Size component. Can be any object with public `width` and `height` properties. Dimensions are clamped to keep them within the parent bounds where possible.
  */
 @:native("Phaser.Structs.Size")
 extern class Size {
-    public function new(?width:Float, ?height:Float, ?aspectMode:Int, ?parent:Dynamic);
+    public function new(?width:Float, ?height:Float, ?aspectMode:Float, ?parent:Dynamic);
     /**
      * The aspect mode this Size component will use when calculating its dimensions.
      * This property is read-only. To change it use the `setAspectMode` method.
      *
      * @name Phaser.Structs.Size#aspectMode
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.16.0
      */
-    public var aspectMode:Int;
+    public var aspectMode:Float;
     /**
      * The proportional relationship between the width and height.
      *
@@ -146,11 +146,11 @@ extern class Size {
      * @method Phaser.Structs.Size#setAspectMode
      * @since 3.16.0
      *
-     * @param {integer} [value=0] - The aspect mode value.
+     * @param {number} [value=0] - The aspect mode value.
      *
      * @return {this} This Size component instance.
      */
-    public function setAspectMode(?value:Int):Dynamic;
+    public function setAspectMode(?value:Float):Dynamic;
     /**
      * By setting a Snap To value when this Size component is modified its dimensions will automatically
      * by snapped to the nearest grid slice, using floor. For example, if you have snap value of 16,

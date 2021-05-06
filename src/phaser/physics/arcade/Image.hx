@@ -23,6 +23,7 @@ package phaser.physics.arcade;
  * @extends Phaser.Physics.Arcade.Components.Gravity
  * @extends Phaser.Physics.Arcade.Components.Immovable
  * @extends Phaser.Physics.Arcade.Components.Mass
+ * @extends Phaser.Physics.Arcade.Components.Pushable
  * @extends Phaser.Physics.Arcade.Components.Size
  * @extends Phaser.Physics.Arcade.Components.Velocity
  * @extends Phaser.GameObjects.Components.Alpha
@@ -43,7 +44,7 @@ package phaser.physics.arcade;
  * @param {number} x - The horizontal position of this Game Object in the world.
  * @param {number} y - The vertical position of this Game Object in the world.
  * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
- * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+ * @param {(string|number)} [frame] - An optional frame from the Texture this Game Object is rendering with.
  */
 @:native("Phaser.Physics.Arcade.Image")
 extern class Image extends phaser.gameobjects.Image {
@@ -445,12 +446,16 @@ extern class Image extends phaser.gameobjects.Image {
      */
     public function setGravityY(y:Float):Dynamic;
     /**
-     * Sets Whether this Body can be moved by collisions with another Body.
+     * Sets if this Body can be separated during collisions with other bodies.
+     *
+     * When a body is immovable it means it won't move at all, not even to separate it from collision
+     * overlap. If you just wish to prevent a body from being knocked around by other bodies, see
+     * the `setPushable` method instead.
      *
      * @method Phaser.Physics.Arcade.Components.Immovable#setImmovable
      * @since 3.0.0
      *
-     * @param {boolean} [value=true] - Sets if this body can be moved by collisions with another Body.
+     * @param {boolean} [value=true] - Sets if this body will be separated during collisions with other bodies.
      *
      * @return {this} This Game Object.
      */
@@ -466,6 +471,23 @@ extern class Image extends phaser.gameobjects.Image {
      * @return {this} This Game Object.
      */
     public function setMass(value:Float):Dynamic;
+    /**
+     * Sets if this Body can be pushed by another Body.
+     *
+     * A body that cannot be pushed will reflect back all of the velocity it is given to the
+     * colliding body. If that body is also not pushable, then the separation will be split
+     * between them evenly.
+     *
+     * If you want your body to never move or seperate at all, see the `setImmovable` method.
+     *
+     * @method Phaser.Physics.Arcade.Components.Pushable#setPushable
+     * @since 3.50.0
+     *
+     * @param {boolean} [value=true] - Sets if this body can be pushed by collisions with another Body.
+     *
+     * @return {this} This Game Object.
+     */
+    public function setPushable(?value:Bool):Dynamic;
     /**
      * Sets the body offset. This allows you to adjust the difference between the center of the body
      * and the x and y coordinates of the parent Game Object.

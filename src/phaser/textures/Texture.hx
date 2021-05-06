@@ -95,11 +95,11 @@ extern class Texture {
      * in addition to any extra frames that have been added to it, such as when parsing a Sprite Sheet or Texture Atlas.
      *
      * @name Phaser.Textures.Texture#frameTotal
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var frameTotal:Int;
+    public var frameTotal:Float;
     /**
      * Adds a new Frame to this Texture.
      *
@@ -110,8 +110,8 @@ extern class Texture {
      * @method Phaser.Textures.Texture#add
      * @since 3.0.0
      *
-     * @param {(integer|string)} name - The name of this Frame. The name is unique within the Texture.
-     * @param {integer} sourceIndex - The index of the TextureSource that this Frame is a part of.
+     * @param {(number|string)} name - The name of this Frame. The name is unique within the Texture.
+     * @param {number} sourceIndex - The index of the TextureSource that this Frame is a part of.
      * @param {number} x - The x coordinate of the top-left of this Frame.
      * @param {number} y - The y coordinate of the top-left of this Frame.
      * @param {number} width - The width of this Frame.
@@ -119,7 +119,7 @@ extern class Texture {
      *
      * @return {?Phaser.Textures.Frame} The Frame that was added to this Texture, or `null` if the given name already exists.
      */
-    public function add(name:Dynamic, sourceIndex:Int, x:Float, y:Float, width:Float, height:Float):phaser.textures.Frame;
+    public function add(name:Dynamic, sourceIndex:Float, x:Float, y:Float, width:Float, height:Float):phaser.textures.Frame;
     /**
      * Removes the given Frame from this Texture. The Frame is destroyed immediately.
      *
@@ -155,7 +155,7 @@ extern class Texture {
      * @method Phaser.Textures.Texture#get
      * @since 3.0.0
      *
-     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     * @param {(string|number)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
      *
      * @return {Phaser.Textures.Frame} The Texture Frame.
      */
@@ -171,21 +171,21 @@ extern class Texture {
      *
      * @param {Phaser.Textures.TextureSource} source - The TextureSource to check.
      *
-     * @return {integer} The index of the TextureSource within this Texture, or -1 if not in this Texture.
+     * @return {number} The index of the TextureSource within this Texture, or -1 if not in this Texture.
      */
-    public function getTextureSourceIndex(source:phaser.textures.TextureSource):Int;
+    public function getTextureSourceIndex(source:phaser.textures.TextureSource):Float;
     /**
      * Returns an array of all the Frames in the given TextureSource.
      *
      * @method Phaser.Textures.Texture#getFramesFromTextureSource
      * @since 3.0.0
      *
-     * @param {integer} sourceIndex - The index of the TextureSource to get the Frames from.
+     * @param {number} sourceIndex - The index of the TextureSource to get the Frames from.
      * @param {boolean} [includeBase=false] - Include the `__BASE` Frame in the output array?
      *
      * @return {Phaser.Textures.Frame[]} An array of Texture Frames.
      */
-    public function getFramesFromTextureSource(sourceIndex:Int, ?includeBase:Bool):Array<phaser.textures.Frame>;
+    public function getFramesFromTextureSource(sourceIndex:Float, ?includeBase:Bool):Array<phaser.textures.Frame>;
     /**
      * Returns an array with all of the names of the Frames in this Texture.
      *
@@ -208,7 +208,7 @@ extern class Texture {
      * @method Phaser.Textures.Texture#getSourceImage
      * @since 3.0.0
      *
-     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     * @param {(string|number)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
      *
      * @return {(HTMLImageElement|HTMLCanvasElement|Phaser.GameObjects.RenderTexture)} The DOM Image, Canvas Element or Render Texture.
      */
@@ -222,7 +222,7 @@ extern class Texture {
      * @method Phaser.Textures.Texture#getDataSourceImage
      * @since 3.7.0
      *
-     * @param {(string|integer)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
+     * @param {(string|number)} [name] - The string-based name, or integer based index, of the Frame to get from this Texture.
      *
      * @return {(HTMLImageElement|HTMLCanvasElement)} The DOM Image or Canvas Element.
      */

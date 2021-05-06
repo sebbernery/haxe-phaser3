@@ -10,6 +10,7 @@ package phaser.gameobjects;
  *
  * @class Group
  * @memberof Phaser.GameObjects
+ * @extends Phaser.Events.EventEmitter
  * @constructor
  * @since 3.0.0
  * @param {Phaser.Scene} scene - The scene this group belongs to.
@@ -20,7 +21,7 @@ package phaser.gameobjects;
  * @see Phaser.Physics.Arcade.StaticGroup
  */
 @:native("Phaser.GameObjects.Group")
-extern class Group {
+extern class Group extends phaser.events.EventEmitter {
     public function new(scene:phaser.Scene, ?children:Dynamic, ?config:Dynamic);
     /**
      * This scene this group belongs to.
@@ -88,11 +89,11 @@ extern class Group {
      * The maximum size of this group, if used as a pool. -1 is no limit.
      *
      * @name Phaser.GameObjects.Group#maxSize
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      * @default -1
      */
-    public var maxSize:Int;
+    public var maxSize:Float;
     /**
      * A default texture key to use when creating new group members.
      *
@@ -108,7 +109,7 @@ extern class Group {
      * A default texture frame to use when creating new group members.
      *
      * @name Phaser.GameObjects.Group#defaultFrame
-     * @type {(string|integer)}
+     * @type {(string|number)}
      * @since 3.0.0
      */
     public var defaultFrame:Dynamic;
@@ -157,7 +158,7 @@ extern class Group {
      * @param {number} [x=0] - The horizontal position of the new Game Object in the world.
      * @param {number} [y=0] - The vertical position of the new Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key of the new Game Object.
-     * @param {(string|integer)} [frame=defaultFrame] - The texture frame of the new Game Object.
+     * @param {(string|number)} [frame=defaultFrame] - The texture frame of the new Game Object.
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of the new Game Object.
      * @param {boolean} [active=true] - The {@link Phaser.GameObjects.GameObject#active} state of the new Game Object.
      *
@@ -283,9 +284,29 @@ extern class Group {
      * @method Phaser.GameObjects.Group#getLength
      * @since 3.0.0
      *
-     * @return {integer}
+     * @return {number}
      */
-    public function getLength():Int;
+    public function getLength():Float;
+    /**
+     * Returns all children in this Group that match the given criteria based on the `property` and `value` arguments.
+     *
+     * For example: `getAll('visible', true)` would return only children that have their `visible` property set.
+     *
+     * Optionally, you can specify a start and end index. For example if the Group has 100 elements,
+     * and you set `startIndex` to 0 and `endIndex` to 50, it would return matches from only
+     * the first 50.
+     *
+     * @method Phaser.GameObjects.Group#getMatching
+     * @since 3.50.0
+     *
+     * @param {string} [property] - The property to test on each array element.
+     * @param {*} [value] - The value to test the property against. Must pass a strict (`===`) comparison check.
+     * @param {number} [startIndex] - An optional start index to search from.
+     * @param {number} [endIndex] - An optional end index to search to.
+     *
+     * @return {any[]} An array of matching Group members. The array will be empty if nothing matched.
+     */
+    public function getMatching(?property:String, ?value:Dynamic, ?startIndex:Float, ?endIndex:Float):Array<Dynamic>;
     /**
      * Scans the Group, from top to bottom, for the first member that has an {@link Phaser.GameObjects.GameObject#active} state matching the argument,
      * assigns `x` and `y`, and returns the member.
@@ -301,7 +322,7 @@ extern class Group {
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {?any} The first matching group member, or a newly created member, or null.
@@ -317,18 +338,18 @@ extern class Group {
      * @method Phaser.GameObjects.Group#getFirstNth
      * @since 3.6.0
      *
-     * @param {integer} nth - The nth matching Group member to search for.
+     * @param {number} nth - The nth matching Group member to search for.
      * @param {boolean} [state=false] - The {@link Phaser.GameObjects.GameObject#active} value to match.
      * @param {boolean} [createIfNull=false] - Create a new Game Object if no matching members are found, using the following arguments.
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {?any} The first matching group member, or a newly created member, or null.
      */
-    public function getFirstNth(nth:Int, ?state:Bool, ?createIfNull:Bool, ?x:Float, ?y:Float, ?key:String, ?frame:Dynamic, ?visible:Bool):Dynamic;
+    public function getFirstNth(nth:Float, ?state:Bool, ?createIfNull:Bool, ?x:Float, ?y:Float, ?key:String, ?frame:Dynamic, ?visible:Bool):Dynamic;
     /**
      * Scans the Group for the last member that has an {@link Phaser.GameObjects.GameObject#active} state matching the argument,
      * assigns `x` and `y`, and returns the member.
@@ -344,7 +365,7 @@ extern class Group {
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {?any} The first matching group member, or a newly created member, or null.
@@ -360,18 +381,18 @@ extern class Group {
      * @method Phaser.GameObjects.Group#getLastNth
      * @since 3.6.0
      *
-     * @param {integer} nth - The nth matching Group member to search for.
+     * @param {number} nth - The nth matching Group member to search for.
      * @param {boolean} [state=false] - The {@link Phaser.GameObjects.GameObject#active} value to match.
      * @param {boolean} [createIfNull=false] - Create a new Game Object if no matching members are found, using the following arguments.
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {?any} The first matching group member, or a newly created member, or null.
      */
-    public function getLastNth(nth:Int, ?state:Bool, ?createIfNull:Bool, ?x:Float, ?y:Float, ?key:String, ?frame:Dynamic, ?visible:Bool):Dynamic;
+    public function getLastNth(nth:Float, ?state:Bool, ?createIfNull:Bool, ?x:Float, ?y:Float, ?key:String, ?frame:Dynamic, ?visible:Bool):Dynamic;
     /**
      * Scans the group for the first member that has an {@link Phaser.GameObjects.GameObject#active} state set to `false`,
      * assigns `x` and `y`, and returns the member.
@@ -386,7 +407,7 @@ extern class Group {
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {?any} The first inactive group member, or a newly created member, or null.
@@ -406,7 +427,7 @@ extern class Group {
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {any} The first active group member, or a newly created member, or null.
@@ -427,7 +448,7 @@ extern class Group {
      * @param {number} [x] - The horizontal position of the Game Object in the world.
      * @param {number} [y] - The vertical position of the Game Object in the world.
      * @param {string} [key=defaultKey] - The texture key assigned to a new Game Object (if one is created).
-     * @param {(string|integer)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
+     * @param {(string|number)} [frame=defaultFrame] - A texture frame assigned to a new Game Object (if one is created).
      * @param {boolean} [visible=true] - The {@link Phaser.GameObjects.Components.Visible#visible} state of a new Game Object (if one is created).
      *
      * @return {any} The first inactive group member, or a newly created member, or null.
@@ -462,18 +483,18 @@ extern class Group {
      *
      * @param {boolean} [value=true] - Count active (true) or inactive (false) group members.
      *
-     * @return {integer} The number of group members with an active state matching the `active` argument.
+     * @return {number} The number of group members with an active state matching the `active` argument.
      */
-    public function countActive(?value:Bool):Int;
+    public function countActive(?value:Bool):Float;
     /**
      * Counts the number of in-use (active) group members.
      *
      * @method Phaser.GameObjects.Group#getTotalUsed
      * @since 3.0.0
      *
-     * @return {integer} The number of group members with an active state of true.
+     * @return {number} The number of group members with an active state of true.
      */
-    public function getTotalUsed():Int;
+    public function getTotalUsed():Float;
     /**
      * The difference of {@link Phaser.GameObjects.Group#maxSize} and the number of active group members.
      *
@@ -482,9 +503,9 @@ extern class Group {
      * @method Phaser.GameObjects.Group#getTotalFree
      * @since 3.0.0
      *
-     * @return {integer} maxSize minus the number of active group numbers; or a large number (if maxSize is -1).
+     * @return {number} maxSize minus the number of active group numbers; or a large number (if maxSize is -1).
      */
-    public function getTotalFree():Int;
+    public function getTotalFree():Float;
     /**
      * Sets the `active` property of this Group.
      * When active, this Group runs its `preUpdate` method.
@@ -518,12 +539,12 @@ extern class Group {
      * @param {string} key - The property to be updated.
      * @param {number} value - The amount to set the property to.
      * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
-     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
-     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     * @param {number} [index=0] - An optional offset to start searching from within the items array.
+     * @param {number} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
      *
      * @return {this} This Group object.
      */
-    public function propertyValueSet(key:String, value:Float, ?step:Float, ?index:Int, ?direction:Int):Dynamic;
+    public function propertyValueSet(key:String, value:Float, ?step:Float, ?index:Float, ?direction:Float):Dynamic;
     /**
      * Adds the given value to the property as defined in `key` of each group member.
      *
@@ -533,12 +554,12 @@ extern class Group {
      * @param {string} key - The property to be updated.
      * @param {number} value - The amount to set the property to.
      * @param {number} [step=0] - This is added to the `value` amount, multiplied by the iteration counter.
-     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
-     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     * @param {number} [index=0] - An optional offset to start searching from within the items array.
+     * @param {number} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
      *
      * @return {this} This Group object.
      */
-    public function propertyValueInc(key:String, value:Float, ?step:Float, ?index:Int, ?direction:Int):Dynamic;
+    public function propertyValueInc(key:String, value:Float, ?step:Float, ?index:Float, ?direction:Float):Dynamic;
     /**
      * Sets the x of each group member.
      *
@@ -626,11 +647,11 @@ extern class Group {
      *
      * @param {number} x - The x coordinate to place the first item in the array at.
      * @param {number} y - The y coordinate to place the first item in the array at.
-     * @param {integer} [direction=0] - The iteration direction. 0 = first to last and 1 = last to first.
+     * @param {number} [direction=0] - The iteration direction. 0 = first to last and 1 = last to first.
      *
      * @return {this} This Group object.
      */
-    public function shiftPosition(x:Float, y:Float, ?direction:Int):Dynamic;
+    public function shiftPosition(x:Float, y:Float, ?direction:Float):Dynamic;
     /**
      * Sets the angle of each group member.
      *
@@ -827,12 +848,12 @@ extern class Group {
      * @since 3.21.0
      *
      * @param {boolean} value - The value to set the property to.
-     * @param {integer} [index=0] - An optional offset to start searching from within the items array.
-     * @param {integer} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
+     * @param {number} [index=0] - An optional offset to start searching from within the items array.
+     * @param {number} [direction=1] - The direction to iterate through the array. 1 is from beginning to end, -1 from end to beginning.
      *
      * @return {this} This Group object.
      */
-    public function setVisible(value:Bool, ?index:Int, ?direction:Int):Dynamic;
+    public function setVisible(value:Bool, ?index:Float, ?direction:Float):Dynamic;
     /**
      * Toggles (flips) the visible state of each member of this group.
      *
@@ -842,15 +863,4 @@ extern class Group {
      * @return {this} This Group object.
      */
     public function toggleVisible():Dynamic;
-    /**
-     * Empties this group and removes it from the Scene.
-     *
-     * Does not call {@link Phaser.GameObjects.Group#removeCallback}.
-     *
-     * @method Phaser.GameObjects.Group#destroy
-     * @since 3.0.0
-     *
-     * @param {boolean} [destroyChildren=false] - Also {@link Phaser.GameObjects.GameObject#destroy} each group member.
-     */
-    public function destroy(?destroyChildren:Bool):Void;
 }

@@ -34,10 +34,10 @@ extern class Set {
      * Increasing the size larger than the current size has no effect.
      *
      * @name Phaser.Structs.Set#size
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var size:Int;
+    public var size:Float;
     /**
      * Inserts the provided value into this Set. If the value is already contained in this Set this method will have no effect.
      *

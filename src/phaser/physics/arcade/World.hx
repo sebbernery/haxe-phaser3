@@ -203,11 +203,11 @@ extern class World extends phaser.events.EventEmitter {
      * to allow more items per node and less node division.
      *
      * @name Phaser.Physics.Arcade.World#maxEntries
-     * @type {integer}
+     * @type {number}
      * @default 16
      * @since 3.0.0
      */
-    public var maxEntries:Int;
+    public var maxEntries:Float;
     /**
      * Should this Arcade Physics World use an RTree for Dynamic bodies?
      *
@@ -282,9 +282,9 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]|Phaser.GameObjects.Group|Phaser.GameObjects.Group[])} object - The object, or objects, on which to create the bodies.
-     * @param {integer} [bodyType] - The type of Body to create. Either `DYNAMIC_BODY` or `STATIC_BODY`.
+     * @param {number} [bodyType] - The type of Body to create. Either `DYNAMIC_BODY` or `STATIC_BODY`.
      */
-    public function enable(object:Dynamic, ?bodyType:Int):Void;
+    public function enable(object:Dynamic, ?bodyType:Float):Void;
     /**
      * Creates an Arcade Physics Body on a single Game Object.
      *
@@ -311,11 +311,11 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject} object - The Game Object on which to create the body.
-     * @param {integer} [bodyType] - The type of Body to create. Either `DYNAMIC_BODY` or `STATIC_BODY`.
+     * @param {number} [bodyType] - The type of Body to create. Either `DYNAMIC_BODY` or `STATIC_BODY`.
      *
      * @return {Phaser.GameObjects.GameObject} The Game Object on which the body was created.
      */
-    public function enableBody(object:phaser.gameobjects.GameObject, ?bodyType:Int):phaser.gameobjects.GameObject;
+    public function enableBody(object:phaser.gameobjects.GameObject, ?bodyType:Float):phaser.gameobjects.GameObject;
     /**
      * Adds an existing Arcade Physics Body or StaticBody to the simulation.
      *
@@ -532,18 +532,17 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Arcade.World#setFPS
      * @since 3.10.0
      *
-     * @param {integer} framerate - The frame rate to advance the simulation at.
+     * @param {number} framerate - The frame rate to advance the simulation at.
      *
      * @return {this} This World object.
      */
-    public function setFPS(framerate:Int):Dynamic;
+    public function setFPS(framerate:Float):Dynamic;
     /**
      * Advances the simulation based on the elapsed time and fps rate.
      *
      * This is called automatically by your Scene and does not need to be invoked directly.
      *
      * @method Phaser.Physics.Arcade.World#update
-     * @protected
      * @fires Phaser.Physics.Arcade.Events#WORLD_STEP
      * @since 3.0.0
      *
@@ -771,7 +770,7 @@ extern class World extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject} sprite - The first object to check for collision.
-     * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer - The second object to check for collision.
+     * @param {Phaser.Tilemaps.TilemapLayer} tilemapLayer - The second object to check for collision.
      * @param {ArcadePhysicsCallback} [collideCallback] - An optional callback function that is called if the objects collide.
      * @param {ArcadePhysicsCallback} [processCallback] - An optional callback function that lets you perform additional checks against the two objects if they collide. If this is set then `collideCallback` will only be called if this callback returns `true`.
      * @param {any} [callbackContext] - The context in which to run the callbacks.
@@ -779,7 +778,7 @@ extern class World extends phaser.events.EventEmitter {
      *
      * @return {boolean} True if any objects overlap (with `overlapOnly`); or true if any overlapping objects were separated.
      */
-    public function collideSpriteVsTilemapLayer(sprite:phaser.gameobjects.GameObject, tilemapLayer:Dynamic, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic, ?overlapOnly:Bool):Bool;
+    public function collideSpriteVsTilemapLayer(sprite:phaser.gameobjects.GameObject, tilemapLayer:phaser.tilemaps.TilemapLayer, ?collideCallback:ArcadePhysicsCallback, ?processCallback:ArcadePhysicsCallback, ?callbackContext:Dynamic, ?overlapOnly:Bool):Bool;
     /**
      * Wrap an object's coordinates (or several objects' coordinates) within {@link Phaser.Physics.Arcade.World#bounds}.
      *
@@ -788,7 +787,7 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Arcade.World#wrap
      * @since 3.3.0
      *
-     * @param {*} object - A Game Object, a Group, an object with `x` and `y` coordinates, or an array of such objects.
+     * @param {any} object - A Game Object, a Group, an object with `x` and `y` coordinates, or an array of such objects.
      * @param {number} [padding=0] - An amount added to each boundary edge during the operation.
      */
     public function wrap(object:Dynamic, ?padding:Float):Void;

@@ -23,7 +23,7 @@ package phaser.types.tilemaps;
  * @property {array} [callbacks] - An array of callbacks.
  * @property {array} [bodies] - An array of physics bodies.
  * @property {array} [data] - An array of the tile data indexes.
- * @property {Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer} [tilemapLayer] - A reference to the Tilemap layer that owns this data.
+ * @property {Phaser.Tilemaps.TilemapLayer} [tilemapLayer] - A reference to the Tilemap layer that owns this data.
  */
 typedef LayerDataConfig = {
     @:optional var name:String;
@@ -45,5 +45,5 @@ typedef LayerDataConfig = {
     @:optional var callbacks:Array<Dynamic>;
     @:optional var bodies:Array<Dynamic>;
     @:optional var data:Array<Dynamic>;
-    @:optional var tilemapLayer:Dynamic;
+    @:optional var tilemapLayer:phaser.tilemaps.TilemapLayer;
 };

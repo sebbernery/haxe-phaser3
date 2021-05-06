@@ -35,7 +35,7 @@ package phaser.input.keyboard;
  * @since 3.0.0
  *
  * @param {Phaser.Input.Keyboard.KeyboardPlugin} keyboardPlugin - A reference to the Keyboard Plugin.
- * @param {(string|integer[]|object[])} keys - The keys that comprise this combo.
+ * @param {(string|number[]|object[])} keys - The keys that comprise this combo.
  * @param {Phaser.Types.Input.Keyboard.KeyComboConfig} [config] - A Key Combo configuration object.
  */
 @:native("Phaser.Input.Keyboard.KeyCombo")
@@ -71,19 +71,19 @@ extern class KeyCombo {
      * The current keyCode the combo is waiting for.
      *
      * @name Phaser.Input.Keyboard.KeyCombo#current
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var current:Int;
+    public var current:Float;
     /**
      * The current index of the key being waited for in the 'keys' string.
      *
      * @name Phaser.Input.Keyboard.KeyCombo#index
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var index:Int;
+    public var index:Float;
     /**
      * The length of this combo (in keycodes)
      *
@@ -132,11 +132,11 @@ extern class KeyCombo {
      * The max delay in ms between each key press. Above this the combo is reset. 0 means disabled.
      *
      * @name Phaser.Input.Keyboard.KeyCombo#maxKeyDelay
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var maxKeyDelay:Int;
+    public var maxKeyDelay:Float;
     /**
      * If previously matched and they press the first key of the combo again, will it reset?
      *

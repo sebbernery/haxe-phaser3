@@ -14,9 +14,11 @@ package phaser.types.core;
  * @property {boolean} [premultipliedAlpha=true] - In WebGL mode, the drawing buffer contains colors with pre-multiplied alpha.
  * @property {boolean} [failIfMajorPerformanceCaveat=false] - Let the browser abort creating a WebGL context if it judges performance would be unacceptable.
  * @property {string} [powerPreference='default'] - "high-performance", "low-power" or "default". A hint to the browser on how much device power the game might use.
- * @property {integer} [batchSize=2000] - The default WebGL batch size.
- * @property {integer} [maxLights=10] - The maximum number of lights allowed to be visible within range of a single Camera in the LightManager.
+ * @property {number} [batchSize=4096] - The default WebGL batch size. Represents the number of _quads_ that can be added to a single batch.
+ * @property {number} [maxLights=10] - The maximum number of lights allowed to be visible within range of a single Camera in the LightManager.
+ * @property {number} [maxTextures=-1] - When in WebGL mode, this sets the maximum number of GPU Textures to use. The default, -1, will use all available units. The WebGL1 spec says all browsers should provide a minimum of 8.
  * @property {string} [mipmapFilter='LINEAR'] - The mipmap magFilter to be used when creating WebGL textures.
+ * @property {Phaser.Types.Core.PipelineConfig} [pipline] - The WebGL Pipeline configuration object.
  */
 typedef RenderConfig = {
     @:optional var antialias:Bool;
@@ -29,7 +31,9 @@ typedef RenderConfig = {
     @:optional var premultipliedAlpha:Bool;
     @:optional var failIfMajorPerformanceCaveat:Bool;
     @:optional var powerPreference:String;
-    @:optional var batchSize:Int;
-    @:optional var maxLights:Int;
+    @:optional var batchSize:Float;
+    @:optional var maxLights:Float;
+    @:optional var maxTextures:Float;
     @:optional var mipmapFilter:String;
+    @:optional var pipline:phaser.types.core.PipelineConfig;
 };

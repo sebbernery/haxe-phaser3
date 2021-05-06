@@ -62,6 +62,16 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      */
     public var anims:Dynamic;
     /**
+     * A list of animation mix times.
+     *
+     * See the {@link #setMix} method for more details.
+     *
+     * @name Phaser.Animations.AnimationManager#mixes
+     * @type {Phaser.Structs.Map.<string, Phaser.Animations.Animation>}
+     * @since 3.50.0
+     */
+    public var mixes:Dynamic;
+    /**
      * Whether the Animation Manager is paused along with all of its Animations.
      *
      * @name Phaser.Animations.AnimationManager#paused
@@ -86,6 +96,73 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public function boot():Void;
+    /**
+     * Adds a mix between two animations.
+     *
+     * Mixing allows you to specify a unique delay between a pairing of animations.
+     *
+     * When playing Animation A on a Game Object, if you then play Animation B, and a
+     * mix exists, it will wait for the specified delay to be over before playing Animation B.
+     *
+     * This allows you to customise smoothing between different types of animation, such
+     * as blending between an idle and a walk state, or a running and a firing state.
+     *
+     * Note that mixing is only applied if you use the `Sprite.play` method. If you opt to use
+     * `playAfterRepeat` or `playAfterDelay` instead, those will take pririty and the mix
+     * delay will not be used.
+     *
+     * To update an existing mix, just call this method with the new delay.
+     *
+     * To remove a mix pairing, see the `removeMix` method.
+     *
+     * @method Phaser.Animations.AnimationManager#addMix
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation)} animA - The string-based key, or instance of, Animation A.
+     * @param {(string|Phaser.Animations.Animation)} animB - The string-based key, or instance of, Animation B.
+     * @param {number} delay - The delay, in milliseconds, to wait when transitioning from Animation A to B.
+     *
+     * @return {this} This Animation Manager.
+     */
+    public function addMix(animA:Dynamic, animB:Dynamic, delay:Float):Dynamic;
+    /**
+     * Removes a mix between two animations.
+     *
+     * Mixing allows you to specify a unique delay between a pairing of animations.
+     *
+     * Calling this method lets you remove those pairings. You can either remove
+     * it between `animA` and `animB`, or if you do not provide the `animB` parameter,
+     * it will remove all `animA` mixes.
+     *
+     * If you wish to update an existing mix instead, call the `addMix` method with the
+     * new delay.
+     *
+     * @method Phaser.Animations.AnimationManager#removeMix
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation)} animA - The string-based key, or instance of, Animation A.
+     * @param {(string|Phaser.Animations.Animation)} [animB] - The string-based key, or instance of, Animation B. If not given, all mixes for Animation A will be removed.
+     *
+     * @return {this} This Animation Manager.
+     */
+    public function removeMix(animA:Dynamic, ?animB:Dynamic):Dynamic;
+    /**
+     * Returns the mix delay between two animations.
+     *
+     * If no mix has been set-up, this method will return zero.
+     *
+     * If you wish to create, or update, a new mix, call the `addMix` method.
+     * If you wish to remove a mix, call the `removeMix` method.
+     *
+     * @method Phaser.Animations.AnimationManager#getMix
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation)} animA - The string-based key, or instance of, Animation A.
+     * @param {(string|Phaser.Animations.Animation)} animB - The string-based key, or instance of, Animation B.
+     *
+     * @return {number} The mix duration, or zero if no mix exists.
+     */
+    public function getMix(animA:Dynamic, animB:Dynamic):Float;
     /**
      * Adds an existing Animation to the Animation Manager.
      *
@@ -113,6 +190,83 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      */
     public function exists(key:String):Bool;
     /**
+     * Create one, or more animations from a loaded Aseprite JSON file.
+     *
+     * Aseprite is a powerful animated sprite editor and pixel art tool.
+     *
+     * You can find more details at https://www.aseprite.org/
+     *
+     * To export a compatible JSON file in Aseprite, please do the following:
+     *
+     * 1. Go to "File - Export Sprite Sheet"
+     *
+     * 2. On the **Layout** tab:
+     * 2a. Set the "Sheet type" to "Packed"
+     * 2b. Set the "Constraints" to "None"
+     * 2c. Check the "Merge Duplicates" checkbox
+     *
+     * 3. On the **Sprite** tab:
+     * 3a. Set "Layers" to "Visible layers"
+     * 3b. Set "Frames" to "All frames", unless you only wish to export a sub-set of tags
+     *
+     * 4. On the **Borders** tab:
+     * 4a. Check the "Trim Sprite" and "Trim Cells" options
+     * 4b. Ensure "Border Padding", "Spacing" and "Inner Padding" are all > 0 (1 is usually enough)
+     *
+     * 5. On the **Output** tab:
+     * 5a. Check "Output File", give your image a name and make sure you choose "png files" as the file type
+     * 5b. Check "JSON Data" and give your json file a name
+     * 5c. The JSON Data type can be either a Hash or Array, Phaser doesn't mind.
+     * 5d. Make sure "Tags" is checked in the Meta options
+     * 5e. In the "Item Filename" input box, make sure it says just "{frame}" and nothing more.
+     *
+     * 6. Click export
+     *
+     * This was tested with Aseprite 1.2.25.
+     *
+     * This will export a png and json file which you can load using the Aseprite Loader, i.e.:
+     *
+     * ```javascript
+     * function preload ()
+     * {
+     *     this.load.path = 'assets/animations/aseprite/';
+     *     this.load.aseprite('paladin', 'paladin.png', 'paladin.json');
+     * }
+     * ```
+     *
+     * Once loaded, you can call this method from within a Scene with the 'atlas' key:
+     *
+     * ```javascript
+     * this.anims.createFromAseprite('paladin');
+     * ```
+     *
+     * Any animations defined in the JSON will now be available to use in Phaser and you play them
+     * via their Tag name. For example, if you have an animation called 'War Cry' on your Aseprite timeline,
+     * you can play it in Phaser using that Tag name:
+     *
+     * ```javascript
+     * this.add.sprite(400, 300).play('War Cry');
+     * ```
+     *
+     * When calling this method you can optionally provide an array of tag names, and only those animations
+     * will be created. For example:
+     *
+     * ```javascript
+     * this.anims.createFromAseprite('paladin', [ 'step', 'War Cry', 'Magnum Break' ]);
+     * ```
+     *
+     * This will only create the 3 animations defined. Note that the tag names are case-sensitive.
+     *
+     * @method Phaser.Animations.AnimationManager#createFromAseprite
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the loaded Aseprite atlas. It must have been loaded prior to calling this method.
+     * @param {string[]} [tags] - An array of Tag names. If provided, only animations found in this array will be created.
+     *
+     * @return {Phaser.Animations.Animation[]} An array of Animation instances that were successfully created.
+     */
+    public function createFromAseprite(key:String, ?tags:Array<String>):Array<phaser.animations.Animation>;
+    /**
      * Creates a new Animation and adds it to the Animation Manager.
      *
      * Animations are global. Once created, you can use them in any Scene in your game. They are not Scene specific.
@@ -131,7 +285,7 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      *
      * @param {Phaser.Types.Animations.Animation} config - The configuration settings for the Animation.
      *
-     * @return {(Phaser.Animations.Animation|false)} The Animation that was created, or `false` is the key is already in use.
+     * @return {(Phaser.Animations.Animation|false)} The Animation that was created, or `false` if the key is already in use.
      */
     public function create(config:phaser.types.animations.Animation):phaser.animations.Animation;
     /**
@@ -192,6 +346,36 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      *
      * If you're working with a texture atlas, see the `generateFrameNames` method instead.
      *
+     * It's a helper method, designed to make it easier for you to extract frames from sprite sheets.
+     * If you're working with a texture atlas, see the `generateFrameNames` method instead.
+     *
+     * Example:
+     *
+     * If you have a sprite sheet loaded called `explosion` and it contains 12 frames, then you can call this method using:
+     * `this.anims.generateFrameNumbers('explosion', { start: 0, end: 12 })`.
+     *
+     * The `end` value tells it to stop after 12 frames. To create an animation using this method, you can do:
+     *
+     * ```javascript
+     * this.anims.create({
+     *   key: 'boom',
+     *   frames: this.anims.generateFrameNames('explosion', {
+     *     start: 0,
+     *     end: 12
+     *   })
+     * });
+     * ```
+     *
+     * Note that `start` is optional and you don't need to include it if the animation starts from frame 0.
+     *
+     * To specify an animation in reverse, swap the `start` and `end` values.
+     *
+     * If the frames are not sequential, you may pass an array of frame numbers instead, for example:
+     *
+     * `this.anims.generateFrameNumbers('explosion', { frames: [ 0, 1, 2, 1, 2, 3, 4, 0, 1, 2 ] })`
+     *
+     * Please see the animation examples and `GenerateFrameNumbers` config docs for further details.
+     *
      * @method Phaser.Animations.AnimationManager#generateFrameNumbers
      * @since 3.0.0
      *
@@ -213,19 +397,6 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      */
     public function get(key:String):phaser.animations.Animation;
     /**
-     * Load an Animation into a Game Object's Animation Component.
-     *
-     * @method Phaser.Animations.AnimationManager#load
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.GameObject} child - The Game Object to load the animation into.
-     * @param {string} key - The key of the animation to load.
-     * @param {(string|integer)} [startFrame] - The name of a start frame to set on the loaded animation.
-     *
-     * @return {Phaser.GameObjects.GameObject} The Game Object with the animation loaded into it.
-     */
-    public function load(child:phaser.gameobjects.GameObject, key:String, ?startFrame:Dynamic):phaser.gameobjects.GameObject;
-    /**
      * Pause all animations.
      *
      * @method Phaser.Animations.AnimationManager#pauseAll
@@ -241,12 +412,52 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @method Phaser.Animations.AnimationManager#play
      * @since 3.0.0
      *
-     * @param {string} key - The key of the animation to play on the Game Object.
-     * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Objects to play the animation on.
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
+     * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} children - An array of Game Objects to play the animation on. They must have an Animation Component.
      *
      * @return {this} This Animation Manager.
      */
-    public function play(key:String, child:Dynamic):Dynamic;
+    public function play(key:Dynamic, children:Dynamic):Dynamic;
+    /**
+     * Takes an array of Game Objects that have an Animation Component and then
+     * starts the given animation playing on them. The start time of each Game Object
+     * is offset, incrementally, by the `stagger` amount.
+     *
+     * For example, if you pass an array with 4 children and a stagger time of 1000,
+     * the delays will be:
+     *
+     * child 1: 1000ms delay
+     * child 2: 2000ms delay
+     * child 3: 3000ms delay
+     * child 4: 4000ms delay
+     *
+     * If you set the `staggerFirst` parameter to `false` they would be:
+     *
+     * child 1: 0ms delay
+     * child 2: 1000ms delay
+     * child 3: 2000ms delay
+     * child 4: 3000ms delay
+     *
+     * You can also set `stagger` to be a negative value. If it was -1000, the above would be:
+     *
+     * child 1: 3000ms delay
+     * child 2: 2000ms delay
+     * child 3: 1000ms delay
+     * child 4: 0ms delay
+     *
+     * @method Phaser.Animations.AnimationManager#staggerPlay
+     * @since 3.0.0
+     *
+     * @generic {Phaser.GameObjects.GameObject[]} G - [items,$return]
+     *
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
+     * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} children - An array of Game Objects to play the animation on. They must have an Animation Component.
+     * @param {number} stagger - The amount of time, in milliseconds, to offset each play time by. If a negative value is given, it's applied to the children in reverse order.
+     * @param {boolean} [staggerFirst=true] -Should the first child be staggered as well?
+     *
+     * @return {this} This Animation Manager.
+     */
+    public function staggerPlay(key:Dynamic, children:Dynamic, stagger:Float, ?staggerFirst:Bool):Dynamic;
     /**
      * Removes an Animation from this Animation Manager, based on the given key.
      *
@@ -272,23 +483,6 @@ extern class AnimationManager extends phaser.events.EventEmitter {
      * @return {this} This Animation Manager.
      */
     public function resumeAll():Dynamic;
-    /**
-     * Takes an array of Game Objects that have an Animation Component and then
-     * starts the given animation playing on them, each one offset by the
-     * `stagger` amount given to this method.
-     *
-     * @method Phaser.Animations.AnimationManager#staggerPlay
-     * @since 3.0.0
-     *
-     * @generic {Phaser.GameObjects.GameObject[]} G - [items,$return]
-     *
-     * @param {string} key - The key of the animation to play on the Game Objects.
-     * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} children - An array of Game Objects to play the animation on. They must have an Animation Component.
-     * @param {number} [stagger=0] - The amount of time, in milliseconds, to offset each play time by.
-     *
-     * @return {this} This Animation Manager.
-     */
-    public function staggerPlay(key:String, children:Dynamic, ?stagger:Float):Dynamic;
     /**
      * Returns the Animation data as JavaScript object based on the given key.
      * Or, if not key is defined, it will return the data of all animations as array of objects.

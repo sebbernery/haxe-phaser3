@@ -9,56 +9,56 @@ class Geom {
      * A Circle Geometry object type.
      *
      * @name Phaser.Geom.CIRCLE
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var CIRCLE:Int;
+    static public var CIRCLE:Float;
     /**
      * An Ellipse Geometry object type.
      *
      * @name Phaser.Geom.ELLIPSE
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var ELLIPSE:Int;
+    static public var ELLIPSE:Float;
     /**
      * A Line Geometry object type.
      *
      * @name Phaser.Geom.LINE
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var LINE:Int;
+    static public var LINE:Float;
     /**
      * A Point Geometry object type.
      *
      * @name Phaser.Geom.POINT
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var POINT:Int;
+    static public var POINT:Float;
     /**
      * A Polygon Geometry object type.
      *
      * @name Phaser.Geom.POLYGON
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var POLYGON:Int;
+    static public var POLYGON:Float;
     /**
      * A Rectangle Geometry object type.
      *
      * @name Phaser.Geom.RECTANGLE
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var RECTANGLE:Int;
+    static public var RECTANGLE:Float;
     /**
      * A Triangle Geometry object type.
      *
      * @name Phaser.Geom.TRIANGLE
-     * @type {integer}
+     * @type {number}
      * @since 3.19.0
      */
-    static public var TRIANGLE:Int;
+    static public var TRIANGLE:Float;
 }

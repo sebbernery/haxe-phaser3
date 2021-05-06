@@ -38,11 +38,11 @@ extern class Curve extends phaser.gameobjects.Shape {
      * Increase this value for smoother curves, at the cost of more polygons being rendered.
      *
      * @name Phaser.GameObjects.Curve#smoothness
-     * @type {integer}
+     * @type {number}
      * @default 32
      * @since 3.13.0
      */
-    public var smoothness:Int;
+    public var smoothness:Float;
     /**
      * Sets the smoothness of the curve. The number of points used when rendering it.
      * Increase this value for smoother curves, at the cost of more polygons being rendered.
@@ -51,9 +51,9 @@ extern class Curve extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.Curve#setSmoothness
      * @since 3.13.0
      *
-     * @param {integer} value - The value to set the smoothness to.
+     * @param {number} value - The value to set the smoothness to.
      *
      * @return {this} This Game Object instance.
      */
-    public function setSmoothness(value:Int):Dynamic;
+    public function setSmoothness(value:Float):Dynamic;
 }

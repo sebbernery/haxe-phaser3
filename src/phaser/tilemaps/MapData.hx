@@ -84,18 +84,18 @@ extern class MapData {
      * The format of the map data.
      *
      * @name Phaser.Tilemaps.MapData#format
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var format:Int;
+    public var format:Float;
     /**
      * The orientation of the map data (i.e. orthogonal, isometric, hexagonal), default 'orthogonal'.
      *
      * @name Phaser.Tilemaps.MapData#orientation
-     * @type {string}
-     * @since 3.0.0
+     * @type {Phaser.Tilemaps.OrientationType}
+     * @since 3.50.0
      */
-    public var orientation:String;
+    public var orientation:phaser.tilemaps.OrientationType;
     /**
      * Determines the draw order of tilemap. Default is right-down
      *
@@ -181,4 +181,13 @@ extern class MapData {
      * @since 3.0.0
      */
     public var tiles:Array<Dynamic>;
+    /**
+     * The length of the horizontal sides of the hexagon.
+     * Only used for hexagonal orientation Tilemaps.
+     *
+     * @name Phaser.Tilemaps.MapData#hexSideLength
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var hexSideLength:Float;
 }

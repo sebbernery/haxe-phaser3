@@ -22,11 +22,11 @@ extern class Line {
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Line#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * The x coordinate of the lines starting point.
      *
@@ -111,12 +111,12 @@ extern class Line {
      * @since 3.0.0
      *
      * @param {Phaser.Geom.Line} line - The line.
-     * @param {integer} [stepRate=1] - The optional step rate for the points on the line.
+     * @param {number} [stepRate=1] - The optional step rate for the points on the line.
      * @param {Phaser.Types.Math.Vector2Like[]} [results] - An optional array to push the resulting coordinates into.
      *
      * @return {Phaser.Types.Math.Vector2Like[]} The array of coordinates on the line.
      */
-    static public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Int, ?results:Array<phaser.types.math.Vector2Like>):Array<phaser.types.math.Vector2Like>;
+    static public function BresenhamPoints(line:phaser.geom.Line, ?stepRate:Float, ?results:Array<phaser.types.math.Vector2Like>):Array<phaser.types.math.Vector2Like>;
     /**
      * Center a line on the given coordinates.
      *
@@ -216,13 +216,13 @@ extern class Line {
      *
      * @param {Phaser.Geom.Line} line - The Line object.
      * @param {(string|function)} ease - The ease to use. This can be either a string from the EaseMap, or a custom function.
-     * @param {integer} quantity - The number of points to return. Note that if you provide a `collinearThreshold`, the resulting array may not always contain this number of points.
+     * @param {number} quantity - The number of points to return. Note that if you provide a `collinearThreshold`, the resulting array may not always contain this number of points.
      * @param {number} [collinearThreshold=0] - An optional threshold. The final array is reduced so that each point is spaced out at least this distance apart. This helps reduce clustering in noisey eases.
      * @param {number[]} [easeParams] - An optional array of ease parameters to go with the ease.
      *
      * @return {Phaser.Geom.Point[]} An array of Geom.Points containing the coordinates of the points on the line.
      */
-    static public function GetEasedPoints(line:phaser.geom.Line, ease:Dynamic, quantity:Int, ?collinearThreshold:Float, ?easeParams:Array<Float>):Array<phaser.geom.Point>;
+    static public function GetEasedPoints(line:phaser.geom.Line, ease:Dynamic, quantity:Float, ?collinearThreshold:Float, ?easeParams:Array<Float>):Array<phaser.geom.Point>;
     /**
      * Get the midpoint of the given line.
      *
@@ -297,13 +297,13 @@ extern class Line {
      * @generic {Phaser.Geom.Point[]} O - [out,$return]
      *
      * @param {Phaser.Geom.Line} line - The line.
-     * @param {integer} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
+     * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
      * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
      * @param {(array|Phaser.Geom.Point[])} [out] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
      */
-    static public function GetPoints(line:phaser.geom.Line, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(line:phaser.geom.Line, quantity:Float, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Get the shortest distance from a Line to the given Point.
      *
@@ -367,13 +367,13 @@ extern class Line {
      *
      * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
-     * @param {integer} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
-     * @param {integer} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
+     * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
+     * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
      * @param {(array|Phaser.Geom.Point[])} [output] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
      */
-    public function getPoints(quantity:Int, ?stepRate:Int, ?output:Dynamic):Array<Dynamic>;
+    public function getPoints(quantity:Float, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Get a random Point on the Line.
      *

@@ -11,7 +11,7 @@ package phaser.types.scenes;
  * @property {boolean} isBooted - Has the Scene finished booting?
  * @property {boolean} isTransition - Is the Scene in a state of transition?
  * @property {?Phaser.Scene} transitionFrom - The Scene this Scene is transitioning from, if set.
- * @property {integer} transitionDuration - The duration of the transition, if set.
+ * @property {number} transitionDuration - The duration of the transition, if set.
  * @property {boolean} transitionAllowInput - Is this Scene allowed to receive input during transitions?
  * @property {object} data - a data bundle passed to this Scene from the Scene Manager.
  * @property {(false|Phaser.Types.Loader.FileTypes.PackFileSection)} pack - Files to be loaded before the Scene begins.
@@ -29,7 +29,7 @@ var visible:Bool;
 var isBooted:Bool;
 var isTransition:Bool;
 var transitionFrom:phaser.Scene;
-var transitionDuration:Int;
+var transitionDuration:Float;
 var transitionAllowInput:Bool;
 var data:Dynamic;
 var pack:Dynamic;

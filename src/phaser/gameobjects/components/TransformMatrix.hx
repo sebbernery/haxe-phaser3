@@ -405,6 +405,36 @@ extern class TransformMatrix {
      */
     public function getY(x:Float, y:Float):Float;
     /**
+     * Returns the X component of this matrix multiplied by the given values.
+     *
+     * This is the same as `x * a + y * c + e`, optionally passing via `Math.round`.
+     *
+     * @method Phaser.GameObjects.Components.TransformMatrix#getXRound
+     * @since 3.50.0
+     *
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {boolean} [round=false] - Math.round the resulting value?
+     *
+     * @return {number} The calculated x value.
+     */
+    public function getXRound(x:Float, y:Float, ?round:Bool):Float;
+    /**
+     * Returns the Y component of this matrix multiplied by the given values.
+     *
+     * This is the same as `x * b + y * d + f`, optionally passing via `Math.round`.
+     *
+     * @method Phaser.GameObjects.Components.TransformMatrix#getYRound
+     * @since 3.50.0
+     *
+     * @param {number} x - The x value.
+     * @param {number} y - The y value.
+     * @param {boolean} [round=false] - Math.round the resulting value?
+     *
+     * @return {number} The calculated y value.
+     */
+    public function getYRound(x:Float, y:Float, ?round:Bool):Float;
+    /**
      * Returns a string that can be used in a CSS Transform call as a `matrix` property.
      *
      * @method Phaser.GameObjects.Components.TransformMatrix#getCSSMatrix

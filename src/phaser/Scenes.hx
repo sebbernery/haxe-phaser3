@@ -10,89 +10,89 @@ class Scenes {
      *
      * @name Phaser.Scenes.PENDING
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PENDING:Int;
+    static public var PENDING:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.INIT
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var INIT:Int;
+    static public var INIT:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.START
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var START:Int;
+    static public var START:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.LOADING
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var LOADING:Int;
+    static public var LOADING:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.CREATING
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var CREATING:Int;
+    static public var CREATING:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.RUNNING
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var RUNNING:Int;
+    static public var RUNNING:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.PAUSED
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PAUSED:Int;
+    static public var PAUSED:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.SLEEPING
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SLEEPING:Int;
+    static public var SLEEPING:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.SHUTDOWN
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SHUTDOWN:Int;
+    static public var SHUTDOWN:Float;
     /**
      * Scene state.
      *
      * @name Phaser.Scenes.DESTROYED
      * @readonly
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var DESTROYED:Int;
+    static public var DESTROYED:Float;
 }

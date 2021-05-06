@@ -455,7 +455,7 @@ extern class ScenePlugin {
      *
      * @param {(string|Phaser.Scene)} [key] - The Scene to get the index of.
      *
-     * @return {integer} The index of the Scene.
+     * @return {number} The index of the Scene.
      */
-    public function getIndex(?key:Dynamic):Int;
+    public function getIndex(?key:Dynamic):Float;
 }

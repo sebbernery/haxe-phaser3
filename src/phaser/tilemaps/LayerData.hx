@@ -3,7 +3,7 @@ package phaser.tilemaps;
 /**
  * @classdesc
  * A class for representing data about about a layer in a map. Maps are parsed from CSV, Tiled,
- * etc. into this format. Tilemap, StaticTilemapLayer and DynamicTilemapLayer have a reference
+ * etc. into this format. Tilemap and TilemapLayer objects have a reference
  * to this data and use it to look up and perform operations on tiles.
  *
  * @class LayerData
@@ -89,6 +89,14 @@ extern class LayerData {
      */
     public var baseTileHeight:Float;
     /**
+     * The layers orientation, necessary to be able to determine a tiles pixelX and pixelY as well as the layers width and height.
+     *
+     * @name Phaser.Tilemaps.LayerData#orientation
+     * @type {Phaser.Tilemaps.OrientationType}
+     * @since 3.50.0
+     */
+    public var orientation:phaser.tilemaps.OrientationType;
+    /**
      * The width in pixels of the entire layer.
      *
      * @name Phaser.Tilemaps.LayerData#widthInPixels
@@ -172,8 +180,17 @@ extern class LayerData {
      * A reference to the Tilemap layer that owns this data.
      *
      * @name Phaser.Tilemaps.LayerData#tilemapLayer
-     * @type {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)}
+     * @type {Phaser.Tilemaps.TilemapLayer}
      * @since 3.0.0
      */
-    public var tilemapLayer:Dynamic;
+    public var tilemapLayer:phaser.tilemaps.TilemapLayer;
+    /**
+     * The length of the horizontal sides of the hexagon.
+     * Only used for hexagonal orientation Tilemaps.
+     *
+     * @name Phaser.Tilemaps.LayerData#hexSideLength
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var hexSideLength:Float;
 }

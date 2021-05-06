@@ -40,11 +40,11 @@ extern class Ellipse extends phaser.gameobjects.Shape {
      * Increase this value for a smoother ellipse, at the cost of more polygons being rendered.
      *
      * @name Phaser.GameObjects.Ellipse#smoothness
-     * @type {integer}
+     * @type {number}
      * @default 64
      * @since 3.13.0
      */
-    public var smoothness:Int;
+    public var smoothness:Float;
     /**
      * Sets the smoothness of the ellipse. The number of points used when rendering it.
      * Increase this value for a smoother ellipse, at the cost of more polygons being rendered.
@@ -53,9 +53,9 @@ extern class Ellipse extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.Ellipse#setSmoothness
      * @since 3.13.0
      *
-     * @param {integer} value - The value to set the smoothness to.
+     * @param {number} value - The value to set the smoothness to.
      *
      * @return {this} This Game Object instance.
      */
-    public function setSmoothness(value:Int):Dynamic;
+    public function setSmoothness(value:Float):Dynamic;
 }

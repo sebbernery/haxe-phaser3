@@ -37,14 +37,14 @@ package phaser.gameobjects;
  * @param {Phaser.Scene} scene - The Scene to which this Game Object belongs. A Game Object can only belong to one Scene at a time.
  * @param {number} [x=0] - The horizontal position of this Game Object in the world.
  * @param {number} [y=0] - The vertical position of this Game Object in the world.
- * @param {integer} [width=32] - The width of the Render Texture.
- * @param {integer} [height=32] - The height of the Render Texture.
+ * @param {number} [width=32] - The width of the Render Texture.
+ * @param {number} [height=32] - The height of the Render Texture.
  * @property {string} [key] - The texture key to make the RenderTexture from.
  * @property {string} [frame] - the frame to make the RenderTexture from.
  */
 @:native("Phaser.GameObjects.RenderTexture")
 extern class RenderTexture extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?width:Int, ?height:Int);
+    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?width:Float, ?height:Float);
     /**
      * A reference to either the Canvas or WebGL Renderer that the Game instance is using.
      *
@@ -88,15 +88,6 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public var canvas:js.html.CanvasElement;
     /**
-     * A reference to the GL Frame Buffer this Render Texture is drawing to.
-     * This is only set if Phaser is running with the WebGL Renderer.
-     *
-     * @name Phaser.GameObjects.RenderTexture#framebuffer
-     * @type {?WebGLFramebuffer}
-     * @since 3.2.0
-     */
-    public var framebuffer:js.html.webgl.Framebuffer;
-    /**
      * Is this Render Texture dirty or not? If not it won't spend time clearing or filling itself.
      *
      * @name Phaser.GameObjects.RenderTexture#dirty
@@ -123,24 +114,17 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public var camera:phaser.cameras.scene2d.BaseCamera;
     /**
-     * A reference to the WebGL Rendering Context.
+     * The Render Target that belongs to this Render Texture.
      *
-     * @name Phaser.GameObjects.RenderTexture#gl
-     * @type {WebGLRenderingContext}
-     * @default null
-     * @since 3.0.0
-     */
-    public var gl:js.html.webgl.RenderingContext;
-    /**
-     * A reference to the WebGLTexture that is being rendered to in a WebGL Context.
+     * A Render Target encapsulates a framebuffer and texture for the WebGL Renderer.
      *
-     * @name Phaser.GameObjects.RenderTexture#glTexture
-     * @type {WebGLTexture}
-     * @default null
-     * @readonly
-     * @since 3.19.0
+     * This property remains `null` under Canvas.
+     *
+     * @name Phaser.GameObjects.RenderTexture#renderTarget
+     * @type {Phaser.Renderer.WebGL.RenderTarget}
+     * @since 3.50.0
      */
-    public var glTexture:js.html.webgl.Texture;
+    public var renderTarget:phaser.renderer.webgl.RenderTarget;
     /**
      * Resizes the Render Texture to the new dimensions given.
      *
@@ -148,8 +132,10 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * texture will not change.
      *
      * If Render Texture was not created from specific frame, the following will happen:
+     *
      * In WebGL it will destroy and then re-create the frame buffer being used by the Render Texture.
      * In Canvas it will resize the underlying canvas element.
+     *
      * Both approaches will erase everything currently drawn to the Render Texture.
      *
      * If the dimensions given are the same as those already being used, calling this method will do nothing.
@@ -169,11 +155,11 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.RenderTexture#setGlobalTint
      * @since 3.2.0
      *
-     * @param {integer} tint - The tint value.
+     * @param {number} tint - The tint value.
      *
      * @return {this} This Render Texture.
      */
-    public function setGlobalTint(tint:Int):Dynamic;
+    public function setGlobalTint(tint:Float):Dynamic;
     /**
      * Set the alpha to use when rendering this Render Texture.
      *
@@ -208,6 +194,10 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * By default it will create a single base texture. You can add frames to the texture
      * by using the `Texture.add` method. After doing this, you can then allow Game Objects
      * to use a specific frame from a Render Texture.
+     *
+     * If you destroy this Render Texture, any Game Object using it via the Texture Manager will
+     * stop rendering. Ensure you remove the texture from the Texture Manager and any Game Objects
+     * using it first, before destroying this Render Texture.
      *
      * @method Phaser.GameObjects.RenderTexture#saveTexture
      * @since 3.12.0
@@ -249,7 +239,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * It can accept any of the following:
      *
      * * Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
-     * * Dynamic and Static Tilemap Layers.
+     * * Tilemap Layers.
      * * A Group. The contents of which will be iterated and drawn in turn.
      * * A Container. The contents of which will be iterated fully, and drawn in turn.
      * * A Scene's Display List. Pass in `Scene.children` to draw the whole list.
@@ -296,7 +286,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * It can accept any of the following:
      *
      * * Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
-     * * Dynamic and Static Tilemap Layers.
+     * * Tilemap Layers.
      * * A Group. The contents of which will be iterated and drawn in turn.
      * * A Container. The contents of which will be iterated fully, and drawn in turn.
      * * A Scene's Display List. Pass in `Scene.children` to draw the whole list.
@@ -365,7 +355,7 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @since 3.12.0
      *
      * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      * @param {number} [x=0] - The x position to draw the frame at.
      * @param {number} [y=0] - The y position to draw the frame at.
      * @param {number} [alpha] - The alpha to use. If not specified it uses the `globalAlpha` property.
@@ -374,6 +364,211 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @return {this} This Render Texture instance.
      */
     public function drawFrame(key:String, ?frame:Dynamic, ?x:Float, ?y:Float, ?alpha:Float, ?tint:Float):Dynamic;
+    /**
+     * Use this method if you need to batch draw a large number of Game Objects to
+     * this Render Texture in a single go, or on a frequent basis.
+     *
+     * This method starts the beginning of a batched draw.
+     *
+     * It is faster than calling `draw`, but you must be very careful to manage the
+     * flow of code and remember to call `endDraw()`. If you don't need to draw large
+     * numbers of objects it's much safer and easier to use the `draw` method instead.
+     *
+     * The flow should be:
+     *
+     * ```javascript
+     * // Call once:
+     * RenderTexture.beginDraw();
+     *
+     * // repeat n times:
+     * RenderTexture.batchDraw();
+     * // or
+     * RenderTexture.batchDrawFrame();
+     *
+     * // Call once:
+     * RenderTexture.endDraw();
+     * ```
+     *
+     * Do not call any methods other than `batchDraw`, `batchDrawFrame`, or `endDraw` once you
+     * have started a batch. Also, be very careful not to destroy this Render Texture while the
+     * batch is still open, or call `beginDraw` again.
+     *
+     * @method Phaser.GameObjects.RenderTexture#beginDraw
+     * @since 3.50.0
+     *
+     * @return {this} This Render Texture instance.
+     */
+    public function beginDraw():Dynamic;
+    /**
+     * Use this method if you have already called `beginDraw` and need to batch
+     * draw a large number of objects to this Render Texture.
+     *
+     * This method batches the drawing of the given objects to this Render Texture,
+     * without causing a bind or batch flush.
+     *
+     * It is faster than calling `draw`, but you must be very careful to manage the
+     * flow of code and remember to call `endDraw()`. If you don't need to draw large
+     * numbers of objects it's much safer and easier to use the `draw` method instead.
+     *
+     * The flow should be:
+     *
+     * ```javascript
+     * // Call once:
+     * RenderTexture.beginDraw();
+     *
+     * // repeat n times:
+     * RenderTexture.batchDraw();
+     * // or
+     * RenderTexture.batchDrawFrame();
+     *
+     * // Call once:
+     * RenderTexture.endDraw();
+     * ```
+     *
+     * Do not call any methods other than `batchDraw`, `batchDrawFrame`, or `endDraw` once you
+     * have started a batch. Also, be very careful not to destroy this Render Texture while the
+     * batch is still open, or call `beginDraw` again.
+     *
+     * Draws the given object, or an array of objects, to this Render Texture.
+     *
+     * It can accept any of the following:
+     *
+     * * Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
+     * * Tilemap Layers.
+     * * A Group. The contents of which will be iterated and drawn in turn.
+     * * A Container. The contents of which will be iterated fully, and drawn in turn.
+     * * A Scene's Display List. Pass in `Scene.children` to draw the whole list.
+     * * Another Render Texture.
+     * * A Texture Frame instance.
+     * * A string. This is used to look-up a texture from the Texture Manager.
+     *
+     * Note: You cannot draw a Render Texture to itself.
+     *
+     * If passing in a Group or Container it will only draw children that return `true`
+     * when their `willRender()` method is called. I.e. a Container with 10 children,
+     * 5 of which have `visible=false` will only draw the 5 visible ones.
+     *
+     * If passing in an array of Game Objects it will draw them all, regardless if
+     * they pass a `willRender` check or not.
+     *
+     * You can pass in a string in which case it will look for a texture in the Texture
+     * Manager matching that string, and draw the base frame. If you need to specify
+     * exactly which frame to draw then use the method `drawFrame` instead.
+     *
+     * You can pass in the `x` and `y` coordinates to draw the objects at. The use of
+     * the coordinates differ based on what objects are being drawn. If the object is
+     * a Group, Container or Display List, the coordinates are _added_ to the positions
+     * of the children. For all other types of object, the coordinates are exact.
+     *
+     * The `alpha` and `tint` values are only used by Texture Frames.
+     * Game Objects use their own alpha and tint values when being drawn.
+     *
+     * @method Phaser.GameObjects.RenderTexture#batchDraw
+     * @since 3.50.0
+     *
+     * @param {any} entries - Any renderable Game Object, or Group, Container, Display List, other Render Texture, Texture Frame or an array of any of these.
+     * @param {number} [x] - The x position to draw the Frame at, or the offset applied to the object.
+     * @param {number} [y] - The y position to draw the Frame at, or the offset applied to the object.
+     * @param {number} [alpha] -  The alpha value. Only used for Texture Frames and if not specified defaults to the `globalAlpha` property. Game Objects use their own current alpha value.
+     * @param {number} [tint] -  WebGL only. The tint color value. Only used for Texture Frames and if not specified defaults to the `globalTint` property. Game Objects use their own current tint value.
+     *
+     * @return {this} This Render Texture instance.
+     */
+    public function batchDraw(entries:Dynamic, ?x:Float, ?y:Float, ?alpha:Float, ?tint:Float):Dynamic;
+    /**
+     * Use this method if you have already called `beginDraw` and need to batch
+     * draw a large number of texture frames to this Render Texture.
+     *
+     * This method batches the drawing of the given frames to this Render Texture,
+     * without causing a bind or batch flush.
+     *
+     * It is faster than calling `drawFrame`, but you must be very careful to manage the
+     * flow of code and remember to call `endDraw()`. If you don't need to draw large
+     * numbers of frames it's much safer and easier to use the `drawFrame` method instead.
+     *
+     * The flow should be:
+     *
+     * ```javascript
+     * // Call once:
+     * RenderTexture.beginDraw();
+     *
+     * // repeat n times:
+     * RenderTexture.batchDraw();
+     * // or
+     * RenderTexture.batchDrawFrame();
+     *
+     * // Call once:
+     * RenderTexture.endDraw();
+     * ```
+     *
+     * Do not call any methods other than `batchDraw`, `batchDrawFrame`, or `endDraw` once you
+     * have started a batch. Also, be very careful not to destroy this Render Texture while the
+     * batch is still open, or call `beginDraw` again.
+     *
+     * Draws the Texture Frame to the Render Texture at the given position.
+     *
+     * Textures are referenced by their string-based keys, as stored in the Texture Manager.
+     *
+     * ```javascript
+     * var rt = this.add.renderTexture(0, 0, 800, 600);
+     * rt.drawFrame(key, frame);
+     * ```
+     *
+     * You can optionally provide a position, alpha and tint value to apply to the frame
+     * before it is drawn.
+     *
+     * Calling this method will cause a batch flush, so if you've got a stack of things to draw
+     * in a tight loop, try using the `draw` method instead.
+     *
+     * If you need to draw a Sprite to this Render Texture, use the `draw` method instead.
+     *
+     * @method Phaser.GameObjects.RenderTexture#batchDrawFrame
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
+     * @param {number} [x=0] - The x position to draw the frame at.
+     * @param {number} [y=0] - The y position to draw the frame at.
+     * @param {number} [alpha] - The alpha to use. If not specified it uses the `globalAlpha` property.
+     * @param {number} [tint] - WebGL only. The tint color to use. If not specified it uses the `globalTint` property.
+     *
+     * @return {this} This Render Texture instance.
+     */
+    public function batchDrawFrame(key:String, ?frame:Dynamic, ?x:Float, ?y:Float, ?alpha:Float, ?tint:Float):Dynamic;
+    /**
+     * Use this method to finish batch drawing to this Render Texture.
+     *
+     * Never call this method without first calling `beginDraw`.
+     *
+     * It is faster than calling `draw`, but you must be very careful to manage the
+     * flow of code and remember to call `endDraw()`. If you don't need to draw large
+     * numbers of objects it's much safer and easier to use the `draw` method instead.
+     *
+     * The flow should be:
+     *
+     * ```javascript
+     * // Call once:
+     * RenderTexture.beginDraw();
+     *
+     * // repeat n times:
+     * RenderTexture.batchDraw();
+     * // or
+     * RenderTexture.batchDrawFrame();
+     *
+     * // Call once:
+     * RenderTexture.endDraw();
+     * ```
+     *
+     * Do not call any methods other than `batchDraw`, `batchDrawFrame`, or `endDraw` once you
+     * have started a batch. Also, be very careful not to destroy this Render Texture while the
+     * batch is still open, or call `beginDraw` again.
+     *
+     * @method Phaser.GameObjects.RenderTexture#endDraw
+     * @since 3.50.0
+     *
+     * @return {this} This Render Texture instance.
+     */
+    public function endDraw():Dynamic;
     /**
      * Takes a snapshot of the given area of this Render Texture.
      *
@@ -389,17 +584,17 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.RenderTexture#snapshotArea
      * @since 3.19.0
      *
-     * @param {integer} x - The x coordinate to grab from.
-     * @param {integer} y - The y coordinate to grab from.
-     * @param {integer} width - The width of the area to grab.
-     * @param {integer} height - The height of the area to grab.
+     * @param {number} x - The x coordinate to grab from.
+     * @param {number} y - The y coordinate to grab from.
+     * @param {number} width - The width of the area to grab.
+     * @param {number} height - The height of the area to grab.
      * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot image is created.
      * @param {string} [type='image/png'] - The format of the image to create, usually `image/png` or `image/jpeg`.
      * @param {number} [encoderOptions=0.92] - The image quality, between 0 and 1. Used for image formats with lossy compression, such as `image/jpeg`.
      *
      * @return {this} This Render Texture instance.
      */
-    public function snapshotArea(x:Int, y:Int, width:Int, height:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
+    public function snapshotArea(x:Float, y:Float, width:Float, height:Float, callback:phaser.types.renderer.snapshot.SnapshotCallback, ?type:String, ?encoderOptions:Float):Dynamic;
     /**
      * Takes a snapshot of the whole of this Render Texture.
      *
@@ -436,13 +631,13 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.RenderTexture#snapshotPixel
      * @since 3.19.0
      *
-     * @param {integer} x - The x coordinate of the pixel to get.
-     * @param {integer} y - The y coordinate of the pixel to get.
+     * @param {number} x - The x coordinate of the pixel to get.
+     * @param {number} y - The y coordinate of the pixel to get.
      * @param {Phaser.Types.Renderer.Snapshot.SnapshotCallback} callback - The Function to invoke after the snapshot pixel data is extracted.
      *
      * @return {this} This Render Texture instance.
      */
-    public function snapshotPixel(x:Int, y:Int, callback:phaser.types.renderer.snapshot.SnapshotCallback):Dynamic;
+    public function snapshotPixel(x:Float, y:Float, callback:phaser.types.renderer.snapshot.SnapshotCallback):Dynamic;
     /**
      * Internal destroy handler, called as part of the destroy process.
      *
@@ -757,11 +952,11 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *
@@ -1054,6 +1249,8 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.
@@ -1182,6 +1379,8 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
     /**
      * The initial WebGL pipeline of this Game Object.
      *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
      * @type {Phaser.Renderer.WebGL.WebGLPipeline}
      * @default null
@@ -1200,30 +1399,129 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
      * Sets the initial WebGL Pipeline of this Game Object.
-     * This should only be called during the instantiation of the Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
      *
      * @method Phaser.GameObjects.Components.Pipeline#initPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} [pipelineName=TextureTintPipeline] - The name of the pipeline to set on this Game Object. Defaults to the Texture Tint Pipeline.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
      *
      * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
      */
-    public function initPipeline(?pipelineName:String):Bool;
+    public function initPipeline(pipeline:Dynamic):Bool;
     /**
-     * Sets the active WebGL Pipeline of this Game Object.
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
      *
      * @method Phaser.GameObjects.Components.Pipeline#setPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} pipelineName - The name of the pipeline to set on this Game Object.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPipeline(pipelineName:String):Dynamic;
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
      * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
      *
@@ -1231,9 +1529,37 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
      */
-    public function resetPipeline():Bool;
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
     /**
      * Gets the name of the WebGL Pipeline this Game Object is currently using.
      *
@@ -1317,7 +1643,54 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public function setScrollFactor(x:Float, ?y:Float):Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -1326,57 +1699,20 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -1418,14 +1754,14 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -1447,14 +1783,14 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * The x position of this Game Object.
      *
@@ -1534,11 +1870,11 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1567,6 +1903,17 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1691,6 +2038,27 @@ extern class RenderTexture extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

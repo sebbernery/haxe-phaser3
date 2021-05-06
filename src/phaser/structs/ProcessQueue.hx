@@ -25,14 +25,22 @@ package phaser.structs;
 extern class ProcessQueue extends phaser.events.EventEmitter {
     public function new();
     /**
+     * If `true` only unique objects will be allowed in the queue.
+     *
+     * @name Phaser.Structs.ProcessQueue#checkQueue
+     * @type {boolean}
+     * @since 3.50.0
+     */
+    public var checkQueue:Bool;
+    /**
      * The number of entries in the active list.
      *
      * @name Phaser.Structs.ProcessQueue#length
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.20.0
      */
-    public var length:Int;
+    public var length:Float;
     /**
      * Adds a new item to the Process Queue.
      *

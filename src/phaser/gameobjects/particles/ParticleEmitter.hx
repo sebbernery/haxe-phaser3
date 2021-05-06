@@ -265,11 +265,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      */
     public var scaleY:phaser.gameobjects.particles.EmitterOp;
     /**
-     * Color tint applied to emitted particles. Any alpha component (0xAA000000) is ignored.
+     * Color tint applied to emitted particles. Value must not include the alpha channel.
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#tint
      * @type {Phaser.GameObjects.Particles.EmitterOp}
-     * @default 0xffffffff
+     * @default 0xffffff
      * @since 3.0.0
      */
     public var tint:phaser.gameobjects.particles.EmitterOp;
@@ -353,11 +353,11 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * 0 means unlimited.
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#maxParticles
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var maxParticles:Int;
+    public var maxParticles:Float;
     /**
      * How many particles are emitted each time particles are emitted (one explosion or one flow cycle).
      *
@@ -535,12 +535,12 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * The current texture frame, as an index of {@link Phaser.GameObjects.Particles.ParticleEmitter#frames}.
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#currentFrame
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      * @see Phaser.GameObjects.Particles.ParticleEmitter#setFrame
      */
-    public var currentFrame:Int;
+    public var currentFrame:Float;
     /**
      * Whether texture {@link Phaser.GameObjects.Particles.ParticleEmitter#frames} are selected at random.
      *
@@ -555,12 +555,12 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * The number of consecutive particles that receive a single texture frame (per frame cycle).
      *
      * @name Phaser.GameObjects.Particles.ParticleEmitter#frameQuantity
-     * @type {integer}
+     * @type {number}
      * @default 1
      * @since 3.0.0
      * @see Phaser.GameObjects.Particles.ParticleEmitter#setFrame
      */
-    public var frameQuantity:Int;
+    public var frameQuantity:Float;
     /**
      * Merges configuration settings into the emitter's current settings.
      *
@@ -621,13 +621,13 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#setFrame
      * @since 3.0.0
      *
-     * @param {(array|string|integer|Phaser.Types.GameObjects.Particles.ParticleEmitterFrameConfig)} frames - One or more texture frames, or a configuration object.
+     * @param {(array|string|number|Phaser.Types.GameObjects.Particles.ParticleEmitterFrameConfig)} frames - One or more texture frames, or a configuration object.
      * @param {boolean} [pickRandom=true] - Whether frames should be assigned at random from `frames`.
-     * @param {integer} [quantity=1] - The number of consecutive particles that will receive each frame.
+     * @param {number} [quantity=1] - The number of consecutive particles that will receive each frame.
      *
      * @return {this} This Particle Emitter.
      */
-    public function setFrame(frames:Dynamic, ?pickRandom:Bool, ?quantity:Int):Dynamic;
+    public function setFrame(frames:Dynamic, ?pickRandom:Bool, ?quantity:Float):Dynamic;
     /**
      * Turns {@link Phaser.GameObjects.Particles.ParticleEmitter#radial} particle movement on or off.
      *
@@ -882,38 +882,38 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#reserve
      * @since 3.0.0
      *
-     * @param {integer} particleCount - The number of particles to create.
+     * @param {number} particleCount - The number of particles to create.
      *
      * @return {this} This Particle Emitter.
      */
-    public function reserve(particleCount:Int):Dynamic;
+    public function reserve(particleCount:Float):Dynamic;
     /**
      * Gets the number of active (in-use) particles in this emitter.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#getAliveParticleCount
      * @since 3.0.0
      *
-     * @return {integer} The number of particles with `active=true`.
+     * @return {number} The number of particles with `active=true`.
      */
-    public function getAliveParticleCount():Int;
+    public function getAliveParticleCount():Float;
     /**
      * Gets the number of inactive (available) particles in this emitter.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#getDeadParticleCount
      * @since 3.0.0
      *
-     * @return {integer} The number of particles with `active=false`.
+     * @return {number} The number of particles with `active=false`.
      */
-    public function getDeadParticleCount():Int;
+    public function getDeadParticleCount():Float;
     /**
      * Gets the total number of particles in this emitter.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#getParticleCount
      * @since 3.0.0
      *
-     * @return {integer} The number of particles, including both alive and dead.
+     * @return {number} The number of particles, including both alive and dead.
      */
-    public function getParticleCount():Int;
+    public function getParticleCount():Float;
     /**
      * Whether this emitter is at its limit (if set).
      *
@@ -1059,13 +1059,13 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @method Phaser.GameObjects.Particles.ParticleEmitter#explode
      * @since 3.0.0
      *
-     * @param {integer} count - The amount of Particles to emit.
+     * @param {number} count - The amount of Particles to emit.
      * @param {number} x - The x coordinate to emit the Particles from.
      * @param {number} y - The y coordinate to emit the Particles from.
      *
      * @return {Phaser.GameObjects.Particles.Particle} The most recently emitted Particle.
      */
-    public function explode(count:Int, x:Float, y:Float):phaser.gameobjects.particles.Particle;
+    public function explode(count:Float, x:Float, y:Float):phaser.gameobjects.particles.Particle;
     /**
      * Emits particles at a given position (or the emitter's current position).
      *
@@ -1074,18 +1074,18 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      *
      * @param {number} [x=this.x] - The x coordinate to emit the Particles from.
      * @param {number} [y=this.x] - The y coordinate to emit the Particles from.
-     * @param {integer} [count=this.quantity] - The number of Particles to emit.
+     * @param {number} [count=this.quantity] - The number of Particles to emit.
      *
      * @return {Phaser.GameObjects.Particles.Particle} The most recently emitted Particle.
      */
-    public function emitParticleAt(?x:Float, ?y:Float, ?count:Int):phaser.gameobjects.particles.Particle;
+    public function emitParticleAt(?x:Float, ?y:Float, ?count:Float):phaser.gameobjects.particles.Particle;
     /**
      * Emits particles at a given position (or the emitter's current position).
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#emitParticle
      * @since 3.0.0
      *
-     * @param {integer} [count=this.quantity] - The number of Particles to emit.
+     * @param {number} [count=this.quantity] - The number of Particles to emit.
      * @param {number} [x=this.x] - The x coordinate to emit the Particles from.
      * @param {number} [y=this.x] - The y coordinate to emit the Particles from.
      *
@@ -1093,17 +1093,17 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      *
      * @see Phaser.GameObjects.Particles.Particle#fire
      */
-    public function emitParticle(?count:Int, ?x:Float, ?y:Float):phaser.gameobjects.particles.Particle;
+    public function emitParticle(?count:Float, ?x:Float, ?y:Float):phaser.gameobjects.particles.Particle;
     /**
      * Updates this emitter and its particles.
      *
      * @method Phaser.GameObjects.Particles.ParticleEmitter#preUpdate
      * @since 3.0.0
      *
-     * @param {integer} time - The current timestamp as generated by the Request Animation Frame or SetTimeout.
+     * @param {number} time - The current timestamp as generated by the Request Animation Frame or SetTimeout.
      * @param {number} delta - The delta time, in ms, elapsed since the last frame.
      */
-    public function preUpdate(time:Int, delta:Float):Void;
+    public function preUpdate(time:Float, delta:Float):Void;
     /**
      * Calculates the difference of two particles, for sorting them by depth.
      *
@@ -1113,9 +1113,9 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
      * @param {object} a - The first particle.
      * @param {object} b - The second particle.
      *
-     * @return {integer} The difference of a and b's y coordinates.
+     * @return {number} The difference of a and b's y coordinates.
      */
-    public function depthSortCallback(a:Dynamic, b:Dynamic):Int;
+    public function depthSortCallback(a:Dynamic, b:Dynamic):Float;
     /**
      * The Mask this Game Object is using during render.
      *
@@ -1160,6 +1160,8 @@ extern class ParticleEmitter extends phaser.gameobjects.components.BlendMode {
     /**
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
+     *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
      *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an

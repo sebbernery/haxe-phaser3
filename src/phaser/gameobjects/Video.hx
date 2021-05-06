@@ -29,7 +29,7 @@ package phaser.gameobjects;
  *
  * Videos can only autoplay if the browser has been unlocked with an interaction, or satisfies the MEI settings.
  * The policies that control autoplaying are vast and vary between browser.
- * You can, ahd should, read more about it here: https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
+ * You can, and should, read more about it here: https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
  *
  * If your video doesn't contain any audio, then set the `noAudio` parameter to `true` when the video is _loaded_,
  * and it will often allow the video to play immediately:
@@ -139,26 +139,26 @@ extern class Video extends phaser.gameobjects.GameObject {
      * state in this manner until the `retryLimit` is reached and then abort.
      *
      * @name Phaser.GameObjects.Video#retryLimit
-     * @type {integer}
+     * @type {number}
      * @since 3.20.0
      */
-    public var retryLimit:Int;
+    public var retryLimit:Float;
     /**
      * The current retry attempt.
      *
      * @name Phaser.GameObjects.Video#retry
-     * @type {integer}
+     * @type {number}
      * @since 3.20.0
      */
-    public var retry:Int;
+    public var retry:Float;
     /**
      * The number of ms between each retry while monitoring the ready state of a downloading video.
      *
      * @name Phaser.GameObjects.Video#retryInterval
-     * @type {integer}
+     * @type {number}
      * @since 3.20.0
      */
-    public var retryInterval:Int;
+    public var retryInterval:Float;
     /**
      * An object containing in and out markers for sequence playback.
      *
@@ -205,12 +205,12 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @since 3.20.0
      *
      * @param {boolean} [loop=false] - Should the video loop automatically when it reaches the end? Please note that not all browsers support _seamless_ video looping for all encoding formats.
-     * @param {integer} [markerIn] - Optional in marker time, in seconds, for playback of a sequence of the video.
-     * @param {integer} [markerOut] - Optional out marker time, in seconds, for playback of a sequence of the video.
+     * @param {number} [markerIn] - Optional in marker time, in seconds, for playback of a sequence of the video.
+     * @param {number} [markerOut] - Optional out marker time, in seconds, for playback of a sequence of the video.
      *
      * @return {this} This Video Game Object for method chaining.
      */
-    public function play(?loop:Bool, ?markerIn:Int, ?markerOut:Int):Dynamic;
+    public function play(?loop:Bool, ?markerIn:Float, ?markerOut:Float):Dynamic;
     /**
      * This method allows you to change the source of the current video element. It works by first stopping the
      * current video, if playing. Then deleting the video texture, if one has been created. Finally, it makes a
@@ -226,12 +226,12 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @param {string} key - The key of the Video this Game Object will swap to playing, as stored in the Video Cache.
      * @param {boolean} [autoplay=true] - Should the video start playing immediately, once the swap is complete?
      * @param {boolean} [loop=false] - Should the video loop automatically when it reaches the end? Please note that not all browsers support _seamless_ video looping for all encoding formats.
-     * @param {integer} [markerIn] - Optional in marker time, in seconds, for playback of a sequence of the video.
-     * @param {integer} [markerOut] - Optional out marker time, in seconds, for playback of a sequence of the video.
+     * @param {number} [markerIn] - Optional in marker time, in seconds, for playback of a sequence of the video.
+     * @param {number} [markerOut] - Optional out marker time, in seconds, for playback of a sequence of the video.
      *
      * @return {this} This Video Game Object for method chaining.
      */
-    public function changeSource(key:String, ?autoplay:Bool, ?loop:Bool, ?markerIn:Int, ?markerOut:Int):Dynamic;
+    public function changeSource(key:String, ?autoplay:Bool, ?loop:Bool, ?markerIn:Float, ?markerOut:Float):Dynamic;
     /**
      * Adds a sequence marker to this video.
      *
@@ -248,12 +248,12 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @since 3.20.0
      *
      * @param {string} key - A unique name to give this marker.
-     * @param {integer} markerIn - The time, in seconds, representing the start of this marker.
-     * @param {integer} markerOut - The time, in seconds, representing the end of this marker.
+     * @param {number} markerIn - The time, in seconds, representing the start of this marker.
+     * @param {number} markerOut - The time, in seconds, representing the end of this marker.
      *
      * @return {this} This Video Game Object for method chaining.
      */
-    public function addMarker(key:String, markerIn:Int, markerOut:Int):Dynamic;
+    public function addMarker(key:String, markerIn:Float, markerOut:Float):Dynamic;
     /**
      * Plays a pre-defined sequence in this video.
      *
@@ -297,12 +297,12 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Video#snapshot
      * @since 3.20.0
      *
-     * @param {integer} [width] - The width of the resulting CanvasTexture.
-     * @param {integer} [height] - The height of the resulting CanvasTexture.
+     * @param {number} [width] - The width of the resulting CanvasTexture.
+     * @param {number} [height] - The height of the resulting CanvasTexture.
      *
      * @return {Phaser.Textures.CanvasTexture}
      */
-    public function snapshot(?width:Int, ?height:Int):phaser.textures.CanvasTexture;
+    public function snapshot(?width:Float, ?height:Float):phaser.textures.CanvasTexture;
     /**
      * Takes a snapshot of the specified area of the current frame of the video and renders it to a CanvasTexture object,
      * which is then returned. You can optionally resize the grab by passing a different `destWidth` and `destHeight`.
@@ -313,16 +313,16 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Video#snapshotArea
      * @since 3.20.0
      *
-     * @param {integer} [x=0] - The horizontal location of the top-left of the area to grab from.
-     * @param {integer} [y=0] - The vertical location of the top-left of the area to grab from.
-     * @param {integer} [srcWidth] - The width of area to grab from the video. If not given it will grab the full video dimensions.
-     * @param {integer} [srcHeight] - The height of area to grab from the video. If not given it will grab the full video dimensions.
-     * @param {integer} [destWidth] - The destination width of the grab, allowing you to resize it.
-     * @param {integer} [destHeight] - The destination height of the grab, allowing you to resize it.
+     * @param {number} [x=0] - The horizontal location of the top-left of the area to grab from.
+     * @param {number} [y=0] - The vertical location of the top-left of the area to grab from.
+     * @param {number} [srcWidth] - The width of area to grab from the video. If not given it will grab the full video dimensions.
+     * @param {number} [srcHeight] - The height of area to grab from the video. If not given it will grab the full video dimensions.
+     * @param {number} [destWidth] - The destination width of the grab, allowing you to resize it.
+     * @param {number} [destHeight] - The destination height of the grab, allowing you to resize it.
      *
      * @return {Phaser.Textures.CanvasTexture}
      */
-    public function snapshotArea(?x:Int, ?y:Int, ?srcWidth:Int, ?srcHeight:Int, ?destWidth:Int, ?destHeight:Int):phaser.textures.CanvasTexture;
+    public function snapshotArea(?x:Float, ?y:Float, ?srcWidth:Float, ?srcHeight:Float, ?destWidth:Float, ?destHeight:Float):phaser.textures.CanvasTexture;
     /**
      * Stores a copy of this Videos `snapshotTexture` in the Texture Manager using the given key.
      *
@@ -375,6 +375,23 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @return {this} This Video Game Object for method chaining.
      */
     public function loadURL(url:String, ?loadEvent:String, ?noAudio:Bool):Dynamic;
+    /**
+     * Loads a Video from the given MediaStream object, ready for playback with the `Video.play` method.
+     *
+     * You can control at what point the browser determines the video as being ready for playback via
+     * the `loadEvent` parameter. See https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement
+     * for more details.
+     *
+     * @method Phaser.GameObjects.Video#loadMediaStream
+     * @since 3.50.0
+     *
+     * @param {string} stream - The MediaStream object.
+     * @param {string} [loadEvent='loadeddata'] - The load event to listen for. Either `loadeddata`, `canplay` or `canplaythrough`.
+     * @param {boolean} [noAudio=false] - Does the video have an audio track? If not you can enable auto-playing on it.
+     *
+     * @return {this} This Video Game Object for method chaining.
+     */
+    public function loadMediaStream(stream:String, ?loadEvent:String, ?noAudio:Bool):Dynamic;
     /**
      * Called when the video emits a `playing` event during load.
      *
@@ -863,11 +880,11 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *
@@ -1160,6 +1177,8 @@ extern class Video extends phaser.gameobjects.GameObject {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.
@@ -1288,6 +1307,8 @@ extern class Video extends phaser.gameobjects.GameObject {
     /**
      * The initial WebGL pipeline of this Game Object.
      *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
      * @type {Phaser.Renderer.WebGL.WebGLPipeline}
      * @default null
@@ -1306,30 +1327,129 @@ extern class Video extends phaser.gameobjects.GameObject {
      */
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
      * Sets the initial WebGL Pipeline of this Game Object.
-     * This should only be called during the instantiation of the Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
      *
      * @method Phaser.GameObjects.Components.Pipeline#initPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} [pipelineName=TextureTintPipeline] - The name of the pipeline to set on this Game Object. Defaults to the Texture Tint Pipeline.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
      *
      * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
      */
-    public function initPipeline(?pipelineName:String):Bool;
+    public function initPipeline(pipeline:Dynamic):Bool;
     /**
-     * Sets the active WebGL Pipeline of this Game Object.
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
      *
      * @method Phaser.GameObjects.Components.Pipeline#setPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} pipelineName - The name of the pipeline to set on this Game Object.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPipeline(pipelineName:String):Dynamic;
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
      * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
      *
@@ -1337,9 +1457,37 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
      */
-    public function resetPipeline():Bool;
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
     /**
      * Gets the name of the WebGL Pipeline this Game Object is currently using.
      *
@@ -1592,7 +1740,7 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -1610,7 +1758,7 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.TextureCrop#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *
@@ -1618,7 +1766,54 @@ extern class Video extends phaser.gameobjects.GameObject {
      */
     public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -1627,57 +1822,20 @@ extern class Video extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -1719,14 +1877,14 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -1748,14 +1906,14 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * The x position of this Game Object.
      *
@@ -1835,11 +1993,11 @@ extern class Video extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1868,6 +2026,17 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1992,6 +2161,27 @@ extern class Video extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

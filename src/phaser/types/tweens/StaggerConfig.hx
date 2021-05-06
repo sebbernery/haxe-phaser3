@@ -6,8 +6,8 @@ package phaser.types.tweens;
  *
  * @property {number} [start=0] - The value to start the stagger from. Can be used as a way to offset the stagger while still using a range for the value.
  * @property {(string|function)} [ease='Linear'] - An ease to apply across the staggered values. Can either be a string, such as 'sine.inout', or a function.
- * @property {(string|integer)} [from=0] - The index to start the stagger from. Can be the strings `first`, `last` or `center`, or an integer representing the stagger position.
- * @property {integer[]} [grid] - Set the stagger to run across a grid by providing an array where element 0 is the width of the grid and element 1 is the height. Combine with the 'from' property to control direction.
+ * @property {(string|number)} [from=0] - The index to start the stagger from. Can be the strings `first`, `last` or `center`, or an integer representing the stagger position.
+ * @property {number[]} [grid] - Set the stagger to run across a grid by providing an array where element 0 is the width of the grid and element 1 is the height. Combine with the 'from' property to control direction.
  *
  * @example
  * {
@@ -21,5 +21,5 @@ typedef StaggerConfig = {
     @:optional var start:Float;
     @:optional var ease:Dynamic;
     @:optional var from:Dynamic;
-    @:optional var grid:Array<Int>;
+    @:optional var grid:Array<Float>;
 };

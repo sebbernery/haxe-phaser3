@@ -1,8 +1,11 @@
 package phaser.types.physics.arcade;
 
 /**
- * @typedef {Phaser.Physics.Arcade.Sprite} Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
+ * @typedef {object} Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
+ * @extends Phaser.Physics.Arcade.Sprite
  *
  * @property {Phaser.Physics.Arcade.Body} body
  */
-typedef SpriteWithDynamicBody = Dynamic;
+typedef SpriteWithDynamicBody = {
+var body:phaser.physics.arcade.Body;
+};

@@ -5,6 +5,8 @@ package phaser.types.gameobjects.bitmaptext;
  *
  * Describes the character's position, size, offset and kerning.
  *
+ * As of version 3.50 it also includes the WebGL texture uv data.
+ *
  * @typedef {object} Phaser.Types.GameObjects.BitmapText.BitmapFontCharacterData
  * @since 3.0.0
  *
@@ -16,6 +18,10 @@ package phaser.types.gameobjects.bitmaptext;
  * @property {number} centerY - The center y position of the character.
  * @property {number} xOffset - The x offset of the character.
  * @property {number} yOffset - The y offset of the character.
+ * @property {number} u0 - WebGL texture u0.
+ * @property {number} v0 - WebGL texture v0.
+ * @property {number} u1 - WebGL texture u1.
+ * @property {number} v1 - WebGL texture v1.
  * @property {object} data - Extra data for the character.
  * @property {Object.<number>} kerning - Kerning values, keyed by character code.
  */
@@ -28,6 +34,10 @@ var centerX:Float;
 var centerY:Float;
 var xOffset:Float;
 var yOffset:Float;
+var u0:Float;
+var v0:Float;
+var u1:Float;
+var v1:Float;
 var data:Dynamic;
 var kerning:Dynamic;
 };

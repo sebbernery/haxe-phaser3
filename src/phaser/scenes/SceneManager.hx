@@ -6,7 +6,7 @@ package phaser.scenes;
  *
  * The Scene Manager is a Game level system, responsible for creating, processing and updating all of the
  * Scenes in a Game instance.
- *
+ ó *
  *
  * @class SceneManager
  * @memberof Phaser.Scenes
@@ -319,11 +319,11 @@ extern class SceneManager {
      * @method Phaser.Scenes.SceneManager#getAt
      * @since 3.0.0
      *
-     * @param {integer} index - The index of the Scene to retrieve.
+     * @param {number} index - The index of the Scene to retrieve.
      *
      * @return {(Phaser.Scene|undefined)} The Scene.
      */
-    public function getAt(index:Int):phaser.Scene;
+    public function getAt(index:Float):phaser.Scene;
     /**
      * Retrieves the numeric index of a Scene.
      *
@@ -332,9 +332,9 @@ extern class SceneManager {
      *
      * @param {(string|Phaser.Scene)} key - The key of the Scene.
      *
-     * @return {integer} The index of the Scene.
+     * @return {number} The index of the Scene.
      */
-    public function getIndex(key:Dynamic):Int;
+    public function getIndex(key:Dynamic):Float;
     /**
      * Brings a Scene to the top of the Scenes list.
      *

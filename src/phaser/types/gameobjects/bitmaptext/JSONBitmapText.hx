@@ -9,14 +9,14 @@ package phaser.types.gameobjects.bitmaptext;
  * @property {string} text - The text that this Bitmap Text displays.
  * @property {number} fontSize - The size of the font.
  * @property {number} letterSpacing - Adds / Removes spacing between characters.
- * @property {integer} align - The alignment of the text in a multi-line BitmapText object.
+ * @property {number} align - The alignment of the text in a multi-line BitmapText object.
  */
 typedef JSONBitmapText = {
 var font:String;
 var text:String;
 var fontSize:Float;
 var letterSpacing:Float;
-var align:Int;
+var align:Float;
 var name:String;
 var type:String;
 var x:Float;
@@ -28,7 +28,7 @@ var flipY:Bool;
 var rotation:Float;
 var alpha:Float;
 var visible:Bool;
-var scaleMode:Int;
+var scaleMode:Float;
 var blendMode:Dynamic;
 var textureKey:String;
 var frameKey:String;

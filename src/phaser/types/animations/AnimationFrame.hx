@@ -4,14 +4,14 @@ package phaser.types.animations;
  * @typedef {object} Phaser.Types.Animations.AnimationFrame
  * @since 3.0.0
  *
- * @property {string} key - The key that the animation will be associated with. i.e. sprite.animations.play(key)
- * @property {(string|number)} frame - The key, or index number, of the frame within the animation.
+ * @property {string} [key] - The key of the texture within the Texture Manager to use for this Animation Frame.
+ * @property {(string|number)} [frame] - The key, or index number, of the frame within the texture to use for this Animation Frame.
  * @property {number} [duration=0] - The duration, in ms, of this frame of the animation.
  * @property {boolean} [visible] - Should the parent Game Object be visible during this frame of the animation?
  */
 typedef AnimationFrame = {
-var key:String;
-var frame:Dynamic;
+    @:optional var key:String;
+    @:optional var frame:Dynamic;
     @:optional var duration:Float;
     @:optional var visible:Bool;
 };

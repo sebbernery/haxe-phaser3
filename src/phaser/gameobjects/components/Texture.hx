@@ -34,7 +34,7 @@ extern class Texture {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Textures.Texture)} key - The key of the texture to be used, as stored in the Texture Manager, or a Texture instance.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -52,7 +52,7 @@ extern class Texture {
      * @method Phaser.GameObjects.Components.Texture#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *

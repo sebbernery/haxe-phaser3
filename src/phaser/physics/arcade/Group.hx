@@ -4,9 +4,19 @@ package phaser.physics.arcade;
  * @classdesc
  * An Arcade Physics Group object.
  *
- * All Game Objects created by or added to this Group will automatically be given dynamic Arcade Physics bodies, if they have no body.
+ * The primary use of a Physics Group is a way to collect together physics enable objects
+ * that share the same intrinsic structure into a single pool. They can they be easily
+ * compared against other Groups, or Game Objects.
  *
- * Its static counterpart is {@link Phaser.Physics.Arcade.StaticGroup}.
+ * All Game Objects created by, or added to this Group will automatically be given **dynamic**
+ * Arcade Physics bodies (if they have no body already) and the bodies will receive the
+ * Groups {@link Phaser.Physics.Arcade.Group#defaults default values}.
+ *
+ * You should not pass objects into this Group that should not receive a body. For example,
+ * do not add basic Geometry or Tilemap Layers into a Group, as they will not behave in the
+ * way you may expect. Groups should all ideally have objects of the same type in them.
+ *
+ * If you wish to create a Group filled with Static Bodies, please see {@link Phaser.Physics.Arcade.StaticGroup}.
  *
  * @class Group
  * @extends Phaser.GameObjects.Group
@@ -34,13 +44,15 @@ extern class Group extends phaser.gameobjects.Group {
      * The physics type of the Group's members.
      *
      * @name Phaser.Physics.Arcade.Group#physicsType
-     * @type {integer}
+     * @type {number}
      * @default Phaser.Physics.Arcade.DYNAMIC_BODY
      * @since 3.0.0
      */
-    public var physicsType:Int;
+    public var physicsType:Float;
     /**
      * Default physics properties applied to Game Objects added to the Group or created by the Group. Derived from the `config` argument.
+     *
+     * You can remove the default values by setting this property to `{}`.
      *
      * @name Phaser.Physics.Arcade.Group#defaults
      * @type {Phaser.Types.Physics.Arcade.PhysicsGroupDefaults}

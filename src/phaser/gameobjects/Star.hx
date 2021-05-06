@@ -39,11 +39,11 @@ extern class Star extends phaser.gameobjects.Shape {
      * The number of points that make up the Star shape.
      *
      * @name Phaser.GameObjects.Star#points
-     * @type {integer}
+     * @type {number}
      * @default 5
      * @since 3.13.0
      */
-    public var points:Int;
+    public var points:Float;
     /**
      * The inner radius of the Star shape.
      *
@@ -69,11 +69,11 @@ extern class Star extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.Star#setPoints
      * @since 3.13.0
      *
-     * @param {integer} value - The amount of points the Star will have.
+     * @param {number} value - The amount of points the Star will have.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPoints(value:Int):Dynamic;
+    public function setPoints(value:Float):Dynamic;
     /**
      * Sets the inner radius of the Star shape.
      * This call can be chained.

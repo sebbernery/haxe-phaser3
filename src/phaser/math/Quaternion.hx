@@ -9,14 +9,23 @@ package phaser.math;
  * @constructor
  * @since 3.0.0
  *
- * @param {number} [x] - The x component.
- * @param {number} [y] - The y component.
- * @param {number} [z] - The z component.
- * @param {number} [w] - The w component.
+ * @param {number} [x=0] - The x component.
+ * @param {number} [y=0] - The y component.
+ * @param {number} [z=0] - The z component.
+ * @param {number} [w=1] - The w component.
  */
 @:native("Phaser.Math.Quaternion")
 extern class Quaternion {
     public function new(?x:Float, ?y:Float, ?z:Float, ?w:Float);
+    /**
+     * This callback is invoked, if set, each time a value in this quaternion is changed.
+     * The callback is passed one argument, a reference to this quaternion.
+     *
+     * @name Phaser.Math.Quaternion#onChangeCallback
+     * @type {function}
+     * @since 3.50.0
+     */
+    public var onChangeCallback:Dynamic;
     /**
      * The x component of this Quaternion.
      *
@@ -65,7 +74,7 @@ extern class Quaternion {
      */
     public function copy(src:Dynamic):phaser.math.Quaternion;
     /**
-     * Set the components of this Quaternion.
+     * Set the components of this Quaternion and optionally call the `onChangeCallback`.
      *
      * @method Phaser.Math.Quaternion#set
      * @since 3.0.0
@@ -74,10 +83,11 @@ extern class Quaternion {
      * @param {number} [y=0] - The y component.
      * @param {number} [z=0] - The z component.
      * @param {number} [w=0] - The w component.
+     * @param {boolean} [update=true] - Call the `onChangeCallback`?
      *
      * @return {Phaser.Math.Quaternion} This Quaternion.
      */
-    public function set(?x:Dynamic, ?y:Float, ?z:Float, ?w:Float):phaser.math.Quaternion;
+    public function set(?x:Dynamic, ?y:Float, ?z:Float, ?w:Float, ?update:Bool):phaser.math.Quaternion;
     /**
      * Add a given Quaternion or Vector to this Quaternion. Addition is component-wise.
      *
@@ -294,6 +304,29 @@ extern class Quaternion {
      * @return {Phaser.Math.Quaternion} This Quaternion.
      */
     public function calculateW():phaser.math.Quaternion;
+    /**
+     * Set this Quaternion from the given Euler, based on Euler order.
+     *
+     * @method Phaser.Math.Quaternion#setFromEuler
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Euler} euler - The Euler to convert from.
+     * @param {boolean} [update=true] - Run the `onChangeCallback`?
+     *
+     * @return {Phaser.Math.Quaternion} This Quaternion.
+     */
+    public function setFromEuler(euler:phaser.math.Euler, ?update:Bool):phaser.math.Quaternion;
+    /**
+     * Sets the rotation of this Quaternion from the given Matrix4.
+     *
+     * @method Phaser.Math.Quaternion#setFromRotationMatrix
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to set the rotation from.
+     *
+     * @return {Phaser.Math.Quaternion} This Quaternion.
+     */
+    public function setFromRotationMatrix(mat4:phaser.math.Matrix4):phaser.math.Quaternion;
     /**
      * Convert the given Matrix into this Quaternion.
      *

@@ -84,6 +84,16 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      */
     public var loop:Bool;
     /**
+     * Gets or sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * @name Phaser.Sound.WebAudioSound#pan
+     * @type {number}
+     * @default 0
+     * @fires Phaser.Sound.Events#PAN
+     * @since 3.50.0
+     */
+    public var pan:Float;
+    /**
      * Sets the playback rate of this Sound.
      *
      * For example, a value of 1.0 plays the audio at full speed, 0.5 plays the audio at half speed
@@ -95,9 +105,9 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The playback rate at of this Sound.
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound.
+     * @return {this} This Sound instance.
      */
-    public function setRate(value:Float):phaser.sound.WebAudioSound;
+    public function setRate(value:Float):Dynamic;
     /**
      * Sets the detune value of this Sound, given in [cents](https://en.wikipedia.org/wiki/Cent_%28music%29).
      * The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
@@ -108,9 +118,9 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound.
+     * @return {this} This Sound instance.
      */
-    public function setDetune(value:Float):phaser.sound.WebAudioSound;
+    public function setDetune(value:Float):Dynamic;
     /**
      * Sets the muted state of this Sound.
      *
@@ -120,9 +130,9 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {boolean} value - `true` to mute this sound, `false` to unmute it.
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setMute(value:Bool):phaser.sound.WebAudioSound;
+    public function setMute(value:Bool):Dynamic;
     /**
      * Sets the volume of this Sound.
      *
@@ -132,9 +142,9 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The volume of the sound.
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setVolume(value:Float):phaser.sound.WebAudioSound;
+    public function setVolume(value:Float):Dynamic;
     /**
      * Seeks to a specific point in this sound.
      *
@@ -144,9 +154,9 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The point in the sound to seek to.
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setSeek(value:Float):phaser.sound.WebAudioSound;
+    public function setSeek(value:Float):Dynamic;
     /**
      * Sets the loop state of this Sound.
      *
@@ -156,7 +166,19 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      *
      * @param {boolean} value - `true` to loop this sound, `false` to not loop it.
      *
-     * @return {Phaser.Sound.WebAudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setLoop(value:Bool):phaser.sound.WebAudioSound;
+    public function setLoop(value:Bool):Dynamic;
+    /**
+     * Sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * @method Phaser.Sound.WebAudioSound#setPan
+     * @fires Phaser.Sound.Events#PAN
+     * @since 3.50.0
+     *
+     * @param {number} value - The pan of the sound. A value between -1 (full left pan) and 1 (full right pan).
+     *
+     * @return {this} This Sound instance.
+     */
+    public function setPan(value:Float):Dynamic;
 }

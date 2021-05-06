@@ -30,6 +30,13 @@ package phaser.input;
  *
  * Please also see the Input examples and tutorials for further information.
  *
+ * **Incorrect input coordinates with Angular**
+ *
+ * If you are using Phaser within Angular, and use nglf or the router, to make the component in which the Phaser game resides
+ * change state (i.e. appear or disappear) then you'll need to notify the Scale Manager about this, as Angular will mess with
+ * the DOM in a way in which Phaser can't detect directly. Call `this.scale.updateBounds()` as part of your game init in order
+ * to refresh the canvas DOM bounds values, which Phaser uses for input point position calculations.
+ *
  * @class InputPlugin
  * @extends Phaser.Events.EventEmitter
  * @memberof Phaser.Input
@@ -138,11 +145,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * Set to 0 to poll constantly. Set to -1 to only poll on user movement.
      *
      * @name Phaser.Input.InputPlugin#pollRate
-     * @type {integer}
+     * @type {number}
      * @default -1
      * @since 3.0.0
      */
-    public var pollRate:Int;
+    public var pollRate:Float;
     /**
      * The distance, in pixels, a pointer has to move while being held down, before it thinks it is being dragged.
      *
@@ -402,13 +409,13 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to be enabled for input.
-     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [hitArea] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} [hitAreaCallback] - The 'contains' function to invoke to check if the pointer is within the hit area.
      * @param {boolean} [dropZone=false] - Is this Game Object a drop zone or not?
      *
      * @return {this} This Input Plugin.
      */
-    public function enable(gameObject:phaser.gameobjects.GameObject, ?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):Dynamic;
+    public function enable(gameObject:phaser.gameobjects.GameObject, ?hitArea:Dynamic, ?hitAreaCallback:phaser.types.input.HitAreaCallback, ?dropZone:Bool):Dynamic;
     /**
      * Takes the given Pointer and performs a hit test against it, to see which interactive Game Objects
      * it is currently above.
@@ -441,9 +448,9 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      *
      * @param {Phaser.Input.Pointer} pointer - The Pointer to get the drag state for.
      *
-     * @return {integer} The drag state of the given Pointer.
+     * @return {number} The drag state of the given Pointer.
      */
-    public function getDragState(pointer:phaser.input.Pointer):Int;
+    public function getDragState(pointer:phaser.input.Pointer):Float;
     /**
      * Sets the drag state of the given Pointer for this Input Plugin.
      *
@@ -460,9 +467,9 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.16.0
      *
      * @param {Phaser.Input.Pointer} pointer - The Pointer to set the drag state for.
-     * @param {integer} state - The drag state value. An integer between 0 and 5.
+     * @param {number} state - The drag state value. An integer between 0 and 5.
      */
-    public function setDragState(pointer:phaser.input.Pointer, state:Int):Void;
+    public function setDragState(pointer:phaser.input.Pointer, state:Float):Void;
     /**
      * Sets the draggable state of the given array of Game Objects.
      *
@@ -508,11 +515,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.InputPlugin#makePixelPerfect
      * @since 3.10.0
      *
-     * @param {integer} [alphaTolerance=1] - The alpha level that the pixel should be above to be included as a successful interaction.
+     * @param {number} [alphaTolerance=1] - The alpha level that the pixel should be above to be included as a successful interaction.
      *
      * @return {function} A Pixel Perfect Handler for use as a hitArea shape callback.
      */
-    public function makePixelPerfect(?alphaTolerance:Int):Dynamic;
+    public function makePixelPerfect(?alphaTolerance:Float):Dynamic;
     /**
      * Sets the hit area for the given array of Game Objects.
      *
@@ -530,12 +537,12 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @since 3.0.0
      *
      * @param {(Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[])} gameObjects - An array of Game Objects to set the hit area on.
-     * @param {(Phaser.Types.Input.InputConfiguration|any)} [shape] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
-     * @param {Phaser.Types.Input.HitAreaCallback} [callback] - The 'contains' function to invoke to check if the pointer is within the hit area.
+     * @param {(Phaser.Types.Input.InputConfiguration|any)} [hitArea] - Either an input configuration object, or a geometric shape that defines the hit area for the Game Object. If not specified a Rectangle will be used.
+     * @param {Phaser.Types.Input.HitAreaCallback} [hitAreaCallback] - The 'contains' function to invoke to check if the pointer is within the hit area.
      *
      * @return {this} This InputPlugin object.
      */
-    public function setHitArea(gameObjects:Dynamic, ?shape:Dynamic, ?callback:phaser.types.input.HitAreaCallback):Dynamic;
+    public function setHitArea(gameObjects:Dynamic, ?hitArea:Dynamic, ?hitAreaCallback:phaser.types.input.HitAreaCallback):Dynamic;
     /**
      * Sets the hit area for an array of Game Objects to be a `Phaser.Geom.Circle` shape, using
      * the given coordinates and radius to control its position and size.
@@ -770,11 +777,11 @@ extern class InputPlugin extends phaser.events.EventEmitter {
      * @method Phaser.Input.InputPlugin#addPointer
      * @since 3.10.0
      *
-     * @param {integer} [quantity=1] The number of new Pointers to create. A maximum of 10 is allowed in total.
+     * @param {number} [quantity=1] The number of new Pointers to create. A maximum of 10 is allowed in total.
      *
      * @return {Phaser.Input.Pointer[]} An array containing all of the new Pointer objects that were created.
      */
-    public function addPointer(?quantity:Int):Array<phaser.input.Pointer>;
+    public function addPointer(?quantity:Float):Array<phaser.input.Pointer>;
     /**
      * Tells the Input system to set a custom cursor.
      *

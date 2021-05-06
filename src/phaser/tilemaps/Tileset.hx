@@ -11,11 +11,11 @@ package phaser.tilemaps;
  * @since 3.0.0
  *
  * @param {string} name - The name of the tileset in the map data.
- * @param {integer} firstgid - The first tile index this tileset contains.
- * @param {integer} [tileWidth=32] - Width of each tile (in pixels).
- * @param {integer} [tileHeight=32] - Height of each tile (in pixels).
- * @param {integer} [tileMargin=0] - The margin around all tiles in the sheet (in pixels).
- * @param {integer} [tileSpacing=0] - The spacing between each tile in the sheet (in pixels).
+ * @param {number} firstgid - The first tile index this tileset contains.
+ * @param {number} [tileWidth=32] - Width of each tile (in pixels).
+ * @param {number} [tileHeight=32] - Height of each tile (in pixels).
+ * @param {number} [tileMargin=0] - The margin around all tiles in the sheet (in pixels).
+ * @param {number} [tileSpacing=0] - The spacing between each tile in the sheet (in pixels).
  * @param {object} [tileProperties={}] - Custom properties defined per tile in the Tileset.
  * These typically are custom properties created in Tiled when editing a tileset.
  * @param {object} [tileData={}] - Data stored per tile. These typically are created in Tiled
@@ -23,7 +23,7 @@ package phaser.tilemaps;
  */
 @:native("Phaser.Tilemaps.Tileset")
 extern class Tileset {
-    public function new(name:String, firstgid:Int, ?tileWidth:Int, ?tileHeight:Int, ?tileMargin:Int, ?tileSpacing:Int, ?tileProperties:Dynamic, ?tileData:Dynamic);
+    public function new(name:String, firstgid:Float, ?tileWidth:Float, ?tileHeight:Float, ?tileMargin:Float, ?tileSpacing:Float, ?tileProperties:Dynamic, ?tileData:Dynamic);
     /**
      * The name of the Tileset.
      *
@@ -36,46 +36,46 @@ extern class Tileset {
      * The starting index of the first tile index this Tileset contains.
      *
      * @name Phaser.Tilemaps.Tileset#firstgid
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var firstgid:Int;
+    public var firstgid:Float;
     /**
      * The width of each tile (in pixels). Use setTileSize to change.
      *
      * @name Phaser.Tilemaps.Tileset#tileWidth
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var tileWidth:Int;
+    public var tileWidth:Float;
     /**
      * The height of each tile (in pixels). Use setTileSize to change.
      *
      * @name Phaser.Tilemaps.Tileset#tileHeight
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var tileHeight:Int;
+    public var tileHeight:Float;
     /**
      * The margin around the tiles in the sheet (in pixels). Use `setSpacing` to change.
      *
      * @name Phaser.Tilemaps.Tileset#tileMargin
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var tileMargin:Int;
+    public var tileMargin:Float;
     /**
      * The spacing between each the tile in the sheet (in pixels). Use `setSpacing` to change.
      *
      * @name Phaser.Tilemaps.Tileset#tileSpacing
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var tileSpacing:Int;
+    public var tileSpacing:Float;
     /**
      * Tileset-specific properties per tile that are typically defined in the Tiled editor in the
      * Tileset editor.
@@ -116,29 +116,29 @@ extern class Tileset {
      * The number of tile rows in the the tileset.
      *
      * @name Phaser.Tilemaps.Tileset#rows
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var rows:Int;
+    public var rows:Float;
     /**
      * The number of tile columns in the tileset.
      *
      * @name Phaser.Tilemaps.Tileset#columns
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var columns:Int;
+    public var columns:Float;
     /**
      * The total number of tiles in the tileset.
      *
      * @name Phaser.Tilemaps.Tileset#total
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var total:Int;
+    public var total:Float;
     /**
      * The look-up table to specific tile image texture coordinates (UV in pixels). Each element
      * contains the coordinates for a tile in an object of the form {x, y}.
@@ -156,11 +156,11 @@ extern class Tileset {
      * @method Phaser.Tilemaps.Tileset#getTileProperties
      * @since 3.0.0
      *
-     * @param {integer} tileIndex - The unique id of the tile across all tilesets in the map.
+     * @param {number} tileIndex - The unique id of the tile across all tilesets in the map.
      *
      * @return {?(object|undefined)}
      */
-    public function getTileProperties(tileIndex:Int):Dynamic;
+    public function getTileProperties(tileIndex:Float):Dynamic;
     /**
      * Get a tile's data that is stored in the Tileset. Returns null if tile index is not contained
      * in this Tileset. This is typically defined in Tiled and will contain both Tileset collision
@@ -169,11 +169,11 @@ extern class Tileset {
      * @method Phaser.Tilemaps.Tileset#getTileData
      * @since 3.0.0
      *
-     * @param {integer} tileIndex - The unique id of the tile across all tilesets in the map.
+     * @param {number} tileIndex - The unique id of the tile across all tilesets in the map.
      *
      * @return {?object|undefined}
      */
-    public function getTileData(tileIndex:Int):Dynamic;
+    public function getTileData(tileIndex:Float):Dynamic;
     /**
      * Get a tile's collision group that is stored in the Tileset. Returns null if tile index is not
      * contained in this Tileset. This is typically defined within Tiled's tileset collision editor.
@@ -181,22 +181,22 @@ extern class Tileset {
      * @method Phaser.Tilemaps.Tileset#getTileCollisionGroup
      * @since 3.0.0
      *
-     * @param {integer} tileIndex - The unique id of the tile across all tilesets in the map.
+     * @param {number} tileIndex - The unique id of the tile across all tilesets in the map.
      *
      * @return {?object}
      */
-    public function getTileCollisionGroup(tileIndex:Int):Dynamic;
+    public function getTileCollisionGroup(tileIndex:Float):Dynamic;
     /**
      * Returns true if and only if this Tileset contains the given tile index.
      *
      * @method Phaser.Tilemaps.Tileset#containsTileIndex
      * @since 3.0.0
      *
-     * @param {integer} tileIndex - The unique id of the tile across all tilesets in the map.
+     * @param {number} tileIndex - The unique id of the tile across all tilesets in the map.
      *
      * @return {boolean}
      */
-    public function containsTileIndex(tileIndex:Int):Bool;
+    public function containsTileIndex(tileIndex:Float):Bool;
     /**
      * Returns the texture coordinates (UV in pixels) in the Tileset image for the given tile index.
      * Returns null if tile index is not contained in this Tileset.
@@ -204,12 +204,12 @@ extern class Tileset {
      * @method Phaser.Tilemaps.Tileset#getTileTextureCoordinates
      * @since 3.0.0
      *
-     * @param {integer} tileIndex - The unique id of the tile across all tilesets in the map.
+     * @param {number} tileIndex - The unique id of the tile across all tilesets in the map.
      *
      * @return {?object} Object in the form { x, y } representing the top-left UV coordinate
      * within the Tileset image.
      */
-    public function getTileTextureCoordinates(tileIndex:Int):Dynamic;
+    public function getTileTextureCoordinates(tileIndex:Float):Dynamic;
     /**
      * Sets the image associated with this Tileset and updates the tile data (rows, columns, etc.).
      *
@@ -227,34 +227,34 @@ extern class Tileset {
      * @method Phaser.Tilemaps.Tileset#setTileSize
      * @since 3.0.0
      *
-     * @param {integer} [tileWidth] - The width of a tile in pixels.
-     * @param {integer} [tileHeight] - The height of a tile in pixels.
+     * @param {number} [tileWidth] - The width of a tile in pixels.
+     * @param {number} [tileHeight] - The height of a tile in pixels.
      *
      * @return {Phaser.Tilemaps.Tileset} This Tileset object.
      */
-    public function setTileSize(?tileWidth:Int, ?tileHeight:Int):phaser.tilemaps.Tileset;
+    public function setTileSize(?tileWidth:Float, ?tileHeight:Float):phaser.tilemaps.Tileset;
     /**
      * Sets the tile margin & spacing and updates the tile data (rows, columns, etc.).
      *
      * @method Phaser.Tilemaps.Tileset#setSpacing
      * @since 3.0.0
      *
-     * @param {integer} [margin] - The margin around the tiles in the sheet (in pixels).
-     * @param {integer} [spacing] - The spacing between the tiles in the sheet (in pixels).
+     * @param {number} [margin] - The margin around the tiles in the sheet (in pixels).
+     * @param {number} [spacing] - The spacing between the tiles in the sheet (in pixels).
      *
      * @return {Phaser.Tilemaps.Tileset} This Tileset object.
      */
-    public function setSpacing(?margin:Int, ?spacing:Int):phaser.tilemaps.Tileset;
+    public function setSpacing(?margin:Float, ?spacing:Float):phaser.tilemaps.Tileset;
     /**
      * Updates tile texture coordinates and tileset data.
      *
      * @method Phaser.Tilemaps.Tileset#updateTileData
      * @since 3.0.0
      *
-     * @param {integer} imageWidth - The (expected) width of the image to slice.
-     * @param {integer} imageHeight - The (expected) height of the image to slice.
+     * @param {number} imageWidth - The (expected) width of the image to slice.
+     * @param {number} imageHeight - The (expected) height of the image to slice.
      *
      * @return {Phaser.Tilemaps.Tileset} This Tileset object.
      */
-    public function updateTileData(imageWidth:Int, imageHeight:Int):phaser.tilemaps.Tileset;
+    public function updateTileData(imageWidth:Float, imageHeight:Float):phaser.tilemaps.Tileset;
 }

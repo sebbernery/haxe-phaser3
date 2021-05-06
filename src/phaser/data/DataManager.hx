@@ -81,10 +81,10 @@ extern class DataManager {
      * Return the total number of entries in this Data Manager.
      *
      * @name Phaser.Data.DataManager#count
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var count:Int;
+    public var count:Float;
     /**
      * Retrieves the value for the given key, or undefined if it doesn't exist.
      *

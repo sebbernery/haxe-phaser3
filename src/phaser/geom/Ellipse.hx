@@ -26,11 +26,11 @@ extern class Ellipse {
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Ellipse#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * The x position of the center of the ellipse.
      *
@@ -236,13 +236,13 @@ extern class Ellipse {
      *
      * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
-     * @param {integer} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
      * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
      * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
      */
-    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
+    public function getPoints(quantity:Float, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Returns a uniformly distributed random point from anywhere within the given Ellipse.
      *
@@ -386,13 +386,13 @@ extern class Ellipse {
      * @generic {Phaser.Geom.Point[]} O - [out,$return]
      *
      * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the points from.
-     * @param {integer} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
      * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
      * @param {(array|Phaser.Geom.Point[])} [out] - An array to insert the points in to. If not provided a new array will be created.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
      */
-    static public function GetPoints(ellipse:phaser.geom.Ellipse, quantity:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(ellipse:phaser.geom.Ellipse, quantity:Float, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Offsets the Ellipse by the values given.
      *

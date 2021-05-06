@@ -89,10 +89,10 @@ extern class File {
      * The current state of the file. One of the FILE_CONST values.
      *
      * @name Phaser.Loader.File#state
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var state:Int;
+    public var state:Float;
     /**
      * The total size of this file.
      * Set by onProgress and only if loading via XHR.

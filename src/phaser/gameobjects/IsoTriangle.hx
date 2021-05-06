@@ -40,11 +40,11 @@ extern class IsoTriangle extends phaser.gameobjects.Shape {
      * The projection level of the iso box. Change this to change the 'angle' at which you are looking at the box.
      *
      * @name Phaser.GameObjects.IsoTriangle#projection
-     * @type {integer}
+     * @type {number}
      * @default 4
      * @since 3.13.0
      */
-    public var projection:Int;
+    public var projection:Float;
     /**
      * The color used to fill in the top of the iso triangle. This is only used if the triangle is reversed.
      *
@@ -112,11 +112,11 @@ extern class IsoTriangle extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.IsoTriangle#setProjection
      * @since 3.13.0
      *
-     * @param {integer} value - The value to set the projection to.
+     * @param {number} value - The value to set the projection to.
      *
      * @return {this} This Game Object instance.
      */
-    public function setProjection(value:Int):Dynamic;
+    public function setProjection(value:Float):Dynamic;
     /**
      * Sets if the iso triangle will be rendered upside down or not.
      * This call can be chained.

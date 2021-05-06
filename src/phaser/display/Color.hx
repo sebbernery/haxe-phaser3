@@ -147,15 +147,15 @@ extern class Color {
      * @method Phaser.Display.Color#setTo
      * @since 3.0.0
      *
-     * @param {integer} red - The red color value. A number between 0 and 255.
-     * @param {integer} green - The green color value. A number between 0 and 255.
-     * @param {integer} blue - The blue color value. A number between 0 and 255.
-     * @param {integer} [alpha=255] - The alpha value. A number between 0 and 255.
+     * @param {number} red - The red color value. A number between 0 and 255.
+     * @param {number} green - The green color value. A number between 0 and 255.
+     * @param {number} blue - The blue color value. A number between 0 and 255.
+     * @param {number} [alpha=255] - The alpha value. A number between 0 and 255.
      * @param {boolean} [updateHSV=true] - Update the HSV values after setting the RGB values?
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function setTo(red:Int, green:Int, blue:Int, ?alpha:Int, ?updateHSV:Bool):phaser.display.Color;
+    public function setTo(red:Float, green:Float, blue:Float, ?alpha:Float, ?updateHSV:Bool):phaser.display.Color;
     /**
      * Sets the red, green, blue and alpha GL values of this Color component.
      *
@@ -209,35 +209,35 @@ extern class Color {
      * @method Phaser.Display.Color#gray
      * @since 3.13.0
      *
-     * @param {integer} shade - A value between 0 and 255.
+     * @param {number} shade - A value between 0 and 255.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function gray(shade:Int):phaser.display.Color;
+    public function gray(shade:Float):phaser.display.Color;
     /**
      * Sets this Color object to be a random color between the `min` and `max` values given.
      *
      * @method Phaser.Display.Color#random
      * @since 3.13.0
      *
-     * @param {integer} [min=0] - The minimum random color value. Between 0 and 255.
-     * @param {integer} [max=255] - The maximum random color value. Between 0 and 255.
+     * @param {number} [min=0] - The minimum random color value. Between 0 and 255.
+     * @param {number} [max=255] - The maximum random color value. Between 0 and 255.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function random(?min:Int, ?max:Int):phaser.display.Color;
+    public function random(?min:Float, ?max:Float):phaser.display.Color;
     /**
      * Sets this Color object to be a random grayscale color between the `min` and `max` values given.
      *
      * @method Phaser.Display.Color#randomGray
      * @since 3.13.0
      *
-     * @param {integer} [min=0] - The minimum random color value. Between 0 and 255.
-     * @param {integer} [max=255] - The maximum random color value. Between 0 and 255.
+     * @param {number} [min=0] - The minimum random color value. Between 0 and 255.
+     * @param {number} [max=255] - The maximum random color value. Between 0 and 255.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function randomGray(?min:Int, ?max:Int):phaser.display.Color;
+    public function randomGray(?min:Float, ?max:Float):phaser.display.Color;
     /**
      * Increase the saturation of this Color by the percentage amount given.
      * The saturation is the amount of the base color in the hue.
@@ -245,11 +245,11 @@ extern class Color {
      * @method Phaser.Display.Color#saturate
      * @since 3.13.0
      *
-     * @param {integer} amount - The percentage amount to change this color by. A value between 0 and 100.
+     * @param {number} amount - The percentage amount to change this color by. A value between 0 and 100.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function saturate(amount:Int):phaser.display.Color;
+    public function saturate(amount:Float):phaser.display.Color;
     /**
      * Decrease the saturation of this Color by the percentage amount given.
      * The saturation is the amount of the base color in the hue.
@@ -257,44 +257,61 @@ extern class Color {
      * @method Phaser.Display.Color#desaturate
      * @since 3.13.0
      *
-     * @param {integer} amount - The percentage amount to change this color by. A value between 0 and 100.
+     * @param {number} amount - The percentage amount to change this color by. A value between 0 and 100.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function desaturate(amount:Int):phaser.display.Color;
+    public function desaturate(amount:Float):phaser.display.Color;
     /**
      * Increase the lightness of this Color by the percentage amount given.
      *
      * @method Phaser.Display.Color#lighten
      * @since 3.13.0
      *
-     * @param {integer} amount - The percentage amount to change this color by. A value between 0 and 100.
+     * @param {number} amount - The percentage amount to change this color by. A value between 0 and 100.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function lighten(amount:Int):phaser.display.Color;
+    public function lighten(amount:Float):phaser.display.Color;
     /**
      * Decrease the lightness of this Color by the percentage amount given.
      *
      * @method Phaser.Display.Color#darken
      * @since 3.13.0
      *
-     * @param {integer} amount - The percentage amount to change this color by. A value between 0 and 100.
+     * @param {number} amount - The percentage amount to change this color by. A value between 0 and 100.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function darken(amount:Int):phaser.display.Color;
+    public function darken(amount:Float):phaser.display.Color;
     /**
      * Brighten this Color by the percentage amount given.
      *
      * @method Phaser.Display.Color#brighten
      * @since 3.13.0
      *
-     * @param {integer} amount - The percentage amount to change this color by. A value between 0 and 100.
+     * @param {number} amount - The percentage amount to change this color by. A value between 0 and 100.
      *
      * @return {Phaser.Display.Color} This Color object.
      */
-    public function brighten(amount:Int):phaser.display.Color;
+    public function brighten(amount:Float):phaser.display.Color;
+    /**
+     * Return an array of Colors in a Color Spectrum.
+     *
+     * The spectrum colors flow in the order: red, yellow, green, blue.
+     *
+     * By default this function will return an array with 1024 elements in.
+     *
+     * However, you can reduce this to a smaller quantity if needed, by specitying the `limit` parameter.
+     *
+     * @function Phaser.Display.Color.ColorSpectrum
+     * @since 3.50.0
+     *
+     * @param {number} [limit=1024] - How many colors should be returned? The maximum is 1024 but you can set a smaller quantity if required.
+     *
+     * @return {Phaser.Types.Display.ColorObject[]} An array containing `limit` parameter number of elements, where each contains a Color Object.
+     */
+    static public function ColorSpectrum(?limit:Float):Array<phaser.types.display.ColorObject>;
     /**
      * Converts the given color value into an Object containing r,g,b and a properties.
      *
@@ -312,38 +329,38 @@ extern class Color {
      * @function Phaser.Display.Color.ComponentToHex
      * @since 3.0.0
      *
-     * @param {integer} color - The color channel to get the hex value for, must be a value between 0 and 255.
+     * @param {number} color - The color channel to get the hex value for, must be a value between 0 and 255.
      *
      * @return {string} A string of length 2 characters, i.e. 255 = ff, 100 = 64.
      */
-    static public function ComponentToHex(color:Int):String;
+    static public function ComponentToHex(color:Float):String;
     /**
      * Given 3 separate color values this will return an integer representation of it.
      *
      * @function Phaser.Display.Color.GetColor
      * @since 3.0.0
      *
-     * @param {integer} red - The red color value. A number between 0 and 255.
-     * @param {integer} green - The green color value. A number between 0 and 255.
-     * @param {integer} blue - The blue color value. A number between 0 and 255.
+     * @param {number} red - The red color value. A number between 0 and 255.
+     * @param {number} green - The green color value. A number between 0 and 255.
+     * @param {number} blue - The blue color value. A number between 0 and 255.
      *
      * @return {number} The combined color value.
      */
-    static public function GetColor(red:Int, green:Int, blue:Int):Float;
+    static public function GetColor(red:Float, green:Float, blue:Float):Float;
     /**
      * Given an alpha and 3 color values this will return an integer representation of it.
      *
      * @function Phaser.Display.Color.GetColor32
      * @since 3.0.0
      *
-     * @param {integer} red - The red color value. A number between 0 and 255.
-     * @param {integer} green - The green color value. A number between 0 and 255.
-     * @param {integer} blue - The blue color value. A number between 0 and 255.
-     * @param {integer} alpha - The alpha color value. A number between 0 and 255.
+     * @param {number} red - The red color value. A number between 0 and 255.
+     * @param {number} green - The green color value. A number between 0 and 255.
+     * @param {number} blue - The blue color value. A number between 0 and 255.
+     * @param {number} alpha - The alpha color value. A number between 0 and 255.
      *
      * @return {number} The combined color value.
      */
-    static public function GetColor32(red:Int, green:Int, blue:Int, alpha:Int):Float;
+    static public function GetColor32(red:Float, green:Float, blue:Float, alpha:Float):Float;
     /**
      * Converts HSL (hue, saturation and lightness) values to a Phaser Color object.
      *
@@ -370,10 +387,11 @@ extern class Color {
      */
     static public function HSVColorWheel(?s:Float, ?v:Float):Array<phaser.types.display.ColorObject>;
     /**
-     * Converts an HSV (hue, saturation and value) color value to RGB.
-     * Conversion formula from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Converts a HSV (hue, saturation and value) color set to RGB.
+     *
+     * Conversion formula from https://en.wikipedia.org/wiki/HSL_and_HSV
+     *
      * Assumes HSV values are contained in the set [0, 1].
-     * Based on code by Michael Jackson (https://github.com/mjijackson)
      *
      * @function Phaser.Display.Color.HSVToRGB
      * @since 3.0.0
@@ -421,11 +439,11 @@ extern class Color {
      * @function Phaser.Display.Color.IntegerToColor
      * @since 3.0.0
      *
-     * @param {integer} input - The color value to convert into a Color object.
+     * @param {number} input - The color value to convert into a Color object.
      *
      * @return {Phaser.Display.Color} A Color object.
      */
-    static public function IntegerToColor(input:Int):phaser.display.Color;
+    static public function IntegerToColor(input:Float):phaser.display.Color;
     /**
      * Return the component parts of a color as an Object with the properties alpha, red, green, blue.
      *
@@ -434,11 +452,11 @@ extern class Color {
      * @function Phaser.Display.Color.IntegerToRGB
      * @since 3.0.0
      *
-     * @param {integer} input - The color value to convert into a Color object.
+     * @param {number} input - The color value to convert into a Color object.
      *
      * @return {Phaser.Types.Display.ColorObject} An object with the red, green and blue values set in the r, g and b properties.
      */
-    static public function IntegerToRGB(input:Int):phaser.types.display.ColorObject;
+    static public function IntegerToRGB(input:Float):phaser.types.display.ColorObject;
     /**
      * Converts an object containing `r`, `g`, `b` and `a` properties into a Color class instance.
      *
@@ -472,29 +490,29 @@ extern class Color {
      * @function Phaser.Display.Color.RGBToHSV
      * @since 3.0.0
      *
-     * @param {integer} r - The red color value. A number between 0 and 255.
-     * @param {integer} g - The green color value. A number between 0 and 255.
-     * @param {integer} b - The blue color value. A number between 0 and 255.
+     * @param {number} r - The red color value. A number between 0 and 255.
+     * @param {number} g - The green color value. A number between 0 and 255.
+     * @param {number} b - The blue color value. A number between 0 and 255.
      * @param {(Phaser.Types.Display.HSVColorObject|Phaser.Display.Color)} [out] - An object to store the color values in. If not given an HSV Color Object will be created.
      *
      * @return {(Phaser.Types.Display.HSVColorObject|Phaser.Display.Color)} An object with the properties `h`, `s` and `v` set.
      */
-    static public function RGBToHSV(r:Int, g:Int, b:Int, ?out:Dynamic):phaser.types.display.HSVColorObject;
+    static public function RGBToHSV(r:Float, g:Float, b:Float, ?out:Dynamic):phaser.types.display.HSVColorObject;
     /**
      * Converts the color values into an HTML compatible color string, prefixed with either `#` or `0x`.
      *
      * @function Phaser.Display.Color.RGBToString
      * @since 3.0.0
      *
-     * @param {integer} r - The red color value. A number between 0 and 255.
-     * @param {integer} g - The green color value. A number between 0 and 255.
-     * @param {integer} b - The blue color value. A number between 0 and 255.
-     * @param {integer} [a=255] - The alpha value. A number between 0 and 255.
+     * @param {number} r - The red color value. A number between 0 and 255.
+     * @param {number} g - The green color value. A number between 0 and 255.
+     * @param {number} b - The blue color value. A number between 0 and 255.
+     * @param {number} [a=255] - The alpha value. A number between 0 and 255.
      * @param {string} [prefix=#] - The prefix of the string. Either `#` or `0x`.
      *
      * @return {string} A string-based representation of the color values.
      */
-    static public function RGBToString(r:Int, g:Int, b:Int, ?a:Int, ?prefix:String):String;
+    static public function RGBToString(r:Float, g:Float, b:Float, ?a:Float, ?prefix:String):String;
     /**
      * Creates a new Color object where the r, g, and b values have been set to random values
      * based on the given min max values.
@@ -502,12 +520,12 @@ extern class Color {
      * @function Phaser.Display.Color.RandomRGB
      * @since 3.0.0
      *
-     * @param {integer} [min=0] - The minimum value to set the random range from (between 0 and 255)
-     * @param {integer} [max=255] - The maximum value to set the random range from (between 0 and 255)
+     * @param {number} [min=0] - The minimum value to set the random range from (between 0 and 255)
+     * @param {number} [max=255] - The maximum value to set the random range from (between 0 and 255)
      *
      * @return {Phaser.Display.Color} A Color object.
      */
-    static public function RandomRGB(?min:Int, ?max:Int):phaser.display.Color;
+    static public function RandomRGB(?min:Float, ?max:Float):phaser.display.Color;
     /**
      * Converts the given source color value into an instance of a Color class.
      * The value can be either a string, prefixed with `rgb` or a hex string, a number or an Object.

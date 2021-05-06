@@ -263,9 +263,9 @@ extern class Gamepad extends phaser.events.EventEmitter {
      * @method Phaser.Input.Gamepad.Gamepad#getAxisTotal
      * @since 3.10.0
      *
-     * @return {integer} The total number of axes this Gamepad claims to support.
+     * @return {number} The total number of axes this Gamepad claims to support.
      */
-    public function getAxisTotal():Int;
+    public function getAxisTotal():Float;
     /**
      * Gets the value of an axis based on the given index.
      * The index must be valid within the range of axes supported by this Gamepad.
@@ -274,11 +274,11 @@ extern class Gamepad extends phaser.events.EventEmitter {
      * @method Phaser.Input.Gamepad.Gamepad#getAxisValue
      * @since 3.10.0
      *
-     * @param {integer} index - The index of the axes to get the value for.
+     * @param {number} index - The index of the axes to get the value for.
      *
      * @return {number} The value of the axis, between 0 and 1.
      */
-    public function getAxisValue(index:Int):Float;
+    public function getAxisValue(index:Float):Float;
     /**
      * Sets the threshold value of all axis on this Gamepad.
      * The value is a float between 0 and 1 and is the amount below which the axis is considered as not having been moved.
@@ -295,9 +295,9 @@ extern class Gamepad extends phaser.events.EventEmitter {
      * @method Phaser.Input.Gamepad.Gamepad#getButtonTotal
      * @since 3.10.0
      *
-     * @return {integer} The total number of buttons this Gamepad claims to have.
+     * @return {number} The total number of buttons this Gamepad claims to have.
      */
-    public function getButtonTotal():Int;
+    public function getButtonTotal():Float;
     /**
      * Gets the value of a button based on the given index.
      * The index must be valid within the range of buttons supported by this Gamepad.
@@ -308,11 +308,11 @@ extern class Gamepad extends phaser.events.EventEmitter {
      * @method Phaser.Input.Gamepad.Gamepad#getButtonValue
      * @since 3.10.0
      *
-     * @param {integer} index - The index of the button to get the value for.
+     * @param {number} index - The index of the button to get the value for.
      *
      * @return {number} The value of the button, between 0 and 1.
      */
-    public function getButtonValue(index:Int):Float;
+    public function getButtonValue(index:Float):Float;
     /**
      * Returns if the button is pressed down or not.
      * The index must be valid within the range of buttons supported by this Gamepad.
@@ -320,9 +320,9 @@ extern class Gamepad extends phaser.events.EventEmitter {
      * @method Phaser.Input.Gamepad.Gamepad#isButtonDown
      * @since 3.10.0
      *
-     * @param {integer} index - The index of the button to get the value for.
+     * @param {number} index - The index of the button to get the value for.
      *
      * @return {boolean} `true` if the button is considered as being pressed down, otherwise `false`.
      */
-    public function isButtonDown(index:Int):Bool;
+    public function isButtonDown(index:Float):Bool;
 }

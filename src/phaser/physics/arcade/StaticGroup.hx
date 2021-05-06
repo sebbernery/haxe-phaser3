@@ -34,11 +34,11 @@ extern class StaticGroup extends phaser.gameobjects.Group {
      * The scene this group belongs to.
      *
      * @name Phaser.Physics.Arcade.StaticGroup#physicsType
-     * @type {integer}
+     * @type {number}
      * @default Phaser.Physics.Arcade.STATIC_BODY
      * @since 3.0.0
      */
-    public var physicsType:Int;
+    public var physicsType:Float;
     /**
      * Adds a static physics body to the new group member (if it lacks one) and adds it to the simulation.
      *

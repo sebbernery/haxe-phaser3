@@ -57,6 +57,28 @@ extern class Vector3 {
      */
     public function up():phaser.math.Vector3;
     /**
+     * Sets the components of this Vector to be the `Math.min` result from the given vector.
+     *
+     * @method Phaser.Math.Vector3#min
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to check the minimum values against.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function min(v:phaser.math.Vector3):phaser.math.Vector3;
+    /**
+     * Sets the components of this Vector to be the `Math.max` result from the given vector.
+     *
+     * @method Phaser.Math.Vector3#max
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to check the maximum values against.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function max(v:phaser.math.Vector3):phaser.math.Vector3;
+    /**
      * Make a clone of this Vector3.
      *
      * @method Phaser.Math.Vector3#clone
@@ -65,6 +87,18 @@ extern class Vector3 {
      * @return {Phaser.Math.Vector3} A new Vector3 object containing this Vectors values.
      */
     public function clone():phaser.math.Vector3;
+    /**
+     * Adds the two given Vector3s and sets the results into this Vector3.
+     *
+     * @method Phaser.Math.Vector3#addVectors
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} a - The first Vector to add.
+     * @param {Phaser.Math.Vector3} b - The second Vector to add.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function addVectors(a:phaser.math.Vector3, b:phaser.math.Vector3):phaser.math.Vector3;
     /**
      * Calculate the cross (vector) product of two given Vectors.
      *
@@ -115,6 +149,45 @@ extern class Vector3 {
      */
     public function set(x:Dynamic, ?y:Float, ?z:Float):phaser.math.Vector3;
     /**
+     * Sets the components of this Vector3 from the position of the given Matrix4.
+     *
+     * @method Phaser.Math.Vector3#setFromMatrixPosition
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the position from.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function setFromMatrixPosition(mat4:phaser.math.Matrix4):phaser.math.Vector3;
+    /**
+     * Sets the components of this Vector3 from the Matrix4 column specified.
+     *
+     * @method Phaser.Math.Vector3#setFromMatrixColumn
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the column from.
+     * @param {number} index - The column index.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function setFromMatrixColumn(mat4:phaser.math.Matrix4, index:Float):phaser.math.Vector3;
+    /**
+     * Sets the components of this Vector3 from the given array, based on the offset.
+     *
+     * Vector3.x = array[offset]
+     * Vector3.y = array[offset + 1]
+     * Vector3.z = array[offset + 2]
+     *
+     * @method Phaser.Math.Vector3#fromArray
+     * @since 3.50.0
+     *
+     * @param {number[]} array - The array of values to get this Vector from.
+     * @param {number} [offset=0] - The offset index into the array.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function fromArray(array:Array<Float>, ?offset:Float):phaser.math.Vector3;
+    /**
      * Add a given Vector to this Vector. Addition is component-wise.
      *
      * @method Phaser.Math.Vector3#add
@@ -125,6 +198,29 @@ extern class Vector3 {
      * @return {Phaser.Math.Vector3} This Vector3.
      */
     public function add(v:Dynamic):phaser.math.Vector3;
+    /**
+     * Add the given value to each component of this Vector.
+     *
+     * @method Phaser.Math.Vector3#addScalar
+     * @since 3.50.0
+     *
+     * @param {number} s - The amount to add to this Vector.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function addScalar(s:Float):phaser.math.Vector3;
+    /**
+     * Add and scale a given Vector to this Vector. Addition is component-wise.
+     *
+     * @method Phaser.Math.Vector3#addScale
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to add to this Vector.
+     * @param {number} scale - The amount to scale `v` by.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function addScale(v:Dynamic, scale:Float):phaser.math.Vector3;
     /**
      * Subtract the given Vector from this Vector. Subtraction is component-wise.
      *
@@ -270,6 +366,28 @@ extern class Vector3 {
      */
     public function lerp(v:phaser.math.Vector3, ?t:Float):phaser.math.Vector3;
     /**
+     * Takes a Matrix3 and applies it to this Vector3.
+     *
+     * @method Phaser.Math.Vector3#applyMatrix3
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix3} mat3 - The Matrix3 to apply to this Vector3.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function applyMatrix3(mat3:phaser.math.Matrix3):phaser.math.Vector3;
+    /**
+     * Takes a Matrix4 and applies it to this Vector3.
+     *
+     * @method Phaser.Math.Vector3#applyMatrix4
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to apply to this Vector3.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function applyMatrix4(mat4:phaser.math.Matrix4):phaser.math.Vector3;
+    /**
      * Transform this Vector with the given Matrix.
      *
      * @method Phaser.Math.Vector3#transformMat3
@@ -281,7 +399,7 @@ extern class Vector3 {
      */
     public function transformMat3(mat:phaser.math.Matrix3):phaser.math.Vector3;
     /**
-     * Transform this Vector with the given Matrix.
+     * Transform this Vector with the given Matrix4.
      *
      * @method Phaser.Math.Vector3#transformMat4
      * @since 3.0.0
@@ -325,6 +443,30 @@ extern class Vector3 {
      * @return {Phaser.Math.Vector3} This Vector3.
      */
     public function project(mat:phaser.math.Matrix4):phaser.math.Vector3;
+    /**
+     * Multiplies this Vector3 by the given view and projection matrices.
+     *
+     * @method Phaser.Math.Vector3#projectViewMatrix
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} viewMatrix - A View Matrix.
+     * @param {Phaser.Math.Matrix4} projectionMatrix - A Projection Matrix.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function projectViewMatrix(viewMatrix:phaser.math.Matrix4, projectionMatrix:phaser.math.Matrix4):phaser.math.Vector3;
+    /**
+     * Multiplies this Vector3 by the given inversed projection matrix and world matrix.
+     *
+     * @method Phaser.Math.Vector3#unprojectViewMatrix
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} projectionMatrix - An inversed Projection Matrix.
+     * @param {Phaser.Math.Matrix4} worldMatrix - A World View Matrix.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    public function unprojectViewMatrix(projectionMatrix:phaser.math.Matrix4, worldMatrix:phaser.math.Matrix4):phaser.math.Vector3;
     /**
      * Unproject this point from 2D space to 3D space.
      * The point should have its x and y properties set to

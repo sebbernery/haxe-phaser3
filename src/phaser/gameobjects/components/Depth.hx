@@ -40,9 +40,9 @@ extern class Depth {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
 }

@@ -234,6 +234,14 @@ extern class Scene {
      */
     public var plugins:phaser.plugins.PluginManager;
     /**
+     * A reference to the renderer instance Phaser is using, either Canvas or WebGL.
+     *
+     * @name Phaser.Scene#renderer
+     * @type {(Phaser.Renderer.Canvas.CanvasRenderer|Phaser.Renderer.WebGL.WebGLRenderer)}
+     * @since 3.50.0
+     */
+    public var renderer:Dynamic;
+    /**
      * Should be overridden by your own Scenes.
      * This method is called once per game step while the scene is running.
      *

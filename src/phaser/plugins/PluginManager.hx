@@ -174,9 +174,9 @@ extern class PluginManager {
      *
      * @param {string} key - The unique plugin key.
      *
-     * @return {integer} The index of the plugin within the plugins array.
+     * @return {number} The index of the plugin within the plugins array.
      */
-    public function getIndex(key:String):Int;
+    public function getIndex(key:String):Float;
     /**
      * Gets a global plugin based on the given key.
      *

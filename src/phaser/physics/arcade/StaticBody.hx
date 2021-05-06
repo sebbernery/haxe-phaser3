@@ -50,10 +50,10 @@ extern class StaticBody {
      * The color of this Static Body on the debug display.
      *
      * @name Phaser.Physics.Arcade.StaticBody#debugBodyColor
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var debugBodyColor:Int;
+    public var debugBodyColor:Float;
     /**
      * Whether this Static Body is updated by the physics simulation.
      *
@@ -231,6 +231,24 @@ extern class StaticBody {
      */
     public var immovable:Bool;
     /**
+     * Sets if this Body can be pushed by another Body.
+     *
+     * A body that cannot be pushed will reflect back all of the velocity it is given to the
+     * colliding body. If that body is also not pushable, then the separation will be split
+     * between them evenly.
+     *
+     * If you want your body to never move or seperate at all, see the `setImmovable` method.
+     *
+     * By default, Static Bodies are not pushable.
+     *
+     * @name Phaser.Physics.Arcade.StaticBody#pushable
+     * @type {boolean}
+     * @default false
+     * @since 3.50.0
+     * @see Phaser.GameObjects.Components.Pushable#setPushable
+     */
+    public var pushable:Bool;
+    /**
      * A flag disabling the default horizontal separation of colliding bodies. Pass your own `collideHandler` to the collider.
      *
      * @name Phaser.Physics.Arcade.StaticBody#customSeparateX
@@ -304,7 +322,8 @@ extern class StaticBody {
      */
     public var checkCollision:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this StaticBody has ever collided with another body and in which direction.
+     * This property is kept for compatibility with Dynamic Bodies.
+     * Avoid using it.
      *
      * @name Phaser.Physics.Arcade.StaticBody#touching
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
@@ -312,7 +331,9 @@ extern class StaticBody {
      */
     public var touching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this StaticBody was colliding with another body during the last step or any previous step, and in which direction.
+     * This property is kept for compatibility with Dynamic Bodies.
+     * Avoid using it.
+     * The values are always false for a Static Body.
      *
      * @name Phaser.Physics.Arcade.StaticBody#wasTouching
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
@@ -320,7 +341,8 @@ extern class StaticBody {
      */
     public var wasTouching:phaser.types.physics.arcade.ArcadeBodyCollision;
     /**
-     * Whether this StaticBody has ever collided with a tile or the world boundary.
+     * This property is kept for compatibility with Dynamic Bodies.
+     * Avoid using it.
      *
      * @name Phaser.Physics.Arcade.StaticBody#blocked
      * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
@@ -331,11 +353,11 @@ extern class StaticBody {
      * The StaticBody's physics type (static by default).
      *
      * @name Phaser.Physics.Arcade.StaticBody#physicsType
-     * @type {integer}
+     * @type {number}
      * @default Phaser.Physics.Arcade.STATIC_BODY
      * @since 3.0.0
      */
-    public var physicsType:Int;
+    public var physicsType:Float;
     /**
      * The x coordinate of the StaticBody.
      *
@@ -433,13 +455,13 @@ extern class StaticBody {
      * @method Phaser.Physics.Arcade.StaticBody#setSize
      * @since 3.0.0
      *
-     * @param {integer} [width] - The width of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
-     * @param {integer} [height] - The height of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
+     * @param {number} [width] - The width of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
+     * @param {number} [height] - The height of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
      * @param {boolean} [center=true] - Place the Static Body's center on its Game Object's center. Only works if the Game Object has the `getCenter` method.
      *
      * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
      */
-    public function setSize(?width:Int, ?height:Int, ?center:Bool):phaser.physics.arcade.StaticBody;
+    public function setSize(?width:Float, ?height:Float, ?center:Bool):phaser.physics.arcade.StaticBody;
     /**
      * Sets this Static Body to have a circular body and sets its size and position.
      *

@@ -20,11 +20,11 @@ extern class Point {
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Point#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * The x coordinate of this Point.
      *

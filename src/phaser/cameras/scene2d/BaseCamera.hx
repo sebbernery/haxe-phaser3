@@ -82,11 +82,11 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * This value is a bitmask.
      *
      * @name Phaser.Cameras.Scene2D.BaseCamera#id
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.11.0
      */
-    public var id:Int;
+    public var id:Float;
     /**
      * The name of the Camera. This is left empty for your own use.
      *
@@ -96,18 +96,6 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public var name:String;
-    /**
-     * This property is un-used in v3.16.
-     *
-     * The resolution of the Game, used in most Camera calculations.
-     *
-     * @name Phaser.Cameras.Scene2D.BaseCamera#resolution
-     * @type {number}
-     * @readonly
-     * @deprecated
-     * @since 3.12.0
-     */
-    public var resolution:Float;
     /**
      * Should this camera round its pixel values to integers?
      *
@@ -327,6 +315,40 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      */
     public var zoom:Float;
     /**
+     * The Camera horizontal zoom value. Change this value to zoom in, or out of, a Scene.
+     *
+     * A value of 0.5 would zoom the Camera out, so you can now see twice as much
+     * of the Scene as before. A value of 2 would zoom the Camera in, so every pixel
+     * now takes up 2 pixels when rendered.
+     *
+     * Set to 1 to return to the default zoom level.
+     *
+     * Be careful to never set this value to zero.
+     *
+     * @name Phaser.Cameras.Scene2D.BaseCamera#zoomX
+     * @type {number}
+     * @default 1
+     * @since 3.50.0
+     */
+    public var zoomX:Float;
+    /**
+     * The Camera vertical zoom value. Change this value to zoom in, or out of, a Scene.
+     *
+     * A value of 0.5 would zoom the Camera out, so you can now see twice as much
+     * of the Scene as before. A value of 2 would zoom the Camera in, so every pixel
+     * now takes up 2 pixels when rendered.
+     *
+     * Set to 1 to return to the default zoom level.
+     *
+     * Be careful to never set this value to zero.
+     *
+     * @name Phaser.Cameras.Scene2D.BaseCamera#zoomY
+     * @type {number}
+     * @default 1
+     * @since 3.50.0
+     */
+    public var zoomY:Float;
+    /**
      * The horizontal position of the center of the Camera's viewport, relative to the left of the game canvas.
      *
      * @name Phaser.Cameras.Scene2D.BaseCamera#centerX
@@ -510,10 +532,8 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @method Phaser.Cameras.Scene2D.BaseCamera#preRender
      * @protected
      * @since 3.0.0
-     *
-     * @param {number} resolution - The game resolution, as set in the Scale Manager.
      */
-    public function preRender(resolution:Float):Void;
+    public function preRender():Void;
     /**
      * Takes an x value and checks it's within the range of the Camera bounds, adjusting if required.
      * Do not call this method if you are not using camera bounds.
@@ -598,15 +618,15 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @method Phaser.Cameras.Scene2D.BaseCamera#setBounds
      * @since 3.0.0
      *
-     * @param {integer} x - The top-left x coordinate of the bounds.
-     * @param {integer} y - The top-left y coordinate of the bounds.
-     * @param {integer} width - The width of the bounds, in pixels.
-     * @param {integer} height - The height of the bounds, in pixels.
+     * @param {number} x - The top-left x coordinate of the bounds.
+     * @param {number} y - The top-left y coordinate of the bounds.
+     * @param {number} width - The width of the bounds, in pixels.
+     * @param {number} height - The height of the bounds, in pixels.
      * @param {boolean} [centerOn=false] - If `true` the Camera will automatically be centered on the new bounds.
      *
      * @return {this} This Camera instance.
      */
-    public function setBounds(x:Int, y:Int, width:Int, height:Int, ?centerOn:Bool):Dynamic;
+    public function setBounds(x:Float, y:Float, width:Float, height:Float, ?centerOn:Bool):Dynamic;
     /**
      * Returns a rectangle containing the bounds of the Camera.
      *
@@ -677,8 +697,6 @@ extern class BaseCamera extends phaser.events.EventEmitter {
     /**
      * Sets the Scene the Camera is bound to.
      *
-     * Also populates the `resolution` property and updates the internal size values.
-     *
      * @method Phaser.Cameras.Scene2D.BaseCamera#setScene
      * @since 3.0.0
      *
@@ -713,12 +731,12 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @method Phaser.Cameras.Scene2D.BaseCamera#setSize
      * @since 3.0.0
      *
-     * @param {integer} width - The width of the Camera viewport.
-     * @param {integer} [height=width] - The height of the Camera viewport.
+     * @param {number} width - The width of the Camera viewport.
+     * @param {number} [height=width] - The height of the Camera viewport.
      *
      * @return {this} This Camera instance.
      */
-    public function setSize(width:Int, ?height:Int):Dynamic;
+    public function setSize(width:Float, ?height:Float):Dynamic;
     /**
      * This method sets the position and size of the Camera viewport in a single call.
      *
@@ -735,12 +753,12 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * @param {number} x - The top-left x coordinate of the Camera viewport.
      * @param {number} y - The top-left y coordinate of the Camera viewport.
-     * @param {integer} width - The width of the Camera viewport.
-     * @param {integer} [height=width] - The height of the Camera viewport.
+     * @param {number} width - The width of the Camera viewport.
+     * @param {number} [height=width] - The height of the Camera viewport.
      *
      * @return {this} This Camera instance.
      */
-    public function setViewport(x:Float, y:Float, width:Int, ?height:Int):Dynamic;
+    public function setViewport(x:Float, y:Float, width:Float, ?height:Float):Dynamic;
     /**
      * Set the zoom value of the Camera.
      *
@@ -751,14 +769,17 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * Changing the zoom does not impact the Camera viewport in any way, it is only applied during rendering.
      *
+     * As of Phaser 3.50 you can now set the horizontal and vertical zoom values independently.
+     *
      * @method Phaser.Cameras.Scene2D.BaseCamera#setZoom
      * @since 3.0.0
      *
-     * @param {number} [value=1] - The zoom value of the Camera. The minimum it can be is 0.001.
+     * @param {number} [x=1] - The horizontal zoom value of the Camera. The minimum it can be is 0.001.
+     * @param {number} [y=x] - The vertical zoom value of the Camera. The minimum it can be is 0.001.
      *
      * @return {this} This Camera instance.
      */
-    public function setZoom(?value:Float):Dynamic;
+    public function setZoom(?x:Float, ?y:Float):Dynamic;
     /**
      * Sets the mask to be applied to this Camera during rendering.
      *
@@ -770,8 +791,6 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      *
      * Masks have no impact on physics or input detection. They are purely a rendering component
      * that allows you to limit what is visible during the render pass.
-     *
-     * Note: You cannot mask a Camera that has `renderToTexture` set.
      *
      * @method Phaser.Cameras.Scene2D.BaseCamera#setMask
      * @since 3.17.0
@@ -809,10 +828,10 @@ extern class BaseCamera extends phaser.events.EventEmitter {
      * @protected
      * @since 3.0.0
      *
-     * @param {integer} time - The current timestamp as generated by the Request Animation Frame or SetTimeout.
+     * @param {number} time - The current timestamp as generated by the Request Animation Frame or SetTimeout.
      * @param {number} delta - The delta time, in ms, elapsed since the last frame.
      */
-    public function update(time:Int, delta:Float):Void;
+    public function update(time:Float, delta:Float):Void;
     /**
      * The alpha value of the Game Object.
      *

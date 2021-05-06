@@ -7,9 +7,9 @@ package phaser.types.input.gamepad;
  * @since 3.10.0
  *
  * @property {string} id - The ID of the Gamepad.
- * @property {integer} index - The index of the Gamepad.
+ * @property {number} index - The index of the Gamepad.
  */
 typedef Pad = {
 var id:String;
-var index:Int;
+var index:Float;
 };

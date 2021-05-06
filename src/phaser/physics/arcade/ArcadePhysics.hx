@@ -42,10 +42,10 @@ extern class ArcadePhysics {
      * A configuration object. Union of the `physics.arcade.*` properties of the GameConfig and SceneConfig objects.
      *
      * @name Phaser.Physics.Arcade.ArcadePhysics#config
-     * @type {object}
+     * @type {Phaser.Types.Physics.Arcade.ArcadeWorldConfig}
      * @since 3.0.0
      */
-    public var config:Dynamic;
+    public var config:phaser.types.physics.arcade.ArcadeWorldConfig;
     /**
      * The physics simulation.
      *
@@ -63,14 +63,38 @@ extern class ArcadePhysics {
      */
     public var add:phaser.physics.arcade.Factory;
     /**
+     * Causes `World.update` to be automatically called each time the Scene
+     * emits and `UPDATE` event. This is the default setting, so only needs
+     * calling if you have specifically disabled it.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#enableUpdate
+     * @since 3.50.0
+     */
+    public function enableUpdate():Void;
+    /**
+     * Causes `World.update` to **not** be automatically called each time the Scene
+     * emits and `UPDATE` event.
+     *
+     * If you wish to run the World update at your own rate, or from your own
+     * component, then you should call this method to disable the built-in link,
+     * and then call `World.update(delta, time)` accordingly.
+     *
+     * Note that `World.postUpdate` is always automatically called when the Scene
+     * emits a `POST_UPDATE` event, regardless of this setting.
+     *
+     * @method Phaser.Physics.Arcade.ArcadePhysics#disableUpdate
+     * @since 3.50.0
+     */
+    public function disableUpdate():Void;
+    /**
      * Creates the physics configuration for the current Scene.
      *
      * @method Phaser.Physics.Arcade.ArcadePhysics#getConfig
      * @since 3.0.0
      *
-     * @return {object} The physics configuration.
+     * @return {Phaser.Types.Physics.Arcade.ArcadeWorldConfig} The physics configuration.
      */
-    public function getConfig():Dynamic;
+    public function getConfig():phaser.types.physics.arcade.ArcadeWorldConfig;
     /**
      * Tests if Game Objects overlap. See {@link Phaser.Physics.Arcade.World#overlap}
      *

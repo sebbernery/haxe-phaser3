@@ -41,11 +41,11 @@ extern class List {
      * This is used internally when iterating through the list with the {@link #first}, {@link #last}, {@link #get}, and {@link #previous} properties.
      *
      * @name Phaser.Structs.List#position
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var position:Int;
+    public var position:Float;
     /**
      * A callback that is invoked every time a child is added to this list.
      *
@@ -74,11 +74,11 @@ extern class List {
      * The number of items inside the List.
      *
      * @name Phaser.Structs.List#length
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var length:Int;
+    public var length:Float;
     /**
      * The first item in the List or `null` for an empty List.
      *
@@ -146,12 +146,12 @@ extern class List {
      * @genericUse {T} - [child,$return]
      *
      * @param {*} child - The item, or array of items, to add to the list.
-     * @param {integer} [index=0] - The index in the list at which the element(s) will be inserted.
+     * @param {number} [index=0] - The index in the list at which the element(s) will be inserted.
      * @param {boolean} [skipCallback=false] - Skip calling the List.addCallback if this child is added successfully.
      *
      * @return {*} The List's underlying array.
      */
-    public function addAt(child:Dynamic, ?index:Int, ?skipCallback:Bool):Dynamic;
+    public function addAt(child:Dynamic, ?index:Float, ?skipCallback:Bool):Dynamic;
     /**
      * Retrieves the item at a given position inside the List.
      *
@@ -160,11 +160,11 @@ extern class List {
      *
      * @genericUse {T} - [$return]
      *
-     * @param {integer} index - The index of the item.
+     * @param {number} index - The index of the item.
      *
      * @return {*} The retrieved item, or `undefined` if it's outside the List's bounds.
      */
-    public function getAt(index:Int):Dynamic;
+    public function getAt(index:Float):Dynamic;
     /**
      * Locates an item within the List and returns its index.
      *
@@ -175,9 +175,9 @@ extern class List {
      *
      * @param {*} child - The item to locate.
      *
-     * @return {integer} The index of the item within the List, or -1 if it's not in the List.
+     * @return {number} The index of the item within the List, or -1 if it's not in the List.
      */
-    public function getIndex(child:Dynamic):Int;
+    public function getIndex(child:Dynamic):Float;
     /**
      * Sort the contents of this List so the items are in order based on the given property.
      * For example, `sort('alpha')` would sort the List contents based on the value of their `alpha` property.
@@ -216,12 +216,12 @@ extern class List {
      *
      * @genericUse {T | null} - [$return]
      *
-     * @param {integer} [startIndex=0] - Offset from the front of the group (lowest child).
-     * @param {integer} [length=(to top)] - Restriction on the number of values you want to randomly select from.
+     * @param {number} [startIndex=0] - Offset from the front of the group (lowest child).
+     * @param {number} [length=(to top)] - Restriction on the number of values you want to randomly select from.
      *
      * @return {?*} A random child of this Group.
      */
-    public function getRandom(?startIndex:Int, ?length:Int):Dynamic;
+    public function getRandom(?startIndex:Float, ?length:Float):Dynamic;
     /**
      * Returns the first element in a given part of the List which matches a specific criterion.
      *
@@ -261,12 +261,12 @@ extern class List {
      *
      * @param {string} [property] - An optional property to test against the value argument.
      * @param {*} [value] - If property is set then Child.property must strictly equal this value to be included in the results.
-     * @param {integer} [startIndex] - The first child index to start the search from.
-     * @param {integer} [endIndex] - The last child index to search up until.
+     * @param {number} [startIndex] - The first child index to start the search from.
+     * @param {number} [endIndex] - The last child index to search up until.
      *
      * @return {Array.<*>} All items of the List which match the given criterion, if any.
      */
-    public function getAll(?property:String, ?value:Dynamic, ?startIndex:Int, ?endIndex:Int):Array<Dynamic>;
+    public function getAll(?property:String, ?value:Dynamic, ?startIndex:Float, ?endIndex:Float):Array<Dynamic>;
     /**
      * Returns the total number of items in the List which have a property matching the given value.
      *
@@ -278,9 +278,9 @@ extern class List {
      * @param {string} property - The property to test on each item.
      * @param {*} value - The value to test the property against.
      *
-     * @return {integer} The total number of matching elements.
+     * @return {number} The total number of matching elements.
      */
-    public function count(property:String, value:Dynamic):Int;
+    public function count(property:String, value:Dynamic):Float;
     /**
      * Swaps the positions of two items in the list.
      *
@@ -302,11 +302,11 @@ extern class List {
      * @genericUse {T} - [child,$return]
      *
      * @param {*} child - The item to move.
-     * @param {integer} index - Moves an item in the List to a new position.
+     * @param {number} index - Moves an item in the List to a new position.
      *
      * @return {*} The item that was moved.
      */
-    public function moveTo(child:Dynamic, index:Int):Dynamic;
+    public function moveTo(child:Dynamic, index:Float):Dynamic;
     /**
      * Removes one or many items from the List.
      *
@@ -329,12 +329,12 @@ extern class List {
      *
      * @genericUse {T} - [$return]
      *
-     * @param {integer} index - The position to remove the item from.
+     * @param {number} index - The position to remove the item from.
      * @param {boolean} [skipCallback=false] - Skip calling the List.removeCallback.
      *
      * @return {*} The item that was removed.
      */
-    public function removeAt(index:Int, ?skipCallback:Bool):Dynamic;
+    public function removeAt(index:Float, ?skipCallback:Bool):Dynamic;
     /**
      * Removes the items within the given range in the List.
      *
@@ -343,13 +343,13 @@ extern class List {
      *
      * @genericUse {T[]} - [$return]
      *
-     * @param {integer} [startIndex=0] - The index to start removing from.
-     * @param {integer} [endIndex] - The position to stop removing at. The item at this position won't be removed.
+     * @param {number} [startIndex=0] - The index to start removing from.
+     * @param {number} [endIndex] - The position to stop removing at. The item at this position won't be removed.
      * @param {boolean} [skipCallback=false] - Skip calling the List.removeCallback.
      *
      * @return {Array.<*>} An array of the items which were removed.
      */
-    public function removeBetween(?startIndex:Int, ?endIndex:Int, ?skipCallback:Bool):Array<Dynamic>;
+    public function removeBetween(?startIndex:Float, ?endIndex:Float, ?skipCallback:Bool):Array<Dynamic>;
     /**
      * Removes all the items.
      *
@@ -474,10 +474,10 @@ extern class List {
      *
      * @param {string} property - The name of the property to set.
      * @param {*} value - The value to set the property to.
-     * @param {integer} [startIndex] - The first child index to start the search from.
-     * @param {integer} [endIndex] - The last child index to search up until.
+     * @param {number} [startIndex] - The first child index to start the search from.
+     * @param {number} [endIndex] - The last child index to search up until.
      */
-    public function setAll(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):Void;
+    public function setAll(property:String, value:Dynamic, ?startIndex:Float, ?endIndex:Float):Void;
     /**
      * Passes all children to the given callback.
      *

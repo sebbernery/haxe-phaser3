@@ -12,7 +12,54 @@ package phaser.gameobjects.components;
 extern class Tint {
     public function new();
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -21,57 +68,20 @@ extern class Tint {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -113,14 +123,14 @@ extern class Tint {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -142,12 +152,12 @@ extern class Tint {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
 }

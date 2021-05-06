@@ -17,6 +17,9 @@ package phaser.display.masks;
  *  A pixel with an alpha of 1 in the masked Game Object will receive the same alpha as the
  * corresponding pixel in the mask.
  *
+ * Note: You cannot combine Bitmap Masks and Blend Modes on the same Game Object. You can, however,
+ * combine Geometry Masks and Blend Modes together.
+ *
  * The Bitmap Mask's location matches the location of its Game Object, not the location of the
  * masked objects. Moving or transforming the underlying Game Object will change the mask
  * (and affect the visibility of any masked objects), whereas moving or transforming a masked object
@@ -55,7 +58,7 @@ extern class BitmapMask {
      */
     public var bitmapMask:phaser.gameobjects.GameObject;
     /**
-     * The texture used for the mask's framebuffer.
+     * The texture used for the masks framebuffer.
      *
      * @name Phaser.Display.Masks.BitmapMask#maskTexture
      * @type {WebGLTexture}
@@ -98,17 +101,10 @@ extern class BitmapMask {
      */
     public var maskFramebuffer:js.html.webgl.Framebuffer;
     /**
-     * The previous framebuffer set in the renderer before this one was enabled.
-     *
-     * @name Phaser.Display.Masks.BitmapMask#prevFramebuffer
-     * @type {WebGLFramebuffer}
-     * @since 3.17.0
-     */
-    public var prevFramebuffer:js.html.webgl.Framebuffer;
-    /**
      * Whether to invert the masks alpha.
      *
-     * If `true`, the alpha of the masking pixel will be inverted before it's multiplied with the masked pixel. Essentially, this means that a masked area will be visible only if the corresponding area in the mask is invisible.
+     * If `true`, the alpha of the masking pixel will be inverted before it's multiplied with the masked pixel.
+     * Essentially, this means that a masked area will be visible only if the corresponding area in the mask is invisible.
      *
      * @name Phaser.Display.Masks.BitmapMask#invertAlpha
      * @type {boolean}
@@ -124,6 +120,25 @@ extern class BitmapMask {
      * @since 3.17.0
      */
     public var isStencil:Bool;
+    /**
+     * Creates the WebGL Texture2D objects and Framebuffers required for this
+     * mask. If this mask has already been created, then `clearMask` is called first.
+     *
+     * @method Phaser.Display.Masks.BitmapMask#createMask
+     * @since 3.50.0
+     */
+    public function createMask():Void;
+    /**
+     * Deletes the `mainTexture` and `maskTexture` WebGL Textures and deletes
+     * the `mainFramebuffer` and `maskFramebuffer` too, nulling all references.
+     *
+     * This is called when this mask is destroyed, or if you try to creat a new
+     * mask from this object when one is already set.
+     *
+     * @method Phaser.Display.Masks.BitmapMask#clearMask
+     * @since 3.50.0
+     */
+    public function clearMask():Void;
     /**
      * Sets a new masking Game Object for the Bitmap Mask.
      *

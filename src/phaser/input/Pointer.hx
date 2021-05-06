@@ -21,11 +21,11 @@ package phaser.input;
  * @since 3.0.0
  *
  * @param {Phaser.Input.InputManager} manager - A reference to the Input Manager.
- * @param {integer} id - The internal ID of this Pointer.
+ * @param {number} id - The internal ID of this Pointer.
  */
 @:native("Phaser.Input.Pointer")
 extern class Pointer {
-    public function new(manager:phaser.input.InputManager, id:Int);
+    public function new(manager:phaser.input.InputManager, id:Float);
     /**
      * A reference to the Input Manager.
      *
@@ -38,11 +38,11 @@ extern class Pointer {
      * The internal ID of this Pointer.
      *
      * @name Phaser.Input.Pointer#id
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    public var id:Int;
+    public var id:Float;
     /**
      * The most recent native DOM Event this Pointer has processed.
      *
@@ -94,12 +94,12 @@ extern class Pointer {
      * however, it should behave as if the left button was clicked in the standard button layout.
      *
      * @name Phaser.Input.Pointer#button
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default 0
      * @since 3.18.0
      */
-    public var button:Int;
+    public var button:Float;
     /**
      * 0: No button or un-initialized
      * 1: Left button
@@ -112,11 +112,11 @@ extern class Pointer {
      * In this case, the values are read from right to left.
      *
      * @name Phaser.Input.Pointer#buttons
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var buttons:Int;
+    public var buttons:Float;
     /**
      * The position of the Pointer in screen space.
      *
@@ -270,7 +270,7 @@ extern class Pointer {
      */
     public var downY:Float;
     /**
-     * Time when Button 1 (left button), or Touch, was pressed, used for dragging objects.
+     * The Event timestamp when the first button, or Touch input, was pressed. Used for dragging objects.
      *
      * @name Phaser.Input.Pointer#downTime
      * @type {number}
@@ -297,7 +297,7 @@ extern class Pointer {
      */
     public var upY:Float;
     /**
-     * Time when Button 1 (left button), or Touch, was released, used for dragging objects.
+     * The Event timestamp when the final button, or Touch input, was released. Used for dragging objects.
      *
      * @name Phaser.Input.Pointer#upTime
      * @type {number}
@@ -635,7 +635,7 @@ extern class Pointer {
      * duration since the button was pressed down.
      *
      * If no button is held down, it will return the last recorded duration, based on the time
-     * the Pointer button was released.
+     * the last button on the Pointer was released.
      *
      * @method Phaser.Input.Pointer#getDuration
      * @since 3.16.0
@@ -686,12 +686,12 @@ extern class Pointer {
      * @method Phaser.Input.Pointer#getInterpolatedPosition
      * @since 3.11.0
      *
-     * @param {integer} [steps=10] - The number of interpolation steps to use.
+     * @param {number} [steps=10] - The number of interpolation steps to use.
      * @param {array} [out] - An array to store the results in. If not provided a new one will be created.
      *
      * @return {array} An array of interpolated values.
      */
-    public function getInterpolatedPosition(?steps:Int, ?out:Array<Dynamic>):Array<Dynamic>;
+    public function getInterpolatedPosition(?steps:Float, ?out:Array<Dynamic>):Array<Dynamic>;
     /**
      * Destroys this Pointer instance and resets its external references.
      *

@@ -28,20 +28,20 @@ extern class Curve {
      * The default number of divisions within the curve.
      *
      * @name Phaser.Curves.Curve#defaultDivisions
-     * @type {integer}
+     * @type {number}
      * @default 5
      * @since 3.0.0
      */
-    public var defaultDivisions:Int;
+    public var defaultDivisions:Float;
     /**
      * The quantity of arc length divisions within the curve.
      *
      * @name Phaser.Curves.Curve#arcLengthDivisions
-     * @type {integer}
+     * @type {number}
      * @default 100
      * @since 3.0.0
      */
-    public var arcLengthDivisions:Int;
+    public var arcLengthDivisions:Float;
     /**
      * An array of cached arc length values.
      *
@@ -81,11 +81,11 @@ extern class Curve {
      * @generic {Phaser.GameObjects.Graphics} G - [graphics,$return]
      *
      * @param {Phaser.GameObjects.Graphics} graphics - The Graphics instance onto which this curve will be drawn.
-     * @param {integer} [pointsTotal=32] - The resolution of the curve. The higher the value the smoother it will render, at the cost of rendering performance.
+     * @param {number} [pointsTotal=32] - The resolution of the curve. The higher the value the smoother it will render, at the cost of rendering performance.
      *
      * @return {Phaser.GameObjects.Graphics} The Graphics object to which the curve was drawn.
      */
-    public function draw(graphics:phaser.gameobjects.Graphics, ?pointsTotal:Int):phaser.gameobjects.Graphics;
+    public function draw(graphics:phaser.gameobjects.Graphics, ?pointsTotal:Float):phaser.gameobjects.Graphics;
     /**
      * Returns a Rectangle where the position and dimensions match the bounds of this Curve.
      *
@@ -96,11 +96,11 @@ extern class Curve {
      * @since 3.0.0
      *
      * @param {Phaser.Geom.Rectangle} [out] - The Rectangle to store the bounds in. If falsey a new object will be created.
-     * @param {integer} [accuracy=16] - The accuracy of the bounds calculations.
+     * @param {number} [accuracy=16] - The accuracy of the bounds calculations.
      *
      * @return {Phaser.Geom.Rectangle} A Rectangle object holding the bounds of this curve. If `out` was given it will be this object.
      */
-    public function getBounds(?out:phaser.geom.Rectangle, ?accuracy:Int):phaser.geom.Rectangle;
+    public function getBounds(?out:phaser.geom.Rectangle, ?accuracy:Float):phaser.geom.Rectangle;
     /**
      * Returns an array of points, spaced out X distance pixels apart.
      * The smaller the distance, the larger the array will be.
@@ -108,11 +108,11 @@ extern class Curve {
      * @method Phaser.Curves.Curve#getDistancePoints
      * @since 3.0.0
      *
-     * @param {integer} distance - The distance, in pixels, between each point along the curve.
+     * @param {number} distance - The distance, in pixels, between each point along the curve.
      *
      * @return {Phaser.Geom.Point[]} An Array of Point objects.
      */
-    public function getDistancePoints(distance:Int):Array<phaser.geom.Point>;
+    public function getDistancePoints(distance:Float):Array<phaser.geom.Point>;
     /**
      * Get a point at the end of the curve.
      *
@@ -147,11 +147,11 @@ extern class Curve {
      * @method Phaser.Curves.Curve#getLengths
      * @since 3.0.0
      *
-     * @param {integer} [divisions] - The number of divisions or segments.
+     * @param {number} [divisions] - The number of divisions or segments.
      *
      * @return {number[]} An array of cumulative lengths.
      */
-    public function getLengths(?divisions:Int):Array<Float>;
+    public function getLengths(?divisions:Float):Array<Float>;
     /**
      * Get a point at a relative position on the curve, by arc length.
      *
@@ -184,13 +184,13 @@ extern class Curve {
      *
      * @generic {Phaser.Math.Vector2[]} O - [out,$return]
      *
-     * @param {integer} [divisions] - The number of divisions to make.
+     * @param {number} [divisions] - The number of divisions to make.
      * @param {number} [stepRate] - The curve distance between points, implying `divisions`.
      * @param {(array|Phaser.Math.Vector2[])} [out] - An optional array to store the points in.
      *
      * @return {(array|Phaser.Math.Vector2[])} An array of Points from the curve.
      */
-    public function getPoints(?divisions:Int, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
+    public function getPoints(?divisions:Float, ?stepRate:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Get a random point from the curve.
      *
@@ -212,13 +212,13 @@ extern class Curve {
      * @method Phaser.Curves.Curve#getSpacedPoints
      * @since 3.0.0
      *
-     * @param {integer} [divisions=this.defaultDivisions] - The number of divisions to make.
+     * @param {number} [divisions=this.defaultDivisions] - The number of divisions to make.
      * @param {number} [stepRate] - Step between points. Used to calculate the number of points to return when divisions is falsy. Ignored if divisions is positive.
      * @param {(array|Phaser.Math.Vector2[])} [out] - An optional array to store the points in.
      *
      * @return {Phaser.Math.Vector2[]} An array of points.
      */
-    public function getSpacedPoints(?divisions:Int, ?stepRate:Float, ?out:Dynamic):Array<phaser.math.Vector2>;
+    public function getSpacedPoints(?divisions:Float, ?stepRate:Float, ?out:Dynamic):Array<phaser.math.Vector2>;
     /**
      * Get a point at the start of the curve.
      *
@@ -269,12 +269,12 @@ extern class Curve {
      * @method Phaser.Curves.Curve#getTFromDistance
      * @since 3.0.0
      *
-     * @param {integer} distance - The distance, in pixels.
-     * @param {integer} [divisions] - Optional amount of divisions.
+     * @param {number} distance - The distance, in pixels.
+     * @param {number} [divisions] - Optional amount of divisions.
      *
      * @return {number} The distance.
      */
-    public function getTFromDistance(distance:Int, ?divisions:Int):Float;
+    public function getTFromDistance(distance:Float, ?divisions:Float):Float;
     /**
      * Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equidistant.
      *
@@ -282,12 +282,12 @@ extern class Curve {
      * @since 3.0.0
      *
      * @param {number} u - A float between 0 and 1.
-     * @param {integer} distance - The distance, in pixels.
-     * @param {integer} [divisions] - Optional amount of divisions.
+     * @param {number} distance - The distance, in pixels.
+     * @param {number} [divisions] - Optional amount of divisions.
      *
      * @return {number} The equidistant value.
      */
-    public function getUtoTmapping(u:Float, distance:Int, ?divisions:Int):Float;
+    public function getUtoTmapping(u:Float, distance:Float, ?divisions:Float):Float;
     /**
      * Calculate and cache the arc lengths.
      *

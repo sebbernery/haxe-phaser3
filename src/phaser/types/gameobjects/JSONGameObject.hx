@@ -19,8 +19,8 @@ package phaser.types.gameobjects;
  * @property {number} rotation - The angle of this Game Object in radians.
  * @property {number} alpha - The alpha value of the Game Object.
  * @property {boolean} visible - The visible state of the Game Object.
- * @property {integer} scaleMode - The Scale Mode being used by this Game Object.
- * @property {(integer|string)} blendMode - Sets the Blend Mode being used by this Game Object.
+ * @property {number} scaleMode - The Scale Mode being used by this Game Object.
+ * @property {(number|string)} blendMode - Sets the Blend Mode being used by this Game Object.
  * @property {string} textureKey - The texture key of this Game Object.
  * @property {string} frameKey - The frame key of this Game Object.
  * @property {object} data - The data of this Game Object.
@@ -37,7 +37,7 @@ var flipY:Bool;
 var rotation:Float;
 var alpha:Float;
 var visible:Bool;
-var scaleMode:Int;
+var scaleMode:Float;
 var blendMode:Dynamic;
 var textureKey:String;
 var frameKey:String;

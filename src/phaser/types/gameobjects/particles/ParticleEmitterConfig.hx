@@ -19,7 +19,7 @@ package phaser.types.gameobjects.particles;
  * @property {number} [frequency] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#frequency}.
  * @property {number} [gravityX] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#gravityX}.
  * @property {number} [gravityY] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#gravityY}.
- * @property {integer} [maxParticles] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#maxParticles}.
+ * @property {number} [maxParticles] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#maxParticles}.
  * @property {string} [name] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#name}.
  * @property {boolean} [on] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#on}.
  * @property {boolean} [particleBringToTop] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#particleBringToTop}.
@@ -50,12 +50,14 @@ package phaser.types.gameobjects.particles;
  * @property {(Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType|Phaser.Types.GameObjects.Particles.EmitterOpOnUpdateType)} [tint] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#tint}.
  * @property {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} [x] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#x} (emit only).
  * @property {Phaser.Types.GameObjects.Particles.EmitterOpOnEmitType} [y] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#y} (emit only).
- * @property {object} [emitZone] - As {@link Phaser.GameObjects.Particles.ParticleEmitter#setEmitZone}.
+ * @property {Phaser.Types.GameObjects.Particles.ParticleEmitterEdgeZoneConfig | Phaser.Types.GameObjects.Particles.ParticleEmitterRandomZoneConfig} [emitZone] - As {@link Phaser.GameObjects.Particles.ParticleEmitter#setEmitZone}.
+ * @property {Phaser.Types.GameObjects.Particles.ParticleEmitterDeathZoneConfig} [deathZone] - As {@link Phaser.GameObjects.Particles.ParticleEmitter#setDeathZone}.
  * @property {Phaser.Types.GameObjects.Particles.ParticleEmitterBounds|Phaser.Types.GameObjects.Particles.ParticleEmitterBoundsAlt} [bounds] - As {@link Phaser.GameObjects.Particles.ParticleEmitter#setBounds}.
  * @property {object} [followOffset] - Assigns to {@link Phaser.GameObjects.Particles.ParticleEmitter#followOffset}.
  * @property {number} [followOffset.x] - x-coordinate of the offset.
  * @property {number} [followOffset.y] - y-coordinate of the offset.
  * @property {number|number[]|string|string[]|Phaser.Textures.Frame|Phaser.Textures.Frame[]|Phaser.Types.GameObjects.Particles.ParticleEmitterFrameConfig} [frame] - Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#frames}.
+ * @property {number} [reserve] - Creates specified number of inactive particles and adds them to this emitter's pool. {@link Phaser.GameObjects.Particles.ParticleEmitter#reserve}
  */
 typedef ParticleEmitterConfig = {
     @:optional var active:Bool;
@@ -73,7 +75,7 @@ typedef ParticleEmitterConfig = {
     @:optional var frequency:Float;
     @:optional var gravityX:Float;
     @:optional var gravityY:Float;
-    @:optional var maxParticles:Int;
+    @:optional var maxParticles:Float;
     @:optional var name:String;
     @:optional var on:Bool;
     @:optional var particleBringToTop:Bool;
@@ -105,7 +107,9 @@ typedef ParticleEmitterConfig = {
     @:optional var x:phaser.types.gameobjects.particles.EmitterOpOnEmitType;
     @:optional var y:phaser.types.gameobjects.particles.EmitterOpOnEmitType;
     @:optional var emitZone:Dynamic;
+    @:optional var deathZone:phaser.types.gameobjects.particles.ParticleEmitterDeathZoneConfig;
     @:optional var bounds:Dynamic;
     @:optional var followOffset:Dynamic;
     @:optional var frame:Dynamic;
+    @:optional var reserve:Float;
 };

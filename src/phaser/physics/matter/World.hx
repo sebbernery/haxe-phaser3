@@ -384,13 +384,12 @@ extern class World extends phaser.events.EventEmitter {
      * @method Phaser.Physics.Matter.World#convertTilemapLayer
      * @since 3.0.0
      *
-     * @param {(Phaser.Tilemaps.DynamicTilemapLayer|Phaser.Tilemaps.StaticTilemapLayer)} tilemapLayer -
-     * An array of tiles.
+     * @param {Phaser.Tilemaps.TilemapLayer} tilemapLayer - An array of tiles.
      * @param {object} [options] - Options to be passed to the MatterTileBody constructor. {@see Phaser.Physics.Matter.TileBody}
      *
      * @return {this} This Matter World object.
      */
-    public function convertTilemapLayer(tilemapLayer:Dynamic, ?options:Dynamic):Dynamic;
+    public function convertTilemapLayer(tilemapLayer:phaser.tilemaps.TilemapLayer, ?options:Dynamic):Dynamic;
     /**
      * Adds `MatterTileBody` instances for the given tiles. This adds bodies regardless of whether the
      * tiles are set to collide or not.

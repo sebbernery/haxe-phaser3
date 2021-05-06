@@ -17,6 +17,9 @@ package phaser.gameobjects;
  * of the game canvas. This div is sized to match the canvas, and if the canvas size changes, as a result of
  * settings within the Scale Manager, the dom container is resized accordingly.
  *
+ * If you have not already done so, you have to provide a `parent` in the Game Configuration, or the DOM
+ * Container will fail to be created.
+ *
  * You can create a DOM Element by either passing in DOMStrings, or by passing in a reference to an existing
  * Element that you wish to be placed under the control of Phaser. For example:
  *
@@ -644,11 +647,11 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontal origin of this Game Object.
      * The origin maps the relationship between the size and position of the Game Object.
@@ -890,11 +893,11 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -923,6 +926,17 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1047,6 +1061,27 @@ extern class DOMElement extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

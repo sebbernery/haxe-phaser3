@@ -84,6 +84,18 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      */
     public var loop:Bool;
     /**
+     * Gets or sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * Has no audible effect on HTML5 Audio Sound, but still generates the PAN Event.
+     *
+     * @name Phaser.Sound.HTML5AudioSound#pan
+     * @type {number}
+     * @default 0
+     * @fires Phaser.Sound.Events#PAN
+     * @since 3.50.0
+     */
+    public var pan:Float;
+    /**
      * Sets the muted state of this Sound.
      *
      * @method Phaser.Sound.HTML5AudioSound#setMute
@@ -92,9 +104,9 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      *
      * @param {boolean} value - `true` to mute this sound, `false` to unmute it.
      *
-     * @return {Phaser.Sound.HTML5AudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setMute(value:Bool):phaser.sound.HTML5AudioSound;
+    public function setMute(value:Bool):Dynamic;
     /**
      * Sets the volume of this Sound.
      *
@@ -104,9 +116,9 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The volume of the sound.
      *
-     * @return {Phaser.Sound.HTML5AudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setVolume(value:Float):phaser.sound.HTML5AudioSound;
+    public function setVolume(value:Float):Dynamic;
     /**
      * Sets the playback rate of this Sound.
      *
@@ -119,9 +131,9 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The playback rate at of this Sound.
      *
-     * @return {Phaser.Sound.HTML5AudioSound} This Sound.
+     * @return {this} This Sound instance.
      */
-    public function setRate(value:Float):phaser.sound.HTML5AudioSound;
+    public function setRate(value:Float):Dynamic;
     /**
      * Sets the detune value of this Sound, given in [cents](https://en.wikipedia.org/wiki/Cent_%28music%29).
      * The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
@@ -132,9 +144,9 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
      *
-     * @return {Phaser.Sound.HTML5AudioSound} This Sound.
+     * @return {this} This Sound instance.
      */
-    public function setDetune(value:Float):phaser.sound.HTML5AudioSound;
+    public function setDetune(value:Float):Dynamic;
     /**
      * Seeks to a specific point in this sound.
      *
@@ -144,9 +156,9 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      *
      * @param {number} value - The point in the sound to seek to.
      *
-     * @return {Phaser.Sound.HTML5AudioSound} This Sound instance.
+     * @return {this} This Sound instance.
      */
-    public function setSeek(value:Float):phaser.sound.HTML5AudioSound;
+    public function setSeek(value:Float):Dynamic;
     /**
      * Sets the loop state of this Sound.
      *
@@ -159,4 +171,18 @@ extern class HTML5AudioSound extends phaser.sound.BaseSound {
      * @return {Phaser.Sound.HTML5AudioSound} This Sound instance.
      */
     public function setLoop(value:Bool):phaser.sound.HTML5AudioSound;
+    /**
+     * Sets the pan of this sound, a value between -1 (full left pan) and 1 (full right pan).
+     *
+     * Has no audible effect on HTML5 Audio Sound, but still generates the PAN Event.
+     *
+     * @method Phaser.Sound.HTML5AudioSound#setPan
+     * @fires Phaser.Sound.Events#PAN
+     * @since 3.50.0
+     *
+     * @param {number} value - The pan of the sound. A value between -1 (full left pan) and 1 (full right pan).
+     *
+     * @return {this} This Sound instance.
+     */
+    public function setPan(value:Float):Dynamic;
 }

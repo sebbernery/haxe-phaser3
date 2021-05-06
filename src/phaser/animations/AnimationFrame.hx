@@ -15,13 +15,14 @@ package phaser.animations;
  * @since 3.0.0
  *
  * @param {string} textureKey - The key of the Texture this AnimationFrame uses.
- * @param {(string|integer)} textureFrame - The key of the Frame within the Texture that this AnimationFrame uses.
- * @param {integer} index - The index of this AnimationFrame within the Animation sequence.
+ * @param {(string|number)} textureFrame - The key of the Frame within the Texture that this AnimationFrame uses.
+ * @param {number} index - The index of this AnimationFrame within the Animation sequence.
  * @param {Phaser.Textures.Frame} frame - A reference to the Texture Frame this AnimationFrame uses for rendering.
+ * @param {boolean} [isKeyFrame=false] - Is this Frame a Keyframe within the Animation?
  */
 @:native("Phaser.Animations.AnimationFrame")
 extern class AnimationFrame {
-    public function new(textureKey:String, textureFrame:Dynamic, index:Int, frame:phaser.textures.Frame);
+    public function new(textureKey:String, textureFrame:Dynamic, index:Float, frame:phaser.textures.Frame, ?isKeyFrame:Bool);
     /**
      * The key of the Texture this AnimationFrame uses.
      *
@@ -34,7 +35,7 @@ extern class AnimationFrame {
      * The key of the Frame within the Texture that this AnimationFrame uses.
      *
      * @name Phaser.Animations.AnimationFrame#textureFrame
-     * @type {(string|integer)}
+     * @type {(string|number)}
      * @since 3.0.0
      */
     public var textureFrame:Dynamic;
@@ -42,10 +43,10 @@ extern class AnimationFrame {
      * The index of this AnimationFrame within the Animation sequence.
      *
      * @name Phaser.Animations.AnimationFrame#index
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var index:Int;
+    public var index:Float;
     /**
      * A reference to the Texture Frame this AnimationFrame uses for rendering.
      *
@@ -115,6 +116,14 @@ extern class AnimationFrame {
      * @since 3.0.0
      */
     public var progress:Float;
+    /**
+     * Is this Frame a KeyFrame within the Animation?
+     *
+     * @name Phaser.Animations.AnimationFrame#isKeyFrame
+     * @type {boolean}
+     * @since 3.50.0
+     */
+    public var isKeyFrame:Bool;
     /**
      * Generates a JavaScript object suitable for converting to JSON.
      *

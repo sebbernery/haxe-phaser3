@@ -28,6 +28,9 @@ package phaser.gameobjects;
  * Containers can be enabled for input. Because they do not have a texture you need to provide a shape for them
  * to use as their hit area. Container children can also be enabled for input, independent of the Container.
  *
+ * If input enabling a _child_ you should not set both the `origin` and a **negative** scale factor on the child,
+ * or the input area will become misaligned.
+ *
  * Containers can be given a physics body for either Arcade Physics, Impact Physics or Matter Physics. However,
  * if Container _children_ are enabled for physics you may get unexpected results, such as offset bodies,
  * if the Container itself, or any of its ancestors, is positioned anywhere other than at 0 x 0. Container children
@@ -51,6 +54,7 @@ package phaser.gameobjects;
  * @extends Phaser.GameObjects.Components.ComputedSize
  * @extends Phaser.GameObjects.Components.Depth
  * @extends Phaser.GameObjects.Components.Mask
+ * @extends Phaser.GameObjects.Components.Pipeline
  * @extends Phaser.GameObjects.Components.Transform
  * @extends Phaser.GameObjects.Components.Visible
  *
@@ -95,19 +99,19 @@ extern class Container extends phaser.gameobjects.GameObject {
      * the maximum limit the Container can grow in size to.
      *
      * @name Phaser.GameObjects.Container#maxSize
-     * @type {integer}
+     * @type {number}
      * @default -1
      * @since 3.4.0
      */
-    public var maxSize:Int;
+    public var maxSize:Float;
     /**
      * The cursor position.
      *
      * @name Phaser.GameObjects.Container#position
-     * @type {integer}
+     * @type {number}
      * @since 3.4.0
      */
-    public var position:Int;
+    public var position:Float;
     /**
      * Internal Transform Matrix used for local space conversion.
      *
@@ -139,7 +143,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#scrollFactorX
      * @type {number}
      * @default 1
-     * @since 3.0.0
+     * @since 3.4.0
      */
     public var scrollFactorX:Float;
     /**
@@ -165,7 +169,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#scrollFactorY
      * @type {number}
      * @default 1
-     * @since 3.0.0
+     * @since 3.4.0
      */
     public var scrollFactorY:Float;
     /**
@@ -175,6 +179,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#originX
      * @type {number}
      * @readonly
+     * @override
      * @since 3.4.0
      */
     public var originX:Float;
@@ -185,6 +190,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#originY
      * @type {number}
      * @readonly
+     * @override
      * @since 3.4.0
      */
     public var originY:Float;
@@ -195,6 +201,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#displayOriginX
      * @type {number}
      * @readonly
+     * @override
      * @since 3.4.0
      */
     public var displayOriginX:Float;
@@ -205,6 +212,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @name Phaser.GameObjects.Container#displayOriginY
      * @type {number}
      * @readonly
+     * @override
      * @since 3.4.0
      */
     public var displayOriginY:Float;
@@ -212,11 +220,11 @@ extern class Container extends phaser.gameobjects.GameObject {
      * The number of Game Objects inside this Container.
      *
      * @name Phaser.GameObjects.Container#length
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.4.0
      */
-    public var length:Int;
+    public var length:Float;
     /**
      * Returns the first Game Object within the Container, or `null` if it is empty.
      *
@@ -351,22 +359,22 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @since 3.4.0
      *
      * @param {Phaser.GameObjects.GameObject|Phaser.GameObjects.GameObject[]} child - The Game Object, or array of Game Objects, to add to the Container.
-     * @param {integer} [index=0] - The position to insert the Game Object/s at.
+     * @param {number} [index=0] - The position to insert the Game Object/s at.
      *
      * @return {this} This Container instance.
      */
-    public function addAt(child:Dynamic, ?index:Int):Dynamic;
+    public function addAt(child:Dynamic, ?index:Float):Dynamic;
     /**
      * Returns the Game Object at the given position in this Container.
      *
      * @method Phaser.GameObjects.Container#getAt
      * @since 3.4.0
      *
-     * @param {integer} index - The position to get the Game Object from.
+     * @param {number} index - The position to get the Game Object from.
      *
      * @return {?Phaser.GameObjects.GameObject} The Game Object at the specified index, or `null` if none found.
      */
-    public function getAt(index:Int):phaser.gameobjects.GameObject;
+    public function getAt(index:Float):phaser.gameobjects.GameObject;
     /**
      * Returns the index of the given Game Object in this Container.
      *
@@ -375,9 +383,9 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to search for in this Container.
      *
-     * @return {integer} The index of the Game Object in this Container, or -1 if not found.
+     * @return {number} The index of the Game Object in this Container, or -1 if not found.
      */
-    public function getIndex(child:phaser.gameobjects.GameObject):Int;
+    public function getIndex(child:phaser.gameobjects.GameObject):Float;
     /**
      * Sort the contents of this Container so the items are in order based on the given property.
      * For example: `sort('alpha')` would sort the elements based on the value of their `alpha` property.
@@ -409,12 +417,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Container#getRandom
      * @since 3.4.0
      *
-     * @param {integer} [startIndex=0] - An optional start index.
-     * @param {integer} [length] - An optional length, the total number of elements (from the startIndex) to choose from.
+     * @param {number} [startIndex=0] - An optional start index.
+     * @param {number} [length] - An optional length, the total number of elements (from the startIndex) to choose from.
      *
      * @return {?Phaser.GameObjects.GameObject} A random child from the Container, or `null` if the Container is empty.
      */
-    public function getRandom(?startIndex:Int, ?length:Int):phaser.gameobjects.GameObject;
+    public function getRandom(?startIndex:Float, ?length:Float):phaser.gameobjects.GameObject;
     /**
      * Gets the first Game Object in this Container.
      *
@@ -430,12 +438,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {string} property - The property to test on each Game Object in the Container.
      * @param {*} value - The value to test the property against. Must pass a strict (`===`) comparison check.
-     * @param {integer} [startIndex=0] - An optional start index to search from.
-     * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
+     * @param {number} [startIndex=0] - An optional start index to search from.
+     * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
      * @return {?Phaser.GameObjects.GameObject} The first matching Game Object, or `null` if none was found.
      */
-    public function getFirst(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):phaser.gameobjects.GameObject;
+    public function getFirst(property:String, value:Dynamic, ?startIndex:Float, ?endIndex:Float):phaser.gameobjects.GameObject;
     /**
      * Returns all Game Objects in this Container.
      *
@@ -456,12 +464,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {string} [property] - The property to test on each Game Object in the Container.
      * @param {any} [value] - If property is set then the `property` must strictly equal this value to be included in the results.
-     * @param {integer} [startIndex=0] - An optional start index to search from.
-     * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
+     * @param {number} [startIndex=0] - An optional start index to search from.
+     * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
      * @return {Phaser.GameObjects.GameObject[]} An array of matching Game Objects from this Container.
      */
-    public function getAll(?property:String, ?value:Dynamic, ?startIndex:Int, ?endIndex:Int):Array<phaser.gameobjects.GameObject>;
+    public function getAll(?property:String, ?value:Dynamic, ?startIndex:Float, ?endIndex:Float):Array<phaser.gameobjects.GameObject>;
     /**
      * Returns the total number of Game Objects in this Container that have a property
      * matching the given value.
@@ -475,12 +483,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {string} property - The property to check.
      * @param {any} value - The value to check.
-     * @param {integer} [startIndex=0] - An optional start index to search from.
-     * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
+     * @param {number} [startIndex=0] - An optional start index to search from.
+     * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
-     * @return {integer} The total number of Game Objects in this Container with a property matching the given value.
+     * @return {number} The total number of Game Objects in this Container with a property matching the given value.
      */
-    public function count(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):Int;
+    public function count(property:String, value:Dynamic, ?startIndex:Float, ?endIndex:Float):Float;
     /**
      * Swaps the position of two Game Objects in this Container.
      * Both Game Objects must belong to this Container.
@@ -506,11 +514,11 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @since 3.4.0
      *
      * @param {Phaser.GameObjects.GameObject} child - The Game Object to move.
-     * @param {integer} index - The new position of the Game Object in this Container.
+     * @param {number} index - The new position of the Game Object in this Container.
      *
      * @return {this} This Container instance.
      */
-    public function moveTo(child:phaser.gameobjects.GameObject, index:Int):Dynamic;
+    public function moveTo(child:phaser.gameobjects.GameObject, index:Float):Dynamic;
     /**
      * Removes the given Game Object, or array of Game Objects, from this Container.
      *
@@ -535,12 +543,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Container#removeAt
      * @since 3.4.0
      *
-     * @param {integer} index - The index of the Game Object to be removed.
+     * @param {number} index - The index of the Game Object to be removed.
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on the Game Object if successfully removed from this Container.
      *
      * @return {this} This Container instance.
      */
-    public function removeAt(index:Int, ?destroyChild:Bool):Dynamic;
+    public function removeAt(index:Float, ?destroyChild:Bool):Dynamic;
     /**
      * Removes the Game Objects between the given positions in this Container.
      *
@@ -549,13 +557,13 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Container#removeBetween
      * @since 3.4.0
      *
-     * @param {integer} [startIndex=0] - An optional start index to search from.
-     * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
+     * @param {number} [startIndex=0] - An optional start index to search from.
+     * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      * @param {boolean} [destroyChild=false] - Optionally call `destroy` on each Game Object successfully removed from this Container.
      *
      * @return {this} This Container instance.
      */
-    public function removeBetween(?startIndex:Int, ?endIndex:Int, ?destroyChild:Bool):Dynamic;
+    public function removeBetween(?startIndex:Float, ?endIndex:Float, ?destroyChild:Bool):Dynamic;
     /**
      * Removes all Game Objects from this Container.
      *
@@ -672,12 +680,12 @@ extern class Container extends phaser.gameobjects.GameObject {
      *
      * @param {string} property - The property that must exist on the Game Object.
      * @param {any} value - The value to get the property to.
-     * @param {integer} [startIndex=0] - An optional start index to search from.
-     * @param {integer} [endIndex=Container.length] - An optional end index to search up to (but not included)
+     * @param {number} [startIndex=0] - An optional start index to search from.
+     * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *
      * @return {this} This Container instance.
      */
-    public function setAll(property:String, value:Dynamic, ?startIndex:Int, ?endIndex:Int):Dynamic;
+    public function setAll(property:String, value:Dynamic, ?startIndex:Float, ?endIndex:Float):Dynamic;
     /**
      * Passes all Game Objects in this Container to the given callback.
      *
@@ -731,7 +739,7 @@ extern class Container extends phaser.gameobjects.GameObject {
      * them from physics bodies if not accounted for in your code.
      *
      * @method Phaser.GameObjects.Container#setScrollFactor
-     * @since 3.0.0
+     * @since 3.4.0
      *
      * @param {number} x - The horizontal scroll factor of this Game Object.
      * @param {number} [y=x] - The vertical scroll factor of this Game Object. If not set it will use the `x` value.
@@ -948,11 +956,11 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The Mask this Game Object is using during render.
      *
@@ -998,6 +1006,8 @@ extern class Container extends phaser.gameobjects.GameObject {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.
@@ -1033,6 +1043,200 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @return {Phaser.Display.Masks.GeometryMask} This Geometry Mask that was created.
      */
     public function createGeometryMask(?graphics:phaser.gameobjects.Graphics):phaser.display.masks.GeometryMask;
+    /**
+     * The initial WebGL pipeline of this Game Object.
+     *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
+     * @type {Phaser.Renderer.WebGL.WebGLPipeline}
+     * @default null
+     * @webglOnly
+     * @since 3.0.0
+     */
+    public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
+    /**
+     * The current WebGL pipeline of this Game Object.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipeline
+     * @type {Phaser.Renderer.WebGL.WebGLPipeline}
+     * @default null
+     * @webglOnly
+     * @since 3.0.0
+     */
+    public var pipeline:phaser.renderer.webgl.WebGLPipeline;
+    /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
+     * Sets the initial WebGL Pipeline of this Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#initPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     *
+     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     */
+    public function initPipeline(pipeline:Dynamic):Bool;
+    /**
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
+    /**
+     * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
+     */
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
+    /**
+     * Gets the name of the WebGL Pipeline this Game Object is currently using.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPipelineName
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @return {string} The string-based name of the pipeline being used by this Game Object.
+     */
+    public function getPipelineName():String;
     /**
      * The x position of this Game Object.
      *
@@ -1112,11 +1316,11 @@ extern class Container extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1145,6 +1349,17 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1269,6 +1484,27 @@ extern class Container extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

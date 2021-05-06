@@ -172,7 +172,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
     /**
      * The Base Size component.
      *
-     * The modified game size, which is the gameSize * resolution, used to set the canvas width and height
+     * The modified game size, which is the auto-rounded gameSize, used to set the canvas width and height
      * (but not the CSS style)
      *
      * @name Phaser.Scale.ScaleManager#baseSize
@@ -198,16 +198,6 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @since 3.16.0
      */
     public var scaleMode:phaser.scale.ScaleModeType;
-    /**
-     * The canvas resolution.
-     *
-     * This is hard-coded to a value of 1 in the 3.16 release of Phaser and will be enabled at a later date.
-     *
-     * @name Phaser.Scale.ScaleManager#resolution
-     * @type {number}
-     * @since 3.16.0
-     */
-    public var resolution:Float;
     /**
      * The game zoom factor.
      *
@@ -310,10 +300,10 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * checked here.
      *
      * @name Phaser.Scale.ScaleManager#resizeInterval
-     * @type {integer}
+     * @type {number}
      * @since 3.16.0
      */
-    public var resizeInterval:Int;
+    public var resizeInterval:Float;
     /**
      * Is the browser currently in fullscreen mode or not?
      *
@@ -518,11 +508,11 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @fires Phaser.Scale.Events#RESIZE
      * @since 3.16.0
      *
-     * @param {integer} value - The new zoom value of the game.
+     * @param {number} value - The new zoom value of the game.
      *
      * @return {this} The Scale Manager instance.
      */
-    public function setZoom(value:Int):Dynamic;
+    public function setZoom(value:Float):Dynamic;
     /**
      * Sets the zoom to be the maximum possible based on the _current_ parent size.
      *
@@ -576,9 +566,9 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * @method Phaser.Scale.ScaleManager#getMaxZoom
      * @since 3.16.0
      *
-     * @return {integer} The maximum possible zoom factor. At a minimum this value is always at least 1.
+     * @return {number} The maximum possible zoom factor. At a minimum this value is always at least 1.
      */
-    public function getMaxZoom():Int;
+    public function getMaxZoom():Float;
     /**
      * Calculates and updates the canvas CSS style in order to center it within the
      * bounds of its parent. If you have explicitly set parent to be `null` in your
@@ -631,7 +621,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      *
      * If the browser does not support this, a `FULLSCREEN_UNSUPPORTED` event will be emitted.
      *
-     * This method _must_ be called from a user-input gesture, such as `pointerup`. You cannot launch
+     * This method _must_ be called from a `pointerup` user-input gesture (**not** `pointerdown`). You cannot launch
      * games fullscreen without this, as most browsers block it. Games within an iframe will also be blocked
      * from fullscreen unless the iframe has the `allowfullscreen` attribute.
      *
@@ -716,6 +706,7 @@ extern class ScaleManager extends phaser.events.EventEmitter {
      * Triggered when a fullscreenchange event is dispatched by the DOM.
      *
      * @method Phaser.Scale.ScaleManager#onFullScreenChange
+     * @protected
      * @since 3.16.0
      */
     public function onFullScreenChange():Void;

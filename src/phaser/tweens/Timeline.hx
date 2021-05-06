@@ -122,10 +122,10 @@ extern class Timeline extends phaser.events.EventEmitter {
      * The current state of the Timeline.
      *
      * @name Phaser.Tweens.Timeline#state
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var state:Int;
+    public var state:Float;
     /**
      * Does the Timeline start off paused? (if so it needs to be started with Timeline.play)
      *

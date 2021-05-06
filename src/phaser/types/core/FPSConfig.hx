@@ -4,18 +4,18 @@ package phaser.types.core;
  * @typedef {object} Phaser.Types.Core.FPSConfig
  * @since 3.0.0
  *
- * @property {integer} [min=5] - The minimum acceptable rendering rate, in frames per second.
- * @property {integer} [target=60] - The optimum rendering rate, in frames per second.
+ * @property {number} [min=5] - The minimum acceptable rendering rate, in frames per second.
+ * @property {number} [target=60] - The optimum rendering rate, in frames per second. This does not enforce the fps rate, it merely tells Phaser what rate is considered optimal for this game.
  * @property {boolean} [forceSetTimeOut=false] - Use setTimeout instead of requestAnimationFrame to run the game loop.
- * @property {integer} [deltaHistory=10] - Calculate the average frame delta from this many consecutive frame intervals.
- * @property {integer} [panicMax=120] - The amount of frames the time step counts before we trust the delta values again.
+ * @property {number} [deltaHistory=10] - Calculate the average frame delta from this many consecutive frame intervals.
+ * @property {number} [panicMax=120] - The amount of frames the time step counts before we trust the delta values again.
  * @property {boolean} [smoothStep=true] - Apply delta smoothing during the game update to help avoid spikes?
  */
 typedef FPSConfig = {
-    @:optional var min:Int;
-    @:optional var target:Int;
+    @:optional var min:Float;
+    @:optional var target:Float;
     @:optional var forceSetTimeOut:Bool;
-    @:optional var deltaHistory:Int;
-    @:optional var panicMax:Int;
+    @:optional var deltaHistory:Float;
+    @:optional var panicMax:Float;
     @:optional var smoothStep:Bool;
 };

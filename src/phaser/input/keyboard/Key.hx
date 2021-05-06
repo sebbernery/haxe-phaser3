@@ -12,11 +12,11 @@ package phaser.input.keyboard;
  * @since 3.0.0
  *
  * @param {Phaser.Input.Keyboard.KeyboardPlugin} plugin - The Keyboard Plugin instance that owns this Key object.
- * @param {integer} keyCode - The keycode of this key.
+ * @param {number} keyCode - The keycode of this key.
  */
 @:native("Phaser.Input.Keyboard.Key")
 extern class Key extends phaser.events.EventEmitter {
-    public function new(plugin:phaser.input.keyboard.KeyboardPlugin, keyCode:Int);
+    public function new(plugin:phaser.input.keyboard.KeyboardPlugin, keyCode:Float);
     /**
      * The Keyboard Plugin instance that owns this Key object.
      *
@@ -29,10 +29,10 @@ extern class Key extends phaser.events.EventEmitter {
      * The keycode of this key.
      *
      * @name Phaser.Input.Keyboard.Key#keyCode
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var keyCode:Int;
+    public var keyCode:Float;
     /**
      * The original DOM event.
      *

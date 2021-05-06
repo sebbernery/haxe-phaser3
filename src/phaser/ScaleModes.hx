@@ -12,27 +12,27 @@ class ScaleModes {
      * Default Scale Mode (Linear).
      *
      * @name Phaser.ScaleModes.DEFAULT
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    static public var DEFAULT:Int;
+    static public var DEFAULT:Float;
     /**
      * Linear Scale Mode.
      *
      * @name Phaser.ScaleModes.LINEAR
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    static public var LINEAR:Int;
+    static public var LINEAR:Float;
     /**
      * Nearest Scale Mode.
      *
      * @name Phaser.ScaleModes.NEAREST
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.0.0
      */
-    static public var NEAREST:Int;
+    static public var NEAREST:Float;
 }

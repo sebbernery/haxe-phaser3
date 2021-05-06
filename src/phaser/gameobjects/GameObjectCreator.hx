@@ -38,6 +38,15 @@ extern class GameObjectCreator {
      */
     public var systems:phaser.scenes.Systems;
     /**
+     * A reference to the Scene Event Emitter.
+     *
+     * @name Phaser.GameObjects.GameObjectCreator#events
+     * @type {Phaser.Events.EventEmitter}
+     * @protected
+     * @since 3.50.0
+     */
+    public var events:phaser.events.EventEmitter;
+    /**
      * A reference to the Scene Display List.
      *
      * @name Phaser.GameObjects.GameObjectCreator#displayList
@@ -153,6 +162,20 @@ extern class GameObjectCreator {
      */
     public function image(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Image;
     /**
+     * Creates a new Layer Game Object and returns it.
+     *
+     * Note: This method will only be available if the Layer Game Object has been built into Phaser.
+     *
+     * @method Phaser.GameObjects.GameObjectCreator#layer
+     * @since 3.50.0
+     *
+     * @param {object} config - The configuration object this Game Object will use to create itself.
+     * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
+     *
+     * @return {Phaser.GameObjects.Layer} The Game Object that was created.
+     */
+    public function layer(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Layer;
+    /**
      * Creates a new Mesh Game Object and returns it.
      *
      * Note: This method will only be available if the Mesh Game Object and WebGL support have been built into Phaser.
@@ -181,19 +204,19 @@ extern class GameObjectCreator {
      */
     public function particles(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.particles.ParticleEmitterManager;
     /**
-     * Creates a new Quad Game Object and returns it.
+     * Creates a new Point Light Game Object and returns it.
      *
-     * Note: This method will only be available if the Quad Game Object and WebGL support have been built into Phaser.
+     * Note: This method will only be available if the Point Light Game Object has been built into Phaser.
      *
-     * @method Phaser.GameObjects.GameObjectCreator#quad
-     * @since 3.0.0
+     * @method Phaser.GameObjects.GameObjectCreator#pointlight
+     * @since 3.50.0
      *
      * @param {object} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
-     * @return {Phaser.GameObjects.Quad} The Game Object that was created.
+     * @return {Phaser.GameObjects.PointLight} The Game Object that was created.
      */
-    public function quad(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Quad;
+    public function pointlight(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.PointLight;
     /**
      * Creates a new Render Texture Game Object and returns it.
      *
@@ -258,12 +281,12 @@ extern class GameObjectCreator {
      * @method Phaser.GameObjects.GameObjectCreator#text
      * @since 3.0.0
      *
-     * @param {object} config - The configuration object this Game Object will use to create itself.
+     * @param {Phaser.Types.GameObjects.Text.TextConfig} config - The configuration object this Game Object will use to create itself.
      * @param {boolean} [addToScene] - Add this Game Object to the Scene after creating it? If set this argument overrides the `add` property in the config object.
      *
      * @return {Phaser.GameObjects.Text} The Game Object that was created.
      */
-    public function text(config:Dynamic, ?addToScene:Bool):phaser.gameobjects.Text;
+    public function text(config:phaser.types.gameobjects.text.TextConfig, ?addToScene:Bool):phaser.gameobjects.Text;
     /**
      * Creates a new TileSprite Game Object and returns it.
      *

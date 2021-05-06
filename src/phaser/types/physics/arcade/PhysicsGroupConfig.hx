@@ -21,6 +21,8 @@ package phaser.types.physics.arcade;
  * @property {number} [gravityY=0] - Sets {@link Phaser.Physics.Arcade.Body#gravity gravity.y}.
  * @property {number} [frictionX=0] - Sets {@link Phaser.Physics.Arcade.Body#friction friction.x}.
  * @property {number} [frictionY=0] - Sets {@link Phaser.Physics.Arcade.Body#friction friction.y}.
+ * @property {number} [maxVelocityX=10000] - Sets {@link Phaser.Physics.Arcade.Body#maxVelocity maxVelocity.x}.
+ * @property {number} [maxVelocityY=10000] - Sets {@link Phaser.Physics.Arcade.Body#maxVelocity maxVelocity.y}.
  * @property {number} [velocityX=0] - Sets {@link Phaser.Physics.Arcade.Body#velocity velocity.x}.
  * @property {number} [velocityY=0] - Sets {@link Phaser.Physics.Arcade.Body#velocity velocity.y}.
  * @property {number} [angularVelocity=0] - Sets {@link Phaser.Physics.Arcade.Body#angularVelocity}.
@@ -46,6 +48,8 @@ typedef PhysicsGroupConfig = {
     @:optional var gravityY:Float;
     @:optional var frictionX:Float;
     @:optional var frictionY:Float;
+    @:optional var maxVelocityX:Float;
+    @:optional var maxVelocityY:Float;
     @:optional var velocityX:Float;
     @:optional var velocityY:Float;
     @:optional var angularVelocity:Float;

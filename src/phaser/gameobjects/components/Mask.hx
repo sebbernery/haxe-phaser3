@@ -54,6 +54,8 @@ extern class Mask {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.

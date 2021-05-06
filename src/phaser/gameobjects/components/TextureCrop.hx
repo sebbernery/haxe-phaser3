@@ -78,7 +78,7 @@ extern class TextureCrop {
      * @since 3.0.0
      *
      * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -96,7 +96,7 @@ extern class TextureCrop {
      * @method Phaser.GameObjects.Components.TextureCrop#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *

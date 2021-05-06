@@ -205,11 +205,11 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *
@@ -597,7 +597,7 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Textures.Texture)} key - The key of the texture to be used, as stored in the Texture Manager, or a Texture instance.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -615,7 +615,7 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Texture#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *
@@ -623,7 +623,54 @@ extern class Extern extends phaser.gameobjects.GameObject {
      */
     public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -632,57 +679,20 @@ extern class Extern extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -724,14 +734,14 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -753,14 +763,14 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * The x position of this Game Object.
      *
@@ -840,11 +850,11 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -873,6 +883,17 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -997,6 +1018,27 @@ extern class Extern extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

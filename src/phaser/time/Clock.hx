@@ -65,14 +65,19 @@ extern class Clock {
     /**
      * Creates a Timer Event and adds it to the Clock at the start of the frame.
      *
+     * You can also pass in an existing Timer Event, which will be reset and added to this Clock.
+     *
+     * Note that if the Timer Event is being used by _another_ Clock (in another Scene) it will still
+     * be updated by that Clock as well, so be careful when using this feature.
+     *
      * @method Phaser.Time.Clock#addEvent
      * @since 3.0.0
      *
-     * @param {Phaser.Types.Time.TimerEventConfig} config - The configuration for the Timer Event.
+     * @param {(Phaser.Time.TimerEvent | Phaser.Types.Time.TimerEventConfig)} config - The configuration for the Timer Event, or an existing Timer Event object.
      *
-     * @return {Phaser.Time.TimerEvent} The Timer Event which was created.
+     * @return {Phaser.Time.TimerEvent} The Timer Event which was created, or passed in.
      */
-    public function addEvent(config:phaser.types.time.TimerEventConfig):phaser.time.TimerEvent;
+    public function addEvent(config:Dynamic):phaser.time.TimerEvent;
     /**
      * Creates a Timer Event and adds it to the Clock at the start of the frame.
      *
@@ -95,18 +100,32 @@ extern class Clock {
      * @method Phaser.Time.Clock#clearPendingEvents
      * @since 3.0.0
      *
-     * @return {Phaser.Time.Clock} This Clock object.
+     * @return {this} - This Clock instance.
      */
-    public function clearPendingEvents():phaser.time.Clock;
+    public function clearPendingEvents():Dynamic;
+    /**
+     * Removes the given Timer Event, or an array of Timer Events, from this Clock.
+     *
+     * The events are removed from all internal lists (active, pending and removal),
+     * freeing the event up to be re-used.
+     *
+     * @method Phaser.Time.Clock#removeEvent
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Time.TimerEvent | Phaser.Time.TimerEvent[])} events - The Timer Event, or an array of Timer Events, to remove from this Clock.
+     *
+     * @return {this} - This Clock instance.
+     */
+    public function removeEvent(events:Dynamic):Dynamic;
     /**
      * Schedules all active Timer Events for removal at the start of the frame.
      *
      * @method Phaser.Time.Clock#removeAllEvents
      * @since 3.0.0
      *
-     * @return {Phaser.Time.Clock} This Clock object.
+     * @return {this} - This Clock instance.
      */
-    public function removeAllEvents():phaser.time.Clock;
+    public function removeAllEvents():Dynamic;
     /**
      * Updates the arrays of active and pending Timer Events. Called at the start of the frame.
      *

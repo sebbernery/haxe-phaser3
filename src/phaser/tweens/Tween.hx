@@ -48,10 +48,10 @@ extern class Tween extends phaser.events.EventEmitter {
      * The cached length of the data array.
      *
      * @name Phaser.Tweens.Tween#totalData
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var totalData:Int;
+    public var totalData:Float;
     /**
      * An array of references to the target/s this Tween is operating on.
      *
@@ -64,10 +64,10 @@ extern class Tween extends phaser.events.EventEmitter {
      * Cached target total (not necessarily the same as the data total)
      *
      * @name Phaser.Tweens.Tween#totalTargets
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var totalTargets:Int;
+    public var totalTargets:Float;
     /**
      * If `true` then duration, delay, etc values are all frame totals.
      *
@@ -186,10 +186,10 @@ extern class Tween extends phaser.events.EventEmitter {
      * The current state of the tween
      *
      * @name Phaser.Tweens.Tween#state
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var state:Int;
+    public var state:Float;
     /**
      * Does the Tween start off paused? (if so it needs to be started with Tween.play)
      *
@@ -279,17 +279,17 @@ extern class Tween extends phaser.events.EventEmitter {
      * @since 3.0.0
      */
     public var callbackScope:Dynamic;
-    /**	
+    /**
      * Returns the current value of the specified Tween Data.
      *
      * @method Phaser.Tweens.Tween#getValue
      * @since 3.0.0
      *
-     * @param {integer} [index=0] - The Tween Data to return the value from.
+     * @param {number} [index=0] - The Tween Data to return the value from.
      *
      * @return {number} The value of the requested Tween Data.
      */
-    public function getValue(?index:Int):Float;
+    public function getValue(?index:Float):Float;
     /**
      * Set the scale the time applied to this Tween. A value of 1 runs in real-time. A value of 0.5 runs 50% slower, and so on.
      *
@@ -449,7 +449,8 @@ extern class Tween extends phaser.events.EventEmitter {
     /**
      * Seeks to a specific point in the Tween.
      *
-     * **Note:** You cannot seek a Tween that repeats or loops forever, or that has an unusually long total duration.
+     * **Note:** Be careful when seeking a Tween that repeats or loops forever,
+     * or that has an unusually long total duration, as it's possible to hang the browser.
      *
      * The given position is a value between 0 and 1 which represents how far through the Tween to seek to.
      * A value of 0.5 would seek to half-way through the Tween, where-as a value of zero would seek to the start.
@@ -585,9 +586,9 @@ extern class Tween extends phaser.events.EventEmitter {
      * @param {Phaser.Types.Tweens.TweenDataConfig} tweenData - The TweenData property to update.
      * @param {number} diff - Any extra time that needs to be accounted for in the elapsed and progress values.
      *
-     * @return {integer} The state of this Tween.
+     * @return {number} The state of this Tween.
      */
-    public function setStateFromEnd(tween:phaser.tweens.Tween, tweenData:phaser.types.tweens.TweenDataConfig, diff:Float):Int;
+    public function setStateFromEnd(tween:phaser.tweens.Tween, tweenData:phaser.types.tweens.TweenDataConfig, diff:Float):Float;
     /**
      * Internal method used as part of the playback process that sets a tween to play from the start.
      *
@@ -599,9 +600,9 @@ extern class Tween extends phaser.events.EventEmitter {
      * @param {Phaser.Types.Tweens.TweenDataConfig} tweenData - The TweenData property to update.
      * @param {number} diff - Any extra time that needs to be accounted for in the elapsed and progress values.
      *
-     * @return {integer} The state of this Tween.
+     * @return {number} The state of this Tween.
      */
-    public function setStateFromStart(tween:phaser.tweens.Tween, tweenData:phaser.types.tweens.TweenDataConfig, diff:Float):Int;
+    public function setStateFromStart(tween:phaser.tweens.Tween, tweenData:phaser.types.tweens.TweenDataConfig, diff:Float):Float;
     /**
      * Internal method that advances the TweenData based on the time value given.
      *

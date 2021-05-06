@@ -222,14 +222,20 @@ extern class TweenManager {
     /**
      * Returns an array of all Tweens or Timelines in the Tween Manager which affect the given target or array of targets.
      *
+     * Only the currently active tweens are tested. A tween that has completed and is
+     * awaiting removal will not be included in the results.
+     *
+     * If you wish to also search pending tweens, use the `includePending` flag.
+     *
      * @method Phaser.Tweens.TweenManager#getTweensOf
      * @since 3.0.0
      *
      * @param {(object|array)} target - The target to look for. Provide an array to look for multiple targets.
+     * @param {boolean} [includePending=false] - Also check for pending tweens, not just active ones?
      *
      * @return {Phaser.Tweens.Tween[]} A new array containing all Tweens and Timelines which affect the given target(s).
      */
-    public function getTweensOf(target:Dynamic):Array<phaser.tweens.Tween>;
+    public function getTweensOf(target:Dynamic, ?includePending:Bool):Array<phaser.tweens.Tween>;
     /**
      * Checks if the given object is being affected by a playing Tween.
      *

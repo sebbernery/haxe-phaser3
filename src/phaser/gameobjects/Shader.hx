@@ -328,14 +328,14 @@ extern class Shader extends phaser.gameobjects.GameObject {
      *
      * @param {string} uniformKey - The key of the sampler2D uniform to be updated, i.e. `iChannel0`.
      * @param {WebGLTexture} texture - A WebGLTexture reference.
-     * @param {integer} width - The width of the texture.
-     * @param {integer} height - The height of the texture.
-     * @param {integer} [textureIndex=0] - The texture index.
+     * @param {number} width - The width of the texture.
+     * @param {number} height - The height of the texture.
+     * @param {number} [textureIndex=0] - The texture index.
      * @param {any} [textureData] - Additional texture data.
      *
      * @return {this} This Shader instance.
      */
-    public function setSampler2DBuffer(uniformKey:String, texture:js.html.webgl.Texture, width:Int, height:Int, ?textureIndex:Int, ?textureData:Dynamic):Dynamic;
+    public function setSampler2DBuffer(uniformKey:String, texture:js.html.webgl.Texture, width:Float, height:Float, ?textureIndex:Float, ?textureData:Dynamic):Dynamic;
     /**
      * Sets a sampler2D uniform on this shader.
      *
@@ -349,12 +349,12 @@ extern class Shader extends phaser.gameobjects.GameObject {
      *
      * @param {string} uniformKey - The key of the sampler2D uniform to be updated, i.e. `iChannel0`.
      * @param {string} textureKey - The key of the texture, as stored in the Texture Manager. Must already be loaded.
-     * @param {integer} [textureIndex=0] - The texture index.
+     * @param {number} [textureIndex=0] - The texture index.
      * @param {any} [textureData] - Additional texture data.
      *
      * @return {this} This Shader instance.
      */
-    public function setSampler2D(uniformKey:String, textureKey:String, ?textureIndex:Int, ?textureData:Dynamic):Dynamic;
+    public function setSampler2D(uniformKey:String, textureKey:String, ?textureIndex:Float, ?textureData:Dynamic):Dynamic;
     /**
      * Sets a property of a uniform already present on this shader.
      *
@@ -594,11 +594,11 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * Gets the center coordinate of this Game Object, regardless of origin.
      * The returned point is calculated in local space and does not factor in any parent containers
@@ -791,6 +791,8 @@ extern class Shader extends phaser.gameobjects.GameObject {
     /**
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
+     *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
      *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
@@ -1068,11 +1070,11 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1101,6 +1103,17 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1225,6 +1238,27 @@ extern class Shader extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

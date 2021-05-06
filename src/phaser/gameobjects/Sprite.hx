@@ -37,19 +37,23 @@ package phaser.gameobjects;
  * @param {number} x - The horizontal position of this Game Object in the world.
  * @param {number} y - The vertical position of this Game Object in the world.
  * @param {(string|Phaser.Textures.Texture)} texture - The key, or instance of the Texture this Game Object will use to render with, as stored in the Texture Manager.
- * @param {(string|integer)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+ * @param {(string|number)} [frame] - An optional frame from the Texture this Game Object is rendering with.
  */
 @:native("Phaser.GameObjects.Sprite")
 extern class Sprite extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, x:Float, y:Float, texture:Dynamic, ?frame:Dynamic);
     /**
-     * The Animation Controller of this Sprite.
+     * The Animation State component of this Sprite.
+     *
+     * This component provides features to apply animations to this Sprite.
+     * It is responsible for playing, loading, queuing animations for later playback,
+     * mixing between animations and setting the current animation frame to this Sprite.
      *
      * @name Phaser.GameObjects.Sprite#anims
-     * @type {Phaser.GameObjects.Components.Animation}
+     * @type {Phaser.Animations.AnimationState}
      * @since 3.0.0
      */
-    public var anims:phaser.gameobjects.components.Animation;
+    public var anims:phaser.animations.AnimationState;
     /**
      * Update this Sprite's animations.
      *
@@ -62,18 +66,276 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      */
     public function preUpdate(time:Float, delta:Float):Void;
     /**
-     * Start playing the given animation.
+     * Start playing the given animation on this Sprite.
+     *
+     * Animations in Phaser can either belong to the global Animation Manager, or specifically to this Sprite.
+     *
+     * The benefit of a global animation is that multiple Sprites can all play the same animation, without
+     * having to duplicate the data. You can just create it once and then play it on any Sprite.
+     *
+     * The following code shows how to create a global repeating animation. The animation will be created
+     * from all of the frames within the sprite sheet that was loaded with the key 'muybridge':
+     *
+     * ```javascript
+     * var config = {
+     *     key: 'run',
+     *     frames: 'muybridge',
+     *     frameRate: 15,
+     *     repeat: -1
+     * };
+     *
+     * //  This code should be run from within a Scene:
+     * this.anims.create(config);
+     * ```
+     *
+     * However, if you wish to create an animation that is unique to this Sprite, and this Sprite alone,
+     * you can call the `Animation.create` method instead. It accepts the exact same parameters as when
+     * creating a global animation, however the resulting data is kept locally in this Sprite.
+     *
+     * With the animation created, either globally or locally, you can now play it on this Sprite:
+     *
+     * ```javascript
+     * this.add.sprite(x, y).play('run');
+     * ```
+     *
+     * Alternatively, if you wish to run it at a different frame rate, for example, you can pass a config
+     * object instead:
+     *
+     * ```javascript
+     * this.add.sprite(x, y).play({ key: 'run', frameRate: 24 });
+     * ```
+     *
+     * When playing an animation on a Sprite it will first check to see if it can find a matching key
+     * locally within the Sprite. If it can, it will play the local animation. If not, it will then
+     * search the global Animation Manager and look for it there.
+     *
+     * If you need a Sprite to be able to play both local and global animations, make sure they don't
+     * have conflicting keys.
+     *
+     * See the documentation for the `PlayAnimationConfig` config object for more details about this.
+     *
+     * Also, see the documentation in the Animation Manager for further details on creating animations.
      *
      * @method Phaser.GameObjects.Sprite#play
+     * @fires Phaser.Animations.Events#ANIMATION_START
      * @since 3.0.0
      *
-     * @param {string} key - The string-based key of the animation to play.
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
      * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
-     * @param {integer} [startFrame=0] - Optionally start the animation playing from this frame index.
      *
      * @return {this} This Game Object.
      */
-    public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):Dynamic;
+    public function play(key:Dynamic, ?ignoreIfPlaying:Bool):Dynamic;
+    /**
+     * Start playing the given animation on this Sprite, in reverse.
+     *
+     * Animations in Phaser can either belong to the global Animation Manager, or specifically to this Sprite.
+     *
+     * The benefit of a global animation is that multiple Sprites can all play the same animation, without
+     * having to duplicate the data. You can just create it once and then play it on any Sprite.
+     *
+     * The following code shows how to create a global repeating animation. The animation will be created
+     * from all of the frames within the sprite sheet that was loaded with the key 'muybridge':
+     *
+     * ```javascript
+     * var config = {
+     *     key: 'run',
+     *     frames: 'muybridge',
+     *     frameRate: 15,
+     *     repeat: -1
+     * };
+     *
+     * //  This code should be run from within a Scene:
+     * this.anims.create(config);
+     * ```
+     *
+     * However, if you wish to create an animation that is unique to this Sprite, and this Sprite alone,
+     * you can call the `Animation.create` method instead. It accepts the exact same parameters as when
+     * creating a global animation, however the resulting data is kept locally in this Sprite.
+     *
+     * With the animation created, either globally or locally, you can now play it on this Sprite:
+     *
+     * ```javascript
+     * this.add.sprite(x, y).playReverse('run');
+     * ```
+     *
+     * Alternatively, if you wish to run it at a different frame rate, for example, you can pass a config
+     * object instead:
+     *
+     * ```javascript
+     * this.add.sprite(x, y).playReverse({ key: 'run', frameRate: 24 });
+     * ```
+     *
+     * When playing an animation on a Sprite it will first check to see if it can find a matching key
+     * locally within the Sprite. If it can, it will play the local animation. If not, it will then
+     * search the global Animation Manager and look for it there.
+     *
+     * If you need a Sprite to be able to play both local and global animations, make sure they don't
+     * have conflicting keys.
+     *
+     * See the documentation for the `PlayAnimationConfig` config object for more details about this.
+     *
+     * Also, see the documentation in the Animation Manager for further details on creating animations.
+     *
+     * @method Phaser.GameObjects.Sprite#playReverse
+     * @fires Phaser.Animations.Events#ANIMATION_START
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
+     * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
+     *
+     * @return {this} This Game Object.
+     */
+    public function playReverse(key:Dynamic, ?ignoreIfPlaying:Bool):Dynamic;
+    /**
+     * Waits for the specified delay, in milliseconds, then starts playback of the given animation.
+     *
+     * If the animation _also_ has a delay value set in its config, it will be **added** to the delay given here.
+     *
+     * If an animation is already running and a new animation is given to this method, it will wait for
+     * the given delay before starting the new animation.
+     *
+     * If no animation is currently running, the given one begins after the delay.
+     *
+     * When playing an animation on a Sprite it will first check to see if it can find a matching key
+     * locally within the Sprite. If it can, it will play the local animation. If not, it will then
+     * search the global Animation Manager and look for it there.
+     *
+     * Prior to Phaser 3.50 this method was called 'delayedPlay'.
+     *
+     * @method Phaser.GameObjects.Sprite#playAfterDelay
+     * @fires Phaser.Animations.Events#ANIMATION_START
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
+     * @param {number} delay - The delay, in milliseconds, to wait before starting the animation playing.
+     *
+     * @return {this} This Game Object.
+     */
+    public function playAfterDelay(key:Dynamic, delay:Float):Dynamic;
+    /**
+     * Waits for the current animation to complete the `repeatCount` number of repeat cycles, then starts playback
+     * of the given animation.
+     *
+     * You can use this to ensure there are no harsh jumps between two sets of animations, i.e. going from an
+     * idle animation to a walking animation, by making them blend smoothly into each other.
+     *
+     * If no animation is currently running, the given one will start immediately.
+     *
+     * When playing an animation on a Sprite it will first check to see if it can find a matching key
+     * locally within the Sprite. If it can, it will play the local animation. If not, it will then
+     * search the global Animation Manager and look for it there.
+     *
+     * @method Phaser.GameObjects.Sprite#playAfterRepeat
+     * @fires Phaser.Animations.Events#ANIMATION_START
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig)} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object.
+     * @param {number} [repeatCount=1] - How many times should the animation repeat before the next one starts?
+     *
+     * @return {this} This Game Object.
+     */
+    public function playAfterRepeat(key:Dynamic, ?repeatCount:Float):Dynamic;
+    /**
+     * Sets an animation, or an array of animations, to be played immediately after the current one completes or stops.
+     *
+     * The current animation must enter a 'completed' state for this to happen, i.e. finish all of its repeats, delays, etc,
+     * or have the `stop` method called directly on it.
+     *
+     * An animation set to repeat forever will never enter a completed state.
+     *
+     * You can chain a new animation at any point, including before the current one starts playing, during it,
+     * or when it ends (via its `animationcomplete` event).
+     *
+     * Chained animations are specific to a Game Object, meaning different Game Objects can have different chained
+     * animations without impacting the animation they're playing.
+     *
+     * Call this method with no arguments to reset all currently chained animations.
+     *
+     * When playing an animation on a Sprite it will first check to see if it can find a matching key
+     * locally within the Sprite. If it can, it will play the local animation. If not, it will then
+     * search the global Animation Manager and look for it there.
+     *
+     * @method Phaser.GameObjects.Sprite#chain
+     * @since 3.50.0
+     *
+     * @param {(string|Phaser.Animations.Animation|Phaser.Types.Animations.PlayAnimationConfig|string[]|Phaser.Animations.Animation[]|Phaser.Types.Animations.PlayAnimationConfig[])} key - The string-based key of the animation to play, or an Animation instance, or a `PlayAnimationConfig` object, or an array of them.
+     *
+     * @return {this} This Game Object.
+     */
+    public function chain(key:Dynamic):Dynamic;
+    /**
+     * Immediately stops the current animation from playing and dispatches the `ANIMATION_STOP` events.
+     *
+     * If no animation is playing, no event will be dispatched.
+     *
+     * If there is another animation queued (via the `chain` method) then it will start playing immediately.
+     *
+     * @method Phaser.GameObjects.Sprite#stop
+     * @fires Phaser.Animations.Events#ANIMATION_STOP
+     * @since 3.50.0
+     *
+     * @return {this} This Game Object.
+     */
+    public function stop():Dynamic;
+    /**
+     * Stops the current animation from playing after the specified time delay, given in milliseconds.
+     *
+     * It then dispatches the `ANIMATION_STOP` event.
+     *
+     * If no animation is running, no events will be dispatched.
+     *
+     * If there is another animation in the queue (set via the `chain` method) then it will start playing,
+     * when the current one stops.
+     *
+     * @method Phaser.GameObjects.Sprite#stopAfterDelay
+     * @fires Phaser.Animations.Events#ANIMATION_STOP
+     * @since 3.50.0
+     *
+     * @param {number} delay - The number of milliseconds to wait before stopping this animation.
+     *
+     * @return {this} This Game Object.
+     */
+    public function stopAfterDelay(delay:Float):Dynamic;
+    /**
+     * Stops the current animation from playing after the given number of repeats.
+     *
+     * It then dispatches the `ANIMATION_STOP` event.
+     *
+     * If no animation is running, no events will be dispatched.
+     *
+     * If there is another animation in the queue (set via the `chain` method) then it will start playing,
+     * when the current one stops.
+     *
+     * @method Phaser.GameObjects.Sprite#stopAfterRepeat
+     * @fires Phaser.Animations.Events#ANIMATION_STOP
+     * @since 3.50.0
+     *
+     * @param {number} [repeatCount=1] - How many times should the animation repeat before stopping?
+     *
+     * @return {this} This Game Object.
+     */
+    public function stopAfterRepeat(?repeatCount:Float):Dynamic;
+    /**
+     * Stops the current animation from playing when it next sets the given frame.
+     * If this frame doesn't exist within the animation it will not stop it from playing.
+     *
+     * It then dispatches the `ANIMATION_STOP` event.
+     *
+     * If no animation is running, no events will be dispatched.
+     *
+     * If there is another animation in the queue (set via the `chain` method) then it will start playing,
+     * when the current one stops.
+     *
+     * @method Phaser.GameObjects.Sprite#stopOnFrame
+     * @fires Phaser.Animations.Events#ANIMATION_STOP
+     * @since 3.50.0
+     *
+     * @param {Phaser.Animations.AnimationFrame} frame - The frame to check before stopping this animation.
+     *
+     * @return {this} This Game Object.
+     */
+    public function stopOnFrame(frame:phaser.animations.AnimationFrame):Dynamic;
     /**
      * The alpha value of the Game Object.
      *
@@ -238,11 +500,11 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *
@@ -535,6 +797,8 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.
@@ -663,6 +927,8 @@ extern class Sprite extends phaser.gameobjects.GameObject {
     /**
      * The initial WebGL pipeline of this Game Object.
      *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
      * @type {Phaser.Renderer.WebGL.WebGLPipeline}
      * @default null
@@ -681,30 +947,129 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      */
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
      * Sets the initial WebGL Pipeline of this Game Object.
-     * This should only be called during the instantiation of the Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
      *
      * @method Phaser.GameObjects.Components.Pipeline#initPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} [pipelineName=TextureTintPipeline] - The name of the pipeline to set on this Game Object. Defaults to the Texture Tint Pipeline.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
      *
      * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
      */
-    public function initPipeline(?pipelineName:String):Bool;
+    public function initPipeline(pipeline:Dynamic):Bool;
     /**
-     * Sets the active WebGL Pipeline of this Game Object.
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
      *
      * @method Phaser.GameObjects.Components.Pipeline#setPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} pipelineName - The name of the pipeline to set on this Game Object.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPipeline(pipelineName:String):Dynamic;
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
      * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
      *
@@ -712,9 +1077,37 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
      */
-    public function resetPipeline():Bool;
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
     /**
      * Gets the name of the WebGL Pipeline this Game Object is currently using.
      *
@@ -967,7 +1360,7 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {string} key - The key of the texture to be used, as stored in the Texture Manager.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -985,7 +1378,7 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.TextureCrop#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *
@@ -993,7 +1386,54 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      */
     public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -1002,57 +1442,20 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -1094,14 +1497,14 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -1123,14 +1526,14 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * The x position of this Game Object.
      *
@@ -1210,11 +1613,11 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1243,6 +1646,17 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1367,6 +1781,27 @@ extern class Sprite extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

@@ -28,15 +28,15 @@ package phaser.gameobjects;
  * @param {number} [x=0] - The horizontal position of this Game Object in the world.
  * @param {number} [y=0] - The vertical position of this Game Object in the world.
  * @param {number} [radius=128] - The radius of the arc.
- * @param {integer} [startAngle=0] - The start angle of the arc, in degrees.
- * @param {integer} [endAngle=360] - The end angle of the arc, in degrees.
+ * @param {number} [startAngle=0] - The start angle of the arc, in degrees.
+ * @param {number} [endAngle=360] - The end angle of the arc, in degrees.
  * @param {boolean} [anticlockwise=false] - The winding order of the start and end angles.
  * @param {number} [fillColor] - The color the arc will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the arc will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
 @:native("Phaser.GameObjects.Arc")
 extern class Arc extends phaser.gameobjects.Shape {
-    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?radius:Float, ?startAngle:Int, ?endAngle:Int, ?anticlockwise:Bool, ?fillColor:Float, ?fillAlpha:Float);
+    public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?radius:Float, ?startAngle:Float, ?endAngle:Float, ?anticlockwise:Bool, ?fillColor:Float, ?fillAlpha:Float);
     /**
      * The number of iterations used when drawing the arc.
      * Increase this value for smoother arcs, at the cost of more polygons being rendered.
@@ -60,18 +60,18 @@ extern class Arc extends phaser.gameobjects.Shape {
      * The start angle of the arc, in degrees.
      *
      * @name Phaser.GameObjects.Arc#startAngle
-     * @type {integer}
+     * @type {number}
      * @since 3.13.0
      */
-    public var startAngle:Int;
+    public var startAngle:Float;
     /**
      * The end angle of the arc, in degrees.
      *
      * @name Phaser.GameObjects.Arc#endAngle
-     * @type {integer}
+     * @type {number}
      * @since 3.13.0
      */
-    public var endAngle:Int;
+    public var endAngle:Float;
     /**
      * The winding order of the start and end angles.
      *
@@ -113,11 +113,11 @@ extern class Arc extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.Arc#setStartAngle
      * @since 3.13.0
      *
-     * @param {integer} value - The value to set the starting angle to.
+     * @param {number} value - The value to set the starting angle to.
      *
      * @return {this} This Game Object instance.
      */
-    public function setStartAngle(value:Int):Dynamic;
+    public function setStartAngle(value:Float):Dynamic;
     /**
      * Sets the ending angle of the arc, in degrees.
      * This call can be chained.
@@ -125,9 +125,9 @@ extern class Arc extends phaser.gameobjects.Shape {
      * @method Phaser.GameObjects.Arc#setEndAngle
      * @since 3.13.0
      *
-     * @param {integer} value - The value to set the ending angle to.
+     * @param {number} value - The value to set the ending angle to.
      *
      * @return {this} This Game Object instance.
      */
-    public function setEndAngle(value:Int):Dynamic;
+    public function setEndAngle(value:Float):Dynamic;
 }

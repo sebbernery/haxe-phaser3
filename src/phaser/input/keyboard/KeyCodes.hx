@@ -13,784 +13,784 @@ class KeyCodes {
      * The BACKSPACE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.BACKSPACE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var BACKSPACE:Int;
+    static public var BACKSPACE:Float;
     /**
      * The TAB key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.TAB
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var TAB:Int;
+    static public var TAB:Float;
     /**
      * The ENTER key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.ENTER
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var ENTER:Int;
+    static public var ENTER:Float;
     /**
      * The SHIFT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SHIFT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SHIFT:Int;
+    static public var SHIFT:Float;
     /**
      * The CTRL key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.CTRL
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var CTRL:Int;
+    static public var CTRL:Float;
     /**
      * The ALT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.ALT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var ALT:Int;
+    static public var ALT:Float;
     /**
      * The PAUSE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PAUSE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PAUSE:Int;
+    static public var PAUSE:Float;
     /**
      * The CAPS_LOCK key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.CAPS_LOCK
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var CAPS_LOCK:Int;
+    static public var CAPS_LOCK:Float;
     /**
      * The ESC key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.ESC
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var ESC:Int;
+    static public var ESC:Float;
     /**
      * The SPACE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SPACE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SPACE:Int;
+    static public var SPACE:Float;
     /**
      * The PAGE_UP key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PAGE_UP
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PAGE_UP:Int;
+    static public var PAGE_UP:Float;
     /**
      * The PAGE_DOWN key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PAGE_DOWN:Int;
+    static public var PAGE_DOWN:Float;
     /**
      * The END key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.END
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var END:Int;
+    static public var END:Float;
     /**
      * The HOME key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.HOME
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var HOME:Int;
+    static public var HOME:Float;
     /**
      * The LEFT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.LEFT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var LEFT:Int;
+    static public var LEFT:Float;
     /**
      * The UP key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.UP
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var UP:Int;
+    static public var UP:Float;
     /**
      * The RIGHT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.RIGHT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var RIGHT:Int;
+    static public var RIGHT:Float;
     /**
      * The DOWN key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.DOWN
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var DOWN:Int;
+    static public var DOWN:Float;
     /**
      * The PRINT_SCREEN key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PRINT_SCREEN
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PRINT_SCREEN:Int;
+    static public var PRINT_SCREEN:Float;
     /**
      * The INSERT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.INSERT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var INSERT:Int;
+    static public var INSERT:Float;
     /**
      * The DELETE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.DELETE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var DELETE:Int;
+    static public var DELETE:Float;
     /**
      * The ZERO key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.ZERO
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var ZERO:Int;
+    static public var ZERO:Float;
     /**
      * The ONE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.ONE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var ONE:Int;
+    static public var ONE:Float;
     /**
      * The TWO key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.TWO
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var TWO:Int;
+    static public var TWO:Float;
     /**
      * The THREE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.THREE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var THREE:Int;
+    static public var THREE:Float;
     /**
      * The FOUR key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.FOUR
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var FOUR:Int;
+    static public var FOUR:Float;
     /**
      * The FIVE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.FIVE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var FIVE:Int;
+    static public var FIVE:Float;
     /**
      * The SIX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SIX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SIX:Int;
+    static public var SIX:Float;
     /**
      * The SEVEN key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SEVEN
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SEVEN:Int;
+    static public var SEVEN:Float;
     /**
      * The EIGHT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.EIGHT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var EIGHT:Int;
+    static public var EIGHT:Float;
     /**
      * The NINE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NINE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NINE:Int;
+    static public var NINE:Float;
     /**
      * The NUMPAD_ZERO key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_ZERO:Int;
+    static public var NUMPAD_ZERO:Float;
     /**
      * The NUMPAD_ONE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_ONE:Int;
+    static public var NUMPAD_ONE:Float;
     /**
      * The NUMPAD_TWO key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_TWO:Int;
+    static public var NUMPAD_TWO:Float;
     /**
      * The NUMPAD_THREE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_THREE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_THREE:Int;
+    static public var NUMPAD_THREE:Float;
     /**
      * The NUMPAD_FOUR key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_FOUR:Int;
+    static public var NUMPAD_FOUR:Float;
     /**
      * The NUMPAD_FIVE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_FIVE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_FIVE:Int;
+    static public var NUMPAD_FIVE:Float;
     /**
      * The NUMPAD_SIX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_SIX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_SIX:Int;
+    static public var NUMPAD_SIX:Float;
     /**
      * The NUMPAD_SEVEN key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_SEVEN
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_SEVEN:Int;
+    static public var NUMPAD_SEVEN:Float;
     /**
      * The NUMPAD_EIGHT key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_EIGHT
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_EIGHT:Int;
+    static public var NUMPAD_EIGHT:Float;
     /**
      * The NUMPAD_NINE key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_NINE
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var NUMPAD_NINE:Int;
+    static public var NUMPAD_NINE:Float;
     /**
      * The Numpad Addition (+) key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_ADD
-     * @type {integer}
+     * @type {number}
      * @since 3.21.0
      */
-    static public var NUMPAD_ADD:Int;
+    static public var NUMPAD_ADD:Float;
     /**
      * The Numpad Subtraction (-) key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.NUMPAD_SUBTRACT
-     * @type {integer}
+     * @type {number}
      * @since 3.21.0
      */
-    static public var NUMPAD_SUBTRACT:Int;
+    static public var NUMPAD_SUBTRACT:Float;
     /**
      * The A key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.A
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var A:Int;
+    static public var A:Float;
     /**
      * The B key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.B
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var B:Int;
+    static public var B:Float;
     /**
      * The C key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.C
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var C:Int;
+    static public var C:Float;
     /**
      * The D key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.D
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var D:Int;
+    static public var D:Float;
     /**
      * The E key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.E
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var E:Int;
+    static public var E:Float;
     /**
      * The F key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F:Int;
+    static public var F:Float;
     /**
      * The G key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.G
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var G:Int;
+    static public var G:Float;
     /**
      * The H key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.H
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var H:Int;
+    static public var H:Float;
     /**
      * The I key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.I
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var I:Int;
+    static public var I:Float;
     /**
      * The J key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.J
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var J:Int;
+    static public var J:Float;
     /**
      * The K key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.K
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var K:Int;
+    static public var K:Float;
     /**
      * The L key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.L
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var L:Int;
+    static public var L:Float;
     /**
      * The M key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.M
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var M:Int;
+    static public var M:Float;
     /**
      * The N key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.N
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var N:Int;
+    static public var N:Float;
     /**
      * The O key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.O
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var O:Int;
+    static public var O:Float;
     /**
      * The P key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.P
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var P:Int;
+    static public var P:Float;
     /**
      * The Q key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.Q
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var Q:Int;
+    static public var Q:Float;
     /**
      * The R key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.R
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var R:Int;
+    static public var R:Float;
     /**
      * The S key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.S
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var S:Int;
+    static public var S:Float;
     /**
      * The T key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.T
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var T:Int;
+    static public var T:Float;
     /**
      * The U key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.U
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var U:Int;
+    static public var U:Float;
     /**
      * The V key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.V
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var V:Int;
+    static public var V:Float;
     /**
      * The W key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.W
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var W:Int;
+    static public var W:Float;
     /**
      * The X key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.X
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var X:Int;
+    static public var X:Float;
     /**
      * The Y key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.Y
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var Y:Int;
+    static public var Y:Float;
     /**
      * The Z key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.Z
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var Z:Int;
+    static public var Z:Float;
     /**
      * The F1 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F1
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F1:Int;
+    static public var F1:Float;
     /**
      * The F2 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F2
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F2:Int;
+    static public var F2:Float;
     /**
      * The F3 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F3
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F3:Int;
+    static public var F3:Float;
     /**
      * The F4 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F4
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F4:Int;
+    static public var F4:Float;
     /**
      * The F5 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F5
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F5:Int;
+    static public var F5:Float;
     /**
      * The F6 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F6
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F6:Int;
+    static public var F6:Float;
     /**
      * The F7 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F7
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F7:Int;
+    static public var F7:Float;
     /**
      * The F8 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F8
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F8:Int;
+    static public var F8:Float;
     /**
      * The F9 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F9
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F9:Int;
+    static public var F9:Float;
     /**
      * The F10 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F10
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F10:Int;
+    static public var F10:Float;
     /**
      * The F11 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F11
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F11:Int;
+    static public var F11:Float;
     /**
      * The F12 key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.F12
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var F12:Int;
+    static public var F12:Float;
     /**
      * The SEMICOLON key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SEMICOLON
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SEMICOLON:Int;
+    static public var SEMICOLON:Float;
     /**
      * The PLUS key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PLUS
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PLUS:Int;
+    static public var PLUS:Float;
     /**
      * The COMMA key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.COMMA
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var COMMA:Int;
+    static public var COMMA:Float;
     /**
      * The MINUS key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.MINUS
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var MINUS:Int;
+    static public var MINUS:Float;
     /**
      * The PERIOD key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.PERIOD
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var PERIOD:Int;
+    static public var PERIOD:Float;
     /**
      * The FORWARD_SLASH key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.FORWARD_SLASH
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var FORWARD_SLASH:Int;
+    static public var FORWARD_SLASH:Float;
     /**
      * The BACK_SLASH key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.BACK_SLASH
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var BACK_SLASH:Int;
+    static public var BACK_SLASH:Float;
     /**
      * The QUOTES key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.QUOTES
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var QUOTES:Int;
+    static public var QUOTES:Float;
     /**
      * The BACKTICK key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.BACKTICK
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var BACKTICK:Int;
+    static public var BACKTICK:Float;
     /**
      * The OPEN_BRACKET key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.OPEN_BRACKET
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var OPEN_BRACKET:Int;
+    static public var OPEN_BRACKET:Float;
     /**
      * The CLOSED_BRACKET key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.CLOSED_BRACKET
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var CLOSED_BRACKET:Int;
+    static public var CLOSED_BRACKET:Float;
     /**
      * The SEMICOLON_FIREFOX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.SEMICOLON_FIREFOX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var SEMICOLON_FIREFOX:Int;
+    static public var SEMICOLON_FIREFOX:Float;
     /**
      * The COLON key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.COLON
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var COLON:Int;
+    static public var COLON:Float;
     /**
      * The COMMA_FIREFOX_WINDOWS key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.COMMA_FIREFOX_WINDOWS
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var COMMA_FIREFOX_WINDOWS:Int;
+    static public var COMMA_FIREFOX_WINDOWS:Float;
     /**
      * The COMMA_FIREFOX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.COMMA_FIREFOX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var COMMA_FIREFOX:Int;
+    static public var COMMA_FIREFOX:Float;
     /**
      * The BRACKET_RIGHT_FIREFOX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.BRACKET_RIGHT_FIREFOX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var BRACKET_RIGHT_FIREFOX:Int;
+    static public var BRACKET_RIGHT_FIREFOX:Float;
     /**
      * The BRACKET_LEFT_FIREFOX key.
      *
      * @name Phaser.Input.Keyboard.KeyCodes.BRACKET_LEFT_FIREFOX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    static public var BRACKET_LEFT_FIREFOX:Int;
+    static public var BRACKET_LEFT_FIREFOX:Float;
 }

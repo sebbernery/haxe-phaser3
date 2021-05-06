@@ -10,8 +10,8 @@ package phaser.textures;
  * @since 3.0.0
  *
  * @param {Phaser.Textures.Texture} texture - The Texture this Frame is a part of.
- * @param {(integer|string)} name - The name of this Frame. The name is unique within the Texture.
- * @param {integer} sourceIndex - The index of the TextureSource that this Frame is a part of.
+ * @param {(number|string)} name - The name of this Frame. The name is unique within the Texture.
+ * @param {number} sourceIndex - The index of the TextureSource that this Frame is a part of.
  * @param {number} x - The x coordinate of the top-left of this Frame.
  * @param {number} y - The y coordinate of the top-left of this Frame.
  * @param {number} width - The width of this Frame.
@@ -19,7 +19,7 @@ package phaser.textures;
  */
 @:native("Phaser.Textures.Frame")
 extern class Frame {
-    public function new(texture:phaser.textures.Texture, name:Dynamic, sourceIndex:Int, x:Float, y:Float, width:Float, height:Float);
+    public function new(texture:phaser.textures.Texture, name:Dynamic, sourceIndex:Float, x:Float, y:Float, width:Float, height:Float);
     /**
      * The Texture this Frame is a part of.
      *
@@ -49,10 +49,10 @@ extern class Frame {
      * The index of the TextureSource in the Texture sources array.
      *
      * @name Phaser.Textures.Frame#sourceIndex
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var sourceIndex:Int;
+    public var sourceIndex:Float;
     /**
      * A reference to the Texture Source WebGL Texture that this Frame is using.
      *
@@ -66,102 +66,102 @@ extern class Frame {
      * X position within the source image to cut from.
      *
      * @name Phaser.Textures.Frame#cutX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var cutX:Int;
+    public var cutX:Float;
     /**
      * Y position within the source image to cut from.
      *
      * @name Phaser.Textures.Frame#cutY
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var cutY:Int;
+    public var cutY:Float;
     /**
      * The width of the area in the source image to cut.
      *
      * @name Phaser.Textures.Frame#cutWidth
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var cutWidth:Int;
+    public var cutWidth:Float;
     /**
      * The height of the area in the source image to cut.
      *
      * @name Phaser.Textures.Frame#cutHeight
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var cutHeight:Int;
+    public var cutHeight:Float;
     /**
      * The X rendering offset of this Frame, taking trim into account.
      *
      * @name Phaser.Textures.Frame#x
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var x:Int;
+    public var x:Float;
     /**
      * The Y rendering offset of this Frame, taking trim into account.
      *
      * @name Phaser.Textures.Frame#y
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var y:Int;
+    public var y:Float;
     /**
      * The rendering width of this Frame, taking trim into account.
      *
      * @name Phaser.Textures.Frame#width
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var width:Int;
+    public var width:Float;
     /**
      * The rendering height of this Frame, taking trim into account.
      *
      * @name Phaser.Textures.Frame#height
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var height:Int;
+    public var height:Float;
     /**
      * Half the width, floored.
      * Precalculated for the renderer.
      *
      * @name Phaser.Textures.Frame#halfWidth
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var halfWidth:Int;
+    public var halfWidth:Float;
     /**
      * Half the height, floored.
      * Precalculated for the renderer.
      *
      * @name Phaser.Textures.Frame#halfHeight
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var halfHeight:Int;
+    public var halfHeight:Float;
     /**
      * The x center of this frame, floored.
      *
      * @name Phaser.Textures.Frame#centerX
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var centerX:Int;
+    public var centerX:Float;
     /**
      * The y center of this frame, floored.
      *
      * @name Phaser.Textures.Frame#centerY
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var centerY:Int;
+    public var centerY:Float;
     /**
      * The horizontal pivot point of this Frame.
      *
@@ -209,11 +209,11 @@ extern class Frame {
      * 1 = Round
      *
      * @name Phaser.Textures.Frame#autoRound
-     * @type {integer}
+     * @type {number}
      * @default -1
      * @since 3.0.0
      */
-    public var autoRound:Int;
+    public var autoRound:Float;
     /**
      * Any Frame specific custom data can be stored here.
      *
@@ -314,14 +314,14 @@ extern class Frame {
      * @method Phaser.Textures.Frame#setSize
      * @since 3.7.0
      *
-     * @param {integer} width - The width of the frame before being trimmed.
-     * @param {integer} height - The height of the frame before being trimmed.
-     * @param {integer} [x=0] - The x coordinate of the top-left of this Frame.
-     * @param {integer} [y=0] - The y coordinate of the top-left of this Frame.
+     * @param {number} width - The width of the frame before being trimmed.
+     * @param {number} height - The height of the frame before being trimmed.
+     * @param {number} [x=0] - The x coordinate of the top-left of this Frame.
+     * @param {number} [y=0] - The y coordinate of the top-left of this Frame.
      *
      * @return {Phaser.Textures.Frame} This Frame object.
      */
-    public function setSize(width:Int, height:Int, ?x:Int, ?y:Int):phaser.textures.Frame;
+    public function setSize(width:Float, height:Float, ?x:Float, ?y:Float):phaser.textures.Frame;
     /**
      * If the frame was trimmed when added to the Texture Atlas, this records the trim and source data.
      *
@@ -373,6 +373,25 @@ extern class Frame {
      * @return {object} The updated crop data object.
      */
     public function updateCropUVs(crop:Dynamic, flipX:Bool, flipY:Bool):Dynamic;
+    /**
+     * Directly sets the canvas and WebGL UV data for this frame.
+     *
+     * Use this if you need to override the values that are generated automatically
+     * when the Frame is created.
+     *
+     * @method Phaser.Textures.Frame#setUVs
+     * @since 3.50.0
+     *
+     * @param {number} width - Width of this frame for the Canvas data.
+     * @param {number} height - Height of this frame for the Canvas data.
+     * @param {number} u0 - UV u0 value.
+     * @param {number} v0 - UV v0 value.
+     * @param {number} u1 - UV u1 value.
+     * @param {number} v1 - UV v1 value.
+     *
+     * @return {Phaser.Textures.Frame} This Frame object.
+     */
+    public function setUVs(width:Float, height:Float, u0:Float, v0:Float, u1:Float, v1:Float):phaser.textures.Frame;
     /**
      * Updates the internal WebGL UV cache and the drawImage cache.
      *

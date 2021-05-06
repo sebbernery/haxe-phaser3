@@ -783,9 +783,9 @@ extern class MatterPhysics {
      * @param {Phaser.Types.Physics.Matter.MatterBody} body - The Body to align.
      * @param {number} x - The horizontal position to align the body to.
      * @param {number} y - The vertical position to align the body to.
-     * @param {integer} align - One of the `Phaser.Display.Align` constants, such as `Phaser.Display.Align.TOP_LEFT`.
+     * @param {number} align - One of the `Phaser.Display.Align` constants, such as `Phaser.Display.Align.TOP_LEFT`.
      *
      * @return {this} This Matter Physics instance.
      */
-    public function alignBody(body:phaser.types.physics.matter.MatterBody, x:Float, y:Float, align:Int):Dynamic;
+    public function alignBody(body:phaser.types.physics.matter.MatterBody, x:Float, y:Float, align:Float):Dynamic;
 }

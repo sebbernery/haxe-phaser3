@@ -11,11 +11,11 @@ package phaser.input.gamepad;
  * @since 3.0.0
  *
  * @param {Phaser.Input.Gamepad.Gamepad} pad - A reference to the Gamepad that this Axis belongs to.
- * @param {integer} index - The index of this Axis.
+ * @param {number} index - The index of this Axis.
  */
 @:native("Phaser.Input.Gamepad.Axis")
 extern class Axis {
-    public function new(pad:phaser.input.gamepad.Gamepad, index:Int);
+    public function new(pad:phaser.input.gamepad.Gamepad, index:Float);
     /**
      * A reference to the Gamepad that this Axis belongs to.
      *
@@ -36,10 +36,10 @@ extern class Axis {
      * The index of this Axis.
      *
      * @name Phaser.Input.Gamepad.Axis#index
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var index:Int;
+    public var index:Float;
     /**
      * The raw axis value, between -1 and 1 with 0 being dead center.
      * Use the method `getValue` to get a normalized value with the threshold applied.

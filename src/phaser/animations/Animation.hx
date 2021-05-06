@@ -4,15 +4,19 @@ package phaser.animations;
  * @classdesc
  * A Frame based Animation.
  *
- * This consists of a key, some default values (like the frame rate) and a bunch of Frame objects.
+ * Animations in Phaser consist of a sequence of `AnimationFrame` objects, which are managed by
+ * this class, along with properties that impact playback, such as the animations frame rate
+ * or delay.
  *
- * The Animation Manager creates these. Game Objects don't own an instance of these directly.
- * Game Objects have the Animation Component, which are like playheads to global Animations (these objects)
- * So multiple Game Objects can have playheads all pointing to this one Animation instance.
+ * This class contains all of the properties and methods needed to handle playback of the animation
+ * directly to an `AnimationState` instance, which is owned by a Sprite, or similar Game Object.
+ *
+ * You don't typically create an instance of this class directly, but instead go via
+ * either the `AnimationManager` or the `AnimationState` and use their `create` methods,
+ * depending on if you need a global animation, or local to a specific Sprite.
  *
  * @class Animation
  * @memberof Phaser.Animations
- * @extends Phaser.Events.EventEmitter
  * @constructor
  * @since 3.0.0
  *
@@ -21,7 +25,7 @@ package phaser.animations;
  * @param {Phaser.Types.Animations.Animation} config - The Animation configuration.
  */
 @:native("Phaser.Animations.Animation")
-extern class Animation extends phaser.events.EventEmitter {
+extern class Animation {
     public function new(manager:phaser.animations.AnimationManager, key:String, config:phaser.types.animations.Animation);
     /**
      * A reference to the global Animation Manager.
@@ -60,35 +64,35 @@ extern class Animation extends phaser.events.EventEmitter {
      * The frame rate of playback in frames per second (default 24 if duration is null)
      *
      * @name Phaser.Animations.Animation#frameRate
-     * @type {integer}
+     * @type {number}
      * @default 24
      * @since 3.0.0
      */
-    public var frameRate:Int;
+    public var frameRate:Float;
     /**
      * How long the animation should play for, in milliseconds.
      * If the `frameRate` property has been set then it overrides this value,
      * otherwise the `frameRate` is derived from `duration`.
      *
      * @name Phaser.Animations.Animation#duration
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var duration:Int;
+    public var duration:Float;
     /**
      * How many ms per frame, not including frame specific modifiers.
      *
      * @name Phaser.Animations.Animation#msPerFrame
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var msPerFrame:Int;
+    public var msPerFrame:Float;
     /**
      * Skip frames if the time lags, or always advanced anyway?
      *
      * @name Phaser.Animations.Animation#skipMissedFrames
      * @type {boolean}
-     * @default false
+     * @default true
      * @since 3.0.0
      */
     public var skipMissedFrames:Bool;
@@ -96,29 +100,29 @@ extern class Animation extends phaser.events.EventEmitter {
      * The delay in ms before the playback will begin.
      *
      * @name Phaser.Animations.Animation#delay
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var delay:Int;
+    public var delay:Float;
     /**
      * Number of times to repeat the animation. Set to -1 to repeat forever.
      *
      * @name Phaser.Animations.Animation#repeat
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var repeat:Int;
+    public var repeat:Float;
     /**
      * The delay in ms before the a repeat play starts.
      *
      * @name Phaser.Animations.Animation#repeatDelay
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var repeatDelay:Int;
+    public var repeatDelay:Float;
     /**
      * Should the animation yoyo (reverse back down to the start) before repeating?
      *
@@ -156,6 +160,27 @@ extern class Animation extends phaser.events.EventEmitter {
      */
     public var paused:Bool;
     /**
+     * Gets the total number of frames in this animation.
+     *
+     * @method Phaser.Animations.Animation#getTotalFrames
+     * @since 3.50.0
+     *
+     * @return {number} The total number of frames in this animation.
+     */
+    public function getTotalFrames():Float;
+    /**
+     * Calculates the duration, frame rate and msPerFrame values.
+     *
+     * @method Phaser.Animations.Animation#calculateDuration
+     * @since 3.50.0
+     *
+     * @param {Phaser.Animations.Animation} target - The target to set the values on.
+     * @param {number} totalFrames - The total number of frames in the animation.
+     * @param {number} duration - The duration to calculate the frame rate from.
+     * @param {number} frameRate - The frame ate to calculate the duration from.
+     */
+    public function calculateDuration(target:phaser.animations.Animation, totalFrames:Float, duration:Float, frameRate:Float):Void;
+    /**
      * Add frames to the end of the animation.
      *
      * @method Phaser.Animations.Animation#addFrame
@@ -172,34 +197,23 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#addFrameAt
      * @since 3.0.0
      *
-     * @param {integer} index - The index to insert the frame at within the animation.
+     * @param {number} index - The index to insert the frame at within the animation.
      * @param {(string|Phaser.Types.Animations.AnimationFrame[])} config - Either a string, in which case it will use all frames from a texture with the matching key, or an array of Animation Frame configuration objects.
      *
      * @return {this} This Animation object.
      */
-    public function addFrameAt(index:Int, config:Dynamic):Dynamic;
+    public function addFrameAt(index:Float, config:Dynamic):Dynamic;
     /**
      * Check if the given frame index is valid.
      *
      * @method Phaser.Animations.Animation#checkFrame
      * @since 3.0.0
      *
-     * @param {integer} index - The index to be checked.
+     * @param {number} index - The index to be checked.
      *
      * @return {boolean} `true` if the index is valid, otherwise `false`.
      */
-    public function checkFrame(index:Int):Bool;
-    /**
-     * Called internally when this Animation completes playback.
-     * Optionally, hides the parent Game Object, then stops playback.
-     *
-     * @method Phaser.Animations.Animation#completeAnimation
-     * @protected
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
-     */
-    public function completeAnimation(component:phaser.gameobjects.components.Animation):Void;
+    public function checkFrame(index:Float):Bool;
     /**
      * Called internally when this Animation first starts to play.
      * Sets the accumulator and nextTick properties.
@@ -208,10 +222,9 @@ extern class Animation extends phaser.events.EventEmitter {
      * @protected
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
-     * @param {boolean} [includeDelay=true] - If `true` the Animation Components delay value will be added to the `nextTick` total.
+     * @param {Phaser.Animations.AnimationState} state - The Animation State belonging to the Game Object invoking this call.
      */
-    public function getFirstTick(component:phaser.gameobjects.components.Animation, ?includeDelay:Bool):Void;
+    public function getFirstTick(state:phaser.animations.AnimationState):Void;
     /**
      * Returns the AnimationFrame at the provided index
      *
@@ -219,11 +232,11 @@ extern class Animation extends phaser.events.EventEmitter {
      * @protected
      * @since 3.0.0
      *
-     * @param {integer} index - The index in the AnimationFrame array
+     * @param {number} index - The index in the AnimationFrame array
      *
      * @return {Phaser.Animations.AnimationFrame} The frame at the index provided from the animation sequence
      */
-    public function getFrameAt(index:Int):phaser.animations.AnimationFrame;
+    public function getFrameAt(index:Float):phaser.animations.AnimationFrame;
     /**
      * Creates AnimationFrame instances based on the given frame data.
      *
@@ -243,9 +256,9 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#getNextTick
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
+     * @param {Phaser.Animations.AnimationState} state - The Animation State belonging to the Game Object invoking this call.
      */
-    public function getNextTick(component:phaser.gameobjects.components.Animation):Void;
+    public function getNextTick(state:phaser.animations.AnimationState):Void;
     /**
      * Returns the frame closest to the given progress value between 0 and 1.
      *
@@ -263,16 +276,16 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#nextFrame
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component to advance.
+     * @param {Phaser.Animations.AnimationState} state - The Animation State to advance.
      */
-    public function nextFrame(component:phaser.gameobjects.components.Animation):Void;
+    public function nextFrame(state:phaser.animations.AnimationState):Void;
     /**
      * Returns the animation last frame.
      *
      * @method Phaser.Animations.Animation#getLastFrame
      * @since 3.12.0
      *
-     * @return {Phaser.Animations.AnimationFrame} component - The Animation Last Frame.
+     * @return {Phaser.Animations.AnimationFrame} The last Animation Frame.
      */
     public function getLastFrame():phaser.animations.AnimationFrame;
     /**
@@ -282,9 +295,9 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#previousFrame
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
+     * @param {Phaser.Animations.AnimationState} state - The Animation State belonging to the Game Object invoking this call.
      */
-    public function previousFrame(component:phaser.gameobjects.components.Animation):Void;
+    public function previousFrame(state:phaser.animations.AnimationState):Void;
     /**
      * Removes the given AnimationFrame from this Animation instance.
      * This is a global action. Any Game Object using this Animation will be impacted by this change.
@@ -304,11 +317,11 @@ extern class Animation extends phaser.events.EventEmitter {
      * @method Phaser.Animations.Animation#removeFrameAt
      * @since 3.0.0
      *
-     * @param {integer} index - The index in the AnimationFrame array
+     * @param {number} index - The index in the AnimationFrame array
      *
      * @return {this} This Animation object.
      */
-    public function removeFrameAt(index:Int):Dynamic;
+    public function removeFrameAt(index:Float):Dynamic;
     /**
      * Called internally during playback. Forces the animation to repeat, providing there are enough counts left
      * in the repeat counter.
@@ -319,18 +332,9 @@ extern class Animation extends phaser.events.EventEmitter {
      * @fires Phaser.Animations.Events#SPRITE_ANIMATION_KEY_REPEAT
      * @since 3.0.0
      *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
+     * @param {Phaser.Animations.AnimationState} state - The Animation State belonging to the Game Object invoking this call.
      */
-    public function repeatAnimation(component:phaser.gameobjects.components.Animation):Void;
-    /**
-     * Sets the texture frame the animation uses for rendering.
-     *
-     * @method Phaser.Animations.Animation#setFrame
-     * @since 3.0.0
-     *
-     * @param {Phaser.GameObjects.Components.Animation} component - The Animation Component belonging to the Game Object invoking this call.
-     */
-    public function setFrame(component:phaser.gameobjects.components.Animation):Void;
+    public function repeatAnimation(state:phaser.animations.AnimationState):Void;
     /**
      * Converts the animation data to JSON.
      *
@@ -367,4 +371,13 @@ extern class Animation extends phaser.events.EventEmitter {
      * @return {this} This Animation object.
      */
     public function resume():Dynamic;
+    /**
+     * Destroys this Animation instance. It will remove all event listeners,
+     * remove this animation and its key from the global Animation Manager,
+     * and then destroy all Animation Frames in turn.
+     *
+     * @method Phaser.Animations.Animation#destroy
+     * @since 3.0.0
+     */
+    public function destroy():Void;
 }

@@ -4,7 +4,7 @@ package phaser.types.tilemaps;
  * @typedef {object} Phaser.Types.Tilemaps.TiledObject
  * @since 3.0.0
  *
- * @property {integer} id - The unique object ID.
+ * @property {number} id - The unique object ID.
  * @property {string} name - The name this object was assigned in Tiled.
  * @property {string} type - The type, as assigned in Tiled.
  * @property {boolean} [visible] - The visible state of this object.
@@ -14,7 +14,7 @@ package phaser.types.tilemaps;
  * @property {number} [height] - The height of this object, in pixels.
  * @property {number} [rotation] - The rotation of the object in clockwise degrees.
  * @property {any} [properties] - Custom properties object.
- * @property {integer} [gid] - Only set if of type 'tile'.
+ * @property {number} [gid] - Only set if of type 'tile'.
  * @property {boolean} [flippedHorizontal] - Only set if a tile object. The horizontal flip value.
  * @property {boolean} [flippedVertical] - Only set if a tile object. The vertical flip value.
  * @property {boolean} [flippedAntiDiagonal] - Only set if a tile object. The diagonal flip value.
@@ -26,7 +26,7 @@ package phaser.types.tilemaps;
  * @property {boolean} [point] - Only set, and set to `true`, if a point object.
  */
 typedef TiledObject = {
-var id:Int;
+var id:Float;
 var name:String;
 var type:String;
     @:optional var visible:Bool;
@@ -36,7 +36,7 @@ var type:String;
     @:optional var height:Float;
     @:optional var rotation:Float;
     @:optional var properties:Dynamic;
-    @:optional var gid:Int;
+    @:optional var gid:Float;
     @:optional var flippedHorizontal:Bool;
     @:optional var flippedVertical:Bool;
     @:optional var flippedAntiDiagonal:Bool;

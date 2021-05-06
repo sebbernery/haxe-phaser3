@@ -46,11 +46,11 @@ package phaser.gameobjects;
  * @param {string} font - The key of the font to use from the Bitmap Font cache.
  * @param {(string|string[])} [text] - The string, or array of strings, to be set as the content of this Bitmap Text.
  * @param {number} [size] - The font size of this Bitmap Text.
- * @param {integer} [align=0] - The alignment of the text in a multi-line BitmapText object.
+ * @param {number} [align=0] - The alignment of the text in a multi-line BitmapText object.
  */
 @:native("Phaser.GameObjects.BitmapText")
 extern class BitmapText extends phaser.gameobjects.GameObject {
-    public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float, ?align:Int);
+    public function new(scene:phaser.Scene, x:Float, y:Float, font:String, ?text:Dynamic, ?size:Float, ?align:Float);
     /**
      * The key of the Bitmap Font used by this Bitmap Text.
      * To change the font after creation please use `setFont`.
@@ -80,6 +80,46 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var wordWrapCharCode:Float;
     /**
+     * The horizontal offset of the drop shadow.
+     *
+     * You can set this directly, or use `Phaser.GameObjects.BitmapText#setDropShadow`.
+     *
+     * @name Phaser.GameObjects.BitmapText#dropShadowX
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var dropShadowX:Float;
+    /**
+     * The vertical offset of the drop shadow.
+     *
+     * You can set this directly, or use `Phaser.GameObjects.BitmapText#setDropShadow`.
+     *
+     * @name Phaser.GameObjects.BitmapText#dropShadowY
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var dropShadowY:Float;
+    /**
+     * The color of the drop shadow.
+     *
+     * You can set this directly, or use `Phaser.GameObjects.BitmapText#setDropShadow`.
+     *
+     * @name Phaser.GameObjects.BitmapText#dropShadowColor
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var dropShadowColor:Float;
+    /**
+     * The alpha value of the drop shadow.
+     *
+     * You can set this directly, or use `Phaser.GameObjects.BitmapText#setDropShadow`.
+     *
+     * @name Phaser.GameObjects.BitmapText#dropShadowAlpha
+     * @type {number}
+     * @since 3.50.0
+     */
+    public var dropShadowAlpha:Float;
+    /**
      * Controls the alignment of each line of text in this BitmapText object.
      *
      * Only has any effect when this BitmapText contains multiple lines of text, split with carriage-returns.
@@ -94,10 +134,10 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * The alignment position is based on the longest line of text.
      *
      * @name Phaser.GameObjects.BitmapText#align
-     * @type {integer}
+     * @type {number}
      * @since 3.11.0
      */
-    public var align:Int;
+    public var align:Float;
     /**
      * The text that this Bitmap Text object displays.
      *
@@ -167,26 +207,26 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * Left align the text characters in a multi-line BitmapText object.
      *
      * @name Phaser.GameObjects.BitmapText.ALIGN_LEFT
-     * @type {integer}
+     * @type {number}
      * @since 3.11.0
      */
-    public var ALIGN_LEFT:Int;
+    public var ALIGN_LEFT:Float;
     /**
      * Center align the text characters in a multi-line BitmapText object.
      *
      * @name Phaser.GameObjects.BitmapText.ALIGN_CENTER
-     * @type {integer}
+     * @type {number}
      * @since 3.11.0
      */
-    public var ALIGN_CENTER:Int;
+    public var ALIGN_CENTER:Float;
     /**
      * Right align the text characters in a multi-line BitmapText object.
      *
      * @name Phaser.GameObjects.BitmapText.ALIGN_RIGHT
-     * @type {integer}
+     * @type {number}
      * @since 3.11.0
      */
-    public var ALIGN_RIGHT:Int;
+    public var ALIGN_RIGHT:Float;
     /**
      * Set the lines of text in this BitmapText to be left-aligned.
      * This only has any effect if this BitmapText contains more than one line of text.
@@ -255,6 +295,114 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public function setText(value:Dynamic):Dynamic;
     /**
+     * Sets a drop shadow effect on this Bitmap Text.
+     *
+     * This is a WebGL only feature and only works with Static Bitmap Text, not Dynamic.
+     *
+     * You can set the vertical and horizontal offset of the shadow, as well as the color and alpha.
+     *
+     * Once a shadow has been enabled you can modify the `dropShadowX` and `dropShadowY` properties of this
+     * Bitmap Text directly to adjust the position of the shadow in real-time.
+     *
+     * If you wish to clear the shadow, call this method with no parameters specified.
+     *
+     * @method Phaser.GameObjects.BitmapText#setDropShadow
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {number} [x=0] - The horizontal offset of the drop shadow.
+     * @param {number} [y=0] - The vertical offset of the drop shadow.
+     * @param {number} [color=0x000000] - The color of the drop shadow, given as a hex value, i.e. `0x000000` for black.
+     * @param {number} [alpha=0.5] - The alpha of the drop shadow, given as a float between 0 and 1. This is combined with the Bitmap Text alpha as well.
+     *
+     * @return {this} This BitmapText Object.
+     */
+    public function setDropShadow(?x:Float, ?y:Float, ?color:Float, ?alpha:Float):Dynamic;
+    /**
+     * Sets a tint on a range of characters in this Bitmap Text, starting from the `start` parameter index
+     * and running for `length` quantity of characters.
+     *
+     * The `start` parameter can be negative. In this case, it starts at the end of the text and counts
+     * backwards `start` places.
+     *
+     * You can also pass in -1 as the `length` and it will tint all characters from `start`
+     * up until the end of the string.
+     
+     * Remember that spaces and punctuation count as characters.
+     *
+     * This is a WebGL only feature and only works with Static Bitmap Text, not Dynamic.
+     *
+     * The tint works by taking the pixel color values from the Bitmap Text texture, and then
+     * multiplying it by the color value of the tint. You can provide either one color value,
+     * in which case the whole character will be tinted in that color. Or you can provide a color
+     * per corner. The colors are blended together across the extent of the character range.
+     *
+     * To swap this from being an additive tint to a fill based tint, set the `tintFill` parameter to `true`.
+     *
+     * To modify the tint color once set, call this method again with new color values.
+     *
+     * Using `setWordTint` can override tints set by this function, and vice versa.
+     *
+     * To remove a tint call this method with just the `start`, and optionally, the `length` parameters defined.
+     *
+     * @method Phaser.GameObjects.BitmapText#setCharacterTint
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {number} [start=0] - The starting character to begin the tint at. If negative, it counts back from the end of the text.
+     * @param {number} [length=1] - The number of characters to tint. Remember that spaces count as a character too. Pass -1 to tint all characters from `start` onwards.
+     * @param {boolean} [tintFill=false] - Use a fill-based tint (true), or an additive tint (false)
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the character. If not other values are given this value is applied evenly, tinting the whole character.
+     * @param {number} [topRight] - The tint being applied to the top-right of the character.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the character.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the character.
+     *
+     * @return {this} This BitmapText Object.
+     */
+    public function setCharacterTint(?start:Float, ?length:Float, ?tintFill:Bool, ?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
+    /**
+     * Sets a tint on a matching word within this Bitmap Text.
+     *
+     * The `word` parameter can be either a string or a number.
+     *
+     * If a string, it will run a string comparison against the text contents, and if matching,
+     * it will tint the whole word.
+     *
+     * If a number, if till that word, based on its offset within the text contents.
+     *
+     * The `count` parameter controls how many words are replaced. Pass in -1 to replace them all.
+     *
+     * This parameter is ignored if you pass a number as the `word` to be searched for.
+     *
+     * This is a WebGL only feature and only works with Static Bitmap Text, not Dynamic.
+     *
+     * The tint works by taking the pixel color values from the Bitmap Text texture, and then
+     * multiplying it by the color value of the tint. You can provide either one color value,
+     * in which case the whole character will be tinted in that color. Or you can provide a color
+     * per corner. The colors are blended together across the extent of the character range.
+     *
+     * To swap this from being an additive tint to a fill based tint, set the `tintFill` parameter to `true`.
+     *
+     * To modify the tint color once set, call this method again with new color values.
+     *
+     * Using `setCharacterTint` can override tints set by this function, and vice versa.
+     *
+     * @method Phaser.GameObjects.BitmapText#setWordTint
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|number)} word - The word to search for. Either a string, or an index of the word in the words array.
+     * @param {number} [count=1] - The number of matching words to tint. Pass -1 to tint all matching words.
+     * @param {boolean} [tintFill=false] - Use a fill-based tint (true), or an additive tint (false)
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the word. If not other values are given this value is applied evenly, tinting the whole word.
+     * @param {number} [topRight] - The tint being applied to the top-right of the word.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the word.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the word.
+     *
+     * @return {this} This BitmapText Object.
+     */
+    public function setWordTint(word:Dynamic, ?count:Float, ?tintFill:Bool, ?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
+    /**
      * Calculate the bounds of this Bitmap Text.
      *
      * An object is returned that contains the position, width and height of the Bitmap Text in local and global
@@ -269,11 +417,36 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.BitmapText#getTextBounds
      * @since 3.0.0
      *
-     * @param {boolean} [round] - Whether to round the results to the nearest integer.
+     * @param {boolean} [round=false] - Whether to round the results up to the nearest integer.
      *
      * @return {Phaser.Types.GameObjects.BitmapText.BitmapTextSize} An object that describes the size of this Bitmap Text.
      */
     public function getTextBounds(?round:Bool):phaser.types.gameobjects.bitmaptext.BitmapTextSize;
+    /**
+     * Gets the character located at the given x/y coordinate within this Bitmap Text.
+     *
+     * The coordinates you pass in are translated into the local space of the
+     * Bitmap Text, however, it is up to you to first translate the input coordinates to world space.
+     *
+     * If you wish to use this in combination with an input event, be sure
+     * to pass in `Pointer.worldX` and `worldY` so they are in world space.
+     *
+     * In some cases, based on kerning, characters can overlap. When this happens,
+     * the first character in the word is returned.
+     *
+     * Note that this does not work for DynamicBitmapText if you have changed the
+     * character positions during render. It will only scan characters in their un-translated state.
+     *
+     * @method Phaser.GameObjects.BitmapText#getCharacterAt
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to check.
+     * @param {number} y - The y position to check.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Types.GameObjects.BitmapText.BitmapTextCharacter} The character object at the given position, or `null`.
+     */
+    public function getCharacterAt(x:Float, y:Float, ?camera:phaser.cameras.scene2d.Camera):phaser.types.gameobjects.bitmaptext.BitmapTextCharacter;
     /**
      * Changes the font this BitmapText is using to render.
      *
@@ -285,11 +458,11 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      *
      * @param {string} font - The key of the font to use from the Bitmap Font cache.
      * @param {number} [size] - The font size of this Bitmap Text. If not specified the current size will be used.
-     * @param {integer} [align=0] - The alignment of the text in a multi-line BitmapText object. If not specified the current alignment will be used.
+     * @param {number} [align=0] - The alignment of the text in a multi-line BitmapText object. If not specified the current alignment will be used.
      *
      * @return {this} This BitmapText Object.
      */
-    public function setFont(font:String, ?size:Float, ?align:Int):Dynamic;
+    public function setFont(font:String, ?size:Float, ?align:Float):Dynamic;
     /**
      * Sets the maximum display width of this BitmapText in pixels.
      *
@@ -312,6 +485,14 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public function setMaxWidth(value:Float, ?wordWrapCharCode:Float):Dynamic;
     /**
+     * Internal destroy handler, called as part of the destroy process.
+     *
+     * @method Phaser.GameObjects.BitmapText#preDestroy
+     * @protected
+     * @since 3.50.0
+     */
+    public function preDestroy():Void;
+    /**
      * Parse an XML Bitmap Font from an Atlas.
      *
      * Adds the parsed Bitmap Font data to the cache with the `fontName` key.
@@ -324,12 +505,12 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @param {string} textureKey - The key of the BitmapFont's texture.
      * @param {string} frameKey - The key of the BitmapFont texture's frame.
      * @param {string} xmlKey - The key of the XML data of the font to parse.
-     * @param {integer} [xSpacing] - The x-axis spacing to add between each letter.
-     * @param {integer} [ySpacing] - The y-axis spacing to add to the line height.
+     * @param {number} [xSpacing] - The x-axis spacing to add between each letter.
+     * @param {number} [ySpacing] - The y-axis spacing to add to the line height.
      *
      * @return {boolean} Whether the parsing was successful or not.
      */
-    static public function ParseFromAtlas(scene:phaser.Scene, fontName:String, textureKey:String, frameKey:String, xmlKey:String, ?xSpacing:Int, ?ySpacing:Int):Bool;
+    static public function ParseFromAtlas(scene:phaser.Scene, fontName:String, textureKey:String, frameKey:String, xmlKey:String, ?xSpacing:Float, ?ySpacing:Float):Bool;
     /**
      * Parse an XML font to Bitmap Font data for the Bitmap Font cache.
      *
@@ -337,13 +518,13 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @since 3.17.0
      *
      * @param {XMLDocument} xml - The XML Document to parse the font from.
-     * @param {integer} [xSpacing=0] - The x-axis spacing to add between each letter.
-     * @param {integer} [ySpacing=0] - The y-axis spacing to add to the line height.
-     * @param {Phaser.Textures.Frame} [frame] - The texture frame to take into account while parsing.
+     * @param {Phaser.Textures.Frame} frame - The texture frame to take into account when creating the uv data.
+     * @param {number} [xSpacing=0] - The x-axis spacing to add between each letter.
+     * @param {number} [ySpacing=0] - The y-axis spacing to add to the line height.
      *
      * @return {Phaser.Types.GameObjects.BitmapText.BitmapFontData} The parsed Bitmap Font data.
      */
-    static public function ParseXMLBitmapFont(xml:js.html.XMLDocument, ?xSpacing:Int, ?ySpacing:Int, ?frame:phaser.textures.Frame):phaser.types.gameobjects.bitmaptext.BitmapFontData;
+    static public function ParseXMLBitmapFont(xml:js.html.XMLDocument, frame:phaser.textures.Frame, ?xSpacing:Float, ?ySpacing:Float):phaser.types.gameobjects.bitmaptext.BitmapFontData;
     /**
      * The alpha value of the Game Object.
      *
@@ -508,11 +689,11 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The Mask this Game Object is using during render.
      *
@@ -557,6 +738,8 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     /**
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
+     *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
      *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
@@ -686,6 +869,8 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
     /**
      * The initial WebGL pipeline of this Game Object.
      *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
      * @type {Phaser.Renderer.WebGL.WebGLPipeline}
      * @default null
@@ -704,30 +889,129 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
      * Sets the initial WebGL Pipeline of this Game Object.
-     * This should only be called during the instantiation of the Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
      *
      * @method Phaser.GameObjects.Components.Pipeline#initPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} [pipelineName=TextureTintPipeline] - The name of the pipeline to set on this Game Object. Defaults to the Texture Tint Pipeline.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
      *
      * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
      */
-    public function initPipeline(?pipelineName:String):Bool;
+    public function initPipeline(pipeline:Dynamic):Bool;
     /**
-     * Sets the active WebGL Pipeline of this Game Object.
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
      *
      * @method Phaser.GameObjects.Components.Pipeline#setPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} pipelineName - The name of the pipeline to set on this Game Object.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPipeline(pipelineName:String):Dynamic;
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
      * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
      *
@@ -735,9 +1019,37 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
      */
-    public function resetPipeline():Bool;
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
     /**
      * Gets the name of the WebGL Pipeline this Game Object is currently using.
      *
@@ -845,7 +1157,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Textures.Texture)} key - The key of the texture to be used, as stored in the Texture Manager, or a Texture instance.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -863,7 +1175,7 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Texture#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *
@@ -871,7 +1183,54 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public function setFrame(frame:Dynamic, ?updateSize:Bool, ?updateOrigin:Bool):Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -880,57 +1239,20 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -972,14 +1294,14 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -1001,14 +1323,14 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * The x position of this Game Object.
      *
@@ -1088,11 +1410,11 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1121,6 +1443,17 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1245,6 +1578,27 @@ extern class BitmapText extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

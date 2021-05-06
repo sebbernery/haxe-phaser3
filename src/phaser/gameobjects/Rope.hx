@@ -36,8 +36,8 @@ package phaser.gameobjects;
  * @param {number} [x=0] - The horizontal position of this Game Object in the world.
  * @param {number} [y=0] - The vertical position of this Game Object in the world.
  * @param {string} [texture] - The key of the Texture this Game Object will use to render with, as stored in the Texture Manager. If not given, `__DEFAULT` is used.
- * @param {(string|integer|null)} [frame] - An optional frame from the Texture this Game Object is rendering with.
- * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created. See `setPoints` to set this post-creation.
+ * @param {(string|number|null)} [frame] - An optional frame from the Texture this Game Object is rendering with.
+ * @param {(number|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created. See `setPoints` to set this post-creation.
  * @param {boolean} [horizontal=true] - Should the vertices of this Rope be aligned horizontally (`true`), or vertically (`false`)?
  * @param {number[]} [colors] - An optional array containing the color data for this Rope. You should provide one color value per pair of vertices.
  * @param {number[]} [alphas] - An optional array containing the alpha data for this Rope. You should provide one alpha value per pair of vertices.
@@ -46,13 +46,13 @@ package phaser.gameobjects;
 extern class Rope extends phaser.gameobjects.GameObject {
     public function new(scene:phaser.Scene, ?x:Float, ?y:Float, ?texture:String, ?frame:Dynamic, ?points:Dynamic, ?horizontal:Bool, ?colors:Array<Float>, ?alphas:Array<Float>);
     /**
-     * The Animation Controller of this Rope.
+     * The Animation State of this Rope.
      *
      * @name Phaser.GameObjects.Rope#anims
-     * @type {Phaser.GameObjects.Components.Animation}
+     * @type {Phaser.Animations.AnimationState}
      * @since 3.23.0
      */
-    public var anims:phaser.gameobjects.components.Animation;
+    public var anims:phaser.animations.AnimationState;
     /**
      * An array containing the points data for this Rope.
      *
@@ -122,15 +122,14 @@ extern class Rope extends phaser.gameobjects.GameObject {
     /**
      * The tint fill mode.
      *
-     * 0 = An additive tint (the default), where vertices colors are blended with the texture.
-     * 1 = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
-     * 2 = A complete tint, where the vertices colors replace the texture, including alpha, entirely.
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Rope#tintFill
-     * @type {integer}
+     * @type {boolean}
      * @since 3.23.0
      */
-    public var tintFill:Int;
+    public var tintFill:Bool;
     /**
      * If the Rope is marked as `dirty` it will automatically recalculate its vertices
      * the next time it renders. You can also force this by calling `updateVertices`.
@@ -202,11 +201,11 @@ extern class Rope extends phaser.gameobjects.GameObject {
      *
      * @param {string} key - The string-based key of the animation to play.
      * @param {boolean} [ignoreIfPlaying=false] - If an animation is already playing then ignore this call.
-     * @param {integer} [startFrame=0] - Optionally start the animation playing from this frame index.
+     * @param {number} [startFrame=0] - Optionally start the animation playing from this frame index.
      *
      * @return {this} This Game Object.
      */
-    public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Int):Dynamic;
+    public function play(key:String, ?ignoreIfPlaying:Bool, ?startFrame:Float):Dynamic;
     /**
      * Flags this Rope as being dirty. A dirty rope will recalculate all of its vertices data
      * the _next_ time it renders. You should set this rope as dirty if you update the points
@@ -227,7 +226,7 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Rope#setHorizontal
      * @since 3.23.0
      *
-     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
+     * @param {(number|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
      * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
      * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
      *
@@ -243,7 +242,7 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Rope#setVertical
      * @since 3.23.0
      *
-     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
+     * @param {(number|Phaser.Types.Math.Vector2Like[])} [points] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided the current points length is used.
      * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
      * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
      *
@@ -253,14 +252,12 @@ extern class Rope extends phaser.gameobjects.GameObject {
     /**
      * Sets the tint fill mode.
      *
-     * Mode 0 is an additive tint, the default, which blends the vertices colors with the texture.
+     * Mode 0 (`false`) is an additive tint, the default, which blends the vertices colors with the texture.
      * This mode respects the texture alpha.
      *
-     * Mode 1 is a fill tint. Unlike an additive tint, a fill-tint literally replaces the pixel colors
+     * Mode 1 (`true`) is a fill tint. Unlike an additive tint, a fill-tint literally replaces the pixel colors
      * from the texture with those in the tint. You can use this for effects such as making a player flash 'white'
      * if hit by something. This mode respects the texture alpha.
-     *
-     * Mode 2 is a complete tint. The texture colors and alpha are replaced entirely by the vertices colors.
      *
      * See the `setColors` method for details of how to color each of the vertices.
      *
@@ -268,11 +265,11 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.23.0
      *
-     * @param {integer} [value=0] - Set to 0 for an Additive tint, 1 for a fill tint with alpha, or 2 for a fill tint without alpha.
+     * @param {boolean} [value=false] - Set to `false` for an Additive tint or `true` fill tint with alpha.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?value:Int):Dynamic;
+    public function setTintFill(?value:Bool):Dynamic;
     /**
      * Set the alpha values used by the Rope during rendering.
      *
@@ -360,7 +357,7 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Rope#setPoints
      * @since 3.23.0
      *
-     * @param {(integer|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created.
+     * @param {(number|Phaser.Types.Math.Vector2Like[])} [points=2] - An array containing the vertices data for this Rope, or a number that indicates how many segments to split the texture frame into. If none is provided a simple quad is created.
      * @param {(number|number[])} [colors] - Either a single color value, or an array of values.
      * @param {(number|number[])} [alphas] - Either a single alpha value, or an array of values.
      *
@@ -383,11 +380,11 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Rope#resizeArrays
      * @since 3.23.0
      *
-     * @param {integer} newSize - The amount of segments to split the Rope in to.
+     * @param {number} newSize - The amount of segments to split the Rope in to.
      *
      * @return {this} This Game Object instance.
      */
-    public function resizeArrays(newSize:Int):Dynamic;
+    public function resizeArrays(newSize:Float):Dynamic;
     /**
      * Updates the vertices based on the Rope points.
      *
@@ -404,9 +401,10 @@ extern class Rope extends phaser.gameobjects.GameObject {
     /**
      * This method enables rendering of the Rope vertices to the given Graphics instance.
      *
-     * If you enable this feature, you must call `Graphics.clear()` in your Scene `update`,
-     * otherwise the Graphics instance will fill-in with draw calls. This is not done automatically
-     * to allow for you to debug render multiple Rope objects to a single Graphics instance.
+     * If you enable this feature, you **must** call `Graphics.clear()` in your Scene `update`,
+     * otherwise the Graphics instance you provide to debug will fill-up with draw calls,
+     * eventually crashing the browser. This is not done automatically to allow you to debug
+     * draw multiple Rope objects to a single Graphics instance.
      *
      * The Rope class has a built-in debug rendering callback `Rope.renderDebugVerts`, however
      * you can also provide your own callback to be used instead. Do this by setting the `callback` parameter.
@@ -442,10 +440,10 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @since 3.23.0
      *
      * @param {Phaser.GameObjects.Rope} src - The Rope object being rendered.
-     * @param {integer} meshLength - The number of vertices in the mesh.
+     * @param {number} meshLength - The number of vertices in the mesh.
      * @param {number[]} verts - An array of translated vertex coordinates.
      */
-    public function renderDebugVerts(src:phaser.gameobjects.Rope, meshLength:Int, verts:Array<Float>):Void;
+    public function renderDebugVerts(src:phaser.gameobjects.Rope, meshLength:Float, verts:Array<Float>):Void;
     /**
      * The alpha value of the Game Object.
      *
@@ -564,11 +562,11 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Depth#setDepth
      * @since 3.0.0
      *
-     * @param {integer} value - The depth of this Game Object.
+     * @param {number} value - The depth of this Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setDepth(value:Int):Dynamic;
+    public function setDepth(value:Float):Dynamic;
     /**
      * The horizontally flipped state of the Game Object.
      *
@@ -713,6 +711,8 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * Creates and returns a Bitmap Mask. This mask can be used by any Game Object,
      * including this one.
      *
+     * Note: Bitmap Masks only work on WebGL. Geometry Masks work on both WebGL and Canvas.
+     *
      * To create the mask you need to pass in a reference to a renderable Game Object.
      * A renderable Game Object is one that uses a texture to render with, such as an
      * Image, Sprite, Render Texture or BitmapText.
@@ -751,6 +751,8 @@ extern class Rope extends phaser.gameobjects.GameObject {
     /**
      * The initial WebGL pipeline of this Game Object.
      *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
      * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
      * @type {Phaser.Renderer.WebGL.WebGLPipeline}
      * @default null
@@ -769,30 +771,129 @@ extern class Rope extends phaser.gameobjects.GameObject {
      */
     public var pipeline:phaser.renderer.webgl.WebGLPipeline;
     /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
      * Sets the initial WebGL Pipeline of this Game Object.
-     * This should only be called during the instantiation of the Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
      *
      * @method Phaser.GameObjects.Components.Pipeline#initPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} [pipelineName=TextureTintPipeline] - The name of the pipeline to set on this Game Object. Defaults to the Texture Tint Pipeline.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
      *
      * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
      */
-    public function initPipeline(?pipelineName:String):Bool;
+    public function initPipeline(pipeline:Dynamic):Bool;
     /**
-     * Sets the active WebGL Pipeline of this Game Object.
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
      *
      * @method Phaser.GameObjects.Components.Pipeline#setPipeline
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {string} pipelineName - The name of the pipeline to set on this Game Object.
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
      *
      * @return {this} This Game Object instance.
      */
-    public function setPipeline(pipelineName:String):Dynamic;
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
     /**
      * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
      *
@@ -800,9 +901,37 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @webglOnly
      * @since 3.0.0
      *
-     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
      */
-    public function resetPipeline():Bool;
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
     /**
      * Gets the name of the WebGL Pipeline this Game Object is currently using.
      *
@@ -939,7 +1068,7 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @since 3.0.0
      *
      * @param {(string|Phaser.Textures.Texture)} key - The key of the texture to be used, as stored in the Texture Manager, or a Texture instance.
-     * @param {(string|integer)} [frame] - The name or index of the frame within the Texture.
+     * @param {(string|number)} [frame] - The name or index of the frame within the Texture.
      *
      * @return {this} This Game Object instance.
      */
@@ -957,7 +1086,7 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @method Phaser.GameObjects.Components.Texture#setFrame
      * @since 3.0.0
      *
-     * @param {(string|integer)} frame - The name or index of the frame within the Texture.
+     * @param {(string|number)} frame - The name or index of the frame within the Texture.
      * @param {boolean} [updateSize=true] - Should this call adjust the size of the Game Object?
      * @param {boolean} [updateOrigin=true] - Should this call adjust the origin of the Game Object?
      *
@@ -1043,11 +1172,11 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * If you prefer to work in radians, see the `rotation` property instead.
      *
      * @name Phaser.GameObjects.Components.Transform#angle
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.0.0
      */
-    public var angle:Int;
+    public var angle:Float;
     /**
      * The angle of this Game Object in radians.
      *
@@ -1076,6 +1205,17 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @return {this} This Game Object instance.
      */
     public function setPosition(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic;
+    /**
+     * Copies an object's coordinates to this Game Object's position.
+     *
+     * @method Phaser.GameObjects.Components.Transform#copyPosition
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Types.Math.Vector2Like|Phaser.Types.Math.Vector3Like|Phaser.Types.Math.Vector4Like)} source - An object with numeric 'x', 'y', 'z', or 'w' properties. Undefined values are not copied.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function copyPosition(source:Dynamic):Dynamic;
     /**
      * Sets the position of this Game Object to be a random position within the confines of
      * the given area.
@@ -1200,6 +1340,27 @@ extern class Rope extends phaser.gameobjects.GameObject {
      * @return {Phaser.GameObjects.Components.TransformMatrix} The populated Transform Matrix.
      */
     public function getWorldTransformMatrix(?tempMatrix:phaser.gameobjects.components.TransformMatrix, ?parentMatrix:phaser.gameobjects.components.TransformMatrix):phaser.gameobjects.components.TransformMatrix;
+    /**
+     * Takes the given `x` and `y` coordinates and converts them into local space for this
+     * Game Object, taking into account parent and local transforms, and the Display Origin.
+     *
+     * The returned Vector2 contains the translated point in its properties.
+     *
+     * A Camera needs to be provided in order to handle modified scroll factors. If no
+     * camera is specified, it will use the `main` camera from the Scene to which this
+     * Game Object belongs.
+     *
+     * @method Phaser.GameObjects.Components.Transform#getLocalPoint
+     * @since 3.50.0
+     *
+     * @param {number} x - The x position to translate.
+     * @param {number} y - The y position to translate.
+     * @param {Phaser.Math.Vector2} [point] - A Vector2, or point-like object, to store the results in.
+     * @param {Phaser.Cameras.Scene2D.Camera} [camera] - The Camera which is being tested against. If not given will use the Scene default camera.
+     *
+     * @return {Phaser.Math.Vector2} The translated point.
+     */
+    public function getLocalPoint(x:Float, y:Float, ?point:phaser.math.Vector2, ?camera:phaser.cameras.scene2d.Camera):phaser.math.Vector2;
     /**
      * Gets the sum total rotation of all of this Game Objects parent Containers.
      *

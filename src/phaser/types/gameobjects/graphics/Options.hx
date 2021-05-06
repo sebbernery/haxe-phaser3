@@ -1,7 +1,7 @@
 package phaser.types.gameobjects.graphics;
 
 /**
- * Options for the Graphics game Object.
+ * Options for the Graphics Game Object.
  *
  * @typedef {object} Phaser.Types.GameObjects.Graphics.Options
  * @extends Phaser.Types.GameObjects.Graphics.Styles

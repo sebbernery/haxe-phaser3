@@ -31,6 +31,7 @@ package phaser.cameras.scene2d;
  * @extends Phaser.Cameras.Scene2D.BaseCamera
  * @extends Phaser.GameObjects.Components.Flip
  * @extends Phaser.GameObjects.Components.Tint
+ * @extends Phaser.GameObjects.Components.Pipeline
  *
  * @param {number} x - The x position of the Camera, relative to the top-left of the game canvas.
  * @param {number} y - The y position of the Camera, relative to the top-left of the game canvas.
@@ -155,174 +156,6 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public var deadzone:phaser.geom.Rectangle;
     /**
-     * Is this Camera rendering directly to the canvas or to a texture?
-     *
-     * Enable rendering to texture with the method `setRenderToTexture` (just enabling this boolean won't be enough)
-     *
-     * Once enabled you can toggle it by switching this property.
-     *
-     * To properly remove a render texture you should call the `clearRenderToTexture()` method.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#renderToTexture
-     * @type {boolean}
-     * @default false
-     * @since 3.13.0
-     */
-    public var renderToTexture:Bool;
-    /**
-     * If this Camera is rendering to a texture (via `setRenderToTexture`) then you
-     * have the option to control if it should also render to the Game canvas as well.
-     *
-     * By default, a Camera will render both to its texture and to the Game canvas.
-     *
-     * However, if you set ths property to `false` it will only render to the texture
-     * and skip rendering to the Game canvas.
-     *
-     * Setting this property if the Camera isn't rendering to a texture has no effect.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#renderToGame
-     * @type {boolean}
-     * @default true
-     * @since 3.23.0
-     */
-    public var renderToGame:Bool;
-    /**
-     * If this Camera has been set to render to a texture then this holds a reference
-     * to the HTML Canvas Element that the Camera is drawing to.
-     *
-     * Enable texture rendering using the method `setRenderToTexture`.
-     *
-     * This is only populated if Phaser is running with the Canvas Renderer.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#canvas
-     * @type {HTMLCanvasElement}
-     * @since 3.13.0
-     */
-    public var canvas:js.html.CanvasElement;
-    /**
-     * If this Camera has been set to render to a texture then this holds a reference
-     * to the Rendering Context belonging to the Canvas element the Camera is drawing to.
-     *
-     * Enable texture rendering using the method `setRenderToTexture`.
-     *
-     * This is only populated if Phaser is running with the Canvas Renderer.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#context
-     * @type {CanvasRenderingContext2D}
-     * @since 3.13.0
-     */
-    public var context:js.html.CanvasRenderingContext2D;
-    /**
-     * If this Camera has been set to render to a texture then this holds a reference
-     * to the GL Texture belonging the Camera is drawing to.
-     *
-     * Enable texture rendering using the method `setRenderToTexture`.
-     *
-     * This is only set if Phaser is running with the WebGL Renderer.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#glTexture
-     * @type {?WebGLTexture}
-     * @since 3.13.0
-     */
-    public var glTexture:js.html.webgl.Texture;
-    /**
-     * If this Camera has been set to render to a texture then this holds a reference
-     * to the GL Frame Buffer belonging the Camera is drawing to.
-     *
-     * Enable texture rendering using the method `setRenderToTexture`.
-     *
-     * This is only set if Phaser is running with the WebGL Renderer.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#framebuffer
-     * @type {?WebGLFramebuffer}
-     * @since 3.13.0
-     */
-    public var framebuffer:js.html.webgl.Framebuffer;
-    /**
-     * If this Camera has been set to render to a texture and to use a custom pipeline,
-     * then this holds a reference to the pipeline the Camera is drawing with.
-     *
-     * Enable texture rendering using the method `setRenderToTexture`.
-     *
-     * This is only set if Phaser is running with the WebGL Renderer.
-     *
-     * @name Phaser.Cameras.Scene2D.Camera#pipeline
-     * @type {any}
-     * @since 3.13.0
-     */
-    public var pipeline:Dynamic;
-    /**
-     * Sets the Camera to render to a texture instead of to the main canvas.
-     *
-     * The Camera will redirect all Game Objects it's asked to render to this texture.
-     *
-     * During the render sequence, the texture itself will then be rendered to the main canvas.
-     *
-     * Doing this gives you the ability to modify the texture before this happens,
-     * allowing for special effects such as Camera specific shaders, or post-processing
-     * on the texture.
-     *
-     * If running under Canvas the Camera will render to its `canvas` property.
-     *
-     * If running under WebGL the Camera will create a frame buffer, which is stored in its `framebuffer` and `glTexture` properties.
-     *
-     * If you set a camera to render to a texture then it will emit 2 events during the render loop:
-     *
-     * First, it will emit the event `prerender`. This happens right before any Game Object's are drawn to the Camera texture.
-     *
-     * Then, it will emit the event `postrender`. This happens after all Game Object's have been drawn, but right before the
-     * Camera texture is rendered to the main game canvas. It's the final point at which you can manipulate the texture before
-     * it appears in-game.
-     *
-     * You should not enable this unless you plan on actually using the texture it creates
-     * somehow, otherwise you're just doubling the work required to render your game.
-     *
-     * If you only require the Camera to render to a texture, and not also to the Game,
-     * them set the `renderToGame` parameter to `false`.
-     *
-     * To temporarily disable rendering to a texture, toggle the `renderToTexture` boolean.
-     *
-     * If you no longer require the Camera to render to a texture, call the `clearRenderToTexture` method,
-     * which will delete the respective textures and free-up resources.
-     *
-     * @method Phaser.Cameras.Scene2D.Camera#setRenderToTexture
-     * @since 3.13.0
-     *
-     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} [pipeline] - An optional WebGL Pipeline to render with, can be either a string which is the name of the pipeline, or a pipeline reference.
-     * @param {boolean} [renderToGame=true] - If you do not need the Camera to still render to the Game, set this parameter to `false`.
-     *
-     * @return {this} This Camera instance.
-     */
-    public function setRenderToTexture(?pipeline:Dynamic, ?renderToGame:Bool):Dynamic;
-    /**
-     * Sets the WebGL pipeline this Camera is using when rendering to a texture.
-     *
-     * You can pass either the string-based name of the pipeline, or a reference to the pipeline itself.
-     *
-     * Call this method with no arguments to clear any previously set pipeline.
-     *
-     * @method Phaser.Cameras.Scene2D.Camera#setPipeline
-     * @since 3.13.0
-     *
-     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} [pipeline] - The WebGL Pipeline to render with, can be either a string which is the name of the pipeline, or a pipeline reference. Or if left empty it will clear the pipeline.
-     *
-     * @return {this} This Camera instance.
-     */
-    public function setPipeline(?pipeline:Dynamic):Dynamic;
-    /**
-     * If this Camera was set to render to a texture, this will clear the resources it was using and
-     * redirect it to render back to the primary Canvas again.
-     *
-     * If you only wish to temporarily disable rendering to a texture then you can toggle the
-     * property `renderToTexture` instead.
-     *
-     * @method Phaser.Cameras.Scene2D.Camera#clearRenderToTexture
-     * @since 3.13.0
-     *
-     * @return {this} This Camera instance.
-     */
-    public function clearRenderToTexture():Dynamic;
-    /**
      * Sets the Camera dead zone.
      *
      * The deadzone is only used when the camera is following a target.
@@ -355,17 +188,17 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_COMPLETE
      * @since 3.3.0
      *
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
-     * @param {integer} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
-     * @param {integer} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
-     * @param {integer} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
+     * @param {number} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
+     * @param {number} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {this} This Camera instance.
      */
-    public function fadeIn(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function fadeIn(?duration:Float, ?red:Float, ?green:Float, ?blue:Float, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera out to the given color over the duration specified.
      * This is an alias for Camera.fade that forces the fade to start, regardless of existing fades.
@@ -375,17 +208,17 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_COMPLETE
      * @since 3.3.0
      *
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
-     * @param {integer} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
-     * @param {integer} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
-     * @param {integer} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
+     * @param {number} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
+     * @param {number} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
      * @param {any} [context] - The context in which the callback is invoked. Defaults to the Scene to which the Camera belongs.
      *
      * @return {this} This Camera instance.
      */
-    public function fadeOut(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function fadeOut(?duration:Float, ?red:Float, ?green:Float, ?blue:Float, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera from the given color to transparent over the duration specified.
      *
@@ -394,10 +227,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#FADE_IN_COMPLETE
      * @since 3.5.0
      *
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
-     * @param {integer} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
-     * @param {integer} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
-     * @param {integer} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
+     * @param {number} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
+     * @param {number} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {boolean} [force=false] - Force the effect to start immediately, even if already running.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
@@ -405,7 +238,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function fadeFrom(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function fadeFrom(?duration:Float, ?red:Float, ?green:Float, ?blue:Float, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Fades the Camera from transparent to the given color over the duration specified.
      *
@@ -414,10 +247,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#FADE_OUT_COMPLETE
      * @since 3.0.0
      *
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
-     * @param {integer} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
-     * @param {integer} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
-     * @param {integer} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [red=0] - The amount to fade the red channel towards. A value between 0 and 255.
+     * @param {number} [green=0] - The amount to fade the green channel towards. A value between 0 and 255.
+     * @param {number} [blue=0] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {boolean} [force=false] - Force the effect to start immediately, even if already running.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
@@ -425,7 +258,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function fade(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function fade(?duration:Float, ?red:Float, ?green:Float, ?blue:Float, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Flashes the Camera by setting it to the given color immediately and then fading it away again quickly over the duration specified.
      *
@@ -434,10 +267,10 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#FLASH_COMPLETE
      * @since 3.0.0
      *
-     * @param {integer} [duration=250] - The duration of the effect in milliseconds.
-     * @param {integer} [red=255] - The amount to fade the red channel towards. A value between 0 and 255.
-     * @param {integer} [green=255] - The amount to fade the green channel towards. A value between 0 and 255.
-     * @param {integer} [blue=255] - The amount to fade the blue channel towards. A value between 0 and 255.
+     * @param {number} [duration=250] - The duration of the effect in milliseconds.
+     * @param {number} [red=255] - The amount to fade the red channel towards. A value between 0 and 255.
+     * @param {number} [green=255] - The amount to fade the green channel towards. A value between 0 and 255.
+     * @param {number} [blue=255] - The amount to fade the blue channel towards. A value between 0 and 255.
      * @param {boolean} [force=false] - Force the effect to start immediately, even if already running.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
      * It is sent two arguments: A reference to the camera and a progress amount between 0 and 1 indicating how complete the effect is.
@@ -445,7 +278,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function flash(?duration:Int, ?red:Int, ?green:Int, ?blue:Int, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function flash(?duration:Float, ?red:Float, ?green:Float, ?blue:Float, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * Shakes the Camera by the given intensity over the duration specified.
      *
@@ -454,7 +287,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @fires Phaser.Cameras.Scene2D.Events#SHAKE_COMPLETE
      * @since 3.0.0
      *
-     * @param {integer} [duration=100] - The duration of the effect in milliseconds.
+     * @param {number} [duration=100] - The duration of the effect in milliseconds.
      * @param {(number|Phaser.Math.Vector2)} [intensity=0.05] - The intensity of the shake.
      * @param {boolean} [force=false] - Force the shake effect to start immediately, even if already running.
      * @param {function} [callback] - This callback will be invoked every frame for the duration of the effect.
@@ -463,7 +296,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function shake(?duration:Int, ?intensity:Dynamic, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
+    public function shake(?duration:Float, ?intensity:Dynamic, ?force:Bool, ?callback:Dynamic, ?context:Dynamic):Dynamic;
     /**
      * This effect will scroll the Camera so that the center of its viewport finishes at the given destination,
      * over the duration and with the ease specified.
@@ -475,7 +308,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @param {number} x - The destination x coordinate to scroll the center of the Camera viewport to.
      * @param {number} y - The destination y coordinate to scroll the center of the Camera viewport to.
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
      * @param {Phaser.Types.Cameras.Scene2D.CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
@@ -485,7 +318,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function pan(x:Float, y:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
+    public function pan(x:Float, y:Float, ?duration:Float, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
     /**
      * This effect will rotate the Camera so that the viewport finishes at the given angle in radians,
      * over the duration and with the ease specified.
@@ -495,7 +328,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @param {number} radians - The destination angle in radians to rotate the Camera viewport to. If the angle is positive then the rotation is clockwise else anticlockwise
      * @param {boolean} [shortestPath=false] - If shortest path is set to true the camera will rotate in the quickest direction clockwise or anti-clockwise.
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the rotation. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the rotation effect to start immediately, even if already running.
      * @param {CameraRotateCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
@@ -505,7 +338,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {Phaser.Cameras.Scene2D.Camera} This Camera instance.
      */
-    public function rotateTo(radians:Float, ?shortestPath:Bool, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:CameraRotateCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
+    public function rotateTo(radians:Float, ?shortestPath:Bool, ?duration:Float, ?ease:Dynamic, ?force:Bool, ?callback:CameraRotateCallback, ?context:Dynamic):phaser.cameras.scene2d.Camera;
     /**
      * This effect will zoom the Camera to the given scale, over the duration and with the ease specified.
      *
@@ -515,7 +348,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @since 3.11.0
      *
      * @param {number} zoom - The target Camera zoom value.
-     * @param {integer} [duration=1000] - The duration of the effect in milliseconds.
+     * @param {number} [duration=1000] - The duration of the effect in milliseconds.
      * @param {(string|function)} [ease='Linear'] - The ease to use for the pan. Can be any of the Phaser Easing constants or a custom function.
      * @param {boolean} [force=false] - Force the pan effect to start immediately, even if already running.
      * @param {Phaser.Types.Cameras.Scene2D.CameraPanCallback} [callback] - This callback will be invoked every frame for the duration of the effect.
@@ -525,7 +358,7 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      *
      * @return {this} This Camera instance.
      */
-    public function zoomTo(zoom:Float, ?duration:Int, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
+    public function zoomTo(zoom:Float, ?duration:Float, ?ease:Dynamic, ?force:Bool, ?callback:phaser.types.cameras.scene2d.CameraPanCallback, ?context:Dynamic):Dynamic;
     /**
      * Sets the linear interpolation value to use when following a target.
      *
@@ -704,7 +537,54 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public function resetFlip():Dynamic;
     /**
-     * Fill or additive?
+     * The tint value being applied to the top-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopLeft:Float;
+    /**
+     * The tint value being applied to the top-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintTopRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintTopRight:Float;
+    /**
+     * The tint value being applied to the bottom-left vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomLeft:Float;
+    /**
+     * The tint value being applied to the bottom-right vertice of the Game Object.
+     * This value is interpolated from the corner to the center of the Game Object.
+     * The value should be set as a hex number, i.e. 0xff0000 for red, or 0xff00ff for purple.
+     *
+     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
+     * @type {number}
+     * @default 0xffffff
+     * @since 3.0.0
+     */
+    public var tintBottomRight:Float;
+    /**
+     * The tint fill mode.
+     *
+     * `false` = An additive tint (the default), where vertices colors are blended with the texture.
+     * `true` = A fill tint, where the vertices colors replace the texture, but respects texture alpha.
      *
      * @name Phaser.GameObjects.Components.Tint#tintFill
      * @type {boolean}
@@ -713,57 +593,20 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      */
     public var tintFill:Bool;
     /**
-     * The tint value being applied to the top-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopLeft:Int;
-    /**
-     * The tint value being applied to the top-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintTopRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintTopRight:Int;
-    /**
-     * The tint value being applied to the bottom-left of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomLeft
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomLeft:Int;
-    /**
-     * The tint value being applied to the bottom-right of the Game Object.
-     * This value is interpolated from the corner to the center of the Game Object.
-     *
-     * @name Phaser.GameObjects.Components.Tint#tintBottomRight
-     * @type {integer}
-     * @webglOnly
-     * @since 3.0.0
-     */
-    public var tintBottomRight:Int;
-    /**
      * The tint value being applied to the whole of the Game Object.
      * This property is a setter-only. Use the properties `tintTopLeft` etc to read the current tint value.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
-     * @type {integer}
+     * @type {number}
      * @webglOnly
      * @since 3.0.0
      */
-    public var tint:Int;
+    public var tint:Float;
     /**
-     * Does this Game Object have a tint applied to it or not?
+     * Does this Game Object have a tint applied?
+     *
+     * It checks to see if the 4 tint properties are set to the value 0xffffff
+     * and that the `tintFill` property is `false`. This indicates that a Game Object isn't tinted.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}
@@ -805,14 +648,14 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @webglOnly
      * @since 3.0.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If no other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTint(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTint(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
     /**
      * Sets a fill-based tint on this Game Object.
      *
@@ -834,12 +677,206 @@ extern class Camera extends phaser.cameras.scene2d.BaseCamera {
      * @webglOnly
      * @since 3.11.0
      *
-     * @param {integer} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
-     * @param {integer} [topRight] - The tint being applied to the top-right of the Game Object.
-     * @param {integer} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
-     * @param {integer} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
+     * @param {number} [topLeft=0xffffff] - The tint being applied to the top-left of the Game Object. If not other values are given this value is applied evenly, tinting the whole Game Object.
+     * @param {number} [topRight] - The tint being applied to the top-right of the Game Object.
+     * @param {number} [bottomLeft] - The tint being applied to the bottom-left of the Game Object.
+     * @param {number} [bottomRight] - The tint being applied to the bottom-right of the Game Object.
      *
      * @return {this} This Game Object instance.
      */
-    public function setTintFill(?topLeft:Int, ?topRight:Int, ?bottomLeft:Int, ?bottomRight:Int):Dynamic;
+    public function setTintFill(?topLeft:Float, ?topRight:Float, ?bottomLeft:Float, ?bottomRight:Float):Dynamic;
+    /**
+     * The initial WebGL pipeline of this Game Object.
+     *
+     * If you call `resetPipeline` on this Game Object, the pipeline is reset to this default.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#defaultPipeline
+     * @type {Phaser.Renderer.WebGL.WebGLPipeline}
+     * @default null
+     * @webglOnly
+     * @since 3.0.0
+     */
+    public var defaultPipeline:phaser.renderer.webgl.WebGLPipeline;
+    /**
+     * The current WebGL pipeline of this Game Object.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipeline
+     * @type {Phaser.Renderer.WebGL.WebGLPipeline}
+     * @default null
+     * @webglOnly
+     * @since 3.0.0
+     */
+    public var pipeline:phaser.renderer.webgl.WebGLPipeline;
+    /**
+     * Does this Game Object have any Post Pipelines set?
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#hasPostPipeline
+     * @type {boolean}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var hasPostPipeline:Bool;
+    /**
+     * The WebGL Post FX Pipelines this Game Object uses for post-render effects.
+     *
+     * The pipelines are processed in the order in which they appear in this array.
+     *
+     * If you modify this array directly, be sure to set the
+     * `hasPostPipeline` property accordingly.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#postPipeline
+     * @type {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[]}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var postPipeline:Array<phaser.renderer.webgl.pipelines.PostFXPipeline>;
+    /**
+     * An object to store pipeline specific data in, to be read by the pipelines this Game Object uses.
+     *
+     * @name Phaser.GameObjects.Components.Pipeline#pipelineData
+     * @type {object}
+     * @webglOnly
+     * @since 3.50.0
+     */
+    public var pipelineData:Dynamic;
+    /**
+     * Sets the initial WebGL Pipeline of this Game Object.
+     *
+     * This should only be called during the instantiation of the Game Object. After that, use `setPipeline`.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#initPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     *
+     * @return {boolean} `true` if the pipeline was set successfully, otherwise `false`.
+     */
+    public function initPipeline(pipeline:Dynamic):Bool;
+    /**
+     * Sets the main WebGL Pipeline of this Game Object.
+     *
+     * Also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the same pipeline data object.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {(string|Phaser.Renderer.WebGL.WebGLPipeline)} pipeline - Either the string-based name of the pipeline, or a pipeline instance to set.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipeline(pipeline:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Sets one, or more, Post Pipelines on this Game Object.
+     *
+     * Post Pipelines are invoked after this Game Object has rendered to its target and
+     * are commonly used for post-fx.
+     *
+     * The post pipelines are appended to the `postPipelines` array belonging to this
+     * Game Object. When the renderer processes this Game Object, it iterates through the post
+     * pipelines in the order in which they appear in the array. If you are stacking together
+     * multiple effects, be aware that the order is important.
+     *
+     * If you call this method multiple times, the new pipelines will be appended to any existing
+     * post pipelines already set. Use the `resetPostPipeline` method to clear them first, if required.
+     *
+     * You can optionally also sets the `pipelineData` property, if the parameter is given.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|string[]|function|function[]|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[])} pipelines - Either the string-based name of the pipeline, or a pipeline instance, or class, or an array of them.
+     * @param {object} [pipelineData] - Optional pipeline data object that is _deep copied_ into the `pipelineData` property of this Game Object.
+     * @param {boolean} [copyData=true] - Should the pipeline data object be _deep copied_ into the `pipelineData` property of this Game Object? If `false` it will be set by reference instead.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPostPipeline(pipelines:Dynamic, ?pipelineData:Dynamic, ?copyData:Bool):Dynamic;
+    /**
+     * Adds an entry to the `pipelineData` object belonging to this Game Object.
+     *
+     * If the 'key' already exists, its value is updated. If it doesn't exist, it is created.
+     *
+     * If `value` is undefined, and `key` exists, `key` is removed from the data object.
+     *
+     * Both the pipeline and post pipelines share the pipeline data object together.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#setPipelineData
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string} key - The key of the pipeline data to set, update, or delete.
+     * @param {any} [value] - The value to be set with the key. If `undefined` then `key` will be deleted from the object.
+     *
+     * @return {this} This Game Object instance.
+     */
+    public function setPipelineData(key:String, ?value:Dynamic):Dynamic;
+    /**
+     * Gets a Post Pipeline instance from this Game Object, based on the given name, and returns it.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {(string|function|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline)} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} The first Post Pipeline matching the name, or undefined if no match.
+     */
+    public function getPostPipeline(pipeline:Dynamic):phaser.renderer.webgl.pipelines.PostFXPipeline;
+    /**
+     * Resets the WebGL Pipeline of this Game Object back to the default it was created with.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPipeline
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @param {boolean} [resetPostPipelines=false] - Reset all of the post pipelines?
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     *
+     * @return {boolean} `true` if the pipeline was reset successfully, otherwise `false`.
+     */
+    public function resetPipeline(?resetPostPipelines:Bool, ?resetData:Bool):Bool;
+    /**
+     * Resets the WebGL Post Pipelines of this Game Object. It does this by calling
+     * the `destroy` method on each post pipeline and then clearing the local array.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#resetPostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {boolean} [resetData=false] - Reset the `pipelineData` object to being an empty object?
+     */
+    public function resetPostPipeline(?resetData:Bool):Void;
+    /**
+     * Removes a single Post Pipeline instance from this Game Object, based on the given name, and destroys it.
+     *
+     * If you wish to remove all Post Pipelines use the `resetPostPipeline` method instead.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#removePostPipeline
+     * @webglOnly
+     * @since 3.50.0
+     *
+     * @param {string|Phaser.Renderer.WebGL.Pipelines.PostFXPipeline} pipeline - The string-based name of the pipeline, or a pipeline class.
+     *
+     * @return {this} This Game Object.
+     */
+    public function removePostPipeline(pipeline:Dynamic):Dynamic;
+    /**
+     * Gets the name of the WebGL Pipeline this Game Object is currently using.
+     *
+     * @method Phaser.GameObjects.Components.Pipeline#getPipelineName
+     * @webglOnly
+     * @since 3.0.0
+     *
+     * @return {string} The string-based name of the pipeline being used by this Game Object.
+     */
+    public function getPipelineName():String;
 }

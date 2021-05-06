@@ -22,11 +22,11 @@ extern class Rectangle {
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Rectangle#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * The X coordinate of the top left corner of the Rectangle.
      *
@@ -401,12 +401,12 @@ extern class Rectangle {
      *
      * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle object to get the points from.
      * @param {number} step - Step between points. Used to calculate the number of points to return when quantity is falsey. Ignored if quantity is positive.
-     * @param {integer} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsey, step param will be used to calculate the number of points.
+     * @param {number} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsey, step param will be used to calculate the number of points.
      * @param {(array|Phaser.Geom.Point[])} [out] - An optional array to store the points in.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
      */
-    static public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Int, ?out:Dynamic):Array<Dynamic>;
+    static public function GetPoints(rectangle:phaser.geom.Rectangle, step:Float, quantity:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Returns the size of the Rectangle, expressed as a Point object.
      * With the value of the `width` as the `x` property and the `height` as the `y` property.
@@ -467,12 +467,12 @@ extern class Rectangle {
      *
      * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the perimeter points from.
      * @param {number} [step] - The distance between each point of the perimeter. Set to `null` if you wish to use the `quantity` parameter instead.
-     * @param {integer} [quantity] - The total number of points to return. The step is then calculated based on the length of the Rectangle, divided by this value.
+     * @param {number} [quantity] - The total number of points to return. The step is then calculated based on the length of the Rectangle, divided by this value.
      * @param {(array|Phaser.Geom.Point[])} [out] - An array in which the perimeter points will be stored. If not given, a new array instance is created.
      *
      * @return {(array|Phaser.Geom.Point[])} An array containing the perimeter points from the Rectangle.
      */
-    static public function MarchingAnts(rect:phaser.geom.Rectangle, ?step:Float, ?quantity:Int, ?out:Dynamic):Array<Dynamic>;
+    static public function MarchingAnts(rect:phaser.geom.Rectangle, ?step:Float, ?quantity:Float, ?out:Dynamic):Array<Dynamic>;
     /**
      * Merges a Rectangle with a list of points by repositioning and/or resizing it such that all points are located on or within its bounds.
      *
@@ -578,12 +578,12 @@ extern class Rectangle {
      * @generic {Phaser.Geom.Point} O - [out,$return]
      *
      * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
-     * @param {integer} angle - The angle of the point, in degrees.
+     * @param {number} angle - The angle of the point, in degrees.
      * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
      *
      * @return {Phaser.Geom.Point} A Point object holding the coordinates of the Rectangle perimeter.
      */
-    static public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Int, ?out:phaser.geom.Point):phaser.geom.Point;
+    static public function PerimeterPoint(rectangle:phaser.geom.Rectangle, angle:Float, ?out:phaser.geom.Point):phaser.geom.Point;
     /**
      * Returns a random point within a Rectangle.
      *
@@ -652,13 +652,13 @@ extern class Rectangle {
      *
      * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
-     * @param {integer} quantity - The number of points to return. Set to `false` or 0 to return an arbitrary number of points (`perimeter / stepRate`) evenly spaced around the Rectangle based on the `stepRate`.
+     * @param {number} quantity - The number of points to return. Set to `false` or 0 to return an arbitrary number of points (`perimeter / stepRate`) evenly spaced around the Rectangle based on the `stepRate`.
      * @param {number} [stepRate] - If `quantity` is 0, determines the normalized distance between each returned point.
      * @param {(array|Phaser.Geom.Point[])} [output] - An array to which to append the points.
      *
      * @return {(array|Phaser.Geom.Point[])} The modified `output` array, or a new array if none was provided.
      */
-    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
+    public function getPoints(quantity:Float, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Returns a random point within the Rectangle's bounds.
      *

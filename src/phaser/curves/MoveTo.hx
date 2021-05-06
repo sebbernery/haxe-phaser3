@@ -2,15 +2,16 @@ package phaser.curves;
 
 /**
  * @classdesc
- * A MoveTo Curve is a very simple curve consisting of only a single point. Its intended use is to move the ending point in a Path.
+ * A MoveTo Curve is a very simple curve consisting of only a single point.
+ * Its intended use is to move the ending point in a Path.
  *
  * @class MoveTo
  * @memberof Phaser.Curves
  * @constructor
  * @since 3.0.0
  *
- * @param {number} [x] - `x` pixel coordinate.
- * @param {number} [y] - `y` pixel coordinate.
+ * @param {number} [x=0] - `x` pixel coordinate.
+ * @param {number} [y=0] - `y` pixel coordinate.
  */
 @:native("Phaser.Curves.MoveTo")
 extern class MoveTo {

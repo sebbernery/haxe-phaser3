@@ -45,6 +45,14 @@ extern class DisplayList {
      */
     public var systems:phaser.scenes.Systems;
     /**
+     * The Scene's Event Emitter.
+     *
+     * @name Phaser.GameObjects.DisplayList#events
+     * @type {Phaser.Events.EventEmitter}
+     * @since 3.50.0
+     */
+    public var events:phaser.events.EventEmitter;
+    /**
      * Force a sort of the display list on the next call to depthSort.
      *
      * @method Phaser.GameObjects.DisplayList#queueDepthSort
@@ -67,9 +75,9 @@ extern class DisplayList {
      * @param {Phaser.GameObjects.GameObject} childA - The first Game Object.
      * @param {Phaser.GameObjects.GameObject} childB - The second Game Object.
      *
-     * @return {integer} The difference between the depths of each Game Object.
+     * @return {number} The difference between the depths of each Game Object.
      */
-    public function sortByDepth(childA:phaser.gameobjects.GameObject, childB:phaser.gameobjects.GameObject):Int;
+    public function sortByDepth(childA:phaser.gameobjects.GameObject, childB:phaser.gameobjects.GameObject):Float;
     /**
      * Returns an array which contains all objects currently on the Display List.
      * This is a reference to the main list array, not a copy of it, so be careful not to modify it.

@@ -13,6 +13,7 @@ class GameObjects {
     static public var GameObject:Dynamic;
     static public var Graphics:Dynamic;
     static public var Image:Dynamic;
+    static public var Layer:Dynamic;
     static public var Sprite:Dynamic;
     static public var Text:Dynamic;
 }

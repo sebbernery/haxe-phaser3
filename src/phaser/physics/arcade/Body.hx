@@ -61,10 +61,10 @@ extern class Body {
      * The color of this Body on the debug display.
      *
      * @name Phaser.Physics.Arcade.Body#debugBodyColor
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      */
-    public var debugBodyColor:Int;
+    public var debugBodyColor:Float;
     /**
      * Whether this Body is updated by the physics simulation.
      *
@@ -271,10 +271,11 @@ extern class Body {
     /**
      * When `useDamping` is false (the default), this is absolute loss of velocity due to movement, in pixels per second squared.
      *
-     * When `useDamping` is true, this is 1 minus the damping factor.
+     * When `useDamping` is true, this is a damping multiplier between 0 and 1.
+     * A value of 0 means the Body stops instantly.
+     * A value of 0.01 mean the Body loses 99% of its velocity per second.
+     * A value of 0.1 means the Body loses 90% of its velocity per second.
      * A value of 1 means the Body loses no velocity.
-     * A value of 0.95 means the Body loses 5% of its velocity per step.
-     * A value of 0.5 means the Body loses 50% of its velocity per step.
      *
      * The x and y components are applied separately.
      *
@@ -333,7 +334,7 @@ extern class Body {
      * You can also change it by using the `Body.setBoundsRectangle` method.
      *
      * @name Phaser.Physics.Arcade.Body#customBoundsRectangle
-     * @type {?Phaser.Geom.Rectangle}
+     * @type {Phaser.Geom.Rectangle}
      * @since 3.20
      */
     public var customBoundsRectangle:phaser.geom.Rectangle;
@@ -408,8 +409,8 @@ extern class Body {
      * by using damping, avoiding the axis-drift that is prone with linear deceleration.
      *
      * If you enable this property then you should use far smaller `drag` values than with linear, as
-     * they are used as a multiplier on the velocity. Values such as 0.95 will give a nice slow
-     * deceleration, where-as smaller values, such as 0.5 will stop an object almost immediately.
+     * they are used as a multiplier on the velocity. Values such as 0.05 will give a nice slow
+     * deceleration.
      *
      * @name Phaser.Physics.Arcade.Body#useDamping
      * @type {boolean}
@@ -489,7 +490,7 @@ extern class Body {
      * If the Body is moving on both axes, this describes motion on the vertical axis only.
      *
      * @name Phaser.Physics.Arcade.Body#facing
-     * @type {integer}
+     * @type {number}
      * @since 3.0.0
      *
      * @see Phaser.Physics.Arcade.FACING_UP
@@ -497,7 +498,7 @@ extern class Body {
      * @see Phaser.Physics.Arcade.FACING_LEFT
      * @see Phaser.Physics.Arcade.FACING_RIGHT
      */
-    public var facing:Int;
+    public var facing:Float;
     /**
      * Whether this Body can be moved by collisions with another Body.
      *
@@ -507,6 +508,24 @@ extern class Body {
      * @since 3.0.0
      */
     public var immovable:Bool;
+    /**
+     * Sets if this Body can be pushed by another Body.
+     *
+     * A body that cannot be pushed will reflect back all of the velocity it is given to the
+     * colliding body. If that body is also not pushable, then the separation will be split
+     * between them evenly.
+     *
+     * If you want your body to never move or seperate at all, see the `setImmovable` method.
+     *
+     * By default, Dynamic Bodies are always pushable.
+     *
+     * @name Phaser.Physics.Arcade.Body#pushable
+     * @type {boolean}
+     * @default true
+     * @since 3.50.0
+     * @see Phaser.GameObjects.Components.Pushable#setPushable
+     */
+    public var pushable:Bool;
     /**
      * Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
      *
@@ -638,14 +657,14 @@ extern class Body {
      * The Body's physics type (dynamic or static).
      *
      * @name Phaser.Physics.Arcade.Body#physicsType
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @default Phaser.Physics.Arcade.DYNAMIC_BODY
      * @since 3.0.0
      */
-    public var physicsType:Int;
+    public var physicsType:Float;
     /**
-     * The Body's horizontal position (left edge).
+     * The Bodys horizontal position (left edge).
      *
      * @name Phaser.Physics.Arcade.Body#x
      * @type {number}
@@ -653,7 +672,7 @@ extern class Body {
      */
     public var x:Float;
     /**
-     * The Body's vertical position (top edge).
+     * The Bodys vertical position (top edge).
      *
      * @name Phaser.Physics.Arcade.Body#y
      * @type {number}
@@ -731,8 +750,10 @@ extern class Body {
      *
      * @method Phaser.Physics.Arcade.Body#resetFlags
      * @since 3.18.0
+     *
+     * @param {boolean} [clear=false] - Set the `wasTouching` values to their defaults.
      */
-    public function resetFlags():Void;
+    public function resetFlags(?clear:Bool):Void;
     /**
      * Syncs the position body position with the parent Game Object.
      *
@@ -791,6 +812,7 @@ extern class Body {
     public function checkWorldBounds():Bool;
     /**
      * Sets the offset of the Body's position from its Game Object's position.
+     * The Body's `position` isn't changed until the next `preUpdate`.
      *
      * @method Phaser.Physics.Arcade.Body#setOffset
      * @since 3.0.0
@@ -809,13 +831,13 @@ extern class Body {
      * @method Phaser.Physics.Arcade.Body#setSize
      * @since 3.0.0
      *
-     * @param {integer} [width] - The width of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
-     * @param {integer} [height] - The height of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
+     * @param {number} [width] - The width of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
+     * @param {number} [height] - The height of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
      * @param {boolean} [center=true] - Modify the Body's `offset`, placing the Body's center on its Game Object's center. Only works if the Game Object has the `getCenter` method.
      *
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
-    public function setSize(?width:Int, ?height:Int, ?center:Bool):phaser.physics.arcade.Body;
+    public function setSize(?width:Float, ?height:Float, ?center:Bool):phaser.physics.arcade.Body;
     /**
      * Sizes and positions this Body, as a circle.
      *
@@ -830,14 +852,14 @@ extern class Body {
      */
     public function setCircle(radius:Float, ?offsetX:Float, ?offsetY:Float):phaser.physics.arcade.Body;
     /**
-     * Resets this Body to the given coordinates. Also positions its parent Game Object to the same coordinates.
+     * Sets this Body's parent Game Object to the given coordinates and resets this Body at the new coordinates.
      * If the Body had any velocity or acceleration it is lost as a result of calling this.
      *
      * @method Phaser.Physics.Arcade.Body#reset
      * @since 3.0.0
      *
-     * @param {number} x - The horizontal position to place the Game Object and Body.
-     * @param {number} y - The vertical position to place the Game Object and Body.
+     * @param {number} x - The horizontal position to place the Game Object.
+     * @param {number} y - The vertical position to place the Game Object.
      */
     public function reset(x:Float, y:Float):Void;
     /**
@@ -1017,18 +1039,19 @@ extern class Body {
     /**
      * Sets whether this Body collides with the world boundary.
      *
-     * Optionally also sets the World Bounce values. If the `Body.worldBounce` is null, it's set to a new Phaser.Math.Vector2 first.
+     * Optionally also sets the World Bounce and `onWorldBounds` values.
      *
      * @method Phaser.Physics.Arcade.Body#setCollideWorldBounds
      * @since 3.0.0
      *
-     * @param {boolean} [value=true] - `true` if this body should collide with the world bounds, otherwise `false`.
-     * @param {number} [bounceX] - If given this will be replace the `worldBounce.x` value.
-     * @param {number} [bounceY] - If given this will be replace the `worldBounce.y` value.
+     * @param {boolean} [value=true] - `true` if the Body should collide with the world bounds, otherwise `false`.
+     * @param {number} [bounceX] - If given this replaces the Body's `worldBounce.x` value.
+     * @param {number} [bounceY] - If given this replaces the Body's `worldBounce.y` value.
+     * @param {boolean} [onWorldBounds] - If given this replaces the Body's `onWorldBounds` value.
      *
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
-    public function setCollideWorldBounds(?value:Bool, ?bounceX:Float, ?bounceY:Float):phaser.physics.arcade.Body;
+    public function setCollideWorldBounds(?value:Bool, ?bounceX:Float, ?bounceY:Float, ?onWorldBounds:Bool):phaser.physics.arcade.Body;
     /**
      * Sets the Body's velocity.
      *
@@ -1075,6 +1098,28 @@ extern class Body {
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
     public function setMaxVelocity(x:Float, ?y:Float):phaser.physics.arcade.Body;
+    /**
+     * Sets the Body's maximum horizontal velocity.
+     *
+     * @method Phaser.Physics.Arcade.Body#setMaxVelocityX
+     * @since 3.50.0
+     *
+     * @param {number} value - The maximum horizontal velocity, in pixels per second.
+     *
+     * @return {Phaser.Physics.Arcade.Body} This Body object.
+     */
+    public function setMaxVelocityX(value:Float):phaser.physics.arcade.Body;
+    /**
+     * Sets the Body's maximum vertical velocity.
+     *
+     * @method Phaser.Physics.Arcade.Body#setMaxVelocityY
+     * @since 3.50.0
+     *
+     * @param {number} value - The maximum vertical velocity, in pixels per second.
+     *
+     * @return {Phaser.Physics.Arcade.Body} This Body object.
+     */
+    public function setMaxVelocityY(value:Float):phaser.physics.arcade.Body;
     /**
      * Sets the maximum speed the Body can move.
      *
@@ -1202,6 +1247,25 @@ extern class Body {
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
     public function setDrag(x:Float, y:Float):phaser.physics.arcade.Body;
+    /**
+     * If this Body is using `drag` for deceleration this property controls how the drag is applied.
+     * If set to `true` drag will use a damping effect rather than a linear approach. If you are
+     * creating a game where the Body moves freely at any angle (i.e. like the way the ship moves in
+     * the game Asteroids) then you will get a far smoother and more visually correct deceleration
+     * by using damping, avoiding the axis-drift that is prone with linear deceleration.
+     *
+     * If you enable this property then you should use far smaller `drag` values than with linear, as
+     * they are used as a multiplier on the velocity. Values such as 0.95 will give a nice slow
+     * deceleration, where-as smaller values, such as 0.5 will stop an object almost immediately.
+     *
+     * @method Phaser.Physics.Arcade.Body#setDamping
+     * @since 3.50.0
+     *
+     * @param {boolean} value - `true` to use damping, or `false` to use drag.
+     *
+     * @return {Phaser.Physics.Arcade.Body} This Body object.
+     */
+    public function setDamping(value:Bool):phaser.physics.arcade.Body;
     /**
      * Sets the Body's horizontal drag.
      *
@@ -1358,4 +1422,30 @@ extern class Body {
      * @return {Phaser.Physics.Arcade.Body} This Body object.
      */
     public function setEnable(?value:Bool):phaser.physics.arcade.Body;
+    /**
+     * This is an internal handler, called by the `ProcessX` function as part
+     * of the collision step. You should almost never call this directly.
+     *
+     * @method Phaser.Physics.Arcade.Body#processX
+     * @since 3.50.0
+     *
+     * @param {number} x - The amount to add to the Body position.
+     * @param {number} [vx] - The amount to add to the Body velocity.
+     * @param {boolean} [left] - Set the blocked.left value?
+     * @param {boolean} [right] - Set the blocked.right value?
+     */
+    public function processX(x:Float, ?vx:Float, ?left:Bool, ?right:Bool):Void;
+    /**
+     * This is an internal handler, called by the `ProcessY` function as part
+     * of the collision step. You should almost never call this directly.
+     *
+     * @method Phaser.Physics.Arcade.Body#processY
+     * @since 3.50.0
+     *
+     * @param {number} y - The amount to add to the Body position.
+     * @param {number} [vy] - The amount to add to the Body velocity.
+     * @param {boolean} [up] - Set the blocked.up value?
+     * @param {boolean} [down] - Set the blocked.down value?
+     */
+    public function processY(y:Float, ?vy:Float, ?up:Bool, ?down:Bool):Void;
 }

@@ -65,19 +65,19 @@ extern class MultiFile {
      * The number of files to load.
      *
      * @name Phaser.Loader.MultiFile#pending
-     * @type {integer}
+     * @type {number}
      * @since 3.7.0
      */
-    public var pending:Int;
+    public var pending:Float;
     /**
      * The number of files that failed to load.
      *
      * @name Phaser.Loader.MultiFile#failed
-     * @type {integer}
+     * @type {number}
      * @default 0
      * @since 3.7.0
      */
-    public var failed:Int;
+    public var failed:Float;
     /**
      * A storage container for transient data that the loading files need.
      *

@@ -15,7 +15,7 @@ package phaser.geom;
  * @constructor
  * @since 3.0.0
  *
- * @param {Phaser.Geom.Point[]} [points] - List of points defining the perimeter of this Polygon. Several formats are supported:
+ * @param {(string|number[]|Phaser.Types.Math.Vector2Like[])} [points] - List of points defining the perimeter of this Polygon. Several formats are supported:
  * - A string containing paired x y values separated by a single space: `'40 0 40 20 100 20 100 80 40 80 40 100 0 50'`
  * - An array of Point objects: `[new Phaser.Point(x1, y1), ...]`
  * - An array of objects with public x y properties: `[obj1, obj2, ...]`
@@ -24,17 +24,17 @@ package phaser.geom;
  */
 @:native("Phaser.Geom.Polygon")
 extern class Polygon {
-    public function new(?points:Array<phaser.geom.Point>);
+    public function new(?points:Dynamic);
     /**
      * The geometry constant type of this object: `GEOM_CONST.POLYGON`.
      * Used for fast type comparisons.
      *
      * @name Phaser.Geom.Polygon#type
-     * @type {integer}
+     * @type {number}
      * @readonly
      * @since 3.19.0
      */
-    public var type:Int;
+    public var type:Float;
     /**
      * The area of this Polygon.
      *
@@ -89,6 +89,59 @@ extern class Polygon {
      */
     static public function ContainsPoint(polygon:phaser.geom.Polygon, point:phaser.geom.Point):Bool;
     /**
+     * This module implements a modified ear slicing algorithm, optimized by z-order curve hashing and extended to
+     * handle holes, twisted polygons, degeneracies and self-intersections in a way that doesn't guarantee correctness
+     * of triangulation, but attempts to always produce acceptable results for practical data.
+     *
+     * Example:
+     *
+     * ```javascript
+     * const triangles = Phaser.Geom.Polygon.Earcut([10,0, 0,50, 60,60, 70,10]); // returns [1,0,3, 3,2,1]
+     * ```
+     *
+     * Each group of three vertex indices in the resulting array forms a triangle.
+     *
+     * ```javascript
+     * // triangulating a polygon with a hole
+     * earcut([0,0, 100,0, 100,100, 0,100,  20,20, 80,20, 80,80, 20,80], [4]);
+     * // [3,0,4, 5,4,0, 3,4,7, 5,0,1, 2,3,7, 6,5,1, 2,7,6, 6,1,2]
+     *
+     * // triangulating a polygon with 3d coords
+     * earcut([10,0,1, 0,50,2, 60,60,3, 70,10,4], null, 3);
+     * // [1,0,3, 3,2,1]
+     * ```
+     *
+     * If you pass a single vertex as a hole, Earcut treats it as a Steiner point.
+     *
+     * If your input is a multi-dimensional array (e.g. GeoJSON Polygon), you can convert it to the format
+     * expected by Earcut with `Phaser.Geom.Polygon.Earcut.flatten`:
+     *
+     * ```javascript
+     * var data = earcut.flatten(geojson.geometry.coordinates);
+     * var triangles = earcut(data.vertices, data.holes, data.dimensions);
+     * ```
+     *
+     * After getting a triangulation, you can verify its correctness with `Phaser.Geom.Polygon.Earcut.deviation`:
+     *
+     * ```javascript
+     * var deviation = earcut.deviation(vertices, holes, dimensions, triangles);
+     * ```
+     * Returns the relative difference between the total area of triangles and the area of the input polygon.
+     * 0 means the triangulation is fully correct.
+     *
+     * For more information see https://github.com/mapbox/earcut
+     *
+     * @function Phaser.Geom.Polygon.Earcut
+     * @since 3.50.0
+     *
+     * @param {number[]} data - A flat array of vertex coordinate, like [x0,y0, x1,y1, x2,y2, ...]
+     * @param {number[]} [holeIndices] - An array of hole indices if any (e.g. [5, 8] for a 12-vertex input would mean one hole with vertices 5–7 and another with 8–11).
+     * @param {number} [dimensions=2] - The number of coordinates per vertex in the input array (2 by default).
+     *
+     * @return {number[]} An array of triangulated data.
+     */
+    static public function Earcut(data:Array<Float>, ?holeIndices:Array<Float>, ?dimensions:Float):Array<Float>;
+    /**
      * Calculates the bounding AABB rectangle of a polygon.
      *
      * @function Phaser.Geom.Polygon.GetAABB
@@ -126,13 +179,13 @@ extern class Polygon {
      * @since 3.12.0
      *
      * @param {Phaser.Geom.Polygon} polygon - The Polygon to get the points from.
-     * @param {integer} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
      * @param {number} [stepRate] - Sets the quantity by getting the perimeter of the Polygon and dividing it by the stepRate.
      * @param {array} [output] - An array to insert the points in to. If not provided a new array will be created.
      *
      * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
      */
-    static public function GetPoints(polygon:phaser.geom.Polygon, quantity:Int, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
+    static public function GetPoints(polygon:phaser.geom.Polygon, quantity:Float, ?stepRate:Float, ?output:Array<Dynamic>):Array<phaser.geom.Point>;
     /**
      * Returns the perimeter of the given Polygon.
      *
@@ -172,11 +225,11 @@ extern class Polygon {
      * @method Phaser.Geom.Polygon#setTo
      * @since 3.0.0
      *
-     * @param {array} points - Points defining the perimeter of this polygon. Please check function description above for the different supported formats.
+     * @param {(string|number[]|Phaser.Types.Math.Vector2Like[])} [points] - Points defining the perimeter of this polygon. Please check function description above for the different supported formats.
      *
      * @return {this} This Polygon object.
      */
-    public function setTo(points:Array<Dynamic>):Dynamic;
+    public function setTo(?points:Dynamic):Dynamic;
     /**
      * Calculates the area of the Polygon. This is available in the property Polygon.area
      *
@@ -195,13 +248,13 @@ extern class Polygon {
      *
      * @generic {Phaser.Geom.Point[]} O - [output,$return]
      *
-     * @param {integer} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
      * @param {number} [stepRate] - Sets the quantity by getting the perimeter of the Polygon and dividing it by the stepRate.
      * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the perimeter of the Polygon.
      */
-    public function getPoints(quantity:Int, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
+    public function getPoints(quantity:Float, ?stepRate:Float, ?output:Dynamic):Array<Dynamic>;
     /**
      * Reverses the order of the points of a Polygon.
      *
@@ -216,6 +269,24 @@ extern class Polygon {
      */
     static public function Reverse(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
     /**
+     * Takes a Polygon object and simplifies the points by running them through a combination of
+     * Douglas-Peucker and Radial Distance algorithms. Simplification dramatically reduces the number of
+     * points in a polygon while retaining its shape, giving a huge performance boost when processing
+     * it and also reducing visual noise.
+     *
+     * @function Phaser.Geom.Polygon.Simplify
+     * @since 3.50.0
+     *
+     * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+     *
+     * @param {Phaser.Geom.Polygon} polygon - The polygon to be simplified. The polygon will be modified in-place and returned.
+     * @param {number} [tolerance=1] - Affects the amount of simplification (in the same metric as the point coordinates).
+     * @param {boolean} [highestQuality=false] - Excludes distance-based preprocessing step which leads to highest quality simplification but runs ~10-20 times slower.
+     *
+     * @return {Phaser.Geom.Polygon} The input polygon.
+     */
+    static public function Simplify(polygon:phaser.geom.Polygon, ?tolerance:Float, ?highestQuality:Bool):phaser.geom.Polygon;
+    /**
      * Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
      *
      * @function Phaser.Geom.Polygon.Smooth
@@ -228,4 +299,19 @@ extern class Polygon {
      * @return {Phaser.Geom.Polygon} The input polygon.
      */
     static public function Smooth(polygon:phaser.geom.Polygon):phaser.geom.Polygon;
+    /**
+     * Tranlates the points of the given Polygon.
+     *
+     * @function Phaser.Geom.Polygon.Translate
+     * @since 3.50.0
+     *
+     * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+     *
+     * @param {Phaser.Geom.Polygon} polygon - The Polygon to modify.
+     * @param {number} x - The amount to horizontally translate the points by.
+     * @param {number} y - The amount to vertically translate the points by.
+     *
+     * @return {Phaser.Geom.Polygon} The modified Polygon.
+     */
+    static public function Translate(polygon:phaser.geom.Polygon, x:Float, y:Float):phaser.geom.Polygon;
 }

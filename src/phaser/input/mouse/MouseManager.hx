@@ -27,14 +27,41 @@ extern class MouseManager {
      */
     public var manager:phaser.input.InputManager;
     /**
-     * If true the DOM mouse events will have event.preventDefault applied to them, if false they will propagate fully.
+     * If `true` the DOM `mousedown` event will have `preventDefault` set.
      *
-     * @name Phaser.Input.Mouse.MouseManager#capture
+     * @name Phaser.Input.Mouse.MouseManager#preventDefaultDown
      * @type {boolean}
      * @default true
-     * @since 3.0.0
+     * @since 3.50.0
      */
-    public var capture:Bool;
+    public var preventDefaultDown:Bool;
+    /**
+     * If `true` the DOM `mouseup` event will have `preventDefault` set.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#preventDefaultUp
+     * @type {boolean}
+     * @default true
+     * @since 3.50.0
+     */
+    public var preventDefaultUp:Bool;
+    /**
+     * If `true` the DOM `mousemove` event will have `preventDefault` set.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#preventDefaultMove
+     * @type {boolean}
+     * @default true
+     * @since 3.50.0
+     */
+    public var preventDefaultMove:Bool;
+    /**
+     * If `true` the DOM `wheel` event will have `preventDefault` set.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#preventDefaultWheel
+     * @type {boolean}
+     * @default true
+     * @since 3.50.0
+     */
+    public var preventDefaultWheel:Bool;
     /**
      * A boolean that controls if the Mouse Manager is enabled or not.
      * Can be toggled on the fly.
@@ -154,6 +181,19 @@ extern class MouseManager {
      */
     public var pointerLockChange:Dynamic;
     /**
+     * Are the event listeners hooked into `window.top` or `window`?
+     *
+     * This is set during the `boot` sequence. If the browser does not have access to `window.top`,
+     * such as in cross-origin iframe environments, this property gets set to `false` and the events
+     * are hooked into `window` instead.
+     *
+     * @name Phaser.Input.Mouse.MouseManager#isTop
+     * @type {boolean}
+     * @readonly
+     * @since 3.50.0
+     */
+    public var isTop:Bool;
+    /**
      * Attempts to disable the context menu from appearing if you right-click on the browser.
      *
      * Works by listening for the `contextmenu` event and prevent defaulting it.
@@ -178,6 +218,12 @@ extern class MouseManager {
      *
      * It is important to note that pointer lock can only be enabled after an 'engagement gesture',
      * see: https://w3c.github.io/pointerlock/#dfn-engagement-gesture.
+     *
+     * Note for Firefox: There is a bug in certain Firefox releases that cause native DOM events like
+     * `mousemove` to fire continuously when in pointer lock mode. You can get around this by setting
+     * `this.preventDefaultMove` to `false` in this class. You may also need to do the same for
+     * `preventDefaultDown` and/or `preventDefaultUp`. Please test combinations of these if you encounter
+     * the error.
      *
      * @method Phaser.Input.Mouse.MouseManager#requestPointerLock
      * @since 3.0.0
