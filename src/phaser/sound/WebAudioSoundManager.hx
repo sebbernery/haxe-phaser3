@@ -50,7 +50,7 @@ extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
      * @type {AudioNode}
      * @since 3.0.0
      */
-    public var destination:AudioNode;
+    public var destination:js.html.audio.AudioNode;
     /**
      * Method responsible for instantiating and returning AudioContext instance.
      * If an instance of an AudioContext class was provided through the game config,
