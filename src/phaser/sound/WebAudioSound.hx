@@ -24,7 +24,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @type {AudioBuffer}
      * @since 3.0.0
      */
-    public var audioBuffer:AudioBuffer;
+    public var audioBuffer:js.html.audio.AudioBuffer;
     /**
      * A reference to an audio source node used for playing back audio from
      * audio data stored in Phaser.Sound.WebAudioSound#audioBuffer.
@@ -34,7 +34,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @default null
      * @since 3.0.0
      */
-    public var source:AudioBufferSourceNode;
+    public var source:js.html.audio.AudioBufferSourceNode;
     /**
      * A reference to a second audio source used for gapless looped playback.
      *
@@ -43,7 +43,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @default null
      * @since 3.0.0
      */
-    public var loopSource:AudioBufferSourceNode;
+    public var loopSource:js.html.audio.AudioBufferSourceNode;
     /**
      * Gain node responsible for controlling this sound's muting.
      *
@@ -51,7 +51,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @type {GainNode}
      * @since 3.0.0
      */
-    public var muteNode:GainNode;
+    public var muteNode:js.html.audio.GainNode;
     /**
      * Gain node responsible for controlling this sound's volume.
      *
@@ -59,7 +59,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @type {GainNode}
      * @since 3.0.0
      */
-    public var volumeNode:GainNode;
+    public var volumeNode:js.html.audio.GainNode;
     /**
      * Panner node responsible for controlling this sound's pan.
      *
@@ -69,7 +69,7 @@ extern class WebAudioSound extends phaser.sound.BaseSound {
      * @type {StereoPannerNode}
      * @since 3.50.0
      */
-    public var pannerNode:StereoPannerNode;
+    public var pannerNode:js.html.audio.StereoPannerNode;
     /**
      * Used for keeping track when sound source playback has ended
      * so its state can be updated accordingly.

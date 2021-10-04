@@ -34,7 +34,7 @@ extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
      * @type {GainNode}
      * @since 3.0.0
      */
-    public var masterMuteNode:GainNode;
+    public var masterMuteNode:js.html.audio.GainNode;
     /**
      * Gain node responsible for controlling global volume.
      *
@@ -42,7 +42,7 @@ extern class WebAudioSoundManager extends phaser.sound.BaseSoundManager {
      * @type {GainNode}
      * @since 3.0.0
      */
-    public var masterVolumeNode:GainNode;
+    public var masterVolumeNode:js.html.audio.GainNode;
     /**
      * Destination node for connecting individual sounds to.
      *
