@@ -1055,4 +1055,9 @@ extern class GameObjectFactory {
      * @return {Phaser.Tweens.Tween} The Tween that was created.
      */
     public function tween(config:Dynamic):phaser.tweens.Tween;
+
+    #if SPINE_PLUGIN
+    public function spine(x: Float, y: Float, ?key: String, ?animationName: String, ?loop: Bool): spine.SpineGameObject;
+    public function spineContainer(x: Float, y: Float, ?children: haxe.ds.Eiher<spine.SpineGameObject, Array<spine.SpineGameObject>>): spine.SpineContainer;
+    #end
 }
