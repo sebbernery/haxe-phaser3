@@ -1,7 +1,7 @@
-package phaser.input.keyboard;
+package phaser.input;
 
 /**
- * @namespace Phaser.Input.Keyboard.Events
+ * @namespace Phaser.Input.Events
  */
 @:native("Phaser.Input.Events")
 class Events 
