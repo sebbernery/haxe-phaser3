@@ -357,7 +357,7 @@ extern class GameObjectCreator {
     public function tween(config:Dynamic):phaser.tweens.Tween;
 
     #if SPINE_PLUGIN
-    public function spine(config: spine.SpineGameObjectConfig, ?addToScene: Bool): spine.SpineGameObject;
-    public function spineContainer(config: spine.SpineContainerConfig, ?addToScene: Bool): spine.SpineContainer;
+    public function spine(config: spine.SpineGameObject.SpineGameObjectConfig, ?addToScene: Bool): spine.SpineGameObject;
+    public function spineContainer(config: spine.SpineContainer.SpineContainerConfig, ?addToScene: Bool): spine.SpineContainer;
     #end
 }

@@ -3109,10 +3109,11 @@ extern class LoaderPlugin extends phaser.events.EventEmitter {
     public function xml(key:Dynamic, ?url:String, ?xhrSettings:phaser.types.loader.XHRSettingsObject):Dynamic;
 
     #if SPINE_PLUGIN
-    spine(key: haxe.ds.Either<String, haxe.ds.Either<phaser.loader.filetypes.SpineFile.SpineFileConfig, Array<phaser.loader.filetypes.SpineFileConfig>>>,
+    public function spine(key: haxe.ds.Either<String, haxe.ds.Either<phaser.loader.filetypes.SpineFileConfig, Array<phaser.loader.filetypes.SpineFileConfig>>>,
         jsonURL: String,
         atlasURL: haxe.ds.Either<String, Array<String>>,
-        ?preMultipliedAlpha: Bool, textureXhrSettings?: phaser.types.loader.XHRSettingsObject,
+        ?preMultipliedAlpha: Bool,
+        ?textureXhrSetting: phaser.types.loader.XHRSettingsObject,
         ?atlasXhrSettings: phaser.types.loader.XHRSettingsObject): LoaderPlugin;
     #end
 }
