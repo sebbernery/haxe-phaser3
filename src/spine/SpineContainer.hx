@@ -1,5 +1,6 @@
 package spine;
 
+#if SPINE_PLUGIN
 @:native("SpinePlugin.SpineContainer")
 /**
  * @extends phaser.gameobjects.components.BlendMode
@@ -139,3 +140,5 @@ typedef SpineContainerConfig = phaser.types.gameobjects.GameObjectConfig&
     ?y: Float,
     ?children: haxe.ds.Either<SpineGameObject, Array<SpineGameObject>>
 }
+
+#end

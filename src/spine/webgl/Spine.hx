@@ -1,4 +1,6 @@
 package spine.webgl;
+
+#if SPINE_PLUGIN
 import phaser.textures.Texture;
 import spine.Spine;
 
@@ -413,3 +415,4 @@ extern class WebGLBlendModeConverter {
     public static function getDestGLBlendMode(blendMode: BlendMode): Float;
     public static function getSourceGLBlendMode(blendMode: BlendMode, ?premultipliedAlpha: Bool): Float;
 }
+#end

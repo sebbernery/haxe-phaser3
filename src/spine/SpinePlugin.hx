@@ -1,4 +1,6 @@
 package spine;
+
+#if SPINE_PLUGIN
 import spine.Spine;
 import spine.SpineGameObject;
 
@@ -68,3 +70,5 @@ extern class SpinePlugin extends phaser.plugins.ScenePlugin {
     public function add(x: Float, y: Float, ?key: String, ?animationName: String, ?loop: Bool): SpineGameObject;
     public function make(config: SpineGameObjectConfig, ?addToScene: Bool): SpineGameObject;
 }
+
+#end

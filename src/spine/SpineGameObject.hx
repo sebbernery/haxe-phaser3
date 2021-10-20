@@ -1,5 +1,7 @@
 
 package spine;
+
+#if SPINE_PLUGIN
 import spine.Spine;
 
 /**
@@ -136,3 +138,4 @@ typedef SpineGameObjectConfig = phaser.types.gameobjects.GameObjectConfig&
     var ?slotName: String;
     var ?attachmentName: String;
 }
+#end

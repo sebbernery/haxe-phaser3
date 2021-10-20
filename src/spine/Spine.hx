@@ -1,5 +1,6 @@
 package spine;
 
+#if SPINE_PLUGIN
 @:native("spine.Animation")
 extern class Animation {
     public var name: String;
@@ -1463,3 +1464,5 @@ extern class SwirlEffect implements VertexEffect {
     public function transform(position: Vector2, uv: Vector2, light: Color, dark: Color): Void;
     public function end(): Void;
 }
+
+#end

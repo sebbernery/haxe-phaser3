@@ -1,4 +1,6 @@
 package spine.canvas;
+
+#if SPINE_PLUGIN
 import spine.Spine;
 
 
@@ -34,3 +36,4 @@ extern class SkeletonRenderer {
     private var computeRegionVertices : Any;
     private var computeMeshVertices : Any;
 }
+#end
