@@ -355,4 +355,9 @@ extern class GameObjectCreator {
      * @return {Phaser.Tweens.Tween} The Tween that was created.
      */
     public function tween(config:Dynamic):phaser.tweens.Tween;
+
+    #if SPINE_PLUGIN
+    public function spine(config: spine.SpineGameObject.SpineGameObjectConfig, ?addToScene: Bool): spine.SpineGameObject;
+    public function spineContainer(config: spine.SpineContainer.SpineContainerConfig, ?addToScene: Bool): spine.SpineContainer;
+    #end
 }
